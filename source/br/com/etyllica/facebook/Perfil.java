@@ -45,10 +45,10 @@ public class Perfil {
 		return eid;
 	}
 	*/
-	public boolean importarDadosFB(){
+	public boolean importarDadosFB(String fid){
 		//http://graphs.facebook.com/
 		//id = http.../info.php;
-		set("id","10098456790");
+		set("id",fid);
 		
 		String fbdata = "http://graphs.facebook.com/id";
 		
