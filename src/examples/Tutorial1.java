@@ -1,5 +1,8 @@
-import jogo.OlaMundo;
+package examples;
+
 import br.com.etyllica.Etyllica;
+
+import examples.jogo.OlaMundo;
 
 public class Tutorial1 extends Etyllica {
 
