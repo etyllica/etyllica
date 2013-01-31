@@ -1,182 +1,148 @@
 package br.com.etyllica;
 
-import java.awt.Color;
+import java.applet.Applet;
 import java.awt.Cursor;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.Transparency;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
 
-import javax.swing.JApplet;
+import javax.swing.JFrame;
 
-import br.com.etyllica.nucleo.Gerenciador;
-import br.com.etyllica.nucleo.controle.Mouse;
-import br.com.etyllica.nucleo.controle.Tecla;
-import br.com.etyllica.nucleo.controle.Teclado;
-import br.com.etyllica.nucleo.sessao.MiniSessao;
-import br.com.etyllica.nucleo.video.TelaCheia;
+import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.control.keyboard.Keyboard;
+import br.com.etyllica.core.control.mouse.Mouse;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.loader.MultimediaLoader;
+import br.com.etyllica.core.loader.FontLoader;
+import br.com.etyllica.core.loader.ImageLoader;
+import br.com.etyllica.core.video.FullScreenWindow;
+import br.com.etyllica.effects.GenericFullScreenEffect;
+import br.com.etyllica.gui.Gui;
+import br.com.etyllica.gui.window.DesktopWindow;
 
-public abstract class Etyllica extends JApplet implements Runnable{
+/**
+ * 
+ * @author mscythe
+ * @license GPLv3
+ *
+ */
+
+public abstract class Etyllica extends Applet implements Runnable{
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
-	private Indice indice;
-
-	private Gerenciador grrr;
-
-	private TelaCheia telaCheia = null;
+	private FullScreenWindow telaCheia = null;
 	private boolean fullScreen = false;
 
-	private int largura = 640;
-	private int altura = 480;
-
-	//Controle
-	private Mouse mouse;
-	private Teclado teclado;
+	protected int largura = 640;
+	protected int altura = 480;
 
 	private boolean isRunning = true;
 
-	private String cursorNormal = "";
-	private String cursorClicado = "";
-	private String cursorCarregando = "";
+	//TODO determinar o fps por cada sessao
+	private final int FRAME_DELAY = 20; // 20ms. Implica em 50fps (1000/20) = 50
+	private final int UPDATE_DELAY = 10; // 20ms. Implica em 50fps (1000/20) = 50
+
+	private Application application;
 
 	private VolatileImage volatileImg;
 
+	private DesktopWindow desktop;
+	
+	protected Mouse mouse;
+	
+	protected Keyboard keyboard;
+	
 	public Etyllica(int largura, int altura){
-						
-		grrr = Gerenciador.getInstancia(largura, altura);
-		
-		grrr.setContentPane(getContentPane());
 
-		mouse = grrr.getControle().getMouse();
-		teclado = grrr.getControle().getTeclado();
-		
-		addMouseMotionListener( mouse );
-		addMouseListener( mouse );
-		addKeyListener( teclado );
-		
-	}
+		this.largura = largura;
+		this.altura = altura;
 
-	public void setPrimeiraSessao(MiniSessao sessao){
-		this.indice = new Indice(grrr, sessao);
 	}
 
 	public void init() {
 
-		String s = getCodeBase().toString();
-		//System.out.println(s);
+		//TODO Mudar isso
+		//String s = getCodeBase().toString();
 
-		grrr.setUrl(s);
-		//grrr.iniciaCliente();
+		String s = getClass().getResource("").toString();
+		//For Windows
+		s = s.replaceAll("%20"," ");
+		//System.out.println(s);
 		
+		//TODO load largura e altura from a .ini file
+
+		ImageLoader.getInstance().setUrl(s);
+		FontLoader.getInstancia().setUrl(s);
+		MultimediaLoader.getInstancia().setUrl(s);
+
+		desktop = new DesktopWindow(0,0,largura,altura);
+		Gui.getInstance().setDesktopWindow(desktop);
+
+		mouse = Gui.getInstance().getControl().getMouse();
+		keyboard = Gui.getInstance().getControl().getTeclado();
+
 		defineTamanho(largura,altura);
 		
+		comecaJogo();
 
-		if(!cursorNormal.isEmpty()){
-			carregaCursor();
-		}
+		desktop.changeApplication(application);
+
+		escondeCursor();
 		
-		//requisitaFoco();
+		this.setFocusTraversalKeysEnabled(false);
 		setFocusable(true);
-
-	}
-
-	public void setTamanho(int largura, int altura){
-		this.largura = largura;
-		this.altura = altura;
+		requestFocus();
 		
-		grrr.setSize(largura, altura);
-	}
-
-	private void desenhaPrincipal(){
-		indice.desenha();
-		grrr.getContentPane().paintComponents(grrr.getGrafico().getGraphics());
-		grrr.getGrafico().desenha(mouse);
-	}
-
-	//Gerenciando os eventos
-	//Alt+Enter para entrar em Fullscreen
-	//E o esc para sair do fullscreen
-	private int gerencia(){
-		
-		if(teclado.getTecla(Tecla.TSK_ESC)){
-			if(fullScreen){
-				setFullScreen(false);
-				defineJanela();
-				teclado.despressionaTecla(Tecla.TSK_ESC);
-			}
-			
-		}
-		if((teclado.getTecla(Tecla.TSK_ALT))&&(teclado.getTecla(Tecla.TSK_ENTER))){
-			if(!fullScreen){
-				setFullScreen(true);
-				defineJanela();
-				teclado.despressionaTecla(Tecla.TSK_ALT);
-				teclado.despressionaTecla(Tecla.TSK_ENTER);
-			}
-			
-		}
-
-		indice.gerencia();
-		//mouse.desPressiona();
-
-		return 0;
-
-	}
-
-	private void defineJanela(){
-
-		if(fullScreen==true){
-
-			telaCheia = new TelaCheia();
-
-		}else{
-
-			if(telaCheia!=null){
-
-				telaCheia.dispose();
-				telaCheia = null;
-
-			}
-
-		}
-
-	}
-
-	private void defineTamanho(int largura, int altura){
-
-		defineJanela();
-
-		this.largura = largura;
-		this.altura = altura;
-
-
-		GraphicsConfiguration gc = getGraphicsConfiguration();
-		volatileImg = gc.createCompatibleVolatileImage(largura, altura);
-
-		grrr.getGrafico().setGraphics(volatileImg);
-		grrr.setSize(largura, altura);
-
-
-		setSize(largura, altura);
-
-	}
-
-	@Override
-	public void start(){
+		addMouseMotionListener( mouse );
+		addMouseWheelListener( mouse );
+		addMouseListener( mouse );
+		addKeyListener( keyboard );
 		
 		Thread t = new Thread(this);
 		t.start();
 
+		//gerenciaSistema();
 	}
 
-	private final int FRAME_DELAY = 20; // 20ms. implies 50fps (1000/20) = 50
+	public abstract void comecaJogo();
 
-	private void desenha(){
-		repaint();
+	public void setTamanho(int largura, int altura){
+		this.largura = largura;
+		this.altura = altura;
 	}
+
+	/*public void gerenciaSistema(){
+		
+		Thread t = new Thread(new Runnable() {
+			
+			public void run() {
+
+				long cycleTime = System.currentTimeMillis();
+
+				while(true){
+					gerencia();
+
+					cycleTime = cycleTime + UPDATE_DELAY;
+					long difference = cycleTime - System.currentTimeMillis();
+
+					try {
+						Thread.sleep(Math.max(0, difference));
+					}
+					catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				}
+			}
+		});
+		t.start();
+	}*/
 
 	@Override
 	public void paint( Graphics g ) {
@@ -186,50 +152,48 @@ public abstract class Etyllica extends JApplet implements Runnable{
 
 		// This means the device doesn't match up to this hardware accelerated image.
 		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE){
-			createBackBuffer(); // recreate the hardware accelerated image.
+			volatileImg = createBackBuffer(largura,altura); // recreate the hardware accelerated image.
 		}
 
-		Graphics offscreenGraphics = volatileImg.getGraphics();
+		Gui.getInstance().draw();
 
-		offscreenGraphics.setColor(Color.WHITE);
-		offscreenGraphics.fillRect(0,0,largura,altura);	
+		//DesktopWindow desktop = indice.getDesktop();
 
-		grrr.getGrafico().setGraphics(volatileImg.getGraphics());
-
-
-		desenhaPrincipal();
+		volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
 		if(!fullScreen){
 			g.drawImage(volatileImg, 0, 0, this);
 		}
 		else{
-			if(telaCheia!=null)
+			if(telaCheia!=null){
 				telaCheia.desenha(volatileImg);
+			}
 		}
 
 	}
 
 	@Override
 	public void update(Graphics g) {
-
 		paint(g);
-
 	}
-
-	private void createBackBuffer() {
-		GraphicsConfiguration gc = getGraphicsConfiguration();
-		volatileImg = gc.createCompatibleVolatileImage(largura, altura);
-	} 
+	
+	private void draw(){
+		repaint();
+	}
 
 	@Override
 	public void run() {
 		long cycleTime = System.currentTimeMillis();
+
 		while(isRunning) {
 
-			teclado.poll();
-
+			//TODO Separar em duas threads gera problema de modificacao concorrente
+			
+			keyboard.poll();
+			
+			draw();
 			gerencia();
-			desenha();
+			
 
 			cycleTime = cycleTime + FRAME_DELAY;
 			long difference = cycleTime - System.currentTimeMillis();
@@ -244,35 +208,96 @@ public abstract class Etyllica extends JApplet implements Runnable{
 		}
 	}
 
-	public void setFullScreen(boolean fullScreen){
-		this.fullScreen = fullScreen;
-	}
+	private GUIEvent gerencia(){
 
+		GUIEvent event = GUIEvent.NONE;
+
+			Gui.getInstance().gerencia();
+			
+			event = Gui.getInstance().getSuperEvent();
+			
+			if(event==GUIEvent.ENABLE_FULL_SCREEN){
+				enableFullScreen();
+			}else if(event==GUIEvent.DISABLE_FULL_SCREEN){
+				disableFullScreen();
+				
+			//TODO When Frame
+			}else if(event==GUIEvent.WINDOW_MOVE){
+				setLocation(this.getX()+(mouse.getX()-mouse.getDragX()), this.getY()+(mouse.getY()-mouse.getDragY()));
+			}
+		
+			//TODO Request Focus
+			/*if(mouse.getPressionado(Mouse.BOTAO_ESQUERDO)||mouse.getPressionado(Mouse.BOTAO_MEIO)||mouse.getPressionado(Mouse.BOTAO_DIREITO)){
+				if ( !hasFocus() ) {
+				requestFocus();
+				}
+				//System.gc();
+			}*/
+
+		return GUIEvent.NONE;
+
+	}
 	
+	public void setPrimeiraApplicacao(Application application){
+		this.application = application;
+	}
 	
-	public void setCursor(String cursorNormal){
-		this.cursorNormal = cursorNormal;
-		this.cursorClicado = cursorNormal;
-	}
-	public void setCursor(String cursorNormal, String cursorClicado){
-		this.cursorNormal = cursorNormal;
-		this.cursorClicado = cursorClicado;
-	}
-
-	private void carregaCursor(){
-		mouse.setCursorNormal(grrr.getGrafico().carregaImagem(cursorNormal));
-		mouse.setCursorClicado(grrr.getGrafico().carregaImagem(cursorClicado));
-		mouse.setCursorCarregando(grrr.getGrafico().carregaImagem(cursorCarregando));
-		mouse.resetCursor();
-		escondeCursor();
-	}
-
 	private void escondeCursor(){
 		int[] pixels = new int[16 * 16];
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
 				, new Point(0, 0), "invisibleCursor");
 		setCursor( transparentCursor );
+	}
+	
+	private VolatileImage createBackBuffer(int largura, int altura){
+		return createBackBuffer(largura, altura, Transparency.OPAQUE);
+	}
+
+	private VolatileImage createBackBuffer(int largura, int altura, int transparency){
+		GraphicsConfiguration gc = getGraphicsConfiguration();
+		return gc.createCompatibleVolatileImage(largura, altura, transparency);
+	}
+	
+	private void defineTamanho(int largura, int altura){
+		
+		this.largura = largura;
+		this.altura = altura;
+
+		setSize(largura, altura);
+		
+		volatileImg = createBackBuffer(largura, altura);
+
+	}
+	
+	public void setFullScreen(boolean fullscreen){
+		
+		if(fullscreen){
+			enableFullScreen();
+		}else{
+			disableFullScreen();
+		}
+		
+	}
+	
+	private void enableFullScreen(){
+		
+		if(!fullScreen){
+			fullScreen = true;
+
+			telaCheia = new FullScreenWindow();
+			//telaCheia.setGerenciador(indice);
+			Gui.getInstance().addEffect(new GenericFullScreenEffect(0, 0, largura, altura));
+		}
+	}
+
+	private void disableFullScreen(){
+		if(fullScreen){
+			fullScreen = false;
+
+			telaCheia.dispose();
+			telaCheia = null;
+		}
 	}
 
 }
