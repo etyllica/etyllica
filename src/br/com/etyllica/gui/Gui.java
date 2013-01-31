@@ -201,9 +201,9 @@ public class Gui {
 
 				lastEvent = gerenciaEvento(activeWindow, lastEvent);
 
-				GUIEvent customEvent = updateCustomEvents(event); 
-				if(customEvent!=GUIEvent.NONE){
-					superEvent = customEvent;
+				GUIEvent frameEvent = updateFrameEvents(event); 
+				if(frameEvent!=GUIEvent.NONE){
+					superEvent = frameEvent;
 				}
 
 			}
@@ -254,14 +254,6 @@ public class Gui {
 		}
 				
 		keyEvents.clear();
-	}
-
-	private GUIEvent updateCustomEvents(Event event){
-		//updateKeyboardEvents(event);
-
-		//updateNumpadMouse(event);
-
-		return updateFrameEvents(event);		
 	}
 
 	private void updateForcedEvents(List<GUIEvent> guiEvents){
