@@ -1,7 +1,7 @@
 =====================================================
 Etyllica (v 1.1) - Updated after Global Game Jam 2013
 =====================================================
-Engine de para jogos 2D em Java puro.
+Engine para jogos 2D em Java puro.
 
 Game Engine 2D in pure Java.
 
