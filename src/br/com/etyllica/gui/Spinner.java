@@ -7,6 +7,13 @@ import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.label.TextLabel;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public abstract class Spinner<T extends Number> extends GUIComponent{
 
 	private Button plus;

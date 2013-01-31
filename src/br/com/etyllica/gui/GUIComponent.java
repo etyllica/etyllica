@@ -14,7 +14,7 @@ import br.com.etyllica.layer.Layer;
 /**
  * 
  * @author mscythe
- * @license GPLv3
+ * @license LGPLv3
  *
  */
 

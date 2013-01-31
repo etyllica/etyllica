@@ -11,6 +11,12 @@ import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.Tecla;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
 
 public class Keyboard implements KeyListener {
 	

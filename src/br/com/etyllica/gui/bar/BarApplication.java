@@ -2,6 +2,12 @@ package br.com.etyllica.gui.bar;
 
 import br.com.etyllica.core.application.Application;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
 
 public abstract class BarApplication extends Application{
 

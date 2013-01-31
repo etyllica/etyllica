@@ -8,6 +8,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.util.SVGColor;
 
 public class HelloWorld extends Application{
 
@@ -21,7 +22,7 @@ public class HelloWorld extends Application{
 	@Override
 	public void draw(Grafico g) {
 
-		g.setColor(new Color(0xDD,0xDD,0xDD));
+		g.setColor(SVGColor.CRIMSON);
 		g.getGraphics().fillRect(0, 0, w, h);
 		
 		g.setColor(Color.BLACK);
@@ -42,7 +43,7 @@ public class HelloWorld extends Application{
 		}
 		
 		if(event.getPressed(Tecla.TSK_ENTER)){
-			returnApplication = new TchauMundo();
+			returnApplication = new ByeWorld();
 		}
 
 		return GUIEvent.NONE;

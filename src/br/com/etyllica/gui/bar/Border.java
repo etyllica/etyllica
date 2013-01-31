@@ -9,6 +9,13 @@ import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.GUIComponent;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class Border extends GUIComponent{
 
 	private int borderSize = 12;

@@ -12,10 +12,9 @@ public class Tutorial1 extends Etyllica {
 	}
 
 	@Override
-	public void comecaJogo() {
-		// TODO Auto-generated method stub
+	public void startGame() {
 		
-		setPrimeiraApplicacao(new HelloWorld());
+		setMainApplicacao(new HelloWorld());
 	}
 	
 }

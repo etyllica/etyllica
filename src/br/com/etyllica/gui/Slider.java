@@ -7,6 +7,13 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class Slider extends GUIComponent{
 
 	private int minValue = 0;

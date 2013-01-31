@@ -11,6 +11,13 @@ import br.com.etyllica.gui.button.IconedRoundButton;
 import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.layer.ImageLayer;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class DefaultWindow extends Window{
 
 	//private Panel panel;

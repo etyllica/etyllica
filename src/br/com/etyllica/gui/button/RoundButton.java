@@ -9,7 +9,7 @@ import br.com.etyllica.gui.Button;
 /**
  * 
  * @author mscythe
- * @license GPLv3
+ * @license LGPLv3
  *
  */
 

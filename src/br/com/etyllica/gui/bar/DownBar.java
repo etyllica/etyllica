@@ -6,6 +6,13 @@ import br.com.etyllica.core.event.Event;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class DownBar extends Bar{
 
 	public DownBar(int x, int y, int w, int h){

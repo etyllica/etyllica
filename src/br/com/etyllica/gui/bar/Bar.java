@@ -11,6 +11,13 @@ import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.layer.ImageLayer;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public abstract class Bar extends Button{
 
 	protected int startX;

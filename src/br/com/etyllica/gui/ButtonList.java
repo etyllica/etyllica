@@ -4,11 +4,16 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.control.HIDController;
 import br.com.etyllica.core.event.Event;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.video.Grafico;
+
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
 
 public class ButtonList extends GUIComponent{
 	

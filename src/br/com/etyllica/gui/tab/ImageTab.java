@@ -6,6 +6,13 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.button.IconedButton;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class ImageTab extends IconedButton{
 
 	private boolean active = false;

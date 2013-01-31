@@ -1,5 +1,12 @@
 package br.com.etyllica.effects;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public enum TransitionEffect {
 
 	FADE,

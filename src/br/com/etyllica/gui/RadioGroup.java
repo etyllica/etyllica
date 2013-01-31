@@ -3,6 +3,12 @@ package br.com.etyllica.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
 
 public class RadioGroup {
 

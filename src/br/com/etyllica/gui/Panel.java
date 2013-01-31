@@ -2,7 +2,6 @@ package br.com.etyllica.gui;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
-import br.com.etyllica.core.control.HIDController;
 import br.com.etyllica.core.event.Event;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
@@ -10,7 +9,7 @@ import br.com.etyllica.core.video.Grafico;
 /**
  * 
  * @author mscythe
- * @license GPLv3
+ * @license LGPLv3
  *
  */
 

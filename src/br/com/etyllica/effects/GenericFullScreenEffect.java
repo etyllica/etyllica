@@ -4,6 +4,13 @@ import java.awt.Color;
 
 import br.com.etyllica.core.video.Grafico;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class GenericFullScreenEffect extends GlobalEffect{
 	
 	private int alpha = 100;

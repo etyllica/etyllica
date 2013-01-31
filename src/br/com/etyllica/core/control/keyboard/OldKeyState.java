@@ -1,5 +1,12 @@
 package br.com.etyllica.core.control.keyboard;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public enum OldKeyState {
 	FIRST_RELEASED,
 	RELEASED,

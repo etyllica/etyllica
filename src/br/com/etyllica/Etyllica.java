@@ -2,7 +2,6 @@ package br.com.etyllica;
 
 import java.applet.Applet;
 import java.awt.Cursor;
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.awt.Point;
@@ -11,15 +10,13 @@ import java.awt.Transparency;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
 
-import javax.swing.JFrame;
-
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.control.keyboard.Keyboard;
 import br.com.etyllica.core.control.mouse.Mouse;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.loader.MultimediaLoader;
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.loader.ImageLoader;
+import br.com.etyllica.core.loader.MultimediaLoader;
 import br.com.etyllica.core.video.FullScreenWindow;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.Gui;
@@ -28,7 +25,7 @@ import br.com.etyllica.gui.window.DesktopWindow;
 /**
  * 
  * @author mscythe
- * @license GPLv3
+ * @license LGPLv3
  *
  */
 
@@ -89,7 +86,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 		defineTamanho(largura,altura);
 		
-		comecaJogo();
+		startGame();
 
 		desktop.changeApplication(application);
 
@@ -110,7 +107,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 		//gerenciaSistema();
 	}
 
-	public abstract void comecaJogo();
+	public abstract void startGame();
 
 	public void setTamanho(int largura, int altura){
 		this.largura = largura;
@@ -156,8 +153,6 @@ public abstract class Etyllica extends Applet implements Runnable{
 		}
 
 		Gui.getInstance().draw();
-
-		//DesktopWindow desktop = indice.getDesktop();
 
 		volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
@@ -238,7 +233,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	}
 	
-	public void setPrimeiraApplicacao(Application application){
+	public void setMainApplicacao(Application application){
 		this.application = application;
 	}
 	

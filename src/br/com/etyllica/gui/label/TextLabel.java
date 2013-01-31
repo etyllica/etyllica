@@ -11,6 +11,13 @@ import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Label;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class TextLabel extends Label{
 
 	//protected String text;

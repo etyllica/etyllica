@@ -4,7 +4,7 @@ package br.com.etyllica.gui;
 /**
  * 
  * @author mscythe
- * @license GPLv3
+ * @license LGPLv3
  *
  */
 

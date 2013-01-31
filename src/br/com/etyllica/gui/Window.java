@@ -14,6 +14,13 @@ import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.loader.ApplicationLoader;
 import br.com.etyllica.core.video.Grafico;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class Window extends GUIComponent implements Runnable{
 
 	protected Application application;

@@ -6,6 +6,13 @@ import br.com.etyllica.core.control.mouse.Mouse;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.layer.ImageLayer;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class LeftBar extends Bar{
 	
 	public LeftBar(int x, int y, int w, int h){

@@ -1,5 +1,12 @@
 package br.com.etyllica.lang;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public enum Language {
 	
 	PORTUGUESE_BRAZIL("pt_BR","UTF-8"),

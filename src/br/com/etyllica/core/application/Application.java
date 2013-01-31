@@ -2,7 +2,6 @@ package br.com.etyllica.core.application;
 
 import java.awt.image.BufferedImage;
 
-import br.com.etyllica.core.event.Event;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.MultimediaLoader;
 import br.com.etyllica.core.video.Grafico;

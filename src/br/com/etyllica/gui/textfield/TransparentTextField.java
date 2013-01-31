@@ -5,7 +5,7 @@ import br.com.etyllica.gui.TextField;
 /**
  * 
  * @author mscythe
- * @license GPLv3
+ * @license LGPLv3
  *
  */
 

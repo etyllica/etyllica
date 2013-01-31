@@ -7,6 +7,13 @@ import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.layer.ImageLayer;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class IconedRoundButton extends Button{
 
 	protected ImageLayer icon;

@@ -5,6 +5,13 @@ import java.awt.Color;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Window;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class DesktopWindow extends Window{
 
 	public DesktopWindow(int x, int y, int w, int h) {

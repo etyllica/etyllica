@@ -2,6 +2,13 @@ package br.com.etyllica.gui.textfield;
 
 import br.com.etyllica.gui.PasswordField;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class ConfirmPasswordField extends PasswordField{
 
 	private PasswordField passwordField;

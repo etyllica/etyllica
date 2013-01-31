@@ -11,7 +11,7 @@ import java.awt.image.DataBufferInt;
 /**
  * 
  * @author mscythe
- * @license GPLv3
+ * @license LGPLv3
  *
  */
 

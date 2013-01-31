@@ -185,9 +185,9 @@ public class Gui {
 
 				List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
 				for(GUIComponent component: components){
-
-					//Update componente
-					simpleUpdateComponent(component, event);
+					if(component!=null){
+						updateComponent(component, event);
+					}
 
 					//TODO Coisas de acessibilidade
 					//gerenciaTimerClick();
@@ -286,7 +286,7 @@ public class Gui {
 
 	}
 
-	private void simpleUpdateComponent(GUIComponent component, Event event){
+	private void updateComponent(GUIComponent component, Event event){
 
 		//If componente is visible
 		if(component.isVisible()){
@@ -296,7 +296,7 @@ public class Gui {
 
 				child.setOffset(component.getX(), component.getY());
 
-				simpleUpdateComponent(child, event);
+				updateComponent(child, event);
 
 				child.setOffset(-component.getX(), -component.getY());
 

@@ -9,6 +9,13 @@ import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class Radio extends CheckBox{
 
 	private RadioGroup group;

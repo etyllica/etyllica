@@ -8,6 +8,13 @@ import br.com.etyllica.core.control.mouse.Mouse;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.layer.ImageLayer;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class RightBar extends Bar{
 	
 	public RightBar(int x, int y, int w, int h){

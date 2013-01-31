@@ -5,7 +5,7 @@ import br.com.etyllica.layer.MovementedLayer;
 /**
  * 
  * @author mscythe
- * @license GPLv3
+ * @license LGPLv3
  *
  */
 

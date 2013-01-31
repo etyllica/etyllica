@@ -1,5 +1,12 @@
 package br.com.etyllica.core.control.joystick;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class JoystickEvent {
 
 	public static final int LEFT = 1001;

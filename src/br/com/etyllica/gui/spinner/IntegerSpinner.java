@@ -2,6 +2,13 @@ package br.com.etyllica.gui.spinner;
 
 import br.com.etyllica.gui.Spinner;
 
+/**
+ * 
+ * @author mscythe
+ * @license LGPLv3
+ *
+ */
+
 public class IntegerSpinner extends Spinner<Integer> {
 
 	public IntegerSpinner(int x, int y, int w, int h) {
