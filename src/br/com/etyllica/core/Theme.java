@@ -42,6 +42,7 @@ public class Theme {
 	private Font buttonFont;
 	
 	private Color buttonColor = new Color(0x00,0x00, 0x00, 0xa0);
+	private Color buttonOnFocus = new Color(0x33, 0x33, 0x99, 0xa0);	
 	private Color buttonOnMouse = new Color(0x33, 0x33, 0x33, 0xa0);
 	private Color buttonOnClick = new Color(0x99, 0x99, 0x99, 0xa0);
 	
@@ -141,6 +142,14 @@ public class Theme {
 
 	public void setButtonOnMouse(Color buttonOnMouse) {
 		this.buttonOnMouse = buttonOnMouse;
+	}
+	
+	public Color getButtonOnFocus() {
+		return buttonOnFocus;
+	}
+
+	public void setButtonOnFocus(Color buttonOnFocus) {
+		this.buttonOnFocus = buttonOnFocus;
 	}
 
 	public Color getButtonOnClick() {

@@ -3,7 +3,7 @@ package br.com.etyllica.gui.bar;
 import java.awt.Polygon;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.video.Grafico;
@@ -40,7 +40,7 @@ public class Border extends GUIComponent{
 	
 	
 	@Override
-	public GUIEvent updateMouse(Event event) {
+	public GUIEvent updateMouse(PointerEvent event) {
 		// TODO Auto-generated method stub
 		return GUIEvent.NONE;
 	}

@@ -11,7 +11,7 @@ import br.com.etyllica.core.loader.MultimediaLoader;
 
 public class Music extends Sound{
 
-	private boolean loop = false;
+	private boolean loop = true;
 	
 	public Music(String path){
 		super(path);

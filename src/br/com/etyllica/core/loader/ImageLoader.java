@@ -52,8 +52,22 @@ public class ImageLoader extends GenericLoader{
 	}
 
 	public BufferedImage getImagem(String path){
+		
+		return getImagem(path, false);
+		
+	}
+	
+	public BufferedImage getImagem(String path, boolean absolute){
 
-		String diretorio = pasta+path;
+		StringBuilder sb = new StringBuilder();
+				
+		if(!absolute){
+			sb.append(pasta);
+		}
+		
+		sb.append(path);
+		
+		String diretorio = sb.toString();
 
 		if(camadas.containsKey(diretorio)){
 

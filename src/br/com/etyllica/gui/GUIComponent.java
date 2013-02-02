@@ -1,11 +1,16 @@
 package br.com.etyllica.gui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import br.com.etyllica.core.Component;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
@@ -27,7 +32,10 @@ public abstract class GUIComponent extends Layer implements Component{
 	
 	protected int roundness;
 
-	protected List<GUIComponent> components = new ArrayList<GUIComponent>();
+	protected GUIComponent root = null;
+	
+	private Set<GUIComponent> components = new LinkedHashSet<GUIComponent>();
+	
 	protected List<GUIAction> actions = new ArrayList<GUIAction>();
 	
 	//TODO Remover lista e trocar por mapa
@@ -68,7 +76,6 @@ public abstract class GUIComponent extends Layer implements Component{
 	public void setOnFocus(boolean focus) {
 		this.onFocus = focus;
 	}
-	
 
 	public int getRoundness() {
 		return roundness;
@@ -86,13 +93,34 @@ public abstract class GUIComponent extends Layer implements Component{
 		this.actions = actions;
 	}
 
-	public List<GUIComponent> getComponents() {
+	public Set<GUIComponent> getComponents() {
 		return components;
 	}
 
+	public void clearComponents(){
+		this.components.clear();
+	}
+	
+	public void remove(GUIComponent component){
+		this.components.remove(component);
+	}
+	
+	public void removeAll(Collection<? extends GUIComponent> components){
+		this.components.removeAll(components);
+	}
+	
 	//Always add component at first
-	public void addComponent(GUIComponent component) {
-		this.components.add(0,component);
+	public void add(GUIComponent component) {
+		component.setRoot(this);
+		this.components.add(component);
+	}
+	
+	public void addAll(Collection<? extends GUIComponent> components) {
+		
+		for(GUIComponent component: components)	{
+			add(component);
+		}
+		
 	}
 	
 	public void translateComponents(int x, int y){
@@ -133,6 +161,38 @@ public abstract class GUIComponent extends Layer implements Component{
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
 		return GUIEvent.NONE;
-	}	
+	}
+	
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		return GUIEvent.NONE;
+	}
+	
+	protected void setRoot(GUIComponent root){
+		this.root = root;
+	}
+	
+	public GUIComponent findNext(){
+						
+		if(root!=null){
+			
+			Iterator<GUIComponent> it = root.getComponents().iterator();
+
+	        while(it.hasNext()){
+	        	
+	        	if(this.equals(it.next())){
+	        		
+	        		if(it.hasNext()){
+	        			return it.next();
+	        		}
+	        	}
+	        	
+	        }
+			
+		}
+		
+		return null;
+		
+	}
 	
 }

@@ -44,7 +44,7 @@ public class FontLoader extends GenericLoader{
 		return font.deriveFont(size);
 		
 	}
-	
+		
 	public Font carregaFonte(String fontName){
 
 		if(!fonts.containsKey(fontName)){

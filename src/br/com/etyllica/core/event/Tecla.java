@@ -1,7 +1,6 @@
 package br.com.etyllica.core.event;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 import br.com.etyllica.core.control.joystick.JoystickEvent;
 
@@ -98,25 +97,25 @@ public enum Tecla {
 	TSK_SHIFT_DIREITA (KeyEvent.KEY_LOCATION_RIGHT*100+KeyEvent.VK_SHIFT),
 	TSK_SHIFT_ESQUERDA (KeyEvent.KEY_LOCATION_LEFT*100+KeyEvent.VK_SHIFT),
 		
-	TSK_NUMPAD_0 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_0.getCodigo()+48),
-	TSK_NUMPAD_1 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_1.getCodigo()+48),
-	TSK_NUMPAD_2 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_2.getCodigo()+48),
-	TSK_NUMPAD_3 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_3.getCodigo()+48),
-	TSK_NUMPAD_4 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_4.getCodigo()+48),
-	TSK_NUMPAD_5 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_5.getCodigo()+48),
-	TSK_NUMPAD_6 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_6.getCodigo()+48),
-	TSK_NUMPAD_7 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_7.getCodigo()+48),
-	TSK_NUMPAD_8 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_8.getCodigo()+48),
-	TSK_NUMPAD_9 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_9.getCodigo()+48),
+	TSK_NUMPAD_0 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_0.getCode()+48),
+	TSK_NUMPAD_1 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_1.getCode()+48),
+	TSK_NUMPAD_2 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_2.getCode()+48),
+	TSK_NUMPAD_3 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_3.getCode()+48),
+	TSK_NUMPAD_4 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_4.getCode()+48),
+	TSK_NUMPAD_5 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_5.getCode()+48),
+	TSK_NUMPAD_6 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_6.getCode()+48),
+	TSK_NUMPAD_7 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_7.getCode()+48),
+	TSK_NUMPAD_8 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_8.getCode()+48),
+	TSK_NUMPAD_9 (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_9.getCode()+48),
 	
-	TSK_NUMPAD_DEL (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_DEL.getCodigo()-19),
-	TSK_NUMPAD_INS (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_INSERT.getCodigo()),
-	TSK_NUMPAD_ENTER (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_ENTER.getCodigo()),
+	TSK_NUMPAD_DEL (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_DEL.getCode()-19),
+	TSK_NUMPAD_INS (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_INSERT.getCode()),
+	TSK_NUMPAD_ENTER (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_ENTER.getCode()),
 	
-	TSK_NUMPAD_SETA_BAIXO (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_BAIXO.getCodigo()+185),
-	TSK_NUMPAD_SETA_CIMA (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_CIMA.getCodigo()+186),
-	TSK_NUMPAD_SETA_DIREITA (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_DIREITA.getCodigo()+188),
-	TSK_NUMPAD_SETA_ESQUERDA (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_ESQUERDA.getCodigo()+189),
+	TSK_NUMPAD_SETA_BAIXO (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_BAIXO.getCode()+185),
+	TSK_NUMPAD_SETA_CIMA (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_CIMA.getCode()+186),
+	TSK_NUMPAD_SETA_DIREITA (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_DIREITA.getCode()+188),
+	TSK_NUMPAD_SETA_ESQUERDA (KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_ESQUERDA.getCode()+189),
 			
 	TSK_ABRE_COLCHETES (KeyEvent.VK_OPEN_BRACKET),
 	TSK_FECHA_COLCHETES (KeyEvent.VK_CLOSE_BRACKET),
@@ -131,12 +130,7 @@ public enum Tecla {
 	
 		
 	TSK_HIRAGANA (KeyEvent.VK_JAPANESE_HIRAGANA),
-	
-	MOUSE_BUTTON_LEFT(MouseEvent.BUTTON1),
-	MOUSE_BUTTON_MIDDLE(MouseEvent.BUTTON2),
-	MOUSE_BUTTON_RIGHT(MouseEvent.BUTTON3),
-	MOUSE_WHEEL(MouseEvent.MOUSE_WHEEL),
-	
+		
 	JOYSTICK_UP(JoystickEvent.UP),
 	JOYSTICK_DOWN(JoystickEvent.DOWN),
 	JOYSTICK_LEFT(JoystickEvent.LEFT),
@@ -150,14 +144,14 @@ public enum Tecla {
 	
 	NONE(0);
 	
-	private final int codigo;
+	private final int code;
 
-	Tecla(int codigo){
-		this.codigo = codigo;
+	Tecla(int code){
+		this.code = code;
 	}
 	
-	public final int getCodigo(){ 
-		return codigo; 
+	public final int getCode(){ 
+		return code; 
 	}
 
 }

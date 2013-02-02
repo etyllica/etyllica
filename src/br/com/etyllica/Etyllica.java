@@ -10,6 +10,9 @@ import java.awt.Transparency;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
 
+import javax.swing.JFrame;
+
+import br.com.etyllica.core.Core;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.control.keyboard.Keyboard;
 import br.com.etyllica.core.control.mouse.Mouse;
@@ -19,7 +22,6 @@ import br.com.etyllica.core.loader.ImageLoader;
 import br.com.etyllica.core.loader.MultimediaLoader;
 import br.com.etyllica.core.video.FullScreenWindow;
 import br.com.etyllica.effects.GenericFullScreenEffect;
-import br.com.etyllica.gui.Gui;
 import br.com.etyllica.gui.window.DesktopWindow;
 
 /**
@@ -77,12 +79,14 @@ public abstract class Etyllica extends Applet implements Runnable{
 		ImageLoader.getInstance().setUrl(s);
 		FontLoader.getInstancia().setUrl(s);
 		MultimediaLoader.getInstancia().setUrl(s);
+		
+		//MeshLoader.getInstancia().setUrl(s);
 
 		desktop = new DesktopWindow(0,0,largura,altura);
-		Gui.getInstance().setDesktopWindow(desktop);
+		Core.getInstance().setDesktopWindow(desktop);
 
-		mouse = Gui.getInstance().getControl().getMouse();
-		keyboard = Gui.getInstance().getControl().getTeclado();
+		mouse = Core.getInstance().getControl().getMouse();
+		keyboard = Core.getInstance().getControl().getTeclado();
 
 		defineTamanho(largura,altura);
 		
@@ -152,7 +156,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 			volatileImg = createBackBuffer(largura,altura); // recreate the hardware accelerated image.
 		}
 
-		Gui.getInstance().draw();
+		Core.getInstance().draw();
 
 		volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
@@ -207,9 +211,9 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 		GUIEvent event = GUIEvent.NONE;
 
-			Gui.getInstance().gerencia();
+			Core.getInstance().gerencia();
 			
-			event = Gui.getInstance().getSuperEvent();
+			event = Core.getInstance().getSuperEvent();
 			
 			if(event==GUIEvent.ENABLE_FULL_SCREEN){
 				enableFullScreen();
@@ -282,7 +286,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 			telaCheia = new FullScreenWindow();
 			//telaCheia.setGerenciador(indice);
-			Gui.getInstance().addEffect(new GenericFullScreenEffect(0, 0, largura, altura));
+			Core.getInstance().addEffect(new GenericFullScreenEffect(0, 0, largura, altura));
 		}
 	}
 

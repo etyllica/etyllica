@@ -1,11 +1,12 @@
 package br.com.etyllica.core.application;
 
 import java.awt.image.BufferedImage;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.loader.MultimediaLoader;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.effects.EfeitoSonoro;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.GUIComponent;
 import br.com.etyllica.layer.ImageLayer;
@@ -17,8 +18,11 @@ import br.com.etyllica.layer.ImageLayer;
  *
  */
 
-public abstract class Application extends GUIComponent{
+public abstract class Application extends GUIComponent implements Runnable{
 
+	private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+	private int updateInterval = -1;
+	
 	protected LoadApplication loading;
 	protected Application returnApplication = this;
 	protected TransitionEffect effect = TransitionEffect.NONE;
@@ -79,20 +83,6 @@ public abstract class Application extends GUIComponent{
 	public String getCarregandoFrase(){
 		return carregandoFrase;
 	}
-	
-	private boolean musica = false;
-
-	protected void tocaMusicaStream(String caminho){
-		if(musica){
-			MultimediaLoader.getInstancia().tocaMusicaStream(caminho);
-		}
-	}
-	protected void tocaSom(EfeitoSonoro efeito){
-		if(efeito.isTocando()){
-			MultimediaLoader.getInstancia().tocaSom(efeito.getSom());
-			efeito.setTocando(false);
-		}
-	}
 
 	//Para Uso Externo
 	public void setVariaveis(SessionMap variaveis){
@@ -151,5 +141,21 @@ public abstract class Application extends GUIComponent{
 	public void setIcon(ImageLayer icon) {
 		this.icon = icon;
 	}
+			
+	protected  void updateAtFixedRate(int interval){
 		
+		updateInterval = interval;
+		
+		executor.scheduleAtFixedRate(this, 0, updateInterval, TimeUnit.MILLISECONDS);
+		
+	}
+
+	public void run(){
+		timeUpdate();
+	}
+	
+	protected void timeUpdate(){
+		
+	}
+	
 }

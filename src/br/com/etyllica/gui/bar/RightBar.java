@@ -65,7 +65,7 @@ public class RightBar extends Bar{
 		g.fillArc(iconColision.getX(), iconColision.getY(), iconColision.getW(), iconColision.getH(), 90, 180);
 
 		if(icon!=null){
-			g.desenha(icon);
+			icon.draw(g);
 		}
 		
 		if(closed){

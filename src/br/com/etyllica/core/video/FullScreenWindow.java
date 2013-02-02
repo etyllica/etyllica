@@ -13,9 +13,9 @@ import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
 
+import br.com.etyllica.core.Core;
 import br.com.etyllica.core.control.keyboard.Keyboard;
 import br.com.etyllica.core.control.mouse.Mouse;
-import br.com.etyllica.gui.Gui;
 
 /**
  * 
@@ -70,8 +70,8 @@ public class FullScreenWindow extends Window{
 	
 	private void setListeners(){
 		
-		Mouse mouse = Gui.getInstance().getControl().getMouse();
-		Keyboard keyboard = Gui.getInstance().getControl().getTeclado();
+		Mouse mouse = Core.getInstance().getControl().getMouse();
+		Keyboard keyboard = Core.getInstance().getControl().getTeclado();
 		
 		addMouseMotionListener( mouse );
 		addMouseWheelListener( mouse );

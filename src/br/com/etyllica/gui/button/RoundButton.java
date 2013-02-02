@@ -25,11 +25,19 @@ public class RoundButton extends Button{
 		Theme theme = Configuration.getInstance().getTheme();
 
 		if(!mouseOver){
-
-			g.setColor(theme.getButtonColor());
+			
+			if(onFocus){
+				
+				g.setColor(theme.getButtonOnFocus());
+				
+			}else{
+				
+				g.setColor(theme.getButtonColor());
+				
+			}
 
 		}else{
-			
+						
 			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
 
 				g.setColor(theme.getButtonOnClick());
@@ -39,6 +47,7 @@ public class RoundButton extends Button{
 				g.setColor(theme.getButtonOnMouse());
 
 			}
+						
 		}
 
 		g.fillOval(x,y,w,h);

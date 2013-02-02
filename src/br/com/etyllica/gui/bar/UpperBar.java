@@ -57,7 +57,7 @@ public class UpperBar extends Bar{
 		g.fillArc(iconColision.getX(), iconColision.getY(), iconColision.getW(), iconColision.getH(), 180, 180);
 
 		if(icon!=null){
-			g.desenha(icon);
+			icon.draw(g);
 		}
 				
 	}

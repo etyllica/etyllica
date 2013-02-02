@@ -1,6 +1,6 @@
 package br.com.etyllica.gui;
 
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 
@@ -18,7 +18,7 @@ public class Wallpaper extends GUIComponent{
 	}
 	
 	@Override
-	public GUIEvent updateMouse(Event event) {
+	public GUIEvent updateMouse(PointerEvent event) {
 		
 		return GUIEvent.NONE;
 	}

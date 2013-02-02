@@ -2,7 +2,6 @@ package br.com.etyllica.core;
 
 import br.com.etyllica.core.control.mouse.theme.ArrowTheme;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.gui.Gui;
 import br.com.etyllica.lang.Language;
 
 /**
@@ -73,7 +72,7 @@ public class Configuration {
 		theme.reloadFonts();
 		
 		//Force GUIEvent update
-		Gui.getInstance().addGUIEvent(GUIEvent.LANGUAGE_CHANGED);
+		Core.getInstance().addGUIEvent(GUIEvent.LANGUAGE_CHANGED);
 	}
 
 	public boolean isTimerClick() {

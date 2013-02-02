@@ -15,12 +15,10 @@ import javax.swing.event.MouseInputListener;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.control.mouse.arrow.MouseArrow;
 import br.com.etyllica.core.control.mouse.theme.ArrowTheme;
-import br.com.etyllica.core.event.DeviceType;
-import br.com.etyllica.core.event.Event;
 import br.com.etyllica.core.event.KeyState;
-import br.com.etyllica.core.event.Tecla;
-import br.com.etyllica.layer.ImageLayer;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.layer.AnimatedImageLayer;
+import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.linear.Poligono;
 
 /**
@@ -32,7 +30,7 @@ import br.com.etyllica.linear.Poligono;
 
 public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheelListener{
 
-	private List<Event> events = new ArrayList<Event>();
+	private List<PointerEvent> events = new ArrayList<PointerEvent>();
 	
 	protected int x = 0;
 	protected int y = 0;
@@ -113,21 +111,21 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 
 	private void addEvent(int button, KeyState state, int x, int y){
 
-		Tecla key = Tecla.NONE;
+		MouseButton key = MouseButton.MOUSE_NONE;
 
 		switch (button) {
 		case MouseEvent.BUTTON1:
-			key = Tecla.MOUSE_BUTTON_LEFT;
+			key = MouseButton.MOUSE_BUTTON_LEFT;
 			break;
 		case MouseEvent.BUTTON2:
-			key = Tecla.MOUSE_BUTTON_MIDDLE;
+			key = MouseButton.MOUSE_BUTTON_MIDDLE;
 			break;
 		case MouseEvent.BUTTON3:
-			key = Tecla.MOUSE_BUTTON_RIGHT;
+			key = MouseButton.MOUSE_BUTTON_RIGHT;
 			break;
 		}
 
-		events.add(new Event(DeviceType.MOUSE, key, state, x, y ));
+		events.add(new PointerEvent(key, state, x, y ));
 
 	}
 
@@ -168,7 +166,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 	@Override
 	public void mouseMoved( MouseEvent me ) {
 
-		events.add(new Event(DeviceType.MOUSE, Tecla.NONE, KeyState.MOVE, x, y));
+		events.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, x, y));
 
 		setCoordenadas(me.getX(),me.getY());
 
@@ -360,7 +358,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 		return arrow;
 	}
 	
-	public List<Event> getEvents(){
+	public List<PointerEvent> getEvents(){
 		return events;
 	}
 

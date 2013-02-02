@@ -1,6 +1,6 @@
 package br.com.etyllica.gui;
 
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
@@ -29,11 +29,11 @@ public abstract class Spinner<T extends Number> extends GUIComponent{
 	public Spinner(int x, int y, int w, int h){
 		
 		resultPanel = new Panel(x, y, w, h);
-		components.add(resultPanel);
+		add(resultPanel);
 		
 		//TODO levar em consideracao o fontSize
 		resultLabel = new TextLabel(x+2,y+2+h/2,"0");
-		components.add(resultLabel);
+		add(resultLabel);
 		
 		int buttonWidth = w/6;
 		int miniBorder = 1;
@@ -41,13 +41,13 @@ public abstract class Spinner<T extends Number> extends GUIComponent{
 		plus = new Button(x+w-buttonWidth-miniBorder, y+miniBorder, buttonWidth, h/2-miniBorder-1);
 		plus.setLabel(new TextLabel("+"));
 		plus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "addReload"));
-		components.add(plus);
+		add(plus);
 		
 		minus = new Button(x+w-buttonWidth-miniBorder, y+h/2+miniBorder, buttonWidth, h/2-miniBorder);
 		minus.setLabel(new TextLabel("-"));
 		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "subReload"));
 		
-		components.add(minus);
+		add(minus);
 				
 	}
 		
@@ -71,7 +71,7 @@ public abstract class Spinner<T extends Number> extends GUIComponent{
 	public abstract void subtract();
 
 	@Override
-	public GUIEvent updateMouse(Event event) {
+	public GUIEvent updateMouse(PointerEvent event) {
 		return GUIEvent.NONE;
 	}
 	

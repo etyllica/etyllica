@@ -5,7 +5,8 @@ import java.awt.FontMetrics;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.control.mouse.MouseButton;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyboardEvent;
@@ -50,10 +51,8 @@ public class TextField extends GUIComponent{
 
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event){
-
-		System.out.println("Update TextField");
 		
-		if(onFocus){
+		//if(onFocus){
 			
 			//Update component with typed events
 			if(event.getChar()!='\0'){
@@ -80,14 +79,14 @@ public class TextField extends GUIComponent{
 				return releasedEvent;		
 			}
 			
-		}
+		//}
 
 		return GUIEvent.NONE;
 	}
 
-	public GUIEvent updateMouse(Event event){
+	public GUIEvent updateMouse(PointerEvent event){
 
-		if((event.getState()==KeyState.PRESSED)&&(event.isKey(Tecla.MOUSE_BUTTON_LEFT))){
+		if((event.getPressed(MouseButton.MOUSE_BUTTON_LEFT))){
 
 			if(onMouse(event)){
 
@@ -103,11 +102,17 @@ public class TextField extends GUIComponent{
 		}else if(onMouse(event)){
 
 			if(!onFocus){
+				
 				return GUIEvent.MOUSE_OVER;
+				
 			}else{
+				
 				return GUIEvent.MOUSE_OVER_WITH_FOCUS;
 			}
 
+		//TODO Melhorar
+		}else if(!onMouse(event)){
+			return GUIEvent.MOUSE_OUT;
 		}
 
 		return GUIEvent.NONE;

@@ -9,12 +9,8 @@ package br.com.etyllica.core.event;
 
 public enum KeyState {
 
-	//FIRST_RELEASED,
 	RELEASED,
 	PRESSED,  // Pressionado mas nao pela primeira vez 
-	//ONCE,      // Pressionado pela primeira vez
-	TYPED,
-	
 	DRAGGED,
 	
 	CLICK,

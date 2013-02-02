@@ -2,10 +2,10 @@ package br.com.etyllica.gui;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.control.mouse.MouseButton;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 /**
@@ -24,7 +24,7 @@ public class CheckBox extends Button{
 	}
 
 	@Override
-	public GUIEvent updateMouse(Event event){
+	public GUIEvent updateMouse(PointerEvent event){
 
 		GUIEvent retorno = GUIEvent.NONE;
 
@@ -34,7 +34,7 @@ public class CheckBox extends Button{
 
 			if(event.getState()==KeyState.PRESSED){
 
-				if(event.isKey(Tecla.MOUSE_BUTTON_LEFT)){
+				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
 					swapChecked();
 

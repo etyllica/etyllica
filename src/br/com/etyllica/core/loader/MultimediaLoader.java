@@ -1,14 +1,15 @@
 package br.com.etyllica.core.loader;
 
 
-import com.paulscode.sound.SoundSystem;
-import com.paulscode.sound.SoundSystemConfig;
-import com.paulscode.sound.SoundSystemException;
-import com.paulscode.sound.codecs.CodecJOrbis;
-import com.paulscode.sound.codecs.CodecWav;
-import com.paulscode.sound.libraries.LibraryJavaSound;
+import sound.paulscode.SoundSystem;
+import sound.paulscode.SoundSystemConfig;
+import sound.paulscode.SoundSystemException;
+import sound.paulscode.codecs.CodecJLayerMP3;
+import sound.paulscode.codecs.CodecJOrbis;
+import sound.paulscode.codecs.CodecWav;
+import sound.paulscode.libraries.LibraryJavaSound;
 
-import de.cuina.fireandfuel.CodecJLayerMP3;
+
 
 /**
  * 
@@ -43,13 +44,15 @@ public class MultimediaLoader extends GenericLoader{
 			SoundSystemConfig.setCodec( "mp3", CodecJLayerMP3.class );
 						
 			SoundSystemConfig.addLibrary(LibraryJavaSound.class);
+			//SoundSystemConfig.addLibrary(LibraryJOAL.class);
 			
 			SoundSystemConfig.setSoundFilesPackage(pasta);
 			
 			mySoundSystem = new SoundSystem(LibraryJavaSound.class);
+			//mySoundSystem = new SoundSystem(LibraryJOAL.class);
 		}
 		catch(SoundSystemException e) {
-			System.err.println("WE GOT AN ERROR HERE HOUSTON" );
+			System.err.println("Error on "+this.getClass().getSimpleName() );
 		}
 
 	}

@@ -16,12 +16,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
-import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.effects.EfeitoSonoro;
+import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.layer.ImageLayer;
-import br.com.etyllica.layer.AnimatedImageLayer;
-import br.com.etyllica.layer.BufferedLayer;
-import br.com.etyllica.layer.PivotImageLayer;
 import br.com.etyllica.layer.TextLayer;
 import br.com.etyllica.linear.Ponto2D;
 
@@ -228,91 +224,16 @@ public class Grafico{
 
 	}
 
-
-	public void desenha(AnimatedImageLayer[] imagens) {
-
-		for(int i=0;i<imagens.length;i++){
-			desenha(imagens[i]);
-		}
-
-	}
-
-	public void desenha(ImageLayer[] imagens) {
-		for(ImageLayer imagem: imagens){
-			desenha(imagem);
-		}
-
-	}
-
-	public void desenha(ImageLayer cam){
-		cam.draw(this);
-	}
-
-	public void desenha(EfeitoSonoro efeito){
-		if(efeito.isTocando()){
-			//midia.tocaSom(efeito.getSom());
-			efeito.setTocando(false);
-		}
-		desenha((AnimatedImageLayer) efeito);
-	}
-
-	public void desenha(AnimatedImageLayer cam)
-	{
-		cam.draw(this);
-	}
-
-
-	public void desenha(BufferedLayer cam){
-
-		Image imagem = cam.getImagemBuffer();		
-
-		if(cam.isVisible()){
-
-			int x = cam.getX();
-			int y = cam.getY();
-
-			screen.drawImage( imagem, x, y, x+cam.getW(),y+cam.getH(),
-					cam.getXImagem(),cam.getYImagem(),cam.getXImagem()+cam.getW(),cam.getYImagem()+cam.getH(), null );
-
-		}
-
-	}
-
-	public void draw(int x, int y, BufferedImage imagem){
-		screen.drawImage( imagem, x, y, x+imagem.getWidth(),y+imagem.getHeight(),
-				0,0,imagem.getWidth(),imagem.getHeight(), null );
-	}
-	
 	public void drawImage( Image img, int dx1, int dy1,int dx2, int dy2, int sx1 , int sy1, int sx2, int sy2, ImageObserver observer ){
 		screen.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);
 	}
 	
-	
-	public void desenha(String caminho){
-		
-		BufferedImage bimg = ImageLoader.getInstance().getImagem(caminho);
-		
-		screen.drawImage( bimg,0,0, null );
-	}
-
-	public void desenha(PivotImageLayer camP){
-
-		camP.draw(this);
-	}
-
-	//TODO Colocar fontes nos resources
-	public Font carregaFonte(String nomeFonte, int estilo, int tamanho){
-		Font f = new Font(nomeFonte, estilo, tamanho);
-		return f;
-	}
-	
-
 	public void desenha(TextLayer texto){
 
 		if(texto.isVisible()){
 
-			//TODO if font nao foi definida no gerenciador...
-			Font f = carregaFonte(texto.getNomeFonte(), texto.getEstilo(), texto.getTamanho());
+			Font f = FontLoader.getInstancia().carregaFonte(texto.getNomeFonte());
+			f = f.deriveFont(texto.getEstilo(), texto.getTamanho());
 
 			screen.setFont(f);
 

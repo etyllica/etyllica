@@ -4,10 +4,10 @@ import java.awt.Polygon;
 
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.control.mouse.Mouse;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.control.mouse.MouseButton;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.layer.ImageLayer;
 
@@ -99,7 +99,7 @@ public abstract class Bar extends Button{
 	public void setApplication(BarApplication application) {
 		this.application = application;
 		application.load();
-		components.add(application);
+		add(application);
 
 		//translateGui();	
 	}
@@ -107,7 +107,7 @@ public abstract class Bar extends Button{
 	//protected abstract void translateGui(); 
 
 	@Override
-	public GUIEvent updateMouse(Event event){
+	public GUIEvent updateMouse(PointerEvent event){
 
 		GUIEvent retorno = GUIEvent.NONE;
 
@@ -121,28 +121,28 @@ public abstract class Bar extends Button{
 
 			if(event.getState()==KeyState.PRESSED){
 				
-				if(event.isKey(Tecla.MOUSE_BUTTON_LEFT)){
+				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
 					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 
-				}else if(event.isKey(Tecla.MOUSE_BUTTON_RIGHT)){
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
 
 					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
 
-				}else if(event.isKey(Tecla.MOUSE_BUTTON_MIDDLE)){
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
 
 					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
 				}
 			}
 			else if(event.getState()==KeyState.RELEASED){
 
-				if(event.isKey(Tecla.MOUSE_BUTTON_LEFT)){
+				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 					retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
 					
-				}else if(event.isKey(Tecla.MOUSE_BUTTON_RIGHT)){
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
 					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
 					
-				}else if(event.isKey(Tecla.MOUSE_BUTTON_MIDDLE)){
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
 					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
 				}else{
 					retorno = GUIEvent.MOUSE_OVER;

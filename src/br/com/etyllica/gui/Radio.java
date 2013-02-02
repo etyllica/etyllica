@@ -3,7 +3,8 @@ package br.com.etyllica.gui;
 import java.awt.Color;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.control.mouse.MouseButton;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.Tecla;
@@ -27,7 +28,7 @@ public class Radio extends CheckBox{
 	}
 
 	@Override
-	public GUIEvent updateMouse(Event event) {
+	public GUIEvent updateMouse(PointerEvent event) {
 
 		if(onMouse(event)){
 
@@ -35,7 +36,7 @@ public class Radio extends CheckBox{
 
 			if(event.getState()==KeyState.PRESSED){
 
-				if(event.isKey(Tecla.MOUSE_BUTTON_LEFT)){
+				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
 					if(!checked){
 						if(group!=null){

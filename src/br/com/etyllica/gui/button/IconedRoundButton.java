@@ -49,11 +49,18 @@ public class IconedRoundButton extends Button{
 
 		if(!mouseOver){
 
-			g.setColor(theme.getButtonColor());
-
-			g.fillCircle(x+w/2,y+w/2,w/2);
+			if(onFocus){
+				
+				g.setColor(theme.getButtonOnFocus());
+				
+			}else{
+				
+				g.setColor(theme.getButtonColor());
+				
+			}
 			
 		}else{
+			
 			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
 
 				g.setColor(theme.getButtonOnClick());
@@ -64,9 +71,9 @@ public class IconedRoundButton extends Button{
 
 			}
 			
-			//g.fillCircle(x+w/2,y+w/2,w/2+5);
-			g.fillCircle(x+w/2,y+w/2,w/2);
 		}
+		
+		g.fillCircle(x+w/2,y+w/2,w/2);
 
 		drawIcon(g);
 

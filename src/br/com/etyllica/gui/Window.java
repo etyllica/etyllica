@@ -8,7 +8,7 @@ import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.application.GenericLoadApplication;
 import br.com.etyllica.core.application.LoadApplication;
 import br.com.etyllica.core.application.SessionMap;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.loader.ApplicationLoader;
@@ -49,23 +49,23 @@ public class Window extends GUIComponent implements Runnable{
 	}
 
 	@Override
-	public GUIEvent updateMouse(Event event) {
+	public GUIEvent updateMouse(PointerEvent event) {
 
 		if(onMouse(event)){
 			//TODO Melhorar evento de colisao com janela
 			//return GUIEvent.MOUSE_OVER_UNCLICKABLE;	
 		}
 
-		if(event.getKeyPressed(Tecla.TSK_ESC)){
+		//if(event.getKeyPressed(Tecla.TSK_ESC)){
 
 			//System.out.println("Close Window@");
 
-		}
+		//}
 
 
 		return GUIEvent.NONE;
 	}
-
+	
 	@Override
 	public void update(GUIEvent event) {
 		// TODO Auto-generated method stub
@@ -93,13 +93,13 @@ public class Window extends GUIComponent implements Runnable{
 		this.application = application;
 		//application.carrega();
 
-		components.clear();
+		clearComponents();
 		
-		components.add(load);
+		add(load);
 		//TODO Posso adicionar o closeButton
 		//e o IconButton
 		//Trazer restart de DefaultWindow
-		components.add(application);
+		add(application);
 	
 	}
 	
@@ -126,7 +126,7 @@ public class Window extends GUIComponent implements Runnable{
 		//load.setBimg(new BufferedImage(m.getW(), m.getH(), BufferedImage.TYPE_INT_RGB));		
 		load.load();
 		application = load;
-		components.add(application);
+		add(application);
 		
 		c = new ApplicationLoader(m);
 		
@@ -143,20 +143,20 @@ public class Window extends GUIComponent implements Runnable{
 		}
 		
 		//components.remove(load);
-		components.clear();
+		clearComponents();
 		
 		m.setBimg(load.getBimg());
 		
 		setApplication(m);
 
-		components.remove(load);
+		remove(load);
 		
 		//locked = false;
 
 	}
 
-	/*public boolean isLocked(){
-		return locked;
-	}*/
+	public boolean isStillWantClose() {
+		return stillWantClose;
+	}
 
 }

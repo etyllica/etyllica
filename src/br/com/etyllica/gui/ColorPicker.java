@@ -2,7 +2,7 @@ package br.com.etyllica.gui;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.layer.BufferedLayer;
@@ -19,7 +19,7 @@ public class ColorPicker extends GUIComponent{
 	private BufferedLayer colors;
 	
 	@Override
-	public GUIEvent updateMouse(Event event) {
+	public GUIEvent updateMouse(PointerEvent event) {
 		// TODO Auto-generated method stub
 		return GUIEvent.NONE;
 	}

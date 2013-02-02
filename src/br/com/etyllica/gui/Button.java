@@ -2,10 +2,11 @@ package br.com.etyllica.gui;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.control.mouse.MouseButton;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
 
@@ -68,7 +69,7 @@ public class Button extends GUIComponent{
 		if(label!=null){
 
 			g.setFont(theme.getButtonFont());
-			
+
 			//TODO esse seria muito melhor mas nao ha tempo
 			//label.draw(g);
 			if(theme.isShadow()){
@@ -100,23 +101,33 @@ public class Button extends GUIComponent{
 
 		case MOUSE_OVER:
 			justOnMouse();
+			break;
 
 		case MOUSE_OUT:
 			mouseOut();
+			break;
+
+		case GAIN_FOCUS:
+			onFocus = true;
+			break;
+			
+		case LOST_FOCUS:
+			onFocus = false;
+			break;
 
 		case NONE:
 			break;
 
 		default:
-			
+
 			//Labels is button responsability
 			if(label!=null){
 				label.update(event);
 			}
-			
+
 			break;
 		}
-		
+
 
 	}
 
@@ -146,7 +157,7 @@ public class Button extends GUIComponent{
 
 	int mx, my;
 
-	public GUIEvent updateMouse(Event event){
+	public GUIEvent updateMouse(PointerEvent event){
 
 		GUIEvent retorno = GUIEvent.NONE;
 
@@ -156,28 +167,28 @@ public class Button extends GUIComponent{
 
 			if(event.getState()==KeyState.PRESSED){
 
-				if(event.isKey(Tecla.MOUSE_BUTTON_LEFT)){
+				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
 					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 
-				}else if(event.isKey(Tecla.MOUSE_BUTTON_RIGHT)){
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
 
 					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
 
-				}else if(event.isKey(Tecla.MOUSE_BUTTON_MIDDLE)){
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
 
 					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
 				}
 			}
 			else if(event.getState()==KeyState.RELEASED){
 
-				if(event.isKey(Tecla.MOUSE_BUTTON_LEFT)){
+				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 					retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
 
-				}else if(event.isKey(Tecla.MOUSE_BUTTON_RIGHT)){
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
 					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
 
-				}else if(event.isKey(Tecla.MOUSE_BUTTON_MIDDLE)){
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
 					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
 				}else{
 					retorno = GUIEvent.MOUSE_OVER;
@@ -186,6 +197,10 @@ public class Button extends GUIComponent{
 			}
 
 		}else{
+
+			if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+				onFocus = false;
+			}
 
 			mouseOver = false;
 			retorno = GUIEvent.NONE;
@@ -205,19 +220,37 @@ public class Button extends GUIComponent{
 
 		int offsetX = label.getX();
 		int offsetY = label.getY();
-		
+
 		//TODO remove Test
 		//if(label.isCenter()){
 		label.setX(x+offsetX);
 		label.setY(y+offsetY);
-		
+
 		//}
 	}
 
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
+
+		if(event.getPressed(Tecla.TSK_TAB)){
+
+			return GUIEvent.NEXT_COMPONENT;
+			
+		}
+		
+		/*if(event.getPressed(Tecla.TSK_ENTER)){
+
+			return GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
+
+		}else if(event.getReleased(Tecla.TSK_ENTER)){
+
+			return GUIEvent.MOUSE_LEFT_BUTTON_UP;
+
+		}*/
+
 		return GUIEvent.NONE;
 	}
 
+	
 
 }

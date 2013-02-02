@@ -2,7 +2,7 @@ package br.com.etyllica.gui.bar;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 
@@ -29,7 +29,7 @@ public class DownBar extends Bar{
 	}
 
 	@Override
-	public GUIEvent updateMouse(Event event){
+	public GUIEvent updateMouse(PointerEvent event){
 
 		return GUIEvent.NONE;
 	}

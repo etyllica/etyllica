@@ -59,7 +59,7 @@ public class LeftBar extends Bar{
 		g.fillArc(iconColision.getX(), iconColision.getY(), iconColision.getW(), iconColision.getH(), 270, 180);
 
 		if(icon!=null){
-			g.desenha(icon);
+			icon.draw(g);
 		}
 
 	}

@@ -1,5 +1,7 @@
 package br.com.etyllica.core.loader.image;
 
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -111,10 +113,15 @@ public class TGAReader implements ImageReader{
 		BufferedImage bimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		bimg.setRGB(0, 0, width,height, pixels, 0,width);
 
-		/*AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
-		tx.translate(0, -bimg.getHeight());
+		//Flip Horizontal
+		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+		tx.translate(-bimg.getWidth(), 0);
+		
+		//AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
+		//tx.translate(0, -bimg.getHeight());
+		
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		bimg = op.filter(bimg, null);*/
+		bimg = op.filter(bimg, null);
 
 		return bimg;
 	}

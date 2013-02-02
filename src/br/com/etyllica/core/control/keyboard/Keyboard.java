@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.Tecla;
 
@@ -30,8 +29,8 @@ public class Keyboard implements KeyListener {
 		
 		//Reset Keyboard to avoid delay at first press
 		for (Tecla key: Tecla.values()) {
-			keys.put(key.getCodigo(),false);
-			keyStates.put(key.getCodigo(),OldKeyState.RELEASED);
+			keys.put(key.getCode(),false);
+			keyStates.put(key.getCode(),OldKeyState.RELEASED);
 		}
 
 	}
@@ -44,7 +43,7 @@ public class Keyboard implements KeyListener {
 				if( keyStates.get(key) == OldKeyState.RELEASED ){
 					keyStates.put(key,OldKeyState.ONCE);
 					
-					keyEvents.add(new KeyboardEvent(key, KeyState.PRESSED));
+					keyEvents.add(new KeyboardEvent(key, OldKeyState.PRESSED));
 				}
 				else{
 					keyStates.put(key,OldKeyState.PRESSED);
@@ -55,7 +54,7 @@ public class Keyboard implements KeyListener {
 				if(( keyStates.get(key) == OldKeyState.ONCE )||( keyStates.get(key) == OldKeyState.PRESSED )){
 					keyStates.put(key,OldKeyState.FIRST_RELEASED);
 
-					keyEvents.add(new KeyboardEvent(key, KeyState.RELEASED));
+					keyEvents.add(new KeyboardEvent(key, OldKeyState.RELEASED));
 				}
 				else{
 					keyStates.put(key,OldKeyState.RELEASED);
@@ -102,7 +101,7 @@ public class Keyboard implements KeyListener {
 
 		//TODO Ajeitar o typed
 		if ( c != KeyEvent.CHAR_UNDEFINED ) {
-			keyEvents.add(new KeyboardEvent(code, c, KeyState.TYPED));
+			keyEvents.add(new KeyboardEvent(code, c, OldKeyState.TYPED));
 		}
 		
 		ke.consume();

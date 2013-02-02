@@ -1,7 +1,7 @@
 package br.com.etyllica.layer;
 
 import br.com.etyllica.core.event.DeviceType;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.event.PointerEvent;
 
 /**
  * 
@@ -162,14 +162,10 @@ public class Layer {
 		return (distance <= radius);
 	}
 	
-	public boolean onMouse(Event event) {
+	public boolean onMouse(PointerEvent event) {
 		
-		if(event.getDevice()==DeviceType.MOUSE){
-			return onMouse(event.getX(), event.getY());
-		}
-		
-		return false;
-		
+		return onMouse(event.getX(), event.getY());
+				
 	}
 	
 	public boolean onMouse(int mx, int my) {

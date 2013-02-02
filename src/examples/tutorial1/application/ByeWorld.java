@@ -1,9 +1,9 @@
 package examples.tutorial1.application;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.event.Event;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.util.SVGColor;
@@ -38,7 +38,7 @@ public class ByeWorld extends Application{
 	}
 
 	@Override
-	public GUIEvent updateMouse(Event event) {
+	public GUIEvent updateMouse(PointerEvent event) {
 		// TODO Auto-generated method stub
 		return GUIEvent	.NONE;
 	}

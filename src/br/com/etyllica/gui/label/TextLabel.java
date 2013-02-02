@@ -4,9 +4,10 @@ import java.awt.Color;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
-import br.com.etyllica.core.event.Event;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Label;
@@ -38,12 +39,18 @@ public class TextLabel extends Label{
 	@Override
 	public void update(GUIEvent event) {
 		switch (event) {
+		
+		case LOST_FOCUS:
+			onFocus = false;
+			break;
+		
 		case GAIN_FOCUS:
 			onFocus = true;
 			break;
 
 		default:
 			break;
+			
 		}
 	}
 
@@ -57,7 +64,7 @@ public class TextLabel extends Label{
 		if(!onFocus){
 			g.setColor(theme.getTextColor());
 		}else{
-			g.setColor(Color.YELLOW);
+			g.setColor(theme.getButtonOnFocus());
 		}
 		
 		if(!center){
@@ -79,12 +86,18 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public GUIEvent updateMouse(Event event) {
+	public GUIEvent updateMouse(PointerEvent event) {
 		return GUIEvent.NONE;
 	}
 	
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		
+		if(event.getPressed(Tecla.TSK_TAB)){
+
+			return GUIEvent.NEXT_COMPONENT;
+		}
+		
 		return GUIEvent.NONE;
 	}
 
