@@ -8,9 +8,9 @@ public class Tutorial1 extends Etyllica {
 	private static final long serialVersionUID = 1L;
 
 	public Tutorial1() {
-		super(640, 480);
+		super(640, 480);	
 	}
-
+	
 	@Override
 	public void startGame() {
 		

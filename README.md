@@ -1,5 +1,5 @@
 =====================================================
-Etyllica (v 1.1) - Updated after Global Game Jam 2013
+Etyllica (v 1.2) - Updated 15/02/13
 =====================================================
 
 Engine para jogos 2D em Java puro.

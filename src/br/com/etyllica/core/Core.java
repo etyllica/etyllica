@@ -74,7 +74,7 @@ public class Core {
 	private DesktopWindow desktopWindow;
 
 
-	private Grafico g = new Grafico();
+	//private Grafico g = new Grafico();
 
 	private Core(){
 		super();
@@ -150,6 +150,8 @@ public class Core {
 
 	public void gerencia(){
 
+		teclado.poll();
+		
 		superEvent = GUIEvent.NONE;
 
 		updateKeyboard();
@@ -443,7 +445,7 @@ public class Core {
 
 	}
 
-	public void draw(){
+	public void draw(Grafico g){
 
 		//BufferedImage screen =  g.getBimg();
 
@@ -481,7 +483,7 @@ public class Core {
 
 		}
 
-		drawMouse();
+		drawMouse(g);
 
 	}
 
@@ -489,7 +491,7 @@ public class Core {
 	private BasicStroke strokeThree = new BasicStroke(3F);
 	private BasicStroke strokeFive = new BasicStroke(5F);
 
-	private void drawMouse(){
+	private void drawMouse(Grafico g){
 
 		g.getGraphics().setStroke(strokeOne);
 		mouse.getArrow().move(mouse.getX(), mouse.getY());
@@ -733,10 +735,6 @@ public class Core {
 
 	public HIDController getControl(){
 		return controle;
-	}
-
-	public Grafico getGrafico(){
-		return g;
 	}
 
 	public GUIEvent getSuperEvent(){
