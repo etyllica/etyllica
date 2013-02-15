@@ -30,33 +30,39 @@ import br.com.etyllica.linear.Ponto2D;
 
 public class Grafico{
 
-	//TODO Incluir no carregador de fontes
-
 	private BufferedImage bimg;
-	private Graphics2D screen;
+	protected Graphics2D screen;
 
-	private int largura;
-	private int altura;
+	private int width;
+	private int height;
 
 	public Grafico(){
+		super();
+	}
+	
+	public Grafico(int width, int height){
+		super();
 		
+		this.width = width;
+		this.height = height;
 	}
 	
 	public void setBufferedImage(BufferedImage bimg){
-		this.largura = bimg.getWidth();
-		this.altura = bimg.getHeight();
+		this.width = bimg.getWidth();
+		this.height = bimg.getHeight();
 		
 		this.bimg = bimg;
 		this.screen = (Graphics2D)bimg.getGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
 	}
 
 	public int getLargura() {
-		return largura;
+		return width;
 	}
 
 	public int getAltura() {
-		return altura;
+		return height;
 	}
 	
 	public void escreveCamada(String texto, ImageLayer destino) {
@@ -108,7 +114,7 @@ public class Grafico{
 			FontMetrics fm = screen.getFontMetrics();
 			Font f = getFont();
 
-			int x = (largura/2)-(fm.stringWidth(frase)/2);
+			int x = (width/2)-(fm.stringWidth(frase)/2)+offsetX;
 			int fy = y+fm.getHeight();
 
 			if(!borda){
@@ -159,7 +165,7 @@ public class Grafico{
 
 			FontMetrics fm = screen.getFontMetrics();
 
-			int x = (largura/2)-(fm.stringWidth(frase)/2);
+			int x = (width/2)-(fm.stringWidth(frase)/2);
 			int fy = y+fm.getHeight();
 
 			escreveSombra(x, fy, frase);
@@ -408,6 +414,11 @@ public class Grafico{
 		screen.fillOval(x, y, w, h);
 	}
 
+	/*public void setGraphics(GLGraphics2D graphics){		
+		this.screen = graphics;
+		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	}*/
+	
 	public BufferedImage getBimg() {
 		return bimg;
 	}
