@@ -8,9 +8,8 @@ import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.application.GenericLoadApplication;
 import br.com.etyllica.core.application.LoadApplication;
 import br.com.etyllica.core.application.SessionMap;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.loader.ApplicationLoader;
 import br.com.etyllica.core.video.Grafico;
 
@@ -27,8 +26,6 @@ public class Window extends GUIComponent implements Runnable{
 	
 	//TODO Important to back arrow
 	protected List<Application> oldApplications = new ArrayList<Application>();
-
-	//protected boolean locked = false;
 
 	protected SessionMap variaveis = new SessionMap();
 
@@ -120,17 +117,15 @@ public class Window extends GUIComponent implements Runnable{
 
 	protected void recarrega(){
 
-		//locked = true;
-		
 		//load = new LoadApplication(m.getX(), m.getY(), m.getW(),m.getH());
-		//load.setBimg(new BufferedImage(m.getW(), m.getH(), BufferedImage.TYPE_INT_RGB));		
+		//load.setBimg(new BufferedImage(m.getW(), m.getH(), BufferedImage.TYPE_INT_RGB));
 		load.load();
 		application = load;
 		add(application);
 		
 		c = new ApplicationLoader(m);
-		
 		c.start();
+		
 		new Thread(this).start();
 		
 	}
@@ -151,8 +146,6 @@ public class Window extends GUIComponent implements Runnable{
 
 		remove(load);
 		
-		//locked = false;
-
 	}
 
 	public boolean isStillWantClose() {

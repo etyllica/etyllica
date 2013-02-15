@@ -12,22 +12,53 @@ import br.com.etyllica.util.SVGColor;
 
 public class HelloWorld extends Application{
 
+	//Text Offset
 	private int yText = 100;
 	private int xText = 0;
 	
+	//Hold Mouse position
 	private int mx = 0;
 	private int my = 0;
 	
 	@Override
 	public void load() {
+		
+		for(int i=0;i<99;i++){
+		
+			//Simulating Loads
+			try {
+				Thread.sleep(30);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			carregando = i;
+			
+			if(carregando<30){
+				
+				carregandoFrase = "Loading Nothing...";
+				
+			}else if(carregando<50){
+				
+				carregandoFrase = "Loading Something...";
+				
+			}else if(carregando<90){
+				
+				carregandoFrase = "Almost Loaded...";
+				
+			}
+		}
+
 		carregando = 100;
+		
 	}
 
 	@Override
 	public void draw(Grafico g) {
 
 		//Set Color to SVG Crimson
-		g.setColor(SVGColor.CRIMSON);
+		g.setColor(SVGColor.CRIMSON);		
 		//Draw Background
 		g.getGraphics().fillRect(0, 0, w, h);
 		

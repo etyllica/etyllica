@@ -33,13 +33,18 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 	private int rectY = h/2+100;
 	private int rectH = 32;
 
+	private Color backgroundColor = new Color(0x00,0xcc,0xff);
+	
 	@Override
 	public void draw(Grafico g) {
 
 		g.setFont(f);
 		
+		g.setColor(backgroundColor);
+		g.fillRect(x, y, w, h);
+		
 		g.setColor(Color.WHITE);
-		g.escreveSombraX(320, frase);
+		g.escreveSombraX(280, frase);
 
 		g.drawRect(rectX, rectY, rectW, rectH);
 		g.fillRect(rectX+2, rectY+2, ((rectW*fill)/100)-3, rectH-3);
