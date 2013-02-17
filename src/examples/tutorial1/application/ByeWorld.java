@@ -62,13 +62,13 @@ public class ByeWorld extends Application{
 		g.escreveSombraX(100, "Bye World!");
 		
 		//Write at center with shadow
-		g.escreveSombraX(300, "Press <ESC> to go back.");
+		g.escreveSombraX(300, "Press <BACK SPACE> to go back.");
 	}
 
 	@Override
 	public GUIEvent updateKeyboard( KeyboardEvent event) {
 
-		if(event.getPressed(Tecla.TSK_ESC)){
+		if(event.getPressed(Tecla.TSK_BACK_SPACE)){
 			returnApplication = new HelloWorld();
 		}
 

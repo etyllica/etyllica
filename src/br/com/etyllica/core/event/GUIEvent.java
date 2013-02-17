@@ -49,6 +49,8 @@ public enum GUIEvent {
 	
 	LANGUAGE_CHANGED,
 	
+	REQUEST_FOCUS,
+	
 	NONE;
 	
 }

@@ -184,13 +184,15 @@ public abstract class Etyllica extends Applet implements Runnable{
 			setLocation(this.getX()+(mouse.getX()-mouse.getDragX()), this.getY()+(mouse.getY()-mouse.getDragY()));
 		}
 
-		//TODO Request Focus
-		/*if(mouse.getPressionado(Mouse.BOTAO_ESQUERDO)||mouse.getPressionado(Mouse.BOTAO_MEIO)||mouse.getPressionado(Mouse.BOTAO_DIREITO)){
-				if ( !hasFocus() ) {
+		else if(event==GUIEvent.REQUEST_FOCUS){
+						
+			if ( !hasFocus() ) {
 				requestFocus();
-				}
-				//System.gc();
-			}*/
+			}
+		}
+		
+		//Calls Garbage Collector
+		//System.gc();
 
 	}
 

@@ -66,11 +66,11 @@ public class HelloWorld extends Application{
 		g.setColor(Color.BLACK);
 		//Write HelloWorld!
 		g.escreveX(xText, yText, "Hello World!");
+
+		g.escreveX(250, "Click with Mouse to Gain Keyboard Focus.");
 		
-		g.setColor(Color.BLACK);
 		g.escreveX(300, "Press <SPACE> to change the application!");
 		
-		g.setColor(Color.BLACK);
 		g.escreveX(350, "Press <ALT+ENTER> to change to Fullscreen Mode");
 		
 		//Fill Circle around the Mouse Point

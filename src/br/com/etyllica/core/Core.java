@@ -64,10 +64,11 @@ public class Core {
 
 	private Set<Window> requestCloseSet = new LinkedHashSet<Window>();
 
-	//TODO Separar eventos Mouse, teclado, joystick,...
-	private List<PointerEvent> mouseEvents = new ArrayList<PointerEvent>();
+	private List<PointerEvent> mouseEvents;
 
 	private List<KeyboardEvent> keyEvents;
+	
+	//private List<JoystickEvent> joyEvents;
 
 	private List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
 
@@ -149,17 +150,102 @@ public class Core {
 	private GUIEvent superEvent = GUIEvent.NONE;
 
 	public void gerencia(){
-
-		teclado.poll();
-		
+				
 		superEvent = GUIEvent.NONE;
 
+		updateApplication();
+		
 		updateKeyboard();
 
+		updateMouse();
+		
 		updateCloseRequests(requestCloseSet);
 
 		updateForcedEvents(guiEvents);
 
+
+		if(enableFullScreen){
+			enableFullScreen = false;
+
+			superEvent = GUIEvent.ENABLE_FULL_SCREEN;
+		}
+
+		if(disableFullScreen){
+			disableFullScreen = false;
+
+			superEvent = GUIEvent.DISABLE_FULL_SCREEN;
+		}
+
+	}
+
+	private void updateApplication(){
+		
+		if(activeWindow.getApplication()!=null){
+			//if activeWindow, receive command to change application
+			if(activeWindow.getApplication().getReturnApplication()!=activeWindow.getApplication()){
+				activeWindow.changeApplication(activeWindow.getApplication().getReturnApplication());
+			}
+		}
+		
+	}
+
+	private void updateCloseRequests(Set<Window> closeRequests){
+
+		if(!requestCloseSet.isEmpty()){
+			reallyClose();
+		}
+
+	}
+
+	private void updateKeyboard(){
+
+		teclado.poll();
+		
+		List<KeyboardEvent> keyboardEvents = new CopyOnWriteArrayList<KeyboardEvent>(keyEvents);
+
+		for(KeyboardEvent keyboardEvent: keyboardEvents){
+
+			//Application sempre eh gerenciada pelo teclado
+			activeWindow.getApplication().updateKeyboard(keyboardEvent);		
+
+			//Apenas o componente quem tem foco eh gerenciado pelo teclado
+			if(focus!=null){
+
+				GUIEvent focusEvent = focus.updateKeyboard(keyboardEvent);
+
+				if(focusEvent!=GUIEvent.NONE){
+					//TODO Update NExtComponent
+					System.out.println(focusEvent);
+
+					GUIComponent next = focus.findNext();
+					
+					if(next!=null){
+						
+						if(focusEvent==GUIEvent.NEXT_COMPONENT){
+							
+							gerenciaEvento(focus, focusEvent);
+							gerenciaEvento(next, GUIEvent.GAIN_FOCUS);
+							
+						}else{
+							
+							gerenciaEvento(next, focusEvent);
+							
+						}
+
+					}
+				}
+			}
+
+			updateKeyboardEvents(keyboardEvent);
+
+			updateNumpadMouse(keyboardEvent);
+		}
+
+		keyEvents.clear();
+	}
+	
+	private void updateMouse(){
+		
 		mouseOver = false;
 		mouseOverClickable = false;
 
@@ -169,13 +255,6 @@ public class Core {
 
 		//Update components with events
 		for(PointerEvent event: events){
-
-			if(activeWindow.getApplication()!=null){
-				//if activeWindow, receive command to change application
-				if(activeWindow.getApplication().getReturnApplication()!=activeWindow.getApplication()){
-					activeWindow.changeApplication(activeWindow.getApplication().getReturnApplication());
-				}
-			}
 
 			//Avoid concurrency problems
 			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
@@ -225,73 +304,6 @@ public class Core {
 		}
 
 		mouseEvents.clear();
-
-		if(enableFullScreen){
-			enableFullScreen = false;
-
-			superEvent = GUIEvent.ENABLE_FULL_SCREEN;
-		}
-
-		if(disableFullScreen){
-			disableFullScreen = false;
-
-			superEvent = GUIEvent.DISABLE_FULL_SCREEN;
-		}
-
-	}
-
-
-	private void updateCloseRequests(Set<Window> closeRequests){
-
-		if(!requestCloseSet.isEmpty()){
-			reallyClose();
-		}
-
-	}
-
-	private void updateKeyboard(){
-
-		List<KeyboardEvent> keyboardEvents = new CopyOnWriteArrayList<KeyboardEvent>(keyEvents);
-
-		for(KeyboardEvent keyboardEvent: keyboardEvents){
-
-			//Application sempre eh gerenciada pelo teclado
-			activeWindow.getApplication().updateKeyboard(keyboardEvent);		
-
-			//Apenas o componente quem tem foco eh gerenciado pelo teclado
-			if(focus!=null){
-
-				GUIEvent focusEvent = focus.updateKeyboard(keyboardEvent);
-
-				if(focusEvent!=GUIEvent.NONE){
-					//TODO Update NExtComponent
-					System.out.println(focusEvent);
-
-					GUIComponent next = focus.findNext();
-					
-					if(next!=null){
-						
-						if(focusEvent==GUIEvent.NEXT_COMPONENT){
-							
-							gerenciaEvento(focus, focusEvent);
-							gerenciaEvento(next, GUIEvent.GAIN_FOCUS);
-							
-						}else{
-							
-							gerenciaEvento(next, focusEvent);
-							
-						}
-
-					}
-				}
-			}
-
-			updateKeyboardEvents(keyboardEvent);
-
-			updateNumpadMouse(keyboardEvent);
-		}
-
-		keyEvents.clear();
 	}
 
 	private void updateForcedEvents(List<GUIEvent> guiEvents){
@@ -676,6 +688,11 @@ public class Core {
 	}
 
 	private GUIEvent updateFrameEvents(PointerEvent event){
+		
+		if(event.getState()==KeyState.CLICK){
+			return GUIEvent.REQUEST_FOCUS;
+		}
+		
 		if(event.getState()==KeyState.DRAGGED){
 
 			if(mouse.getY()<=50){

@@ -77,6 +77,7 @@ public enum Tecla {
 	TSK_F15 (KeyEvent.VK_F15),
 	
 	TSK_DEL (KeyEvent.VK_DELETE),
+	TSK_BACK_SPACE (KeyEvent.VK_BACK_SPACE),
 	TSK_TAB (KeyEvent.VK_TAB),
 	TSK_ESPACO (KeyEvent.VK_SPACE),
 	TSK_ENTER (KeyEvent.VK_ENTER),
