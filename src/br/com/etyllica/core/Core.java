@@ -256,6 +256,8 @@ public class Core {
 		//Update components with events
 		for(PointerEvent event: events){
 
+			activeWindow.getApplication().updateMouse(event);
+			
 			//Avoid concurrency problems
 			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
 			//Update components in reverse order
