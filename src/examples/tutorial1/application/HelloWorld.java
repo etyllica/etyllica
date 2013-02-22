@@ -49,7 +49,7 @@ public class HelloWorld extends Application{
 				
 			}
 		}
-
+		
 		carregando = 100;
 		
 	}
