@@ -11,7 +11,7 @@ import br.com.etyllica.core.loader.ImageLoader;
 
 public class StaticLayer extends Layer{
 	
-	protected String caminho = "";
+	protected String path = "";
 	
 	public StaticLayer(){
 		super();
@@ -28,27 +28,27 @@ public class StaticLayer extends Layer{
 	public StaticLayer(int x, int y, int w, int h, String path){
 		super(x,y);
 		
-		this.caminho = path;
+		this.path = path;
 		
-		StaticLayer cam = ImageLoader.getInstance().carregaImagem(path);
+		StaticLayer cam = ImageLoader.getInstance().loadImage(path);
 		this.w = cam.getW();
 		this.h = cam.getH();
 	}
 	
 	
 	public StaticLayer(String caminho){
-		this.caminho = caminho;
-		StaticLayer cam = ImageLoader.getInstance().carregaImagem(caminho);
+		this.path = caminho;
+		StaticLayer cam = ImageLoader.getInstance().loadImage(caminho);
 		this.w = cam.getW();
 		this.h = cam.getH();
 	}
 	
-	public String getCaminho(){
-		return caminho;
+	public String getPath(){
+		return path;
 	}
 	
-	public void setCaminho(String caminho){
-		this.caminho = caminho;
+	public void setPath(String path){
+		this.path = path;
 	}
 	
 	public void setCoordLimite(int w , int h) {
@@ -56,12 +56,12 @@ public class StaticLayer extends Layer{
 		this.h = h;
 	}
 	
-	public void igualaImagem(String caminho) {
-		this.caminho = caminho;
+	public void cloneLayer(String path) {
+		this.path = path;
 	}
 	
-	public void igualaImagem(StaticLayer b) {
-		this.caminho = b.caminho;
+	public void cloneLayer(StaticLayer b) {
+		this.path = b.path;
 		w = b.getW();
 		h = b.getH();
 	}

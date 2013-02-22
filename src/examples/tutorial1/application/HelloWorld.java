@@ -33,24 +33,24 @@ public class HelloWorld extends Application{
 				e.printStackTrace();
 			}
 			
-			carregando = i;
+			loading = i;
 			
-			if(carregando<30){
+			if(loading<30){
 				
-				carregandoFrase = "Loading Nothing...";
+				loadingPhrase = "Loading Nothing...";
 				
-			}else if(carregando<50){
+			}else if(loading<50){
 				
-				carregandoFrase = "Loading Something...";
+				loadingPhrase = "Loading Something...";
 				
-			}else if(carregando<90){
+			}else if(loading<90){
 				
-				carregandoFrase = "Almost Loaded...";
+				loadingPhrase = "Almost Loaded...";
 				
 			}
 		}
 		
-		carregando = 100;
+		loading = 100;
 		
 	}
 

@@ -109,12 +109,8 @@ public class Layer {
 	
 	public void swapVisible(){
 		
-		if(visible){
-			visible = false;
-		}
-		else{
-			visible = true;
-		}
+		visible = !visible;
+		
 	}
 	
 	public boolean colideRect(int bx, int by, int bw, int bh){

@@ -18,10 +18,10 @@ import br.com.etyllica.linear.Rectangle;
 
 public class ImageLayer extends StaticLayer{
 
-	protected int xImagem = 0;
-	protected int yImagem = 0;
+	protected int xImage = 0;
+	protected int yImage = 0;
 
-	protected double angulo = 0;
+	protected double angle = 0;
 	
 	protected ColisionArea areaColisao = null;
 
@@ -45,8 +45,8 @@ public class ImageLayer extends StaticLayer{
 	
 	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String caminho){
 		super(x,y,w,h,caminho);
-		this.xImagem = xImagem;
-		this.yImagem = yImagem;
+		this.xImage = xImagem;
+		this.yImage = yImagem;
 	}
 
 	public ImageLayer(int x, int y, String caminho){
@@ -58,41 +58,31 @@ public class ImageLayer extends StaticLayer{
 		this(0,0,caminho);
 	}
 
-	public int getX() {
-		return x;
-	}
-	public void setX(int x) {
-		this.x = x;
-	}
-	public int getY() {
-		return y;
-	}
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getXImagem() {
-		return xImagem;
-	}
-	public void setXImagem(int imagem) {
-		xImagem = imagem;
-	}
-	public int getYImagem() {
-		return yImagem;
-	}
-	public void setYImagem(int imagem) {
-		yImagem = imagem;
+	public int getXImage() {
+		return xImage;
 	}
 	
-	public double getAngulo() {
-		return angulo;
+	public void setXImage(int imagem) {
+		xImage = imagem;
+	}
+	
+	public int getYImage() {
+		return yImage;
+	}
+	
+	public void setYImage(int imagem) {
+		yImage = imagem;
+	}
+	
+	public double getAngule() {
+		return angle;
 	}
 
-	public void setAngulo(double angulo) {
-		this.angulo = angulo;
+	public void setAngle(double angle) {
+		this.angle = angle;
 	}
-	public void setOffsetAngulo(double angulo) {
-		this.angulo += angulo;
+	public void setOffsetAngle(double offset) {
+		this.angle += offset;
 	}
 
 	public ColisionArea getAreaColisao() {
@@ -109,8 +99,8 @@ public class ImageLayer extends StaticLayer{
 	}
 
 	public void setCoordImagem(int xImagem , int yImagem) {
-		this.xImagem = xImagem;
-		this.yImagem = yImagem;
+		this.xImage = xImagem;
+		this.yImage = yImagem;
 	}	
 
 
@@ -245,7 +235,7 @@ public class ImageLayer extends StaticLayer{
 		Polygon colision = new Polygon();
 		
 		AffineTransform transform = AffineTransform.getTranslateInstance(cx, cy);
-		transform.concatenate(AffineTransform.getRotateInstance(angulo));		
+		transform.concatenate(AffineTransform.getRotateInstance(angle));		
 		
 		Point a = new Point(0, 0);
 		Point b = new Point(w, 0);
@@ -269,20 +259,20 @@ public class ImageLayer extends StaticLayer{
 		return colision.contains(mx, my);
 	}
 
-	public void iguala(ImageLayer b){
+	public void clone(ImageLayer b){
 		this.w = b.w;
 		this.h = b.h;
 		
-		this.xImagem = b.xImagem;
-		this.yImagem = b.yImagem;
+		this.xImage = b.xImage;
+		this.yImage = b.yImage;
 		
-		this.caminho = b.caminho;
+		this.path = b.path;
 	}
 	
 	public void draw(Grafico g){
 		if(visible){
-			g.drawImage( ImageLoader.getInstance().getImagem(caminho), x, y, x+w,y+h,
-					xImagem,yImagem,xImagem+w,yImagem+h, null );
+			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
+					xImage,yImage,xImage+w,yImage+h, null );
 		}
 	}
 	
@@ -290,7 +280,7 @@ public class ImageLayer extends StaticLayer{
 		
 		boolean colision = false;
 		
-		if(angulo==0){
+		if(angle==0){
 			colision = colideRetangular(mouse.getX(), mouse.getY(), 1, 1);
 		}else{
 			colision = colideRotacionada(mouse.getX(), mouse.getY());

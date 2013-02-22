@@ -40,24 +40,24 @@ public class ImageLoader extends GenericLoader{
 		return instance;
 	}
 
-	public StaticLayer carregaImagem(String caminho){
+	public StaticLayer loadImage(String caminho){
 
-		BufferedImage img = getImagem(caminho);
+		BufferedImage img = getImage(caminho);
 
 		StaticLayer cam = new StaticLayer();
 		cam.setCoordLimite(img.getWidth(), img.getHeight());
-		cam.igualaImagem(caminho);
+		cam.cloneLayer(caminho);
 
 		return cam;
 	}
 
-	public BufferedImage getImagem(String path){
+	public BufferedImage getImage(String path){
 		
-		return getImagem(path, false);
+		return getImage(path, false);
 		
 	}
 	
-	public BufferedImage getImagem(String path, boolean absolute){
+	public BufferedImage getImage(String path, boolean absolute){
 
 		StringBuilder sb = new StringBuilder();
 				

@@ -44,11 +44,11 @@ public class ImageButton extends IconedButton{
 	}
 
 	public ImageButton(int x, int y, StaticLayer normal, StaticLayer sobMouse) {
-		this(x,y,normal.getW(),normal.getH(),normal.getCaminho(),sobMouse.getCaminho());
+		this(x,y,normal.getW(),normal.getH(),normal.getPath(),sobMouse.getPath());
 	}
 
 	public ImageButton(int x, int y, StaticLayer normal, StaticLayer sobMouse, StaticLayer click) {
-		this(x,y,normal.getW(),normal.getH(),normal.getCaminho(),sobMouse.getCaminho(),click.getCaminho());
+		this(x,y,normal.getW(),normal.getH(),normal.getPath(),sobMouse.getPath(),click.getPath());
 	}
 
 	public void setSom(String som){
@@ -67,28 +67,28 @@ public class ImageButton extends IconedButton{
 		
 	@Override
 	protected void leftClick(){
-		layer.igualaImagem(click);
+		layer.cloneLayer(click);
 	}
 	
 	@Override
 	protected void rightClick(){
-		layer.igualaImagem(click);
+		layer.cloneLayer(click);
 	}
 
 	@Override
 	protected void middleClick(){
 		//new Voicer().say(rotulo);
-		layer.igualaImagem(click);
+		layer.cloneLayer(click);
 	}
 
 	@Override
 	protected void justOnMouse(){
-		layer.igualaImagem(sobMouse);
+		layer.cloneLayer(sobMouse);
 	}
 	
 	@Override
 	protected void mouseOut(){
-		layer.igualaImagem(normal);
+		layer.cloneLayer(normal);
 	}
 
 	@Override

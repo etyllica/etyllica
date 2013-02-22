@@ -46,8 +46,8 @@ public class PivotImageLayer extends ImageLayer{
 	public void draw(Grafico g){
 		if(visible){
 
-			g.drawImage( ImageLoader.getInstance().getImagem(caminho), x, y, x+w,y+h,
-					xImagem,yImagem,xImagem+w,yImagem+h, null );
+			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
+					xImage,yImage,xImage+w,yImage+h, null );
 
 		}		
 	}

@@ -18,17 +18,17 @@ public class ApplicationLoader extends Thread{
 	}
 
 	public void run(){
-		if(m.getCarregando()<100){
+		if(m.getLoading()<100){
 			m.load();
 		}
 	}
 	
 	public int getLoaded(){
-		return m.getCarregando();
+		return m.getLoading();
 	}
 	
-	public String getCarregandoFrase(){
-		return m.getCarregandoFrase();
+	public String getLoadingPhrase(){
+		return m.getLoadingPhrase();
 	}
 
 }

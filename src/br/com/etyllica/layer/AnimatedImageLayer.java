@@ -17,7 +17,7 @@ public class AnimatedImageLayer extends ImageLayer{
 	protected int yTile = 0;
 
 	protected boolean once = false;
-	protected boolean parado = false;
+	protected boolean stopped = true;
 	protected boolean oscilar = false;
 	protected boolean animaEmX = true;
 
@@ -50,8 +50,8 @@ public class AnimatedImageLayer extends ImageLayer{
 
 
 	protected void reset(){
-		xImagem = 0;
-		yImagem = 0;
+		xImage = 0;
+		yImage = 0;
 		frameAtual = 0;
 	}
 
@@ -94,6 +94,8 @@ public class AnimatedImageLayer extends ImageLayer{
 				preAnima();
 			}
 		}
+
+		stopped = false;
 	}
 
 	public void desAnima(){
@@ -109,15 +111,15 @@ public class AnimatedImageLayer extends ImageLayer{
 		visible = true;
 		lockOnce = false;
 		once = true;
-		
+
 		frameAtual = 0;
-		
+
 		if(animaEmX){
-			xImagem = 0;
+			xImage = 0;
 		}else{
-			yImagem = 0;
+			yImage = 0;
 		}
-		
+
 	}
 
 	public void preAnima(){
@@ -135,24 +137,30 @@ public class AnimatedImageLayer extends ImageLayer{
 			if(once){
 				visible = false;
 				lockOnce = true;
-				setXImagem(xTile*frameAtual);
+				setXImage(xTile*frameAtual);
 				return;
 			}
 
-			if(!oscilar)
+			if(!oscilar){
 				frameAtual = 0;
-			else
+			}else{
 				frameAtual+=inc;
+			}
 
 			loop++;
 
 		}
 
-		if(!animaEmX){
-			setYImagem(yTile*frameAtual);
-		}
-		else{
-			setXImagem(xTile*frameAtual);
+		if(!stopped){
+
+			if(animaEmX){
+
+				setXImage(xTile*frameAtual);
+			}
+			else{
+				setYImage(yTile*frameAtual);
+			}
+			
 		}
 	}
 
@@ -160,13 +168,7 @@ public class AnimatedImageLayer extends ImageLayer{
 		this.tymerAnimacao.setVelocidade(velocidadeAnimacao);
 	}
 
-	public void centraliza(ImageLayer b){
-		centralizaX(b);
-		centralizaY(b);
-	}
-	public void centralizaX(ImageLayer b){
-		centralizaX(b.getX(),b.getX()+b.getW());
-	}
+	@Override
 	public int centralizaX(int xInicial, int xFinal)
 	{
 		int x;
@@ -174,9 +176,8 @@ public class AnimatedImageLayer extends ImageLayer{
 		setX(x);
 		return x;
 	}
-	public void centralizaY(ImageLayer b){
-		centralizaY(b.getY(),b.getY()+b.getH());
-	}
+
+	@Override
 	public int centralizaY(int yInicial, int yFinal)
 	{
 		int y;
@@ -184,6 +185,8 @@ public class AnimatedImageLayer extends ImageLayer{
 		setY(y);
 		return y;
 	}
+
+	@Override
 	public boolean colideRetangular(ImageLayer b)
 	{
 		if(b.getX() + b.getW() < getX())	return false;
@@ -194,6 +197,7 @@ public class AnimatedImageLayer extends ImageLayer{
 
 		return true;
 	}
+
 	public boolean colideRetangular(AnimatedImageLayer b)
 	{
 		if(b.getX() + b.getXTile() < getX())	return false;
@@ -246,23 +250,27 @@ public class AnimatedImageLayer extends ImageLayer{
 	public void draw(Grafico g){
 		if(visible)
 		{ 
-			g.drawImage( ImageLoader.getInstance().getImagem(caminho), x, y, x+xTile,y+yTile,
-					xImagem,yImagem,xImagem+xTile,yImagem+yTile, null );
+			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
+					xImage,yImage,xImage+xTile,yImage+yTile, null );
 		}
 	}
 
-	public boolean getParado(){
-		return parado;
+	public void setStopped(boolean stopped){
+		this.stopped = stopped;
 	}
 	
+	public boolean isStopped(){
+		return stopped;
+	}
+
 	public int getNumeroFrames(){
 		return numeroFrames;
 	}
-	
+
 	public boolean getAnimaEmX(){
 		return animaEmX;
 	}
-	
+
 	public int getLoop(){
 		return loop;
 	}
@@ -270,6 +278,5 @@ public class AnimatedImageLayer extends ImageLayer{
 	public void setLockOnce(boolean lockOnce) {
 		this.lockOnce = lockOnce;
 	}
-	
 
 }

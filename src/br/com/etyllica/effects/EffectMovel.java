@@ -21,7 +21,7 @@ public class EffectMovel extends MovementedLayer
 	
 	public void anima()
 	{
-		parado = false;
+		stopped = false;
 		once = true;
 		reset();
 		
@@ -31,7 +31,7 @@ public class EffectMovel extends MovementedLayer
 	}
 	
 	public void desAnima(){
-		parado = true;
+		stopped = true;
 		visible = false;
 		desanim();
 	}

@@ -39,7 +39,7 @@ public class DefaultLoadApplication extends LoadApplication{
 
 		by = h-100;
 		
-		carregando = 100;
+		loading = 100;
 	}
 
 	@Override

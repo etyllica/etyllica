@@ -35,7 +35,7 @@ public class Effect extends AnimatedImageLayer
 	}
 	
 	public void desAnima(){
-		parado = true;
+		stopped = true;
 		setVisible(false);
 		desanim();
 	}

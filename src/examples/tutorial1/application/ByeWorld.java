@@ -24,27 +24,27 @@ public class ByeWorld extends Application{
 			}
 			
 			//Percentage of Load
-			carregando = i;
+			loading = i;
 			
-			if(carregando<30){
+			if(loading<30){
 				
 				//Loading phrase
-				carregandoFrase = "Wait...";
+				loadingPhrase = "Wait...";
 				
-			}else if(carregando<50){
-				
-				//Loading phrase
-				carregandoFrase = "Please Wait...";
-				
-			}else if(carregando<90){
+			}else if(loading<50){
 				
 				//Loading phrase
-				carregandoFrase = "Almost Loaded...";
+				loadingPhrase = "Please Wait...";
+				
+			}else if(loading<90){
+				
+				//Loading phrase
+				loadingPhrase = "Almost Loaded...";
 				
 			}
 		}
 
-		carregando = 100;
+		loading = 100;
 	}
 
 	@Override

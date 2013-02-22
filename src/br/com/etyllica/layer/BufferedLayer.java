@@ -22,7 +22,7 @@ public class BufferedLayer extends ImageLayer{
 
 	public BufferedLayer(int x, int y) {
 		super(x,y);
-		caminho = "";
+		path = "";
 	}
 	public BufferedLayer(int x, int y, BufferedImage buf) {
 		this(x,y);

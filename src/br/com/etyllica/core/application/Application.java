@@ -23,12 +23,12 @@ public abstract class Application extends GUIComponent implements Runnable{
 	private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 	private int updateInterval = -1;
 	
-	protected LoadApplication loading;
+	protected LoadApplication loadApplication;
 	protected Application returnApplication = this;
 	protected TransitionEffect effect = TransitionEffect.NONE;
 	
-	protected int carregando = 0;
-	protected String carregandoFrase = "Loading...";
+	protected int loading = 0;
+	protected String loadingPhrase = "Loading...";
 	
 	protected String title = "Application";
 	protected boolean fullscreen = false;
@@ -37,7 +37,8 @@ public abstract class Application extends GUIComponent implements Runnable{
 	
 	protected SessionMap variaveis;
 
-	protected BufferedImage bimg;
+	//TODO Should be removed 
+	protected BufferedImage bufferedImage;
 	
 	protected ImageLayer icon = null;
 	
@@ -48,9 +49,9 @@ public abstract class Application extends GUIComponent implements Runnable{
 	public Application(int x, int y, int w, int h){
 		super(x,y,w,h);
 		
-		this.carregando = 0;
+		this.loading = 0;
 		//TODO Dictionary get "loading"+...
-		this.carregandoFrase = "Carregando...";
+		this.loadingPhrase = "Carregando...";
 	}
 		
 	public Application(int w, int h){
@@ -76,12 +77,12 @@ public abstract class Application extends GUIComponent implements Runnable{
 		return false;
 	}
 
-	public int getCarregando(){
-		return carregando;
+	public int getLoading(){
+		return loading;
 	}
 	
-	public String getCarregandoFrase(){
-		return carregandoFrase;
+	public String getLoadingPhrase(){
+		return loadingPhrase;
 	}
 
 	//Para Uso Externo
@@ -111,11 +112,11 @@ public abstract class Application extends GUIComponent implements Runnable{
 	}
 
 	public BufferedImage getBimg() {
-		return bimg;
+		return bufferedImage;
 	}
 
 	public void setBimg(BufferedImage bimg) {
-		this.bimg = bimg;
+		this.bufferedImage = bimg;
 	}
 
 	public Application getReturnApplication() {

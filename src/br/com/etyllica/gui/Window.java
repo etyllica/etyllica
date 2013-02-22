@@ -134,7 +134,7 @@ public class Window extends GUIComponent implements Runnable{
 	public void run() {
 
 		while(c.getLoaded()<100){
-			load.setText(c.getCarregandoFrase(), c.getLoaded());
+			load.setText(c.getLoadingPhrase(), c.getLoaded());
 		}
 		
 		//components.remove(load);

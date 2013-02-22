@@ -100,7 +100,7 @@ public class DefaultWindow extends Window{
 		
 		this.application = application;
 		//It should be a thread with load
-		if(application.getCarregando()!=100){
+		if(application.getLoading()!=100){
 			application.load();
 		}
 		

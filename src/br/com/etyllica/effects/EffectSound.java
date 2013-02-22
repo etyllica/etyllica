@@ -26,7 +26,7 @@ public class EffectSound extends Effect{
 	@Override
 	public void anima(){
 		frameAtual = 0;
-		parado = false;
+		stopped = false;
 		once = true;
 		playing = true;
 		
@@ -36,7 +36,7 @@ public class EffectSound extends Effect{
 	
 	@Override
 	public void desAnima(){
-		parado = true;
+		stopped = true;
 		playing = false;
 		setVisible(false);
 		desanim();
