@@ -1,6 +1,5 @@
 package br.com.etyllica.layer;
 
-import br.com.etyllica.core.event.DeviceType;
 import br.com.etyllica.core.event.PointerEvent;
 
 /**
@@ -12,11 +11,29 @@ import br.com.etyllica.core.event.PointerEvent;
 
 public class Layer {
 
+	/**
+     * x position of a Layer
+     */
 	protected int x = 0;
+	
+	/**
+     * y position of a Layer
+     */
 	protected int y = 0;
+	
+	/**
+     * Layer's width
+     */
 	protected int w = 0;
+	
+	/**
+     * The Layer's height
+     */
 	protected int h = 0;
 	
+	/**
+     * if layer is visible
+     */
 	protected boolean visible = true;
 	
 	public Layer(){
@@ -99,10 +116,16 @@ public class Layer {
 		return visible;
 	}
 
+	/**
+     * Method to turn a Layer visible
+     */
 	public void show(){
 		visible = true;
 	}
 	
+	/**
+     * Method to turn a Layer invisible
+     */
 	public void hide(){
 		visible = false;
 	}

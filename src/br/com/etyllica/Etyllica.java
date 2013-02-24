@@ -196,7 +196,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	}
 
-	public void setMainApplicacao(Application application){
+	public void setMainApplication(Application application){
 		this.application = application;
 	}
 

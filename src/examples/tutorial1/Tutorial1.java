@@ -14,7 +14,7 @@ public class Tutorial1 extends Etyllica {
 	@Override
 	public void startGame() {
 		
-		setMainApplicacao(new HelloWorld());
+		setMainApplication(new HelloWorld());
 	}
 	
 }
