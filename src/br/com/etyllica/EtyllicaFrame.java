@@ -197,7 +197,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 	}
 
-	public void setMainApplicacao(Application application){
+	public void setMainApplication(Application application){
 		this.application = application;
 	}
 
