@@ -1,4 +1,4 @@
-package examples.jgl;
+package examples.jgl.application;
 
 import jgl.GLAUX;
 import br.com.etyllica.core.control.mouse.MouseButton;

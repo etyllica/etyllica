@@ -1,4 +1,4 @@
-package examples.jgl;
+package examples.jgl.application;
 
 import br.com.etyllica.core.video.Grafico;
 import jgl.GL;

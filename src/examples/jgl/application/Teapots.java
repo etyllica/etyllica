@@ -1,4 +1,4 @@
-package examples.jgl;
+package examples.jgl.application;
 
 import java.awt.Color;
 import java.util.Date;

@@ -23,7 +23,6 @@ public abstract class Application extends GUIComponent implements Runnable{
 	private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 	private int updateInterval = -1;
 	
-	protected LoadApplication loadApplication;
 	protected Application returnApplication = this;
 	protected TransitionEffect effect = TransitionEffect.NONE;
 	
@@ -60,7 +59,6 @@ public abstract class Application extends GUIComponent implements Runnable{
 
 	public abstract void load();
 	
-	//public abstract GUIEvent gerencia(Event event);
 	public abstract void draw(Grafico g);
 	
 	public void unload(){

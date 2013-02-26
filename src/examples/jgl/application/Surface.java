@@ -1,4 +1,4 @@
-package examples.jgl;
+package examples.jgl.application;
 
 import jgl.GLU;
 import jgl.glu.GLUnurbsObj;

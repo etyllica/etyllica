@@ -1,5 +1,6 @@
 package examples.jgl;
 
+import examples.jgl.application.TextureSurf;
 import br.com.etyllica.Etyllica;
 
 public class JGLTutorials extends Etyllica {
