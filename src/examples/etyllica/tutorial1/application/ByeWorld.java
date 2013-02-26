@@ -1,4 +1,4 @@
-package examples.tutorial1.application;
+package examples.etyllica.tutorial1.application;
 
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;

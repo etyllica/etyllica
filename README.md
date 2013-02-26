@@ -8,12 +8,11 @@ Game Engine 2D in pure Java.
 
 Dependencies (included)
 
-- Audio Library
+jGL (An OpenGL simulator - http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/)
 
-SoundSystem (http://www.paulscode.com/forum/index.php?topic=4.0)
+SoundSystem (Audio Library - http://www.paulscode.com/forum/index.php?topic=4.0)
 
 WAV, JOgg, JOrbis and MP3 codec plug-in (http://www.paulscode.com/forum/index.php?topic=496.0)
-
 
 
 
