@@ -24,32 +24,32 @@ import br.com.etyllica.gui.panel.ScrollBackground;
 public class RollerPanel extends GUIComponent{
 
 	private GUIComponent component;
-	
+
 	private int buttonSize = 20;
 	private int scrollAmount = 10;
 	private float scrollFactor = 1;
 	private float offset = 0;
 	private float knobPosition = 0;
-	
+
 	private Button upButton;
 	private Button downButton;
 	private Button knob;
 	private ScrollBackground track;
-	
+
 	public RollerPanel(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		
+
 		upButton = new Button(w-buttonSize,0,buttonSize,buttonSize);
 		upButton.setLabel(new UpArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
 		upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollUp"));
-		
+
 		downButton = new Button(w-buttonSize,h-buttonSize,buttonSize,buttonSize);
 		downButton.setLabel(new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
 		downButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollDown"));
-		
+
 		track = new ScrollBackground(w-buttonSize, buttonSize, buttonSize, h-buttonSize*2);
 		add(track);
-		
+
 		add(upButton);
 		add(downButton);
 	}
@@ -58,19 +58,19 @@ public class RollerPanel extends GUIComponent{
 	public void draw(Grafico g){
 
 		g.setColor(Color.WHITE);
-		
+
 		g.fillRect(x,y,w,h);
-		
+
 		BufferedImage back = g.getBimg();
 		g.setBufferedImage(back.getSubimage(x, y, w, h));
-		
+
 		if(component!=null)
 			component.draw(g);
-		
+
 		g.setBufferedImage(back);
 
 	}
-	
+
 	public void update(GUIEvent event){
 
 	}
@@ -78,30 +78,33 @@ public class RollerPanel extends GUIComponent{
 	@Override
 	public GUIEvent updateMouse(PointerEvent event){
 
-		if(event.getPressed(MouseButton.MOUSE_WHEEL_DOWN)){
-			
-			for(int i=0;i<event.getAmount();i++){
-				scrollDown();
+		if(onMouse(event)){
+
+			if(event.getPressed(MouseButton.MOUSE_WHEEL_DOWN)){
+
+				for(int i=0;i<event.getAmount();i++){
+					scrollDown();
+				}
+			}
+
+			if(event.getPressed(MouseButton.MOUSE_WHEEL_UP)){
+
+				for(int i=event.getAmount();i<0;i++){
+					scrollUp();
+				}
+			}
+
+
+			if(knob.isMouseOver()){
+
+				if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+					//TODO Mouse dragged with knob move scroll
+				}
+
 			}
 		}
-		
-		if(event.getPressed(MouseButton.MOUSE_WHEEL_UP)){
-			
-			for(int i=event.getAmount();i<0;i++){
-				scrollUp();
-			}
-		}
-						
-		
-		if(knob.isMouseOver()){
-			
-			if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
-				//TODO Mouse dragged with knob move scroll
-			}
-			
-		}
-		
-		
+
+
 		return GUIEvent.NONE;
 
 	}
@@ -112,55 +115,59 @@ public class RollerPanel extends GUIComponent{
 		if(event.getPressed(Tecla.TSK_TAB)){
 
 			return GUIEvent.NEXT_COMPONENT;
-			
+
 		}
-		
+
 		return GUIEvent.NONE;
 	}
-	
+
 	public void setComponent(GUIComponent component){
 		this.component = component;
-		
+
+		resetScroll();
+
+	}
+
+	protected void resetScroll(){
 		if(component.getH()>h){
 			scrollFactor = (float)((float)h/(float)component.getH());
 		}
-		
+
 		knob = new Button(w-buttonSize, buttonSize, buttonSize,((int)(h*scrollFactor))-buttonSize*2+1);
 		add(knob);
-		
+
 		offset = scrollAmount*scrollFactor;
 		knobPosition = knob.getY();
-		
 	}
-	
+
 	public void scrollDown(){
-		
+
 		int panelDif = h-component.getH();
-		
+
 		if(component.getY()-panelDif>0){
-			
+
 			component.setOffsetY(-scrollAmount);
-				
+
 			knobPosition+=offset;
-			
+
 			knob.setY((int)knobPosition);
-			
+
 		}
-		
+
 	}
-	
+
 	public void scrollUp(){
-		
+
 		if(component.getY()<0){
-			
+
 			component.setOffsetY(+scrollAmount);
-			
+
 			knobPosition-=offset;
-			
+
 			knob.setY((int)knobPosition);
-			
+
 		}
-		
+
 	}
 
 }

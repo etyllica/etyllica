@@ -10,8 +10,7 @@ public enum MouseButton {
 	MOUSE_WHEEL_UP(MouseEvent.MOUSE_WHEEL),
 	MOUSE_WHEEL_DOWN(MouseEvent.MOUSE_WHEEL+1),
 	
-	MOUSE_NONE(0);
-	
+	MOUSE_NONE(0);	
 	
 	private final int code;
 

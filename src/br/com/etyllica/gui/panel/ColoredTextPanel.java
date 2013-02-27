@@ -1,34 +1,27 @@
 package br.com.etyllica.gui.panel;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.GUIComponent;
 
-public class TextPanel extends GUIComponent{
+public class ColoredTextPanel extends GUIComponent{
 
-	private Color backgroundcolor = Color.WHITE;
+	private Color backgroundcolor = Color.GRAY;
 	private Color bordercolor = Color.BLACK;
 	private float borderWidth = 2f;
+
+	private String text = "Hello my friend stay awile and listen!";
 
 	private int paddingTop = 5;//5 px;
 	private int paddingRight = 4;//4px;
 	
 	private int spacing = 0;
 	private float fontSize = 20;
-	
-	private List<String> lines = new ArrayList<String>();
 
-	public TextPanel(int x, int y, int w, int h){
+	public ColoredTextPanel(int x, int y, int w, int h){
 		super(x,y,w,h);	
-	}
-	
-	public void addLine(String line){
-		lines.add(line);
-		h += 12;
 	}
 
 	@Override
@@ -48,14 +41,26 @@ public class TextPanel extends GUIComponent{
 		g.drawRect(x,y,w,h);
 		
 		g.setBasicStroke(1f);
+		g.setFont(g.getFont().deriveFont(fontSize));
 
-		int i=0;
-		
-		for(String line: lines){
-			
-			g.escreve(paddingRight, y+paddingTop+(int)(fontSize+(i*fontSize+spacing)), line);
-			
-			i++;
+		for(int i=0;i<h/10;i++){
+
+			switch(i%4){
+			case 0:
+				g.setColor(Color.BLUE);
+				break;
+			case 1:
+				g.setColor(Color.RED);
+				break;
+			case 2:
+				g.setColor(Color.ORANGE);
+				break;
+			default:
+				g.setColor(Color.GREEN);
+				break;
+			}
+
+			g.escreve(paddingRight, y+paddingTop+(int)(fontSize+(i*fontSize+spacing)), text);
 			
 		}
 
