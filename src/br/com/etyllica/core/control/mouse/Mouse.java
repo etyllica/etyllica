@@ -205,9 +205,14 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent mwe) {
-		//TODO Wheel Up Event
-		//TODO Wheel Down Event
-		events.add(new PointerEvent(MouseButton.MOUSE_WHEEL, KeyState.PRESSED, x, y, mwe.getWheelRotation()));
+		
+		MouseButton key = MouseButton.MOUSE_WHEEL_DOWN;		
+		
+		if(mwe.getWheelRotation()<0){
+			key = MouseButton.MOUSE_WHEEL_UP;
+		}
+		
+		events.add(new PointerEvent(key, KeyState.PRESSED, x, y, mwe.getWheelRotation()));
 	}
 
 	//TODO Remover colisoes e incluir em layer

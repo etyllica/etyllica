@@ -71,7 +71,8 @@ public class Button extends GUIComponent{
 			g.setFont(theme.getButtonFont());
 
 			//TODO esse seria muito melhor mas nao ha tempo
-			//label.draw(g);
+			label.draw(g);
+			
 			if(theme.isShadow()){
 				g.escreveLabelSombra(x, y, w, h, label.getText(),theme.getShadowColor());
 			}else{
@@ -155,8 +156,6 @@ public class Button extends GUIComponent{
 		//igualaImagem(sobMouse);
 	}
 
-	int mx, my;
-
 	public GUIEvent updateMouse(PointerEvent event){
 
 		GUIEvent retorno = GUIEvent.NONE;
@@ -221,12 +220,9 @@ public class Button extends GUIComponent{
 		int offsetX = label.getX();
 		int offsetY = label.getY();
 
-		//TODO remove Test
-		//if(label.isCenter()){
 		label.setX(x+offsetX);
 		label.setY(y+offsetY);
 
-		//}
 	}
 
 	@Override

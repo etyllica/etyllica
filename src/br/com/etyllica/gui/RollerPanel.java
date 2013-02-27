@@ -10,6 +10,8 @@ import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.gui.icon.DownArrow;
+import br.com.etyllica.gui.icon.UpArrow;
 import br.com.etyllica.gui.panel.ScrollBackground;
 
 /**
@@ -29,25 +31,27 @@ public class RollerPanel extends GUIComponent{
 	private float offset = 0;
 	private float knobPosition = 0;
 	
-	private Button upArrow;
-	private Button downArrow;
+	private Button upButton;
+	private Button downButton;
 	private Button knob;
 	private ScrollBackground track;
 	
 	public RollerPanel(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		
-		upArrow = new Button(w-buttonSize,0,buttonSize,buttonSize);
-		upArrow.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollUp"));
+		upButton = new Button(w-buttonSize,0,buttonSize,buttonSize);
+		upButton.setLabel(new UpArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
+		upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollUp"));
 		
-		downArrow = new Button(w-buttonSize,h-buttonSize,buttonSize,buttonSize);
-		downArrow.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollDown"));
+		downButton = new Button(w-buttonSize,h-buttonSize,buttonSize,buttonSize);
+		downButton.setLabel(new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
+		downButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollDown"));
 		
 		track = new ScrollBackground(w-buttonSize, buttonSize, buttonSize, h-buttonSize*2);
 		add(track);
 		
-		add(upArrow);
-		add(downArrow);
+		add(upButton);
+		add(downButton);
 	}
 
 	@Override
@@ -73,18 +77,28 @@ public class RollerPanel extends GUIComponent{
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event){
-		
-		//TODO MouseWheelUP/MouseWheelDOWN
-		/*if(event.getPressed(MouseButton.MOUSE_WHEEL_UP)){
+
+		if(event.getPressed(MouseButton.MOUSE_WHEEL_DOWN)){
+			
 			for(int i=0;i<event.getAmount();i++){
+				scrollDown();
+			}
+		}
+		
+		if(event.getPressed(MouseButton.MOUSE_WHEEL_UP)){
+			
+			for(int i=event.getAmount();i<0;i++){
 				scrollUp();
 			}
-		}*/
+		}
+						
 		
 		if(knob.isMouseOver()){
+			
 			if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
-				//Mouse Dragged também move o scroll
+				//TODO Mouse dragged with knob move scroll
 			}
+			
 		}
 		
 		

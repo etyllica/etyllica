@@ -1,12 +1,10 @@
 package br.com.etyllica.gui.label;
 
-import java.awt.Color;
-
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.video.Grafico;
