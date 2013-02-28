@@ -387,6 +387,9 @@ public class Core {
 				//TODO Mouse.loseFocus()
 				//events.add(new Event(Tecla.NONE, KeyState.LOSE_FOCUS));
 				//events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.LOSE_FOCUS));
+				
+				//TODO improve it
+				focus = null;
 			}
 
 			break;
