@@ -25,12 +25,15 @@ public class Theme {
 	private int fontStyle = Font.PLAIN;
 	private String fontName = FONT_DEFAULT;
 	
-	public static final String FONT_DEFAULT = "DejaVuSans.ttf";
+	//public static final String FONT_DEFAULT = "DejaVuSans.ttf";
+	public static final String FONT_DEFAULT = "Dialog";
 	public static final String FONT_JAPANESE = "mona.ttf";
 	
 	public void reloadFonts(){
 		buttonFont = new Font(fontName,fontStyle,fontSize);
-		font = new Font("Dialog", fontStyle, fontSize);
+		font = new Font(fontName, fontStyle, fontSize);
+		
+		//font = new Font("Dialog", fontStyle, fontSize);
 		//font = new Font("DialogInput", fontStyle, fontSize);
 		//font = new Font("Serif", fontStyle, fontSize);
 		//font = new Font("SansSerif", fontStyle, fontSize);

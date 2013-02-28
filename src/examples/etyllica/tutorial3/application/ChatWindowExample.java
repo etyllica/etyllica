@@ -28,7 +28,7 @@ public class ChatWindowExample extends Application{
 		
 		ScrollerPanel rollerPanel = new ScrollerPanel(20,20,300,240);
 		
-		panel = new TextPanel(0,0,300,240);
+		panel = new TextPanel(300,240);
 		rollerPanel.setComponent(panel);
 		
 		add(rollerPanel);
