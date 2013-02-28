@@ -36,16 +36,16 @@ public class FontLoader extends GenericLoader{
 		return instance;
 	}
 
-	public Font getFonte(String fontName, float size){
+	public Font getFont(String fontName, float size){
 		
-		Font font = carregaFonte(fontName);
+		Font font = loadFont(fontName);
 		
 		
 		return font.deriveFont(size);
 		
 	}
 		
-	public Font carregaFonte(String fontName){
+	public Font loadFont(String fontName){
 
 		if(!fonts.containsKey(fontName)){
 

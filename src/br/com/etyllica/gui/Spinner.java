@@ -18,7 +18,7 @@ public abstract class Spinner<T extends Number> extends GUIComponent{
 
 	private Button plus;
 	private Button minus;
-	private Label resultLabel;
+	private TextLabel resultLabel;
 	private Panel resultPanel;
 	
 	protected T value;

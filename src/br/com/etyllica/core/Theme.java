@@ -18,17 +18,25 @@ public class Theme {
 		reloadFonts();
 	}
 	
-	public void reloadFonts(){
-		buttonFont = new Font(fontName,fontStyle,fontSize);
-	}
+	private Font buttonFont;
+	private Font font;
+
+	private int fontSize = 14;
+	private int fontStyle = Font.PLAIN;
+	private String fontName = FONT_DEFAULT;
 	
 	public static final String FONT_DEFAULT = "DejaVuSans.ttf";
 	public static final String FONT_JAPANESE = "mona.ttf";
 	
-	private int fontSize = 18;
-	private int fontStyle = Font.PLAIN;
-	private String fontName = FONT_DEFAULT;
-	
+	public void reloadFonts(){
+		buttonFont = new Font(fontName,fontStyle,fontSize);
+		font = new Font("Dialog", fontStyle, fontSize);
+		//font = new Font("DialogInput", fontStyle, fontSize);
+		//font = new Font("Serif", fontStyle, fontSize);
+		//font = new Font("SansSerif", fontStyle, fontSize);
+		//font = new Font("Monospaced", fontStyle, fontSize);
+	}
+		
 	private boolean shadow = true;
 	private Color shadowColor = Color.BLACK;
 	
@@ -38,9 +46,7 @@ public class Theme {
 	
 	private Color barColor = new Color(0x00,0x00, 0x00, 0xa0);
 	private Color barOnMouseColor = new Color(0x33, 0x33, 0x33, 0xa0);
-	
-	private Font buttonFont;
-	
+		
 	private Color buttonColor = new Color(0x00,0x00, 0x00, 0xa0);
 	private Color buttonOnFocus = new Color(0x33, 0x33, 0x99, 0xa0);	
 	private Color buttonOnMouse = new Color(0x33, 0x33, 0x33, 0xa0);
@@ -254,6 +260,14 @@ public class Theme {
 
 	public void setTextFieldOnMouseColor(Color textFieldOnMouseColor) {
 		this.textFieldOnMouseColor = textFieldOnMouseColor;
+	}
+	
+	public Font getFont() {
+		return font;
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
 	}
 
 	public Font getButtonFont() {

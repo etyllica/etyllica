@@ -49,7 +49,7 @@ public class RoundCornerButton extends Button{
 		g.fillRect(x+roundness, y+h-roundness, w-roundness*2, roundness);
 		g.fillArc(x+w-roundness*2, y+h-roundness*2, roundness*2, roundness*2, 270, 90);
 		
-		drawLabel(theme,g);
+		drawLabel(g);
 	}
 		
 }

@@ -46,7 +46,7 @@ public class PCXReader implements ImageReader{
 		private int 	palette[]=new int[48];
 		private char	reserved;
 		private char	color_planes;
-		private short   bytes_per_line;
+		private short  bytes_per_line;
 		private short 	palette_type;
 		private byte 	filler[]=new byte[58];
 		private byte[]	data;

@@ -14,27 +14,33 @@ public class TextPanel extends GUIComponent{
 	private Color bordercolor = Color.BLACK;
 	private float borderWidth = 2f;
 
-	private int paddingTop = 5;//5 px;
-	private int paddingRight = 4;//4px;
+	private int paddingTop = 5;//pixels;
+	private int paddingRight = 4;//pixels;
 	
 	private int spacing = 0;
+	
+	//TODO theme.fontSize
 	private float fontSize = 20;
 	
 	private List<String> lines = new ArrayList<String>();
 
 	public TextPanel(int x, int y, int w, int h){
-		super(x,y,w,h);	
+		super(x,y,w,h);
 	}
 	
 	public void addLine(String line){
+		
 		lines.add(line);
-		h += 12;
+		
+		if(h<(lines.size()+1)*fontSize){
+			h += fontSize;
+		}
+
 	}
 
 	@Override
 	public void update(GUIEvent event) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -53,7 +59,7 @@ public class TextPanel extends GUIComponent{
 		
 		for(String line: lines){
 			
-			g.escreve(paddingRight, y+paddingTop+(int)(fontSize+(i*fontSize+spacing)), line);
+			g.escreve(x+paddingRight, y+paddingTop+(int)(fontSize+(i*fontSize+spacing)), line);
 			
 			i++;
 			

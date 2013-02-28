@@ -21,8 +21,9 @@ import br.com.etyllica.gui.panel.ScrollBackground;
  *
  */
 
-public class RollerPanel extends GUIComponent{
+public class ScrollerPanel extends GUIComponent{
 
+	private int lastComponentH = 0;
 	private GUIComponent component;
 
 	private int buttonSize = 20;
@@ -36,7 +37,7 @@ public class RollerPanel extends GUIComponent{
 	private Button knob;
 	private ScrollBackground track;
 
-	public RollerPanel(int x, int y, int w, int h) {
+	public ScrollerPanel(int x, int y, int w, int h) {
 		super(x, y, w, h);
 
 		upButton = new Button(w-buttonSize,0,buttonSize,buttonSize);
@@ -63,14 +64,23 @@ public class RollerPanel extends GUIComponent{
 
 		BufferedImage back = g.getBimg();
 		g.setBufferedImage(back.getSubimage(x, y, w, h));
-
-		if(component!=null)
+		
+		if(component!=null){
+			
+			if(lastComponentH!=component.getH()){
+				resetScroll();
+				lastComponentH = component.getH();
+			}
+			//TODO if H changed
+			
 			component.draw(g);
-
+		}
+		
 		g.setBufferedImage(back);
 
 	}
 
+	@Override
 	public void update(GUIEvent event){
 
 	}
@@ -123,7 +133,10 @@ public class RollerPanel extends GUIComponent{
 
 	public void setComponent(GUIComponent component){
 		this.component = component;
+		lastComponentH = component.getH();
 
+		knobPosition = buttonSize;
+		
 		resetScroll();
 
 	}
@@ -133,11 +146,11 @@ public class RollerPanel extends GUIComponent{
 			scrollFactor = (float)((float)h/(float)component.getH());
 		}
 
-		knob = new Button(w-buttonSize, buttonSize, buttonSize,((int)(h*scrollFactor))-buttonSize*2+1);
+		remove(knob);
+		knob = new Button(w-buttonSize,(int)knobPosition, buttonSize,((int)(h*scrollFactor))-buttonSize*2+1);
 		add(knob);
 
 		offset = scrollAmount*scrollFactor;
-		knobPosition = knob.getY();
 	}
 
 	public void scrollDown(){

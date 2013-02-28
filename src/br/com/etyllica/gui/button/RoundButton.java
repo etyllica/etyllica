@@ -52,7 +52,7 @@ public class RoundButton extends Button{
 
 		g.fillOval(x,y,w,h);
 		
-		drawLabel(theme,g);
+		drawLabel(g);
 
 	}
 

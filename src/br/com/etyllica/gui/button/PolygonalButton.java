@@ -47,7 +47,7 @@ public class PolygonalButton extends Button{
 
 		g.fillPolygon(polygon);
 		
-		drawLabel(theme,g);
+		drawLabel(g);
 		
 	}
 

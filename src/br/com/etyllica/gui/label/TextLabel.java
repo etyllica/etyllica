@@ -6,7 +6,6 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
-import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Label;
 
@@ -19,7 +18,7 @@ import br.com.etyllica.gui.Label;
 
 public class TextLabel extends Label{
 
-	//protected String text;
+	protected String text;
 	
 	protected int fontSize = 18;
 	
@@ -27,11 +26,15 @@ public class TextLabel extends Label{
 		super(x, y);
 	}
 	public TextLabel(int x, int y, String text) {
-		super(x, y,text);
+		super(x, y);
+		
+		this.text = text;
 	}
 	
 	public TextLabel(String text) {
-		super(0, 0,text);
+		super(0,0);
+		
+		this.text = text;
 	}
 	
 	@Override
@@ -57,7 +60,7 @@ public class TextLabel extends Label{
 
 		Theme theme = Configuration.getInstance().getTheme();
 	
-		g.setFont(FontLoader.getInstancia().getFonte(theme.getFontName(),fontSize));		
+		g.setFont(theme.getFont());
 		
 		if(!onFocus){
 			g.setColor(theme.getTextColor());
@@ -65,21 +68,11 @@ public class TextLabel extends Label{
 			g.setColor(theme.getButtonOnFocus());
 		}
 		
-		if(!center){
-			if(!theme.isShadow()){
-				g.escreve(x, y, text);
-			}else{
-				g.escreveSombra(x, y, text);
-			}
-		}
-		else{
-			g.escreveX(y, text);
-			
-			if(!theme.isShadow()){
-				g.escreveX(y, text);
-			}else{
-				g.escreveSombraX(y, text);
-			}
+		//Label is always in center
+		if(!theme.isShadow()){
+			g.escreveLabel(bx, by, bw, bh, text);
+		}else{
+			g.escreveLabelSombra(bx, by, bw, bh, text ,theme.getShadowColor());
 		}
 	}
 
@@ -99,6 +92,14 @@ public class TextLabel extends Label{
 		return GUIEvent.NONE;
 	}
 
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 	public int getFontSize() {
 		return fontSize;
 	}

@@ -10,9 +10,12 @@ package br.com.etyllica.gui;
 
 public abstract class Label extends GUIComponent{
 
-	protected boolean center = false;
 	protected String alt = "";
-	protected String text = "";
+	
+	protected int bx;
+	protected int by;
+	protected int bw;
+	protected int bh;
 	
 	public Label(int x, int y) {
 		super(x, y);
@@ -20,19 +23,6 @@ public abstract class Label extends GUIComponent{
 	
 	public Label(int x, int y, int w, int h) {
 		super(x, y, w, h);
-	}
-	
-	public Label(int x, int y, String text) {
-		super(x, y);
-		this.text = text;
-	}
-	
-	public boolean isCenter() {
-		return center;
-	}
-
-	public void setCenter(boolean center) {
-		this.center = center;
 	}
 
 	public String getAlt() {
@@ -43,12 +33,19 @@ public abstract class Label extends GUIComponent{
 		this.alt = alt;
 	}
 
-	public String getText() {
+	public void setContentBounds(int bx, int by, int bw, int bh){
+		this.bx = bx;
+		this.by = by;
+		this.bw = bw;
+		this.bh = bh;
+	}
+	
+	/*public String getText() {
 		return text;
 	}
 
 	public void setText(String text) {
 		this.text = text;
-	}
+	}*/
 	
 }

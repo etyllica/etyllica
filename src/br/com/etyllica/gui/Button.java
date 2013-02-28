@@ -21,15 +21,8 @@ public class Button extends GUIComponent{
 
 	protected Label label;
 
-	protected String som = null;
-	protected boolean tocou = false;
-
 	public Button(int x, int y, int w, int h) {
 		super(x, y, w, h);
-	}
-
-	public void setSom(String som){
-		this.som = som;
 	}
 
 	@Override
@@ -57,28 +50,17 @@ public class Button extends GUIComponent{
 		}
 
 		g.fillRect(x,y,w,h);
-
-		drawLabel(theme,g);
+		
+		drawLabel(g);
 
 	}
 
-	protected void drawLabel(Theme theme, Grafico g){
-
-		g.setColor(theme.getTextColor());
-
+	protected void drawLabel(Grafico g){
+		
 		if(label!=null){
-
-			g.setFont(theme.getButtonFont());
-
-			//TODO esse seria muito melhor mas nao ha tempo
 			label.draw(g);
-			
-			if(theme.isShadow()){
-				g.escreveLabelSombra(x, y, w, h, label.getText(),theme.getShadowColor());
-			}else{
-				g.escreveLabel(x, y, w, h, label.getText());
-			}
 		}
+		
 	}
 
 	public void update(GUIEvent event){
@@ -222,6 +204,8 @@ public class Button extends GUIComponent{
 
 		label.setX(x+offsetX);
 		label.setY(y+offsetY);
+		
+		label.setContentBounds(x, y, w, h);
 
 	}
 

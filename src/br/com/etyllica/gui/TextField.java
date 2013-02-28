@@ -6,12 +6,10 @@ import java.awt.FontMetrics;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
 import br.com.etyllica.core.control.mouse.MouseButton;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
-import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.textfield.TextFieldValidator;
 
@@ -47,6 +45,18 @@ public class TextField extends GUIComponent{
 
 		//TODO Altura H relativa ao theme
 		//Theme theme = Configuration.getInstance().getTheme().getFontSize();
+		
+		clearField();
+	}
+	
+	public void clearField(){
+		cursor = 0;
+		fixMark = -1;
+
+		minMark = 0;
+		maxMark = 0;
+		
+		text = "";
 	}
 
 	@Override
@@ -194,7 +204,8 @@ public class TextField extends GUIComponent{
 
 		Theme theme = Configuration.getInstance().getTheme();
 
-		g.setFont(FontLoader.getInstancia().getFonte(theme.getFontName(),theme.getFontSize()));
+		//TODO
+		//g.setFont(theme.getFont());
 
 		//Para poder ser usado pelo password
 		String text = this.getText();
@@ -241,7 +252,8 @@ public class TextField extends GUIComponent{
 			//Invert contentColor
 			g.setColor(theme.getSelectionTextColor());
 
-			g.fillRect(x+cx,y,cxm,h);
+			//fill Mark Rect
+			g.fillRect(x+cx+2,y+2,cxm, h-3);			
 
 			//Invert textColor
 
@@ -265,7 +277,12 @@ public class TextField extends GUIComponent{
 			int cx = metrics.stringWidth(text.substring(0,cursor));
 			cx+=x+1;
 
-			g.drawLine(cx, y+2+fontSize/2, cx, y+2+fontSize/2+theme.getFontSize());
+			if(dif>0){
+				g.drawLine(cx+1, y+2, cx+1, y+h-2);
+			}else{
+				g.drawLine(dif+cx, y+2, dif+cx, y+h-2);
+			}
+			
 		}
 
 	}
@@ -328,6 +345,7 @@ public class TextField extends GUIComponent{
 	private void esquerdaControl(){
 
 		if(cursor>0){
+			
 			int i=cursor-2;
 
 			for(;i>0;i--){
@@ -393,8 +411,7 @@ public class TextField extends GUIComponent{
 				text = t1+t2;
 			}
 
-		}
-		else{
+		}else{
 
 			deleteMark();
 
@@ -402,7 +419,8 @@ public class TextField extends GUIComponent{
 	}
 
 	private void deleteMark(){
-		System.out.println("deleteMark "+text.length());
+		
+		//System.out.println("deleteMark "+text.length());
 
 		String t1 = text.substring(0,getMinMark());
 
@@ -417,9 +435,13 @@ public class TextField extends GUIComponent{
 	private void updateChar(char c){
 
 		if((int)c==TEXT_BACKSPACE){
+			
 			apagaBackSpace();
+			
 		}else if((int)c==TEXT_DELETE){
+			
 			apagaDelete();
+			
 		}else if((int)c==TEXT_ENTER||(int)c==TEXT_TAB||(int)c==TEXT_ESC){
 
 		}
@@ -429,7 +451,9 @@ public class TextField extends GUIComponent{
 					addChar(c);
 				}
 			}else{
+				
 				addChar(c);
+				
 			}
 		}
 

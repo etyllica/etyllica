@@ -238,7 +238,7 @@ public class Grafico{
 
 		if(texto.isVisible()){
 
-			Font f = FontLoader.getInstancia().carregaFonte(texto.getNomeFonte());
+			Font f = FontLoader.getInstancia().loadFont(texto.getNomeFonte());
 			f = f.deriveFont(texto.getEstilo(), texto.getTamanho());
 
 			screen.setFont(f);

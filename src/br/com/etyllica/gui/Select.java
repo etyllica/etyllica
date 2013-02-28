@@ -27,9 +27,11 @@ public class Select extends GUIComponent{
 		
 		//TODO ButtonDownArrow
 		button = new Button(w-buttonSize,0,buttonSize,buttonSize);
+		
 		DownArrow arrow = new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2);
 		button.setLabel(arrow);
 		button.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "swapShowOptions"));
+		
 		add(button);
 		
 	}
@@ -61,7 +63,6 @@ public class Select extends GUIComponent{
 		
 		g.escreve(x+textOffset, y+fontSize, options.get(selectedOption).getLabel());
 		
-				
 		if(showOptions){
 		
 			int initialY = y+h;
@@ -83,7 +84,6 @@ public class Select extends GUIComponent{
 			g.drawRect(x, initialY, w, finalY);
 			
 		}
-
 						
 	}
 
