@@ -24,6 +24,10 @@ public class TextPanel extends GUIComponent{
 	
 	private List<String> lines = new ArrayList<String>();
 
+	public TextPanel(int w, int h){
+		super(0,0,w,h);
+	}
+	
 	public TextPanel(int x, int y, int w, int h){
 		super(x,y,w,h);
 	}
@@ -32,6 +36,7 @@ public class TextPanel extends GUIComponent{
 		
 		lines.add(line);
 		
+		//This +1 is because String is rendered from bottom to top 
 		if(h<(lines.size()+1)*fontSize){
 			h += fontSize;
 		}

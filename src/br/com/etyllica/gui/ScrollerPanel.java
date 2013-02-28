@@ -43,12 +43,16 @@ public class ScrollerPanel extends GUIComponent{
 		upButton = new Button(w-buttonSize,0,buttonSize,buttonSize);
 		upButton.setLabel(new UpArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
 		upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollUp"));
-
+		upButton.setVisible(false);		
+		
 		downButton = new Button(w-buttonSize,h-buttonSize,buttonSize,buttonSize);
 		downButton.setLabel(new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
 		downButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollDown"));
-
+		downButton.setVisible(false);
+		
 		track = new ScrollBackground(w-buttonSize, buttonSize, buttonSize, h-buttonSize*2);
+		track.setVisible(false);
+		
 		add(track);
 
 		add(upButton);
@@ -71,7 +75,6 @@ public class ScrollerPanel extends GUIComponent{
 				resetScroll();
 				lastComponentH = component.getH();
 			}
-			//TODO if H changed
 			
 			component.draw(g);
 		}
@@ -138,19 +141,36 @@ public class ScrollerPanel extends GUIComponent{
 		knobPosition = buttonSize;
 		
 		resetScroll();
-
 	}
 
-	protected void resetScroll(){
+	private void resetScroll(){
+		
+		boolean needScroll = false; 
+		
 		if(component.getH()>h){
 			scrollFactor = (float)((float)h/(float)component.getH());
+			needScroll = true;
 		}
 
 		remove(knob);
 		knob = new Button(w-buttonSize,(int)knobPosition, buttonSize,((int)(h*scrollFactor))-buttonSize*2+1);
+		knob.setVisible(false);
 		add(knob);
-
+		
 		offset = scrollAmount*scrollFactor;
+		
+		if(needScroll){
+			showButtons();
+		}
+			
+		
+	}
+	
+	private void showButtons(){
+		track.setVisible(true);
+		upButton.setVisible(true);
+		downButton.setVisible(true);
+		knob.setVisible(true);
 	}
 
 	public void scrollDown(){

@@ -8,6 +8,7 @@ public class Option {
 	
 	public Option(String value, String label) {
 		super();
+		
 		this.value = value;
 		this.label = label;
 	}

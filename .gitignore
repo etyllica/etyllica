@@ -1,8 +1,7 @@
-*.class
+# Pre-Compiled Files #
+#*.class
+bin/
 
 # Package Files #
 *.war
 *.ear
-
-# Javasound serialized Files #
-*.ser
