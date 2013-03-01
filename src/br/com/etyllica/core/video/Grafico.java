@@ -18,6 +18,7 @@ import java.awt.image.ImageObserver;
 
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.layer.ImageLayer;
+import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
 import br.com.etyllica.linear.Ponto2D;
 
@@ -296,13 +297,13 @@ public class Grafico{
 		return screen;
 	}
 
-	public void drawRect(ImageLayer camada){
+	public void drawRect(Layer camada){
 		screen.drawRect(camada.getX(), camada.getY(), camada.getW(), camada.getH());
 	}
-	public void fillOval(ImageLayer camada){
+	public void fillOval(Layer camada){
 		screen.fillOval(camada.getX(), camada.getY(), camada.getW(), camada.getH());
 	}
-	public void fillArc(ImageLayer camada, int anguloInicial, int anguloArco){
+	public void fillArc(Layer camada, int anguloInicial, int anguloArco){
 		screen.fillArc(camada.getX(), camada.getY(), camada.getW(), camada.getH(), anguloInicial, anguloArco);
 	}
 	
