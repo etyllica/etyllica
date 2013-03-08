@@ -95,7 +95,8 @@ public class PointerEvent {
 	}
 	
 	public boolean getPressed(MouseButton key){
-		return((state==KeyState.PRESSED)&&this.key==key);
+		//TODO Makes sense?
+		return((state==KeyState.PRESSED||(state==KeyState.DRAGGED))&&this.key==key);
 	}
 	
 	public boolean getReleased(MouseButton key){
