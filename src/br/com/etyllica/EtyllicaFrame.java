@@ -88,6 +88,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 		//MeshLoader.getInstancia().setUrl(s);
 		grafico = new Grafico(w,h);
+		grafico.setBufferedImage(volatileImg.getSnapshot());
 		desktop = new DesktopWindow(0,0,w,h);
 		Core.getInstance().setDesktopWindow(desktop);
 
@@ -136,14 +137,15 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 		Core.getInstance().draw(grafico);
 
-		volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
-
+		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
+		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
+		
 		if(!fullScreen){
-			g.drawImage(volatileImg, 0, 0, this);
+			g.drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		}
 		else{
 			if(telaCheia!=null){
-				telaCheia.desenha(volatileImg);
+				telaCheia.desenha(grafico.getBimg());
 			}
 		}
 

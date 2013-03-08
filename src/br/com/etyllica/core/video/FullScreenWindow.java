@@ -11,7 +11,6 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
-import java.awt.image.VolatileImage;
 
 import br.com.etyllica.core.Core;
 import br.com.etyllica.core.control.keyboard.Keyboard;
@@ -86,7 +85,7 @@ public class FullScreenWindow extends Window{
 		setCursor( transparentCursor );
 	}
 	
-	public void desenha(VolatileImage volatileImage){
+	public void desenha(BufferedImage bufferedImage){
 		
 		//int w, int h;
 		int y = offsetY;
@@ -100,7 +99,7 @@ public class FullScreenWindow extends Window{
 	    //g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
 	    
 	    //g.drawImage(volatileImage, 0, 0, largura, altura, 0, 0, volatileImage.getWidth(), volatileImage.getHeight(), null);
-	    g.drawImage(volatileImage, 0, y, w, h, 0, 0, volatileImage.getWidth(), y+volatileImage.getHeight(), null);
+	    g.drawImage(bufferedImage, 0, y, w, h, 0, 0, bufferedImage.getWidth(), y+bufferedImage.getHeight(), null);
 	    g.dispose();
 				
 		getGraphics().drawImage(resized,0,0,null);

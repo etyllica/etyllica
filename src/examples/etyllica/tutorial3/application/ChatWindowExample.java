@@ -42,7 +42,7 @@ public class ChatWindowExample extends Application{
 		add(tf);
 		
 		Button button = new Button(tf.getX()+tf.getW()+10, tf.getY(), 90, tf.getH());
-		button.setLabel(new TextLabel("Enviar!"));
+		button.setLabel(new TextLabel("Send!"));
 		button.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "sendMsg"));
 		add(button);
 		

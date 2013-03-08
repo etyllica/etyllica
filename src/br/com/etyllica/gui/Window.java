@@ -42,7 +42,7 @@ public class Window extends GUIComponent implements Runnable{
 		//load = new LoadApplication(x,y,w,h);
 		load = new GenericLoadApplication(x,y,w,h);
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_ARGB));
-		load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB));
+		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB));
 		
 	}
 
@@ -141,7 +141,7 @@ public class Window extends GUIComponent implements Runnable{
 		//components.remove(load);
 		clearComponents();
 		
-		m.setBimg(load.getBimg());
+		//m.setBimg(load.getBimg());
 		
 		setApplication(m);
 

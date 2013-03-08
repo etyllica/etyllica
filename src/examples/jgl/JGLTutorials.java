@@ -1,5 +1,6 @@
 package examples.jgl;
 
+import examples.jgl.application.Teapots;
 import examples.jgl.application.TextureSurf;
 import br.com.etyllica.Etyllica;
 
@@ -31,8 +32,8 @@ public class JGLTutorials extends Etyllica {
 		//setMainApplication(new Smooth(w,h));
 		//setMainApplication(new Surface(w,h));
 		//setMainApplication(new Tea(w,h));
-		//setMainApplication(new Teapots(w,h));
-		setMainApplication(new TextureSurf(w,h));
+		setMainApplication(new Teapots(w,h));
+		//setMainApplication(new TextureSurf(w,h));
 		
 		//Problem
 		//setMainApplication(new Simple(w,h));

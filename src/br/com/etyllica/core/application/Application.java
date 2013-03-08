@@ -35,9 +35,6 @@ public abstract class Application extends GUIComponent implements Runnable{
 	protected boolean apagar = true;
 	
 	protected SessionMap variaveis;
-
-	//TODO Should be removed 
-	protected BufferedImage bufferedImage;
 	
 	protected ImageLayer icon = null;
 		
@@ -105,13 +102,7 @@ public abstract class Application extends GUIComponent implements Runnable{
 		return apagar;
 	}
 
-	public BufferedImage getBimg() {
-		return bufferedImage;
-	}
 
-	public void setBimg(BufferedImage bimg) {
-		this.bufferedImage = bimg;
-	}
 
 	public Application getReturnApplication() {
 		return returnApplication;

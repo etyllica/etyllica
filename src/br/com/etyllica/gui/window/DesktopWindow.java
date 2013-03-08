@@ -20,7 +20,7 @@ public class DesktopWindow extends Window{
 	
 	@Override
 	public void draw(Grafico g){
-		g.setBufferedImage(application.getBimg());
+		//g.setBufferedImage(application.getBimg());
 
 		if(application.isApagar()){
 			g.setColor(Color.WHITE);

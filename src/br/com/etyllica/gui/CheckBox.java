@@ -22,6 +22,10 @@ public class CheckBox extends Button{
 	public CheckBox(int x, int y) {
 		super(x, y, 22, 22);
 	}
+	
+	public CheckBox(int x, int y, int w, int h) {
+		super(x, y, w, h);
+	}
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event){
@@ -37,13 +41,39 @@ public class CheckBox extends Button{
 				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
 					swapChecked();
+					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+
+					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
+
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+
+					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
 				}
 				
+			}else if(event.getState()==KeyState.RELEASED){
+
+				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
+					
+					retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
+
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+					
+					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
+
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+					
+					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
+					
+				}else{
+					
+					retorno = GUIEvent.MOUSE_OVER;
+					
+				}
+
 			}
 			
-			retorno = GUIEvent.MOUSE_OVER;
-
 		}else{
 
 			mouseOver = false;
