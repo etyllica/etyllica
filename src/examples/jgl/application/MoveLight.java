@@ -3,13 +3,14 @@ package examples.jgl.application;
 import jgl.GLAUX;
 import br.com.etyllica.core.control.mouse.MouseButton;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class MoveLight extends GLAUX{
 
-	public MoveLight() {
-		super();
+	public MoveLight(int w, int h) {
+		super(w,h);
 	}
 
 	@Override
@@ -74,5 +75,11 @@ public class MoveLight extends GLAUX{
 		glLoadIdentity ();
 		gluPerspective (40.0, (float)w/(float)h, 1.0, 20.0);
 		glMatrixMode (GL_MODELVIEW);
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 }

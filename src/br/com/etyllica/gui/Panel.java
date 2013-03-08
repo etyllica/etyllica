@@ -2,6 +2,7 @@ package br.com.etyllica.gui;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
+import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
@@ -54,6 +55,12 @@ public class Panel extends GUIComponent{
 		g.fillRect(x+roundness, y+h-roundness, w-roundness*2, roundness);
 		g.fillArc(x+w-roundness*2, y+h-roundness*2, roundness*2, roundness*2, 270, 90);
 	
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent	.NONE;
 	}
 
 }

@@ -2,6 +2,7 @@ package br.com.etyllica.gui;
 
 import java.awt.Color;
 
+import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
@@ -70,6 +71,11 @@ public class ColorPicker extends GUIComponent{
 		g.drawRect(offsetX, offsetY, wBar*6, hBar);
 	}
 
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
 	
 	
 }

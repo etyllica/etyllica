@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.util.Date;
 
 import jgl.GLAUX;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class Teapots extends GLAUX{
 	
-	public Teapots() {
-		super();
+	public Teapots(int w, int h) {
+		super(w,h);
 	}
 
 	@Override
@@ -145,6 +148,18 @@ public class Teapots extends GLAUX{
 					-10.0f, 10.0f);
 		}
 		glMatrixMode (GL_MODELVIEW);
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 	
 }

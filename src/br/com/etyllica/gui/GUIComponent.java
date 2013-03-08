@@ -10,10 +10,8 @@ import java.util.Map;
 import java.util.Set;
 
 import br.com.etyllica.core.Component;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.layer.Layer;
 
 /**
@@ -156,18 +154,7 @@ public abstract class GUIComponent extends Layer implements Component{
 	public void addAction(GUIEvent event, GUIAction action){
 		mapa.put(event, action);
 	}
-	
-
-	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event) {
-		return GUIEvent.NONE;
-	}
-	
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		return GUIEvent.NONE;
-	}
-	
+		
 	protected void setRoot(GUIComponent root){
 		this.root = root;
 	}

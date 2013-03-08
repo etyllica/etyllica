@@ -1,12 +1,15 @@
 package examples.jgl.application;
 
 import jgl.GLAUX;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class Light extends GLAUX{
 
-	public Light() {
-		super();
+	public Light(int w, int h) {
+		super(w,h);
 	}
 
 	public void load() {
@@ -55,5 +58,17 @@ public class Light extends GLAUX{
 		}
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 }

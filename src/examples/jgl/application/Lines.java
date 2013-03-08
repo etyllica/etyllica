@@ -2,12 +2,15 @@ package examples.jgl.application;
 
 import jgl.GL;
 import jgl.GLU;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class Lines extends GLU{
 
-	public Lines() {
-		super();
+	public Lines(int w, int h) {
+		super(w,h);
 	}
 
 	@Override
@@ -87,6 +90,18 @@ public class Lines extends GLU{
 		glMatrixMode (GL.GL_PROJECTION);
 		glLoadIdentity ();
 		gluOrtho2D (0.0, (double)w, 0.0, (double)h);
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 
 }

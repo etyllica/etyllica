@@ -1,12 +1,15 @@
 package examples.jgl.application;
 
 import jgl.GL;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class Stroke extends GL {
 	
-	public Stroke() {
-		super();
+	public Stroke(int w, int h) {
+		super(w,h);
 	}
 
 	private class CP {
@@ -122,6 +125,18 @@ public class Stroke extends GL {
 		printStrokedString(test2);
 		glPopMatrix();
 		glFlush(g);
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 
 }

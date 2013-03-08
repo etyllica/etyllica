@@ -2,12 +2,15 @@ package examples.jgl.application;
 
 
 import jgl.GLU;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class Smooth extends GLU{
 	
-	public Smooth() {
-		super();
+	public Smooth(int w, int h) {
+		super(w,h);
 	}
 
 	@Override
@@ -53,6 +56,18 @@ public class Smooth extends GLU{
 			gluOrtho2D (0.0, 30.0 * (float)w/(float)h, 0.0, 30.0);
 		}
 		glMatrixMode (GL_MODELVIEW);
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 
 }

@@ -8,13 +8,13 @@ public class Tutorial1 extends Etyllica {
 	private static final long serialVersionUID = 1L;
 
 	public Tutorial1() {
-		super(640, 480);
+		super(800, 600);
 	}
 	
 	@Override
 	public void startGame() {
 		
-		setMainApplication(new HelloWorld());
+		setMainApplication(new HelloWorld(w,h));
 	}
 	
 }

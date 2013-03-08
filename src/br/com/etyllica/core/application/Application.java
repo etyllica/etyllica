@@ -40,11 +40,7 @@ public abstract class Application extends GUIComponent implements Runnable{
 	protected BufferedImage bufferedImage;
 	
 	protected ImageLayer icon = null;
-	
-	public Application(){
-		this(640,480);
-	}
-	
+		
 	public Application(int x, int y, int w, int h){
 		super(x,y,w,h);
 		

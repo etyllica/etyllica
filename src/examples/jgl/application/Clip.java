@@ -1,13 +1,17 @@
 package examples.jgl.application;
 
 import jgl.GLAUX;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class Clip extends GLAUX{
 
-	public Clip() {
-		super();
+	public Clip(int w, int h) {
+		super(w,h);
 	}
+	
 	public void load(){
 		myinit();
 		loading = 100;
@@ -46,6 +50,18 @@ public class Clip extends GLAUX{
 		glLoadIdentity ();
 		gluPerspective (60.0, (float)w/(float)h, 1.0, 20.0);
 		glMatrixMode (GL_MODELVIEW);
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 	
 }

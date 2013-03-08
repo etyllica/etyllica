@@ -10,6 +10,10 @@ import br.com.etyllica.util.SVGColor;
 
 public class ByeWorld extends Application{
 
+	public ByeWorld(int w, int h) {
+		super(w, h);
+	}
+
 	@Override
 	public void load() {
 
@@ -69,7 +73,7 @@ public class ByeWorld extends Application{
 	public GUIEvent updateKeyboard( KeyboardEvent event) {
 
 		if(event.getPressed(Tecla.TSK_BACK_SPACE)){
-			returnApplication = new HelloWorld();
+			returnApplication = new HelloWorld(w,h);
 		}
 
 		return GUIEvent	.NONE;

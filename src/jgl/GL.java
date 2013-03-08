@@ -6197,10 +6197,6 @@ public abstract class GL extends Application{
 		return JavaImage;
 	}
 	 */
-
-	public GL(){
-		super();
-	}
 	
 	public GL(int largura, int altura) {
 		super(largura,altura);

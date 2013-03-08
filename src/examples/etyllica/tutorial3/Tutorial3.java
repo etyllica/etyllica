@@ -14,7 +14,7 @@ public class Tutorial3 extends Etyllica {
 	@Override
 	public void startGame() {
 		
-		setMainApplication(new ChatWindowExample());
+		setMainApplication(new ChatWindowExample(w,h));
 	}
 	
 }

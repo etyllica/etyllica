@@ -13,6 +13,10 @@ import br.com.etyllica.util.SVGColor;
 
 public class HelloWorld extends Application{
 
+	public HelloWorld(int w, int h) {
+		super(w, h);
+	}
+
 	//Text Offset
 	private int yText = 100;
 	private int xText = 0;
@@ -111,7 +115,7 @@ public class HelloWorld extends Application{
 		}
 		
 		if(event.getPressed(Tecla.TSK_ESPACO)){
-			returnApplication = new ByeWorld();
+			returnApplication = new ByeWorld(w,h);
 		}
 
 		return GUIEvent.NONE;

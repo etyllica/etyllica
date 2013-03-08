@@ -2,12 +2,15 @@ package examples.jgl.application;
 
 
 import jgl.GLU;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class MipMap extends GLU{
 	
-	public MipMap() {
-		super();
+	public MipMap(int w, int h) {
+		super(w,h);
 	}
 
 	@Override
@@ -122,6 +125,18 @@ public class MipMap extends GLU{
 		gluPerspective (60.0, 1.0 * (double)w/(double)h, 1.0, 30000.0);
 		glMatrixMode (GL_MODELVIEW);
 		glLoadIdentity ();
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 
 }

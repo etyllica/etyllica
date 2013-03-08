@@ -2,12 +2,15 @@ package examples.jgl.application;
 
 
 import jgl.GL;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class Model extends GL{
 	
-	public Model() {
-		super();
+	public Model(int w, int h) {
+		super(w,h);
 	}
 
 	@Override
@@ -73,6 +76,18 @@ public class Model extends GL{
 					-1.0f,  1.0f);
 		}
 		glMatrixMode (GL_MODELVIEW);
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 
 }

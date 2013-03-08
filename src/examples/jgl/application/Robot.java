@@ -3,13 +3,14 @@ package examples.jgl.application;
 import jgl.GLAUX;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
 
 public class Robot extends GLAUX{
 
-	public Robot(){
-		super();
+	public Robot(int w, int h) {
+		super(w,h);
 	}
 
 	private static int shoulder = 0, elbow = 0;
@@ -95,6 +96,11 @@ public class Robot extends GLAUX{
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		glTranslatef(0.0f, 0.0f, -5.0f);
+	}
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 
 }

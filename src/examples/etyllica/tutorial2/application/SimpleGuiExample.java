@@ -5,6 +5,8 @@ import java.awt.Color;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.button.RoundCornerButton;
@@ -91,6 +93,18 @@ public class SimpleGuiExample extends Application{
 		g.setColor(color);
 		g.fillRect(x, y, w, h);
 		
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent	.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent	.NONE;
 	}
 
 }

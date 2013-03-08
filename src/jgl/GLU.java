@@ -1268,10 +1268,6 @@ public abstract class GLU extends GL{
 				type);
 	}
 
-	public GLU () {
-		super();
-	}
-
 	public GLU(int w, int h) {
 		super(w,h);
 	}

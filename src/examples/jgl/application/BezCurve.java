@@ -1,12 +1,15 @@
 package examples.jgl.application;
 
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 import jgl.GL;
 
 public class BezCurve extends GL{
 
-	public BezCurve() {
-		super(640,480);
+	public BezCurve(int w, int h) {
+		super(w,h);
 	}
 
 	public void load(){
@@ -78,6 +81,18 @@ public class BezCurve extends GL{
 		
 		glMatrixMode (GL_MODELVIEW);
 		glLoadIdentity ();
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent	.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent	.NONE;
 	}
 
 }

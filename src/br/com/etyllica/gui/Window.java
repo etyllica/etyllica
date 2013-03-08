@@ -9,6 +9,7 @@ import br.com.etyllica.core.application.GenericLoadApplication;
 import br.com.etyllica.core.application.LoadApplication;
 import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.loader.ApplicationLoader;
 import br.com.etyllica.core.video.Grafico;
@@ -150,6 +151,12 @@ public class Window extends GUIComponent implements Runnable{
 
 	public boolean isStillWantClose() {
 		return stillWantClose;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent	.NONE;
 	}
 
 }

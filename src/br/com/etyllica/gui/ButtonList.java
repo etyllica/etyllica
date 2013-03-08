@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
@@ -83,6 +84,12 @@ public class ButtonList extends GUIComponent{
 		
 		this.x += offsetX;
 		this.y += offsetY;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent	.NONE;
 	}
 
 }

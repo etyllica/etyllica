@@ -1,12 +1,15 @@
 package examples.jgl.application;
 
 import jgl.GLU;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 
 public class TextureSurf extends GLU{
 
-	public TextureSurf() {
-		super();
+	public TextureSurf(int w, int h) {
+		super(w,h);
 	}
 
 	private static final float ctrlpoints [][][] = {
@@ -106,6 +109,18 @@ public class TextureSurf extends GLU{
 		glMatrixMode (GL_MODELVIEW);
 		glLoadIdentity ();
 		glRotatef (85.0f, 1.0f, 1.0f, 1.0f);
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
 	}
 
 

@@ -757,10 +757,6 @@ public abstract class GLAUX extends GLU{
 		new Teapot(this).aux_solid_teapot (scale);
 	}
 
-	public GLAUX () {
-		super();
-	}
-
 	public GLAUX(int w, int h) {
 		super(w,h);
 	}
