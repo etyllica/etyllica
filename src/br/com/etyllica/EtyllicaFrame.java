@@ -40,8 +40,8 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 	private FullScreenWindow telaCheia = null;
 	private boolean fullScreen = false;
 
-	protected int largura = 640;
-	protected int altura = 480;
+	protected int w = 640;
+	protected int h = 480;
 
 	//TODO determinar o fps por cada sessao
 	private final int FRAME_DELAY = 80; // 20ms. Implica em 50fps (1000/20) = 50
@@ -64,8 +64,8 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 	public EtyllicaFrame(int largura, int altura){
 
-		this.largura = largura;
-		this.altura = altura;
+		this.w = largura;
+		this.h = altura;
 
 	}
 
@@ -80,20 +80,19 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		//System.out.println(s);
 
 		//TODO load largura e altura from a .ini file
-
+		defineTamanho(w,h);		
+		
 		ImageLoader.getInstance().setUrl(s);
 		FontLoader.getInstancia().setUrl(s);
 		MultimediaLoader.getInstancia().setUrl(s);
 
 		//MeshLoader.getInstancia().setUrl(s);
-		grafico = new Grafico(largura,altura);
-		desktop = new DesktopWindow(0,0,largura,altura);
+		grafico = new Grafico(w,h);
+		desktop = new DesktopWindow(0,0,w,h);
 		Core.getInstance().setDesktopWindow(desktop);
 
 		mouse = Core.getInstance().getControl().getMouse();
 		//keyboard = Core.getInstance().getControl().getTeclado();
-
-		defineTamanho(largura,altura);
 
 		startGame();
 
@@ -120,8 +119,8 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 
 	public void setTamanho(int largura, int altura){
-		this.largura = largura;
-		this.altura = altura;
+		this.w = largura;
+		this.h = altura;
 	}
 
 	@Override
@@ -132,7 +131,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 		// This means the device doesn't match up to this hardware accelerated image.
 		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE){
-			volatileImg = createBackBuffer(largura,altura); // recreate the hardware accelerated image.
+			volatileImg = createBackBuffer(w,h); // recreate the hardware accelerated image.
 		}
 
 		Core.getInstance().draw(grafico);
@@ -220,8 +219,8 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 	private void defineTamanho(int largura, int altura){
 
-		this.largura = largura;
-		this.altura = altura;
+		this.w = largura;
+		this.h = altura;
 
 		setSize(largura, altura);
 
@@ -246,7 +245,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 			telaCheia = new FullScreenWindow();
 			//telaCheia.setGerenciador(indice);
-			Core.getInstance().addEffect(new GenericFullScreenEffect(0, 0, largura, altura));
+			Core.getInstance().addEffect(new GenericFullScreenEffect(0, 0, w, h));
 		}
 	}
 
