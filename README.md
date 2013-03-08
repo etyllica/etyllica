@@ -1,8 +1,6 @@
 =====================================================
-Etyllica (v 1.3)
+Etyllica (v 1.3.3)
 =====================================================
-
-Engine para jogos 2D em Java puro.
 
 Game Engine 2D in pure Java.
 
