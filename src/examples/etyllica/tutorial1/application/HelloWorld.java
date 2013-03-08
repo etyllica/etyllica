@@ -3,6 +3,7 @@ package examples.etyllica.tutorial1.application;
 import java.awt.Color;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.control.mouse.MouseButton;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;

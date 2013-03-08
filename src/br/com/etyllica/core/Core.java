@@ -256,7 +256,7 @@ public class Core {
 		//Update components with events
 		for(PointerEvent event: events){
 
-			activeWindow.getApplication().updateMouse(event);
+			//activeWindow.getApplication().updateMouse(event);
 			
 			//Avoid concurrency problems
 			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
