@@ -20,13 +20,13 @@ public class RadioGroup {
 		radios = new ArrayList<Radio>();
 	}
 	
-	public void addRadio(Radio radio){
+	public void add(Radio radio){
 		this.radios.add(radio);
 		
 		radio.setGroup(this);		
 	}
 	
-	public void removeRadio(Radio radio){
+	public void remove(Radio radio){
 		this.radios.remove(radio);
 	}
 	

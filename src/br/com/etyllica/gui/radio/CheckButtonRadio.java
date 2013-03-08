@@ -1,10 +1,10 @@
-package br.com.etyllica.gui.checkbox;
+package br.com.etyllica.gui.radio;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Theme;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.gui.CheckBox;
+import br.com.etyllica.gui.Radio;
 
 /**
  * 
@@ -13,12 +13,12 @@ import br.com.etyllica.gui.CheckBox;
  *
  */
 
-public class CheckButton extends CheckBox{
+public class CheckButtonRadio extends Radio{
 
-	public CheckButton(int x, int y, int w, int h) {
+	public CheckButtonRadio(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
-	
+			
 	@Override
 	public void draw(Grafico g){
 
