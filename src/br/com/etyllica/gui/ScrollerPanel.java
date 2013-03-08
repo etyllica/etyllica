@@ -1,6 +1,7 @@
 package br.com.etyllica.gui;
 
 import java.awt.Color;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import br.com.etyllica.core.control.mouse.MouseButton;
@@ -76,7 +77,11 @@ public class ScrollerPanel extends GUIComponent{
 				lastComponentH = component.getH();
 			}
 			
+			//component.draw(g);
+			
+			
 			component.draw(g);
+			
 		}
 		
 		g.setBufferedImage(back);
@@ -152,12 +157,14 @@ public class ScrollerPanel extends GUIComponent{
 			needScroll = true;
 		}
 
+		offset = scrollAmount*scrollFactor;
+		
 		remove(knob);
-		knob = new Button(w-buttonSize,(int)knobPosition, buttonSize,((int)(h*scrollFactor))-buttonSize*2+1);
+		knob = new Button(w-buttonSize,(int)(knobPosition), buttonSize,((int)(h*scrollFactor))-buttonSize*2+1);
 		knob.setVisible(false);
 		add(knob);
 		
-		offset = scrollAmount*scrollFactor;
+		
 		
 		if(needScroll){
 			showButtons();

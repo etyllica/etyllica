@@ -14,8 +14,13 @@ package br.com.etyllica.core.loader.image;
  *
  * @author Michele Marcon
  * 
+ * 
  * Updated by mscythe
- * This code had a minor bug and didn't open images smaller than 256x256 
+ * 
+ * This code had a minor bug and didn't open images smaller than 256x256
+ * 
+ * I couldn't find the authors to ask about redistribute this code in LGPL License.
+ *  
  */
 
 import java.awt.image.BufferedImage;

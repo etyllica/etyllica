@@ -15,6 +15,7 @@ import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.awt.image.VolatileImage;
 
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.layer.ImageLayer;
@@ -31,21 +32,32 @@ import br.com.etyllica.linear.Ponto2D;
 
 public class Grafico{
 
+	private BufferedImage originalBimg;
 	private BufferedImage bimg;
+	
+	private VolatileImage vimg;
 	protected Graphics2D screen;
 
 	private int width;
 	private int height;
-
-	public Grafico(){
-		super();
-	}
 	
 	public Grafico(int width, int height){
 		super();
 		
 		this.width = width;
 		this.height = height;
+	}
+	
+	public void setVolatileImage(VolatileImage vimg){
+	
+		this.vimg = vimg;
+		this.width = vimg.getWidth();
+		this.height = vimg.getHeight();
+		
+		this.bimg = vimg.getSnapshot();
+		this.screen = (Graphics2D)vimg.createGraphics();
+		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
 	}
 	
 	public void setBufferedImage(BufferedImage bimg){
@@ -424,8 +436,9 @@ public class Grafico{
 		return bimg;
 	}
 
-	public void setBimg(BufferedImage bimg) {
-		this.bimg = bimg;
+	public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
+		
+		bimg.setRGB(startX, startY, w, h, rgbArray, offset, scansize);
 	}
 		
 }

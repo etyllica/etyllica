@@ -1,9 +1,11 @@
 package examples.etyllica.tutorial1.application;
 
 import java.awt.Color;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.control.mouse.MouseButton;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -13,6 +15,8 @@ import br.com.etyllica.util.SVGColor;
 
 public class HelloWorld extends Application{
 
+	private ScheduledExecutorService loadSimulator = Executors.newSingleThreadScheduledExecutor();
+		
 	public HelloWorld(int w, int h) {
 		super(w, h);
 	}
@@ -27,35 +31,33 @@ public class HelloWorld extends Application{
 	
 	@Override
 	public void load() {
-		
-		for(int i=0;i<99;i++){
-		
-			//Simulating Loads
-			try {
-				Thread.sleep(30);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+		//Simulating Loads
+		loadSimulator.scheduleAtFixedRate(new Runnable() {
+			
+			@Override
+			public void run() {
+				loading+=3;
+				
+				if(loading<30){
+					
+					loadingPhrase = "Loading Nothing...";
+					
+				}else if(loading<50){
+					
+					loadingPhrase = "Loading Something...";
+					
+				}else if(loading<90){
+					
+					loadingPhrase = "Almost Loaded...";
+					
+				}else if(loading==100){
+					loadSimulator.shutdown();
+				}
+				
 			}
 			
-			loading = i;
-			
-			if(loading<30){
-				
-				loadingPhrase = "Loading Nothing...";
-				
-			}else if(loading<50){
-				
-				loadingPhrase = "Loading Something...";
-				
-			}else if(loading<90){
-				
-				loadingPhrase = "Almost Loaded...";
-				
-			}
-		}
-		
-		loading = 100;
+		}, 25, 25, TimeUnit.MILLISECONDS);
 		
 	}
 

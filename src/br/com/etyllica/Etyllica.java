@@ -43,8 +43,9 @@ public abstract class Etyllica extends Applet implements Runnable{
 	protected int h = 480;
 
 	//TODO determinar o fps por cada sessao
-	private final int FRAME_DELAY = 80; // 20ms. Implica em 50fps (1000/20) = 50
+	private final int FRAME_DELAY = 80; // 20ms. Implica em 12fps (1000/80) = 12.5
 	private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
+	//private final int UPDATE_DELAY = 20; // 20ms. Implica em 50fps (1000/20) = 50
 
 	private Application application;
 
@@ -52,7 +53,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	private DesktopWindow desktop;
 
-	protected Mouse mouse;
+	private Mouse mouse;
 
 	//protected Keyboard keyboard;
 
@@ -119,22 +120,18 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	public abstract void startGame();
 
-
-	public void setTamanho(int largura, int altura){
-		this.w = largura;
-		this.h = altura;
-	}
-
 	@Override
 	public void paint( Graphics g ) {
 
+		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
 		GraphicsConfiguration gc = this.getGraphicsConfiguration();
 		int valCode = volatileImg.validate(gc);
 
 		// This means the device doesn't match up to this hardware accelerated image.
 		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE){
 			volatileImg = createBackBuffer(w,h); // recreate the hardware accelerated image.
-			grafico.setBimg(volatileImg.getSnapshot());
+			//grafico.setBimg(volatileImg.getSnapshot());
 		}
 
 		Core.getInstance().draw(grafico);
@@ -147,9 +144,12 @@ public abstract class Etyllica extends Applet implements Runnable{
 		}
 		else{
 			if(telaCheia!=null){
+				//telaCheia.desenha(volatileImg.getSnapshot());
 				telaCheia.desenha(grafico.getBimg());
 			}
 		}
+		
+		g.dispose();
 
 	}
 

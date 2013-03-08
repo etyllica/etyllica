@@ -208,6 +208,16 @@ public class Button extends GUIComponent{
 		label.setContentBounds(x, y, w, h);
 
 	}
+	
+	public void setCenterLabel(Label label) {
+		this.label = label;
+
+		label.setX(x+w/2-label.getW()/2);
+		label.setY(y+h/2-label.getH()/2);
+		
+		label.setContentBounds(x, y, w, h);
+
+	}
 
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {

@@ -1723,7 +1723,10 @@ public abstract class GL extends Application{
 
 	/** GLvoid glFlush (GLvoid) */
 	public void glFlush (Grafico g) {
-		if (Context.RenderMode != GL_RENDER) { return; }
+		
+		if (Context.RenderMode != GL_RENDER) { 
+			return; 
+		}
 
 		GL_Viewport viewport = Context.getViewport(); 
 
@@ -1740,7 +1743,7 @@ public abstract class GL extends Application{
 		 */
 		if(data!=null){
 			//BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-			g.getBimg().setRGB(0, 0, w, h, data, 0, w);
+			g.setRGB(0, 0, w, h, data, 0, w);
 
 		}
 
