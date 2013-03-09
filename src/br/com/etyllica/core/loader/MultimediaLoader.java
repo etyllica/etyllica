@@ -1,6 +1,7 @@
 package br.com.etyllica.core.loader;
 
 
+import sound.paulscode.Library;
 import sound.paulscode.SoundSystem;
 import sound.paulscode.SoundSystemConfig;
 import sound.paulscode.SoundSystemException;
@@ -57,6 +58,15 @@ public class MultimediaLoader extends GenericLoader{
 
 	}
 
+	public void setSoundLibrary(Class<? extends Library> library){
+		try {
+			mySoundSystem = new SoundSystem(library);
+		} catch (SoundSystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public boolean isPlaying(String path){
 		return mySoundSystem.playing(path);
 	}

@@ -111,6 +111,7 @@ public class AnimatedImageLayer extends ImageLayer{
 		visible = true;
 		lockOnce = false;
 		once = true;
+		stopped = false;
 
 		frameAtual = 0;
 
@@ -137,6 +138,7 @@ public class AnimatedImageLayer extends ImageLayer{
 			if(once){
 				visible = false;
 				lockOnce = true;
+				//stopped = true;
 				setXImage(xTile*frameAtual);
 				return;
 			}
@@ -248,8 +250,7 @@ public class AnimatedImageLayer extends ImageLayer{
 
 	@Override
 	public void draw(Grafico g){
-		if(visible)
-		{ 
+		if(visible){
 			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
 					xImage,yImage,xImage+xTile,yImage+yTile, null );
 		}

@@ -9,8 +9,7 @@ import br.com.etyllica.layer.AnimatedImageLayer;
  *
  */
 
-public class Effect extends AnimatedImageLayer
-{
+public class Effect extends AnimatedImageLayer{
 
 	public Effect(int x, int y, int xTile, int yTile)
 	{
