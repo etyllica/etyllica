@@ -43,13 +43,7 @@ public class Radio extends CheckBox{
 
 				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
-					if(!checked){
-						if(group!=null){
-							group.mark(this);
-						}
-
-						checked = true;
-					}
+					mark();
 					
 					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 				}
@@ -117,6 +111,18 @@ public class Radio extends CheckBox{
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+	
+	public void mark() {
+		
+		if(!checked){
+			if(group!=null){
+				group.mark(this);
+			}
+
+			checked = true;
+		}
+		
 	}
 	
 }
