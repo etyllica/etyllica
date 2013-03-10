@@ -29,16 +29,21 @@ public class SVGColor{
 	public static Color MIDNIGHT_BLUE = new Color(0x19, 0x19, 0x70);//#191970
 	public static Color DODGER_BLUE = new Color(0x1E, 0x90, 0xFF);//#1E90FF
 	public static Color LIGHT_SEA_GREEN = new Color(0x20, 0xB2, 0xAA);//#20B2AA
-	public static Color CYAN = new Color(0, 0xFF, 0xFF);//#00FFFF
+	public static Color CYAN = new Color(0x00, 0xFF, 0xFF);//#00FFFF
 	public static Color AQUA = CYAN;//#00FFFF
+	public static Color LIGHT_CYAN = new Color(0xE0, 0xFF, 0xFF);//#00FFFF
+	public static Color SKY_BLUE = new Color(0x87, 0xCE, 0xEB);//#87CEEB
+	public static Color SAVAGE_BLUE = new Color(0x00, 0x40, 0x80);//#004080
+	public static Color ALICE_BLUE = new Color(0xF0, 0xF8, 0xFF);//#F0F8FF
 	
 	public static Color LIME = new Color(0X00, 0xFF, 0x00);//#00FF00
 	public static Color MEDIUM_SPRING_GREEN = new Color(0x00, 0xFA, 0x9A);//#00FA9A
-	public static Color SPRING_GREEN = new Color(0, 0xFF, 0x7F);//#00FF7F
+	public static Color SPRING_GREEN = new Color(0x00, 0xFF, 0x7F);//#00FF7F
 	public static Color FOREST_GREEN = new Color(0x22, 0x8B, 0x22);//#228B22
 	public static Color SEA_GREEN = new Color(0x2E, 0x8B, 0x57);//#2E8B57
 	public static Color LIME_GREEN = new Color(0x32, 0xCD, 0x32);//#32CD32
-	public static Color OLIVE = new Color(0x80, 0x80, 0x00);//#8080000
+	public static Color OLIVE = new Color(0x80, 0x80, 0x00);//#808000
+	public static Color MOSS_GREEN = new Color(0x80,0x80,0x40);//#808040
 	
 	public static Color NAVY = new Color(0x00, 0x00, 0x80);//#000080
 	public static Color INDIGO = new Color(0x4B, 0x00, 0x82);//#4B0082
@@ -65,12 +70,16 @@ public class SVGColor{
 	
 	
 	public static Color PURPLE = new Color(0x80, 0x00, 0x80);
+	public static Color LILAC = new Color(0x80,0x00,0xFF);
+	public static Color LAVENDAR = new Color(0x80, 0x80, 0xFF);
 	public static Color ORCHID = new Color(0xDA, 0x70, 0xD6);
+	public static Color DARK_ROSE = new Color(0xFF, 0x00, 0x80);
 
 	public static Color GOLD = new Color(0xFF, 0xD7, 0x00);
 	public static Color SNOW = new Color(0xFF, 0xFA, 0xFA);
 	public static Color YELLOW = new Color(0xFF, 0xFF, 0x00);
 	public static Color LIGHT_YELLOW = new Color(0xFF, 0xFF, 0xE0);
+	public static Color EGG_CUSTARD = new Color(0xFF, 0xFF, 0x80);
 
 	public static Color CORAL = new Color(0xFF, 0x7F, 0x50);
 	public static Color DARK_ORANGE = new Color(0xFF, 0x8C, 0x00);
@@ -86,10 +95,11 @@ public class SVGColor{
 
 	public static Color BROWN  = new Color(0xA5, 0x2A, 0x2A);
 	public static Color MAROON = new Color(0x80, 0x00, 0x00);
+	public static Color WOOD_BROWN = new Color(0x80, 0x40, 0x00);
 	
 	public static Color DARK_SLATE_GRAY = new Color(0x2F, 0x4F, 0x4F);
 	public static Color GRAY = new Color(0x80, 0x80, 0x80);
-	
+	public static Color RICH_BLACK = new Color(0x00, 0x40, 0x40);//#004040
 	
 	/* TODO
  	darkslategrey #2F4F4F
