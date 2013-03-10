@@ -140,6 +140,8 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 
 		addEvent(me.getButton(),state);
 
+		setCoordenadas(me.getX(),me.getY());
+		
 		me.consume();
 	}
 

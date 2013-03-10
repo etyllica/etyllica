@@ -164,26 +164,49 @@ public class Button extends GUIComponent{
 			else if(event.getState()==KeyState.RELEASED){
 
 				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
+					
 					retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
 
 				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+					
 					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
 
 				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+					
 					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
+					
 				}else{
+					
 					retorno = GUIEvent.MOUSE_OVER;
+					
+				}
+
+			}else if(event.getState()==KeyState.DOUBLE_CLICK){
+			
+				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
+					
+					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
+					
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+					
+					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
+					
+				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+										
+					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
+					
 				}
 
 			}
 
 		}else{
 
+			mouseOver = false;
+			
 			if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
 				onFocus = false;
 			}
 
-			mouseOver = false;
 			retorno = GUIEvent.NONE;
 
 		}

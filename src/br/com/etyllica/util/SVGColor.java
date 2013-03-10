@@ -11,49 +11,47 @@ import java.awt.Color;
 
 public class SVGColor{
 	
-	public static Color BLACK = new Color(0x00,0x00,0x00);
-	public static Color BLUE_VIOLET = new Color(0x8A, 0x2B, 0xE2);
-	public static Color DARK_BLUE =  new Color(0x00,0x00,0x8B);
+	public static Color BLACK = new Color(0x00, 0x00, 0x00);//#000000
+	public static Color BLUE_VIOLET = new Color(0x8A, 0x2B, 0xE2);//#8A2BE2
+	public static Color DARK_BLUE =  new Color(0x00, 0x00, 0x8B);//#00008B
 	
-	public static Color MEDIUM_BLUE = new Color(0x00,0x00,0xCD);
-	public static Color BLUE = new Color(0x00,0x00,0xFF);
-	public static Color DARK_GREEN = new Color(0x00,0x64,0x00);
-	public static Color GREEN = new Color(0x00,0x80,0x00);
-	public static Color TEAL = new Color(0x00,0x80,0x80);
-	public static Color DARK_CYAN = new Color(0x00,0x8B,0x8B);
+	public static Color MEDIUM_BLUE = new Color(0x00, 0x00, 0xCD);//#0000CD
+	public static Color BLUE = new Color(0x00, 0x00, 0xFF);//#0000FF
+	public static Color DARK_GREEN = new Color(0x00, 0x64, 0x00);//#006400
+	public static Color GREEN = new Color(0x00, 0x80, 0x00);//#008000
+	public static Color TEAL = new Color(0x00, 0x80, 0x80);//#008080
+	public static Color DARK_CYAN = new Color(0x00, 0x8B, 0x8B);//#008B8B
 	
-	public static Color DEEP_SKY_BLUE = new Color(0x00,0xBF,0xFF);
-	public static Color DARK_TURQUOISE = new Color(0x00,0xCE,0xD1);
-	public static Color TURQUOISE = new Color(0x40,0xE0,0xD0);
-	public static Color ROYAL_BLUE = new Color(0x41,0x69,0xE1);
-		
-	public static Color MEDIUM_SPRING_GREEN = new Color(0x00,0xFA,0x9A);
-	public static Color LIME = new Color(0,0xFF,0);
-
-	public static Color SPRING_GREEN = new Color(0,0xFF,0x7F);
-	public static Color CYAN = new Color(0,0xFF,0xFF);
-	public static Color AQUA = CYAN;
+	public static Color DEEP_SKY_BLUE = new Color(0x00, 0xBF, 0xFF);//#00BFFF
+	public static Color DARK_TURQUOISE = new Color(0x00, 0xCE, 0xD1);//#00CED1
+	public static Color TURQUOISE = new Color(0x40, 0xE0, 0xD0);//#40E0D0
+	public static Color ROYAL_BLUE = new Color(0x41, 0x69, 0xE1);//#4169E1
+	public static Color MIDNIGHT_BLUE = new Color(0x19, 0x19, 0x70);//#191970
+	public static Color DODGER_BLUE = new Color(0x1E, 0x90, 0xFF);//#1E90FF
+	public static Color LIGHT_SEA_GREEN = new Color(0x20, 0xB2, 0xAA);//#20B2AA
+	public static Color CYAN = new Color(0, 0xFF, 0xFF);//#00FFFF
+	public static Color AQUA = CYAN;//#00FFFF
 	
-	public static Color MIDNIGHT_BLUE = new Color(0x19,0x19,0x70);
-	public static Color DODGER_BLUE = new Color(0x1E,0x90,0xFF);
-	public static Color LIGHT_SEA_GREEN = new Color(0x20,0xB2,0xAA);
-		
-	public static Color FOREST_GREEN = new Color(0x22,0x8B,0x22);
-	public static Color SEA_GREEN = new Color(0x2E,0x8B,0x57);
-	public static Color LIME_GREEN = new Color(0x32,0xCD,0x32);
+	public static Color LIME = new Color(0X00, 0xFF, 0x00);//#00FF00
+	public static Color MEDIUM_SPRING_GREEN = new Color(0x00, 0xFA, 0x9A);//#00FA9A
+	public static Color SPRING_GREEN = new Color(0, 0xFF, 0x7F);//#00FF7F
+	public static Color FOREST_GREEN = new Color(0x22, 0x8B, 0x22);//#228B22
+	public static Color SEA_GREEN = new Color(0x2E, 0x8B, 0x57);//#2E8B57
+	public static Color LIME_GREEN = new Color(0x32, 0xCD, 0x32);//#32CD32
+	public static Color OLIVE = new Color(0x80, 0x80, 0x00);//#8080000
 	
-	public static Color NAVY = new Color(0x00,0x00,0x80);
-	public static Color INDIGO = new Color(0x4B, 0x00, 0x82);
+	public static Color NAVY = new Color(0x00, 0x00, 0x80);//#000080
+	public static Color INDIGO = new Color(0x4B, 0x00, 0x82);//#4B0082
 	
-	public static Color RED = new Color(0xFF, 0x00, 0x00);
-	public static Color WHITE = new Color(0xFF, 0xFF, 0xFF);
+	public static Color WHITE = new Color(0xFF, 0xFF, 0xFF);//#FFFFFF
 	
-	public static Color MEDIUM_ORCHID = new Color(0xBA, 0x55, 0xD3);
-	public static Color DARK_ORCHID = new Color(0x99, 0x32, 0xCC);
-	public static Color THISTLE = new Color(0xD8, 0xBF, 0xD8);
+	public static Color RED = new Color(0xFF, 0x00, 0x00);//#FF0000
+	public static Color MEDIUM_ORCHID = new Color(0xBA, 0x55, 0xD3);//#BA55D3
+	public static Color DARK_ORCHID = new Color(0x99, 0x32, 0xCC);//#9932CC
+	public static Color THISTLE = new Color(0xD8, 0xBF, 0xD8);//#D8BFD8
 	public static Color PLUM = new Color(0xDD, 0xA0, 0xDD);
 	public static Color VIOLET = new Color(0xEE, 0x82, 0xEE);
-	public static Color MEDIUM_VIOLET_RED= new Color(0xC7, 0x15, 0x85);
+	public static Color MEDIUM_VIOLET_RED = new Color(0xC7, 0x15, 0x85);
 	public static Color DARK_MAGENTA = new Color(0x8B, 0x00, 0x8B);
 	public static Color FUCHSIA = new Color(0xFF, 0x00, 0xFF);
 	public static Color MAGENTA = new Color(0xFF, 0x00, 0xFF);
@@ -66,7 +64,7 @@ public class SVGColor{
 	public static Color LIGHT_PINK = new Color(0xFF, 0xB6, 0xC1);
 	
 	
-	public static Color PURPLE = new Color(0x80,0,0x80);
+	public static Color PURPLE = new Color(0x80, 0x00, 0x80);
 	public static Color ORCHID = new Color(0xDA, 0x70, 0xD6);
 
 	public static Color GOLD = new Color(0xFF, 0xD7, 0x00);
@@ -87,9 +85,10 @@ public class SVGColor{
 	public static Color MISTYROSE = new Color(0xFF, 0xE4, 0xE1);
 
 	public static Color BROWN  = new Color(0xA5, 0x2A, 0x2A);
-	public static Color MAROON = new Color(0x80,0x00,0x00);
+	public static Color MAROON = new Color(0x80, 0x00, 0x00);
 	
-	public static Color DARK_SLATE_GRAY = new Color(0x2F,0x4F,0x4F);
+	public static Color DARK_SLATE_GRAY = new Color(0x2F, 0x4F, 0x4F);
+	public static Color GRAY = new Color(0x80, 0x80, 0x80);
 	
 	
 	/* TODO
