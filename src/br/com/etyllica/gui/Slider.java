@@ -34,10 +34,11 @@ public class Slider extends GUIComponent{
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
 
-		if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
-		//if(mouse.getPressionado(Mouse.BOTAO_ESQUERDO)){
+		if(mouseOver){
+			if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+				//if(mouse.getPressionado(Mouse.BOTAO_ESQUERDO)){
 
-			if(onMouse(event)){
+			
 				
 				int interval = maxValue-minValue;
 				

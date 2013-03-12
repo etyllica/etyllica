@@ -339,6 +339,21 @@ public class Core {
 		//If componente is visible
 		if(component.isVisible()){
 
+			//Verify onMouse
+			if(component.onMouse(event)){
+				
+				if(!component.isMouseOver()){
+					component.setMouseOver(true);
+				}
+				
+			}else{
+				
+				if(component.isMouseOver()){
+					component.setMouseOver(false);
+				}
+				
+			}
+			
 			//Update Childs
 			for(GUIComponent child: component.getComponents()){
 

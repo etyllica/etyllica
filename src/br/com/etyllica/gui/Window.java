@@ -1,6 +1,5 @@
 package br.com.etyllica.gui;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -35,9 +35,7 @@ public class Radio extends CheckBox{
 
 		GUIEvent retorno = GUIEvent.NONE;
 		
-		if(onMouse(event)){
-
-			mouseOver = true;
+		if(mouseOver){
 
 			if(event.getState()==KeyState.PRESSED){
 
@@ -58,10 +56,6 @@ public class Radio extends CheckBox{
 				
 			}
 			
-		}else{
-
-			mouseOver = false;
-
 		}
 
 		return retorno;

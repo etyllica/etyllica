@@ -17,7 +17,7 @@ import br.com.etyllica.core.video.Grafico;
  *
  */
 
-public class Button extends GUIComponent{
+public class Button extends RoundGUIComponent{
 
 	protected Label label;
 
@@ -142,9 +142,7 @@ public class Button extends GUIComponent{
 
 		GUIEvent retorno = GUIEvent.NONE;
 
-		if(onMouse(event)){
-
-			mouseOver = true;
+		if(mouseOver){
 
 			if(event.getState()==KeyState.PRESSED){
 
@@ -200,8 +198,6 @@ public class Button extends GUIComponent{
 			}
 
 		}else{
-
-			mouseOver = false;
 			
 			if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
 				onFocus = false;

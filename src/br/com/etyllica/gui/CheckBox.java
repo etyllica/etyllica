@@ -32,9 +32,7 @@ public class CheckBox extends Button{
 
 		GUIEvent retorno = GUIEvent.NONE;
 
-		if(onMouse(event)){
-
-			mouseOver = true;
+		if(mouseOver){
 
 			if(event.getState()==KeyState.PRESSED){
 
@@ -76,7 +74,6 @@ public class CheckBox extends Button{
 			
 		}else{
 
-			mouseOver = false;
 			retorno = GUIEvent.NONE;
 
 		}

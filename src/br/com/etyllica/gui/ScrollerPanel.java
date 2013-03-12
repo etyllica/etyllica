@@ -96,7 +96,7 @@ public class ScrollerPanel extends GUIComponent{
 	@Override
 	public GUIEvent updateMouse(PointerEvent event){
 
-		if(onMouse(event)){
+		if(mouseOver){
 
 			if(event.getPressed(MouseButton.MOUSE_WHEEL_DOWN)){
 

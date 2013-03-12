@@ -98,7 +98,7 @@ public class TextField extends GUIComponent{
 
 		if((event.getPressed(MouseButton.MOUSE_BUTTON_LEFT))){
 
-			if(onMouse(event)){
+			if(mouseOver){
 
 				//TODO posiciona cursor onMouse
 
@@ -109,7 +109,7 @@ public class TextField extends GUIComponent{
 				return GUIEvent.LOST_FOCUS;
 			}
 
-		}else if(onMouse(event)){
+		}else if(mouseOver){
 
 			if(!onFocus){
 				
@@ -121,7 +121,7 @@ public class TextField extends GUIComponent{
 			}
 
 		//TODO Melhorar
-		}else if(!onMouse(event)){
+		}else if(!mouseOver){
 			return GUIEvent.MOUSE_OUT;
 		}
 

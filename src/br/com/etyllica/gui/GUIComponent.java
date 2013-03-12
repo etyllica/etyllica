@@ -27,8 +27,6 @@ public abstract class GUIComponent extends Layer implements Component{
 	
 	protected boolean onFocus = false;
 	protected boolean mouseOver = false;
-	
-	protected int roundness;
 
 	protected GUIComponent root = null;
 	
@@ -38,6 +36,8 @@ public abstract class GUIComponent extends Layer implements Component{
 	
 	//TODO Remover lista e trocar por mapa
 	protected Map<GUIEvent,GUIAction> mapa = new HashMap<GUIEvent, GUIAction>();
+	
+	protected String alt = "";
 	
 	public GUIComponent(int x, int y) {
 		super(x,y,1,1);
@@ -73,14 +73,6 @@ public abstract class GUIComponent extends Layer implements Component{
 
 	public void setOnFocus(boolean focus) {
 		this.onFocus = focus;
-	}
-
-	public int getRoundness() {
-		return roundness;
-	}
-
-	public void setRoundness(int roundness) {
-		this.roundness = roundness;
 	}
 
 	public List<GUIAction> getActions() {
@@ -180,6 +172,14 @@ public abstract class GUIComponent extends Layer implements Component{
 		
 		return null;
 		
+	}
+	
+	public String getAlt() {
+		return alt;
+	}
+
+	public void setAlt(String alt) {
+		this.alt = alt;
 	}
 	
 }

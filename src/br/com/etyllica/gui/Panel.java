@@ -14,7 +14,7 @@ import br.com.etyllica.core.video.Grafico;
  *
  */
 
-public class Panel extends GUIComponent{
+public class Panel extends RoundGUIComponent{
 	
 	public Panel(int x, int y, int w, int h){
 		super(x,y,w,h);
