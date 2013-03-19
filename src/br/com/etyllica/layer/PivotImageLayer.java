@@ -12,8 +12,15 @@ import br.com.etyllica.core.video.Grafico;
 
 public class PivotImageLayer extends ImageLayer{
 
-	private int xPivot;
-	private int yPivot;
+	protected int xPivot;
+	protected int yPivot;
+	
+	public PivotImageLayer(int x, int y){
+		super(x,y);
+		
+		xPivot = 0;
+		yPivot = 0;
+	}
 	
 	public PivotImageLayer(int x, int y, String caminho){
 		super(x,y,caminho);
@@ -29,7 +36,7 @@ public class PivotImageLayer extends ImageLayer{
 		yPivot = 0;
 	}
 	
-	public void setCoordenadasPivot(int xPivot,int yPivot){
+	public void setPivotCoordinates(int xPivot,int yPivot){
 		this.xPivot = xPivot;
 		this.yPivot = yPivot;
 	}

@@ -74,7 +74,7 @@ public class ImageLayer extends StaticLayer{
 		yImage = imagem;
 	}
 	
-	public double getAngule() {
+	public double getAngle() {
 		return angle;
 	}
 

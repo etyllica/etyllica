@@ -275,7 +275,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 
 	public boolean sobMouse(ImageLayer cam)
 	{
-		if(cam.getAngule()==0){
+		if(cam.getAngle()==0){
 			int cx = cam.getX();
 			int cy = cam.getY();
 
@@ -283,7 +283,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 
 		}else{
 
-			AffineTransform transformer = AffineTransform.getRotateInstance(cam.getAngule(),cam.getX(),cam.getY());
+			AffineTransform transformer = AffineTransform.getRotateInstance(cam.getAngle(),cam.getX(),cam.getY());
 
 			Point2D a = new Point2D.Double(cam.getX(),cam.getY());
 			Point2D b = new Point2D.Double(cam.getX()+cam.getW(),cam.getY());
