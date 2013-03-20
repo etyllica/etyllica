@@ -20,11 +20,36 @@ public class ImageIcon extends Icon{
 		camada = new ImageLayer(0,0,path);
 	}
 	
+	public ImageIcon(String path){
+		super(0, 0);
+		camada = new ImageLayer(0,0,path);
+	}
+	
 	@Override
 	public void draw(Grafico g) {
-		camada.setOffset(x, y);
+		//camada.setOffset(x, y);
 		camada.draw(g);
-		camada.setOffset(-x, -y);
+		//camada.setOffset(-x, -y);
+	}
+	
+	//Useful methods to centralize label
+	@Override
+	public void setX(int x){
+		camada.setX(x);
+	}
+	
+	@Override
+	public void setY(int y){
+		camada.setY(y);
+	}
+	
+	public int getW(){
+		return camada.getW();
+	}
+	
+	@Override
+	public int getH(){
+		return camada.getH();
 	}
 	
 }

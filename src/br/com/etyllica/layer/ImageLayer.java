@@ -22,7 +22,7 @@ public class ImageLayer extends StaticLayer{
 	protected int yImage = 0;
 
 	protected double angle = 0;
-	
+
 	protected ColisionArea areaColisao = null;
 
 	public ImageLayer(){
@@ -42,7 +42,7 @@ public class ImageLayer extends StaticLayer{
 	public ImageLayer(int x, int y, int w, int h, String caminho){
 		super(x,y,w,h,caminho);
 	}
-	
+
 	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String caminho){
 		super(x,y,w,h,caminho);
 		this.xImage = xImagem;
@@ -61,19 +61,19 @@ public class ImageLayer extends StaticLayer{
 	public int getXImage() {
 		return xImage;
 	}
-	
+
 	public void setXImage(int imagem) {
 		xImage = imagem;
 	}
-	
+
 	public int getYImage() {
 		return yImage;
 	}
-	
+
 	public void setYImage(int imagem) {
 		yImage = imagem;
 	}
-	
+
 	public double getAngle() {
 		return angle;
 	}
@@ -149,15 +149,15 @@ public class ImageLayer extends StaticLayer{
 	{
 		return colideCircular(b.getX(), b.getY(), b.getW(), b.getH());
 	}
-	
+
 	public boolean colideCircularPonto(int px, int py){
-		
+
 		int centroX = x+w/2;
 		int centroY = y+h/2;
-		
+
 		return (px-centroX)*(px-centroX) + (py - centroY)*(py - centroY) < (w/2)*(w/2);
 	}
-	
+
 	public boolean colideCircular(int bx, int by, int bw, int bh)
 	{
 		int xdiff = bx - x;
@@ -226,67 +226,107 @@ public class ImageLayer extends StaticLayer{
 
 		return false;
 	}
-	
+
 	public boolean colideRotacionada(int mx, int my){
-		
+
 		int cx = x+w/2;
 		int cy = y+h/2;
-		
+
 		Polygon colision = new Polygon();
-		
+
 		AffineTransform transform = AffineTransform.getTranslateInstance(cx, cy);
-		transform.concatenate(AffineTransform.getRotateInstance(angle));		
-		
+		transform.concatenate(AffineTransform.getRotateInstance(angle));
+
 		Point a = new Point(0, 0);
 		Point b = new Point(w, 0);
 		Point c = new Point(w, h);
 		Point d = new Point(0, h);
-		
+
 		Point n = new Point(0, 0);
-		
+
 		transform.transform(a, n);
 		colision.addPoint((int)n.getX(),(int)n.getY());
-		
+
 		transform.transform(b, n);
 		colision.addPoint((int)n.getX(),(int)n.getY());
-		
+
 		transform.transform(c, n);
 		colision.addPoint((int)n.getX(),(int)n.getY());
-		
+
 		transform.transform(d, n);
 		colision.addPoint((int)n.getX(),(int)n.getY());
-		
+
 		return colision.contains(mx, my);
+	}
+
+	//Based on code http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
+	public boolean isPointInsideRectangle(int mx, int my){
+
+		//Pivot Point of rotation
+		
+		int px = x+w/2;
+		int py = y+h/2;
+		
+		double c = Math.cos(angle);
+
+		double s = Math.sin(angle);
+
+		// UNrotate the point depending on the rotation of the rectangle
+		double rotatedX = px + c * (mx - px) - s * (my - py);
+
+		double rotatedY = py + s * (mx - px) + c * (my - py);
+
+		// perform a normal check if the new point is inside the 
+		// bounds of the UNrotated rectangle		
+		int leftX = px - w / 2;
+		int rightX = px + w/2;
+		int topY = py - h/2;
+		int bottomY = py + h/2;
+		
+		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
 
 	public void clone(ImageLayer b){
 		this.w = b.w;
 		this.h = b.h;
-		
+
 		this.xImage = b.xImage;
 		this.yImage = b.yImage;
-		
+
 		this.path = b.path;
 	}
-	
+
 	public void draw(Grafico g){
 		if(visible){
-			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
-					xImage,yImage,xImage+w,yImage+h, null );
+
+			if(angle==0){
+				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
+						xImage,yImage,xImage+w,yImage+h, null );
+			}else{
+
+				AffineTransform reset = g.getTransform();
+
+				AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2);
+				
+				g.setTransform(transform);
+				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
+						xImage,yImage,xImage+w,yImage+h, null );
+				g.setTransform(reset);
+			}
 		}
 	}
-	
+
 	public boolean onMouse(Mouse mouse){
-		
+
 		boolean colision = false;
-		
+
 		if(angle==0){
 			colision = colideRetangular(mouse.getX(), mouse.getY(), 1, 1);
 		}else{
 			colision = colideRotacionada(mouse.getX(), mouse.getY());
 		}
-		
+
 		return colision;
 	}
-	
+
 }

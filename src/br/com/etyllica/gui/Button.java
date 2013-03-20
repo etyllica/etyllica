@@ -9,6 +9,7 @@ import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.gui.label.Icon;
 
 /**
  * 
@@ -231,13 +232,13 @@ public class Button extends RoundGUIComponent{
 	public void setCenterLabel(Label label) {
 		this.label = label;
 
-		label.setX(x+w/2-label.getW()/2);
-		label.setY(y+h/2-label.getH()/2);
+		label.setX(label.getX()+(x+w/2-label.getW()/2));
+		label.setY(label.getY()+(y+h/2-label.getH()/2));
 		
 		label.setContentBounds(x, y, w, h);
 
 	}
-
+	
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
 

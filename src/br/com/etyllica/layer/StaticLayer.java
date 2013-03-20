@@ -36,9 +36,9 @@ public class StaticLayer extends Layer{
 	}
 	
 	
-	public StaticLayer(String caminho){
-		this.path = caminho;
-		StaticLayer cam = ImageLoader.getInstance().loadImage(caminho);
+	public StaticLayer(String path){
+		this.path = path;
+		StaticLayer cam = ImageLoader.getInstance().loadImage(path);
 		this.w = cam.getW();
 		this.h = cam.getH();
 	}
