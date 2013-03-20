@@ -1,7 +1,5 @@
 package br.com.etyllica.layer;
 
-import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 
 import br.com.etyllica.core.control.mouse.Mouse;
@@ -227,43 +225,10 @@ public class ImageLayer extends StaticLayer{
 		return false;
 	}
 
-	public boolean colideRotacionada(int mx, int my){
-
-		int cx = x+w/2;
-		int cy = y+h/2;
-
-		Polygon colision = new Polygon();
-
-		AffineTransform transform = AffineTransform.getTranslateInstance(cx, cy);
-		transform.concatenate(AffineTransform.getRotateInstance(angle));
-
-		Point a = new Point(0, 0);
-		Point b = new Point(w, 0);
-		Point c = new Point(w, h);
-		Point d = new Point(0, h);
-
-		Point n = new Point(0, 0);
-
-		transform.transform(a, n);
-		colision.addPoint((int)n.getX(),(int)n.getY());
-
-		transform.transform(b, n);
-		colision.addPoint((int)n.getX(),(int)n.getY());
-
-		transform.transform(c, n);
-		colision.addPoint((int)n.getX(),(int)n.getY());
-
-		transform.transform(d, n);
-		colision.addPoint((int)n.getX(),(int)n.getY());
-
-		return colision.contains(mx, my);
-	}
-
 	//Based on code http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
-	public boolean isPointInsideRectangle(int mx, int my){
+	public boolean colisionRotated(int mx, int my){
 
-		//Pivot Point of rotation
-		
+		//Pivot Point of rotation		
 		int px = x+w/2;
 		int py = y+h/2;
 		
@@ -277,11 +242,11 @@ public class ImageLayer extends StaticLayer{
 		double rotatedY = py + s * (mx - px) + c * (my - py);
 
 		// perform a normal check if the new point is inside the 
-		// bounds of the UNrotated rectangle		
+		// bounds of the UNrotated rectangle
 		int leftX = px - w / 2;
-		int rightX = px + w/2;
-		int topY = py - h/2;
-		int bottomY = py + h/2;
+		int rightX = px + w / 2;
+		int topY = py - h / 2;
+		int bottomY = py + h / 2;
 		
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
@@ -323,7 +288,7 @@ public class ImageLayer extends StaticLayer{
 		if(angle==0){
 			colision = colideRetangular(mouse.getX(), mouse.getY(), 1, 1);
 		}else{
-			colision = colideRotacionada(mouse.getX(), mouse.getY());
+			colision = colisionRotated(mouse.getX(), mouse.getY());
 		}
 
 		return colision;
