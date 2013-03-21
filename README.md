@@ -18,7 +18,7 @@ Etyllica is a pure Java Game Engine to make games fast. It can render 3D (by sof
 
 - [Etyllic Mario](http://yuripourre.github.com/etyllic-mario)
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint)
-- [Hard to Beat Me Paint](http://yuripourre.github.com/hardtobeatme)
+- [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme)
 
 
 ##Dependencies (included)
