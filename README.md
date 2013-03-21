@@ -1,6 +1,6 @@
-=====================================================
+===================
 #Etyllica (v 1.3.6)
-=====================================================
+===================
 
 [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games fast. It can render 3D (by software) using jGL in unsigned applets and streams audio with SoundSystem Library. [Etyllica](http://yuripourre.github.com/etyllica) also have its own GUI System.
 
@@ -8,11 +8,12 @@
 
 - Image Loader that supports (TGA, PCX, PNG, BMP, JPG)
 - Sound Loader that supports (MP3, OGG, WAV)
-- Keyboard and Mouse handling
+- Keyboard and Mouse handling (and [Joystick](https://github.com/yuripourre/joystick) only for Linux)
 - Animation
 - Special Effects
 - Background Music
 - GUI System with some components
+- FullScreen
 
 ##Related Projects
 
