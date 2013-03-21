@@ -2,15 +2,24 @@
 #Etyllica (v 1.3.6)
 =====================================================
 
-A 2D/3D Game Engine in pure Java.
+Etyllica is a pure Java Game Engine to make games fast. It can render 3D (by software) using jGL in unsigned applets and streams audio with SoundSystem Library. Etyllica also have its own GUI System.
 
 ##Features
+
 - Image Loader that supports (TGA, PCX, PNG, BMP, JPG)
 - Sound Loader that supports (MP3, OGG, WAV)
 - Keyboard and Mouse handling
 - Animation
 - Special Effects
 - Background Music
+- GUI System with some components
+
+##Related Projects
+
+- [Etyllic Mario](http://yuripourre.github.com/etyllic-mario)
+- [Etyllic Paint](http://yuripourre.github.com/etyllic-paint)
+- [Hard to Beat Me Paint](http://yuripourre.github.com/hardtobeatme)
+
 
 ##Dependencies (included)
 
