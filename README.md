@@ -24,7 +24,7 @@ Etyllica is a pure Java Game Engine to make games fast. It can render 3D (by sof
 ##Dependencies (included)
 
 - [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) (An OpenGL simulator)
-- SoundSystem(http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library)
+- [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library)
 - [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0)
 
 ##License
