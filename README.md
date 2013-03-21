@@ -2,7 +2,7 @@
 #Etyllica (v 1.3.6)
 =====================================================
 
-Etyllica is a pure Java Game Engine to make games fast. It can render 3D (by software) using jGL in unsigned applets and streams audio with SoundSystem Library. Etyllica also have its own GUI System.
+[Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games fast. It can render 3D (by software) using jGL in unsigned applets and streams audio with SoundSystem Library. [Etyllica](http://yuripourre.github.com/etyllica) also have its own GUI System.
 
 ##Features
 
@@ -20,7 +20,6 @@ Etyllica is a pure Java Game Engine to make games fast. It can render 3D (by sof
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint)
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme)
 
-
 ##Dependencies (included)
 
 - [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) (An OpenGL simulator)
@@ -28,5 +27,4 @@ Etyllica is a pure Java Game Engine to make games fast. It can render 3D (by sof
 - [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0)
 
 ##License
-- LGPL
-
+- [LGPL](http://www.gnu.org/copyleft/lesser.html)
