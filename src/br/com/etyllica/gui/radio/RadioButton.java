@@ -13,9 +13,9 @@ import br.com.etyllica.gui.Radio;
  *
  */
 
-public class CheckButtonRadio extends Radio{
+public class RadioButton extends Radio{
 
-	public CheckButtonRadio(int x, int y, int w, int h) {
+	public RadioButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
 			
