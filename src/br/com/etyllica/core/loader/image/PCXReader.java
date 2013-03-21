@@ -8,14 +8,14 @@ package br.com.etyllica.core.loader.image;
  *
  *  PCXLoad
  *  Author	: Mustata Bogdan (LoneRunner)
- *  Contact	: lonerunner@planetquake.com
+ *  Contact	: lonerunner@planetquake.com (e-mail don't exist anymore)
  *
  * This software is released under the GNU GPL
  *
  * @author Michele Marcon
  * 
  * 
- * Updated by mscythe
+ * Updated by mscythe to work with Etyllica Engine
  * 
  * This code had a minor bug and didn't open images smaller than 256x256
  * 
@@ -82,32 +82,31 @@ public class PCXReader implements ImageReader{
 	}
 
 	public BufferedImage loadImage(URL url) throws IOException{
-		
-		PCXHeader	pcx;
-
-		int palette[];
-
-		int		dataByte, runLength;
 
 		//
 		// load the file
 		//
 
 		InputStream	f = url.openStream();
+		
 		int len=f.available();
+		
 		byte[] buffer = new byte[len+1];
+		
 		buffer[len] = 0;
 
 		for (int i = 0; i < len; i++){
-			buffer[i]=(byte)f.read();
+			buffer[i] = (byte)f.read();
 		}
 
 		f.close();
-
+		
 		//
 		// parse the PCX file
 		//
-		pcx = new PCXHeader(buffer);
+		
+		PCXHeader pcx = new PCXHeader(buffer);
+		
 		byte[] raw = pcx.data;
 
 		if (pcx.manufacturer != 0x0a
@@ -121,7 +120,8 @@ public class PCXReader implements ImageReader{
 			return null;
 		}
 
-		palette = new int[768];
+		int palette[] = new int[768];
+		
 		for (int i = 0; i < 768; i++){
 			if ((len-128-768+i)<pcx.data.length){
 				palette[i]=pcx.data[len-128-768+i]&0xff;
@@ -136,10 +136,12 @@ public class PCXReader implements ImageReader{
 		int[] pic = out;
 		int[] pix = out;
 
-		int pixcount=0;
-		int rawcount=0;
+		int pixcount = 0;
+		int rawcount = 0;
+		
+		int	dataByte, runLength;
 
-		for (int y=0 ; y<=pcx.ymax ; y++, pixcount += pcx.xmax+1){
+		for (int y=0 ; y<= pcx.ymax ; y++, pixcount += pcx.xmax+1){
 
 			for (int x=0 ; x<=pcx.xmax ; ){
 
@@ -180,6 +182,7 @@ public class PCXReader implements ImageReader{
 
 		int z=0;
 		int w=0;
+		
 		for (int i = 0; i < imageWidth; i++){
 			for (int j = 0; j < imageHeight; j++){
 				pixel[z++]=(0xff<<24)
