@@ -22,7 +22,7 @@ public class DesktopWindow extends Window{
 	public void draw(Grafico g){
 		//g.setBufferedImage(application.getBimg());
 
-		if(application.isApagar()){
+		if(application.isClearBeforeDraw()){
 			g.setColor(Color.WHITE);
 
 			g.fillRect(0,0,application.getW(),application.getH());

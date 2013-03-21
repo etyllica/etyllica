@@ -105,7 +105,7 @@ public class Window extends GUIComponent implements Runnable{
 		if(application!=this.application){
 
 			m = application;
-			m.setVariaveis(variaveis);
+			m.setSessionMap(variaveis);
 
 			recarrega();
 
