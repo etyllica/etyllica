@@ -19,6 +19,7 @@
 
 - [Etyllic Mario](http://yuripourre.github.com/etyllic-mario)
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint)
+- [Etyllic Animator](http://yuripourre.github.com/etyllic-animator/)
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme)
 
 ##Dependencies (included)
