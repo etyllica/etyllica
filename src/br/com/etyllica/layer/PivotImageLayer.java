@@ -49,7 +49,6 @@ public class PivotImageLayer extends ImageLayer{
 		int py = y+yPivot;
 
 		double c = Math.cos(Math.toRadians(-angle));
-
 		double s = Math.sin(Math.toRadians(-angle));
 
 		// UNrotate the point depending on the rotation of the rectangle
@@ -58,10 +57,10 @@ public class PivotImageLayer extends ImageLayer{
 
 		// perform a normal check if the new point is inside the 
 		// bounds of the UNrotated rectangle
-		int leftX = px - w / 2;
-		int rightX = px + w / 2;
-		int topY = py + 2*yPivot - h / 2;
-		int bottomY = py +2*yPivot + h / 2;
+		int leftX = px - xPivot;
+		int rightX = px - xPivot + w;
+		int topY = py - yPivot;
+		int bottomY = py - yPivot + h;
 
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}

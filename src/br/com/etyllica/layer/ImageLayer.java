@@ -80,7 +80,7 @@ public class ImageLayer extends StaticLayer{
 		this.angle = angle;
 	}
 	public void setOffsetAngle(double offset) {
-		this.angle += offset;
+		setAngle(angle+offset);
 	}
 
 	public ColisionArea getAreaColisao() {
