@@ -406,6 +406,14 @@ public class Grafico{
 	public void drawRect(double x, double y, double w, double h) {
 		screen.drawRect((int)x,(int)y,(int)w,(int)h);
 	}
+	
+	public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+		screen.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+	}
+	
+	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+		screen.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
+	}
 
 	public void drawOval(int x, int y, int w, int h ){
 		screen.drawOval(x,y,w,h);
