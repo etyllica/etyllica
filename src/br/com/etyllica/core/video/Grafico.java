@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
@@ -321,22 +322,34 @@ public class Grafico{
 	
 	/** Funções Delegadas */
 	public void setBasicStroke(float width){
-		screen.setStroke(new BasicStroke(width));	
+		screen.setStroke(new BasicStroke(width));
 	}
 	
 	public AffineTransform getTransform(){
 		return screen.getTransform();
 	}
 	public void setTransform(AffineTransform tx){
-		//Evitar Bug do Java
-		if(screen!=null)
+		//Avoid Java Bug
+		if(screen!=null){
 			screen.setTransform(tx);
+		}
 	}
-	/*public void resetTransform(){
-		//Evitar Bug do Java
-		if(screen!=null)
-			screen.setTransform(resetTransform);
-	}*/
+	
+	public void resetTransform(){
+	
+		if(screen!=null){
+			//Identity matrix
+			screen.setTransform(AffineTransform.getScaleInstance(1, 1));
+		}
+	}
+	
+	public void resetStroke(){
+		screen.setStroke(new BasicStroke(1f));
+	}
+	
+	public void setStroke(Stroke stroke){
+		screen.setStroke(stroke);
+	}
 	
 	public void setFont(Font fonte){
 		screen.setFont(fonte);
