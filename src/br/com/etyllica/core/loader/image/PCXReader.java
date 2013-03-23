@@ -1,7 +1,6 @@
 package br.com.etyllica.core.loader.image;
+
 /**
- * pcx.java
- *
  * PCX Image loader
  *
  *  include ported C code from:
@@ -10,17 +9,14 @@ package br.com.etyllica.core.loader.image;
  *  Author	: Mustata Bogdan (LoneRunner)
  *  Contact	: lonerunner@planetquake.com (e-mail don't exist anymore)
  *
- * This software is released under the GNU GPL
- *
  * @author Michele Marcon
- * 
  * 
  * Updated by mscythe to work with Etyllica Engine
  * 
- * This code had a minor bug and didn't open images smaller than 256x256
+ * This code had a minor bug and didn't open images smaller than 256x256 pixels
  * 
- * I couldn't find the authors to ask about redistribute this code in LGPL License.
- *  
+ * The author allowed me to publish it as LGPL License.
+ * 
  */
 
 import java.awt.image.BufferedImage;
