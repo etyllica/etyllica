@@ -3,7 +3,7 @@ package br.com.etyllica.core.timer;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

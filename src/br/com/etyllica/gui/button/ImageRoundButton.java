@@ -3,7 +3,7 @@ package br.com.etyllica.gui.button;
 import br.com.etyllica.layer.StaticLayer;
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

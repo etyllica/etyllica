@@ -2,7 +2,7 @@ package br.com.etyllica.gui.textfield;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

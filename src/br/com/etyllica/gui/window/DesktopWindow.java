@@ -7,7 +7,7 @@ import br.com.etyllica.gui.Window;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

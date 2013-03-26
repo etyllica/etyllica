@@ -11,7 +11,7 @@ import br.com.etyllica.gui.GUIComponent;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

@@ -14,7 +14,7 @@ import sound.paulscode.libraries.LibraryJavaSound;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
@@ -71,10 +71,10 @@ public class MultimediaLoader extends GenericLoader{
 		return mySoundSystem.playing(path);
 	}
 	
-	//Tamb�m serve para mp3
-	public void carregaMusica(String caminho){
+	//Loads ogg and mp3 too
+	public void loadMusic(String path){
 
-		mySoundSystem.loadSound(caminho);
+		mySoundSystem.loadSound(path);
 		
 
 	}

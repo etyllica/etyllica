@@ -15,7 +15,7 @@ import br.com.etyllica.layer.StaticLayer;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
@@ -24,7 +24,7 @@ public class ImageLoader extends GenericLoader{
 
 	private static ImageLoader instance = null;
 
-	private Map<String, BufferedImage>camadas = new HashMap<String, BufferedImage>();
+	private Map<String, BufferedImage> camadas = new HashMap<String, BufferedImage>();
 
 	private ImageLoader(){
 		super();

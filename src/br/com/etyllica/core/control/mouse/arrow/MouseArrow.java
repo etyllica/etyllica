@@ -1,19 +1,15 @@
 package br.com.etyllica.core.control.mouse.arrow;
 
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.DrawableComponent;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
 
-public interface MouseArrow {
-
-	public void defPoints();
-	
-	public void draw(Grafico g);
+public interface MouseArrow extends DrawableComponent{
 	
 	public void move(int mx, int my);
 	

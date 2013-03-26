@@ -2,7 +2,7 @@ package br.com.etyllica.core.control.mouse.arrow;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
@@ -14,7 +14,7 @@ public class WaitingArrow extends DefaultArrow{
 	}
 
 	@Override
-	public void defPoints(){
+	protected void defPoints(){
 		addPoint(0, 0);
 		addPoint(size, 0);
 		addPoint((int)(size*0.65),(int)(size*0.5));

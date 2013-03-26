@@ -4,7 +4,7 @@ import br.com.etyllica.gui.PasswordField;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

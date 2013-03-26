@@ -27,7 +27,7 @@ import br.com.etyllica.gui.window.DesktopWindow;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

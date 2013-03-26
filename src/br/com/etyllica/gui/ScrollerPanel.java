@@ -17,7 +17,7 @@ import br.com.etyllica.gui.panel.ScrollBackground;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

@@ -7,7 +7,7 @@ import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Button;
 
 /**
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

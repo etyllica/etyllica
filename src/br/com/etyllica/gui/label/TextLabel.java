@@ -11,7 +11,7 @@ import br.com.etyllica.gui.Label;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

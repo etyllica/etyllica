@@ -6,7 +6,7 @@ import br.com.etyllica.core.control.joystick.JoystickEvent;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

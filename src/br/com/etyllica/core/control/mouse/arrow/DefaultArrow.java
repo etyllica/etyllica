@@ -9,7 +9,7 @@ import br.com.etyllica.core.video.Grafico;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
@@ -32,7 +32,7 @@ public class DefaultArrow extends Polygon implements MouseArrow{
 		defPoints();
 	}
 
-	public void defPoints(){
+	protected void defPoints(){
 		addPoint(0, 0);
 		addPoint(0, (int)(size*0.8));
 		addPoint((int)(size*0.18),(int)(size*0.62));

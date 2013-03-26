@@ -7,7 +7,7 @@ import br.com.etyllica.gui.Panel;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

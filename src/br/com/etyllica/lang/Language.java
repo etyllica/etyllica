@@ -2,7 +2,7 @@ package br.com.etyllica.lang;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

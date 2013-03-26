@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

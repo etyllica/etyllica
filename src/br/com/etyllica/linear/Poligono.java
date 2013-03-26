@@ -4,7 +4,7 @@ import java.awt.Polygon;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

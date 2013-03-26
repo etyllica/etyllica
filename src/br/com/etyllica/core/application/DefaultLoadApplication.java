@@ -9,7 +9,7 @@ import br.com.etyllica.core.video.Grafico;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
@@ -22,9 +22,9 @@ public class DefaultLoadApplication extends LoadApplication{
 		load();
 	}
 
-	protected String frase = "Carregando...";
+	protected String phrase = "Loading...";
 	
-	protected String porcent = "0%";
+	protected String percent = "0%";
 
 	protected int fill = 0;
 
@@ -54,23 +54,23 @@ public class DefaultLoadApplication extends LoadApplication{
 		g.getGraphics().drawRect(bx-1,by-1,bxLimite+2,byLimite+2);
 
 		g.setColor(Color.WHITE);
-		g.escreveX(100, frase,true);
+		g.escreveX(100, phrase,true);
 			
 		//Desenha preenchimento da barra
 		g.fillRect(bx+2, by+2, fill*4, byLimite-3);
 
 
 		g.setColor(Color.WHITE);
-		g.escreveX(h-85, porcent,true);
+		g.escreveX(h-85, percent,true);
 
 	}
 
 	@Override
 	public void setText(String frase, int andamento){
 		
-		this.frase = frase;
+		this.phrase = frase;
 		
-		this.porcent = Integer.toString(andamento)+"%";
+		this.percent = Integer.toString(andamento)+"%";
 
 		this.fill = andamento;
 	}

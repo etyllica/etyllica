@@ -5,7 +5,7 @@ import br.com.etyllica.core.event.GUIEvent;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

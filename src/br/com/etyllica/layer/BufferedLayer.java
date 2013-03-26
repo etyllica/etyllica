@@ -10,7 +10,7 @@ import java.awt.image.DataBufferInt;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

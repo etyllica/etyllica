@@ -5,7 +5,7 @@ import br.com.etyllica.core.control.mouse.MouseButton;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
@@ -95,7 +95,7 @@ public class PointerEvent {
 	}
 	
 	public boolean getPressed(MouseButton key){
-		//TODO Makes sense?
+		//TODO Make sense?
 		return((state==KeyState.PRESSED||(state==KeyState.DRAGGED))&&this.key==key);
 	}
 	

@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

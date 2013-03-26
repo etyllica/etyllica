@@ -5,7 +5,7 @@ import java.net.URL;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

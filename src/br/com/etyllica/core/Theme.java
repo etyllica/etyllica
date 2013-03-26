@@ -5,7 +5,7 @@ import java.awt.Font;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

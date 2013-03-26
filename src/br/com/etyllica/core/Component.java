@@ -6,7 +6,7 @@ import br.com.etyllica.core.event.KeyboardEvent;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

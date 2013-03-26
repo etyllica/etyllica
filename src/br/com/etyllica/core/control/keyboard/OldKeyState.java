@@ -2,7 +2,7 @@ package br.com.etyllica.core.control.keyboard;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

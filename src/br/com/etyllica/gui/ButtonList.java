@@ -11,7 +11,7 @@ import br.com.etyllica.core.video.Grafico;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

@@ -2,7 +2,7 @@ package br.com.etyllica.effects;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

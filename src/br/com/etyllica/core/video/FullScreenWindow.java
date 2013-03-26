@@ -11,7 +11,6 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
-import java.awt.image.VolatileImage;
 
 import br.com.etyllica.core.Core;
 import br.com.etyllica.core.control.keyboard.Keyboard;
@@ -19,7 +18,7 @@ import br.com.etyllica.core.control.mouse.Mouse;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

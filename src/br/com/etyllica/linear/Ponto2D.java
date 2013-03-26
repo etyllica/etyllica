@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

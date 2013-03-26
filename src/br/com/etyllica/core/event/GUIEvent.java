@@ -2,7 +2,7 @@ package br.com.etyllica.core.event;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

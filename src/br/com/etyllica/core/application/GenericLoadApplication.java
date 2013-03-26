@@ -9,7 +9,7 @@ import br.com.etyllica.core.video.Grafico;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
@@ -44,13 +44,13 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 		g.fillRect(x, y, w, h);
 		
 		g.setColor(Color.WHITE);
-		g.escreveSombraX(280, frase);
+		g.escreveSombraX(280, phrase);
 
 		g.drawRect(rectX, rectY, rectW, rectH);
 		g.fillRect(rectX+2, rectY+2, ((rectW*fill)/100)-3, rectH-3);
 		
 		g.setFont(p);
-		g.escreveLabelSombra(rectX, rectY, rectW, rectH, porcent, Color.BLACK);
+		g.escreveLabelSombra(rectX, rectY, rectW, rectH, percent, Color.BLACK);
 		
 	}	
 	

@@ -26,7 +26,7 @@ import br.com.etyllica.linear.Ponto2D;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

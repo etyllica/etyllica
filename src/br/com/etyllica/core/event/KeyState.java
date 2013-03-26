@@ -2,7 +2,7 @@ package br.com.etyllica.core.event;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
@@ -10,7 +10,7 @@ package br.com.etyllica.core.event;
 public enum KeyState {
 
 	RELEASED,
-	PRESSED,  // Pressionado mas nao pela primeira vez 
+	PRESSED,  // Pressed but not for the first time 
 	DRAGGED,
 	
 	CLICK,

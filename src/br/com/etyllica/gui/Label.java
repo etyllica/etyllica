@@ -3,7 +3,7 @@ package br.com.etyllica.gui;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

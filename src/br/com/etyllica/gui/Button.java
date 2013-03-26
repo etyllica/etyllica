@@ -13,7 +13,7 @@ import br.com.etyllica.gui.label.Icon;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

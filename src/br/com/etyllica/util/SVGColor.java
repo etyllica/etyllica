@@ -4,7 +4,7 @@ import java.awt.Color;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

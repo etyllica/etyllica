@@ -6,7 +6,7 @@ import br.com.etyllica.core.control.mouse.arrow.MouseArrow;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

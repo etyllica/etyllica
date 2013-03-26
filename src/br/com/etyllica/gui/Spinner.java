@@ -9,7 +9,7 @@ import br.com.etyllica.gui.label.TextLabel;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

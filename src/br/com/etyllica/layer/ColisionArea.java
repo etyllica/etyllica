@@ -7,7 +7,7 @@ import br.com.etyllica.linear.Rectangle;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

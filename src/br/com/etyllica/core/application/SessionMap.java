@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

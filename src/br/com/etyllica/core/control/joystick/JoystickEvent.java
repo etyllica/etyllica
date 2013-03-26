@@ -2,7 +2,7 @@ package br.com.etyllica.core.control.joystick;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

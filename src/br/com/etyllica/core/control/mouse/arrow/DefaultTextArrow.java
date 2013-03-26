@@ -2,7 +2,7 @@ package br.com.etyllica.core.control.mouse.arrow;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
@@ -14,7 +14,7 @@ public class DefaultTextArrow extends DefaultArrow{
 	}
 	
 	@Override
-	public void defPoints(){
+	protected void defPoints(){
 		
 		addPoint((int)(size*0.4),0);
 		addPoint(0, 0);

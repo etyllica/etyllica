@@ -6,7 +6,7 @@ import br.com.etyllica.layer.StaticLayer;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

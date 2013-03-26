@@ -4,7 +4,7 @@ import br.com.etyllica.core.loader.MultimediaLoader;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

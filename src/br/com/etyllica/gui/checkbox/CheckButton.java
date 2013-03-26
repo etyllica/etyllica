@@ -8,7 +8,7 @@ import br.com.etyllica.gui.CheckBox;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

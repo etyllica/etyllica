@@ -15,7 +15,7 @@ import br.com.etyllica.gui.textfield.TextFieldValidator;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

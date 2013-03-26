@@ -12,7 +12,7 @@ package br.com.etyllica.core.loader.image;
  * @author Michele Marcon
  * 
  * 
- * Updated by mscythe to work with Etyllica Engine
+ * Updated by yuripourre to work with Etyllica Engine
  * 
  * This code had a minor bug and didn't open images smaller than 256x256 pixels.
  * 

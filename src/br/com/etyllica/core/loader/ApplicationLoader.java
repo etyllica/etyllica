@@ -4,7 +4,7 @@ import br.com.etyllica.core.application.Application;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

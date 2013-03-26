@@ -8,7 +8,7 @@ import br.com.etyllica.layer.ImageLayer;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

@@ -6,7 +6,7 @@ import br.com.etyllica.lang.Language;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

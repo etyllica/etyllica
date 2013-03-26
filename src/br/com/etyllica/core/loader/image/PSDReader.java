@@ -3,7 +3,7 @@ package br.com.etyllica.core.loader.image;
  * Based on Adobe Specification
  * http://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
  * 
- * @author mscythe
+ * @author yuripourre
  *
  */
 

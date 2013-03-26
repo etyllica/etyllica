@@ -4,7 +4,7 @@ import br.com.etyllica.layer.AnimatedImageLayer;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

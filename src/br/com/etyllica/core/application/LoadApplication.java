@@ -3,7 +3,7 @@ package br.com.etyllica.core.application;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

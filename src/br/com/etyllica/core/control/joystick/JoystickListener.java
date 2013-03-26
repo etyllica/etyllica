@@ -4,7 +4,7 @@ import java.util.EventListener;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

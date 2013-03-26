@@ -11,9 +11,9 @@ import br.com.etyllica.gui.GUIComponent;
 import br.com.etyllica.layer.ImageLayer;
 
 /**
- * Class to represent sessions of the Main Application like miniApplications.  
+ * Class to represent sessions of the Main Application like Mini-Applications.  
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

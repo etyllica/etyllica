@@ -12,7 +12,7 @@ import br.com.etyllica.core.event.Tecla;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

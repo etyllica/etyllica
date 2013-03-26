@@ -23,7 +23,7 @@ import br.com.etyllica.linear.Poligono;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

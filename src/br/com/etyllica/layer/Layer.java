@@ -4,7 +4,7 @@ import br.com.etyllica.core.event.PointerEvent;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

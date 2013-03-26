@@ -10,7 +10,7 @@ import br.com.etyllica.layer.BufferedLayer;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

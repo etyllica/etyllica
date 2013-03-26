@@ -2,7 +2,7 @@ package br.com.etyllica.layer;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

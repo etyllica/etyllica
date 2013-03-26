@@ -4,7 +4,7 @@ import br.com.etyllica.layer.MovementedLayer;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
