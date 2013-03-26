@@ -11,11 +11,14 @@ package br.com.etyllica.core.loader.image;
  *
  * @author Michele Marcon
  * 
+ * 
  * Updated by mscythe to work with Etyllica Engine
  * 
- * This code had a minor bug and didn't open images smaller than 256x256 pixels
+ * This code had a minor bug and didn't open images smaller than 256x256 pixels.
  * 
- * The author allowed me to publish it as LGPL License.
+ * I talked to a homonymous (Michele Marcon) who might be the owner but isn't 100% sure if is the true owner.
+ * 
+ * He allowed me to publish it as LGPL License.
  * 
  */
 
@@ -173,7 +176,7 @@ public class PCXReader implements ImageReader{
 			imageData[k * 3 + 2] = (byte)palette[pic[k] * 3 + 2];
 		}
 
-		//Transform to BufferedImage
+		//Convert to BufferedImage
 		int pixel[] = new int[imageWidth*imageHeight*3];
 
 		int z=0;
