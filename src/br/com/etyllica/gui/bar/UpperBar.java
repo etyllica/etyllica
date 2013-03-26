@@ -1,10 +1,10 @@
 package br.com.etyllica.gui.bar;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.Theme;
 import br.com.etyllica.core.control.mouse.Mouse;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.layer.ImageLayer;
+import br.com.etyllica.theme.Theme;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package br.com.etyllica.lang;
+package br.com.etyllica.i18n;
 
 /**
  * 

@@ -2,9 +2,9 @@ package br.com.etyllica.gui.button;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.Theme;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Button;
+import br.com.etyllica.theme.Theme;
 
 /**
  * 

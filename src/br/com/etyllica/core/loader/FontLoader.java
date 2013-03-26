@@ -16,7 +16,7 @@ import java.util.Map;
  *
  */
 
-public class FontLoader extends GenericLoader{
+public class FontLoader extends Loader{
 
 	private static FontLoader instance = null;
 

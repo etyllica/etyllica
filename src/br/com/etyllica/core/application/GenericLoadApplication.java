@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.Theme;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.theme.Theme;
 
 /**
  * 

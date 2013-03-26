@@ -1,4 +1,4 @@
-package br.com.etyllica.core;
+package br.com.etyllica.theme;
 
 import java.awt.Color;
 import java.awt.Font;

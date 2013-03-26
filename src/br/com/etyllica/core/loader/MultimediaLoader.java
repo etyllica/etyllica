@@ -19,7 +19,7 @@ import sound.paulscode.libraries.LibraryJavaSound;
  *
  */
 
-public class MultimediaLoader extends GenericLoader{
+public class MultimediaLoader extends Loader{
 
 	private SoundSystem mySoundSystem;
 

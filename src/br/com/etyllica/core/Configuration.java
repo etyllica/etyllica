@@ -2,7 +2,8 @@ package br.com.etyllica.core;
 
 import br.com.etyllica.core.control.mouse.theme.ArrowTheme;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.lang.Language;
+import br.com.etyllica.i18n.Language;
+import br.com.etyllica.theme.Theme;
 
 /**
  * 
