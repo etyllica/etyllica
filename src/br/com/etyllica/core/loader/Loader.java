@@ -10,7 +10,7 @@ import java.net.URL;
  *
  */
 
-public class GenericLoader {
+public class Loader {
 
 	protected URL url;
 	
