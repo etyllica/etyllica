@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import br.com.etyllica.core.loader.image.ICOReader;
 import br.com.etyllica.core.loader.image.PCXReader;
 import br.com.etyllica.core.loader.image.TGAReader;
 import br.com.etyllica.layer.StaticLayer;
@@ -95,12 +96,12 @@ public class ImageLoader extends Loader{
 					img = ImageIO.read(dir);
 
 					if(img==null){
-						System.err.println("Imagem "+diretorio+" não encontrada.");
+						System.err.println("Image "+diretorio+" not found.");
 						return null;
 					}
 
 				} catch (IOException e) {
-					System.err.println("Imagem "+diretorio+" não encontrada.");
+					System.err.println("Image "+diretorio+" not found.");
 				}
 
 				camadas.put(diretorio,img);
@@ -126,6 +127,15 @@ public class ImageLoader extends Loader{
 					e.printStackTrace();
 				}
 
+			}else if(ext.equals("ico")){
+
+				try {
+					img = ICOReader.getInstance().loadImage(dir);
+
+					camadas.put(diretorio,img);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 
 			}
 
