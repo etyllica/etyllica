@@ -25,7 +25,7 @@ public class MultimediaLoader extends Loader{
 
 	private static MultimediaLoader instancia = null;
 
-	public static MultimediaLoader getInstancia() {
+	public static MultimediaLoader getInstance() {
 		if(instancia==null){
 			instancia = new MultimediaLoader();
 		}
@@ -35,7 +35,7 @@ public class MultimediaLoader extends Loader{
 
 	public MultimediaLoader(){
 
-		pasta = "res/sounds/";
+		folder = "res/sounds/";
 		
 		try {
 			
@@ -47,7 +47,7 @@ public class MultimediaLoader extends Loader{
 			SoundSystemConfig.addLibrary(LibraryJavaSound.class);
 			//SoundSystemConfig.addLibrary(LibraryJOAL.class);
 			
-			SoundSystemConfig.setSoundFilesPackage(pasta);
+			SoundSystemConfig.setSoundFilesPackage(folder);
 			
 			mySoundSystem = new SoundSystem(LibraryJavaSound.class);
 			//mySoundSystem = new SoundSystem(LibraryJOAL.class);

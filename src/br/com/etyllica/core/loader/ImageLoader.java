@@ -30,7 +30,7 @@ public class ImageLoader extends Loader{
 	private ImageLoader(){
 		super();
 		
-		pasta = "res/images/";
+		folder = "res/images/";
 	}
 
 	public static ImageLoader getInstance() {
@@ -63,7 +63,7 @@ public class ImageLoader extends Loader{
 		StringBuilder sb = new StringBuilder();
 				
 		if(!absolute){
-			sb.append(pasta);
+			sb.append(folder);
 		}
 		
 		sb.append(path);

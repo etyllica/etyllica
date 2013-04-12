@@ -23,7 +23,7 @@ public class Sound{
 	}
 		
 	public void play(){
-		MultimediaLoader.getInstancia().tocaSom(path);
+		MultimediaLoader.getInstance().tocaSom(path);
 	}
 	
 } 

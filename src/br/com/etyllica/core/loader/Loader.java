@@ -14,8 +14,8 @@ public class Loader {
 
 	protected URL url;
 	
-	//protected String pasta = "http://www.etyllica.com.br/mystic/imagens/";
-	protected String pasta;
+	//protected String folder = "http://www.etyllica.com.br/imagens/";
+	protected String folder;
 	
 	public void setUrl(String s){
 		try {

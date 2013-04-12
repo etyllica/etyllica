@@ -25,10 +25,10 @@ public class FontLoader extends Loader{
 	private FontLoader(){
 		super();
 		
-		pasta = "res/fonts/";
+		folder = "res/fonts/";
 	}
 
-	public static FontLoader getInstancia() {
+	public static FontLoader getInstance() {
 		if(instance==null){
 			instance = new FontLoader();
 		}
@@ -49,7 +49,7 @@ public class FontLoader extends Loader{
 
 		if(!fonts.containsKey(fontName)){
 
-			String diretorio = pasta+fontName;
+			String diretorio = folder+fontName;
 			
 			URL dir = null;
 			

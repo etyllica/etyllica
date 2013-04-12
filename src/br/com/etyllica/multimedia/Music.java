@@ -27,15 +27,15 @@ public class Music extends Sound{
 
 	@Override
 	public void play(){
-		MultimediaLoader.getInstancia().tocaMusica(path,loop);
+		MultimediaLoader.getInstance().tocaMusica(path,loop);
 	}
 	
 	public void playStream(){
-		MultimediaLoader.getInstancia().tocaMusicaStream(path,loop);
+		MultimediaLoader.getInstance().tocaMusicaStream(path,loop);
 	}
 	
 	public boolean isPlaying(){
-		return MultimediaLoader.getInstancia().isPlaying(path);
+		return MultimediaLoader.getInstance().isPlaying(path);
 	}
 
 }

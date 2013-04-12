@@ -83,8 +83,8 @@ public abstract class Etyllica extends Applet implements Runnable{
 		defineTamanho(w,h);
 
 		ImageLoader.getInstance().setUrl(s);
-		FontLoader.getInstancia().setUrl(s);
-		MultimediaLoader.getInstancia().setUrl(s);
+		FontLoader.getInstance().setUrl(s);
+		MultimediaLoader.getInstance().setUrl(s);
 
 		//MeshLoader.getInstancia().setUrl(s);
 		grafico = new Grafico(w,h);		
