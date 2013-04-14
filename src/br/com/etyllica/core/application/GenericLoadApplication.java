@@ -53,6 +53,5 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 		g.escreveLabelSombra(rectX, rectY, rectW, rectH, percent, Color.BLACK);
 		
 	}	
-	
-	
+		
 }

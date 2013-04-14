@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.DefaultLoadApplication;
 import br.com.etyllica.core.application.GenericLoadApplication;
-import br.com.etyllica.core.application.LoadApplication;
 import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
@@ -29,11 +29,11 @@ public class Window extends GUIComponent implements Runnable{
 
 	protected SessionMap variaveis = new SessionMap();
 
-	protected LoadApplication load;
+	protected DefaultLoadApplication load;
 
 	protected ApplicationLoader c;
 
-	protected Application m;
+	protected Application anotherApplication;
 
 	public Window(int x, int y, int w, int h){
 		super(x,y,w,h);
@@ -102,22 +102,22 @@ public class Window extends GUIComponent implements Runnable{
 
 	public void setMainApplication(Application application) {
 		
-		m = application;
-		m.setSessionMap(variaveis);
+		anotherApplication = application;
+		anotherApplication.setSessionMap(variaveis);
 
-		recarrega();
+		reload();
 		
 	}
 
 	public void changeApplication(){
 
-		m = application.getReturnApplication();
-		m.setSessionMap(variaveis);
+		anotherApplication = application.getReturnApplication();
+		anotherApplication.setSessionMap(variaveis);
 
-		recarrega();
+		reload();
 	}
 
-	protected void recarrega(){
+	protected void reload(){
 
 		//load = new LoadApplication(m.getX(), m.getY(), m.getW(),m.getH());
 		//load.setBimg(new BufferedImage(m.getW(), m.getH(), BufferedImage.TYPE_INT_RGB));
@@ -125,26 +125,23 @@ public class Window extends GUIComponent implements Runnable{
 		application = load;
 		add(application);
 
-		c = new ApplicationLoader(m);
-		c.start();
-
+		c = new ApplicationLoader(anotherApplication,load);
+		anotherApplication.load();
+		
 		new Thread(this).start();
-
 	}
 
 	@Override
 	public void run() {
 
-		while(c.getLoaded()<100){
-			load.setText(c.getLoadingPhrase(), c.getLoaded());
-		}
+		c.run();				
 
 		//components.remove(load);
 		clearComponents();
 
 		//m.setBimg(load.getBimg());
 
-		setApplication(m);
+		setApplication(anotherApplication);
 
 		remove(load);
 

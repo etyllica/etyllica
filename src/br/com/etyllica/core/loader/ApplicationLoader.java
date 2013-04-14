@@ -1,6 +1,7 @@
 package br.com.etyllica.core.loader;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.LoadApplication;
 
 /**
  * 
@@ -9,26 +10,31 @@ import br.com.etyllica.core.application.Application;
  *
  */
 
-public class ApplicationLoader extends Thread{
+public class ApplicationLoader{
 	
-	Application m = null;
+	private Application m = null;
+	private LoadApplication load;
+	
+	private boolean locked = true;
 
-	public ApplicationLoader(Application m){
+	public ApplicationLoader(Application m, LoadApplication load){
 		this.m = m;
+		this.load = load;
 	}
 
 	public void run(){
-		if(m.getLoading()<100){
-			m.load();
+		
+		locked = true;
+		
+		while(m.getLoading()<100){
+			load.setText(m.getLoadingPhrase(), m.getLoading());
 		}
-	}
-	
-	public int getLoaded(){
-		return m.getLoading();
-	}
-	
-	public String getLoadingPhrase(){
-		return m.getLoadingPhrase();
+		
+		locked = false;	
 	}
 
+	public boolean isLocked() {
+		return locked;
+	}
+	
 }

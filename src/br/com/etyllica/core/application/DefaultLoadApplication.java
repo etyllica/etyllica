@@ -14,7 +14,7 @@ import br.com.etyllica.core.video.Grafico;
  *
  */
 
-public class DefaultLoadApplication extends LoadApplication{
+public class DefaultLoadApplication  extends Application implements LoadApplication{
 
 	public DefaultLoadApplication(int x, int y, int w, int h) {
 		super(x,y,w,h);
@@ -66,13 +66,13 @@ public class DefaultLoadApplication extends LoadApplication{
 	}
 
 	@Override
-	public void setText(String frase, int andamento){
+	public void setText(String phrase, int load){
 		
-		this.phrase = frase;
+		this.phrase = phrase;
 		
-		this.percent = Integer.toString(andamento)+"%";
+		this.percent = Integer.toString(load)+"%";
 
-		this.fill = andamento;
+		this.fill = load;
 	}
 
 	@Override
