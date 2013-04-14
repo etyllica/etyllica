@@ -97,7 +97,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 		startGame();
 
-		desktop.changeApplication(application);
+		desktop.setMainApplication(application);
 
 		escondeCursor();
 

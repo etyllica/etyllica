@@ -28,4 +28,13 @@ public class Loader {
 	public URL getUrl(){
 		return url;
 	}
+	
+	public String getPath(){
+		
+		String path = url.toString();
+		path = path.substring(5);
+		path = path.replaceAll("%20", " ");
+		
+		return path;
+	}
 }

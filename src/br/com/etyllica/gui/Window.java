@@ -23,7 +23,7 @@ import br.com.etyllica.core.video.Grafico;
 public class Window extends GUIComponent implements Runnable{
 
 	protected Application application;
-	
+
 	//TODO Important to back arrow
 	protected List<Application> oldApplications = new ArrayList<Application>();
 
@@ -37,12 +37,12 @@ public class Window extends GUIComponent implements Runnable{
 
 	public Window(int x, int y, int w, int h){
 		super(x,y,w,h);
-		
+
 		//load = new LoadApplication(x,y,w,h);
 		load = new GenericLoadApplication(x,y,w,h);
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_ARGB));
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB));
-		
+
 	}
 
 	@Override
@@ -55,14 +55,14 @@ public class Window extends GUIComponent implements Runnable{
 
 		//if(event.getKeyPressed(Tecla.TSK_ESC)){
 
-			//System.out.println("Close Window@");
+		//System.out.println("Close Window@");
 
 		//}
 
 
 		return GUIEvent.NONE;
 	}
-	
+
 	@Override
 	public void update(GUIEvent event) {
 		// TODO Auto-generated method stub
@@ -72,7 +72,7 @@ public class Window extends GUIComponent implements Runnable{
 	}
 
 	protected boolean stillWantClose = true;
-	
+
 	protected void close(){
 		stillWantClose = true;
 	}
@@ -91,28 +91,30 @@ public class Window extends GUIComponent implements Runnable{
 		//application.carrega();
 
 		clearComponents();
-		
+
 		add(load);
 		//TODO Posso adicionar o closeButton
 		//e o IconButton
 		//Trazer restart de DefaultWindow
 		add(application);
-	
+
 	}
-	
-	public boolean changeApplication(Application application){
 
-		if(application!=this.application){
+	public void setMainApplication(Application application) {
+		
+		m = application;
+		m.setSessionMap(variaveis);
 
-			m = application;
-			m.setSessionMap(variaveis);
+		recarrega();
+		
+	}
 
-			recarrega();
+	public void changeApplication(){
 
-			return true;
-		}
+		m = application.getReturnApplication();
+		m.setSessionMap(variaveis);
 
-		return false;
+		recarrega();
 	}
 
 	protected void recarrega(){
@@ -122,12 +124,12 @@ public class Window extends GUIComponent implements Runnable{
 		load.load();
 		application = load;
 		add(application);
-		
+
 		c = new ApplicationLoader(m);
 		c.start();
-		
+
 		new Thread(this).start();
-		
+
 	}
 
 	@Override
@@ -136,16 +138,16 @@ public class Window extends GUIComponent implements Runnable{
 		while(c.getLoaded()<100){
 			load.setText(c.getLoadingPhrase(), c.getLoaded());
 		}
-		
+
 		//components.remove(load);
 		clearComponents();
-		
+
 		//m.setBimg(load.getBimg());
-		
+
 		setApplication(m);
 
 		remove(load);
-		
+
 	}
 
 	public boolean isStillWantClose() {

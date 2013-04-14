@@ -99,7 +99,8 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 		startGame();
 
-		desktop.changeApplication(application);
+		desktop.setMainApplication(application);
+		
 
 		escondeCursor();
 

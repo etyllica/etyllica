@@ -183,7 +183,7 @@ public class Core {
 		if(activeWindow.getApplication()!=null){
 			//if activeWindow, receive command to change application
 			if(activeWindow.getApplication().getReturnApplication()!=activeWindow.getApplication()){
-				activeWindow.changeApplication(activeWindow.getApplication().getReturnApplication());
+				activeWindow.changeApplication();
 			}
 		}
 		
@@ -457,7 +457,7 @@ public class Core {
 			 */
 
 		case APPLICATION_CHANGED:
-			activeWindow.changeApplication(activeWindow.getApplication().getReturnApplication());
+			activeWindow.changeApplication();			
 			break;
 
 		default:
