@@ -309,9 +309,12 @@ public class Core {
 	}
 
 	private void updateForcedEvents(List<GUIEvent> guiEvents){
+		
 		for(GUIEvent event: guiEvents){
 			updateForcedEvent(event);
 		}
+		
+		guiEvents.clear();
 	}
 
 	private void updateForcedEvent(GUIEvent event){

@@ -65,10 +65,15 @@ public class Window extends GUIComponent implements Runnable{
 
 	@Override
 	public void update(GUIEvent event) {
-		// TODO Auto-generated method stub
+
+		if(event == GUIEvent.APPLICATION_CHANGED){
+			changeApplication();
+		}
+		
 		if(event == GUIEvent.WINDOW_CLOSE){
 			close();
 		}
+		
 	}
 
 	protected boolean stillWantClose = true;
@@ -134,7 +139,7 @@ public class Window extends GUIComponent implements Runnable{
 	@Override
 	public void run() {
 
-		c.run();				
+		c.run();
 
 		//components.remove(load);
 		clearComponents();
