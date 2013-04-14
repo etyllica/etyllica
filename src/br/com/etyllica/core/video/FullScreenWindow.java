@@ -27,6 +27,8 @@ public class FullScreenWindow extends Window{
 	
 	private static final long serialVersionUID = -5176767672500250086L;
 	
+	private Core core;
+	
 	private int w;
 	private int h;
 	
@@ -34,12 +36,14 @@ public class FullScreenWindow extends Window{
 	
 	private int offsetY = 0;
 	
-	public FullScreenWindow() {
+	public FullScreenWindow(Core core) {
 
-		super(new Frame());    
+		super(new Frame());
 
 		Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
 				
+		this.core = core;
+		
 		//int gnomebar = 20;
 		
 		//setBounds(0, gnomebar, ss.width, ss.height-gnomebar*2);
@@ -69,8 +73,8 @@ public class FullScreenWindow extends Window{
 	
 	private void setListeners(){
 		
-		Mouse mouse = Core.getInstance().getControl().getMouse();
-		Keyboard keyboard = Core.getInstance().getControl().getTeclado();
+		Mouse mouse = core.getControl().getMouse();
+		Keyboard keyboard = core.getControl().getTeclado();
 		
 		addMouseMotionListener( mouse );
 		addMouseWheelListener( mouse );
@@ -104,5 +108,5 @@ public class FullScreenWindow extends Window{
 				
 		getGraphics().drawImage(resized,0,0,null);
 	}
-
+	
 }

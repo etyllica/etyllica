@@ -33,17 +33,6 @@ import br.com.etyllica.gui.window.DesktopWindow;
 
 public class Core {
 
-	private static Core instance = null;
-
-	public static Core getInstance() {
-		if(instance==null){
-			instance = new Core();
-		}
-
-		return instance;
-	}
-
-
 	//Janelas externas
 	private Window activeWindow;
 	private List<Window> windows = new ArrayList<Window>();
@@ -77,7 +66,7 @@ public class Core {
 
 	//private Grafico g = new Grafico();
 
-	private Core(){
+	public Core(){
 		super();
 
 		controle = new HIDController();

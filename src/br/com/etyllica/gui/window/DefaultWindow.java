@@ -53,7 +53,8 @@ public class DefaultWindow extends Window{
 	
 	public void closeWindow(){
 		
-		Core.getInstance().requestClose(this);
+		//TODO change it
+		//Core.getInstance().requestClose(this);
 		
 	}
 	

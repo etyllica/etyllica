@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
+import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Core;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.control.mouse.Mouse;
@@ -37,6 +38,8 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
+	private Core core;
+	
 	private FullScreenWindow telaCheia = null;
 	private boolean fullScreen = false;
 
@@ -72,28 +75,31 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 	public void init() {
 
 		//TODO Mudar isso
-		//String s = getCodeBase().toString();
+				//String s = getCodeBase().toString();
 
-		String s = getClass().getResource("").toString();
-		//For Windows
-		s = s.replaceAll("%20"," ");
-		//System.out.println(s);
+				String s = getClass().getResource("").toString();
+				//For Windows
+				s = s.replaceAll("%20"," ");
+				//System.out.println(s);
 
-		//TODO load largura e altura from a .ini file
-		defineTamanho(w,h);		
-		
-		ImageLoader.getInstance().setUrl(s);
-		FontLoader.getInstance().setUrl(s);
-		MultimediaLoader.getInstance().setUrl(s);
+				//TODO load largura e altura from a .ini file
+				defineTamanho(w,h);
+				
+				core = new Core();
+				Configuration.getInstance().setCore(core);
 
-		//MeshLoader.getInstancia().setUrl(s);
-		grafico = new Grafico(w,h);
-		grafico.setBufferedImage(volatileImg.getSnapshot());
-		desktop = new DesktopWindow(0,0,w,h);
-		Core.getInstance().setDesktopWindow(desktop);
+				ImageLoader.getInstance().setUrl(s);
+				FontLoader.getInstance().setUrl(s);
+				MultimediaLoader.getInstance().setUrl(s);
 
-		mouse = Core.getInstance().getControl().getMouse();
-		//keyboard = Core.getInstance().getControl().getTeclado();
+				//MeshLoader.getInstancia().setUrl(s);
+				grafico = new Grafico(w,h);		
+				grafico.setBufferedImage(volatileImg.getSnapshot());
+				desktop = new DesktopWindow(0,0,w,h);
+				core.setDesktopWindow(desktop);
+				
+				mouse = core.getControl().getMouse();
+				//keyboard = core.getControl().getTeclado();
 
 		startGame();
 
@@ -108,7 +114,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		addMouseMotionListener( mouse );
 		addMouseWheelListener( mouse );
 		addMouseListener( mouse );
-		addKeyListener( Core.getInstance().getControl().getTeclado() );
+		addKeyListener( core.getControl().getTeclado() );
 
 		executor = Executors.newScheduledThreadPool(1);
 		executor.scheduleAtFixedRate(this, UPDATE_DELAY, UPDATE_DELAY, TimeUnit.MILLISECONDS);
@@ -135,7 +141,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 			volatileImg = createBackBuffer(w,h); // recreate the hardware accelerated image.
 		}
 
-		Core.getInstance().draw(grafico);
+		core.draw(grafico);
 
 		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
@@ -172,9 +178,9 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 		GUIEvent event = GUIEvent.NONE;
 
-		Core.getInstance().gerencia();
+		core.gerencia();
 
-		event = Core.getInstance().getSuperEvent();
+		event = core.getSuperEvent();
 
 		if(event==GUIEvent.ENABLE_FULL_SCREEN){
 			enableFullScreen();
@@ -245,9 +251,9 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		if(!fullScreen){
 			fullScreen = true;
 
-			telaCheia = new FullScreenWindow();
+			telaCheia = new FullScreenWindow(core);
 			//telaCheia.setGerenciador(indice);
-			Core.getInstance().addEffect(new GenericFullScreenEffect(0, 0, w, h));
+			core.addEffect(new GenericFullScreenEffect(0, 0, w, h));
 		}
 	}
 

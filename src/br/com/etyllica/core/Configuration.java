@@ -15,6 +15,8 @@ import br.com.etyllica.theme.Theme;
 public class Configuration {
 
 	private static Configuration instance = null;
+	
+	private Core core;
 		
 	//Default Theme
 	//TODO Button Factory
@@ -73,7 +75,7 @@ public class Configuration {
 		theme.reloadFonts();
 		
 		//Force GUIEvent update
-		Core.getInstance().addGUIEvent(GUIEvent.LANGUAGE_CHANGED);
+		core.addGUIEvent(GUIEvent.LANGUAGE_CHANGED);
 	}
 
 	public boolean isTimerClick() {
@@ -91,5 +93,13 @@ public class Configuration {
 	public void setNumpadMouse(boolean numpadMouse) {
 		this.numpadMouse = numpadMouse;
 	}
+
+	public Core getCore() {
+		return core;
+	}
+
+	public void setCore(Core core) {
+		this.core = core;
+	}	
 
 }

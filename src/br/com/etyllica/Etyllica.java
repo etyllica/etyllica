@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Core;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.control.mouse.Mouse;
@@ -36,6 +37,8 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
+	private Core core; 
+	
 	private FullScreenWindow telaCheia = null;
 	private boolean fullScreen = false;
 
@@ -70,7 +73,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 	}
 
 	public void init() {
-
+		
 		//TODO Mudar isso
 		//String s = getCodeBase().toString();
 
@@ -81,6 +84,9 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 		//TODO load largura e altura from a .ini file
 		defineTamanho(w,h);
+		
+		core = new Core();
+		Configuration.getInstance().setCore(core);
 
 		ImageLoader.getInstance().setUrl(s);
 		FontLoader.getInstance().setUrl(s);
@@ -90,10 +96,10 @@ public abstract class Etyllica extends Applet implements Runnable{
 		grafico = new Grafico(w,h);		
 		grafico.setBufferedImage(volatileImg.getSnapshot());
 		desktop = new DesktopWindow(0,0,w,h);
-		Core.getInstance().setDesktopWindow(desktop);
+		core.setDesktopWindow(desktop);
 
-		mouse = Core.getInstance().getControl().getMouse();
-		//keyboard = Core.getInstance().getControl().getTeclado();
+		mouse = core.getControl().getMouse();
+		//keyboard = core.getControl().getTeclado();
 
 		//defineTamanho(largura,altura);
 
@@ -111,7 +117,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 		addMouseMotionListener( mouse );
 		addMouseWheelListener( mouse );
 		addMouseListener( mouse );
-		addKeyListener( Core.getInstance().getControl().getTeclado() );
+		addKeyListener( core.getControl().getTeclado() );
 
 		executor = Executors.newScheduledThreadPool(1);
 		executor.scheduleAtFixedRate(this, UPDATE_DELAY, UPDATE_DELAY, TimeUnit.MILLISECONDS);
@@ -135,7 +141,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 			//grafico.setBimg(volatileImg.getSnapshot());
 		}
 
-		Core.getInstance().draw(grafico);
+		core.draw(grafico);
 
 		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
@@ -175,9 +181,9 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 		GUIEvent event = GUIEvent.NONE;
 
-		Core.getInstance().gerencia();
+		core.gerencia();
 
-		event = Core.getInstance().getSuperEvent();
+		event = core.getSuperEvent();
 
 		if(event==GUIEvent.ENABLE_FULL_SCREEN){
 			enableFullScreen();
@@ -248,9 +254,9 @@ public abstract class Etyllica extends Applet implements Runnable{
 		if(!fullScreen){
 			fullScreen = true;
 
-			telaCheia = new FullScreenWindow();
+			telaCheia = new FullScreenWindow(core);
 			//telaCheia.setGerenciador(indice);
-			Core.getInstance().addEffect(new GenericFullScreenEffect(0, 0, w, h));
+			core.addEffect(new GenericFullScreenEffect(0, 0, w, h));
 		}
 	}
 
