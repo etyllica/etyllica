@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.control.HIDController;
 import br.com.etyllica.core.control.keyboard.Keyboard;
 import br.com.etyllica.core.control.mouse.Mouse;
@@ -41,9 +42,9 @@ public class Core {
 
 	private GUIComponent focus;
 
-	private HIDController controle;
-	private Mouse mouse;
-	private Keyboard teclado;
+	protected HIDController controle;
+	protected Mouse mouse;
+	protected Keyboard teclado;
 
 	//Mouse Over Something
 	//Usado para acessibilidade talvez
@@ -59,7 +60,7 @@ public class Core {
 	
 	//private List<JoystickEvent> joyEvents;
 
-	private List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
+	//private List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
 
 	private DesktopWindow desktopWindow;
 
@@ -150,8 +151,6 @@ public class Core {
 		
 		updateCloseRequests(requestCloseSet);
 
-		updateForcedEvents(guiEvents);
-
 
 		if(enableFullScreen){
 			enableFullScreen = false;
@@ -169,11 +168,15 @@ public class Core {
 
 	private void updateApplication(){
 		
-		if(activeWindow.getApplication()!=null){
+		Application application = activeWindow.getApplication();
+		
+		if(application!=null){
 			//if activeWindow, receive command to change application
-			if(activeWindow.getApplication().getReturnApplication()!=activeWindow.getApplication()){
+			if(application.getReturnApplication()!=application){
 				activeWindow.changeApplication();
 			}
+			
+			updateForcedEvents(application.getGuiEvents());
 		}
 		
 	}
@@ -598,10 +601,6 @@ public class Core {
 
 	public void addEvent(PointerEvent event){
 		mouseEvents.add(event);		
-	}
-
-	public void addGUIEvent(GUIEvent event){
-		guiEvents.add(event);		
 	}
 
 	public void addEffect(GlobalEffect effect){

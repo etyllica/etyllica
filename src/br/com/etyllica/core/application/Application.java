@@ -1,5 +1,7 @@
 package br.com.etyllica.core.application;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -69,6 +71,8 @@ public abstract class Application extends GUIComponent implements Runnable{
 	 * Map shared between Applications  
 	 */
 	protected SessionMap sessionMap;
+	
+	private List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
 	
 	
 	/**
@@ -204,6 +208,18 @@ public abstract class Application extends GUIComponent implements Runnable{
 	
 	protected void timeUpdate(){
 		
+	}
+	
+	protected void addGUIEvent(GUIEvent event){
+		guiEvents.add(event);
+	}
+
+	public List<GUIEvent> getGuiEvents() {
+		return guiEvents;
+	}
+
+	public void setGuiEvents(List<GUIEvent> guiEvents) {
+		this.guiEvents = guiEvents;
 	}
 	
 }

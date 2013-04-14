@@ -74,8 +74,8 @@ public class Configuration {
 		
 		theme.reloadFonts();
 		
-		//Force GUIEvent update
-		core.addGUIEvent(GUIEvent.LANGUAGE_CHANGED);
+		//TODO Each component is responsible for it
+		//addGUIEvent(GUIEvent.LANGUAGE_CHANGED);
 	}
 
 	public boolean isTimerClick() {
