@@ -8,8 +8,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.DefaultLoadApplication;
 import br.com.etyllica.core.control.HIDController;
 import br.com.etyllica.core.control.keyboard.Keyboard;
 import br.com.etyllica.core.control.mouse.Mouse;
@@ -19,6 +22,7 @@ import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.loader.ApplicationLoader;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.GUIComponent;
@@ -34,8 +38,9 @@ import br.com.etyllica.gui.window.DesktopWindow;
 
 public class Core {
 
-	//Janelas externas
+	//External Windows
 	private Window activeWindow;
+	
 	private List<Window> windows = new ArrayList<Window>();
 
 	private List<GlobalEffect> globalEffects = new ArrayList<GlobalEffect>();
@@ -43,7 +48,9 @@ public class Core {
 	private GUIComponent focus;
 
 	protected HIDController controle;
+	
 	protected Mouse mouse;
+	
 	protected Keyboard teclado;
 
 	//Mouse Over Something
@@ -60,12 +67,9 @@ public class Core {
 	
 	//private List<JoystickEvent> joyEvents;
 
-	//private List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
-
+	protected ApplicationLoader applicationLoader;
+	
 	private DesktopWindow desktopWindow;
-
-
-	//private Grafico g = new Grafico();
 
 	public Core(){
 		super();
@@ -173,10 +177,10 @@ public class Core {
 		if(application!=null){
 			//if activeWindow, receive command to change application
 			if(application.getReturnApplication()!=application){
-				activeWindow.changeApplication();
+				this.changeApplication();
 			}
 			
-			updateForcedEvents(application.getGuiEvents());
+			updateApplicationGUIEvents(application);
 		}
 		
 	}
@@ -299,34 +303,14 @@ public class Core {
 
 		mouseEvents.clear();
 	}
-
-	private void updateForcedEvents(List<GUIEvent> guiEvents){
+	
+	private void updateApplicationGUIEvents(Application application){
 		
-		for(GUIEvent event: guiEvents){
-			updateForcedEvent(event);
+		for(GUIEvent event: application.getGuiEvents()){
+			gerenciaEvento(application,event);
 		}
 		
-		guiEvents.clear();
-	}
-
-	private void updateForcedEvent(GUIEvent event){
-
-		for(Window window: windows){
-
-			updateForcedEventComponent(window, event);
-
-		}
-
-	}
-
-	private void updateForcedEventComponent(GUIComponent component, GUIEvent event){
-
-		component.update(event);
-
-		for(GUIComponent child: component.getComponents()){
-			updateForcedEventComponent(child, event);
-		}
-
+		application.getGuiEvents().clear();
 	}
 
 	private GUIEvent updateComponent(GUIComponent component, PointerEvent event){
@@ -452,7 +436,7 @@ public class Core {
 			 */
 
 		case APPLICATION_CHANGED:
-			activeWindow.changeApplication();			
+			this.changeApplication();
 			break;
 
 		default:
@@ -729,10 +713,61 @@ public class Core {
 		return GUIEvent.NONE;
 	}
 
+	private Application anotherApplication;
+	
+	public void setMainApplication(Application application){
+		anotherApplication = application;
+		anotherApplication.setSessionMap(activeWindow.getSessionMap());
+
+		reload();
+	}
+	
+	protected void changeApplication(){
+		
+		setMainApplication(activeWindow.getApplication().getReturnApplication());
+		
+	}
+	
+	private void reload(){
+
+			//load = new LoadApplication(m.getX(), m.getY(), m.getW(),m.getH());
+			//load.setBimg(new BufferedImage(m.getW(), m.getH(), BufferedImage.TYPE_INT_RGB));
+			DefaultLoadApplication load = activeWindow.getLoadApplication();
+			
+			load.load();
+			
+			activeWindow.setApplication(load);
+			//activeWindow.add(load);
+
+			applicationLoader = new ApplicationLoader(anotherApplication, load);
+			applicationLoader.loadApplication();		
+			
+			
+			ExecutorService executor = Executors.newSingleThreadExecutor();
+			executor.execute(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+
+					applicationLoader.run();
+
+					activeWindow.clearComponents();
+
+					//m.setBimg(load.getBimg());
+
+					activeWindow.setApplication(anotherApplication);
+					
+				}
+			});
+			
+			executor.shutdown();
+			
+	}
 
 	private boolean click = false;
 
-	private void gerenciaTimerClick(){
+	private void updateTimerClick(){
 
 		Configuration config = Configuration.getInstance();
 

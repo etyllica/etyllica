@@ -10,7 +10,6 @@ import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.loader.ApplicationLoader;
 import br.com.etyllica.core.video.Grafico;
 
 /**
@@ -20,20 +19,20 @@ import br.com.etyllica.core.video.Grafico;
  *
  */
 
-public class Window extends GUIComponent implements Runnable{
+public class Window extends GUIComponent{
 
 	protected Application application;
 
-	//TODO Important to back arrow
+	//TODO Change to Application backApplication
 	protected List<Application> oldApplications = new ArrayList<Application>();
 
-	protected SessionMap variaveis = new SessionMap();
+	protected SessionMap sessionMap = new SessionMap();
 
 	protected DefaultLoadApplication load;
 
-	protected ApplicationLoader c;
+	//protected ApplicationLoader c;
 
-	protected Application anotherApplication;
+	//protected Application anotherApplication;
 
 	public Window(int x, int y, int w, int h){
 		super(x,y,w,h);
@@ -67,7 +66,8 @@ public class Window extends GUIComponent implements Runnable{
 	public void update(GUIEvent event) {
 
 		if(event == GUIEvent.APPLICATION_CHANGED){
-			changeApplication();
+			//changeApplication();
+			System.err.println("WINDOW - Not here anymore");
 		}
 		
 		if(event == GUIEvent.WINDOW_CLOSE){
@@ -93,36 +93,26 @@ public class Window extends GUIComponent implements Runnable{
 
 	public void setApplication(Application application) {
 		this.application = application;
-		//application.carrega();
-
 		clearComponents();
-
-		add(load);
+		add(application);
+		
 		//TODO Posso adicionar o closeButton
 		//e o IconButton
 		//Trazer restart de DefaultWindow
-		add(application);
+		//add(application);
 
 	}
 
-	public void setMainApplication(Application application) {
+	/*public void setMainApplication(Application application) {
 		
 		anotherApplication = application;
-		anotherApplication.setSessionMap(variaveis);
+		anotherApplication.setSessionMap(sessionMap);
 
 		reload();
 		
-	}
+	}*/
 
-	public void changeApplication(){
-
-		anotherApplication = application.getReturnApplication();
-		anotherApplication.setSessionMap(variaveis);
-
-		reload();
-	}
-
-	protected void reload(){
+	/*public void reload(){
 
 		//load = new LoadApplication(m.getX(), m.getY(), m.getW(),m.getH());
 		//load.setBimg(new BufferedImage(m.getW(), m.getH(), BufferedImage.TYPE_INT_RGB));
@@ -130,8 +120,8 @@ public class Window extends GUIComponent implements Runnable{
 		application = load;
 		add(application);
 
-		c = new ApplicationLoader(anotherApplication,load);
-		anotherApplication.load();
+		c = new ApplicationLoader(anotherApplication, load);
+		c.loadApplication();		
 		
 		new Thread(this).start();
 	}
@@ -150,10 +140,22 @@ public class Window extends GUIComponent implements Runnable{
 
 		remove(load);
 
+	}*/
+	
+	public SessionMap getSessionMap() {
+		return sessionMap;
+	}
+
+	public void setSessionMap(SessionMap sessionMap) {
+		this.sessionMap = sessionMap;
 	}
 
 	public boolean isStillWantClose() {
 		return stillWantClose;
+	}
+	
+	public DefaultLoadApplication getLoadApplication(){
+		return load;
 	}
 
 	@Override

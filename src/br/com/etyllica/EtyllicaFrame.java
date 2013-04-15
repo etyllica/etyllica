@@ -39,7 +39,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 	private static final long serialVersionUID = 4588303747276461888L;
 
 	private Core core;
-	
+
 	private FullScreenWindow telaCheia = null;
 	private boolean fullScreen = false;
 
@@ -75,35 +75,35 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 	public void init() {
 
 		//TODO Mudar isso
-				//String s = getCodeBase().toString();
+		//String s = getCodeBase().toString();
 
-				String s = getClass().getResource("").toString();
-				//For Windows
-				s = s.replaceAll("%20"," ");
-				//System.out.println(s);
+		String s = getClass().getResource("").toString();
+		//For Windows
+		s = s.replaceAll("%20"," ");
+		//System.out.println(s);
 
-				//TODO load largura e altura from a .ini file
-				defineTamanho(w,h);
-				
-				core = new Core();
-				Configuration.getInstance().setCore(core);
+		//TODO load largura e altura from a .ini file
+		defineTamanho(w,h);
 
-				ImageLoader.getInstance().setUrl(s);
-				FontLoader.getInstance().setUrl(s);
-				MultimediaLoader.getInstance().setUrl(s);
+		core = new Core();
+		Configuration.getInstance().setCore(core);
 
-				//MeshLoader.getInstancia().setUrl(s);
-				grafico = new Grafico(w,h);		
-				grafico.setBufferedImage(volatileImg.getSnapshot());
-				desktop = new DesktopWindow(0,0,w,h);
-				core.setDesktopWindow(desktop);
-				
-				mouse = core.getControl().getMouse();
-				//keyboard = core.getControl().getTeclado();
+		ImageLoader.getInstance().setUrl(s);
+		FontLoader.getInstance().setUrl(s);
+		MultimediaLoader.getInstance().setUrl(s);
+
+		//MeshLoader.getInstancia().setUrl(s);
+		grafico = new Grafico(w,h);		
+		grafico.setBufferedImage(volatileImg.getSnapshot());
+		desktop = new DesktopWindow(0,0,w,h);
+		core.setDesktopWindow(desktop);
+
+		mouse = core.getControl().getMouse();
+		//keyboard = core.getControl().getTeclado();
 
 		startGame();
 
-		desktop.setMainApplication(application);
+		core.setMainApplication(application);
 
 		escondeCursor();
 
@@ -145,7 +145,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
-		
+
 		if(!fullScreen){
 			g.drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		}
@@ -193,12 +193,12 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		}
 
 		else if(event==GUIEvent.REQUEST_FOCUS){
-						
+
 			if ( !hasFocus() ) {
 				requestFocus();
 			}
 		}
-		
+
 		//Calls Garbage Collector
 		//System.gc();
 

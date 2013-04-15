@@ -52,6 +52,7 @@ public class HelloWorld extends Application{
 					loadingPhrase = "Almost Loaded...";
 					
 				}else if(loading>=100){
+					loading = 100;
 					loadSimulator.shutdown();
 				}
 				

@@ -1,5 +1,9 @@
 package examples.etyllica.tutorial1.application;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
@@ -10,6 +14,8 @@ import br.com.etyllica.util.SVGColor;
 
 public class ByeWorld extends Application{
 
+	private ScheduledExecutorService loadSimulator = Executors.newSingleThreadScheduledExecutor();
+
 	public ByeWorld(int w, int h) {
 		super(w, h);
 	}
@@ -17,38 +23,33 @@ public class ByeWorld extends Application{
 	@Override
 	public void load() {
 
-		for(int i=0;i<99;i++){
-			
-			//Simulating Loads
-			try {
-				Thread.sleep(30);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			//Percentage of Load
-			loading = i;
-			
-			if(loading<30){
-				
-				//Loading phrase
-				loadingPhrase = "Wait...";
-				
-			}else if(loading<50){
-				
-				//Loading phrase
-				loadingPhrase = "Please Wait...";
-				
-			}else if(loading<90){
-				
-				//Loading phrase
-				loadingPhrase = "Almost Loaded...";
-				
-			}
-		}
+		//Simulating Loads
+		loadSimulator.scheduleAtFixedRate(new Runnable() {
 
-		loading = 100;
+			@Override
+			public void run() {
+				loading+=3;
+
+				if(loading<30){
+
+					loadingPhrase = "Loading Nothing....";
+
+				}else if(loading<50){
+
+					loadingPhrase = "Loading Something....";
+
+				}else if(loading<90){
+
+					loadingPhrase = "Almost Loaded....";
+
+				}else if(loading>=100){
+					loading = 100;
+					loadSimulator.shutdown();
+				}
+
+			}
+
+		}, 25, 25, TimeUnit.MILLISECONDS);
 	}
 
 	@Override
@@ -56,15 +57,15 @@ public class ByeWorld extends Application{
 
 		//Set Background Color
 		g.setColor(SVGColor.ORANGE_RED);
-		
+
 		//Draw Background
 		g.getGraphics().fillRect(0, 0, w, h);
 
 		g.setColor(SVGColor.FOREST_GREEN);
-		
+
 		//Write at center with shadow
 		g.escreveSombraX(100, "Bye World!");
-		
+
 		//Write at center with shadow
 		g.escreveSombraX(300, "Press <BACK SPACE> to go back.");
 	}

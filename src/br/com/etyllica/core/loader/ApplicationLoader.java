@@ -1,5 +1,8 @@
 package br.com.etyllica.core.loader;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.application.LoadApplication;
 
@@ -12,29 +15,38 @@ import br.com.etyllica.core.application.LoadApplication;
 
 public class ApplicationLoader{
 	
-	private Application m = null;
-	private LoadApplication load;
+	private ExecutorService loadExecutor = Executors.newSingleThreadExecutor();
 	
-	private boolean locked = true;
+	private Application m;
+	private LoadApplication load;
 
 	public ApplicationLoader(Application m, LoadApplication load){
 		this.m = m;
-		this.load = load;
+		this.load = load;				
+	}
+	
+	public void loadApplication(){
+		
+
+		loadExecutor.execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				m.load();
+			}
+			
+		});
+		
+		loadExecutor.shutdown();
+		
 	}
 
 	public void run(){
 		
-		locked = true;
-		
 		while(m.getLoading()<100){
 			load.setText(m.getLoadingPhrase(), m.getLoading());
 		}
-		
-		locked = false;	
-	}
 
-	public boolean isLocked() {
-		return locked;
 	}
 	
 }

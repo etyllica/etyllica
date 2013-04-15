@@ -105,7 +105,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 		startGame();
 
-		desktop.setMainApplication(application);
+		core.setMainApplication(application);
 		
 
 		escondeCursor();
@@ -255,7 +255,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 			fullScreen = true;
 
 			telaCheia = new FullScreenWindow(core);
-			//telaCheia.setGerenciador(indice);
+			
 			core.addEffect(new GenericFullScreenEffect(0, 0, w, h));
 		}
 	}
