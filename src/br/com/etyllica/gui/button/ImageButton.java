@@ -1,6 +1,7 @@
 package br.com.etyllica.gui.button;
 
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.gui.Button;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.StaticLayer;
 
@@ -11,15 +12,13 @@ import br.com.etyllica.layer.StaticLayer;
  *
  */
 
-public class ImageButton extends IconedButton{
+public class ImageButton extends Button{
 
 	protected String normal;
 	protected String sobMouse;
 	protected String click;
 
-	protected String som = null;
-	protected boolean tocou = false;
-	protected boolean shadowLabel = false;
+	protected String som = null;	
 	
 	protected ImageLayer layer;
 
@@ -30,10 +29,7 @@ public class ImageButton extends IconedButton{
 	public ImageButton(int x, int y, int w, int h, String normal, String sobMouse){
 		this(x,y,w,h,normal, sobMouse, sobMouse);
 	}
-	public ImageButton(int x, int y, int w, int h, String normal, String sobMouse, ImageLayer icon){
-		this(x,y,w,h,normal,sobMouse);
-		setIcon(icon);
-	}
+	
 	public ImageButton(int x, int y, int w, int h, String normal, String sobMouse, String click){
 		super(x,y,w,h);
 		this.normal = normal;
@@ -59,9 +55,7 @@ public class ImageButton extends IconedButton{
 		
 		layer.draw(g);
 	
-		if(icon!=null){
-			icon.draw(g);
-		}
+		drawLabel(g);
 
 	}
 		
@@ -83,6 +77,7 @@ public class ImageButton extends IconedButton{
 
 	@Override
 	protected void justOnMouse(){
+		System.out.println("ONMOUSE!");
 		layer.cloneLayer(sobMouse);
 	}
 	

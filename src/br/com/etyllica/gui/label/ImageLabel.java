@@ -1,55 +1,62 @@
-package br.com.etyllica.gui.icon;
+package br.com.etyllica.gui.label;
 
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.gui.label.Icon;
 import br.com.etyllica.layer.ImageLayer;
 
 /**
+ * 
+ * ImageLayer as label
  * 
  * @author yuripourre
  * @license LGPLv3
  *
  */
 
-public class ImageIcon extends Icon{
+public class ImageLabel extends Icon{
 
-	private ImageLayer camada; 
+	private ImageLayer layer; 
 	
-	public ImageIcon(int x, int y, String path){
+	public ImageLabel(int x, int y, String path){
 		super(x, y);
-		camada = new ImageLayer(0,0,path);
+		layer = new ImageLayer(0,0,path);
 	}
 	
-	public ImageIcon(String path){
+	public ImageLabel(String path){
 		super(0, 0);
-		camada = new ImageLayer(0,0,path);
+		layer = new ImageLayer(0,0,path);
+	}
+	
+	public ImageLabel(ImageLayer layer){
+		super(0, 0);
+		this.layer = layer;
 	}
 	
 	@Override
 	public void draw(Grafico g) {
 		//camada.setOffset(x, y);
-		camada.draw(g);
+		layer.draw(g);
 		//camada.setOffset(-x, -y);
 	}
 	
 	//Useful methods to centralize label
 	@Override
 	public void setX(int x){
-		camada.setX(x);
+		layer.setX(x);
 	}
 	
 	@Override
 	public void setY(int y){
-		camada.setY(y);
+		layer.setY(y);
 	}
 	
+	@Override
 	public int getW(){
-		return camada.getW();
+		return layer.getW();
 	}
 	
 	@Override
 	public int getH(){
-		return camada.getH();
+		return layer.getH();
 	}
 	
 }
