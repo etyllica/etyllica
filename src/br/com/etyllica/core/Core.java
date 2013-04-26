@@ -332,6 +332,16 @@ public class Core {
 				}
 				
 			}
+
+			//Update Component
+			GUIEvent result = component.updateMouse(event);
+
+			if(result!=GUIEvent.NONE){
+
+				gerenciaEvento(component, result);
+
+				return result;
+			}
 			
 			//Update Childs
 			for(GUIComponent child: component.getComponents()){
@@ -342,16 +352,6 @@ public class Core {
 
 				child.setOffset(-component.getX(), -component.getY());
 
-			}
-
-			//Update Component
-			GUIEvent result = component.updateMouse(event);
-
-			if(result!=GUIEvent.NONE){
-
-				gerenciaEvento(component, result);
-
-				return result;
 			}
 
 		}
