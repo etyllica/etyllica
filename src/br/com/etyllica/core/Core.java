@@ -47,11 +47,11 @@ public class Core {
 
 	private GUIComponent focus;
 
-	protected HIDController controle;
+	protected HIDController control;
 	
 	protected Mouse mouse;
 	
-	protected Keyboard teclado;
+	protected Keyboard keyboard;
 
 	//Mouse Over Something
 	//Usado para acessibilidade talvez
@@ -74,14 +74,14 @@ public class Core {
 	public Core(){
 		super();
 
-		controle = new HIDController();
+		control = new HIDController();
 
-		mouse = controle.getMouse();
+		mouse = control.getMouse();
 		mouseEvents = mouse.getEvents();
 
-		teclado = controle.getTeclado();
+		keyboard = control.getTeclado();
 
-		keyEvents = teclado.getEvents();
+		keyEvents = keyboard.getEvents();
 		
 		applicationLoader = new ApplicationLoader();
 
@@ -197,7 +197,7 @@ public class Core {
 
 	private void updateKeyboard(){
 
-		teclado.poll();
+		keyboard.poll();
 		
 		List<KeyboardEvent> keyboardEvents = new CopyOnWriteArrayList<KeyboardEvent>(keyEvents);
 
@@ -780,7 +780,7 @@ public class Core {
 			if(config.isTimerClick()){
 
 				//TODO Ativar timer do mouse que incrementa sozinho
-				int arc = controle.getMouse().getArc();
+				int arc = control.getMouse().getArc();
 				if(arc<360){
 					mouse.setArc(arc+speed);
 				}else{
@@ -799,7 +799,7 @@ public class Core {
 	}
 
 	public HIDController getControl(){
-		return controle;
+		return control;
 	}
 
 	public GUIEvent getSuperEvent(){
