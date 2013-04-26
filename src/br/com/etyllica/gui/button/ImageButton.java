@@ -71,13 +71,11 @@ public class ImageButton extends Button{
 
 	@Override
 	protected void middleClick(){
-		//new Voicer().say(rotulo);
 		layer.cloneLayer(click);
 	}
 
 	@Override
 	protected void justOnMouse(){
-		System.out.println("ONMOUSE!");
 		layer.cloneLayer(sobMouse);
 	}
 	
