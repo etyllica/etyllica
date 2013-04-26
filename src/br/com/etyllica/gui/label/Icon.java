@@ -3,7 +3,6 @@ package br.com.etyllica.gui.label;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Label;
 
 public abstract class Icon extends Label{
