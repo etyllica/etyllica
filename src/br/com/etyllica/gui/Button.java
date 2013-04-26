@@ -8,10 +8,11 @@ import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.gui.label.Icon;
 import br.com.etyllica.theme.Theme;
 
 /**
+ *
+ * Component Button
  * 
  * @author yuripourre
  * @license LGPLv3
@@ -47,7 +48,6 @@ public class Button extends RoundGUIComponent{
 
 			}
 
-			//g.escreveSombra(x, y, label.getAlt());
 		}
 
 		g.fillRect(x,y,w,h);
@@ -174,10 +174,6 @@ public class Button extends RoundGUIComponent{
 					
 					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
 					
-				}else{
-					
-					retorno = GUIEvent.MOUSE_OVER;
-					
 				}
 
 			}else if(event.getState()==KeyState.DOUBLE_CLICK){
@@ -196,15 +192,23 @@ public class Button extends RoundGUIComponent{
 					
 				}
 
+			}else if(event.getState()==KeyState.MOVE){
+				
+				retorno = GUIEvent.MOUSE_OVER;
+				
 			}
 
 		}else{
 			
-			if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+			if(event.getState()==KeyState.MOVE){
+				
+				retorno = GUIEvent.MOUSE_OUT;
+				
+			}else if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+				
 				onFocus = false;
+				
 			}
-
-			retorno = GUIEvent.NONE;
 
 		}
 

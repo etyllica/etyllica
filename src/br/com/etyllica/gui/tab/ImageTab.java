@@ -3,7 +3,7 @@ package br.com.etyllica.gui.tab;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.gui.button.IconedButton;
+import br.com.etyllica.gui.Button;
 import br.com.etyllica.theme.Theme;
 
 /**
@@ -13,7 +13,7 @@ import br.com.etyllica.theme.Theme;
  *
  */
 
-public class ImageTab extends IconedButton{
+public class ImageTab extends Button{
 
 	private boolean active = false;
 	
@@ -58,8 +58,7 @@ public class ImageTab extends IconedButton{
 		g.fillRect(x, y+roundness, w, h-roundness);
 				
 		//Draw Icon
-		icon.centraliza(x, y, w, h);
-		icon.draw(g);
+		drawLabel(g);
 		
 	}
 	

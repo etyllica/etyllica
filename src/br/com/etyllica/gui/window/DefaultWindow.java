@@ -1,15 +1,14 @@
 package br.com.etyllica.gui.window;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.Core;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Window;
-import br.com.etyllica.gui.button.IconedRoundButton;
+import br.com.etyllica.gui.button.RoundButton;
+import br.com.etyllica.gui.label.ImageLabel;
 import br.com.etyllica.gui.label.TextLabel;
-import br.com.etyllica.layer.ImageLayer;
 
 /**
  * 
@@ -21,8 +20,8 @@ import br.com.etyllica.layer.ImageLayer;
 public class DefaultWindow extends Window{
 
 	//private Panel panel;
-	private IconedRoundButton closeButton;
-	private IconedRoundButton iconButton;
+	private RoundButton closeButton;
+	private RoundButton iconButton;
 	private TextLabel titleBar;
 		
 	public DefaultWindow(int x, int y, int w, int h){
@@ -38,11 +37,11 @@ public class DefaultWindow extends Window{
 		
 		int buttonRadius = 50;
 		
-		iconButton = new IconedRoundButton(-buttonRadius,-buttonRadius, buttonRadius*2, buttonRadius*2);
+		iconButton = new RoundButton(-buttonRadius,-buttonRadius, buttonRadius*2, buttonRadius*2);
 		add(iconButton);
 		
-		closeButton = new IconedRoundButton(w-buttonRadius,-buttonRadius, buttonRadius*2, buttonRadius*2);
-		closeButton.setIcon(new ImageLayer(-20,20,"mystic/icons/default/close.png"));
+		closeButton = new RoundButton(w-buttonRadius,-buttonRadius, buttonRadius*2, buttonRadius*2);
+		closeButton.setLabel(new ImageLabel(-20,20,"mystic/icons/default/close.png"));
 		add(closeButton);
 		
 		closeButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "closeWindow"));
@@ -71,7 +70,7 @@ public class DefaultWindow extends Window{
 			this.application = oldApplications.get(oldApplications.size()-1);
 					
 			if(application.getIcon()!=null){
-				iconButton.setIcon(application.getIcon());
+				iconButton.setLabel(new ImageLabel(application.getIcon()));
 			}
 			
 			add(application);
@@ -107,7 +106,7 @@ public class DefaultWindow extends Window{
 		
 		//Here I get Icon and title to title bar
 		if(application.getIcon()!=null){
-			iconButton.setIcon(application.getIcon());
+			iconButton.setLabel(new ImageLabel(application.getIcon()));
 		}
 		if(!application.getTitle().isEmpty()){
 			System.out.println("Set titleBar to "+application.getTitle());

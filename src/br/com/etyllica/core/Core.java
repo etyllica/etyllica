@@ -334,7 +334,7 @@ public class Core {
 				}
 				
 			}
-			
+
 			//Update Component
 			GUIEvent result = component.updateMouse(event);
 
