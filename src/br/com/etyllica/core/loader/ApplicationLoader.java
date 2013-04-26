@@ -15,24 +15,31 @@ import br.com.etyllica.core.application.LoadApplication;
 
 public class ApplicationLoader{
 	
-	private ExecutorService loadExecutor = Executors.newSingleThreadExecutor();
+	private ExecutorService loadExecutor;
 	
-	private Application m;
-	private LoadApplication load;
+	private Application application;
+	
+	private LoadApplication loadApplication;
 
-	public ApplicationLoader(Application m, LoadApplication load){
-		this.m = m;
-		this.load = load;				
+	public ApplicationLoader(){
+		super();
+	}
+	
+	public ApplicationLoader(Application application, LoadApplication loadApplication){
+		super();
+		this.application = application;
+		this.loadApplication = loadApplication;
 	}
 	
 	public void loadApplication(){
 		
+		loadExecutor = Executors.newSingleThreadExecutor();
 
 		loadExecutor.execute(new Runnable() {
 			
 			@Override
 			public void run() {
-				m.load();
+				application.load();
 			}
 			
 		});
@@ -43,10 +50,26 @@ public class ApplicationLoader{
 
 	public void run(){
 		
-		while(m.getLoading()<100){
-			load.setText(m.getLoadingPhrase(), m.getLoading());
+		while(application.getLoading()<100){
+			loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
 		}
 
 	}
-	
+
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+
+	public LoadApplication getLoadApplication() {
+		return loadApplication;
+	}
+
+	public void setLoadApplication(LoadApplication loadApplication) {
+		this.loadApplication = loadApplication;
+	}
+		
 }

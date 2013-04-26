@@ -82,6 +82,8 @@ public class Core {
 		teclado = controle.getTeclado();
 
 		keyEvents = teclado.getEvents();
+		
+		applicationLoader = new ApplicationLoader();
 
 	}
 
@@ -333,6 +335,16 @@ public class Core {
 				
 			}
 			
+			//Update Component
+			GUIEvent result = component.updateMouse(event);
+
+			if(result!=GUIEvent.NONE){
+
+				gerenciaEvento(component, result);
+
+				return result;
+			}
+			
 			//Update Childs
 			for(GUIComponent child: component.getComponents()){
 
@@ -343,17 +355,7 @@ public class Core {
 				child.setOffset(-component.getX(), -component.getY());
 
 			}
-
-			//Update Component
-			GUIEvent result = component.updateMouse(event);
-
-			if(result!=GUIEvent.NONE){
-
-				gerenciaEvento(component, result);
-
-				return result;
-			}
-
+			
 		}
 
 		return GUIEvent.NONE;
@@ -738,10 +740,10 @@ public class Core {
 			
 			activeWindow.setApplication(load);
 			//activeWindow.add(load);
-
-			applicationLoader = new ApplicationLoader(anotherApplication, load);
-			applicationLoader.loadApplication();		
 			
+			applicationLoader.setApplication(anotherApplication);
+			applicationLoader.setLoadApplication(load);
+			applicationLoader.loadApplication();			
 			
 			ExecutorService executor = Executors.newSingleThreadExecutor();
 			executor.execute(new Runnable() {
