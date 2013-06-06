@@ -400,8 +400,8 @@ public class Grafico{
 		screen.fillPolygon(p);
 	}
 	
-	public void fillRect(ImageLayer camada) {
-		screen.fillRect(camada.getX(),camada.getY(),camada.getW(),camada.getH());
+	public void fillRect(Layer layer) {
+		screen.fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 	}
 	
 	public void fillRect(int x, int y, int w, int h) {

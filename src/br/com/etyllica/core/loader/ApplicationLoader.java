@@ -4,7 +4,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.DefaultLoadApplication;
 import br.com.etyllica.core.application.LoadApplication;
+import br.com.etyllica.gui.Window;
 
 /**
  * 
@@ -13,9 +15,11 @@ import br.com.etyllica.core.application.LoadApplication;
  *
  */
 
-public class ApplicationLoader{
+public class ApplicationLoader implements Runnable{
 	
 	private ExecutorService loadExecutor;
+	
+	private Window window;
 	
 	private Application application;
 	
@@ -24,13 +28,7 @@ public class ApplicationLoader{
 	public ApplicationLoader(){
 		super();
 	}
-	
-	public ApplicationLoader(Application application, LoadApplication loadApplication){
-		super();
-		this.application = application;
-		this.loadApplication = loadApplication;
-	}
-	
+		
 	public void loadApplication(){
 		
 		loadExecutor = Executors.newSingleThreadExecutor();
@@ -53,6 +51,10 @@ public class ApplicationLoader{
 		while(application.getLoading()<100){
 			loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
 		}
+		
+		window.clearComponents();
+
+		window.setApplication(application);
 
 	}
 
@@ -71,5 +73,20 @@ public class ApplicationLoader{
 	public void setLoadApplication(LoadApplication loadApplication) {
 		this.loadApplication = loadApplication;
 	}
+
+	public Window getWindow() {
+		return window;
+	}
+
+	public void setWindow(Window window) {
+		this.window = window;
 		
+		this.loadApplication = window.getLoadApplication();
+
+		this.loadApplication.load();
+		
+		window.setApplication(window.getLoadApplication());
+
+	}
+			
 }

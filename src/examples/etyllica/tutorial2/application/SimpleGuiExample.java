@@ -15,8 +15,9 @@ import br.com.etyllica.util.SVGColor;
 
 public class SimpleGuiExample extends Application{
 
-	public SimpleGuiExample(){
-		super(640,480);
+	public SimpleGuiExample(int w, int h){
+		super(w,h);
+		System.out.println("SimpleGUI - Constructed!");
 	}
 	
 	/**
@@ -59,6 +60,8 @@ public class SimpleGuiExample extends Application{
 		buttonCrimson.setLabel(new TextLabel("CRIMSON!"));
 		buttonCrimson.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "turnCrimson"));
 		add(buttonCrimson);
+		
+		System.out.println("SimpleGUI - Loaded!");
 		
 		loading = 100;
 	}

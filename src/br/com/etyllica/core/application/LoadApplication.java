@@ -11,5 +11,7 @@ package br.com.etyllica.core.application;
 public interface LoadApplication{
 
 	public void setText(String phrase, int load);
+	
+	public void load();
 
 }

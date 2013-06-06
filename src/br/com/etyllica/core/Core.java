@@ -8,11 +8,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.DefaultLoadApplication;
 import br.com.etyllica.core.control.HIDController;
 import br.com.etyllica.core.control.keyboard.Keyboard;
 import br.com.etyllica.core.control.mouse.Mouse;
@@ -40,7 +37,7 @@ public class Core {
 
 	//External Windows
 	private Window activeWindow;
-	
+
 	private List<Window> windows = new ArrayList<Window>();
 
 	private List<GlobalEffect> globalEffects = new ArrayList<GlobalEffect>();
@@ -48,9 +45,9 @@ public class Core {
 	private GUIComponent focus;
 
 	protected HIDController control;
-	
+
 	protected Mouse mouse;
-	
+
 	protected Keyboard keyboard;
 
 	//Mouse Over Something
@@ -64,11 +61,11 @@ public class Core {
 	private List<PointerEvent> mouseEvents;
 
 	private List<KeyboardEvent> keyEvents;
-	
+
 	//private List<JoystickEvent> joyEvents;
 
 	protected ApplicationLoader applicationLoader;
-	
+
 	private DesktopWindow desktopWindow;
 
 	public Core(){
@@ -82,30 +79,21 @@ public class Core {
 		keyboard = control.getTeclado();
 
 		keyEvents = keyboard.getEvents();
-		
+
 		applicationLoader = new ApplicationLoader();
 
 	}
 
 	public void setDesktopWindow(DesktopWindow desktopWindow){
 		this.desktopWindow = desktopWindow;
-		add(desktopWindow);
+
+		windows.add(desktopWindow);
+		activeWindow = desktopWindow;
+		
 	}
 
 	public DesktopWindow getDesktopWindow() {
 		return desktopWindow;
-	}
-
-	public void add(Window window){
-
-		//Change to wID system or
-		//Set<Windows>...
-		if(activeWindow!=window){
-
-			windows.add(window);
-			activeWindow = window;
-		}
-
 	}
 
 	//Change to close
@@ -146,15 +134,15 @@ public class Core {
 	private GUIEvent superEvent = GUIEvent.NONE;
 
 	public void gerencia(){
-				
+
 		superEvent = GUIEvent.NONE;
 
 		updateApplication();
-		
+
 		updateKeyboard();
 
 		updateMouse();
-		
+
 		updateCloseRequests(requestCloseSet);
 
 
@@ -173,18 +161,31 @@ public class Core {
 	}
 
 	private void updateApplication(){
-		
+
 		Application application = activeWindow.getApplication();
-		
+
 		if(application!=null){
 			//if activeWindow, receive command to change application
 			if(application.getReturnApplication()!=application){
 				this.changeApplication();
 			}
 			
+			//Creating Windows
+			if(!application.getWindows().isEmpty()){
+				
+				for(Window window:application.getWindows()){
+					
+					addWindow(window);
+					
+					System.out.println("Window Created!");
+				}
+				
+				application.getWindows().clear();
+			}
+
 			updateApplicationGUIEvents(application);
 		}
-		
+
 	}
 
 	private void updateCloseRequests(Set<Window> closeRequests){
@@ -198,13 +199,13 @@ public class Core {
 	private void updateKeyboard(){
 
 		keyboard.poll();
-		
+
 		List<KeyboardEvent> keyboardEvents = new CopyOnWriteArrayList<KeyboardEvent>(keyEvents);
 
 		for(KeyboardEvent keyboardEvent: keyboardEvents){
 
 			//Application sempre eh gerenciada pelo teclado
-			activeWindow.getApplication().updateKeyboard(keyboardEvent);		
+			activeWindow.getApplication().updateKeyboard(keyboardEvent);
 
 			//Apenas o componente quem tem foco eh gerenciado pelo teclado
 			if(focus!=null){
@@ -216,18 +217,18 @@ public class Core {
 					System.out.println(focusEvent);
 
 					GUIComponent next = focus.findNext();
-					
+
 					if(next!=null){
-						
+
 						if(focusEvent==GUIEvent.NEXT_COMPONENT){
-							
+
 							gerenciaEvento(focus, focusEvent);
 							gerenciaEvento(next, GUIEvent.GAIN_FOCUS);
-							
+
 						}else{
-							
+
 							gerenciaEvento(next, focusEvent);
-							
+
 						}
 
 					}
@@ -241,9 +242,9 @@ public class Core {
 
 		keyEvents.clear();
 	}
-	
+
 	private void updateMouse(){
-		
+
 		mouseOver = false;
 		mouseOverClickable = false;
 
@@ -255,7 +256,7 @@ public class Core {
 		for(PointerEvent event: events){
 
 			//activeWindow.getApplication().updateMouse(event);
-			
+
 			//Avoid concurrency problems
 			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
 			//Update components in reverse order
@@ -271,7 +272,7 @@ public class Core {
 						//Its necessary in NEXT_COMPONENT Events
 
 						GUIComponent next = component.findNext();
-						
+
 						if(next!=null){
 							gerenciaEvento(component.findNext(), nextEvent);	
 						}
@@ -305,13 +306,13 @@ public class Core {
 
 		mouseEvents.clear();
 	}
-	
+
 	private void updateApplicationGUIEvents(Application application){
-		
+
 		for(GUIEvent event: application.getGuiEvents()){
 			gerenciaEvento(application,event);
 		}
-		
+
 		application.getGuiEvents().clear();
 	}
 
@@ -322,17 +323,17 @@ public class Core {
 
 			//Verify onMouse
 			if(component.onMouse(event)){
-				
+
 				if(!component.isMouseOver()){
 					component.setMouseOver(true);
 				}
-				
+
 			}else{
-				
+
 				if(component.isMouseOver()){
 					component.setMouseOver(false);
 				}
-				
+
 			}
 
 			//Update Component
@@ -344,7 +345,7 @@ public class Core {
 
 				return result;
 			}
-			
+
 			//Update Childs
 			for(GUIComponent child: component.getComponents()){
 
@@ -355,7 +356,7 @@ public class Core {
 				child.setOffset(-component.getX(), -component.getY());
 
 			}
-			
+
 		}
 
 		return GUIEvent.NONE;
@@ -383,7 +384,7 @@ public class Core {
 				//TODO Mouse.loseFocus()
 				//events.add(new Event(Tecla.NONE, KeyState.LOSE_FOCUS));
 				//events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.LOSE_FOCUS));
-				
+
 				//TODO improve it
 				focus = null;
 			}
@@ -414,7 +415,7 @@ public class Core {
 		case NEXT_COMPONENT:
 
 			System.out.println("LostFocus");
-			
+
 			//controle.getTeclado().loseFocus();
 			//events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.))
 
@@ -465,7 +466,9 @@ public class Core {
 		//TODO Concurrent Modification problem
 
 		//for(UndecoratedWindow window:windows){
-		for(int i=0;i<windows.size();i++){
+		
+		for(int i=windows.size()-1;i>=0;i--){
+			
 			Window window = windows.get(i);
 
 			window.draw(g);
@@ -685,11 +688,11 @@ public class Core {
 	}
 
 	private GUIEvent updateFrameEvents(PointerEvent event){
-		
+
 		if(event.getState()==KeyState.CLICK){
 			return GUIEvent.REQUEST_FOCUS;
 		}
-		
+
 		if(event.getState()==KeyState.DRAGGED){
 
 			if(mouse.getY()<=50){
@@ -715,56 +718,55 @@ public class Core {
 		return GUIEvent.NONE;
 	}
 
+	public void addWindow(Window window){
+
+		//Change to wID system or
+		//Set<Windows>...
+		if(activeWindow!=window){
+
+			window.setSessionMap(activeWindow.getSessionMap());
+			
+			//TODO Fix this
+			//window.getApplication().setSessionMap(activeWindow.getSessionMap());
+			
+			windows.add(window);
+			
+			activeWindow = window;
+			
+			System.out.println("Window Reloaded");			
+			reload(window.getApplication());
+			
+		}
+
+	}
+	
 	private Application anotherApplication;
-	
+
 	public void setMainApplication(Application application){
-		anotherApplication = application;
-		anotherApplication.setSessionMap(activeWindow.getSessionMap());
 
-		reload();
+		reload(application);
 	}
-	
+
 	protected void changeApplication(){
-		
-		setMainApplication(activeWindow.getApplication().getReturnApplication());
-		
+
+		reload(activeWindow.getApplication().getReturnApplication());
+
 	}
-	
-	private void reload(){
 
-			//load = new LoadApplication(m.getX(), m.getY(), m.getW(),m.getH());
-			//load.setBimg(new BufferedImage(m.getW(), m.getH(), BufferedImage.TYPE_INT_RGB));
-			DefaultLoadApplication load = activeWindow.getLoadApplication();
-			
-			load.load();
-			
-			activeWindow.setApplication(load);
-			//activeWindow.add(load);
-			
-			applicationLoader.setApplication(anotherApplication);
-			applicationLoader.setLoadApplication(load);
-			applicationLoader.loadApplication();			
-			
-			ExecutorService executor = Executors.newSingleThreadExecutor();
-			executor.execute(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
+	private void reload(Application application){
 
-					applicationLoader.run();
+		System.out.println("Try to load");
+		anotherApplication = application;
+		
+		System.out.println("Try to load!!");
+		
+		applicationLoader.setWindow(activeWindow);
+		applicationLoader.setApplication(anotherApplication);
+		
+		applicationLoader.loadApplication();
 
-					activeWindow.clearComponents();
-
-					//m.setBimg(load.getBimg());
-
-					activeWindow.setApplication(anotherApplication);
-					
-				}
-			});
-			
-			executor.shutdown();
-			
+		new Thread(applicationLoader).start();
+		
 	}
 
 	private boolean click = false;

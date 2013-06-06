@@ -10,6 +10,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.GUIComponent;
+import br.com.etyllica.gui.Window;
 import br.com.etyllica.layer.ImageLayer;
 
 /**
@@ -74,6 +75,7 @@ public abstract class Application extends GUIComponent implements Runnable{
 	
 	private List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
 	
+	private List<Window> windows = new ArrayList<Window>();	
 	
 	/**
 	 * Constructor
@@ -220,6 +222,14 @@ public abstract class Application extends GUIComponent implements Runnable{
 
 	public void setGuiEvents(List<GUIEvent> guiEvents) {
 		this.guiEvents = guiEvents;
+	}
+	
+	protected void createWindow(Window window){
+		this.windows.add(window);
+	}
+	
+	public List<Window> getWindows(){
+		return windows;
 	}
 	
 }
