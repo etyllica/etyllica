@@ -28,7 +28,7 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 		p = new Font(theme.getFontName(), theme.getFontStyle(), 18);
 	}
 	
-	private int rectW = 400;
+	private int rectW = w*2/3;
 	private int rectX = w/2-rectW/2;
 	private int rectY = h/2+100;
 	private int rectH = 32;
@@ -41,10 +41,10 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 		g.setFont(f);
 		
 		g.setColor(backgroundColor);
-		g.fillRect(x, y, w, h);
+		g.fillRect(0, 0, w, h);
 		
 		g.setColor(Color.WHITE);
-		g.escreveSombraX(280, phrase);
+		g.escreveSombraX(280-y, phrase);
 
 		g.drawRect(rectX, rectY, rectW, rectH);
 		g.fillRect(rectX+2, rectY+2, ((rectW*fill)/100)-3, rectH-3);

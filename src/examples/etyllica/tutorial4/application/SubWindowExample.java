@@ -20,7 +20,6 @@ public class SubWindowExample extends Application{
 
 	@Override
 	public void load() {
-				
 		loading = 100;
 	}
 
@@ -31,7 +30,7 @@ public class SubWindowExample extends Application{
 			Window subWindow = new Window(200, 20, 160, 400);
 			subWindow.setApplication(new SimpleGuiExample(subWindow.getW(), subWindow.getH()));
 			
-			createWindow(subWindow);
+			addWindow(subWindow);
 		}
 		
 		return GUIEvent.NONE;

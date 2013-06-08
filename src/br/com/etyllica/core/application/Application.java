@@ -224,7 +224,7 @@ public abstract class Application extends GUIComponent implements Runnable{
 		this.guiEvents = guiEvents;
 	}
 	
-	protected void createWindow(Window window){
+	protected void addWindow(Window window){
 		this.windows.add(window);
 	}
 	

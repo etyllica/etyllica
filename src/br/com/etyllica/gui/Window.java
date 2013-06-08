@@ -94,6 +94,7 @@ public class Window extends GUIComponent{
 
 	public void setApplication(Application application) {
 		this.application = application;
+		
 		clearComponents();
 		add(application);
 		

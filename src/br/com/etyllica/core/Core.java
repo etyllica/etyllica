@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.control.HIDController;
 import br.com.etyllica.core.control.keyboard.Keyboard;
 import br.com.etyllica.core.control.mouse.Mouse;
@@ -35,7 +36,9 @@ import br.com.etyllica.gui.window.DesktopWindow;
 public class Core {
 
 	//External Windows
-	private Window activeWindow;
+	private Window activeWindow = null;
+	
+	private SessionMap sessionMap = new SessionMap();
 
 	private List<Window> windows = new ArrayList<Window>();
 
@@ -81,13 +84,14 @@ public class Core {
 
 	}
 
-	public void setDesktopWindow(DesktopWindow desktopWindow){
+	/*public void setDesktopWindow(DesktopWindow desktopWindow){
 		this.desktopWindow = desktopWindow;
-
+		this.desktopWindow.setSessionMap(new SessionMap());
+		
 		windows.add(desktopWindow);
 		activeWindow = desktopWindow;
 		
-	}
+	}*/
 
 	public DesktopWindow getDesktopWindow() {
 		return desktopWindow;
@@ -726,12 +730,12 @@ public class Core {
 
 		//Change to wID system or
 		//Set<Windows>...
-		if(activeWindow!=window){
+		if(window!=activeWindow){
 
-			window.setSessionMap(activeWindow.getSessionMap());
-			
 			//TODO Fix this
-			//window.getApplication().setSessionMap(activeWindow.getSessionMap());
+			window.setSessionMap(sessionMap);
+			
+			window.getApplication().setSessionMap(sessionMap);
 			
 			windows.add(window);
 			

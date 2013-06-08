@@ -96,15 +96,17 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		grafico = new Grafico(w,h);		
 		grafico.setBufferedImage(volatileImg.getSnapshot());
 		desktop = new DesktopWindow(0,0,w,h);
-		core.setDesktopWindow(desktop);
 
 		mouse = core.getControl().getMouse();
 		//keyboard = core.getControl().getTeclado();
 
+		desktop = new DesktopWindow(0,0,w,h);
+
 		startGame();
-
-		core.setMainApplication(application);
-
+		
+		desktop.setApplication(application);		
+		core.addWindow(desktop);
+		
 		escondeCursor();
 
 		this.setFocusTraversalKeysEnabled(false);

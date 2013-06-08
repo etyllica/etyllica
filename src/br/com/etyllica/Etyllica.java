@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Core;
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.control.mouse.Mouse;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.FontLoader;
@@ -95,19 +96,17 @@ public abstract class Etyllica extends Applet implements Runnable{
 		//MeshLoader.getInstancia().setUrl(s);
 		grafico = new Grafico(w,h);		
 		grafico.setBufferedImage(volatileImg.getSnapshot());
-		desktop = new DesktopWindow(0,0,w,h);
-		core.setDesktopWindow(desktop);
-
+				
 		mouse = core.getControl().getMouse();
 		//keyboard = core.getControl().getTeclado();
 
-		//defineTamanho(largura,altura);
+		desktop = new DesktopWindow(0,0,w,h);
 
 		startGame();
-
-		core.setMainApplication(application);
 		
-
+		desktop.setApplication(application);		
+		core.addWindow(desktop);
+		
 		escondeCursor();
 
 		this.setFocusTraversalKeysEnabled(false);
