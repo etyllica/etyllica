@@ -461,5 +461,9 @@ public class Grafico{
 		
 		bimg.setRGB(startX, startY, w, h, rgbArray, offset, scansize);
 	}
+	
+	public void translate(int x, int y){
+		screen.translate(x, y);
+	}
 		
 }

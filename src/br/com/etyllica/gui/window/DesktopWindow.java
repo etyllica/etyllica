@@ -2,7 +2,6 @@ package br.com.etyllica.gui.window;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Window;
 

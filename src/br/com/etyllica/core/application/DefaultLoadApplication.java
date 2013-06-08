@@ -44,7 +44,7 @@ public class DefaultLoadApplication  extends Application implements LoadApplicat
 
 	@Override
 	public void draw(Grafico g) {
-
+		
 		g.setColor(Color.BLACK);
 		g.getGraphics().fillRect(x,y,w,h);
 

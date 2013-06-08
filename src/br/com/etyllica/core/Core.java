@@ -19,7 +19,6 @@ import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
-import br.com.etyllica.core.loader.ApplicationLoader;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.GUIComponent;
@@ -64,7 +63,7 @@ public class Core {
 
 	//private List<JoystickEvent> joyEvents;
 
-	protected ApplicationLoader applicationLoader;
+	//protected ApplicationLoader applicationLoader;
 
 	private DesktopWindow desktopWindow;
 
@@ -79,8 +78,6 @@ public class Core {
 		keyboard = control.getTeclado();
 
 		keyEvents = keyboard.getEvents();
-
-		applicationLoader = new ApplicationLoader();
 
 	}
 
@@ -248,13 +245,15 @@ public class Core {
 		mouseOver = false;
 		mouseOverClickable = false;
 
-
 		//Solving ConcurrentModification
 		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouseEvents);
 
 		//Update components with events
 		for(PointerEvent event: events){
 
+			event.setX(event.getX()-activeWindow.getX());
+			event.setY(event.getY()-activeWindow.getY());
+			
 			//activeWindow.getApplication().updateMouse(event);
 
 			//Avoid concurrency problems
@@ -467,12 +466,15 @@ public class Core {
 
 		//for(UndecoratedWindow window:windows){
 		
-		for(int i=windows.size()-1;i>=0;i--){
+		for(Window window : windows){
+		
+			boolean offset = window.getX()!=0||window.getY()!=0; 
+			if(offset){
+				g.translate(window.getX(), window.getY());
+			}
 			
-			Window window = windows.get(i);
-
 			window.draw(g);
-
+			
 			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(window.getComponents());
 
 			//if(!window.isLocked()){
@@ -482,7 +484,9 @@ public class Core {
 
 			}
 			//}
-
+			if(offset){
+				g.translate(-window.getX(), -window.getY());
+			}
 		}
 
 		int effects = globalEffects.size();
@@ -733,15 +737,12 @@ public class Core {
 			
 			activeWindow = window;
 			
-			System.out.println("Window Reloaded");			
 			reload(window.getApplication());
 			
 		}
 
 	}
 	
-	private Application anotherApplication;
-
 	public void setMainApplication(Application application){
 
 		reload(application);
@@ -755,18 +756,8 @@ public class Core {
 
 	private void reload(Application application){
 
-		System.out.println("Try to load");
-		anotherApplication = application;
-		
-		System.out.println("Try to load!!");
-		
-		applicationLoader.setWindow(activeWindow);
-		applicationLoader.setApplication(anotherApplication);
-		
-		applicationLoader.loadApplication();
-
-		new Thread(applicationLoader).start();
-		
+		activeWindow.reload(application);
+				
 	}
 
 	private boolean click = false;

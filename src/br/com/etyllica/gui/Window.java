@@ -10,6 +10,7 @@ import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.loader.ApplicationLoader;
 import br.com.etyllica.core.video.Grafico;
 
 /**
@@ -30,7 +31,7 @@ public class Window extends GUIComponent{
 
 	protected DefaultLoadApplication load;
 
-	//protected ApplicationLoader c;
+	protected ApplicationLoader applicationLoader;
 
 	//protected Application anotherApplication;
 
@@ -41,7 +42,7 @@ public class Window extends GUIComponent{
 		load = new GenericLoadApplication(x,y,w,h);
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_ARGB));
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB));
-
+		applicationLoader = new ApplicationLoader();
 	}
 
 	@Override
@@ -112,19 +113,21 @@ public class Window extends GUIComponent{
 		
 	}*/
 
-	/*public void reload(){
-
-		//load = new LoadApplication(m.getX(), m.getY(), m.getW(),m.getH());
-		//load.setBimg(new BufferedImage(m.getW(), m.getH(), BufferedImage.TYPE_INT_RGB));
-		load.load();
-		application = load;
-		add(application);
-
-		c = new ApplicationLoader(anotherApplication, load);
-		c.loadApplication();		
+	public void reload(Application application){
 		
-		new Thread(this).start();
+		load.load();
+		setApplication(load);
+		
+		applicationLoader.setWindow(this);
+		applicationLoader.setApplication(application);
+		applicationLoader.setLoadApplication(load);
+		
+		applicationLoader.loadApplication();
+		
+		new Thread(applicationLoader).start();		
+
 	}
+	/*
 
 	@Override
 	public void run() {
@@ -160,7 +163,6 @@ public class Window extends GUIComponent{
 
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
-		// TODO Auto-generated method stub
 		return GUIEvent	.NONE;
 	}
 
