@@ -223,11 +223,14 @@ public class Button extends RoundGUIComponent{
 	public void setLabel(Label label) {
 		this.label = label;
 
-		int offsetX = label.getX();
-		int offsetY = label.getY();
+		label.setX(x+(w/2-label.getW()/2)+label.getX());
+		label.setY(y+(h/2-label.getH()/2)+label.getY());
+		
+		//int offsetX = label.getX();
+		//int offsetY = label.getY();
 
-		label.setX(x+offsetX);
-		label.setY(y+offsetY);
+		//label.setX(x+offsetX);
+		//label.setY(y+offsetY);
 		
 		label.setContentBounds(x, y, w, h);
 

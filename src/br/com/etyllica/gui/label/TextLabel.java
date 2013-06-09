@@ -20,11 +20,16 @@ public class TextLabel extends Label{
 
 	protected String text;
 	
-	protected int fontSize = 18;
+	protected float fontSize = 18;
 	
 	public TextLabel(int x, int y) {
 		super(x, y);
 	}
+	
+	public TextLabel(int x, int y, int w) {
+		super(x, y, w);
+	}
+	
 	public TextLabel(int x, int y, String text) {
 		super(x, y);
 		
@@ -60,7 +65,7 @@ public class TextLabel extends Label{
 
 		Theme theme = Configuration.getInstance().getTheme();
 	
-		g.setFont(theme.getFont());
+		g.setFont(theme.getFont().deriveFont(fontSize));
 		
 		if(!onFocus){
 			g.setColor(theme.getTextColor());
@@ -100,11 +105,11 @@ public class TextLabel extends Label{
 		this.text = text;
 	}
 	
-	public int getFontSize() {
+	public float getFontSize() {
 		return fontSize;
 	}
 
-	public void setFontSize(int fontSize) {
+	public void setFontSize(float fontSize) {
 		this.fontSize = fontSize;
 	}
 	

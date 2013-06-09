@@ -178,7 +178,6 @@ public class Core {
 					
 					addWindow(window);
 					
-					System.out.println("Window Created!");
 				}
 				
 				application.getWindows().clear();
