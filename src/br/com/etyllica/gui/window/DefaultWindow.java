@@ -52,15 +52,9 @@ public class DefaultWindow extends Window{
 	
 	public void closeWindow(){
 		
-		//TODO change it
-		//Core.getInstance().requestClose(this);
+		setClose(true);
 		
-	}
-	
-	@Override
-	protected void close() {
-				
-		if(oldApplications.size()>1){
+		/*if(oldApplications.size()>1){
 		
 			//Clean up current application
 			remove(application);
@@ -78,7 +72,7 @@ public class DefaultWindow extends Window{
 			stillWantClose = false;
 		}else{
 			stillWantClose = true;
-		}
+		}*/
 		
 	}
 	

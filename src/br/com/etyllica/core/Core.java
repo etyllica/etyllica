@@ -4,9 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.core.application.Application;
@@ -58,15 +56,11 @@ public class Core {
 	private boolean mouseOverClickable = false;
 
 
-	private Set<Window> requestCloseSet = new LinkedHashSet<Window>();
-
 	private List<PointerEvent> mouseEvents;
 
 	private List<KeyboardEvent> keyEvents;
 
 	//private List<JoystickEvent> joyEvents;
-
-	//protected ApplicationLoader applicationLoader;
 
 	private DesktopWindow desktopWindow;
 
@@ -84,45 +78,8 @@ public class Core {
 
 	}
 
-	/*public void setDesktopWindow(DesktopWindow desktopWindow){
-		this.desktopWindow = desktopWindow;
-		this.desktopWindow.setSessionMap(new SessionMap());
-		
-		windows.add(desktopWindow);
-		activeWindow = desktopWindow;
-		
-	}*/
-
 	public DesktopWindow getDesktopWindow() {
 		return desktopWindow;
-	}
-
-	//Change to close
-	public void requestClose(Window window){
-		requestCloseSet.add(window);
-	}
-
-	private void reallyClose(){
-
-		boolean activeWindowSetted = false;
-
-		for(Window close: requestCloseSet){
-			close.update(GUIEvent.WINDOW_CLOSE);
-
-			if(close.isStillWantClose()){
-				windows.remove(close);
-			}else{
-				activeWindow = close;
-				activeWindowSetted = true;
-			}
-
-		}
-
-		if(!activeWindowSetted){
-			activeWindow = windows.get(windows.size()-1);
-		}
-
-		requestCloseSet.clear();
 	}
 
 	private boolean enableFullScreen = false;
@@ -138,13 +95,13 @@ public class Core {
 
 		superEvent = GUIEvent.NONE;
 
+		updateActiveWindow();
+		
 		updateApplication();
 
 		updateKeyboard();
 
 		updateMouse();
-
-		updateCloseRequests(requestCloseSet);
 
 
 		if(enableFullScreen){
@@ -159,6 +116,20 @@ public class Core {
 			superEvent = GUIEvent.DISABLE_FULL_SCREEN;
 		}
 
+	}
+	
+	private void updateActiveWindow(){
+		
+		if(activeWindow.isClose()){
+			
+			if(windows.size()>0){
+				windows.remove(activeWindow);
+				activeWindow = windows.get(windows.size()-1);
+			}else{
+				System.exit(0);
+			}
+
+		}
 	}
 
 	private void updateApplication(){
@@ -188,14 +159,6 @@ public class Core {
 
 	}
 
-	private void updateCloseRequests(Set<Window> closeRequests){
-
-		if(!requestCloseSet.isEmpty()){
-			reallyClose();
-		}
-
-	}
-
 	private void updateKeyboard(){
 
 		keyboard.poll();
@@ -206,6 +169,10 @@ public class Core {
 
 			//Application sempre eh gerenciada pelo teclado
 			activeWindow.getApplication().updateKeyboard(keyboardEvent);
+			
+			//TODO Same as UpdateMouse
+			//List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
+			//Collections.reverse(components);
 
 			//Apenas o componente quem tem foco eh gerenciado pelo teclado
 			if(focus!=null){
@@ -426,9 +393,10 @@ public class Core {
 			break;
 
 		case WINDOW_CLOSE:
-
-			requestClose((Window)componente);
-
+			
+			//TODO
+			//((Window)componente.setClose(true));
+			
 			break;
 
 			/*case ONCE:
@@ -462,12 +430,6 @@ public class Core {
 	}
 
 	public void draw(Grafico g){
-
-		//BufferedImage screen =  g.getBimg();
-
-		//TODO Concurrent Modification problem
-
-		//for(UndecoratedWindow window:windows){
 		
 		for(Window window : windows){
 		
@@ -735,6 +697,8 @@ public class Core {
 			window.setSessionMap(sessionMap);
 			
 			window.getApplication().setSessionMap(sessionMap);
+			
+			window.setClose(false);
 			
 			windows.add(window);
 			

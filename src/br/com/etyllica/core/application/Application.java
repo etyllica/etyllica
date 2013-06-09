@@ -75,7 +75,7 @@ public abstract class Application extends GUIComponent implements Runnable{
 	
 	private List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
 	
-	private List<Window> windows = new ArrayList<Window>();	
+	protected List<Window> windows = new ArrayList<Window>();	
 	
 	/**
 	 * Constructor

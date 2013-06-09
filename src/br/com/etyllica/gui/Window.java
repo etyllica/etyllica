@@ -33,7 +33,7 @@ public class Window extends GUIComponent{
 
 	protected ApplicationLoader applicationLoader;
 
-	//protected Application anotherApplication;
+	protected boolean close = false;
 
 	public Window(int x, int y, int w, int h){
 		super(x,y,w,h);
@@ -70,17 +70,7 @@ public class Window extends GUIComponent{
 			//changeApplication();
 			System.err.println("WINDOW - Not here anymore");
 		}
-		
-		if(event == GUIEvent.WINDOW_CLOSE){
-			close();
-		}
-		
-	}
-
-	protected boolean stillWantClose = true;
-
-	protected void close(){
-		stillWantClose = true;
+				
 	}
 
 	@Override
@@ -105,15 +95,6 @@ public class Window extends GUIComponent{
 
 	}
 
-	/*public void setMainApplication(Application application) {
-		
-		anotherApplication = application;
-		anotherApplication.setSessionMap(sessionMap);
-
-		reload();
-		
-	}*/
-
 	public void reload(Application application){
 		
 		load.load();
@@ -128,23 +109,6 @@ public class Window extends GUIComponent{
 		new Thread(applicationLoader).start();		
 
 	}
-	/*
-
-	@Override
-	public void run() {
-
-		c.run();
-
-		//components.remove(load);
-		clearComponents();
-
-		//m.setBimg(load.getBimg());
-
-		setApplication(anotherApplication);
-
-		remove(load);
-
-	}*/
 	
 	public SessionMap getSessionMap() {
 		return sessionMap;
@@ -152,10 +116,6 @@ public class Window extends GUIComponent{
 
 	public void setSessionMap(SessionMap sessionMap) {
 		this.sessionMap = sessionMap;
-	}
-
-	public boolean isStillWantClose() {
-		return stillWantClose;
 	}
 	
 	public DefaultLoadApplication getLoadApplication(){
@@ -166,5 +126,13 @@ public class Window extends GUIComponent{
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
 		return GUIEvent	.NONE;
 	}
+	
+	public boolean isClose() {
+		return close;
+	}
 
+	public void setClose(boolean close) {
+		this.close = close;
+	}
+	
 }
