@@ -3,7 +3,6 @@ package br.com.etyllica.core;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -143,11 +142,15 @@ public class Core {
 			}
 			
 			//Creating Windows
+			//if application has windows
 			if(!application.getWindows().isEmpty()){
 				
+				//For each new window in application.windows
 				for(Window window:application.getWindows()){
 					
+					//if this !windows.contains(window)
 					addWindow(window);
+
 					
 				}
 				
@@ -166,7 +169,9 @@ public class Core {
 		List<KeyboardEvent> keyboardEvents = new CopyOnWriteArrayList<KeyboardEvent>(keyEvents);
 
 		for(KeyboardEvent keyboardEvent: keyboardEvents){
-
+			
+			activeWindow.updateKeyboard(keyboardEvent);
+			
 			//Application sempre eh gerenciada pelo teclado
 			activeWindow.getApplication().updateKeyboard(keyboardEvent);
 			
@@ -224,12 +229,10 @@ public class Core {
 			event.setX(event.getX()-activeWindow.getX());
 			event.setY(event.getY()-activeWindow.getY());
 			
-			//activeWindow.getApplication().updateMouse(event);
-
 			//Avoid concurrency problems
 			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
 			//Update components in reverse order
-			Collections.reverse(components);
+			//Collections.reverse(components);
 
 			for(GUIComponent component: components){
 
@@ -431,7 +434,9 @@ public class Core {
 
 	public void draw(Grafico g){
 		
-		for(Window window : windows){
+		List<Window> drawWindows = new CopyOnWriteArrayList<Window>(windows);
+		
+		for(Window window : drawWindows){
 		
 			boolean offset = window.getX()!=0||window.getY()!=0; 
 			if(offset){
@@ -704,7 +709,10 @@ public class Core {
 			
 			activeWindow = window;
 			
-			reload(window.getApplication());
+			//Avoid unnecessary reload
+			if(window.getApplication().getLoading()!=100){
+				reload(window.getApplication());
+			}
 			
 		}
 

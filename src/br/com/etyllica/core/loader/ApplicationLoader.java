@@ -40,7 +40,7 @@ public class ApplicationLoader implements Runnable{
 			}
 			
 		});
-		
+				
 		loadExecutor.shutdown();
 		
 	}
@@ -52,6 +52,8 @@ public class ApplicationLoader implements Runnable{
 		}
 		
 		window.setApplication(application);
+		
+		window.restartWindow();
 
 	}
 

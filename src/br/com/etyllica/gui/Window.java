@@ -81,6 +81,10 @@ public class Window extends GUIComponent{
 	public Application getApplication() {
 		return application;
 	}
+	
+	public void restartWindow(){
+		
+	}
 
 	public void setApplication(Application application) {
 		this.application = application;
@@ -91,7 +95,7 @@ public class Window extends GUIComponent{
 		//TODO Posso adicionar o closeButton
 		//e o IconButton
 		//Trazer restart de DefaultWindow
-		//add(application);
+		//add(application);		
 
 	}
 
@@ -106,8 +110,8 @@ public class Window extends GUIComponent{
 		
 		applicationLoader.loadApplication();
 		
-		new Thread(applicationLoader).start();		
-
+		new Thread(applicationLoader).start();
+		
 	}
 	
 	public SessionMap getSessionMap() {
@@ -124,7 +128,14 @@ public class Window extends GUIComponent{
 
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		
+		//TODO Ctrl+F4...
+		
 		return GUIEvent	.NONE;
+	}
+	
+	public void closeWindow(){
+		setClose(true);
 	}
 	
 	public boolean isClose() {

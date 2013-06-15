@@ -22,15 +22,18 @@ public class ImageLabel extends Icon{
 	}
 	
 	public ImageLabel(String path){
-		super(0, 0);
-		layer = new ImageLayer(0,0,path);
+		this(0, 0, path);
 	}
 	
-	public ImageLabel(ImageLayer layer){
-		super(0, 0);
+	public ImageLabel(int x, int y, ImageLayer layer){
+		super(x, y);
 		this.layer = layer;
 	}
 	
+	public ImageLabel(ImageLayer layer){
+		this(0, 0, layer);
+	}
+		
 	@Override
 	public void draw(Grafico g) {
 		//camada.setOffset(x, y);
