@@ -34,7 +34,7 @@ public class Core {
 
 	//External Windows
 	private Window activeWindow = null;
-	
+
 	private SessionMap sessionMap = new SessionMap();
 
 	private List<Window> windows = new ArrayList<Window>();
@@ -54,6 +54,7 @@ public class Core {
 	private boolean mouseOver = false;
 	private boolean mouseOverClickable = false;
 
+	private List<GUIEvent> guiEvents;
 
 	private List<PointerEvent> mouseEvents;
 
@@ -65,6 +66,8 @@ public class Core {
 
 	public Core(){
 		super();
+
+		guiEvents = new ArrayList<GUIEvent>();
 
 		control = new HIDController();
 
@@ -92,15 +95,24 @@ public class Core {
 
 	public void gerencia(){
 
+		if(Configuration.getInstance().isLanguageChanged()){
+			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
+			Configuration.getInstance().setLanguageChanged(false);
+		}
+
 		superEvent = GUIEvent.NONE;
 
+		List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
+
 		updateActiveWindow();
-		
+
 		updateApplication();
 
-		updateKeyboard();
+		updateGui(components);
 
-		updateMouse();
+		updateMouse(components);
+
+		updateKeyboard();
 
 
 		if(enableFullScreen){
@@ -116,11 +128,11 @@ public class Core {
 		}
 
 	}
-	
+
 	private void updateActiveWindow(){
-		
+
 		if(activeWindow.isClose()){
-			
+
 			if(windows.size()>0){
 				windows.remove(activeWindow);
 				activeWindow = windows.get(windows.size()-1);
@@ -140,24 +152,23 @@ public class Core {
 			if(application.getReturnApplication()!=application){
 				this.changeApplication();
 			}
-			
+
 			//Creating Windows
 			//if application has windows
 			if(!application.getWindows().isEmpty()){
-				
+
 				//For each new window in application.windows
 				for(Window window:application.getWindows()){
-					
+
 					//if this !windows.contains(window)
 					addWindow(window);
 
-					
+
 				}
-				
+
 				application.getWindows().clear();
 			}
 
-			updateApplicationGUIEvents(application);
 		}
 
 	}
@@ -169,12 +180,12 @@ public class Core {
 		List<KeyboardEvent> keyboardEvents = new CopyOnWriteArrayList<KeyboardEvent>(keyEvents);
 
 		for(KeyboardEvent keyboardEvent: keyboardEvents){
-			
+
 			activeWindow.updateKeyboard(keyboardEvent);
-			
+
 			//Application sempre eh gerenciada pelo teclado
 			activeWindow.getApplication().updateKeyboard(keyboardEvent);
-			
+
 			//TODO Same as UpdateMouse
 			//List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
 			//Collections.reverse(components);
@@ -215,7 +226,7 @@ public class Core {
 		keyEvents.clear();
 	}
 
-	private void updateMouse(){
+	private void updateMouse(List<GUIComponent> components){
 
 		mouseOver = false;
 		mouseOverClickable = false;
@@ -228,9 +239,9 @@ public class Core {
 
 			event.setX(event.getX()-activeWindow.getX());
 			event.setY(event.getY()-activeWindow.getY());
-			
+
 			//Avoid concurrency problems
-			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
+			//
 			//Update components in reverse order
 			//Collections.reverse(components);
 
@@ -279,13 +290,31 @@ public class Core {
 		mouseEvents.clear();
 	}
 
-	private void updateApplicationGUIEvents(Application application){
+	private void updateGui(List<GUIComponent> components){
 
-		for(GUIEvent event: application.getGuiEvents()){
-			gerenciaEvento(application,event);
+		for(GUIEvent event: guiEvents){
+
+			for(GUIComponent component: components){
+
+				updateGuiComponent(component, event);
+
+			}
+			
 		}
 
-		application.getGuiEvents().clear();
+		guiEvents.clear();
+	}
+	
+	private void updateGuiComponent(GUIComponent component, GUIEvent event){
+		
+		component.update(event);
+		
+		//Update Childs
+		for(GUIComponent child: component.getComponents()){
+		
+			updateGuiComponent(child, event);
+		
+		}
 	}
 
 	private GUIEvent updateComponent(GUIComponent component, PointerEvent event){
@@ -396,10 +425,10 @@ public class Core {
 			break;
 
 		case WINDOW_CLOSE:
-			
+
 			//TODO
 			//((Window)componente.setClose(true));
-			
+
 			break;
 
 			/*case ONCE:
@@ -433,18 +462,18 @@ public class Core {
 	}
 
 	public void draw(Grafico g){
-		
+
 		List<Window> drawWindows = new CopyOnWriteArrayList<Window>(windows);
-		
+
 		for(Window window : drawWindows){
-		
+
 			boolean offset = window.getX()!=0||window.getY()!=0; 
 			if(offset){
 				g.translate(window.getX(), window.getY());
 			}
-			
+
 			window.draw(g);
-			
+
 			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(window.getComponents());
 
 			//if(!window.isLocked()){
@@ -700,24 +729,24 @@ public class Core {
 
 			//TODO Fix this
 			window.setSessionMap(sessionMap);
-			
+
 			window.getApplication().setSessionMap(sessionMap);
-			
+
 			window.setClose(false);
-			
+
 			windows.add(window);
-			
+
 			activeWindow = window;
-			
+
 			//Avoid unnecessary reload
 			if(window.getApplication().getLoading()!=100){
 				reload(window.getApplication());
 			}
-			
+
 		}
 
 	}
-	
+
 	public void setMainApplication(Application application){
 
 		reload(application);
@@ -732,7 +761,7 @@ public class Core {
 	private void reload(Application application){
 
 		activeWindow.reload(application);
-				
+
 	}
 
 	private boolean click = false;

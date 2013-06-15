@@ -55,9 +55,7 @@ public class DefaultWindow extends Window{
 	
 	@Override
 	public void restartWindow() {
-		
-		System.out.println("DefaultWindow - RestartWindow");
-		
+				
 		//Here I get Icon and title to title bar
 		if(application.getIcon()!=null){
 			
@@ -66,7 +64,6 @@ public class DefaultWindow extends Window{
 			iconButton.setLabel(new ImageLabel(icon.getW()-icon.getW()/3, icon.getH()-icon.getH()/3, application.getIcon()));
 		}
 		if(!application.getTitle().isEmpty()){
-			System.out.println("Set titleBar to "+application.getTitle());
 			titleBar.setText(application.getTitle());
 		}
 		

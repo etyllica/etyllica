@@ -87,7 +87,6 @@ public abstract class Etyllica extends Applet implements Runnable{
 		defineTamanho(w,h);
 		
 		core = new Core();
-		Configuration.getInstance().setCore(core);
 
 		ImageLoader.getInstance().setUrl(s);
 		FontLoader.getInstance().setUrl(s);

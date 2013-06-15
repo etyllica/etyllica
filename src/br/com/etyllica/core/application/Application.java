@@ -73,8 +73,6 @@ public abstract class Application extends GUIComponent implements Runnable{
 	 */
 	protected SessionMap sessionMap;
 	
-	private List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
-	
 	protected List<Window> windows = new ArrayList<Window>();	
 	
 	/**
@@ -210,18 +208,6 @@ public abstract class Application extends GUIComponent implements Runnable{
 	
 	protected void timeUpdate(){
 		
-	}
-	
-	protected void addGUIEvent(GUIEvent event){
-		guiEvents.add(event);
-	}
-
-	public List<GUIEvent> getGuiEvents() {
-		return guiEvents;
-	}
-
-	public void setGuiEvents(List<GUIEvent> guiEvents) {
-		this.guiEvents = guiEvents;
 	}
 	
 	protected void addWindow(Window window){

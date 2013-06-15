@@ -1,7 +1,6 @@
 package br.com.etyllica.core;
 
 import br.com.etyllica.core.control.mouse.theme.ArrowTheme;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.i18n.Language;
 import br.com.etyllica.theme.Theme;
 
@@ -16,7 +15,7 @@ public class Configuration {
 
 	private static Configuration instance = null;
 	
-	private Core core;
+	//private Core core;
 		
 	//Default Theme
 	//TODO Button Factory
@@ -25,11 +24,12 @@ public class Configuration {
 	
 	//private Language lang = Language.JAPANESE;
 	//private Language lang = Language.ENGLISH_USA;
-	private Language lang = Language.PORTUGUESE_BRAZIL;
+	private Language language = Language.PORTUGUESE_BRAZIL;
 		
 	
 	private boolean timerClick = false;
 	private boolean numpadMouse = false;
+	private boolean languageChanged = false;
 	
 	private Configuration(){
 		super();
@@ -59,20 +59,22 @@ public class Configuration {
 		this.arrowTheme = arrowTheme;
 	}
 
-	public Language getLang() {
-		return lang;
+	public Language getLanguage() {
+		return language;
 	}
 
-	public void setLang(Language lang) {
-		this.lang = lang;
+	public void setLanguage(Language language) {
+		this.language = language;
 		
-		if(lang==Language.JAPANESE){
+		if(language==Language.JAPANESE){
 			theme.setFontName(Theme.FONT_JAPANESE);
 		}else{
 			theme.setFontName(Theme.FONT_DEFAULT);
 		}
 		
 		theme.reloadFonts();
+		
+		setLanguageChanged(true);
 		
 		//TODO Each component is responsible for it
 		//addGUIEvent(GUIEvent.LANGUAGE_CHANGED);
@@ -94,12 +96,12 @@ public class Configuration {
 		this.numpadMouse = numpadMouse;
 	}
 
-	public Core getCore() {
-		return core;
+	public boolean isLanguageChanged() {
+		return languageChanged;
 	}
 
-	public void setCore(Core core) {
-		this.core = core;
-	}	
+	public void setLanguageChanged(boolean languageChanged) {
+		this.languageChanged = languageChanged;
+	}
 
 }
