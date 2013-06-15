@@ -216,6 +216,6 @@ public abstract class Application extends GUIComponent implements Runnable{
 	
 	public List<Window> getWindows(){
 		return windows;
-	}
+	}	
 	
 }

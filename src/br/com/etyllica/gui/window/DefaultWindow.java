@@ -41,7 +41,7 @@ public class DefaultWindow extends Window{
 		
 		closeButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "closeWindow"));
 		
-		titleBar = new TextLabel(200,15, "...");
+		titleBar = new TextLabel(w/-50,15, "...");
 	}
 		
 	@Override
