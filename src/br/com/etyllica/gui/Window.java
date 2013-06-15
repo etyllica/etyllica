@@ -91,12 +91,7 @@ public class Window extends GUIComponent{
 		
 		clearComponents();
 		add(application);
-		
-		//TODO Posso adicionar o closeButton
-		//e o IconButton
-		//Trazer restart de DefaultWindow
-		//add(application);		
-
+	
 	}
 
 	public void reload(Application application){
@@ -116,10 +111,6 @@ public class Window extends GUIComponent{
 	
 	public SessionMap getSessionMap() {
 		return sessionMap;
-	}
-
-	public void setSessionMap(SessionMap sessionMap) {
-		this.sessionMap = sessionMap;
 	}
 	
 	public DefaultLoadApplication getLoadApplication(){

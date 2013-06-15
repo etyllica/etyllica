@@ -35,7 +35,7 @@ public class Core {
 	//External Windows
 	private Window activeWindow = null;
 
-	private SessionMap sessionMap = new SessionMap();
+//	private SessionMap sessionMap = new SessionMap();
 
 	private List<Window> windows = new ArrayList<Window>();
 
@@ -728,9 +728,8 @@ public class Core {
 		if(window!=activeWindow){
 
 			//TODO Fix this
-			window.setSessionMap(sessionMap);
-
-			window.getApplication().setSessionMap(sessionMap);
+			//window.setSessionMap(sessionMap);
+			//window.getApplication().setSessionMap(sessionMap);
 
 			window.setClose(false);
 

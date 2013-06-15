@@ -36,6 +36,7 @@ public class ApplicationLoader implements Runnable{
 			
 			@Override
 			public void run() {
+				application.setSessionMap(window.getSessionMap());
 				application.load();
 			}
 			
@@ -46,7 +47,7 @@ public class ApplicationLoader implements Runnable{
 	}
 
 	public void run(){
-		
+				
 		while(application.getLoading()<100){
 			window.getLoadApplication().setText(application.getLoadingPhrase(), application.getLoading());
 		}
