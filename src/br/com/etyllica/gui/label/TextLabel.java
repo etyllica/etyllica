@@ -3,7 +3,6 @@ package br.com.etyllica.gui.label;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Label;
@@ -81,11 +80,6 @@ public class TextLabel extends Label{
 		}
 	}
 
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		return GUIEvent.NONE;
-	}
-	
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
 		

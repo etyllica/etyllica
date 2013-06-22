@@ -1,5 +1,9 @@
 package br.com.etyllica.gui;
 
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.PointerEvent;
+
 
 /**
  * 
@@ -33,6 +37,23 @@ public abstract class Label extends GUIComponent{
 		this.by = by;
 		this.bw = bw;
 		this.bh = bh;
+	}
+	
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public void update(GUIEvent event) {
+		// TODO Auto-generated method stub
 	}
 	
 }

@@ -33,7 +33,6 @@ import br.com.etyllica.linear.Ponto2D;
 
 public class Grafico{
 
-	private BufferedImage originalBimg;
 	private BufferedImage bimg;
 	
 	private VolatileImage vimg;
@@ -406,6 +405,10 @@ public class Grafico{
 	
 	public void fillRect(int x, int y, int w, int h) {
 		screen.fillRect(x,y,w,h);
+	}
+	
+	public void fill3DRect(int x, int y, int w, int h, boolean raised) {
+		screen.fill3DRect(x, y, w, h, raised);
 	}
 	
 	public void fillArc(int x, int y, int w, int h, int anguloInicial, int anguloArco){

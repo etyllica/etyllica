@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.control.HIDController;
 import br.com.etyllica.core.control.keyboard.Keyboard;
 import br.com.etyllica.core.control.mouse.Mouse;
