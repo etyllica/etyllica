@@ -210,6 +210,10 @@ public abstract class Application extends GUIComponent implements Runnable{
 		
 	}
 	
+	protected void stopTimeUpdate(){
+		executor.shutdownNow();
+	}
+	
 	protected void addWindow(Window window){
 		this.windows.add(window);
 	}
