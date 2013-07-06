@@ -18,7 +18,7 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 
 	private Font f;
 	private Font p;
-	
+		
 	public GenericLoadApplication(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		

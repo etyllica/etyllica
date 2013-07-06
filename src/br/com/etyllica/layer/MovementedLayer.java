@@ -10,7 +10,7 @@ import java.util.Timer;
  *
  */
 
-public class MovementedLayer extends AnimatedImageLayer {
+public class MovementedLayer extends AnimatedLayer {
 
 	private Timer tymerMovel;
 	protected int velocidadeMovel;

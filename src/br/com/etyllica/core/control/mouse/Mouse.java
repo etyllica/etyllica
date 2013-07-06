@@ -17,7 +17,7 @@ import br.com.etyllica.core.control.mouse.arrow.MouseArrow;
 import br.com.etyllica.core.control.mouse.theme.ArrowTheme;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.layer.AnimatedImageLayer;
+import br.com.etyllica.layer.AnimatedLayer;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.linear.Poligono;
 
@@ -308,7 +308,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 		}
 	}
 
-	public boolean sobMouse(AnimatedImageLayer cam)
+	public boolean sobMouse(AnimatedLayer cam)
 	{
 		return sobMouse(cam.getX(), cam.getY(), cam.getXTile(), cam.getYTile());
 	}

@@ -7,16 +7,16 @@ package br.com.etyllica.layer;
  *
  */
 
-public class PivotAnimatedImageLayer extends AnimatedImageLayer{
+public class PivotAnimatedLayer extends AnimatedLayer{
 
 	private int xPivot;
 	private int yPivot;
 	
-	public PivotAnimatedImageLayer(int xTile, int yTile) {
+	public PivotAnimatedLayer(int xTile, int yTile) {
 		this(0, 0, xTile, yTile);
 	}
 	
-	public PivotAnimatedImageLayer(int x, int y, int xTile, int yTile) {
+	public PivotAnimatedLayer(int x, int y, int xTile, int yTile) {
 		super(x, y, xTile, yTile);
 	}
 

@@ -107,11 +107,11 @@ public class ImageLayer extends StaticLayer{
 		centralizaY(y,y+yLimite);
 	}
 
-	public void centraliza(ImageLayer cam){
+	public void centraliza(Layer cam){
 		centralizaX(cam);
 		centralizaY(cam);
 	}
-	public void centralizaX(ImageLayer b){
+	public void centralizaX(Layer b){
 		centralizaX(b.getX(),b.getX()+b.getW());
 	}
 	public int centralizaX(int xInicial, int xFinal)
@@ -121,7 +121,7 @@ public class ImageLayer extends StaticLayer{
 		setX(x);
 		return x;
 	}
-	public void centralizaY(ImageLayer b){
+	public void centralizaY(Layer b){
 		centralizaY(b.getY(),b.getY()+b.getH());
 	}
 	public int centralizaY(int yInicial, int yFinal)
@@ -198,7 +198,7 @@ public class ImageLayer extends StaticLayer{
 		return false;
 	}
 
-	public boolean colideAreaCamada(AnimatedImageLayer b){
+	public boolean colideAreaCamada(AnimatedLayer b){
 		Rectangle rect2 = new Rectangle(0, 0, b.getXTile(), b.getYTile());
 		return colideAreaRetangulo(rect2,b.getX(), b.getY());
 	}

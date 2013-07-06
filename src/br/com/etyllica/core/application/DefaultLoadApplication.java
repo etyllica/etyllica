@@ -16,6 +16,11 @@ import br.com.etyllica.core.video.Grafico;
 
 public class DefaultLoadApplication  extends Application implements LoadApplication{
 
+	
+	public DefaultLoadApplication(int w, int h) {
+		this(0,0,w,h);
+	}
+	
 	public DefaultLoadApplication(int x, int y, int w, int h) {
 		super(x,y,w,h);
 				

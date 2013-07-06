@@ -24,6 +24,11 @@ public class BufferedLayer extends ImageLayer{
 		super(x,y);
 		path = "";
 	}
+	
+	public BufferedLayer(String path) {
+		super(path);
+	}
+	
 	public BufferedLayer(int x, int y, BufferedImage buf) {
 		this(x,y);
 		igualaImagem(buf);

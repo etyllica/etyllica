@@ -1,6 +1,6 @@
 package br.com.etyllica.effects;
 
-import br.com.etyllica.layer.AnimatedImageLayer;
+import br.com.etyllica.layer.AnimatedLayer;
 
 /**
  * 
@@ -9,7 +9,7 @@ import br.com.etyllica.layer.AnimatedImageLayer;
  *
  */
 
-public class Effect extends AnimatedImageLayer{
+public class Effect extends AnimatedLayer{
 
 	public Effect(int x, int y, int xTile, int yTile)
 	{

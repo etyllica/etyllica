@@ -11,7 +11,7 @@ import br.com.etyllica.core.video.Grafico;
  *
  */
 
-public class AnimatedImageLayer extends ImageLayer{
+public class AnimatedLayer extends ImageLayer{
 
 	protected int xTile = 0;
 	protected int yTile = 0;
@@ -32,17 +32,17 @@ public class AnimatedImageLayer extends ImageLayer{
 
 	protected Timer tymerAnimacao = new Timer();
 
-	public AnimatedImageLayer(int x, int y){
+	public AnimatedLayer(int x, int y){
 		this(x, y, 0, 0);
 	}
 
-	public AnimatedImageLayer(int x, int y, int xTile, int yTile, String caminho){
+	public AnimatedLayer(int x, int y, int xTile, int yTile, String caminho){
 		super(x,y,caminho);
 		this.xTile = xTile;
 		this.yTile = yTile;
 	}
 
-	public AnimatedImageLayer(int x, int y, int xTile, int yTile){
+	public AnimatedLayer(int x, int y, int xTile, int yTile){
 		super(x,y);
 		this.xTile = xTile;
 		this.yTile = yTile;
@@ -200,7 +200,7 @@ public class AnimatedImageLayer extends ImageLayer{
 		return true;
 	}
 
-	public boolean colideRetangular(AnimatedImageLayer b)
+	public boolean colideRetangular(AnimatedLayer b)
 	{
 		if(b.getX() + b.getXTile() < getX())	return false;
 		if(b.getX() > getX() + getXTile())		return false;
@@ -211,7 +211,7 @@ public class AnimatedImageLayer extends ImageLayer{
 		return true;
 	}
 
-	public boolean colideCircular(AnimatedImageLayer b)
+	public boolean colideCircular(AnimatedLayer b)
 	{
 		int xdiff = b.getX() - getX();
 		int ydiff = b.getY() - getY();
