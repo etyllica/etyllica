@@ -16,7 +16,7 @@ public class ArrowTheme {
 	protected int arrowSize = 22;
 	
 	protected MouseArrow normalArrow;
-	protected MouseArrow clickArrow;	
+	protected MouseArrow clickArrow;
 	protected MouseArrow textArrow;
 	protected MouseArrow loadingArrow;
 	

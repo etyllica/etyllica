@@ -107,6 +107,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 		core.addWindow(desktop);
 		
 		escondeCursor();
+		mouse.updateArrowTheme();
 
 		this.setFocusTraversalKeysEnabled(false);
 		setFocusable(true);

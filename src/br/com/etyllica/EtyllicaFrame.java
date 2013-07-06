@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Core;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.control.mouse.Mouse;
@@ -107,6 +106,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		core.addWindow(desktop);
 		
 		escondeCursor();
+		mouse.updateArrowTheme();
 
 		this.setFocusTraversalKeysEnabled(false);
 		setFocusable(true);

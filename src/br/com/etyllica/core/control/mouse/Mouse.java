@@ -48,7 +48,9 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 	public Mouse(int x, int y) {
 		this.x = x;
 		this.y = y;
-
+	}
+	
+	public void updateArrowTheme(){
 		arrowTheme = Configuration.getInstance().getArrowTheme();
 		setEstadoNormal();
 	}
