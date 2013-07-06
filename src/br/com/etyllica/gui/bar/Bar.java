@@ -2,7 +2,7 @@ package br.com.etyllica.gui.bar;
 
 import java.awt.Polygon;
 
-import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.InternalApplication;
 import br.com.etyllica.core.control.mouse.Mouse;
 import br.com.etyllica.core.control.mouse.MouseButton;
 import br.com.etyllica.core.event.GUIEvent;
@@ -92,7 +92,7 @@ public abstract class Bar extends Button{
 		this.opened = opened;
 	}
 
-	public Application getApplication() {
+	public InternalApplication getApplication() {
 		return application;
 	}
 

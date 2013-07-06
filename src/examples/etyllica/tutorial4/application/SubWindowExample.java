@@ -2,8 +2,6 @@ package examples.etyllica.tutorial4.application;
 
 import java.awt.Color;
 
-import examples.etyllica.tutorial2.application.SimpleGuiExample;
-
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
@@ -11,6 +9,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Window;
+import examples.etyllica.tutorial2.application.SimpleGuiExample;
 
 public class SubWindowExample extends Application{
 

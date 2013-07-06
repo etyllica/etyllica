@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.InternalApplication;
 import br.com.etyllica.core.application.DefaultLoadApplication;
-import br.com.etyllica.core.application.GenericLoadApplication;
 import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
@@ -25,11 +25,11 @@ public class Window extends GUIComponent{
 	protected Application application;
 
 	//TODO Change to Application backApplication
-	protected List<Application> oldApplications = new ArrayList<Application>();
+	protected List<InternalApplication> oldApplications = new ArrayList<InternalApplication>();
 
 	protected SessionMap sessionMap = new SessionMap();
 
-	protected DefaultLoadApplication load;
+	//protected DefaultLoadApplication load;
 
 	protected ApplicationLoader applicationLoader;
 
@@ -39,9 +39,10 @@ public class Window extends GUIComponent{
 		super(x,y,w,h);
 
 		//load = new LoadApplication(x,y,w,h);
-		load = new GenericLoadApplication(x,y,w,h);
+		//load = new GenericLoadApplication(x,y,w,h);
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_ARGB));
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB));
+		
 		applicationLoader = new ApplicationLoader();
 	}
 
@@ -93,11 +94,20 @@ public class Window extends GUIComponent{
 		add(application);
 	
 	}
+	
+	public void setLoadApplication(DefaultLoadApplication loadApplication) {
+		//this.application = loadApplication;
+		
+		clearComponents();
+		add(loadApplication);
+	
+	}
 
 	public void reload(Application application){
 		
+		DefaultLoadApplication load = application.getLoadApplication();
 		load.load();
-		setApplication(load);
+		setLoadApplication(load);
 		
 		applicationLoader.setWindow(this);
 		applicationLoader.setApplication(application);
@@ -113,10 +123,6 @@ public class Window extends GUIComponent{
 		return sessionMap;
 	}
 	
-	public DefaultLoadApplication getLoadApplication(){
-		return load;
-	}
-
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
 		

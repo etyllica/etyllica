@@ -1,8 +1,7 @@
 package examples.jgl;
 
-import examples.jgl.application.Teapots;
-import examples.jgl.application.TextureSurf;
 import br.com.etyllica.Etyllica;
+import examples.jgl.application.Teapots;
 
 public class JGLTutorials extends Etyllica {
 

@@ -13,10 +13,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Core;
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.control.mouse.Mouse;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.FontLoader;

@@ -1,6 +1,6 @@
 package br.com.etyllica.gui.bar;
 
-import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.InternalApplication;
 
 /**
  * 
@@ -9,7 +9,7 @@ import br.com.etyllica.core.application.Application;
  *
  */
 
-public abstract class BarApplication extends Application{
+public abstract class BarApplication extends InternalApplication{
 
 	protected boolean onMouse = false;
 

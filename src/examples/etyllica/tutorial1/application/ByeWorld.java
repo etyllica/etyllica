@@ -5,6 +5,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.InternalApplication;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;

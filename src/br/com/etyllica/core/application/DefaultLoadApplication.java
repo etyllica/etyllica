@@ -14,7 +14,7 @@ import br.com.etyllica.core.video.Grafico;
  *
  */
 
-public class DefaultLoadApplication  extends Application implements LoadApplication{
+public class DefaultLoadApplication extends InternalApplication implements LoadApplication{
 
 	
 	public DefaultLoadApplication(int w, int h) {
@@ -24,7 +24,7 @@ public class DefaultLoadApplication  extends Application implements LoadApplicat
 	public DefaultLoadApplication(int x, int y, int w, int h) {
 		super(x,y,w,h);
 				
-		load();
+		//load();
 	}
 
 	protected String phrase = "Loading...";
