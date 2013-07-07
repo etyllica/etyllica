@@ -17,7 +17,7 @@ import br.com.etyllica.gui.panel.TextPanel;
 
 public class ChatWindowExample extends Application{
 
-	public ChatWindowExample(int w, int h) {
+	public ChatWindowExample(int w, int h){
 		super(w, h);
 	}
 
@@ -29,7 +29,7 @@ public class ChatWindowExample extends Application{
 	private String friendname = "Friend";
 	
 	@Override
-	public void load() {
+	public void load(){
 		
 		ScrollerPanel rollerPanel = new ScrollerPanel(20,20,300,240);
 		
@@ -54,6 +54,7 @@ public class ChatWindowExample extends Application{
 		tf.clearField();
 	}
 	
+	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event){
 		
 		if(event.getPressed(Tecla.TSK_1)){
@@ -85,7 +86,7 @@ public class ChatWindowExample extends Application{
 	}
 	
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Grafico g){
 		
 		//Drawing background
 		
@@ -94,7 +95,7 @@ public class ChatWindowExample extends Application{
 	}
 
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
+	public GUIEvent updateMouse(PointerEvent event){
 		// TODO Auto-generated method stub
 		return GUIEvent	.NONE;
 	}

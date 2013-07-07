@@ -1,8 +1,14 @@
 package br.com.etyllica.layer;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Shape;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
 
+import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.video.Grafico;
 
 /**
@@ -13,170 +19,176 @@ import br.com.etyllica.core.video.Grafico;
  */
 
 public class TextLayer extends ImageLayer{
-	
+
 	private String text;
-	
+
 	private int style = Font.PLAIN;
 	private float size = 26;
-	private String fontName = "exocet.ttf";
 	
-	private Color corDifusa;
-	private Color corBorda;
+	private Font font = null;
+	private String fontName = "";
 
-	private boolean borda = false; 
+	private Color color;
+	
+	private Color borderColor;
 
-	private boolean isAntiAliased = true;
+	private boolean border = false;
 	
-	//private boolean usesFractionalMetrics = false;
-	
+	private float borderWidth = 4f;
+
+	private boolean antiAliased = true;
+
+	private boolean fractionalMetrics = false;
+
 	public TextLayer(String text){
-		super();
-		
-		//corDifusa = new Color(190,10,10);
-		corDifusa = new Color(0xff,0xff,0xff);
-		corBorda = new Color(0,0,0);
-		
-
-		this.text = text;
+		this(0,0,text);
 	}
 
 	public TextLayer(int x, int y, String text){
+		super(x,y);
 
-		corDifusa = new Color(0xff,0xff,0xff);
-		corBorda = new Color(0,0,0);
+		this.color = new Color(0xff,0xff,0xff);
+		this.borderColor = new Color(0,0,0);
 
-		this.x = x;
-		this.y = y;
-
-		this.text = text;
+		setText(text);
 
 	}
-		
+
 	public int getStyle() {
 		return style;
 	}
+
 	public void setStyle(int style) {
 		this.style = style;
 	}
+
 	public float getSize() {
 		return size;
 	}
+
 	public void setSize(float size) {
 		this.size = size;
 	}
+
 	public String getFontName() {
 		return fontName;
 	}
+
 	public void setFontName(String fontName) {
 		this.fontName = fontName;
-	}
-	
-	public void setOffsetTexto(String texto){
-		setTexto(this.text+texto);
-	}
-	
-	public void apagaUltima(){
-		setTexto(this.text.substring(0,text.length()-1));
-	}
-
-	public void insereFinal(String texto){
-		this.text+=texto;
-	}
-	
-	public void setTexto(Object texto){
-		setTexto(texto.toString());
-	}
-	
-	public void setTexto(String texto){
-		if(!texto.isEmpty())
-			this.text = texto;
-		else
-			this.text = " ";
-		//escreve();
+		
+		this.font = FontLoader.getInstance().loadFont(fontName).deriveFont(style,size);		
 	}
 
 	@Override
 	public void draw(Grafico g){
-		if(visible){
-			g.getFont().deriveFont(style, size);
-			g.drawString(text, x, y);
-		}		
-	}
+				
+		if(this.visible){
+			
+			Font f;
+			
+			if(this.font!=null){
+				
+				f = font;
+				
+			}else{
+				
+				f = g.getFont().deriveFont(style, size);
+			}
+			
+			g.setFont(f);
+						
+			if(!border){
+				
+				g.setColor(color);
+				g.drawString(text,x,y);
+								
+			}else{
+				
+				FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
+				TextLayout layout = new TextLayout(text, f, frc);
 
-	/*
-	protected void escreve(){
+				//Rectangle2D bounds = layout.getBounds();
+				
+				//float height = (float) Math.ceil(bounds.getHeight()+size);
+				
+				Shape sha = layout.getOutline(AffineTransform.getTranslateInstance(x,y));
 
-		FontRenderContext frc = new FontRenderContext(null, isAntiAliased, usesFractionalMetrics);
-		TextLayout layout = new TextLayout(texto, font, frc);
+				g.setStroke(new BasicStroke(borderWidth));
 
-		Rectangle2D bounds = layout.getBounds();
+				g.setColor(borderColor);
+				g.draw(sha);
 
-		//int w = (int) Math.ceil(bounds.getWidth()+3);
-		int width = (int) Math.ceil(bounds.getWidth()+tamanhoFonte/2);
-		int height = (int) Math.ceil(bounds.getHeight()+tamanhoFonte);		
-
-		BufferedImage imagemBuffer = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
-		Graphics2D g = imagemBuffer.createGraphics();
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-		g.setFont(font);
-		if(borda){
-			Shape sha = layout.getOutline(AffineTransform.getTranslateInstance(0,height-14));
-
-			//g.setStroke(new BasicStroke(3f));
-			g.setStroke(new BasicStroke(4f));
-
-			g.setColor(corBorda);
-			g.draw(sha);
-
-			g.setColor(corDifusa);
-			g.fill(sha);
+				g.setColor(color);
+				g.fill(sha);
+			
+			}
+			
 		}
-		else{
-			g.setColor(corDifusa);
-			g.drawString(texto,0,0);
-		}
-
-		g.dispose();
-
-		//Para poder centralizar
-
-
-		int w = imagemBuffer.getWidth();
-		int h = imagemBuffer.getHeight();
-		imgDefinida = imagemBuffer.getScaledInstance(w, h, BufferedImage.TYPE_INT_ARGB);
-		xLimite = imgDefinida.getWidth(null);
-		yLimite = imgDefinida.getHeight(null);
-
-	}
-	*/
-	
-	public void setCorDifusa(int r, int g, int b){
-		corDifusa = new Color(r%256,g%256,b%256);
-	}
-	public void setCorDifusa(Color c){
-		corDifusa = c;
+		
 	}
 	
-	public boolean isAntialiased(){
-		return isAntiAliased;
+	public void setColor(int r, int g, int b){
+		color = new Color(r%256,g%256,b%256);
 	}
-	
-	public boolean getBorda(){
-		return borda;
+
+	public Color getBorderColor() {
+		return borderColor;
 	}
-	
-	public String getTexto(){
+
+	public void setBorderColor(Color borderColor) {
+		this.borderColor = borderColor;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setText(String text) {
+		if(!text.isEmpty())
+			this.text = text;
+		else
+			this.text = " ";
+	}
+
+	public void setBorder(boolean border) {
+		this.border = border;
+	}
+
+	public void setColor(Color color){
+		this.color = color;
+	}
+
+	public boolean isBorder(){
+		return border;
+	}
+
+	public String getText(){
 		return text;
 	}
-	
-	public Color getCorBorda(){
-		return corBorda;
+
+	public boolean isAntiAliased() {
+		return antiAliased;
 	}
-	
-	public Color getCorDifusa(){
-		return corDifusa;
+
+	public void setAntiAliased(boolean antiAliased) {
+		this.antiAliased = antiAliased;
 	}
-	
+
+	public boolean isFractionalMetrics() {
+		return fractionalMetrics;
+	}
+
+	public void setFractionalMetrics(boolean fractionalMetrics) {
+		this.fractionalMetrics = fractionalMetrics;
+	}
+
+	public float getBorderWidth() {
+		return borderWidth;
+	}
+
+	public void setBorderWidth(float borderWidth) {
+		this.borderWidth = borderWidth;
+	}
 	
 }

@@ -450,8 +450,16 @@ public class Grafico{
 		screen.fillOval(x, y, w, h);
 	}
 	
-	public void drawString(String text, int x, int y) {
+	public void drawString(String text, int x, int y){
 		screen.drawString(text, x, y);
+	}
+	
+	public void draw(Shape shape){
+		screen.draw(shape);
+	}
+	
+	public void fill(Shape shape){
+		screen.fill(shape);
 	}
 
 	/*public void setGraphics(GLGraphics2D graphics){		

@@ -22,6 +22,7 @@ public class SubWindowExample extends Application{
 		loading = 100;
 	}
 
+	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event){
 		
 		if(event.getPressed(Tecla.TSK_1)){
