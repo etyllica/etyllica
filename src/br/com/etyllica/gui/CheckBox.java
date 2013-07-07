@@ -1,10 +1,10 @@
 package br.com.etyllica.gui;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.control.mouse.MouseButton;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.theme.Theme;
 

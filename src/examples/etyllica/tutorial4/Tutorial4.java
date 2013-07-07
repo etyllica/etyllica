@@ -1,7 +1,7 @@
 package examples.etyllica.tutorial4;
 
 import br.com.etyllica.Etyllica;
-import examples.etyllica.tutorial4.application.SubWindowExample;
+import examples.etyllica.tutorial4.application.ProceduralColorChange;
 
 public class Tutorial4 extends Etyllica {
 
@@ -13,8 +13,13 @@ public class Tutorial4 extends Etyllica {
 	
 	@Override
 	public void startGame() {
+
+		//Upping 3 file levels
+		String s = getClass().getResource("").toString();
+		setPath(s+"../../../");
 		
-		setMainApplication(new SubWindowExample(w,h));
+		
+		setMainApplication(new ProceduralColorChange(w,h));
 	}
 	
 }

@@ -1,4 +1,4 @@
-package br.com.etyllica.core.control.mouse;
+package br.com.etyllica.core.input.mouse;
 
 import java.awt.event.MouseEvent;
 

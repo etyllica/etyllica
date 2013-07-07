@@ -2,7 +2,7 @@ package br.com.etyllica.core.event;
 
 import java.awt.event.KeyEvent;
 
-import br.com.etyllica.core.control.joystick.JoystickEvent;
+import br.com.etyllica.core.input.joystick.JoystickEvent;
 
 /**
  * 

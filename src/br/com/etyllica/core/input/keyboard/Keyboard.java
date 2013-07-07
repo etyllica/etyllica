@@ -1,4 +1,4 @@
-package br.com.etyllica.core.control.keyboard;
+package br.com.etyllica.core.input.keyboard;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

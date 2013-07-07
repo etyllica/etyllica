@@ -1,4 +1,4 @@
-package br.com.etyllica.core.control.joystick;
+package br.com.etyllica.core.input.joystick;
 
 import java.util.EventListener;
 

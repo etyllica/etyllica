@@ -2,11 +2,13 @@ package br.com.etyllica.layer;
 
 import java.awt.Color;
 import java.awt.Image;
-
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+
+import br.com.etyllica.core.loader.ImageLoader;
+import br.com.etyllica.core.video.Grafico;
 
 /**
  * 
@@ -22,11 +24,15 @@ public class BufferedLayer extends ImageLayer{
 
 	public BufferedLayer(int x, int y) {
 		super(x,y);
-		path = "";
+	}
+	
+	public BufferedLayer(int x, int y, String path) {
+		super(x,y,path);
+		igualaImagem(ImageLoader.getInstance().getImage(path));
 	}
 	
 	public BufferedLayer(String path) {
-		super(path);
+		this(0,0,path);
 	}
 	
 	public BufferedLayer(int x, int y, BufferedImage buf) {
@@ -107,9 +113,10 @@ public class BufferedLayer extends ImageLayer{
 			for(int i=0;i<w;i++){
 
 				//Pego o rgb do pixel selecionado
-				int rgb = imagemBuffer.getRGB(i,j);
+				int rgb = originalBuffer.getRGB(i,j);
 				
-				int a = ((rgb & 0xff000000) >> 24);
+				int a = (rgb>>24) & 0xff;
+				
 				int r = ((rgb & 0x00ff0000) >> 16);
 				int g = ((rgb & 0x0000ff00) >> 8);
 				int b = ((rgb & 0x000000ff) >> 0);
@@ -144,9 +151,9 @@ public class BufferedLayer extends ImageLayer{
 				
 				//Nao sei porque isso ocorre mas as vezes alpha eh negativo e 
 				//me parece que este eh o jeito certo de consertar
-				if(a<0){
-					a += 255;
-				}
+				//if(a<0){
+				//	a += 255;
+				//}
 
 				imagemBuffer.setRGB(i, j, new Color(r,g,b,a).getRGB());
 				
@@ -206,6 +213,26 @@ public class BufferedLayer extends ImageLayer{
 	
 	public BufferedImage getImagemBuffer(){
 		return imagemBuffer;
+	}
+	
+	public void draw(Grafico g){
+		if(visible){
+
+			if(angle==0){
+				g.drawImage( imagemBuffer, x, y, x+w,y+h,
+						xImage,yImage,xImage+w,yImage+h, null );
+			}else{
+
+				AffineTransform reset = g.getTransform();
+
+				AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2);
+				
+				g.setTransform(transform);
+				g.drawImage( imagemBuffer, x, y, x+w,y+h,
+						xImage,yImage,xImage+w,yImage+h, null );
+				g.setTransform(reset);
+			}
+		}
 	}
 
 }

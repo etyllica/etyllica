@@ -104,7 +104,7 @@ public class TextLayer extends ImageLayer{
 				g.drawString(text,x,y);
 								
 			}else{
-				
+								
 				FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
 				TextLayout layout = new TextLayout(text, f, frc);
 

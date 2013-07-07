@@ -1,4 +1,4 @@
-package br.com.etyllica.core.control.mouse;
+package br.com.etyllica.core.input.mouse;
 
 import java.awt.Polygon;
 import java.awt.event.MouseEvent;
@@ -13,10 +13,10 @@ import java.util.List;
 import javax.swing.event.MouseInputListener;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.control.mouse.arrow.MouseArrow;
-import br.com.etyllica.core.control.mouse.theme.ArrowTheme;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.gui.mouse.arrow.MouseArrow;
+import br.com.etyllica.gui.mouse.theme.ArrowTheme;
 import br.com.etyllica.layer.AnimatedLayer;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.linear.Poligono;

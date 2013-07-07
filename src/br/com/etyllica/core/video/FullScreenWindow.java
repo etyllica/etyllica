@@ -13,8 +13,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 
 import br.com.etyllica.core.Core;
-import br.com.etyllica.core.control.keyboard.Keyboard;
-import br.com.etyllica.core.control.mouse.Mouse;
+import br.com.etyllica.core.input.keyboard.Keyboard;
+import br.com.etyllica.core.input.mouse.Mouse;
 
 /**
  * 

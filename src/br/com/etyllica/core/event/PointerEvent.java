@@ -1,6 +1,6 @@
 package br.com.etyllica.core.event;
 
-import br.com.etyllica.core.control.mouse.MouseButton;
+import br.com.etyllica.core.input.mouse.MouseButton;
 
 
 /**

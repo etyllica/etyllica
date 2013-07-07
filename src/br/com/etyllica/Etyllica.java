@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.Core;
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.control.mouse.Mouse;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.loader.ImageLoader;
 import br.com.etyllica.core.loader.MultimediaLoader;
@@ -73,24 +73,14 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	public void init() {
 		
-		//TODO Mudar isso
-		//String s = getCodeBase().toString();
-
-		String s = getClass().getResource("").toString();
-		//For Windows
-		s = s.replaceAll("%20"," ");
-		//System.out.println(s);
-
-		//TODO load largura e altura from a .ini file
 		defineTamanho(w,h);
 		
 		core = new Core();
 
-		ImageLoader.getInstance().setUrl(s);
-		FontLoader.getInstance().setUrl(s);
-		MultimediaLoader.getInstance().setUrl(s);
+		String s = getClass().getResource("").toString();
+		
+		setPath(s);
 
-		//MeshLoader.getInstancia().setUrl(s);
 		grafico = new Grafico(w,h);		
 		grafico.setBufferedImage(volatileImg.getSnapshot());
 				
@@ -120,6 +110,20 @@ public abstract class Etyllica extends Applet implements Runnable{
 		executor.scheduleAtFixedRate(this, UPDATE_DELAY, UPDATE_DELAY, TimeUnit.MILLISECONDS);
 		//executor.scheduleAtFixedRate(this, TIME_UPDATE_INTERVAL, TIME_UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
 
+	}
+	
+	protected void setPath(String path){
+		
+		//For Windows
+		String s = path.replaceAll("%20"," ");
+		//System.out.println(s);
+		
+		ImageLoader.getInstance().setUrl(s);
+		FontLoader.getInstance().setUrl(s);
+		MultimediaLoader.getInstance().setUrl(s);
+
+		//MeshLoader.getInstancia().setUrl(s);
+		
 	}
 
 	public abstract void startGame();

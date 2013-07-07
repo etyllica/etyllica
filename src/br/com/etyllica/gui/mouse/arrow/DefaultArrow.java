@@ -1,4 +1,4 @@
-package br.com.etyllica.core.control.mouse.arrow;
+package br.com.etyllica.gui.mouse.arrow;
 
 import java.awt.Color;
 import java.awt.Polygon;

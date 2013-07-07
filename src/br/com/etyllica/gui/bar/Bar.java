@@ -3,11 +3,11 @@ package br.com.etyllica.gui.bar;
 import java.awt.Polygon;
 
 import br.com.etyllica.core.application.InternalApplication;
-import br.com.etyllica.core.control.mouse.Mouse;
-import br.com.etyllica.core.control.mouse.MouseButton;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.input.mouse.Mouse;
+import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.layer.ImageLayer;
 

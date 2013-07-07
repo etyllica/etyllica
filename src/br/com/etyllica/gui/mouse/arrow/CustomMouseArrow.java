@@ -1,6 +1,6 @@
-package br.com.etyllica.core.control.mouse.arrow;
+package br.com.etyllica.gui.mouse.arrow;
 
-import br.com.etyllica.core.control.mouse.arrow.MouseArrow;
+import br.com.etyllica.gui.mouse.arrow.MouseArrow;
 import br.com.etyllica.layer.ImageLayer;
 
 /**

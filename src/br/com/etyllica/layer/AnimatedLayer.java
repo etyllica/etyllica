@@ -189,7 +189,7 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public boolean colideRetangular(ImageLayer b)
+	public boolean colideRetangular(Layer b)
 	{
 		if(b.getX() + b.getW() < getX())	return false;
 		if(b.getX() > getX() + getXTile())		return false;
@@ -230,7 +230,7 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public boolean colideCircular(ImageLayer b)
+	public boolean colideCircular(Layer b)
 	{
 		int xdiff = b.getX() - getX();
 		int ydiff = b.getY() - getY();

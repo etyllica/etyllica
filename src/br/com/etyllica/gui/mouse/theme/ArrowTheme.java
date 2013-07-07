@@ -1,8 +1,8 @@
-package br.com.etyllica.core.control.mouse.theme;
+package br.com.etyllica.gui.mouse.theme;
 
-import br.com.etyllica.core.control.mouse.arrow.DefaultArrow;
-import br.com.etyllica.core.control.mouse.arrow.DefaultTextArrow;
-import br.com.etyllica.core.control.mouse.arrow.MouseArrow;
+import br.com.etyllica.gui.mouse.arrow.DefaultArrow;
+import br.com.etyllica.gui.mouse.arrow.DefaultTextArrow;
+import br.com.etyllica.gui.mouse.arrow.MouseArrow;
 
 /**
  * 

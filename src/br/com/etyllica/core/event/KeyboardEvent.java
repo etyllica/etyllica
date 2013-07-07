@@ -1,6 +1,6 @@
 package br.com.etyllica.core.event;
 
-import br.com.etyllica.core.control.keyboard.OldKeyState;
+import br.com.etyllica.core.input.keyboard.OldKeyState;
 
 public class KeyboardEvent{
 	
