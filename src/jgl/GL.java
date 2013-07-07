@@ -25,7 +25,6 @@ import jgl.context.GL_Object;
 import jgl.context.GL_Util;
 import jgl.context.attrib.GL_Viewport;
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.InternalApplication;
 import br.com.etyllica.core.video.Grafico;
 
 /**

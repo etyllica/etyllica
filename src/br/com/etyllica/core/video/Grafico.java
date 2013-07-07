@@ -18,7 +18,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.VolatileImage;
 
-import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
@@ -249,10 +248,11 @@ public class Grafico{
 	
 	public void desenha(TextLayer texto){
 
+		/*
 		if(texto.isVisible()){
 
-			Font f = FontLoader.getInstance().loadFont(texto.getNomeFonte());
-			f = f.deriveFont(texto.getEstilo(), texto.getTamanho());
+			Font f = FontLoader.getInstance().loadFont(texto.getFontName());
+			f = f.deriveFont(texto.getStyle(), texto.getSize());
 
 			screen.setFont(f);
 
@@ -271,7 +271,6 @@ public class Grafico{
 
 		}
 
-		/*
 		if(t.getAparecendo()){
 			//escreve
 			//screen.drawImage( t.getImagem(), t.getX(), t.getY(), null);
@@ -449,6 +448,10 @@ public class Grafico{
 	
 	public void fillOval(int x, int y, int w, int h ){
 		screen.fillOval(x, y, w, h);
+	}
+	
+	public void drawString(String text, int x, int y) {
+		screen.drawString(text, x, y);
 	}
 
 	/*public void setGraphics(GLGraphics2D graphics){		

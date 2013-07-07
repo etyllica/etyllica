@@ -3,6 +3,8 @@ package br.com.etyllica.layer;
 import java.awt.Color;
 import java.awt.Font;
 
+import br.com.etyllica.core.video.Grafico;
+
 /**
  * 
  * @author yuripourre
@@ -12,11 +14,11 @@ import java.awt.Font;
 
 public class TextLayer extends ImageLayer{
 	
-	private String texto;
+	private String text;
 	
-	private int estilo = Font.PLAIN;
-	private int tamanho = 22;
-	private String nomeFonte = "exocet.ttf";
+	private int style = Font.PLAIN;
+	private float size = 26;
+	private String fontName = "exocet.ttf";
 	
 	private Color corDifusa;
 	private Color corBorda;
@@ -24,44 +26,61 @@ public class TextLayer extends ImageLayer{
 	private boolean borda = false; 
 
 	private boolean isAntiAliased = true;
+	
 	//private boolean usesFractionalMetrics = false;
 	
-	public int getEstilo(){
-		return estilo;
-	}
-	
-	public void setEstilo(int estilo){
-		this.estilo = estilo;
-	}
-	
-	public int getTamanho(){
-		return tamanho;
-	}
-	
-	public void setTamanho(int tamanho){
-		this.tamanho = tamanho;
-	}
-	
-	public String getNomeFonte(){
-		return nomeFonte;
-	}
-	public void setNomeFonte(String nomeFonte){
-		this.nomeFonte = nomeFonte;
+	public TextLayer(String text){
+		super();
+		
+		//corDifusa = new Color(190,10,10);
+		corDifusa = new Color(0xff,0xff,0xff);
+		corBorda = new Color(0,0,0);
+		
+
+		this.text = text;
 	}
 
-	public void setTamanhoFonte(int tamanho){
-		this.tamanho = tamanho;
-	}
+	public TextLayer(int x, int y, String text){
 
+		corDifusa = new Color(0xff,0xff,0xff);
+		corBorda = new Color(0,0,0);
+
+		this.x = x;
+		this.y = y;
+
+		this.text = text;
+
+	}
+		
+	public int getStyle() {
+		return style;
+	}
+	public void setStyle(int style) {
+		this.style = style;
+	}
+	public float getSize() {
+		return size;
+	}
+	public void setSize(float size) {
+		this.size = size;
+	}
+	public String getFontName() {
+		return fontName;
+	}
+	public void setFontName(String fontName) {
+		this.fontName = fontName;
+	}
+	
 	public void setOffsetTexto(String texto){
-		setTexto(this.texto+texto);
+		setTexto(this.text+texto);
 	}
+	
 	public void apagaUltima(){
-		setTexto(this.texto.substring(0,texto.length()-1));
+		setTexto(this.text.substring(0,text.length()-1));
 	}
 
 	public void insereFinal(String texto){
-		this.texto+=texto;
+		this.text+=texto;
 	}
 	
 	public void setTexto(Object texto){
@@ -70,30 +89,18 @@ public class TextLayer extends ImageLayer{
 	
 	public void setTexto(String texto){
 		if(!texto.isEmpty())
-			this.texto = texto;
+			this.text = texto;
 		else
-			this.texto = " ";
+			this.text = " ";
 		//escreve();
 	}
 
-	public TextLayer(String texto){
-		//corDifusa = new Color(190,10,10);
-		corDifusa = new Color(0xff,0xff,0xff);
-		corBorda = new Color(0,0,0);
-
-		setTexto(texto);
-	}
-
-	public TextLayer(int x, int y, String texto){
-
-		corDifusa = new Color(0xff,0xff,0xff);
-		corBorda = new Color(0,0,0);
-
-		this.x = x;
-		this.y = y;
-
-		this.texto = texto;
-
+	@Override
+	public void draw(Grafico g){
+		if(visible){
+			g.getFont().deriveFont(style, size);
+			g.drawString(text, x, y);
+		}		
 	}
 
 	/*
@@ -160,7 +167,7 @@ public class TextLayer extends ImageLayer{
 	}
 	
 	public String getTexto(){
-		return texto;
+		return text;
 	}
 	
 	public Color getCorBorda(){

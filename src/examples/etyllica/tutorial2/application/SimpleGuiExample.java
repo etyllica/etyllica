@@ -3,7 +3,6 @@ package examples.etyllica.tutorial2.application;
 import java.awt.Color;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.InternalApplication;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
