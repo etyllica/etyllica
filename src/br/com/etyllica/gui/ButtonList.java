@@ -8,6 +8,7 @@ import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.gui.button.DefaultButton;
 
 /**
  * 
@@ -18,7 +19,7 @@ import br.com.etyllica.core.video.Grafico;
 
 public class ButtonList extends GUIComponent{
 	
-	List<Button> buttons = new ArrayList<Button>();
+	List<DefaultButton> buttons = new ArrayList<DefaultButton>();
 	
 	public ButtonList(int x, int y, int w, int h){
 		super(x, y, w, h);
@@ -27,7 +28,7 @@ public class ButtonList extends GUIComponent{
 	@Override
 	public GUIEvent updateMouse(PointerEvent event){
 		
-		for(Button button: buttons){
+		for(DefaultButton button: buttons){
 			button.updateMouse(event);
 		}
 		
@@ -47,7 +48,7 @@ public class ButtonList extends GUIComponent{
 		
 		//g.setBimg(bimg.getSubimage(0, y, w, h));
 		
-		for(Button button: buttons){
+		for(DefaultButton button: buttons){
 			if(button.getY()<h-100){
 				button.draw(g);
 			}else{
@@ -68,7 +69,7 @@ public class ButtonList extends GUIComponent{
 		
 	}
 	
-	public void add(Button button){
+	public void add(DefaultButton button){
 		buttons.add(button);
 	}
 	
@@ -78,7 +79,7 @@ public class ButtonList extends GUIComponent{
 	
 	@Override
 	public void setOffset(int offsetX, int offsetY){
-		for(Button button: buttons){
+		for(DefaultButton button: buttons){
 			button.setOffset(offsetX, offsetY);
 		}
 		

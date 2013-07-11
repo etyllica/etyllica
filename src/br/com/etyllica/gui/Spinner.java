@@ -5,6 +5,7 @@ import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.gui.button.DefaultButton;
 import br.com.etyllica.gui.label.TextLabel;
 
 /**
@@ -16,8 +17,8 @@ import br.com.etyllica.gui.label.TextLabel;
 
 public abstract class Spinner<T extends Number> extends GUIComponent{
 
-	private Button plus;
-	private Button minus;
+	private DefaultButton plus;
+	private DefaultButton minus;
 	private TextLabel resultLabel;
 	private Panel resultPanel;
 	
@@ -38,12 +39,12 @@ public abstract class Spinner<T extends Number> extends GUIComponent{
 		int buttonWidth = w/6;
 		int miniBorder = 1;
 		
-		plus = new Button(x+w-buttonWidth-miniBorder, y+miniBorder, buttonWidth, h/2-miniBorder-1);
+		plus = new DefaultButton(x+w-buttonWidth-miniBorder, y+miniBorder, buttonWidth, h/2-miniBorder-1);
 		plus.setLabel(new TextLabel("+"));
 		plus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "addReload"));
 		add(plus);
 		
-		minus = new Button(x+w-buttonWidth-miniBorder, y+h/2+miniBorder, buttonWidth, h/2-miniBorder);
+		minus = new DefaultButton(x+w-buttonWidth-miniBorder, y+h/2+miniBorder, buttonWidth, h/2-miniBorder);
 		minus.setLabel(new TextLabel("-"));
 		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "subReload"));
 		

@@ -9,6 +9,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.gui.button.DefaultButton;
 import br.com.etyllica.gui.icon.DownArrow;
 import br.com.etyllica.gui.list.Option;
 
@@ -16,7 +17,7 @@ public class Select extends GUIComponent{
 		
 	private List<Option> options = new ArrayList<Option>();
 	
-	private Button button;
+	private DefaultButton button;
 	
 	private int selectedOption = 0;
 	
@@ -28,7 +29,7 @@ public class Select extends GUIComponent{
 		int buttonSize = h;
 		
 		//TODO ButtonDownArrow
-		button = new Button(w-buttonSize,0,buttonSize,buttonSize);
+		button = new DefaultButton(w-buttonSize,0,buttonSize,buttonSize);
 		
 		DownArrow arrow = new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2);
 		button.setLabel(arrow);

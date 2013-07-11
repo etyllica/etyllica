@@ -2,10 +2,8 @@ package br.com.etyllica.gui.button;
 
 import java.awt.Polygon;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.gui.Button;
 import br.com.etyllica.theme.Theme;
 
 /**
@@ -15,7 +13,7 @@ import br.com.etyllica.theme.Theme;
  *
  */
 
-public class PolygonalButton extends Button{
+public class PolygonalButton extends DefaultButton{
 
 	protected Polygon polygon = new Polygon();
 
@@ -27,7 +25,7 @@ public class PolygonalButton extends Button{
 	@Override
 	public void draw(Grafico g){
 
-		Theme theme = Configuration.getInstance().getTheme();
+		Theme theme = getTheme();
 
 		if(!mouseOver){
 

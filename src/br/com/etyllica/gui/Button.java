@@ -1,273 +1,243 @@
 package br.com.etyllica.gui;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
 import br.com.etyllica.core.Configuration;
+import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Tecla;
-import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.theme.Theme;
+import br.com.etyllica.gui.button.DefaultButton;
 
-/**
- *
- * Component Button
- * 
- * @author yuripourre
- * @license LGPLv3
- *
- */
-
-public class Button extends RoundGUIComponent{
-
-	protected Label label;
-
-	public Button(int x, int y, int w, int h) {
-		super(x, y, w, h);
+public class Button extends GUIComponent{
+	
+	private DefaultButton button;
+	
+	public Button(int x, int y, int w, int h){
+		button = Configuration.getInstance().getTheme().createButton(x, y, w, h);
 	}
 
-	@Override
-	public void draw(Grafico g){
-
-		Theme theme = Configuration.getInstance().getTheme();
-
-		if(!mouseOver){
-
-			g.setColor(theme.getButtonColor());
-
-		}else{
-
-			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
-
-				g.setColor(theme.getButtonOnClick());
-
-			}else{
-
-				g.setColor(theme.getButtonOnMouse());
-
-			}
-
-		}
-
-		g.fillRect(x,y,w,h);
-		
-		drawLabel(g);
-
+	public int getRoundness() {
+		return button.getRoundness();
 	}
 
-	protected void drawLabel(Grafico g){
-		
-		if(label!=null){
-			label.draw(g);
-		}
-		
+	public int getX() {
+		return button.getX();
 	}
 
-	public void update(GUIEvent event){
-
-		switch (event) {
-		case MOUSE_LEFT_BUTTON_DOWN:
-			leftClick();
-			break;
-
-		case MOUSE_LEFT_BUTTON_UP:
-			leftUp();
-			break;
-
-		case MOUSE_RIGHT_BUTTON_DOWN:
-			rightClick();
-			break;
-
-		case MOUSE_MIDDLE_BUTTON_DOWN:
-			middleClick();
-			break;
-
-		case MOUSE_OVER:
-			justOnMouse();
-			break;
-
-		case MOUSE_OUT:
-			mouseOut();
-			break;
-
-		case GAIN_FOCUS:
-			onFocus = true;
-			break;
-			
-		case LOST_FOCUS:
-			onFocus = false;
-			break;
-
-		case NONE:
-			break;
-
-		default:
-
-			//Labels is button responsability
-			if(label!=null){
-				label.update(event);
-			}
-
-			break;
-		}
-
-
+	public int getY() {
+		return button.getY();
 	}
 
-	protected void leftClick(){
-		//igualaImagem(click);
+	public void draw(Grafico g) {
+		button.draw(g);
 	}
 
-	protected void leftUp(){
-
+	public int getW() {
+		return button.getW();
 	}
 
-	protected void middleClick(){
-		//new Voicer().say(rotulo);
+	public int getH() {
+		return button.getH();
 	}
 
-	protected void rightClick(){
-
+	public GUIEvent getLastEvent() {
+		return button.getLastEvent();
 	}
 
-	protected void justOnMouse(){
-		//igualaImagem(sobMouse);
+	public boolean isMouseOver() {
+		return button.isMouseOver();
 	}
 
-	protected void mouseOut(){
-		//igualaImagem(sobMouse);
+	public boolean isVisible() {
+		return button.isVisible();
 	}
 
-	public GUIEvent updateMouse(PointerEvent event){
+	public boolean isOnFocus() {
+		return button.isOnFocus();
+	}
 
-		GUIEvent retorno = GUIEvent.NONE;
+	public List<GUIAction> getActions() {
+		return button.getActions();
+	}
 
-		if(mouseOver){
+	public void hide() {
+		button.hide();
+	}
 
-			if(event.getState()==KeyState.PRESSED){
+	public Set<GUIComponent> getComponents() {
+		return button.getComponents();
+	}
 
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
+	public boolean colideRect(int bx, int by, int bw, int bh) {
+		return button.colideRect(bx, by, bw, bh);
+	}
 
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
+	public void clearComponents() {
+		button.clearComponents();
+	}
 
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+	public boolean colideCircleCircle(int bx, int by, int bw, int bh) {
+		return button.colideCircleCircle(bx, by, bw, bh);
+	}
 
-					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
+	public void add(GUIComponent component) {
+		button.add(component);
+	}
 
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+	public void addAll(Collection<? extends GUIComponent> components) {
+		button.addAll(components);
+	}
 
-					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
-				}
-			}
-			else if(event.getState()==KeyState.RELEASED){
+	public boolean colideCirclePoint(int px, int py) {
+		return button.colideCirclePoint(px, py);
+	}
 
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
-					
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
+	public boolean onMouse(PointerEvent event) {
+		return button.onMouse(event);
+	}
 
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
-					
-					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
+	public boolean onMouse(int mx, int my) {
+		return button.onMouse(mx, my);
+	}
 
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
-					
-					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
-					
-				}
+	public void executeAction(GUIEvent event) {
+		button.executeAction(event);
+	}
 
-			}else if(event.getState()==KeyState.DOUBLE_CLICK){
-			
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
-					
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
-					
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
-					
-					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
-					
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
-										
-					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
-					
-				}
+	public void addAction(GUIEvent event, GUIAction action) {
+		button.addAction(event, action);
+	}
 
-			}else if(event.getState()==KeyState.MOVE){
-				
-				retorno = GUIEvent.MOUSE_OVER;
-				
-			}
+	public boolean equals(Object obj) {
+		return button.equals(obj);
+	}
 
-		}else{
-			
-			if(event.getState()==KeyState.MOVE){
-				
-				retorno = GUIEvent.MOUSE_OUT;
-				
-			}else if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
-				
-				onFocus = false;
-				
-			}
+	public GUIComponent findNext() {
+		return button.findNext();
+	}
 
-		}
-
-		return retorno;
-
+	public String getAlt() {
+		return button.getAlt();
 	}
 
 	public Label getLabel() {
-		return label;
+		return button.getLabel();
+	}
+
+	public int hashCode() {
+		return button.hashCode();
+	}
+
+	public void setRoundness(int roundness) {
+		button.setRoundness(roundness);
+	}
+
+	public void setX(int x) {
+		button.setX(x);
+	}
+
+	public void setY(int y) {
+		button.setY(y);
+	}
+
+	public void setW(int w) {
+		button.setW(w);
+	}
+
+	public void setH(int h) {
+		button.setH(h);
+	}
+
+	public void setBounds(int x, int y, int w, int h) {
+		button.setBounds(x, y, w, h);
+	}
+
+	public void setCoordinates(int x, int y) {
+		button.setCoordinates(x, y);
+	}
+
+	public void setOffsetX(int offsetX) {
+		button.setOffsetX(offsetX);
+	}
+
+	public void setOffsetY(int offsetY) {
+		button.setOffsetY(offsetY);
+	}
+
+	public void setLastEvent(GUIEvent lastEvent) {
+		button.setLastEvent(lastEvent);
+	}
+
+	public void update(GUIEvent event) {
+		button.update(event);
+	}
+
+	public void setOffset(int offsetX, int offsetY) {
+		button.setOffset(offsetX, offsetY);
+	}
+
+	public void setVisible(boolean visible) {
+		button.setVisible(visible);
+	}
+
+	public void setMouseOver(boolean mouseOver) {
+		button.setMouseOver(mouseOver);
+	}
+
+	public void show() {
+		button.show();
+	}
+
+	public void setOnFocus(boolean focus) {
+		button.setOnFocus(focus);
+	}
+
+	public void setActions(List<GUIAction> actions) {
+		button.setActions(actions);
+	}
+
+	public void swapVisible() {
+		button.swapVisible();
+	}
+
+	public void remove(GUIComponent component) {
+		button.remove(component);
+	}
+
+	public void removeAll(Collection<? extends GUIComponent> components) {
+		button.removeAll(components);
+	}
+
+	public GUIEvent updateMouse(PointerEvent event) {
+		return button.updateMouse(event);
+	}
+
+	public void translateComponents(int x, int y) {
+		button.translateComponents(x, y);
+	}
+
+	public void setAlt(String alt) {
+		button.setAlt(alt);
 	}
 
 	public void setLabel(Label label) {
-		this.label = label;
-
-		label.setX(x+(w/2-label.getW()/2)+label.getX());
-		label.setY(y+(h/2-label.getH()/2)+label.getY());
-		
-		//int offsetX = label.getX();
-		//int offsetY = label.getY();
-
-		//label.setX(x+offsetX);
-		//label.setY(y+offsetY);
-		
-		label.setContentBounds(x, y, w, h);
-
+		button.setLabel(label);
 	}
-	
+
 	public void setCenterLabel(Label label) {
-		this.label = label;
-
-		label.setX(label.getX()+(x+w/2-label.getW()/2));
-		label.setY(label.getY()+(y+h/2-label.getH()/2));
-		
-		label.setContentBounds(x, y, w, h);
-
+		button.setCenterLabel(label);
 	}
-	
-	@Override
+
+	public String toString() {
+		return button.toString();
+	}
+
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
-
-		if(event.getPressed(Tecla.TSK_TAB)){
-
-			return GUIEvent.NEXT_COMPONENT;
-			
-		}
-		
-		/*if(event.getPressed(Tecla.TSK_ENTER)){
-
-			return GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
-
-		}else if(event.getReleased(Tecla.TSK_ENTER)){
-
-			return GUIEvent.MOUSE_LEFT_BUTTON_UP;
-
-		}*/
-
-		return GUIEvent.NONE;
-	}
-
-	
+		return button.updateKeyboard(event);
+	}	
 
 }

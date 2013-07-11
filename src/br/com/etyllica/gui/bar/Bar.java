@@ -8,7 +8,7 @@ import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.gui.Button;
+import br.com.etyllica.gui.button.DefaultButton;
 import br.com.etyllica.layer.ImageLayer;
 
 /**
@@ -18,7 +18,7 @@ import br.com.etyllica.layer.ImageLayer;
  *
  */
 
-public abstract class Bar extends Button{
+public abstract class Bar extends DefaultButton{
 
 	protected int startX;
 	protected int startY;

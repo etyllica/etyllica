@@ -3,6 +3,9 @@ package br.com.etyllica.theme;
 import java.awt.Color;
 import java.awt.Font;
 
+import br.com.etyllica.gui.button.DefaultButton;
+import br.com.etyllica.gui.button.RoundCornerButton;
+
 /**
  * 
  * @author yuripourre
@@ -279,6 +282,12 @@ public class Theme {
 
 	public void setButtonFont(Font buttonFont) {
 		this.buttonFont = buttonFont;
+	}
+	
+	public DefaultButton createButton(int x, int y, int w, int h){
+		DefaultButton button = new RoundCornerButton(x, y, w, h);
+		button.setTheme(this);
+		return button;
 	}
 			
 }

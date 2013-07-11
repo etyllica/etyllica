@@ -1,9 +1,7 @@
 package br.com.etyllica.gui.button;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.gui.Button;
 import br.com.etyllica.theme.Theme;
 
 /**
@@ -12,16 +10,17 @@ import br.com.etyllica.theme.Theme;
  *
  */
 
-public class RoundCornerButton extends Button{
+public class RoundCornerButton extends DefaultButton{
 
 	public RoundCornerButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
+		this.roundness = 10;
 	}
 	
 	@Override
 	public void draw(Grafico g) {
 		
-		Theme theme = Configuration.getInstance().getTheme();
+		Theme theme = getTheme();
 
 		if(!mouseOver){
 
