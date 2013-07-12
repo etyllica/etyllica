@@ -1,8 +1,9 @@
 package br.com.etyllica.core;
 
+import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.gui.mouse.theme.ArrowTheme;
 import br.com.etyllica.i18n.Language;
-import br.com.etyllica.theme.Theme;
+import br.com.etyllica.theme.EtyllicTheme;
 
 /**
  * 
@@ -15,11 +16,8 @@ public class Configuration {
 
 	private static Configuration instance = null;
 	
-	//private Core core;
 		
-	//Default Theme
-	//TODO Button Factory
-	private Theme theme = new Theme();
+	private Theme theme = new EtyllicTheme();
 	private ArrowTheme arrowTheme = new ArrowTheme();
 	
 	//private Language lang = Language.JAPANESE;
@@ -29,7 +27,9 @@ public class Configuration {
 	
 	private boolean timerClick = false;
 	private boolean numpadMouse = false;
+	
 	private boolean languageChanged = false;
+	private boolean themeChanged = false;
 	
 	private Configuration(){
 		super();
@@ -103,5 +103,15 @@ public class Configuration {
 	public void setLanguageChanged(boolean languageChanged) {
 		this.languageChanged = languageChanged;
 	}
+	
+	public boolean isThemeChanged() {
+		return themeChanged;
+	}
+	
+	public void setThemeChanged(boolean themeChanged) {
+		this.themeChanged = themeChanged;
+	}
+	
+	
 
 }

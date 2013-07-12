@@ -1,10 +1,7 @@
-package br.com.etyllica.theme;
+package br.com.etyllica.core.theme;
 
 import java.awt.Color;
 import java.awt.Font;
-
-import br.com.etyllica.gui.button.DefaultButton;
-import br.com.etyllica.gui.button.RoundCornerButton;
 
 /**
  * 
@@ -13,7 +10,7 @@ import br.com.etyllica.gui.button.RoundCornerButton;
  *
  */
 
-public class Theme {
+public abstract class Theme implements ThemeFactory{
 	
 	public Theme(){
 		super();
@@ -43,38 +40,40 @@ public class Theme {
 		//font = new Font("Monospaced", fontStyle, fontSize);
 	}
 		
-	private boolean shadow = true;
-	private Color shadowColor = Color.BLACK;
+	protected boolean shadow = true;
+	protected Color shadowColor = Color.BLACK;
 	
-	private String wallpaper = "mystic/sunset.jpg";
+	protected String wallpaper = "mystic/sunset.jpg";
 	
-	private Color backGroundColor = new Color(0x66, 0x66, 0x66);
+	protected Color backGroundColor = new Color(0x66, 0x66, 0x66);
 	
-	private Color barColor = new Color(0x00,0x00, 0x00, 0xa0);
-	private Color barOnMouseColor = new Color(0x33, 0x33, 0x33, 0xa0);
+	protected Color barColor = new Color(0x00,0x00, 0x00, 0xa0);
+	protected Color barOnMouseColor = new Color(0x33, 0x33, 0x33, 0xa0);
 		
-	private Color buttonColor = new Color(0x00,0x00, 0x00, 0xa0);
-	private Color buttonOnFocus = new Color(0x33, 0x33, 0x99, 0xa0);	
-	private Color buttonOnMouse = new Color(0x33, 0x33, 0x33, 0xa0);
-	private Color buttonOnClick = new Color(0x99, 0x99, 0x99, 0xa0);
+	protected Color borderColor = new Color(0x00,0x00, 0x00, 0xa0);
+	
+	protected Color buttonColor = new Color(0x00,0x00, 0x00, 0xa0);
+	protected Color buttonOnFocus = new Color(0x33, 0x33, 0x99, 0xa0);
+	protected Color buttonOnMouse = new Color(0x33, 0x33, 0x33, 0xa0);
+	protected Color buttonOnClick = new Color(0x99, 0x99, 0x99, 0xa0);
 	
 	//private Color textColor = new Color(0x00, 0x00, 0x00);
-	private Color textColor = new Color(0xff, 0xff, 0xff);
-	private Color textSelectedColor = new Color(0x00, 0x00, 0x00);
-	private Color textMarkColor = new Color(0x00, 0x00, 0x88,0xa0);
+	protected Color textColor = new Color(0xff, 0xff, 0xff);
+	protected Color textSelectedColor = new Color(0x00, 0x00, 0x00);
+	protected Color textMarkColor = new Color(0x00, 0x00, 0x88,0xa0);
 	
-	private Color textFieldColor = new Color(0xff, 0xff, 0xff);
-	private Color textFieldWithoutFocusColor = new Color (0xaa, 0xaa, 0xaa,0xcc);
-	private Color textFieldOnMouseColor = new Color(0x00, 0x00, 0x88,0xa0);
+	protected Color textFieldColor = new Color(0xff, 0xff, 0xff);
+	protected Color textFieldWithoutFocusColor = new Color (0xaa, 0xaa, 0xaa,0xcc);
+	protected Color textFieldOnMouseColor = new Color(0x00, 0x00, 0x88,0xa0);
 	
-	private Color selectionTextColor = new Color(0x00, 0x00, 0xff);
+	protected Color selectionTextColor = new Color(0x00, 0x00, 0xff);
 	
-	private Color panelColor = new Color(0x00, 0x00, 0x00, 0xA0);
+	protected Color panelColor = new Color(0x00, 0x00, 0x00, 0xA0);
 	
-	private Color mouseArrowColor = new Color(0xff, 0xff, 0xff);
-	private Color mouseArrowBorderColor = new Color(0x00, 0x00, 0x00);
+	protected Color mouseArrowColor = new Color(0xff, 0xff, 0xff);
+	protected Color mouseArrowBorderColor = new Color(0x00, 0x00, 0x00);
 	
-	private Color windowBackgroundColor = new Color(0x55, 0x55, 0x55,0xdd);
+	protected Color windowBackgroundColor = new Color(0x55, 0x55, 0x55,0xdd);
 	
 	public String getWallpaper() {
 		return wallpaper;
@@ -138,6 +137,14 @@ public class Theme {
 
 	public void setBarOnMouseColor(Color barOnMouseColor) {
 		this.barOnMouseColor = barOnMouseColor;
+	}
+	
+	public Color getBorderColor() {
+		return borderColor;
+	}
+
+	public void setBorderColor(Color borderColor) {
+		this.borderColor = borderColor;
 	}
 
 	public Color getButtonColor() {
@@ -283,11 +290,5 @@ public class Theme {
 	public void setButtonFont(Font buttonFont) {
 		this.buttonFont = buttonFont;
 	}
-	
-	public DefaultButton createButton(int x, int y, int w, int h){
-		DefaultButton button = new RoundCornerButton(x, y, w, h);
-		button.setTheme(this);
-		return button;
-	}
-			
+
 }

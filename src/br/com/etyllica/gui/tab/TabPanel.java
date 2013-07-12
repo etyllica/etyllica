@@ -1,9 +1,9 @@
 package br.com.etyllica.gui.tab;
 
 import br.com.etyllica.core.Configuration;
+import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Panel;
-import br.com.etyllica.theme.Theme;
 
 /**
  * 

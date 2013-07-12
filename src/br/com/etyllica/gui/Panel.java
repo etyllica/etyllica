@@ -4,8 +4,8 @@ import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.theme.Theme;
 
 /**
  * 

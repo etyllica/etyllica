@@ -9,7 +9,6 @@ import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Button;
-import br.com.etyllica.gui.button.RoundCornerButton;
 import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.util.SVGColor;
 
@@ -42,19 +41,19 @@ public class SimpleGuiExample extends Application{
 		buttonSeaGreen.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "turnSeaGreen"));
 		add(buttonSeaGreen);
 		
-		RoundCornerButton buttonOrchid = new RoundCornerButton(20,180,120,40);
+		Button buttonOrchid = new Button(20,180,120,40);
 		buttonOrchid.setRoundness(10);
 		buttonOrchid.setLabel(new TextLabel("ORCHID!"));
 		buttonOrchid.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "turnOrchid"));
 		add(buttonOrchid);
 		
-		RoundCornerButton buttonOrange = new RoundCornerButton(20,230,120,40);
+		Button buttonOrange = new Button(20,230,120,40);
 		buttonOrange.setRoundness(10);
 		buttonOrange.setLabel(new TextLabel("ORANGE!"));
 		buttonOrange.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "turnOrange"));
 		add(buttonOrange);
 		
-		RoundCornerButton buttonCrimson = new RoundCornerButton(20,280,120,40);
+		Button buttonCrimson = new Button(20,280,120,40);
 		buttonCrimson.setRoundness(10);
 		buttonCrimson.setLabel(new TextLabel("CRIMSON!"));
 		buttonCrimson.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "turnCrimson"));

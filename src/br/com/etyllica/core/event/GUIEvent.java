@@ -51,6 +51,7 @@ public enum GUIEvent {
 	WINDOW_MOVE,
 	
 	LANGUAGE_CHANGED,
+	THEME_CHANGED,
 	
 	REQUEST_FOCUS,
 	

@@ -93,6 +93,8 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 		startGame();
 		
+		initEngine();
+		
 		desktop.setApplication(application);		
 		core.addWindow(desktop);
 		
@@ -114,20 +116,39 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 	}
 	
+	private String path = "";
+	
+	protected boolean initAll = false;
+	protected boolean initSound = false;
+		
 	protected void setPath(String path){
 		
 		//For Windows
 		String s = path.replaceAll("%20"," ");
-		//System.out.println(s);
 		
-		ImageLoader.getInstance().setUrl(s);
-		FontLoader.getInstance().setUrl(s);
-		MultimediaLoader.getInstance().setUrl(s);
+		this.path = s;				
+				
+	}
+	
+	private void initEngine(){
 
-		//MeshLoader.getInstancia().setUrl(s);
+		initDefault();
+		
+		if(initAll||initSound){
+			initSound();
+		}
 		
 	}
-
+	
+	protected void initDefault(){
+		ImageLoader.getInstance().setUrl(path);
+		FontLoader.getInstance().setUrl(path);
+	}
+	
+	protected void initSound(){
+		MultimediaLoader.getInstance().setUrl(path);
+	}
+	
 	public abstract void startGame();
 
 

@@ -5,8 +5,8 @@ import java.awt.Font;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.application.DefaultLoadApplication;
+import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.theme.Theme;
 
 public class HelloCustomLoading extends DefaultLoadApplication{
 

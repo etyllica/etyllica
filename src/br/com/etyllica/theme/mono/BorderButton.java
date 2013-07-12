@@ -1,41 +1,27 @@
-package br.com.etyllica.gui.button;
+package br.com.etyllica.theme.mono;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.gui.button.DefaultButton;
 
-/**
- * 
- * @author yuripourre
- * @license LGPLv3
- *
- */
+public class BorderButton extends DefaultButton{
 
-public class RoundButton extends DefaultButton{
-
-	public RoundButton(int x, int y, int w, int h) {
+	public BorderButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
-
+	
 	@Override
 	public void draw(Grafico g){
-
-		Theme theme = getTheme();
+		
+		Theme theme = getTheme();		
 
 		if(!mouseOver){
-			
-			if(onFocus){
-				
-				g.setColor(theme.getButtonOnFocus());
-				
-			}else{
-				
-				g.setColor(theme.getButtonColor());
-				
-			}
+
+			g.setColor(theme.getButtonColor());
 
 		}else{
-						
+
 			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
 
 				g.setColor(theme.getButtonOnClick());
@@ -45,10 +31,14 @@ public class RoundButton extends DefaultButton{
 				g.setColor(theme.getButtonOnMouse());
 
 			}
-						
+
 		}
 
-		g.fillOval(x,y,w,h);
+		g.fillRect(x,y,w,h);
+		
+		g.setColor(theme.getBorderColor());
+		
+		g.drawRect(x,y,w,h);
 		
 		drawLabel(g);
 

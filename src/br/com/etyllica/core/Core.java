@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.InternalApplication;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyboardEvent;
@@ -98,6 +97,11 @@ public class Core {
 		if(Configuration.getInstance().isLanguageChanged()){
 			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
 			Configuration.getInstance().setLanguageChanged(false);
+		}
+		
+		if(Configuration.getInstance().isThemeChanged()){
+			guiEvents.add(GUIEvent.THEME_CHANGED);
+			Configuration.getInstance().setThemeChanged(false);
 		}
 
 		superEvent = GUIEvent.NONE;
