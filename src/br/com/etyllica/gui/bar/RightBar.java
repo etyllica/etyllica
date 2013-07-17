@@ -82,7 +82,7 @@ public class RightBar extends Bar{
 				g.setColor(Color.WHITE);
 				String number = Integer.toString(counter);
 				
-				g.escreveSombra(circX-(circRadius/2)*number.length(), circY+circRadius/2, number);
+				g.drawShadow(circX-(circRadius/2)*number.length(), circY+circRadius/2, number);
 			}
 			
 		}else{

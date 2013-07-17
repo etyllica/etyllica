@@ -234,9 +234,9 @@ public class TextField extends GUIComponent{
 		if(minMark==0&&maxMark==0){
 
 			if(dif>0){
-				g.escreveSombra(x, y+h/2+fontSize/2, text);
+				g.drawShadow(x, y+h/2+fontSize/2, text);
 			}else{
-				g.escreveSombra(x+dif, y+h/2+fontSize/2, text);
+				g.drawShadow(x+dif, y+h/2+fontSize/2, text);
 			}
 
 		}else{
@@ -261,13 +261,13 @@ public class TextField extends GUIComponent{
 			//g.setColor(theme.getTextMarkColor());
 			//g.setColor(Color.BLACK);
 			g.setColor(theme.getTextColor());
-			g.escreveSombra(x, y+h/2+fontSize/2, text.substring(0,minMark));
+			g.drawShadow(x, y+h/2+fontSize/2, text.substring(0,minMark));
 
 			g.setColor(theme.getTextSelectedColor());
-			g.escreveSombra(x+cx, y+h/2+fontSize/2, text.substring(minMark,maxMark),Color.WHITE);
+			g.drawShadow(x+cx, y+h/2+fontSize/2, text.substring(minMark,maxMark),Color.WHITE);
 
 			g.setColor(theme.getTextColor());
-			g.escreveSombra(x+cx+cxm, y+h/2+fontSize/2, text.substring(maxMark,text.length()),Color.WHITE);
+			g.drawShadow(x+cx+cxm, y+h/2+fontSize/2, text.substring(maxMark,text.length()),Color.WHITE);
 		}
 
 

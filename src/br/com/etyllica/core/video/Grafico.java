@@ -69,14 +69,6 @@ public class Grafico{
 		
 	}
 	
-	public int getLargura() {
-		return width;
-	}
-
-	public int getAltura() {
-		return height;
-	}
-	
 	public void escreveCamada(String texto, ImageLayer destino) {
 		FontMetrics fm = screen.getFontMetrics();
 
@@ -91,7 +83,7 @@ public class Grafico{
 		screen.drawString(texto, x, y);
 	}
 	
-	public void escreveLabel(int x, int y, int w, int h, String texto) {
+	public void drawString(int x, int y, int w, int h, String texto) {
 		FontMetrics fm = screen.getFontMetrics();
 
 		int msg_width = fm.stringWidth(texto);
@@ -105,7 +97,7 @@ public class Grafico{
 		screen.drawString(texto, dx, dy);
 	}
 	
-	public void escreveLabelSombra(int x, int y, int w, int h, String texto, Color shadowColor) {
+	public void drawStringShadow(int x, int y, int w, int h, String texto, Color shadowColor) {
 		FontMetrics fm = screen.getFontMetrics();
 
 		int msg_width = fm.stringWidth(texto);
@@ -116,27 +108,27 @@ public class Grafico{
 		int dx = x+w/2 - msg_width/2;
 		int dy = y+h/2 - descent/2 + ascent/2;
 
-		escreveSombra(dx, dy, texto, shadowColor);
+		drawShadow(dx, dy, texto, shadowColor);
 	}
 
-	public void escreveX(int offsetX, int y, String frase, boolean borda){
+	public void escreveX(int offsetX, int y, String text, boolean border){
 
-		if((frase!=null)&&(!frase.isEmpty())){
+		if((text!=null)&&(!text.isEmpty())){
 
 			FontMetrics fm = screen.getFontMetrics();
 			Font f = getFont();
 
-			int x = (width/2)-(fm.stringWidth(frase)/2)+offsetX;
+			int x = (width/2)-(fm.stringWidth(text)/2)+offsetX;
 			int fy = y+fm.getHeight();
 
-			if(!borda){
-				screen.drawString(frase,x,fy);
+			if(!border){
+				screen.drawString(text,x,fy);
 			}			
 			else{
 
 				FontRenderContext frc = screen.getFontRenderContext();
 
-				TextLayout tl = new TextLayout(frase, f, frc);
+				TextLayout tl = new TextLayout(text, f, frc);
 
 				Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
 
@@ -153,12 +145,12 @@ public class Grafico{
 	}
 
 	
-	public void escreveSombra(int x, int y, String frase){
+	public void drawShadow(int x, int y, String frase){
 				
-		escreveSombra(x, y, frase,Color.BLACK);
+		drawShadow(x, y, frase,Color.BLACK);
 	}
 	
-	public void escreveSombra(int x, int y, String frase, Color shadowColor){
+	public void drawShadow(int x, int y, String frase, Color shadowColor){
 		
 		if((frase!=null)&&(!frase.isEmpty())){
 			
@@ -180,7 +172,7 @@ public class Grafico{
 			int x = (width/2)-(fm.stringWidth(frase)/2);
 			int fy = y+fm.getHeight();
 
-			escreveSombra(x, fy, frase);
+			drawShadow(x, fy, frase);
 				
 		}
 	}

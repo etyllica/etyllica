@@ -1,5 +1,7 @@
 package br.com.etyllica.gui.label;
 
+import java.awt.Color;
+
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
@@ -7,6 +9,7 @@ import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Label;
+import br.com.etyllica.layer.TextLayer;
 
 /**
  * 
@@ -17,10 +20,8 @@ import br.com.etyllica.gui.Label;
 
 public class TextLabel extends Label{
 
-	protected String text;
-	
-	protected float fontSize = 18;
-	
+	protected TextLayer layer;
+		
 	public TextLabel(int x, int y) {
 		super(x, y);
 	}
@@ -32,13 +33,21 @@ public class TextLabel extends Label{
 	public TextLabel(int x, int y, String text) {
 		super(x, y);
 		
-		this.text = text;
+		this.layer = new TextLayer(x,y,text);
 	}
 	
 	public TextLabel(String text) {
-		super(0,0);
-		
-		this.text = text;
+		this(0,0,text);
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+		this.layer.setX(x);
+	}
+
+	public void setY(int y) {
+		this.y = y;
+		this.layer.setY(y);
 	}
 	
 	@Override
@@ -64,7 +73,7 @@ public class TextLabel extends Label{
 
 		Theme theme = Configuration.getInstance().getTheme();
 	
-		g.setFont(theme.getFont().deriveFont(fontSize));
+		g.setFont(theme.getFont().deriveFont(layer.getSize()));
 		
 		if(!onFocus){
 			g.setColor(theme.getTextColor());
@@ -74,9 +83,9 @@ public class TextLabel extends Label{
 		
 		//Label is always in center
 		if(!theme.isShadow()){
-			g.escreveLabel(bx, by, bw, bh, text);
+			g.drawString(bx, by, bw, bh, layer.getText());
 		}else{
-			g.escreveLabelSombra(bx, by, bw, bh, text ,theme.getShadowColor());
+			g.drawStringShadow(bx, by, bw, bh, layer.getText() ,theme.getShadowColor());
 		}
 	}
 
@@ -92,19 +101,31 @@ public class TextLabel extends Label{
 	}
 
 	public String getText() {
-		return text;
+		return this.layer.getText();
 	}
 
 	public void setText(String text) {
-		this.text = text;
+		this.layer.setText(text);
 	}
 	
 	public float getFontSize() {
-		return fontSize;
+		return this.layer.getSize();
 	}
 
 	public void setFontSize(float fontSize) {
-		this.fontSize = fontSize;
+		this.layer.setSize(fontSize);
 	}
+	
+	public void setBorder(boolean border) {
+		this.layer.setBorder(border);
+	}
+	
+	public void setBorderColor(Color borderColor) {
+		this.layer.setBorderColor(borderColor);
+	}
+	
+	public void setBorderWidth(float borderWidh) {
+		this.layer.setBorderWidth(borderWidh);
+	}	
 	
 }

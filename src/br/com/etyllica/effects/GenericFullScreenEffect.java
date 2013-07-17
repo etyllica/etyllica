@@ -41,7 +41,7 @@ public class GenericFullScreenEffect extends GlobalEffect{
 		g.setFont(g.getFont().deriveFont(20f));
 		
 		//TODO MultiLangLabel
-		g.escreveLabelSombra(rectX,rectY,rectW, rectH, "Press ESC to exit fullscreen",Color.BLACK);
+		g.drawStringShadow(rectX,rectY,rectW, rectH, "Press ESC to exit fullscreen",Color.BLACK);
 		
 		g.setAlpha(100);
 		

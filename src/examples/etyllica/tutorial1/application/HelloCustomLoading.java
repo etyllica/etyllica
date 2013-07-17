@@ -44,7 +44,7 @@ public class HelloCustomLoading extends DefaultLoadApplication{
 		g.fillRect(rectX+2, rectY+2, ((rectW*fill)/100)-3, rectH-3);
 		
 		g.setFont(p);
-		g.escreveLabelSombra(rectX, rectY, rectW, rectH, percent, Color.BLACK);
+		g.drawStringShadow(rectX, rectY, rectW, rectH, percent, Color.BLACK);
 		
 	}
 	

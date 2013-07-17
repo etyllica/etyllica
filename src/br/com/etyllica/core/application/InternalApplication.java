@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import br.com.etyllica.animation.Animation;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.effects.TransitionEffect;
@@ -72,6 +73,11 @@ public abstract class InternalApplication extends GUIComponent implements Runnab
 	 * Child Windows
 	 */
 	protected List<Window> windows = new ArrayList<Window>();
+	
+	/**
+	 * Animation
+	 */
+	protected Animation animation = new Animation();
 		
 	/**
 	 * Constructor
@@ -116,7 +122,7 @@ public abstract class InternalApplication extends GUIComponent implements Runnab
 	public void unload(){
 		
 	}
-	
+		
 	/**
 	 * Method to Update by GUI events
 	 */
@@ -216,4 +222,12 @@ public abstract class InternalApplication extends GUIComponent implements Runnab
 		return windows;
 	}
 
+	public Animation getAnimation() {
+		return animation;
+	}
+
+	public void setAnimation(Animation animation) {
+		this.animation = animation;
+	}
+	
 }

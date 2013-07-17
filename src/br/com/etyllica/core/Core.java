@@ -152,6 +152,11 @@ public class Core {
 		Application application = activeWindow.getApplication();
 
 		if(application!=null){
+			
+			//Animate
+			//TODO Independent Thread
+			application.getAnimation().animate(getTimeNow());
+			
 			//if activeWindow, receive command to change application
 			if(application.getReturnApplication()!=application){
 				this.changeApplication();
@@ -166,7 +171,6 @@ public class Core {
 
 					//if this !windows.contains(window)
 					addWindow(window);
-
 
 				}
 
@@ -545,6 +549,8 @@ public class Core {
 	private void drawComponent(GUIComponent component, Grafico g){
 
 		if(component.isVisible()){
+						
+			//Draw Component
 			component.draw(g);
 
 			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(component.getComponents());
@@ -555,8 +561,14 @@ public class Core {
 				drawComponent(child,g);
 				child.setOffset(-component.getX(), -component.getY());
 			}
+			
 		}
+		
 
+	}
+	
+	public long getTimeNow(){
+		return System.currentTimeMillis();
 	}
 
 	public void translateComponents(int x, int y){

@@ -65,9 +65,9 @@ public class MultiLangLabel extends TextLabel{
 	
 	private void reloadText(Language lang){
 		if(texts.containsKey(lang)){
-			text = texts.get(lang);
+			setText(texts.get(lang));
 		}else{
-			text = texts.get(Language.ENGLISH_USA);
+			setText(texts.get(Language.ENGLISH_USA));
 		}
 		
 	}

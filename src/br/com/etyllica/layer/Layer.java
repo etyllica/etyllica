@@ -37,7 +37,7 @@ public class Layer {
 	protected boolean visible = true;
 	
 	public Layer(){
-		super();
+		super();	
 	}
 	
 	public Layer(int x, int y){
