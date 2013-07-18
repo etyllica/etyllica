@@ -5,24 +5,15 @@ import br.com.etyllica.layer.Layer;
 
 
 public class HorizontalAnimationScript extends AnimationScript{
-
-	private int startValue = 0;
-	
-	private int endValue = 0;
 		
 	public HorizontalAnimationScript(long time) {
 		super(time);
 	}
 	
-	public HorizontalAnimationScript(long time, Layer target) {
-		super(time, target);
+	public HorizontalAnimationScript(Layer target, long time) {
+		super(target, time);
 	}
-	
-	public void setInterval(int startValue, int endValue){
-		this.startValue = startValue;
-		this.endValue = endValue;
-	}
-	
+		
 	@Override
 	public void animate(long now) {
 		

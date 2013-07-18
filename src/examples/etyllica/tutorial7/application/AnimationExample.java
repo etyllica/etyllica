@@ -32,17 +32,24 @@ public class AnimationExample extends Application{
 		text2.setBorderColor(Color.BLACK);
 		text2.setBorderWidth(3f);
 		
-		HorizontalAnimationScript hscript = new HorizontalAnimationScript(10000, text2);
+		HorizontalAnimationScript hscript = new HorizontalAnimationScript(text2, 10000);
 		hscript.setInterval(400, 10);
 		
-		HorizontalAnimationScript invscript = new HorizontalAnimationScript(10000, text2);
-		invscript.setInterval(0, 400);
+		HorizontalAnimationScript invscript = new HorizontalAnimationScript(text2, 10000);
+		invscript.setInterval(10, 400);
 		//After the hscript, execute invscript
 		hscript.setNext(invscript);
 		
-		VerticalAnimationScript vscript = new VerticalAnimationScript(20000);
-		vscript.setTarget(text2);
+		VerticalAnimationScript vscript = new VerticalAnimationScript(text2, 600);
 		vscript.setInterval(100, 200);
+		vscript.setEndless(true);
+		
+		VerticalAnimationScript invVscript = new VerticalAnimationScript(600);
+		invVscript.setTarget(text2);
+		invVscript.setInterval(200, 100);
+		vscript.setNext(invVscript);
+		
+		
 		
 		this.animation.add(hscript);
 		this.animation.add(vscript);
