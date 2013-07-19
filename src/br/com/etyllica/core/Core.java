@@ -29,7 +29,7 @@ import br.com.etyllica.gui.window.DesktopWindow;
  *
  */
 
-public class Core {
+public class Core{
 
 	//External Windows
 	private Window activeWindow = null;
@@ -110,7 +110,7 @@ public class Core {
 
 		updateActiveWindow();
 
-		updateApplication();
+		//updateApplication();
 
 		updateGui(components);
 
@@ -132,7 +132,7 @@ public class Core {
 		}
 
 	}
-
+	
 	private void updateActiveWindow(){
 
 		if(activeWindow.isClose()){
@@ -147,7 +147,7 @@ public class Core {
 		}
 	}
 
-	private void updateApplication(){
+	public void updateApplication(){
 
 		Application application = activeWindow.getApplication();
 

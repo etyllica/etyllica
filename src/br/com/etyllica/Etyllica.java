@@ -47,7 +47,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 	//TODO determinar o fps por cada sessao
 	private final int FRAME_DELAY = 80; // 20ms. Implica em 12fps (1000/80) = 12.5
 	private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
-	//private final int UPDATE_DELAY = 20; // 20ms. Implica em 50fps (1000/20) = 50
+	private final int ANIMATION_DELAY = 20; // 20ms. Implica em 50fps (1000/20) = 50
 
 	private Application application;
 
@@ -108,10 +108,36 @@ public abstract class Etyllica extends Applet implements Runnable{
 		addMouseListener( mouse );
 		addKeyListener( core.getControl().getTeclado() );
 
-		executor = Executors.newScheduledThreadPool(1);
-		executor.scheduleAtFixedRate(this, UPDATE_DELAY, UPDATE_DELAY, TimeUnit.MILLISECONDS);
+		executor = Executors.newScheduledThreadPool(2);
+		startEngine();
+		startAnimation();
+		
+		
 		//executor.scheduleAtFixedRate(this, TIME_UPDATE_INTERVAL, TIME_UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
 
+	}
+	
+	private void startEngine(){
+		
+		Runnable engine = new Runnable() {
+			public void run() {
+				draw();
+				gerencia();
+			}
+		};
+		
+		executor.scheduleAtFixedRate(engine, 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);
+		
+	}
+	
+	private void startAnimation(){
+		Runnable animator = new Runnable() {           
+            public void run() { 
+                core.updateApplication();
+            }
+		};
+		
+		executor.scheduleAtFixedRate(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
 	}
 	
 	private String path = "";
@@ -184,9 +210,6 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	@Override
 	public void run() {
-
-		draw();
-		gerencia();
 
 	}
 
