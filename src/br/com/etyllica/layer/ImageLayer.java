@@ -35,23 +35,23 @@ public class ImageLayer extends StaticLayer{
 		super(x,y,w,h);
 	}
 
-	public ImageLayer(int x, int y, int w, int h, String caminho){
-		super(x,y,w,h,caminho);
+	public ImageLayer(int x, int y, int w, int h, String path){
+		super(x,y,w,h,path);
 	}
 
-	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String caminho){
-		super(x,y,w,h,caminho);
+	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String path){
+		super(x,y,w,h,path);
 		this.xImage = xImagem;
 		this.yImage = yImagem;
 	}
 
-	public ImageLayer(int x, int y, String caminho){
-		super(caminho);
+	public ImageLayer(int x, int y, String path){
+		super(path);
 		setCoordenadas(x, y);
 	}
 
-	public ImageLayer(String caminho){
-		this(0,0,caminho);
+	public ImageLayer(String path){
+		this(0,0,path);
 	}
 
 	public int getXImage() {

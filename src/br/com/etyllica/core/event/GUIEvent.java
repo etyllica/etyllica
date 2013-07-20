@@ -54,6 +54,7 @@ public enum GUIEvent {
 	THEME_CHANGED,
 	
 	REQUEST_FOCUS,
+	UPDATE_MOUSE,
 	
 	NONE;
 	

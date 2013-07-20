@@ -65,6 +65,8 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 		this.w = width;
 		this.h = height;
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
 

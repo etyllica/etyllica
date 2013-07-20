@@ -204,8 +204,8 @@ public class Core{
 			if(focus!=null){
 
 				GUIEvent focusEvent = focus.updateKeyboard(keyboardEvent);
-
-				if(focusEvent!=GUIEvent.NONE){
+				
+				if(focusEvent!=GUIEvent.NONE&&focusEvent!=null){
 					//TODO Update NExtComponent
 					System.out.println(focusEvent);
 
@@ -257,7 +257,7 @@ public class Core{
 
 			for(GUIComponent component: components){
 
-				GUIEvent nextEvent = updateComponent(component, event);
+				GUIEvent nextEvent = updateMouse(component, event);
 
 				if(nextEvent!=GUIEvent.NONE){
 
@@ -299,7 +299,7 @@ public class Core{
 
 		mouseEvents.clear();
 	}
-
+	
 	private void updateGui(List<GUIComponent> components){
 
 		for(GUIEvent event: guiEvents){
@@ -327,7 +327,7 @@ public class Core{
 		}
 	}
 
-	private GUIEvent updateComponent(GUIComponent component, PointerEvent event){
+	private GUIEvent updateMouse(GUIComponent component, PointerEvent event){
 
 		//If componente is visible
 		if(component.isVisible()){
@@ -350,7 +350,7 @@ public class Core{
 			//Update Component
 			GUIEvent result = component.updateMouse(event);
 
-			if(result!=GUIEvent.NONE){
+			if(result!=GUIEvent.NONE&&result!=null){
 
 				gerenciaEvento(component, result);
 
@@ -362,7 +362,7 @@ public class Core{
 
 				child.setOffset(component.getX(), component.getY());
 
-				updateComponent(child, event);
+				updateMouse(child, event);
 
 				child.setOffset(-component.getX(), -component.getY());
 
@@ -449,6 +449,10 @@ public class Core{
 			events.add(event);
 			break;
 			 */
+			
+		case UPDATE_MOUSE:
+			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
+			break;
 
 		case APPLICATION_CHANGED:
 			this.changeApplication();

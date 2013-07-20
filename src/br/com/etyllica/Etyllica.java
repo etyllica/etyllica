@@ -144,7 +144,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 		//For Windows
 		String s = path.replaceAll("%20"," ");
 		
-		this.path = s;				
+		this.path = s;
 				
 	}
 	

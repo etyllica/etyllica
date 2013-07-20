@@ -14,7 +14,7 @@ public class Tutorial4 extends Etyllica {
 	@Override
 	public void startGame() {
 
-		//Upping 3 file levels
+		//Three file levels up
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../../");
 		

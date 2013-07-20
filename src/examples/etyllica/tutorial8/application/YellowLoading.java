@@ -1,4 +1,4 @@
-package examples.etyllica.tutorial1.application;
+package examples.etyllica.tutorial8.application;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -8,12 +8,12 @@ import br.com.etyllica.core.application.DefaultLoadApplication;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Grafico;
 
-public class HelloCustomLoading extends DefaultLoadApplication{
+public class YellowLoading extends DefaultLoadApplication{
 
 	private Font f;
 	private Font p;
 		
-	public HelloCustomLoading(int x, int y, int w, int h) {
+	public YellowLoading(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		
 		Theme theme = Configuration.getInstance().getTheme();
