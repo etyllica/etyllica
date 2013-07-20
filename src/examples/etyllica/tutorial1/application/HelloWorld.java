@@ -14,9 +14,7 @@ import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.util.SVGColor;
 
 public class HelloWorld extends Application{
-
-	private ScheduledExecutorService loadSimulator = Executors.newSingleThreadScheduledExecutor();
-		
+	
 	public HelloWorld(int w, int h) {
 		super(w, h);
 		loadApplication = new HelloCustomLoading(x, y, w, h);
@@ -34,7 +32,15 @@ public class HelloWorld extends Application{
 	public void load() {
 			
 		//Simulating Loads
-		loadSimulator.scheduleAtFixedRate(new Runnable() {
+		fakeLoad();
+		
+	}
+	
+	private void fakeLoad(){
+		
+		final ScheduledExecutorService loadSimulator = Executors.newSingleThreadScheduledExecutor();
+		
+		loadSimulator.scheduleWithFixedDelay(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -59,8 +65,7 @@ public class HelloWorld extends Application{
 				
 			}
 			
-		}, 25, 25, TimeUnit.MILLISECONDS);
-		
+		}, 50, 50, TimeUnit.MILLISECONDS);	
 	}
 
 	@Override

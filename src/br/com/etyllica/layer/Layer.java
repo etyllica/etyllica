@@ -27,15 +27,25 @@ public class Layer {
 	protected int w = 0;
 	
 	/**
-     * The Layer's height
+     * Layer's height
      */
 	protected int h = 0;
+	
+	/**
+	 * Angle in degrees
+	 */
+	protected double angle = 0;
+	
+	/**
+	 * Scale factor
+	 */
+	protected double scale = 1;
 	
 	/**
      * if layer is visible
      */
 	protected boolean visible = true;
-	
+		
 	public Layer(){
 		super();	
 	}
@@ -106,6 +116,18 @@ public class Layer {
 	public void setOffset(int offsetX, int offsetY){
 		setOffsetX(offsetX);
 		setOffsetY(offsetY);
+	}
+	
+	public double getAngle() {
+		return angle;
+	}
+
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+	
+	public void setOffsetAngle(double offset) {
+		setAngle(angle+offset);
 	}
 	
 	public void setVisible(boolean visible){

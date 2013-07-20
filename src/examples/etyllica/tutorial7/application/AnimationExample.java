@@ -3,6 +3,7 @@ package examples.etyllica.tutorial7.application;
 import java.awt.Color;
 
 import br.com.etyllica.animation.scripts.HorizontalAnimationScript;
+import br.com.etyllica.animation.scripts.RotateAnimationScript;
 import br.com.etyllica.animation.scripts.VerticalAnimationScript;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
@@ -10,6 +11,13 @@ import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.layer.TextLayer;
+
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
 
 public class AnimationExample extends Application{
 
@@ -28,6 +36,7 @@ public class AnimationExample extends Application{
 		text.setBorderColor(Color.BLACK);
 		text.setBorderWidth(3f);
 		
+		text2.setSize(26);
 		text2.setBorder(true);
 		text2.setBorderColor(Color.BLACK);
 		text2.setBorderWidth(3f);
@@ -48,11 +57,15 @@ public class AnimationExample extends Application{
 		invVscript.setTarget(text2);
 		invVscript.setInterval(200, 100);
 		vscript.setNext(invVscript);
-		
-		
-		
+				
 		this.animation.add(hscript);
 		this.animation.add(vscript);
+		
+		RotateAnimationScript rotate = new RotateAnimationScript(6000);
+		rotate.setTarget(text2);
+		rotate.setInterval(0, 360);
+		
+		this.animation.add(rotate);
 		
 		
 		loading = 100;

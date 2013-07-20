@@ -19,9 +19,7 @@ public class ImageLayer extends StaticLayer{
 	protected int xImage = 0;
 	protected int yImage = 0;
 
-	protected double angle = 0;
-
-	protected ColisionArea areaColisao = null;
+	protected ColisionArea colisionArea = null;
 
 	public ImageLayer(){
 		super();
@@ -72,23 +70,12 @@ public class ImageLayer extends StaticLayer{
 		yImage = imagem;
 	}
 
-	public double getAngle() {
-		return angle;
+	public ColisionArea getColisionArea() {
+		return colisionArea;
 	}
 
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-	public void setOffsetAngle(double offset) {
-		setAngle(angle+offset);
-	}
-
-	public ColisionArea getAreaColisao() {
-		return areaColisao;
-	}
-
-	public void setAreaColisao(ColisionArea areaColisao) {
-		this.areaColisao = areaColisao;
+	public void setColisionArea(ColisionArea colisionArea) {
+		this.colisionArea = colisionArea;
 	}
 
 	public void setCoordenadas(int x , int y) {
@@ -187,7 +174,7 @@ public class ImageLayer extends StaticLayer{
 
 	private boolean colideAreaRetangulo(Rectangle rect2, int rect2x, int rect2y){
 
-		for(Rectangle rect: areaColisao.getArea()){
+		for(Rectangle rect: colisionArea.getArea()){
 
 			if(colideRetangulo(rect, rect2, rect2x, rect2y)){
 				return true;
@@ -210,9 +197,9 @@ public class ImageLayer extends StaticLayer{
 
 	public boolean colideAreas(ImageLayer b){
 
-		for(Rectangle rect: areaColisao.getArea()){
+		for(Rectangle rect: colisionArea.getArea()){
 
-			for(Rectangle rect2: b.getAreaColisao().getArea()){
+			for(Rectangle rect2: b.getColisionArea().getArea()){
 
 				if(colideRetangulo(rect, rect2, b.getX(), b.getY())){
 					return true;
@@ -276,6 +263,7 @@ public class ImageLayer extends StaticLayer{
 				g.setTransform(transform);
 				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
 						xImage,yImage,xImage+w,yImage+h, null );
+				
 				g.setTransform(reset);
 			}
 		}

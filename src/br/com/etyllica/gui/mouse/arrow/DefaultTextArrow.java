@@ -9,6 +9,8 @@ package br.com.etyllica.gui.mouse.arrow;
 
 public class DefaultTextArrow extends DefaultArrow{
 
+	private static final long serialVersionUID = 1L;
+
 	public DefaultTextArrow(int size) {
 		super(size);
 	}

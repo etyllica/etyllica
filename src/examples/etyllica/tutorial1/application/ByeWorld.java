@@ -14,8 +14,6 @@ import br.com.etyllica.util.SVGColor;
 
 public class ByeWorld extends Application{
 
-	private ScheduledExecutorService loadSimulator = Executors.newSingleThreadScheduledExecutor();
-
 	public ByeWorld(int w, int h) {
 		super(w, h);
 	}
@@ -24,7 +22,14 @@ public class ByeWorld extends Application{
 	public void load() {
 
 		//Simulating Loads
-		loadSimulator.scheduleAtFixedRate(new Runnable() {
+		fakeLoad();
+	}
+
+	private void fakeLoad(){
+
+		final ScheduledExecutorService loadSimulator = Executors.newSingleThreadScheduledExecutor();
+
+		loadSimulator.scheduleWithFixedDelay(new Runnable() {
 
 			@Override
 			public void run() {
@@ -32,15 +37,15 @@ public class ByeWorld extends Application{
 
 				if(loading<30){
 
-					loadingPhrase = "Loading Nothing....";
+					loadingPhrase = "Loading Nothing...";
 
 				}else if(loading<50){
 
-					loadingPhrase = "Loading Something....";
+					loadingPhrase = "Loading Something...";
 
 				}else if(loading<90){
 
-					loadingPhrase = "Almost Loaded....";
+					loadingPhrase = "Almost Loaded...";
 
 				}else if(loading>=100){
 					loading = 100;
@@ -49,7 +54,7 @@ public class ByeWorld extends Application{
 
 			}
 
-		}, 25, 25, TimeUnit.MILLISECONDS);
+		}, 50, 50, TimeUnit.MILLISECONDS);	
 	}
 
 	@Override

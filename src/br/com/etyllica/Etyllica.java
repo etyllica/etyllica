@@ -45,7 +45,6 @@ public abstract class Etyllica extends Applet implements Runnable{
 	protected int h = 480;
 
 	//TODO determinar o fps por cada sessao
-	private final int FRAME_DELAY = 80; // 20ms. Implica em 12fps (1000/80) = 12.5
 	private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
 	private final int ANIMATION_DELAY = 20; // 20ms. Implica em 50fps (1000/20) = 50
 
@@ -56,8 +55,6 @@ public abstract class Etyllica extends Applet implements Runnable{
 	private DesktopWindow desktop;
 
 	private Mouse mouse;
-
-	//protected Keyboard keyboard;
 
 	private Grafico grafico;
 
@@ -110,10 +107,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 		executor = Executors.newScheduledThreadPool(2);
 		startEngine();
-		startAnimation();
-		
-		
-		//executor.scheduleAtFixedRate(this, TIME_UPDATE_INTERVAL, TIME_UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
+		startAnimation();		
 
 	}
 	
@@ -137,7 +131,7 @@ public abstract class Etyllica extends Applet implements Runnable{
             }
 		};
 		
-		executor.scheduleAtFixedRate(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
+		executor.scheduleWithFixedDelay(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
 	}
 	
 	private String path = "";
@@ -200,7 +194,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 		else{
 			if(telaCheia!=null){
 				//telaCheia.desenha(volatileImg.getSnapshot());
-				telaCheia.desenha(grafico.getBimg());
+				telaCheia.draw(grafico.getBimg());
 			}
 		}
 		

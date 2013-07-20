@@ -63,7 +63,7 @@ public class FullScreenWindow extends Window{
 				
 		//setLayout(null);
 
-		escondeCursor();
+		hideCursor();
 		
 		setVisible(true);
 		setAlwaysOnTop(true);
@@ -82,14 +82,14 @@ public class FullScreenWindow extends Window{
 		addKeyListener( keyboard );
 	}
 		
-	protected void escondeCursor(){
+	protected void hideCursor(){
 		int[] pixels = new int[16 * 16];
 		Image image = Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16));
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0, 0), "invisibleCursor");
 		setCursor( transparentCursor );
 	}
 	
-	public void desenha(BufferedImage volatileImage){
+	public void draw(BufferedImage volatileImage){
 		
 		//int w, int h;
 		int y = offsetY;

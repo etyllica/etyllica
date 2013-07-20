@@ -7,6 +7,7 @@ import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.video.Grafico;
@@ -23,17 +24,19 @@ public class TextLayer extends ImageLayer{
 	private String text;
 
 	private int style = Font.PLAIN;
-	private float size = 26;
-	
+
+	private float size = 16;
+
 	private Font font = null;
+
 	private String fontName = "";
 
 	private Color color;
-	
+
 	private Color borderColor;
 
 	private boolean border = false;
-	
+
 	private float borderWidth = 4f;
 
 	private boolean antiAliased = true;
@@ -76,42 +79,54 @@ public class TextLayer extends ImageLayer{
 
 	public void setFontName(String fontName) {
 		this.fontName = fontName;
-		
+
 		this.font = FontLoader.getInstance().loadFont(fontName).deriveFont(style,size);		
 	}
 
 	@Override
 	public void draw(Grafico g){
-				
+
 		if(this.visible){
-			
-			Font f;
-			
-			if(this.font!=null){
-				
-				f = font;
-				
-			}else{
-				
+
+			Font f = this.font;
+
+			if(f==null){
 				f = g.getFont().deriveFont(style, size);
 			}
-			
+
 			g.setFont(f);
-						
+
+			AffineTransform reset = g.getTransform();
+
+			FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
+			TextLayout layout = new TextLayout(text, f, frc);
+
+			if(angle!=0){
+
+				Rectangle2D bounds = layout.getBounds();
+
+				float height = size;
+				float width = (float) Math.ceil(bounds.getWidth());
+
+				float centerX = x+width/2;
+				float centerY = y-height/2;
+
+				AffineTransform transform = AffineTransform.getRotateInstance(angle, centerX, centerY);
+
+				frc = new FontRenderContext(transform, antiAliased, fractionalMetrics);
+				layout = new TextLayout(text, f, frc);
+
+				g.setTransform(transform);
+
+			}
+
 			if(!border){
-				
+
 				g.setColor(color);
 				g.drawString(text,x,y);
-								
-			}else{
-								
-				FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
-				TextLayout layout = new TextLayout(text, f, frc);
 
-				//Rectangle2D bounds = layout.getBounds();
-				
-				//float height = (float) Math.ceil(bounds.getHeight()+size);
-				
+			}else{
+
 				Shape sha = layout.getOutline(AffineTransform.getTranslateInstance(x,y));
 
 				g.setStroke(new BasicStroke(borderWidth));
@@ -121,13 +136,15 @@ public class TextLayer extends ImageLayer{
 
 				g.setColor(color);
 				g.fill(sha);
-			
+
 			}
-			
+
+			g.setTransform(reset);
+
 		}
-		
+
 	}
-	
+
 	public void setColor(int r, int g, int b){
 		color = new Color(r%256,g%256,b%256);
 	}
@@ -190,5 +207,5 @@ public class TextLayer extends ImageLayer{
 	public void setBorderWidth(float borderWidth) {
 		this.borderWidth = borderWidth;
 	}
-	
+
 }

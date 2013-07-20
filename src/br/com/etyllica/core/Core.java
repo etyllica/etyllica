@@ -155,7 +155,9 @@ public class Core{
 			
 			//Animate
 			//TODO Independent Thread
-			application.getAnimation().animate(getTimeNow());
+			if(application.getLoading()==100){
+				application.getAnimation().animate(getTimeNow());
+			}
 			
 			//if activeWindow, receive command to change application
 			if(application.getReturnApplication()!=application){

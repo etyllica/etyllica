@@ -45,9 +45,8 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 	protected int w = 640;
 	protected int h = 480;
 
-	//TODO determinar o fps por cada sessao
-	private final int FRAME_DELAY = 80; // 20ms. Implica em 50fps (1000/20) = 50
 	private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
+	private final int ANIMATION_DELAY = 20; // 20ms. Implica em 50fps (1000/20) = 50
 
 	private Application application;
 
@@ -57,23 +56,21 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 	protected Mouse mouse;
 
-	//protected Keyboard keyboard;
-
 	private Grafico grafico;
 
 	//From Luvia
 	private ScheduledExecutorService executor;
 
-	public EtyllicaFrame(int largura, int altura){
+	public EtyllicaFrame(int width, int height){
 
-		this.w = largura;
-		this.h = altura;
+		this.w = width;
+		this.h = height;
 
 	}
 
 	public void init() {
 		
-		defineTamanho(w,h);
+		defineSize(w,h);
 		
 		core = new Core();
 
@@ -98,7 +95,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		desktop.setApplication(application);		
 		core.addWindow(desktop);
 		
-		escondeCursor();
+		hideCursor();
 		mouse.updateArrowTheme();
 
 		this.setFocusTraversalKeysEnabled(false);
@@ -110,10 +107,33 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		addMouseListener( mouse );
 		addKeyListener( core.getControl().getTeclado() );
 
-		executor = Executors.newScheduledThreadPool(1);
-		executor.scheduleAtFixedRate(this, UPDATE_DELAY, UPDATE_DELAY, TimeUnit.MILLISECONDS);
-		//executor.scheduleAtFixedRate(this, TIME_UPDATE_INTERVAL, TIME_UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
+		executor = Executors.newScheduledThreadPool(2);
+		startEngine();
+		startAnimation();		
 
+	}
+	
+	private void startEngine(){
+		
+		Runnable engine = new Runnable() {
+			public void run() {
+				draw();
+				gerencia();
+			}
+		};
+		
+		executor.scheduleAtFixedRate(engine, 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);
+		
+	}
+	
+	private void startAnimation(){
+		Runnable animator = new Runnable() {           
+            public void run() { 
+                core.updateApplication();
+            }
+		};
+		
+		executor.scheduleAtFixedRate(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
 	}
 	
 	private String path = "";
@@ -178,7 +198,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		}
 		else{
 			if(telaCheia!=null){
-				telaCheia.desenha(grafico.getBimg());
+				telaCheia.draw(grafico.getBimg());
 			}
 		}
 
@@ -235,7 +255,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		this.application = application;
 	}
 
-	private void escondeCursor(){
+	private void hideCursor(){
 		int[] pixels = new int[16 * 16];
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
@@ -252,14 +272,14 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		return gc.createCompatibleVolatileImage(largura, altura, transparency);
 	}
 
-	private void defineTamanho(int largura, int altura){
+	private void defineSize(int width, int height){
 
-		this.w = largura;
-		this.h = altura;
+		this.w = width;
+		this.h = height;
 
-		setSize(largura, altura);
+		setSize(width, height);
 
-		volatileImg = createBackBuffer(largura, altura);
+		volatileImg = createBackBuffer(width, height);
 
 	}
 

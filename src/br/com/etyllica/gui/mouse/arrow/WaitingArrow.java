@@ -9,6 +9,8 @@ package br.com.etyllica.gui.mouse.arrow;
 
 public class WaitingArrow extends DefaultArrow{
 
+	private static final long serialVersionUID = 1L;
+
 	public WaitingArrow(int size) {
 		super(size);
 	}
