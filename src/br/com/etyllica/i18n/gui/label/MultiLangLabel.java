@@ -1,4 +1,4 @@
-package br.com.etyllica.gui.label;
+package br.com.etyllica.i18n.gui.label;
 
 import java.util.Map;
 

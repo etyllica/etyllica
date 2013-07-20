@@ -41,13 +41,13 @@ public class ImageLoader extends Loader{
 		return instance;
 	}
 
-	public StaticLayer loadImage(String caminho){
+	public StaticLayer loadImage(String path){
 
-		BufferedImage img = getImage(caminho);
+		BufferedImage img = getImage(path);
 
 		StaticLayer cam = new StaticLayer();
 		cam.setCoordLimite(img.getWidth(), img.getHeight());
-		cam.cloneLayer(caminho);
+		cam.cloneLayer(path);
 
 		return cam;
 	}

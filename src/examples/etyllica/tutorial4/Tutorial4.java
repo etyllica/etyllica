@@ -18,6 +18,7 @@ public class Tutorial4 extends Etyllica {
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../../");
 		
+		hideCursor();
 		
 		setMainApplication(new ProceduralColorChange(w,h));
 	}

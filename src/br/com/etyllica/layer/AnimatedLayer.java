@@ -84,6 +84,7 @@ public class AnimatedLayer extends ImageLayer{
 	public void anima(){
 		anim();
 	}
+	
 	protected void anim(){
 
 		if(!lockOnce){
@@ -128,7 +129,7 @@ public class AnimatedLayer extends ImageLayer{
 		if((frameAtual < numeroFrames-1)&&(frameAtual >= 0)){
 
 			if(oscilar){
-				inc *= -1;
+				inc = -inc;
 			}
 
 			frameAtual+=inc;

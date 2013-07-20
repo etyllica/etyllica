@@ -2,9 +2,6 @@ package br.com.etyllica.core.application;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.animation.Animation;
 import br.com.etyllica.core.event.GUIEvent;
@@ -22,12 +19,7 @@ import br.com.etyllica.layer.ImageLayer;
  *
  */
 
-public abstract class InternalApplication extends GUIComponent implements Runnable{
-
-	/**
-	 * Executor to update Application by time 
-	 */
-	private ScheduledExecutorService executor = null;
+public abstract class InternalApplication extends GUIComponent{
 	
 	/**
 	 * The updateInterval between executions
@@ -78,6 +70,12 @@ public abstract class InternalApplication extends GUIComponent implements Runnab
 	 * Animation
 	 */
 	protected Animation animation = new Animation();
+	
+	/**
+	 * Last time updated
+	 */
+	
+	protected long lastUpdate = 0;
 		
 	/**
 	 * Constructor
@@ -193,27 +191,13 @@ public abstract class InternalApplication extends GUIComponent implements Runnab
 	protected  void updateAtFixedRate(int interval){
 		
 		updateInterval = interval;
-		
-		if(executor==null){
-			executor = Executors.newSingleThreadScheduledExecutor();
-		}
-		
-		executor.scheduleAtFixedRate(this, 0, updateInterval, TimeUnit.MILLISECONDS);
-		
+				
 	}
 
-	public void run(){
-		timeUpdate();
-	}
-	
-	protected void timeUpdate(){
+	public void timeUpdate(){
 		
 	}
-	
-	protected void stopTimeUpdate(){
-		executor.shutdownNow();
-	}
-	
+		
 	protected void addWindow(Window window){
 		this.windows.add(window);
 	}
@@ -229,5 +213,18 @@ public abstract class InternalApplication extends GUIComponent implements Runnab
 	public void setAnimation(Animation animation) {
 		this.animation = animation;
 	}
+
+	public int getUpdateInterval() {
+		return updateInterval;
+	}
+
+	public long getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(long lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+	
 	
 }

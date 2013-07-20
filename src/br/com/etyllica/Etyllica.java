@@ -36,7 +36,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
-	private Core core; 
+	private Core core;
 	
 	private FullScreenWindow telaCheia = null;
 	private boolean fullScreen = false;
@@ -85,15 +85,14 @@ public abstract class Etyllica extends Applet implements Runnable{
 		//keyboard = core.getControl().getTeclado();
 
 		desktop = new DesktopWindow(0,0,w,h);
-
-		startGame();
 		
-		initEngine();
+		startGame();		
+		
 		
 		desktop.setApplication(application);	
 		core.addWindow(desktop);
 		
-		escondeCursor();
+		hideDefaultCursor();
 		mouse.updateArrowTheme();
 
 		this.setFocusTraversalKeysEnabled(false);
@@ -131,7 +130,7 @@ public abstract class Etyllica extends Applet implements Runnable{
             }
 		};
 		
-		executor.scheduleWithFixedDelay(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
+		executor.scheduleAtFixedRate(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
 	}
 	
 	private String path = "";
@@ -145,10 +144,12 @@ public abstract class Etyllica extends Applet implements Runnable{
 		String s = path.replaceAll("%20"," ");
 		
 		this.path = s;
+		
+		initLoaders();
 				
 	}
 	
-	private void initEngine(){
+	private void initLoaders(){
 
 		initDefault();
 		
@@ -249,8 +250,16 @@ public abstract class Etyllica extends Applet implements Runnable{
 	public void setMainApplication(Application application){
 		this.application = application;
 	}
+	
+	protected void hideCursor(){
+		core.hideCursor();
+	}
+	
+	protected void showCursor(){
+		core.showCursor();
+	}
 
-	private void escondeCursor(){
+	private void hideDefaultCursor(){
 		int[] pixels = new int[16 * 16];
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))

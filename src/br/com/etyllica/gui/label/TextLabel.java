@@ -24,10 +24,14 @@ public class TextLabel extends Label{
 		
 	public TextLabel(int x, int y) {
 		super(x, y);
+		
+		this.layer = new TextLayer(x,y,"");
 	}
 	
 	public TextLabel(int x, int y, int w) {
 		super(x, y, w);
+		
+		this.layer = new TextLayer(x,y,"");
 	}
 	
 	public TextLabel(int x, int y, String text) {

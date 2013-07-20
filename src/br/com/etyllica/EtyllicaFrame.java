@@ -90,14 +90,12 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 		desktop = new DesktopWindow(0,0,w,h);
 
-		startGame();
-		
-		initEngine();
+		startGame();		
 		
 		desktop.setApplication(application);		
 		core.addWindow(desktop);
 		
-		hideCursor();
+		hideDefaultCursor();
 		mouse.updateArrowTheme();
 
 		this.setFocusTraversalKeysEnabled(false);
@@ -143,16 +141,18 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 	protected boolean initAll = false;
 	protected boolean initSound = false;
 		
-	protected void setPath(String path){
+protected void setPath(String path){
 		
 		//For Windows
 		String s = path.replaceAll("%20"," ");
 		
-		this.path = s;				
+		this.path = s;
+		
+		initLoaders();
 				
 	}
 	
-	private void initEngine(){
+	private void initLoaders(){
 
 		initDefault();
 		
@@ -170,7 +170,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 	protected void initSound(){
 		MultimediaLoader.getInstance().setUrl(path);
 	}
-	
+
 	public abstract void startGame();
 
 
@@ -256,8 +256,16 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 	public void setMainApplication(Application application){
 		this.application = application;
 	}
-
-	private void hideCursor(){
+	
+	protected void hideCursor(){
+		core.hideCursor();
+	}
+	
+	protected void showCursor(){
+		core.showCursor();
+	}
+	
+	private void hideDefaultCursor(){
 		int[] pixels = new int[16 * 16];
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))

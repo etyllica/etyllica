@@ -21,10 +21,11 @@ public class ProceduralColorChange extends Application{
 	public void load(){
 		
 		cursor = new BufferedLayer(50,50,"cursor.png");
+		updateAtFixedRate(20);
 		
 		loading = 100;
 	}
-
+	
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event){
 		

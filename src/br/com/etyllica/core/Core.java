@@ -34,7 +34,7 @@ public class Core{
 	//External Windows
 	private Window activeWindow = null;
 
-//	private SessionMap sessionMap = new SessionMap();
+	//	private SessionMap sessionMap = new SessionMap();
 
 	private List<Window> windows = new ArrayList<Window>();
 
@@ -62,6 +62,8 @@ public class Core{
 	//private List<JoystickEvent> joyEvents;
 
 	private DesktopWindow desktopWindow;
+	
+	private boolean drawCursor = true;
 
 	public Core(){
 		super();
@@ -98,7 +100,7 @@ public class Core{
 			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
 			Configuration.getInstance().setLanguageChanged(false);
 		}
-		
+
 		if(Configuration.getInstance().isThemeChanged()){
 			guiEvents.add(GUIEvent.THEME_CHANGED);
 			Configuration.getInstance().setThemeChanged(false);
@@ -132,7 +134,7 @@ public class Core{
 		}
 
 	}
-	
+
 	private void updateActiveWindow(){
 
 		if(activeWindow.isClose()){
@@ -152,13 +154,24 @@ public class Core{
 		Application application = activeWindow.getApplication();
 
 		if(application!=null){
-			
+
+			long now = getTimeNow();
+
+			if(application.getUpdateInterval()>0){
+				
+				if(now-application.getLastUpdate()>application.getUpdateInterval()){
+					application.timeUpdate();
+					application.setLastUpdate(now);
+				}
+				
+			}
+
 			//Animate
 			//TODO Independent Thread
 			if(application.getLoading()==100){
 				application.getAnimation().animate(getTimeNow());
 			}
-			
+
 			//if activeWindow, receive command to change application
 			if(application.getReturnApplication()!=application){
 				this.changeApplication();
@@ -204,7 +217,7 @@ public class Core{
 			if(focus!=null){
 
 				GUIEvent focusEvent = focus.updateKeyboard(keyboardEvent);
-				
+
 				if(focusEvent!=GUIEvent.NONE&&focusEvent!=null){
 					//TODO Update NExtComponent
 					System.out.println(focusEvent);
@@ -299,7 +312,7 @@ public class Core{
 
 		mouseEvents.clear();
 	}
-	
+
 	private void updateGui(List<GUIComponent> components){
 
 		for(GUIEvent event: guiEvents){
@@ -309,21 +322,21 @@ public class Core{
 				updateGuiComponent(component, event);
 
 			}
-			
+
 		}
 
 		guiEvents.clear();
 	}
-	
+
 	private void updateGuiComponent(GUIComponent component, GUIEvent event){
-		
+
 		component.update(event);
-		
+
 		//Update Childs
 		for(GUIComponent child: component.getComponents()){
-		
+
 			updateGuiComponent(child, event);
-		
+
 		}
 	}
 
@@ -449,7 +462,7 @@ public class Core{
 			events.add(event);
 			break;
 			 */
-			
+
 		case UPDATE_MOUSE:
 			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
 			break;
@@ -516,7 +529,9 @@ public class Core{
 
 		}
 
-		drawMouse(g);
+		if(drawCursor){
+			drawMouse(g);
+		}
 
 	}
 
@@ -555,7 +570,7 @@ public class Core{
 	private void drawComponent(GUIComponent component, Grafico g){
 
 		if(component.isVisible()){
-						
+
 			//Draw Component
 			component.draw(g);
 
@@ -567,12 +582,12 @@ public class Core{
 				drawComponent(child,g);
 				child.setOffset(-component.getX(), -component.getY());
 			}
-			
+
 		}
-		
+
 
 	}
-	
+
 	public long getTimeNow(){
 		return System.currentTimeMillis();
 	}
@@ -822,6 +837,14 @@ public class Core{
 
 	public GUIEvent getSuperEvent(){
 		return superEvent;
+	}
+	
+	public void hideCursor() {
+		drawCursor = false;		
+	}
+	
+	public void showCursor() {
+		drawCursor = true;		
 	}
 
 }
