@@ -17,7 +17,7 @@ public class HorizontalAnimationScript extends AnimationScript{
 	@Override
 	public void animate(long now) {
 		
-		long timeElapsed = now-startedAt;
+		long timeElapsed = now-startedAt-delay;
 		
 		float factor = (float)timeElapsed/time;
 

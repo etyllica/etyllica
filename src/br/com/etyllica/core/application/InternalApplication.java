@@ -189,9 +189,11 @@ public abstract class InternalApplication extends GUIComponent{
 	}
 			
 	protected  void updateAtFixedRate(int interval){
-		
 		updateInterval = interval;
-				
+	}
+	
+	protected  void stopTimeUpdate(){
+		updateInterval = 0;
 	}
 
 	public void timeUpdate(){

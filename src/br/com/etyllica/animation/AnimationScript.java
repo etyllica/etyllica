@@ -9,17 +9,18 @@ public class AnimationScript implements Script{
 	protected long startedAt = 0;
 
 	protected long time = 0;
+	protected long delay = 0;
 
 	private boolean started = false;
 	private boolean stopped = false;
 	private boolean endless = false;
-	
+
 	protected int startValue = 0;
-	
+
 	protected int endValue = 0;
-	
+
 	private AnimationScript next;
-	
+
 
 	public AnimationScript(long time){
 		super();
@@ -27,13 +28,20 @@ public class AnimationScript implements Script{
 		this.time = time;
 	}
 	
+	public AnimationScript(long delay, long time){
+		super();
+
+		this.delay = delay;
+		this.time = time;
+	}
+
 	public AnimationScript(Layer target, long time){
 		super();
 
 		this.target = target;
 		this.time = time;
 	}
-	
+
 	public void restart(){
 		started = false;
 		stopped = false;
@@ -51,26 +59,28 @@ public class AnimationScript implements Script{
 			startedAt = now;
 		}
 
-		if(!stopped){
+		if(started&&!stopped){
 
-			if(now-startedAt>=time){
+			if(now-startedAt-delay>=time){
 				stopped = true;
 			}else{
-				this.animate(now);
+				if(now-startedAt>=delay){
+					this.animate(now);
+				}
 			}
-			
+
 		}
 
 	}
 
 	public void animate(long now){
-		
+
 	}
 
 	public boolean isStopped() {
 		return stopped;
 	}
-	
+
 	public boolean isEndless() {
 		return endless;
 	}
@@ -94,7 +104,7 @@ public class AnimationScript implements Script{
 	public void setTarget(Layer target) {
 		this.target = target;
 	}
-	
+
 	public void setInterval(int startValue, int endValue){
 		this.startValue = startValue;
 		this.endValue = endValue;
@@ -107,5 +117,13 @@ public class AnimationScript implements Script{
 	public void setNext(AnimationScript next) {
 		this.next = next;
 	}
-		
+
+	public long getDelay() {
+		return delay;
+	}
+
+	public void setDelay(long delay) {
+		this.delay = delay;
+	}	
+
 }

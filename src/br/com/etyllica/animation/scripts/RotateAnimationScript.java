@@ -10,6 +10,10 @@ public class RotateAnimationScript extends AnimationScript{
 		super(time);
 	}
 	
+	public RotateAnimationScript(long delay, long time) {
+		super(delay, time);
+	}
+	
 	public RotateAnimationScript(Layer target, long time) {
 		super(target, time);
 	}
@@ -17,7 +21,7 @@ public class RotateAnimationScript extends AnimationScript{
 	@Override
 	public void animate(long now) {
 		
-		long timeElapsed = now-startedAt;
+		long timeElapsed = now-startedAt-delay;
 		
 		float factor = (float)timeElapsed/time;
 

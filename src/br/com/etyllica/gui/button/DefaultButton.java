@@ -26,6 +26,8 @@ public class DefaultButton extends RoundGUIComponent{
 	protected Label label;
 	
 	private Theme theme;
+	
+	private String alt = "";
 
 	public DefaultButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -285,5 +287,13 @@ public class DefaultButton extends RoundGUIComponent{
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
-	
+
+	public String getAlt() {
+		return alt;
+	}
+
+	public void setAlt(String alt) {
+		this.alt = alt;
+	}
+		
 }

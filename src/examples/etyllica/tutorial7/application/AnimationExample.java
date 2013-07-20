@@ -61,7 +61,7 @@ public class AnimationExample extends Application{
 		this.animation.add(hscript);
 		this.animation.add(vscript);
 		
-		RotateAnimationScript rotate = new RotateAnimationScript(6000);
+		RotateAnimationScript rotate = new RotateAnimationScript(1000,6000);
 		rotate.setTarget(text2);
 		rotate.setInterval(0, 360);
 		

@@ -26,7 +26,7 @@ public class VerticalAnimationScript extends AnimationScript{
 	@Override
 	public void animate(long now) {
 		
-		long timeElapsed = now-startedAt;
+		long timeElapsed = now-startedAt-delay;
 		
 		float factor = (float)timeElapsed/time;
 

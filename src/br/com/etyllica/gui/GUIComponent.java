@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import br.com.etyllica.animation.Animation;
 import br.com.etyllica.core.Component;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
@@ -37,9 +36,7 @@ public abstract class GUIComponent extends Layer implements Component{
 	
 	//GUIAction's Map
 	protected Map<GUIEvent,GUIAction> map = new HashMap<GUIEvent, GUIAction>();
-		
-	protected String alt = "";
-			
+				
 	public GUIComponent(int x, int y) {
 		super(x,y,1,1);
 	}
@@ -173,14 +170,6 @@ public abstract class GUIComponent extends Layer implements Component{
 		
 		return null;
 		
-	}
-	
-	public String getAlt() {
-		return alt;
-	}
-
-	public void setAlt(String alt) {
-		this.alt = alt;
 	}
 	
 }
