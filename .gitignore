@@ -1,5 +1,5 @@
 # Pre-Compiled Files #
-#*.class
+*.class
 bin/
 sdk/
 
