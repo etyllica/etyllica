@@ -1,5 +1,7 @@
 package br.com.etyllica.layer;
 
+import java.awt.geom.AffineTransform;
+
 import br.com.etyllica.core.loader.ImageLoader;
 import br.com.etyllica.core.timer.Timer;
 import br.com.etyllica.core.video.Grafico;
@@ -84,7 +86,7 @@ public class AnimatedLayer extends ImageLayer{
 	public void anima(){
 		anim();
 	}
-	
+
 	protected void anim(){
 
 		if(!lockOnce){
@@ -163,7 +165,7 @@ public class AnimatedLayer extends ImageLayer{
 			else{
 				setYImage(yTile*frameAtual);
 			}
-			
+
 		}
 	}
 
@@ -252,15 +254,36 @@ public class AnimatedLayer extends ImageLayer{
 	@Override
 	public void draw(Grafico g){
 		if(visible){
-			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
-					xImage,yImage,xImage+xTile,yImage+yTile, null );
+
+			if(opacity<255){
+				g.setOpacity(opacity);
+			}
+
+			if(angle==0){
+				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
+						xImage,yImage,xImage+xTile,yImage+yTile, null );
+			}else{
+
+				AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2);
+
+				g.setTransform(transform);
+				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
+						xImage,yImage,xImage+w,yImage+h, null );
+
+				g.resetTransform();
+			}
+
+			if(opacity<255){
+				g.resetOpacity();
+			}
+
 		}
 	}
 
 	public void setStopped(boolean stopped){
 		this.stopped = stopped;
 	}
-	
+
 	public boolean isStopped(){
 		return stopped;
 	}

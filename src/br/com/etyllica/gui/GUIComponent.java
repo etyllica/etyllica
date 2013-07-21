@@ -53,6 +53,10 @@ public abstract class GUIComponent extends Layer implements Component{
 		return lastEvent;
 	}
 
+	/**
+	 * 
+	 * @param lastEvent
+	 */
 	public void setLastEvent(GUIEvent lastEvent) {
 		this.lastEvent = lastEvent;
 	}
@@ -60,7 +64,11 @@ public abstract class GUIComponent extends Layer implements Component{
 	public boolean isMouseOver() {
 		return mouseOver;
 	}
-
+	
+	/**
+	 * 
+	 * @param mouseOver
+	 */
 	public void setMouseOver(boolean mouseOver) {
 		this.mouseOver = mouseOver;
 	}
@@ -69,6 +77,10 @@ public abstract class GUIComponent extends Layer implements Component{
 		return onFocus;
 	}
 
+	/**
+	 * 
+	 * @param focus
+	 */
 	public void setOnFocus(boolean focus) {
 		this.onFocus = focus;
 	}
@@ -77,6 +89,10 @@ public abstract class GUIComponent extends Layer implements Component{
 		return actions;
 	}
 
+	/**
+	 * 
+	 * @param actions
+	 */
 	public void setActions(List<GUIAction> actions) {
 		this.actions = actions;
 	}
@@ -89,20 +105,34 @@ public abstract class GUIComponent extends Layer implements Component{
 		this.components.clear();
 	}
 	
+	/**
+	 * 
+	 * @param component
+	 */
 	public void remove(GUIComponent component){
 		this.components.remove(component);
 	}
 	
+	/**
+	 * 
+	 * @param components
+	 */
 	public void removeAll(Collection<? extends GUIComponent> components){
 		this.components.removeAll(components);
 	}
 	
-	//Always add component at first
+	/**
+	 * @param component
+	 */
 	public void add(GUIComponent component) {
 		component.setRoot(this);
 		this.components.add(component);
 	}
 	
+	/**
+	 * 
+	 * @param components
+	 */
 	public void addAll(Collection<? extends GUIComponent> components) {
 		
 		for(GUIComponent component: components)	{
@@ -111,6 +141,11 @@ public abstract class GUIComponent extends Layer implements Component{
 		
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void translateComponents(int x, int y){
 		for(GUIComponent component: components){
 			translateComponent(x, y, component);
@@ -141,10 +176,15 @@ public abstract class GUIComponent extends Layer implements Component{
 		
 	}
 	
+	/**
+	 * 
+	 * @param event
+	 * @param action
+	 */
 	public void addAction(GUIEvent event, GUIAction action){
 		map.put(event, action);
 	}
-		
+	
 	protected void setRoot(GUIComponent root){
 		this.root = root;
 	}

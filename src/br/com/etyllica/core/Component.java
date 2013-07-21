@@ -14,12 +14,32 @@ import br.com.etyllica.core.event.KeyboardEvent;
 public interface Component extends DrawableComponent{
 	
 	//TODO Incuir tambem o nome(id) de quem gerou o evento!
-		
+	/**
+	 * 
+	 * @param event
+	 * @return
+	 */
 	public GUIEvent updateMouse(PointerEvent event);
+	
+	/**
+	 * 
+	 * @param event
+	 * @return
+	 */
 	public GUIEvent updateKeyboard(KeyboardEvent event);
 	
+	/**
+	 * 
+	 * @param event
+	 */
 	public void update(GUIEvent event);
 	
+	/**
+	 * 
+	 * @param mx
+	 * @param my
+	 * @return
+	 */
 	public boolean onMouse(int mx, int my);
 
 }

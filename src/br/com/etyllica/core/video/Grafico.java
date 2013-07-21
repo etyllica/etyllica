@@ -20,7 +20,6 @@ import java.awt.image.VolatileImage;
 
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
-import br.com.etyllica.layer.TextLayer;
 import br.com.etyllica.linear.Ponto2D;
 
 /**
@@ -83,10 +82,18 @@ public class Grafico{
 		screen.drawString(texto, x, y);
 	}
 	
-	public void drawString(int x, int y, int w, int h, String texto) {
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param text
+	 */
+	public void drawString(int x, int y, int w, int h, String text) {
 		FontMetrics fm = screen.getFontMetrics();
 
-		int msg_width = fm.stringWidth(texto);
+		int msg_width = fm.stringWidth(text);
 
 		int ascent = fm.getMaxAscent();
 		int descent= fm.getMaxDescent();
@@ -94,13 +101,22 @@ public class Grafico{
 		int dx = x+w/2 - msg_width/2;
 		int dy = y+h/2 - descent/2 + ascent/2;
 
-		screen.drawString(texto, dx, dy);
+		screen.drawString(text, dx, dy);
 	}
 	
-	public void drawStringShadow(int x, int y, int w, int h, String texto, Color shadowColor) {
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param text
+	 * @param shadowColor
+	 */
+	public void drawStringShadow(int x, int y, int w, int h, String text, Color shadowColor) {
 		FontMetrics fm = screen.getFontMetrics();
 
-		int msg_width = fm.stringWidth(texto);
+		int msg_width = fm.stringWidth(text);
 
 		int ascent = fm.getMaxAscent();
 		int descent= fm.getMaxDescent();
@@ -108,9 +124,16 @@ public class Grafico{
 		int dx = x+w/2 - msg_width/2;
 		int dy = y+h/2 - descent/2 + ascent/2;
 
-		drawShadow(dx, dy, texto, shadowColor);
+		drawShadow(dx, dy, text, shadowColor);
 	}
 
+	/**
+	 * 
+	 * @param offsetX
+	 * @param y
+	 * @param text
+	 * @param border
+	 */
 	public void escreveX(int offsetX, int y, String text, boolean border){
 
 		if((text!=null)&&(!text.isEmpty())){
@@ -144,12 +167,24 @@ public class Grafico{
 		}
 	}
 
-	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param frase
+	 */
 	public void drawShadow(int x, int y, String frase){
 				
 		drawShadow(x, y, frase,Color.BLACK);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param frase
+	 * @param shadowColor
+	 */
 	public void drawShadow(int x, int y, String frase, Color shadowColor){
 		
 		if((frase!=null)&&(!frase.isEmpty())){
@@ -163,42 +198,78 @@ public class Grafico{
 		}
 	}
 	
-
-	public void escreveSombraX(int y, String frase){
-		if((frase!=null)&&(!frase.isEmpty())){
+	/**
+	 * 
+	 * @param y
+	 * @param text
+	 */
+	public void drawStringShadowX(int y, String text){
+		if((text!=null)&&(!text.isEmpty())){
 
 			FontMetrics fm = screen.getFontMetrics();
 
-			int x = (width/2)-(fm.stringWidth(frase)/2);
+			int x = (width/2)-(fm.stringWidth(text)/2);
 			int fy = y+fm.getHeight();
 
-			drawShadow(x, fy, frase);
+			drawShadow(x, fy, text);
 				
 		}
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param frase
+	 */
 	public void escreve(int x, int y, String frase){
 		if((frase!=null)&&(!frase.isEmpty())){
 			screen.drawString(frase,x,y);
 		}
 	}
 
+	/**
+	 * 
+	 * @param y
+	 * @param frase
+	 */
 	public void escreveX(int y, String frase) {
 
 		escreveX(0,y,frase, false);
 	}
 	
+	/**
+	 * 
+	 * @param offsetX
+	 * @param y
+	 * @param frase
+	 */
 	public void escreveX(int offsetX, int y, String frase) {
 
 		escreveX(offsetX, y,frase, false);
 	}
 	
+	/**
+	 * 
+	 * @param y
+	 * @param frase
+	 * @param borda
+	 */
 	public void escreveX(int y, String frase, boolean borda) {
 		escreveX(0,y,frase, borda);
 	}
 	
 	
-	//Fun��es de Escrita
+	/*
+	 * Write Methods
+	 */
+	
+	/**
+	 * 
+	 * @param offsetX
+	 * @param y
+	 * @param frase
+	 */
 	public void escreveXCustom(int offsetX, int y, String frase) {
 
 
@@ -234,83 +305,58 @@ public class Grafico{
 
 	}
 
+	/**
+	 * 
+	 * @param img
+	 * @param dx1
+	 * @param dy1
+	 * @param dx2
+	 * @param dy2
+	 * @param sx1
+	 * @param sy1
+	 * @param sx2
+	 * @param sy2
+	 * @param observer
+	 */
 	public void drawImage( Image img, int dx1, int dy1,int dx2, int dy2, int sx1 , int sy1, int sx2, int sy2, ImageObserver observer ){
 		screen.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);
 	}
 	
-	public void desenha(TextLayer texto){
-
-		/*
-		if(texto.isVisible()){
-
-			Font f = FontLoader.getInstance().loadFont(texto.getFontName());
-			f = f.deriveFont(texto.getStyle(), texto.getSize());
-
-			screen.setFont(f);
-
-			screen.setColor(texto.getCorDifusa());
-
-			FontMetrics fm = screen.getFontMetrics(f);
-
-			int msg_width = fm.stringWidth(texto.getTexto());
-
-			int x = texto.getX() - msg_width/2;
-			int y = texto.getY() + texto.getTamanho()/3;
-
-			if(texto.getBorda()==false){
-				screen.drawString(texto.getTexto(), x, y);
-			}
-
-		}
-
-		if(t.getAparecendo()){
-			//escreve
-			//screen.drawImage( t.getImagem(), t.getX(), t.getY(), null);
-			FontRenderContext frc = new FontRenderContext(null, t.isAntialiased(), false);
-			TextLayout layout = new TextLayout(t.getTexto(), t.getFonte(), frc);
-
-			Rectangle2D bounds = layout.getBounds();
-
-			Graphics2D g = getGraphics();
-
-			g.setFont(t.getFonte());
-			if(t.getBorda()==true){
-				Shape sha = layout.getOutline(AffineTransform.getTranslateInstance(0,t.getTexto().length()-14));
-
-				//g.setStroke(new BasicStroke(3f));
-				g.setStroke(new BasicStroke(4f));
-
-				g.setColor(t.getCorBorda());
-				g.draw(sha);
-
-				g.setColor(t.getCorDifusa());
-				g.fill(sha);
-			}
-			else{
-				g.setColor(t.getCorDifusa());
-				g.drawString(t.getTexto(),t.getX(),t.getY());
-			}
-
-			g.dispose();
-		}
-		 */
-	}
-
+	
 	public Graphics2D getGraphics(){
 		return screen;
 	}
 
-	public void drawRect(Layer camada){
-		screen.drawRect(camada.getX(), camada.getY(), camada.getW(), camada.getH());
+	/**
+	 * 
+	 * @param layer
+	 */
+	public void drawRect(Layer layer){
+		screen.drawRect(layer.getX(), layer.getY(), layer.getW(), layer.getH());
 	}
-	public void fillOval(Layer camada){
-		screen.fillOval(camada.getX(), camada.getY(), camada.getW(), camada.getH());
+	/**
+	 * 
+	 * @param layer
+	 */
+	public void fillOval(Layer layer){
+		screen.fillOval(layer.getX(), layer.getY(), layer.getW(), layer.getH());
 	}
-	public void fillArc(Layer camada, int anguloInicial, int anguloArco){
-		screen.fillArc(camada.getX(), camada.getY(), camada.getW(), camada.getH(), anguloInicial, anguloArco);
+	
+	/**
+	 * 
+	 * @param layer
+	 * @param startAngle
+	 * @param arcAngle
+	 */
+	public void fillArc(Layer layer, int startAngle, int arcAngle){
+		screen.fillArc(layer.getX(), layer.getY(), layer.getW(), layer.getH(), startAngle, arcAngle);
 	}
 	
 	/** Funções Delegadas */
+	/**
+	 * 
+	 * @param width
+	 */
 	public void setBasicStroke(float width){
 		screen.setStroke(new BasicStroke(width));
 	}
@@ -318,6 +364,11 @@ public class Grafico{
 	public AffineTransform getTransform(){
 		return screen.getTransform();
 	}
+	
+	/**
+	 * 
+	 * @param tx
+	 */
 	public void setTransform(AffineTransform tx){
 		//Avoid Java Bug
 		if(screen!=null){
@@ -333,17 +384,29 @@ public class Grafico{
 		}
 	}
 	
+	/**
+	 * Set basic stroke with width 1f 
+	 */
 	public void resetStroke(){
 		screen.setStroke(new BasicStroke(1f));
 	}
 	
+	/**
+	 * 
+	 * @param stroke
+	 */
 	public void setStroke(Stroke stroke){
 		screen.setStroke(stroke);
 	}
 	
-	public void setFont(Font fonte){
-		screen.setFont(fonte);
+	/**
+	 * 
+	 * @param font
+	 */
+	public void setFont(Font font){
+		screen.setFont(font);
 	}
+	
 	public Font getFont(){
 		return screen.getFont();		
 	}
@@ -352,104 +415,286 @@ public class Grafico{
 		return screen.getFontRenderContext();
 	}
 	
+	/**
+	 * 
+	 * @param color
+	 */
 	public void setColor(int color){
 		screen.setColor(new Color(color));
-	}	
-	public void setColor(Color c){
-		screen.setColor(c);
 	}
 	
-	public void setAlpha(int porcento){
+	/**
+	 * 
+	 * @param color
+	 */
+	public void setColor(Color color){
+		screen.setColor(color);
+	}
+	
+	/**
+	 * 
+	 * @param percent
+	 */
+	public void setAlpha(int percent){
 
-		float a = (float)porcento/100;
+		float a = (float)percent/100;
 
 		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, a));
 	}
+	
+	/**
+	 * 
+	 * @param opacity
+	 */
+	public void setOpacity(int opacity){
 
+		float a = (float)opacity/255;
+
+		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, a));
+		
+	}
+	
+	public void resetOpacity(){
+
+		float a = 1f;
+
+		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, a));
+		
+	}
+
+	/**
+	 * 
+	 * @param img
+	 * @param x
+	 * @param y
+	 */
 	public void drawImage(Image img, int x, int y){
 		screen.drawImage(img, x, y, null);
 	}
 	
-	public void drawArc(int x, int y, int w, int h, int anguloInicial, int anguloArco){
-		screen.drawArc(x, y, w, h, anguloInicial, anguloArco);
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param startAngle
+	 * @param arcAngle
+	 */
+	public void drawArc(int x, int y, int w, int h, int startAngle, int arcAngle){
+		screen.drawArc(x, y, w, h, startAngle, arcAngle);
 	}
 	
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 */
 	public void drawLine(int x1,int y1,int x2,int y2){
 		screen.drawLine(x1, y1, x2, y2);
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 * @param q
+	 */
 	public void drawLine(Ponto2D p, Ponto2D q){
 		screen.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
 	}
-		
-	public void drawPolygon(Polygon p){
-		screen.drawPolygon(p);
+	
+	/**
+	 * 
+	 * @param polygon
+	 */
+	public void drawPolygon(Polygon polygon){
+		screen.drawPolygon(polygon);
 	}
 	
-	public void fillPolygon(Polygon p){
-		screen.fillPolygon(p);
+	/**
+	 * 
+	 * @param polygon
+	 */
+	public void fillPolygon(Polygon polygon){
+		screen.fillPolygon(polygon);
 	}
 	
+	/**
+	 * 
+	 * @param layer
+	 */
 	public void fillRect(Layer layer) {
 		screen.fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public void fillRect(int x, int y, int w, int h) {
 		screen.fillRect(x,y,w,h);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param raised
+	 */
 	public void fill3DRect(int x, int y, int w, int h, boolean raised) {
 		screen.fill3DRect(x, y, w, h, raised);
 	}
 	
-	public void fillArc(int x, int y, int w, int h, int anguloInicial, int anguloArco){
-		screen.fillArc(x, y, w, h, anguloInicial, anguloArco);
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param startAngle
+	 * @param arcAngle
+	 */
+	public void fillArc(int x, int y, int w, int h, int startAngle, int arcAngle){
+		screen.fillArc(x, y, w, h, startAngle, arcAngle);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public void drawRect(int x, int y, int w, int h) {
 		screen.drawRect(x,y,w,h);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public void drawRect(double x, double y, double w, double h) {
 		screen.drawRect((int)x,(int)y,(int)w,(int)h);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param arcWidth
+	 * @param arcHeight
+	 */
 	public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
 		screen.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param arcWidth
+	 * @param arcHeight
+	 */
 	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
 		screen.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public void drawOval(int x, int y, int w, int h ){
 		screen.drawOval(x,y,w,h);
 	}
 	
-	public void drawCircle(int cx, int cy, int raio ){
-		screen.drawOval(cx-raio, cy-raio, raio*2, raio*2);
+	/**
+	 * 
+	 * @param cx
+	 * @param cy
+	 * @param radius
+	 */
+	public void drawCircle(int cx, int cy, int radius ){
+		screen.drawOval(cx-radius, cy-radius, radius*2, radius*2);
 	}
 	
-	public void drawOval(Ponto2D p, int raio ){
-		screen.drawOval((int)p.getX()-raio, (int)p.getY()-raio, raio*2, raio*2);
+	/**
+	 * 
+	 * @param point
+	 * @param radius
+	 */
+	public void drawCircle(Ponto2D point, int radius ){
+		screen.drawOval((int)point.getX()-radius, (int)point.getY()-radius, radius*2, radius*2);
 	}
 
-	public void fillCircle(int cx, int cy, int raio ){
-		screen.fillOval(cx-raio, cy-raio, raio*2, raio*2);
+	/**
+	 * 
+	 * @param cx
+	 * @param cy
+	 * @param radius
+	 */
+	public void fillCircle(int cx, int cy, int radius ){
+		screen.fillOval(cx-radius, cy-radius, radius*2, radius*2);
 	}
 	
+	/**
+	 * 
+	 * @param point
+	 * @param radius
+	 */
+	public void fillCircle(Ponto2D point, int radius ){
+		screen.fillOval((int)point.getX()-radius, (int)point.getY()-radius, radius*2, radius*2);
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public void fillOval(int x, int y, int w, int h ){
 		screen.fillOval(x, y, w, h);
 	}
 	
+	/**
+	 * 
+	 * @param text
+	 * @param x
+	 * @param y
+	 */
 	public void drawString(String text, int x, int y){
 		screen.drawString(text, x, y);
 	}
 	
+	/**
+	 * 
+	 * @param shape
+	 */
 	public void draw(Shape shape){
 		screen.draw(shape);
 	}
 	
+	/**
+	 * 
+	 * @param shape
+	 */
 	public void fill(Shape shape){
 		screen.fill(shape);
 	}
@@ -463,13 +708,28 @@ public class Grafico{
 		return bimg;
 	}
 
+	/**
+	 * 
+	 * @param startX
+	 * @param startY
+	 * @param w
+	 * @param h
+	 * @param rgbArray
+	 * @param offset
+	 * @param scansize
+	 */
 	public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
 		
 		bimg.setRGB(startX, startY, w, h, rgbArray, offset, scansize);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void translate(int x, int y){
 		screen.translate(x, y);
 	}
-		
+
 }

@@ -68,6 +68,10 @@ public class PivotImageLayer extends ImageLayer{
 	@Override	
 	public void draw(Grafico g){
 		if(visible){
+			
+			if(opacity<255){
+				g.setOpacity(opacity);
+			}
 
 			if(angle==0){
 				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, y+h,
@@ -83,6 +87,11 @@ public class PivotImageLayer extends ImageLayer{
 						xImage,yImage,xImage+w,yImage+h, null );
 				g.setTransform(reset);
 			}
+			
+			if(opacity<255){
+				g.resetOpacity();
+			}
+			
 		}
 	}
 }

@@ -55,6 +55,10 @@ public class Configuration {
 		return arrowTheme;
 	}
 
+	/**
+	 * 
+	 * @param arrowTheme
+	 */
 	public void setArrowTheme(ArrowTheme arrowTheme) {
 		this.arrowTheme = arrowTheme;
 	}
@@ -63,6 +67,10 @@ public class Configuration {
 		return language;
 	}
 
+	/**
+	 * 
+	 * @param language
+	 */
 	public void setLanguage(Language language) {
 		this.language = language;
 		
@@ -84,6 +92,10 @@ public class Configuration {
 		return timerClick;
 	}
 
+	/**
+	 * 
+	 * @param timerClick
+	 */
 	public void setTimerClick(boolean timerClick) {
 		this.timerClick = timerClick;
 	}
@@ -92,6 +104,10 @@ public class Configuration {
 		return numpadMouse;
 	}
 
+	/**
+	 * 
+	 * @param numpadMouse
+	 */
 	public void setNumpadMouse(boolean numpadMouse) {
 		this.numpadMouse = numpadMouse;
 	}
@@ -100,6 +116,10 @@ public class Configuration {
 		return languageChanged;
 	}
 
+	/**
+	 * 
+	 * @param languageChanged
+	 */
 	public void setLanguageChanged(boolean languageChanged) {
 		this.languageChanged = languageChanged;
 	}
@@ -108,10 +128,13 @@ public class Configuration {
 		return themeChanged;
 	}
 	
+	/**
+	 * 
+	 * @param themeChanged
+	 */
 	public void setThemeChanged(boolean themeChanged) {
 		this.themeChanged = themeChanged;
 	}
-	
 	
 
 }

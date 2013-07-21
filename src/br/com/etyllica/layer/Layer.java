@@ -9,7 +9,7 @@ import br.com.etyllica.core.event.PointerEvent;
  *
  */
 
-public class Layer {
+public class Layer{
 
 	/**
      * x position of a Layer
@@ -30,6 +30,11 @@ public class Layer {
      * Layer's height
      */
 	protected int h = 0;
+	
+	/**
+	 * Opacity
+	 */
+	protected int opacity = 255;
 	
 	/**
 	 * Angle in degrees
@@ -101,35 +106,78 @@ public class Layer {
 		this.h = h;
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void setCoordinates(int x, int y){
 		setX(x);
 		setY(y);
 	}
 	
+	/**
+	 * 
+	 * @param offsetX
+	 */
 	public void setOffsetX(int offsetX){
 		setX(x+offsetX);
 	}
+	
+	/**
+	 * 
+	 * @param offsetY
+	 */
 	public void setOffsetY(int offsetY){
 		setY(y+offsetY);
 	}
 
+	/**
+	 * 
+	 * @param offsetX
+	 * @param offsetY
+	 */
 	public void setOffset(int offsetX, int offsetY){
 		setOffsetX(offsetX);
 		setOffsetY(offsetY);
 	}
-	
+		
+	public int getOpacity() {
+		return opacity;
+	}
+
+	/**
+	 * 
+	 * @param opacity
+	 */
+	public void setOpacity(int opacity) {
+		this.opacity = opacity;
+	}
+
 	public double getAngle() {
 		return angle;
 	}
 
+	/**
+	 * 
+	 * @param angle
+	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
 	}
 	
+	/**
+	 * 
+	 * @param offset
+	 */
 	public void setOffsetAngle(double offset) {
 		setAngle(angle+offset);
 	}
 	
+	/**
+	 * 
+	 * @param visible
+	 */
 	public void setVisible(boolean visible){
 		this.visible = visible;	
 	}
@@ -158,6 +206,18 @@ public class Layer {
 		
 	}
 	
+	/*
+	 * Colision Methods
+	 */
+	
+	/**
+	 * 
+	 * @param bx
+	 * @param by
+	 * @param bw
+	 * @param bh
+	 * @return
+	 */
 	public boolean colideRect(int bx, int by, int bw, int bh){
 
 		if(bx + bw < getX())	return false;
@@ -170,6 +230,14 @@ public class Layer {
 
 	}
 	
+	/**
+	 * 
+	 * @param bx
+	 * @param by
+	 * @param bw
+	 * @param bh
+	 * @return
+	 */
 	public boolean colideCircleCircle(int bx, int by, int bw, int bh)
 	{
 		int xdiff = bx - x;
@@ -188,6 +256,12 @@ public class Layer {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param px
+	 * @param py
+	 * @return
+	 */
 	public boolean colideCirclePoint(int px, int py){
 		
 		int cx = x+w/2;
@@ -203,12 +277,23 @@ public class Layer {
 		return (distance <= radius);
 	}
 	
+	/**
+	 * 
+	 * @param event
+	 * @return
+	 */
 	public boolean onMouse(PointerEvent event) {
 		
 		return onMouse(event.getX(), event.getY());
 				
 	}
 	
+	/**
+	 * 
+	 * @param mx
+	 * @param my
+	 * @return
+	 */
 	public boolean onMouse(int mx, int my) {
 		return colideRect(mx, my, 1, 1);
 	}

@@ -87,6 +87,10 @@ public class TextLayer extends ImageLayer{
 	public void draw(Grafico g){
 
 		if(this.visible){
+			
+			if(opacity<255){
+				g.setOpacity(opacity);
+			}
 
 			Font f = this.font;
 
@@ -95,8 +99,6 @@ public class TextLayer extends ImageLayer{
 			}
 
 			g.setFont(f);
-
-			AffineTransform reset = g.getTransform();
 
 			FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
 			TextLayout layout = new TextLayout(text, f, frc);
@@ -139,7 +141,11 @@ public class TextLayer extends ImageLayer{
 
 			}
 
-			g.setTransform(reset);
+			g.resetTransform();
+			
+			if(opacity<255){
+				g.resetOpacity();
+			}
 
 		}
 

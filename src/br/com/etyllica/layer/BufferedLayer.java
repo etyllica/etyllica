@@ -22,74 +22,115 @@ public class BufferedLayer extends ImageLayer{
 	private BufferedImage originalBuffer;
 	protected BufferedImage imagemBuffer;
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public BufferedLayer(int x, int y) {
 		super(x,y);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param path
+	 */
 	public BufferedLayer(int x, int y, String path) {
 		super(x,y,path);
 		igualaImagem(ImageLoader.getInstance().getImage(path));
 	}
 	
+	/**
+	 * 
+	 * @param path
+	 */
 	public BufferedLayer(String path) {
 		this(0,0,path);
 	}
 	
-	public BufferedLayer(int x, int y, BufferedImage buf) {
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param buffer
+	 */
+	public BufferedLayer(int x, int y, BufferedImage buffer) {
 		this(x,y);
-		igualaImagem(buf);
-	}
-	public BufferedLayer(int x, int y, int xLimite, int yLimite) {
-		
-		this(x,y);
-		
-		this.w = xLimite;
-		this.h = yLimite;
-
-		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		originalBuffer.getGraphics().fillRect(0,0,xLimite,yLimite);
-		
-		resetaImagem();
-	}
-
-	public BufferedLayer(BufferedImage buf) {
-		this(0,0,buf);
+		igualaImagem(buffer);
 	}
 	
-	public void igualaImagem(Image buf){
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
+	public BufferedLayer(int x, int y, int w, int h) {
+		
+		this(x,y);
+		
+		this.w = w;
+		this.h = h;
 
-		if(buf==null)
+		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		originalBuffer.getGraphics().fillRect(0,0,w,h);
+		
+		resetImage();
+	}
+
+	/**
+	 * 
+	 * @param buffer
+	 */
+	public BufferedLayer(BufferedImage buffer) {
+		this(0,0,buffer);
+	}
+	
+	/**
+	 * 
+	 * @param buffer
+	 */
+	public void igualaImagem(Image buffer){
+
+		if(buffer==null)
 			return;
 
-		int w = buf.getWidth(null);
-		int h = buf.getHeight(null);
+		int w = buffer.getWidth(null);
+		int h = buffer.getHeight(null);
 
 		this.w = w;
 		this.h = h;
 
 		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		originalBuffer.getGraphics().drawImage(buf,0,0,null);
+		originalBuffer.getGraphics().drawImage(buffer,0,0,null);
 		
-		resetaImagem();
+		resetImage();
 
 	}
 
-	public void igualaImagem(BufferedImage buf){
+	/**
+	 * 
+	 * @param buffer
+	 */
+	public void igualaImagem(BufferedImage buffer){
 
-		w = buf.getWidth();
-		h = buf.getHeight();
+		w = buffer.getWidth();
+		h = buffer.getHeight();
 		
 		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		originalBuffer.getGraphics().drawImage(buf,0,0,null);
+		originalBuffer.getGraphics().drawImage(buffer,0,0,null);
 		
-		resetaImagem();
+		resetImage();
 
 	}
 
 	/**
 	 * ImagemBuffer volta ao estado original
 	 */
-	public void resetaImagem(){
+	public void resetImage(){
 		imagemBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
 		imagemBuffer.getGraphics().drawImage(originalBuffer,0,0,null);
 	}
@@ -97,10 +138,14 @@ public class BufferedLayer extends ImageLayer{
 	/**
 	 * Offset all pixels to the selected value
 	 * Image receive color 
+	 *
+	 * @param red
+	 * @param green
+	 * @param blue
 	 */
 	public void offsetRGB(int red, int green, int blue){
 		
-		resetaImagem();
+		resetImage();
 		
 		offsetPixels(red,green,blue);
 		
@@ -215,22 +260,29 @@ public class BufferedLayer extends ImageLayer{
 		return imagemBuffer;
 	}
 	
+	@Override
 	public void draw(Grafico g){
 		if(visible){
+			
+			if(opacity<255){
+				g.setOpacity(opacity);
+			}
 
 			if(angle==0){
 				g.drawImage( imagemBuffer, x, y, x+w,y+h,
 						xImage,yImage,xImage+w,yImage+h, null );
 			}else{
 
-				AffineTransform reset = g.getTransform();
-
 				AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2);
 				
 				g.setTransform(transform);
 				g.drawImage( imagemBuffer, x, y, x+w,y+h,
 						xImage,yImage,xImage+w,yImage+h, null );
-				g.setTransform(reset);
+				g.resetTransform();
+			}
+			
+			if(opacity<255){
+				g.resetOpacity();
 			}
 		}
 	}

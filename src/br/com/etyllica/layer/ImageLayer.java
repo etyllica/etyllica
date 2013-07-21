@@ -5,6 +5,7 @@ import java.awt.geom.AffineTransform;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.ImageLoader;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.layer.colision.ColisionArea;
 import br.com.etyllica.linear.Rectangle;
 
 /**
@@ -24,32 +25,72 @@ public class ImageLayer extends StaticLayer{
 	public ImageLayer(){
 		super();
 	}
-
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public ImageLayer(int x, int y){
 		super();
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public ImageLayer(int x, int y, int w, int h){
 		super(x,y,w,h);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param path
+	 */
 	public ImageLayer(int x, int y, int w, int h, String path){
 		super(x,y,w,h,path);
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param xImagem
+	 * @param yImagem
+	 * @param path
+	 */
 	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String path){
 		super(x,y,w,h,path);
 		this.xImage = xImagem;
 		this.yImage = yImagem;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param path
+	 */
 	public ImageLayer(int x, int y, String path){
 		super(path);
-		setCoordenadas(x, y);
+		setCoordinates(x, y);
 	}
 
+	/**
+	 * 
+	 * @param path
+	 */
 	public ImageLayer(String path){
 		this(0,0,path);
 	}
@@ -58,36 +99,47 @@ public class ImageLayer extends StaticLayer{
 		return xImage;
 	}
 
-	public void setXImage(int imagem) {
-		xImage = imagem;
+	/**
+	 * 
+	 * @param xImage
+	 */
+	public void setXImage(int xImage) {
+		this.xImage = xImage;
 	}
 
 	public int getYImage() {
 		return yImage;
 	}
-
-	public void setYImage(int imagem) {
-		yImage = imagem;
+	
+	/**
+	 * 
+	 * @param yImage
+	 */
+	public void setYImage(int yImage) {
+		this.yImage = yImage;
 	}
 
 	public ColisionArea getColisionArea() {
 		return colisionArea;
 	}
 
+	/**
+	 * 
+	 * @param colisionArea
+	 */
 	public void setColisionArea(ColisionArea colisionArea) {
 		this.colisionArea = colisionArea;
 	}
 
-	public void setCoordenadas(int x , int y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	public void setCoordImagem(int xImagem , int yImagem) {
-		this.xImage = xImagem;
-		this.yImage = yImagem;
+	/**
+	 * 
+	 * @param xImage
+	 * @param yImage
+	 */
+	public void setImageCoordinates(int xImage, int yImage) {
+		this.xImage = xImage;
+		this.yImage = yImage;
 	}	
-
 
 	public void centraliza(int x, int y, int xLimite, int yLimite){
 		centralizaX(x,x+xLimite);
@@ -250,13 +302,15 @@ public class ImageLayer extends StaticLayer{
 
 	public void draw(Grafico g){
 		if(visible){
-
+			
+			if(opacity<255){
+				g.setOpacity(opacity);
+			}
+			
 			if(angle==0){
 				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
 						xImage,yImage,xImage+w,yImage+h, null );
 			}else{
-
-				AffineTransform reset = g.getTransform();
 
 				AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2);
 				
@@ -264,7 +318,11 @@ public class ImageLayer extends StaticLayer{
 				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
 						xImage,yImage,xImage+w,yImage+h, null );
 				
-				g.setTransform(reset);
+				g.resetTransform();
+			}
+			
+			if(opacity<255){
+				g.resetOpacity();
 			}
 		}
 	}

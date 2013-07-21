@@ -50,7 +50,7 @@ public abstract class InternalApplication extends GUIComponent{
 	 * Application icon (useful with windows) 
 	 */
 	protected ImageLayer icon = null;
-	
+	 	
 	/**
 	 * Clear application before every draw call  
 	 */
@@ -110,7 +110,7 @@ public abstract class InternalApplication extends GUIComponent{
 	public abstract void load();
 	
 	/**
-	 * Draw method     
+	 * Draw method
 	 */
 	public abstract void draw(Grafico g);
 	
@@ -124,6 +124,7 @@ public abstract class InternalApplication extends GUIComponent{
 	/**
 	 * Method to Update by GUI events
 	 */
+	
 	@Override
 	public void update(GUIEvent event) {
 		// TODO Auto-generated method stub

@@ -46,7 +46,7 @@ public class ImageLoader extends Loader{
 		BufferedImage img = getImage(path);
 
 		StaticLayer cam = new StaticLayer();
-		cam.setCoordLimite(img.getWidth(), img.getHeight());
+		cam.setSize(img.getWidth(), img.getHeight());
 		cam.cloneLayer(path);
 
 		return cam;

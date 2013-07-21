@@ -31,6 +31,10 @@ public abstract class Application extends InternalApplication{
 		return returnApplication;
 	}
 
+	/**
+	 * 
+	 * @param returnApplication
+	 */
 	public void setReturnApplication(Application returnApplication) {
 		this.returnApplication = returnApplication;
 	}

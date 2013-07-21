@@ -11,6 +11,10 @@ import br.com.etyllica.core.video.Grafico;
 
 public interface DrawableComponent {
 
+	/**
+	 * 
+	 * @param g
+	 */
 	public void draw(Grafico g);
 	
 }

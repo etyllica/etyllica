@@ -17,14 +17,34 @@ public class StaticLayer extends Layer{
 		super();
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public StaticLayer(int x, int y){
 		super(x,y);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public StaticLayer(int x, int y, int w, int h){
 		super(x,y,w,h);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param path
+	 */
 	public StaticLayer(int x, int y, int w, int h, String path){
 		super(x,y);
 		
@@ -35,7 +55,10 @@ public class StaticLayer extends Layer{
 		this.h = cam.getH();
 	}
 	
-	
+	/**
+	 * 
+	 * @param path
+	 */
 	public StaticLayer(String path){
 		this.path = path;
 		StaticLayer cam = ImageLoader.getInstance().loadImage(path);
@@ -47,23 +70,40 @@ public class StaticLayer extends Layer{
 		return path;
 	}
 	
+	/**
+	 * 
+	 * @param path
+	 */
 	public void setPath(String path){
 		this.path = path;
 	}
 	
-	public void setCoordLimite(int w , int h) {
+	/**
+	 * 
+	 * @param w
+	 * @param h
+	 */
+	public void setSize(int w , int h) {
 		this.w = w;
 		this.h = h;
 	}
 	
+	/**
+	 * 
+	 * @param path
+	 */
 	public void cloneLayer(String path) {
 		this.path = path;
 	}
 	
-	public void cloneLayer(StaticLayer b) {
-		this.path = b.path;
-		w = b.getW();
-		h = b.getH();
+	/**
+	 * 
+	 * @param layer
+	 */
+	public void cloneLayer(StaticLayer layer) {
+		this.path = layer.path;
+		w = layer.getW();
+		h = layer.getH();
 	}
 
 }
