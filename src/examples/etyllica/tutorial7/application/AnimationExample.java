@@ -4,12 +4,14 @@ import java.awt.Color;
 
 import br.com.etyllica.animation.scripts.HorizontalAnimationScript;
 import br.com.etyllica.animation.scripts.RotateAnimationScript;
+import br.com.etyllica.animation.scripts.SpiralAnimationScript;
 import br.com.etyllica.animation.scripts.VerticalAnimationScript;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
 
 /**
@@ -25,9 +27,12 @@ public class AnimationExample extends Application{
 		super(w, h);
 	}
 	
+	private TextLayer text = new TextLayer("Text!");
+	
 	private TextLayer text2 = new TextLayer(0,400,"Text2!");
 	
-	private TextLayer text = new TextLayer("Text!");
+	private Layer layer = new Layer(200,440,40,40);
+	int cx = 220, cy = 340;
 
 	@Override
 	public void load() {
@@ -66,6 +71,15 @@ public class AnimationExample extends Application{
 		rotate.setInterval(0, 360);
 		
 		this.animation.add(rotate);
+				
+		SpiralAnimationScript spiral = new SpiralAnimationScript(0,60000);
+		spiral.setTarget(layer);
+		spiral.setInterval(0, 1080);
+		spiral.setCenter(cx, cy);
+		spiral.setEndless(true);
+		
+		
+		this.animation.add(spiral);
 		
 		
 		loading = 100;
@@ -89,14 +103,22 @@ public class AnimationExample extends Application{
 	public void draw(Grafico g) {
 				
 		//Drawing background
-		
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(x,y,w,h);
 		
 		text.draw(g);
 		
 		text2.draw(g);
-	}
-
+		
+		g.setColor(Color.BLACK);
+		g.fillCircle(cx, cy, 10);
+		g.drawCircle(cx, cy, 120);
+		
+		g.drawLine(cx, cy, layer.getX()+layer.getW()/2, layer.getY()+layer.getH()/2);
+		
+		g.setColor(Color.BLUE);
+		g.drawRect(layer);
+		
+	}	
 	
 }

@@ -38,7 +38,7 @@ public class AnimationScript implements Script{
 	public AnimationScript(Layer target, long time){
 		super();
 
-		this.target = target;
+		setTarget(target);
 		this.time = time;
 	}
 
