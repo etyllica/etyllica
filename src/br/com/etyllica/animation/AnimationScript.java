@@ -2,7 +2,7 @@ package br.com.etyllica.animation;
 
 import br.com.etyllica.layer.Layer;
 
-public class AnimationScript implements Script{
+public class AnimationScript{
 
 	protected Layer target;
 
@@ -27,7 +27,7 @@ public class AnimationScript implements Script{
 
 		this.time = time;
 	}
-	
+
 	public AnimationScript(long delay, long time){
 		super();
 
@@ -73,7 +73,18 @@ public class AnimationScript implements Script{
 
 	}
 
-	public void animate(long now){
+	public void animate(long now) {
+
+		long timeElapsed = now-startedAt-delay;
+
+		float factor = (float)timeElapsed/time;
+
+		double value = startValue+(endValue-startValue)*factor;
+
+		update(value);
+	}
+
+	protected void update(double value){
 
 	}
 

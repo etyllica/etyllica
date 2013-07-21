@@ -6,15 +6,15 @@ import br.com.etyllica.layer.Layer;
 
 public class SpiralAnimationScript extends AnimationScript{
 
-	public SpiralAnimationScript(long time) {
+	public SpiralAnimationScript(long time){
 		super(time);
 	}
 
-	public SpiralAnimationScript(long delay, long time) {
+	public SpiralAnimationScript(long delay, long time){
 		super(delay, time);
 	}
 
-	public SpiralAnimationScript(Layer target, long time) {
+	public SpiralAnimationScript(Layer target, long time){
 		super(target, time);
 	}
 	
@@ -27,7 +27,7 @@ public class SpiralAnimationScript extends AnimationScript{
 	
 	int tx, ty, tw, th;
 	
-	public void setTarget(Layer target) {
+	public void setTarget(Layer target){
 		this.target = target;
 		tx = target.getX();
 		ty = target.getY();
@@ -38,13 +38,7 @@ public class SpiralAnimationScript extends AnimationScript{
 
 
 	@Override
-	public void animate(long now) {
-		
-		long timeElapsed = now-startedAt-delay;
-
-		float factor = (float)timeElapsed/time;
-
-		double value = startValue+(endValue-startValue)*factor;
+	public void update(double value){
 
 		double angle = value*Math.PI/180;
 

@@ -6,25 +6,21 @@ import br.com.etyllica.layer.Layer;
 
 public class HorizontalAnimationScript extends AnimationScript{
 		
-	public HorizontalAnimationScript(long time) {
+	public HorizontalAnimationScript(long time){
 		super(time);
 	}
 	
-	public HorizontalAnimationScript(Layer target, long time) {
+	public HorizontalAnimationScript(long delay, long time){
+		super(delay, time);
+	}
+	
+	public HorizontalAnimationScript(Layer target, long time){
 		super(target, time);
 	}
-		
-	@Override
-	public void animate(long now) {
-		
-		long timeElapsed = now-startedAt-delay;
-		
-		float factor = (float)timeElapsed/time;
 
-		double value = startValue+(endValue-startValue)*factor;
-		
-		target.setX((int)value);		
-		
-	}	
+	@Override
+	protected void update(double value){
+		target.setX((int)value);
+	}
 
 }

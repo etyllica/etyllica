@@ -6,29 +6,21 @@ import br.com.etyllica.layer.Layer;
 
 public class RotateAnimationScript extends AnimationScript{
 		
-	public RotateAnimationScript(long time) {
+	public RotateAnimationScript(long time){
 		super(time);
 	}
 	
-	public RotateAnimationScript(long delay, long time) {
+	public RotateAnimationScript(long delay, long time){
 		super(delay, time);
 	}
 	
-	public RotateAnimationScript(Layer target, long time) {
+	public RotateAnimationScript(Layer target, long time){
 		super(target, time);
 	}
 		
 	@Override
-	public void animate(long now) {
-		
-		long timeElapsed = now-startedAt-delay;
-		
-		float factor = (float)timeElapsed/time;
-
-		double value = startValue+(endValue-startValue)*factor;
-		
+	public void update(double value){
 		target.setAngle(value);		
-		
 	}	
 
 }
