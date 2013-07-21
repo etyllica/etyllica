@@ -9,7 +9,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Window;
-import examples.etyllica.tutorial2.application.SimpleGuiExample;
+import examples.etyllica.tutorial9.application.SimpleGuiExample;
 
 public class SubWindowExample extends Application{
 

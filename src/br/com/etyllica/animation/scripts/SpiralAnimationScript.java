@@ -44,9 +44,9 @@ public class SpiralAnimationScript extends AnimationScript{
 
 		float factor = (float)timeElapsed/time;
 
-		float value = startValue+(endValue-startValue)*factor;
+		double value = startValue+(endValue-startValue)*factor;
 
-		double angle = (double)value*Math.PI/180;
+		double angle = value*Math.PI/180;
 
 		double s = Math.sin(angle);
 		double c = Math.cos(angle);

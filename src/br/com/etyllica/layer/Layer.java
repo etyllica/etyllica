@@ -174,6 +174,18 @@ public class Layer{
 		setAngle(angle+offset);
 	}
 	
+	public double getScale() {
+		return scale;
+	}
+
+	/**
+	 * 
+	 * @param scale
+	 */
+	public void setScale(double scale) {
+		this.scale = scale;
+	}
+
 	/**
 	 * 
 	 * @param visible

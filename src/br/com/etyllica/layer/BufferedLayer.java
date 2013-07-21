@@ -30,7 +30,7 @@ public class BufferedLayer extends ImageLayer{
 	public BufferedLayer(int x, int y) {
 		super(x,y);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -41,7 +41,7 @@ public class BufferedLayer extends ImageLayer{
 		super(x,y,path);
 		igualaImagem(ImageLoader.getInstance().getImage(path));
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -49,7 +49,7 @@ public class BufferedLayer extends ImageLayer{
 	public BufferedLayer(String path) {
 		this(0,0,path);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -60,7 +60,7 @@ public class BufferedLayer extends ImageLayer{
 		this(x,y);
 		igualaImagem(buffer);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -69,15 +69,15 @@ public class BufferedLayer extends ImageLayer{
 	 * @param h
 	 */
 	public BufferedLayer(int x, int y, int w, int h) {
-		
+
 		this(x,y);
-		
+
 		this.w = w;
 		this.h = h;
 
 		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
 		originalBuffer.getGraphics().fillRect(0,0,w,h);
-		
+
 		resetImage();
 	}
 
@@ -88,7 +88,7 @@ public class BufferedLayer extends ImageLayer{
 	public BufferedLayer(BufferedImage buffer) {
 		this(0,0,buffer);
 	}
-	
+
 	/**
 	 * 
 	 * @param buffer
@@ -106,7 +106,7 @@ public class BufferedLayer extends ImageLayer{
 
 		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
 		originalBuffer.getGraphics().drawImage(buffer,0,0,null);
-		
+
 		resetImage();
 
 	}
@@ -119,10 +119,10 @@ public class BufferedLayer extends ImageLayer{
 
 		w = buffer.getWidth();
 		h = buffer.getHeight();
-		
+
 		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
 		originalBuffer.getGraphics().drawImage(buffer,0,0,null);
-		
+
 		resetImage();
 
 	}
@@ -144,24 +144,24 @@ public class BufferedLayer extends ImageLayer{
 	 * @param blue
 	 */
 	public void offsetRGB(int red, int green, int blue){
-		
+
 		resetImage();
-		
+
 		offsetPixels(red,green,blue);
-		
+
 	}
 
 	private void offsetPixels(int offsetRed, int offsetGreen, int offsetBlue){
-		
+
 		for(int j=0;j<h;j++){
-			
+
 			for(int i=0;i<w;i++){
 
 				//Pego o rgb do pixel selecionado
 				int rgb = originalBuffer.getRGB(i,j);
-				
+
 				int a = (rgb>>24) & 0xff;
-				
+
 				int r = ((rgb & 0x00ff0000) >> 16);
 				int g = ((rgb & 0x0000ff00) >> 8);
 				int b = ((rgb & 0x000000ff) >> 0);
@@ -172,28 +172,28 @@ public class BufferedLayer extends ImageLayer{
 				r += offsetRed;
 				g += offsetGreen;
 				b += offsetBlue;
-				
+
 				//Verifico se os valores de vermelho ainda estao no range 0~255
 				if(r>255){
 					r = 255;
 				}else if(r<0){
 					r = 0;
 				}
-				
+
 				//Verifico se os valores de verde ainda estao no range 0~255
 				if(g>255){
 					g = 255;
 				}else if(g<0){
 					g = 0;
 				}
-				
+
 				//Verifico se os valores de azul ainda estao no range 0~255
 				if(b>255){
 					b = 255;
 				}else if(b<0){
 					b = 0;
 				}
-				
+
 				//Nao sei porque isso ocorre mas as vezes alpha eh negativo e 
 				//me parece que este eh o jeito certo de consertar
 				//if(a<0){
@@ -201,12 +201,12 @@ public class BufferedLayer extends ImageLayer{
 				//}
 
 				imagemBuffer.setRGB(i, j, new Color(r,g,b,a).getRGB());
-				
+
 			}
 		}
-		
+
 	}
-	
+
 	//Manipulação de Imagens
 	public void espelharVertical(){
 		AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
@@ -227,63 +227,84 @@ public class BufferedLayer extends ImageLayer{
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		imagemBuffer = op.filter(imagemBuffer, null);
 	}
-	
+
 	public byte[][][] getBytes(){
 
 		DataBufferInt db = (DataBufferInt)imagemBuffer.getRaster().getDataBuffer();
-		
+
 		int[] by = db.getData(); 
-		
+
 		byte imagem2D[][][] = new byte[w][h][3];
-		
+
 		for(int j=0;j<h;j++){
 			for(int i=0;i<w;i++){
 
 				int rgb = by[i+j*w];
-				
-	            byte r = (byte) ((rgb & 0x00ff0000) >> 16);
-	            byte g = (byte) ((rgb & 0x0000ff00) >> 8);
-	            byte b = (byte) (rgb & 0x000000ff);
-				
+
+				byte r = (byte) ((rgb & 0x00ff0000) >> 16);
+				byte g = (byte) ((rgb & 0x0000ff00) >> 8);
+				byte b = (byte) (rgb & 0x000000ff);
+
 				imagem2D[i][j][0] = r;
 				imagem2D[i][j][1] = g;
 				imagem2D[i][j][2] = b;
-				
+
 			}
 		}
 
 		return imagem2D;
-		
+
 	}
-	
+
 	public BufferedImage getImagemBuffer(){
 		return imagemBuffer;
 	}
-	
+
 	@Override
 	public void draw(Grafico g){
 		if(visible){
-			
+
 			if(opacity<255){
 				g.setOpacity(opacity);
 			}
 
-			if(angle==0){
-				g.drawImage( imagemBuffer, x, y, x+w,y+h,
-						xImage,yImage,xImage+w,yImage+h, null );
-			}else{
+			AffineTransform transform = new AffineTransform();
 
-				AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2);
-				
-				g.setTransform(transform);
-				g.drawImage( imagemBuffer, x, y, x+w,y+h,
-						xImage,yImage,xImage+w,yImage+h, null );
-				g.resetTransform();
+			if(angle!=0){
+				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
 			}
-			
+
+			if(scale!=1){
+
+				double sw = w*scale;
+				double sh = h*scale;
+
+				double dx = sw/2-w/2;
+				double dy = sh/2-h/2;
+
+				transform.translate(x-w/2-dx, y-h/2-dy);
+
+				AffineTransform scaleTransform = new AffineTransform();
+
+				scaleTransform.translate(w/2, h/2);
+				scaleTransform.scale(scale,scale);
+				scaleTransform.translate(-x, -y);
+
+				transform.concatenate(scaleTransform);
+
+			}
+
+			g.setTransform(transform);
+
+			g.drawImage( imagemBuffer, x, y, x+w,y+h,
+					xImage,yImage,xImage+w,yImage+h, null );
+
+			g.resetTransform();
+
 			if(opacity<255){
 				g.resetOpacity();
 			}
+
 		}
 	}
 

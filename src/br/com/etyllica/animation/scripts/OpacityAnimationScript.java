@@ -25,7 +25,7 @@ public class OpacityAnimationScript extends AnimationScript{
 		
 		float factor = (float)timeElapsed/time;
 
-		float value = startValue+(endValue-startValue)*factor;
+		double value = startValue+(endValue-startValue)*factor;
 		
 		target.setOpacity((int)value);
 		

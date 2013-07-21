@@ -91,36 +91,62 @@ public class TextLayer extends ImageLayer{
 			if(opacity<255){
 				g.setOpacity(opacity);
 			}
-
+			
+			AffineTransform transform = new AffineTransform();
+			
 			Font f = this.font;
 
 			if(f==null){
 				f = g.getFont().deriveFont(style, size);
 			}
+					
 
 			g.setFont(f);
 
 			FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
 			TextLayout layout = new TextLayout(text, f, frc);
 
+			Rectangle2D bounds = layout.getBounds();
+
+			float height = size;
+			float width = (float) Math.ceil(bounds.getWidth());
+			
+			float centerX = x+width/2;
+			float centerY = y-height/2;
+			
 			if(angle!=0){
-
-				Rectangle2D bounds = layout.getBounds();
-
-				float height = size;
-				float width = (float) Math.ceil(bounds.getWidth());
-
-				float centerX = x+width/2;
-				float centerY = y-height/2;
-
-				AffineTransform transform = AffineTransform.getRotateInstance(angle, centerX, centerY);
+								
+				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle), centerX, centerY));
+				
 
 				frc = new FontRenderContext(transform, antiAliased, fractionalMetrics);
 				layout = new TextLayout(text, f, frc);
 
-				g.setTransform(transform);
-
 			}
+			
+
+			if(scale!=1){
+				
+			    double sw = width*scale;
+			    double sh = height*scale;
+			    
+			    double dx = sw/2-width/2;
+			    double dy = sh/2-height/2;
+				
+				transform.translate(x-width/2-dx, y-height/2+dy);
+				
+				AffineTransform tr2 = new AffineTransform();
+				
+				tr2.translate(width/2, height/2);
+				tr2.scale(scale,scale);
+				tr2.translate(-x, -y);
+			    
+			    transform.concatenate(tr2);
+				
+			}
+			
+			
+			g.setTransform(transform);			
 
 			if(!border){
 

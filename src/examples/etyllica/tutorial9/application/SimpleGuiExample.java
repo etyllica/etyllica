@@ -1,4 +1,4 @@
-package examples.etyllica.tutorial2.application;
+package examples.etyllica.tutorial9.application;
 
 import java.awt.Color;
 

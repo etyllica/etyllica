@@ -30,9 +30,9 @@ public class VerticalAnimationScript extends AnimationScript{
 		
 		float factor = (float)timeElapsed/time;
 
-		int value = startValue+(int)((endValue-startValue)*factor);
+		double value = startValue+(endValue-startValue)*factor;
 		
-		target.setY(value);		
+		target.setY((int)value);
 		
 	}
 

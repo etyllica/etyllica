@@ -34,7 +34,7 @@ public abstract class InternalApplication extends GUIComponent{
 	/**
 	 * Load percentage unlock Application when reaches 100 
 	 */
-	protected int loading = 0;
+	protected float loading = 0;
 	
 	/**
 	 * Loading phrase while loading Application 
@@ -136,7 +136,7 @@ public abstract class InternalApplication extends GUIComponent{
 	}
 
 	
-	public int getLoading(){
+	public float getLoading(){
 		return loading;
 	}
 	

@@ -67,27 +67,48 @@ public class PivotImageLayer extends ImageLayer{
 
 	@Override	
 	public void draw(Grafico g){
+		
 		if(visible){
 			
 			if(opacity<255){
 				g.setOpacity(opacity);
 			}
 
-			if(angle==0){
-				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, y+h,
-						xImage,yImage,xImage+w,yImage+h, null );
-			}else{
+			AffineTransform transform = new AffineTransform();
 
-				AffineTransform reset = g.getTransform();
+			if(angle!=0){
 
-				AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+xPivot, y+yPivot);
+				transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+xPivot, y+yPivot);
 
-				g.setTransform(transform);
-				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, y+h,
-						xImage,yImage,xImage+w,yImage+h, null );
-				g.setTransform(reset);
 			}
 			
+			if(scale!=1){
+
+				double sw = w*scale;
+				double sh = h*scale;
+
+				double dx = sw/2-w/2;
+				double dy = sh/2-h/2;
+
+				transform.translate(x-w/2-dx, y-h/2-dy);
+
+				AffineTransform scaleTransform = new AffineTransform();
+
+				scaleTransform.translate(w/2, h/2);
+				scaleTransform.scale(scale,scale);
+				scaleTransform.translate(-x, -y);
+
+				transform.concatenate(scaleTransform);
+
+			}
+
+			g.setTransform(transform);
+			
+			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
+					xImage,yImage,xImage+w,yImage+h, null );
+
+			g.resetTransform();
+
 			if(opacity<255){
 				g.resetOpacity();
 			}

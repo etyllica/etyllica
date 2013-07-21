@@ -10,7 +10,7 @@ package br.com.etyllica.core.application;
 
 public interface LoadApplication{
 
-	public void setText(String phrase, int load);
+	public void setText(String phrase, float load);
 	
 	public void load();
 

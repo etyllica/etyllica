@@ -31,7 +31,7 @@ public class DefaultLoadApplication extends InternalApplication implements LoadA
 	
 	protected String percent = "0%";
 
-	protected int fill = 0;
+	protected float fill = 0;
 
 	private int bxLimite = 400;
 	private int byLimite = 30;
@@ -62,7 +62,7 @@ public class DefaultLoadApplication extends InternalApplication implements LoadA
 		g.escreveX(100, phrase,true);
 			
 		//Desenha preenchimento da barra
-		g.fillRect(bx+2, by+2, fill*4, byLimite-3);
+		g.fillRect(bx+2, by+2, (int)fill*4, byLimite-3);
 
 
 		g.setColor(Color.WHITE);
@@ -71,11 +71,12 @@ public class DefaultLoadApplication extends InternalApplication implements LoadA
 	}
 
 	@Override
-	public void setText(String phrase, int load){
+	public void setText(String phrase, float load){
 		
 		this.phrase = phrase;
 		
-		this.percent = Integer.toString(load)+"%";
+		//this.percent = Float.toString(load)+"%";
+		this.percent = Integer.toString((int)load)+"%";
 
 		this.fill = load;
 	}

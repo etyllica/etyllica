@@ -15,9 +15,9 @@ public class AnimationScript implements Script{
 	private boolean stopped = false;
 	private boolean endless = false;
 
-	protected int startValue = 0;
+	protected double startValue = 0;
 
-	protected int endValue = 0;
+	protected double endValue = 0;
 
 	private AnimationScript next;
 
@@ -89,14 +89,6 @@ public class AnimationScript implements Script{
 		this.endless = endless;
 	}
 
-	public int getEndValue() {
-		return endValue;
-	}
-
-	public void setEndValue(int endValue) {
-		this.endValue = endValue;
-	}
-
 	public Layer getTarget() {
 		return target;
 	}
@@ -105,7 +97,7 @@ public class AnimationScript implements Script{
 		this.target = target;
 	}
 
-	public void setInterval(int startValue, int endValue){
+	public void setInterval(double startValue, double endValue){
 		this.startValue = startValue;
 		this.endValue = endValue;
 	}

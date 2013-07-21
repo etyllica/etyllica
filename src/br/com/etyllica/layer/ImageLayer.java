@@ -25,7 +25,7 @@ public class ImageLayer extends StaticLayer{
 	public ImageLayer(){
 		super();
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -110,7 +110,7 @@ public class ImageLayer extends StaticLayer{
 	public int getYImage() {
 		return yImage;
 	}
-	
+
 	/**
 	 * 
 	 * @param yImage
@@ -141,33 +141,33 @@ public class ImageLayer extends StaticLayer{
 		this.yImage = yImage;
 	}	
 
-	public void centraliza(int x, int y, int xLimite, int yLimite){
-		centralizaX(x,x+xLimite);
-		centralizaY(y,y+yLimite);
+	public void centralize(int x, int y, int xLimite, int yLimite){
+		centralizeX(x,x+xLimite);
+		centralizeY(y,y+yLimite);
 	}
 
 	public void centraliza(Layer cam){
-		centralizaX(cam);
-		centralizaY(cam);
+		centralizeX(cam);
+		centralizeY(cam);
 	}
-	public void centralizaX(Layer b){
-		centralizaX(b.getX(),b.getX()+b.getW());
+	public void centralizeX(Layer b){
+		centralizeX(b.getX(),b.getX()+b.getW());
 	}
-	public int centralizaX(int xInicial, int xFinal)
+	public int centralizeX(int xInicial, int xFinal)
 	{
-		int x;
-		x = (((xInicial+xFinal)/2)-(getW()/2));
+		int x = (((xInicial+xFinal)/2)-(getW()/2));
 		setX(x);
+		
 		return x;
 	}
-	public void centralizaY(Layer b){
-		centralizaY(b.getY(),b.getY()+b.getH());
+	public void centralizeY(Layer b){
+		centralizeY(b.getY(),b.getY()+b.getH());
 	}
-	public int centralizaY(int yInicial, int yFinal)
+	public int centralizeY(int yInicial, int yFinal)
 	{
-		int y;
-		y = (((yInicial+yFinal)/2)-(getH()/2));
+		int y = (((yInicial+yFinal)/2)-(getH()/2));
 		setY(y);
+		
 		return y;
 	}
 
@@ -270,7 +270,7 @@ public class ImageLayer extends StaticLayer{
 		//Pivot Point of rotation		
 		int px = x+w/2;
 		int py = y+h/2;
-		
+
 		double c = Math.cos(angle);
 
 		double s = Math.sin(angle);
@@ -286,7 +286,7 @@ public class ImageLayer extends StaticLayer{
 		int rightX = px + w / 2;
 		int topY = py - h / 2;
 		int bottomY = py + h / 2;
-		
+
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
 
@@ -301,30 +301,52 @@ public class ImageLayer extends StaticLayer{
 	}
 
 	public void draw(Grafico g){
+
 		if(visible){
-			
+
 			if(opacity<255){
 				g.setOpacity(opacity);
 			}
-			
-			if(angle==0){
-				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
-						xImage,yImage,xImage+w,yImage+h, null );
-			}else{
 
-				AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2);
-				
-				g.setTransform(transform);
-				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
-						xImage,yImage,xImage+w,yImage+h, null );
-				
-				g.resetTransform();
+			AffineTransform transform = new AffineTransform();
+
+			if(angle!=0){
+				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
 			}
+
+			if(scale!=1){
+
+				double sw = w*scale;
+				double sh = h*scale;
+
+				double dx = sw/2-w/2;
+				double dy = sh/2-h/2;
+
+				transform.translate(x-w/2-dx, y-h/2-dy);
+
+				AffineTransform scaleTransform = new AffineTransform();
+
+				scaleTransform.translate(w/2, h/2);
+				scaleTransform.scale(scale,scale);
+				scaleTransform.translate(-x, -y);
+
+				transform.concatenate(scaleTransform);
+
+			}
+
+			g.setTransform(transform);
 			
+			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
+					xImage,yImage,xImage+w,yImage+h, null );
+
+			g.resetTransform();
+
 			if(opacity<255){
 				g.resetOpacity();
 			}
+
 		}
+
 	}
 
 	public boolean onMouse(Mouse mouse){

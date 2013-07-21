@@ -25,9 +25,9 @@ public class RotateAnimationScript extends AnimationScript{
 		
 		float factor = (float)timeElapsed/time;
 
-		float value = startValue+(endValue-startValue)*factor;
+		double value = startValue+(endValue-startValue)*factor;
 		
-		target.setAngle(value*Math.PI/180);		
+		target.setAngle(value);		
 		
 	}	
 

@@ -5,6 +5,7 @@ import java.awt.Color;
 import br.com.etyllica.animation.scripts.HorizontalAnimationScript;
 import br.com.etyllica.animation.scripts.OpacityAnimationScript;
 import br.com.etyllica.animation.scripts.RotateAnimationScript;
+import br.com.etyllica.animation.scripts.ScaleAnimationScript;
 import br.com.etyllica.animation.scripts.SpiralAnimationScript;
 import br.com.etyllica.animation.scripts.VerticalAnimationScript;
 import br.com.etyllica.core.application.Application;
@@ -12,6 +13,8 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.gui.label.ImageLabel;
+import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
 
@@ -32,7 +35,10 @@ public class AnimationExample extends Application{
 	
 	private TextLayer text2 = new TextLayer(0,400,"Text2!");
 	
-	private TextLayer text3 = new TextLayer(560,100,"Text3!");
+	private TextLayer text3 = new TextLayer(300,400,"Text3!");
+	
+	private ImageLayer hello;
+	private ImageLayer helloFix;
 	
 	private Layer layer = new Layer(200,440,40,40);
 	int cx = 220, cy = 340;
@@ -72,7 +78,6 @@ public class AnimationExample extends Application{
 		RotateAnimationScript rotate = new RotateAnimationScript(1000,6000);
 		rotate.setTarget(text2);
 		rotate.setInterval(0, 360);
-		
 		this.animation.add(rotate);
 		
 		
@@ -80,6 +85,11 @@ public class AnimationExample extends Application{
 		opacityAnimation.setTarget(text3);
 		opacityAnimation.setInterval(0, 255);
 		this.animation.add(opacityAnimation);
+		
+		ScaleAnimationScript scaleAnimation = new ScaleAnimationScript(0,10000);
+		scaleAnimation.setTarget(text3);
+		scaleAnimation.setInterval(1, 5);
+		this.animation.add(scaleAnimation);
 		
 				
 		SpiralAnimationScript spiral = new SpiralAnimationScript(0,60000);
@@ -89,6 +99,20 @@ public class AnimationExample extends Application{
 		spiral.setEndless(true);
 				
 		this.animation.add(spiral);
+		
+		
+		hello = new ImageLayer(200,100,"hello.png");
+		helloFix = new ImageLayer(200,100,"hello.png");
+		
+		ScaleAnimationScript scaleHello = new ScaleAnimationScript(0,10000);
+		scaleHello.setTarget(hello);
+		scaleHello.setInterval(1, 2);
+		this.animation.add(scaleHello);
+		
+		RotateAnimationScript rotateHello = new RotateAnimationScript(0,10000);
+		rotateHello.setTarget(hello);
+		rotateHello.setInterval(0, 360);
+		this.animation.add(rotateHello);
 		
 		
 		loading = 100;
@@ -118,6 +142,11 @@ public class AnimationExample extends Application{
 		text2.draw(g);
 		
 		text3.draw(g);
+		
+		
+		helloFix.draw(g);
+		hello.draw(g);
+		
 		
 		g.setColor(Color.BLACK);
 		g.fillCircle(cx, cy, 10);

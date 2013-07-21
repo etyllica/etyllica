@@ -4,13 +4,17 @@ import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.layer.Layer;
 
 
-public class HorizontalAnimationScript extends AnimationScript{
+public class ScaleAnimationScript extends AnimationScript{
 		
-	public HorizontalAnimationScript(long time) {
+	public ScaleAnimationScript(long time) {
 		super(time);
 	}
 	
-	public HorizontalAnimationScript(Layer target, long time) {
+	public ScaleAnimationScript(long delay, long time) {
+		super(delay, time);
+	}
+	
+	public ScaleAnimationScript(Layer target, long time) {
 		super(target, time);
 	}
 		
@@ -23,7 +27,7 @@ public class HorizontalAnimationScript extends AnimationScript{
 
 		double value = startValue+(endValue-startValue)*factor;
 		
-		target.setX((int)value);		
+		target.setScale(value);
 		
 	}	
 

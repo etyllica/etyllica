@@ -1,24 +1,27 @@
 package examples.etyllica.tutorial2;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.Configuration;
-import br.com.etyllica.theme.mono.EtyllicMonoTheme;
-import examples.etyllica.tutorial2.application.SimpleGuiExample;
+import examples.etyllica.tutorial2.application.HelloWorldAnimated;
 
-public class Tutorial2 extends Etyllica {
+public class Tutorial2 extends Etyllica{
 
 	private static final long serialVersionUID = 1L;
 
 	public Tutorial2() {
-		super(640, 480);
+		super(800, 600);
 	}
 	
 	@Override
 	public void startGame() {
 		
-		//Configuration.getInstance().setTheme(new EtyllicMonoTheme());
+		//Etyllica tries to find the resources as your Application should be
+		//To avoid this you should put your /res/images in /Project/bin/examples/etyllica/tutorial2/
 		
-		setMainApplication(new SimpleGuiExample(w,h));
+		//Upping three directories we have /Project/bin/res/images
+		String s = getClass().getResource("").toString();
+		setPath(s+"../../../");
+		
+		setMainApplication(new HelloWorldAnimated(w,h));
 	}
 	
 }

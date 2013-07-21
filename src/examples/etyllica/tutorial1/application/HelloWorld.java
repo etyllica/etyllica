@@ -13,18 +13,6 @@ public class HelloWorld extends Application{
 		super(w, h);
 	}
 
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	private ImageLayer hello;
 
 	@Override
@@ -38,5 +26,19 @@ public class HelloWorld extends Application{
 	public void draw(Grafico g) {
 		hello.draw(g);		
 	}
+	
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyboardEvent event) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

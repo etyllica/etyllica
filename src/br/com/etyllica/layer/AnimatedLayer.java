@@ -83,11 +83,11 @@ public class AnimatedLayer extends ImageLayer{
 	public int getXTile(){
 		return xTile;
 	}
-	
+
 	public int getYTile(){
 		return yTile;
 	}
-	
+
 	/**
 	 * 
 	 * @param xTile
@@ -95,7 +95,7 @@ public class AnimatedLayer extends ImageLayer{
 	public void setXTile(int xTile){
 		this.xTile = xTile;
 	}
-	
+
 	/**
 	 * 
 	 * @param yTile
@@ -214,7 +214,7 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public int centralizaX(int xInicial, int xFinal)
+	public int centralizeX(int xInicial, int xFinal)
 	{
 		int x;
 		x = (((xInicial+xFinal)/2)-(getXTile()/2));
@@ -223,7 +223,7 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public int centralizaY(int yInicial, int yFinal)
+	public int centralizeY(int yInicial, int yFinal)
 	{
 		int y;
 		y = (((yInicial+yFinal)/2)-(getYTile()/2));
@@ -293,33 +293,58 @@ public class AnimatedLayer extends ImageLayer{
 
 	@Override
 	public void draw(Grafico g){
+
 		if(visible){
 
 			if(opacity<255){
 				g.setOpacity(opacity);
 			}
 
-			if(angle==0){
-				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
-						xImage,yImage,xImage+xTile,yImage+yTile, null );
-			}else{
+			AffineTransform transform = new AffineTransform();
 
-				AffineTransform transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2);
-
-				g.setTransform(transform);
-				g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
-						xImage,yImage,xImage+w,yImage+h, null );
-
-				g.resetTransform();
+			if(angle!=0){
+				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+xTile/2, y+yTile/2));
 			}
+
+			if(scale!=1){
+
+				double sw = xTile*scale;
+				double sh = yTile*scale;
+
+				double dx = sw/2-xTile/2;
+				double dy = sh/2-yTile/2;
+
+				transform.translate(x-xTile/2-dx, y-yTile/2-dy);
+
+				AffineTransform scaleTransform = new AffineTransform();
+
+				scaleTransform.translate(xTile/2, yTile/2);
+				scaleTransform.scale(scale,scale);
+				scaleTransform.translate(-x, -y);
+
+				transform.concatenate(scaleTransform);
+
+			}
+
+			g.setTransform(transform);
+			
+			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
+					xImage,yImage,xImage+xTile,yImage+yTile, null );
+			g.resetTransform();
 
 			if(opacity<255){
 				g.resetOpacity();
 			}
 
 		}
+
+
 	}
 
+	/**
+	 * 
+	 * @param stopped
+	 */
 	public void setStopped(boolean stopped){
 		this.stopped = stopped;
 	}
@@ -328,7 +353,7 @@ public class AnimatedLayer extends ImageLayer{
 		return stopped;
 	}
 
-	public int getNumeroFrames(){
+	public int getFrames(){
 		return frames;
 	}
 
