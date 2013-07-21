@@ -1,8 +1,16 @@
 # Pre-Compiled Files #
 *.class
-bin/
+
+# Javazoom Decoder Files #
+*.ser
+
+# Automatic generated Files#
+*.applet
+
 sdk/
 
 # Package Files #
 *.war
 *.ear
+
+/bin
