@@ -25,7 +25,7 @@ public class EffectSound extends Effect{
 	
 	@Override
 	public void anima(){
-		frameAtual = 0;
+		currentFrame = 0;
 		stopped = false;
 		once = true;
 		playing = true;

@@ -29,32 +29,51 @@ public class AnimatedLayer extends ImageLayer{
 
 	private int loop = 0;
 
-	protected int numeroFrames = 1;
-	protected int frameAtual = 0;
+	protected int frames = 1;
+	protected int currentFrame = 0;
 
-	protected Timer tymerAnimacao = new Timer();
+	protected Timer timer = new Timer();
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public AnimatedLayer(int x, int y){
 		this(x, y, 0, 0);
 	}
 
-	public AnimatedLayer(int x, int y, int xTile, int yTile, String caminho){
-		super(x,y,caminho);
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param xTile
+	 * @param yTile
+	 * @param path
+	 */
+	public AnimatedLayer(int x, int y, int xTile, int yTile, String path){
+		super(x,y,path);
 		this.xTile = xTile;
 		this.yTile = yTile;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param xTile
+	 * @param yTile
+	 */
 	public AnimatedLayer(int x, int y, int xTile, int yTile){
 		super(x,y);
 		this.xTile = xTile;
 		this.yTile = yTile;
 	}
 
-
-	protected void reset(){
+	protected void resetAnimation(){
 		xImage = 0;
 		yImage = 0;
-		frameAtual = 0;
+		currentFrame = 0;
 	}
 
 	public void setAnimaEmX(boolean animaX){
@@ -64,23 +83,44 @@ public class AnimatedLayer extends ImageLayer{
 	public int getXTile(){
 		return xTile;
 	}
+	
 	public int getYTile(){
 		return yTile;
 	}
+	
+	/**
+	 * 
+	 * @param xTile
+	 */
 	public void setXTile(int xTile){
 		this.xTile = xTile;
 	}
+	
+	/**
+	 * 
+	 * @param yTile
+	 */
 	public void setYTile(int yTile){
 		this.yTile = yTile;
 	}
 
-	public void setCoordTiles(int xTile, int yTile){
+	/**
+	 * 
+	 * @param xTile
+	 * @param yTile
+	 */
+	public void setTileCoordinates(int xTile, int yTile){
 		setXTile(xTile);
 		setYTile(yTile);
 	}
 
-	public void setNumeroFrames(int numeroFrames){
-		this.numeroFrames = numeroFrames;
+	/**
+	 * Set Number of Frames
+	 * 
+	 * @param frames
+	 */
+	public void setFrame(int frames){
+		this.frames = frames;
 	}
 
 	public void anima(){
@@ -91,9 +131,9 @@ public class AnimatedLayer extends ImageLayer{
 
 		if(!lockOnce){
 
-			tymerAnimacao.setParado(false);
+			timer.setParado(false);
 
-			if(tymerAnimacao.passou()){
+			if(timer.passou()){
 				preAnima();
 			}
 		}
@@ -106,7 +146,7 @@ public class AnimatedLayer extends ImageLayer{
 		//tymerAnimacao();
 	}
 	protected void desanim(){
-		tymerAnimacao.setParado(true);
+		timer.setParado(true);
 	}
 
 	public void animaOnce(){
@@ -116,7 +156,7 @@ public class AnimatedLayer extends ImageLayer{
 		once = true;
 		stopped = false;
 
-		frameAtual = 0;
+		currentFrame = 0;
 
 		if(animaEmX){
 			xImage = 0;
@@ -128,13 +168,13 @@ public class AnimatedLayer extends ImageLayer{
 
 	public void preAnima(){
 
-		if((frameAtual < numeroFrames-1)&&(frameAtual >= 0)){
+		if((currentFrame < frames-1)&&(currentFrame >= 0)){
 
 			if(oscilar){
 				inc = -inc;
 			}
 
-			frameAtual+=inc;
+			currentFrame+=inc;
 		}
 		else{
 
@@ -142,14 +182,14 @@ public class AnimatedLayer extends ImageLayer{
 				visible = false;
 				lockOnce = true;
 				//stopped = true;
-				setXImage(xTile*frameAtual);
+				setXImage(xTile*currentFrame);
 				return;
 			}
 
 			if(!oscilar){
-				frameAtual = 0;
+				currentFrame = 0;
 			}else{
-				frameAtual+=inc;
+				currentFrame+=inc;
 			}
 
 			loop++;
@@ -160,17 +200,17 @@ public class AnimatedLayer extends ImageLayer{
 
 			if(animaEmX){
 
-				setXImage(xTile*frameAtual);
+				setXImage(xTile*currentFrame);
 			}
 			else{
-				setYImage(yTile*frameAtual);
+				setYImage(yTile*currentFrame);
 			}
 
 		}
 	}
 
 	public void setVelocidadeAnimacao(int velocidadeAnimacao){
-		this.tymerAnimacao.setVelocidade(velocidadeAnimacao);
+		this.timer.setVelocidade(velocidadeAnimacao);
 	}
 
 	@Override
@@ -289,7 +329,7 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	public int getNumeroFrames(){
-		return numeroFrames;
+		return frames;
 	}
 
 	public boolean getAnimaEmX(){

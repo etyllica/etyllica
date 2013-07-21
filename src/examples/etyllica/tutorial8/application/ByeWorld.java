@@ -69,10 +69,10 @@ public class ByeWorld extends Application{
 		g.setColor(SVGColor.FOREST_GREEN);
 
 		//Write at center with shadow
-		g.escreveSombraX(100, "Bye World!");
+		g.drawStringShadowX(100, "Bye World!");
 
 		//Write at center with shadow
-		g.escreveSombraX(300, "Press <BACK SPACE> to go back.");
+		g.drawStringShadowX(300, "Press <BACK SPACE> to go back.");
 	}
 
 	@Override

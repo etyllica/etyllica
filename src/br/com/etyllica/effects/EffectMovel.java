@@ -23,7 +23,7 @@ public class EffectMovel extends MovementedLayer
 	{
 		stopped = false;
 		once = true;
-		reset();
+		resetAnimation();
 		
 		visible = true;
 		anim();

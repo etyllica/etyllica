@@ -38,7 +38,7 @@ public class YellowLoading extends DefaultLoadApplication{
 		g.fillRect(0, 0, w, h);
 		
 		g.setColor(Color.WHITE);
-		g.escreveSombraX(280-y, phrase);
+		g.drawStringShadowX(280-y, phrase);
 
 		g.drawRect(rectX, rectY, rectW, rectH);
 		g.fillRect(rectX+2, rectY+2, ((rectW*fill)/100)-3, rectH-3);

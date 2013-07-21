@@ -3,6 +3,7 @@ package examples.etyllica.tutorial7.application;
 import java.awt.Color;
 
 import br.com.etyllica.animation.scripts.HorizontalAnimationScript;
+import br.com.etyllica.animation.scripts.OpacityAnimationScript;
 import br.com.etyllica.animation.scripts.RotateAnimationScript;
 import br.com.etyllica.animation.scripts.SpiralAnimationScript;
 import br.com.etyllica.animation.scripts.VerticalAnimationScript;
@@ -30,6 +31,8 @@ public class AnimationExample extends Application{
 	private TextLayer text = new TextLayer("Text!");
 	
 	private TextLayer text2 = new TextLayer(0,400,"Text2!");
+	
+	private TextLayer text3 = new TextLayer(560,100,"Text3!");
 	
 	private Layer layer = new Layer(200,440,40,40);
 	int cx = 220, cy = 340;
@@ -71,14 +74,20 @@ public class AnimationExample extends Application{
 		rotate.setInterval(0, 360);
 		
 		this.animation.add(rotate);
+		
+		
+		OpacityAnimationScript opacityAnimation = new OpacityAnimationScript(0,10000);
+		opacityAnimation.setTarget(text3);
+		opacityAnimation.setInterval(0, 255);
+		this.animation.add(opacityAnimation);
+		
 				
 		SpiralAnimationScript spiral = new SpiralAnimationScript(0,60000);
 		spiral.setTarget(layer);
 		spiral.setInterval(0, 1080);
 		spiral.setCenter(cx, cy);
 		spiral.setEndless(true);
-		
-		
+				
 		this.animation.add(spiral);
 		
 		
@@ -87,15 +96,13 @@ public class AnimationExample extends Application{
 	
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
-		// TODO Auto-generated method stub
+
 		return GUIEvent.NONE;
 	}
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-				
-		text.setCoordinates(event.getX(), event.getY());
-		
+						
 		return GUIEvent.NONE;
 	}
 	
@@ -109,6 +116,8 @@ public class AnimationExample extends Application{
 		text.draw(g);
 		
 		text2.draw(g);
+		
+		text3.draw(g);
 		
 		g.setColor(Color.BLACK);
 		g.fillCircle(cx, cy, 10);
