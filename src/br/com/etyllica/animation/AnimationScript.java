@@ -83,6 +83,10 @@ public class AnimationScript{
 
 		update(value);
 	}
+	
+	protected void lastUpdate(){
+		update(1f);
+	}
 
 	protected void update(double value){
 

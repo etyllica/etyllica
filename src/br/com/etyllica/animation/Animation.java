@@ -26,20 +26,24 @@ public class Animation {
 		for(AnimationScript script: scripts){
 
 			if(!script.isStopped()){
+				
 				script.preAnimate(now);
+				
 			}else{
 				//if stopped, use child (next script)
 				if(script.getNext()!=null){
 					
 					if(script.isEndless()){
-						endlessScripts.put(lastScript(script),script);
+												
+						endlessScripts.put(lastScript(script),script);						
+						
 					}
 					
 					nextScripts.add(script.getNext());
 					
 					
 				}else{
-					
+										
 					//If this script has some associated endless script
 					if(endlessScripts.containsKey(script)){
 						//Find and restart the endless script
@@ -47,9 +51,19 @@ public class Animation {
 						restartEndless(endless);
 						
 						nextScripts.add(endless);
+						
+					}else{
+
+						//If script is endless and don't have next
+						if(script.isEndless()){
+							script.restart();
+							nextScripts.add(script);
+						}
+						
 					}
 					
 				}
+								
 				removeScripts.add(script);
 			}
 
