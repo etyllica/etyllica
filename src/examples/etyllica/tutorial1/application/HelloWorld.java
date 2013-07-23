@@ -1,10 +1,14 @@
 package examples.etyllica.tutorial1.application;
 
+import java.util.Map;
+
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.i18n.DefaultDictionary;
+import br.com.etyllica.i18n.Language;
 import br.com.etyllica.layer.ImageLayer;
 
 public class HelloWorld extends Application{

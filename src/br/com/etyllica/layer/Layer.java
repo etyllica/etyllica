@@ -1,6 +1,8 @@
 package br.com.etyllica.layer;
 
+import br.com.etyllica.core.DrawableComponent;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.video.Grafico;
 
 /**
  * 
@@ -9,7 +11,7 @@ import br.com.etyllica.core.event.PointerEvent;
  *
  */
 
-public class Layer{
+public class Layer implements DrawableComponent{
 
 	/**
      * x position of a Layer
@@ -308,6 +310,12 @@ public class Layer{
 	 */
 	public boolean onMouse(int mx, int my) {
 		return colideRect(mx, my, 1, 1);
+	}
+
+	@Override
+	public void draw(Grafico g) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -12,11 +12,11 @@ import br.com.etyllica.i18n.Language;
  *
  */
 
-public class Dictionary {
+public abstract class Dictionary {
 
 	protected Map<String,Map<Language,String>> vocabulary;
 	
-	private Language defaultLanguage = Language.ENGLISH_USA;
+	protected Language defaultLanguage = Language.ENGLISH_USA;
 
 	public Dictionary(){
 
@@ -25,9 +25,7 @@ public class Dictionary {
 		populateVocabulary();
 	}
 
-	protected void populateVocabulary(){
-
-	}
+	protected abstract void populateVocabulary();
 
 	public Map<Language, String> getWord(String word){
 		return vocabulary.get(word);

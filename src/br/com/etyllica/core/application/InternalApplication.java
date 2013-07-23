@@ -3,7 +3,7 @@ package br.com.etyllica.core.application;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.animation.Animation;
+import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.effects.TransitionEffect;
@@ -69,7 +69,7 @@ public abstract class InternalApplication extends GUIComponent{
 	/**
 	 * Animation
 	 */
-	protected Animation animation = new Animation();
+	protected AnimationHandler animation = new AnimationHandler();
 	
 	/**
 	 * Last time updated
@@ -209,11 +209,11 @@ public abstract class InternalApplication extends GUIComponent{
 		return windows;
 	}
 
-	public Animation getAnimation() {
+	public AnimationHandler getAnimation() {
 		return animation;
 	}
 
-	public void setAnimation(Animation animation) {
+	public void setAnimation(AnimationHandler animation) {
 		this.animation = animation;
 	}
 

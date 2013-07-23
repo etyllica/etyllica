@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import br.com.etyllica.animation.AnimationHandler;
+import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
@@ -17,6 +19,7 @@ import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.debug.Logger;
 import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.GUIComponent;
 import br.com.etyllica.gui.Window;
@@ -38,7 +41,8 @@ public class Core{
 
 	private List<Window> windows = new ArrayList<Window>();
 
-	private List<GlobalEffect> globalEffects = new ArrayList<GlobalEffect>();
+	private List<AnimationScript> globalScripts = new ArrayList<AnimationScript>();
+	private AnimationHandler animation = new AnimationHandler();
 
 	private GUIComponent focus;
 
@@ -62,7 +66,7 @@ public class Core{
 	//private List<JoystickEvent> joyEvents;
 
 	private DesktopWindow desktopWindow;
-	
+
 	private boolean drawCursor = true;
 
 	public Core(){
@@ -158,12 +162,12 @@ public class Core{
 			long now = getTimeNow();
 
 			if(application.getUpdateInterval()>0){
-				
+
 				if(now-application.getLastUpdate()>application.getUpdateInterval()){
 					application.timeUpdate();
 					application.setLastUpdate(now);
 				}
-				
+
 			}
 
 			//Animate
@@ -220,7 +224,7 @@ public class Core{
 
 				if(focusEvent!=GUIEvent.NONE&&focusEvent!=null){
 					//TODO Update NExtComponent
-					System.out.println(focusEvent);
+					Logger.log(focusEvent);
 
 					GUIComponent next = focus.findNext();
 
@@ -438,7 +442,7 @@ public class Core{
 
 		case NEXT_COMPONENT:
 
-			System.out.println("LostFocus");
+			Logger.log("LostFocus");
 
 			//controle.getTeclado().loseFocus();
 			//events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.))
@@ -515,22 +519,32 @@ public class Core{
 			}
 		}
 
-		int effects = globalEffects.size();
-
-		for(int i = 0; i<effects; i++){
-
-			if(!globalEffects.get(i).isEnd()){
-				globalEffects.get(i).draw(g);
-			}else{
-				globalEffects.remove(i);
-				effects--;
-				break;
-			}
-
-		}
+		drawEffects(g);
 
 		if(drawCursor){
 			drawMouse(g);
+		}
+
+	}
+
+	private void drawEffects(Grafico g){
+
+		animation.animate(getTimeNow());
+				
+		List<AnimationScript> remove = new ArrayList<AnimationScript>();
+		
+		for(AnimationScript script: globalScripts){
+						
+			if(!script.isStopped()){
+				script.getTarget().draw(g);
+			}else{
+				remove.add(script);
+			}
+			
+		}
+		
+		for(AnimationScript script: remove){
+			globalScripts.remove(script);
 		}
 
 	}
@@ -633,7 +647,13 @@ public class Core{
 	}
 
 	public void addEffect(GlobalEffect effect){
-		globalEffects.add(effect);		
+		
+		animation.add(effect.getScript());
+		globalScripts.add(effect.getScript());
+		
+		//TODO add animation
+		//globalEffects.add(effect);
+		
 	}
 
 	private void updateKeyboardEvents(KeyboardEvent event){
@@ -736,12 +756,12 @@ public class Core{
 		if(event.getState()==KeyState.DRAGGED){
 
 			if(mouse.getY()<=50){
-				/*System.out.println("Evento Mouse dragged");
+				/*Logger.log("Evento Mouse dragged");
 
-				System.out.println("Mx = "+mouse.getDragX());
-				System.out.println("My = "+mouse.getDragY());
-				System.out.println("Dx = "+mouse.getDragX());
-				System.out.println("Dy = "+mouse.getDragY());*/
+				Logger.log("Mx = "+mouse.getDragX());
+				Logger.log("My = "+mouse.getDragY());
+				Logger.log("Dx = "+mouse.getDragX());
+				Logger.log("Dy = "+mouse.getDragY());*/
 				return GUIEvent.WINDOW_MOVE;
 			}
 
@@ -749,7 +769,7 @@ public class Core{
 			/*if(event.getMouseButtonDragged(Tecla.MOUSE_BUTTON_LEFT)){
 
 				if(mouse.getY()<20)
-				System.out.println("Evento Move Janela");
+				Logger.log("Evento Move Janela");
 
 				return GUIEvent.WINDOW_MOVE;
 			}*/
@@ -838,11 +858,11 @@ public class Core{
 	public GUIEvent getSuperEvent(){
 		return superEvent;
 	}
-	
+
 	public void hideCursor() {
 		drawCursor = false;		
 	}
-	
+
 	public void showCursor() {
 		drawCursor = true;		
 	}

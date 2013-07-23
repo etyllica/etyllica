@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class Animation {
+public class AnimationHandler {
 
 	private List<AnimationScript> scripts = new ArrayList<AnimationScript>();
 
@@ -17,7 +17,7 @@ public class Animation {
 	
 	private Map<AnimationScript, AnimationScript> endlessScripts = new HashMap<AnimationScript, AnimationScript>();
 
-	public Animation(){
+	public AnimationHandler(){
 		super();
 	}
 

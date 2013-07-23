@@ -16,45 +16,57 @@ import br.com.etyllica.gui.Window;
  */
 
 public class ApplicationLoader implements Runnable{
-	
+
 	private ExecutorService loadExecutor;
-	
+
 	private Window window;
-	
+
 	private Application application;
-	
+
 	private LoadApplication loadApplication;
+
+	private static boolean loading = false;
 
 	public ApplicationLoader(){
 		super();
 	}
-		
-	public void loadApplication(){
-		
-		loadExecutor = Executors.newSingleThreadExecutor();
 
-		loadExecutor.execute(new Runnable() {
-			
-			@Override
-			public void run() {
-				application.setSessionMap(window.getSessionMap());
-				application.load();
-			}
-			
-		});
-				
-		loadExecutor.shutdown();
-		
+	public void loadApplication(){
+
+		if(!loading){
+
+			loadExecutor = Executors.newSingleThreadExecutor();
+
+			loading = true;
+
+			loadExecutor.execute(new Runnable() {
+
+
+				@Override
+				public void run() {
+					application.setSessionMap(window.getSessionMap());
+					application.load();
+
+					loading = false;
+				}
+
+			});
+
+			loadExecutor.shutdown();
+		}else{
+			System.out.println("Window still loading!");
+		}
+
 	}
 
 	public void run(){
-				
+
 		while(application.getLoading()<100){
 			loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
 		}
-		
+
 		window.setApplication(application);
-		
+
 		window.restartWindow();
 
 	}
@@ -82,5 +94,5 @@ public class ApplicationLoader implements Runnable{
 	public void setWindow(Window window) {
 		this.window = window;		
 	}
-			
+
 }

@@ -2,7 +2,7 @@ package br.com.etyllica.animation;
 
 import br.com.etyllica.layer.Layer;
 
-public class AnimationScript implements Script{
+public abstract class AnimationScript{
 
 	protected Layer target;
 
@@ -73,9 +73,7 @@ public class AnimationScript implements Script{
 
 	}
 
-	public void animate(long now){
-
-	}
+	public abstract void animate(long now);
 
 	public boolean isStopped() {
 		return stopped;

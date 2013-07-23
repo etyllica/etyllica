@@ -1,8 +1,13 @@
 package br.com.etyllica.effects;
 
 import java.awt.Color;
+import java.util.Map;
 
+import br.com.etyllica.animation.scripts.OpacityAnimationScript;
+import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.i18n.DefaultDictionary;
+import br.com.etyllica.i18n.Language;
 
 /**
  * 
@@ -13,12 +18,16 @@ import br.com.etyllica.core.video.Grafico;
 
 public class GenericFullScreenEffect extends GlobalEffect{
 	
-	private int alpha = 100;
+	private Map<Language,String> texts;
 		
 	public GenericFullScreenEffect(int x, int y, int w, int h) {
 		super(x, y, w, h);
+			
+		texts = new DefaultDictionary().getWord(DefaultDictionary.MESSAGE_FULLSCREEN);
 		
-		start(35,80);
+		//3 seconds animation
+		script = new OpacityAnimationScript(this, 3000);
+		script.setInterval(255, 0);
 		
 	}
 	
@@ -30,8 +39,8 @@ public class GenericFullScreenEffect extends GlobalEffect{
 	@Override
 	public void draw(Grafico g) {
 		
-		g.setAlpha(alpha);
-		
+		g.setOpacity(opacity);
+				
 		g.setColor(Color.BLACK);
 		g.fillArc(rectX-rectH/2, rectY, rectH, rectH,90,180);
 		g.fillRect(rectX, rectY, rectW, rectH);
@@ -40,25 +49,12 @@ public class GenericFullScreenEffect extends GlobalEffect{
 		g.setColor(Color.WHITE);
 		g.setFont(g.getFont().deriveFont(20f));
 		
-		//TODO MultiLangLabel
-		g.drawStringShadow(rectX,rectY,rectW, rectH, "Press ESC to exit fullscreen",Color.BLACK);
+		//TODO Multi-Language Sentence
+		g.drawStringShadow(rectX,rectY,rectW, rectH, texts.get(Configuration.getInstance().getLanguage()),Color.BLACK);
 		
-		g.setAlpha(100);
-		
+		g.setOpacity(255);
+				
 	}
-	
-	@Override
-	protected void updateFX() {
-
-		if(steps>30){
-			
-			if(alpha>0){
-				alpha -= 2;
-			}
-			//else{System.out.println(steps);}
-		}
 		
-	}	
-	
 }
 

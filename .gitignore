@@ -1,8 +1,13 @@
 # Pre-Compiled Files #
 *.class
-bin/
 sdk/
 
 # Package Files #
 *.war
 *.ear
+
+# Javazoom Decoded Files #
+*.ser
+
+# Automatic Created Files#
+*.applet
