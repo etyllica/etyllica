@@ -27,7 +27,7 @@ public abstract class AnimationScript{
 
 		this.time = time;
 	}
-	
+
 	public AnimationScript(long delay, long time){
 		super();
 
@@ -73,7 +73,18 @@ public abstract class AnimationScript{
 
 	}
 
-	public abstract void animate(long now);
+	public void animate(long now) {
+
+		long timeElapsed = now-startedAt-delay;
+
+		float factor = (float)timeElapsed/time;
+
+		double value = startValue+(endValue-startValue)*factor;
+
+		update(value);
+	}
+	
+	protected abstract void update(double value);
 
 	public boolean isStopped() {
 		return stopped;

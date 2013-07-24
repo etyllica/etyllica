@@ -1,12 +1,16 @@
 # Pre-Compiled Files #
 *.class
+
+# Automatic generated Files#
+*.applet
+
 sdk/
 
 # Package Files #
 *.war
 *.ear
 
-# Javazoom Decoded Files #
+# Javazoom Decoder Files #
 *.ser
 
 # Automatic Created Files#
