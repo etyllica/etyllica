@@ -35,7 +35,7 @@ public class MultiLangLabel extends TextLabel{
 				
 		reloadText(lang);
 	}
-	
+		
 	@Override
 	public void update(GUIEvent event){
 				

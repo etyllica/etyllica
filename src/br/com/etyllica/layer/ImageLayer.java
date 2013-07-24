@@ -141,36 +141,6 @@ public class ImageLayer extends StaticLayer{
 		this.yImage = yImage;
 	}	
 
-	public void centralize(int x, int y, int xLimite, int yLimite){
-		centralizeX(x,x+xLimite);
-		centralizeY(y,y+yLimite);
-	}
-
-	public void centraliza(Layer cam){
-		centralizeX(cam);
-		centralizeY(cam);
-	}
-	public void centralizeX(Layer b){
-		centralizeX(b.getX(),b.getX()+b.getW());
-	}
-	public int centralizeX(int xInicial, int xFinal)
-	{
-		int x = (((xInicial+xFinal)/2)-(getW()/2));
-		setX(x);
-		
-		return x;
-	}
-	public void centralizeY(Layer b){
-		centralizeY(b.getY(),b.getY()+b.getH());
-	}
-	public int centralizeY(int yInicial, int yFinal)
-	{
-		int y = (((yInicial+yFinal)/2)-(getH()/2));
-		setY(y);
-		
-		return y;
-	}
-
 	public boolean colideRetangular(int bx, int by, int bw, int bh){
 
 		return colideRect(bx, by, bw, bh);

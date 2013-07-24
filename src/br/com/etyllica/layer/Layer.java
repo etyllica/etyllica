@@ -221,6 +221,75 @@ public class Layer implements DrawableComponent{
 	}
 	
 	/*
+	 * Centralization Methods
+	 */
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
+	public void centralize(int x, int y, int w, int h){
+		centralizeX(x,x+w);
+		centralizeY(y,y+h);
+	}
+
+	/**
+	 * 
+	 * @param layer
+	 */
+	public void centralize(Layer layer){
+		centralizeX(layer);
+		centralizeY(layer);
+	}
+	
+	/**
+	 * 
+	 * @param layer
+	 */
+	public void centralizeX(Layer layer){
+		centralizeX(layer.getX(),layer.getX()+layer.getW());
+	}
+	
+	/**
+	 * 
+	 * @param startX
+	 * @param endX
+	 * @return
+	 */
+	public int centralizeX(int startX, int endX)
+	{
+		int x = (((startX+endX)/2)-(getW()/2));
+		setX(x);
+		
+		return x;
+	}
+	
+	/**
+	 * 
+	 * @param layer
+	 */
+	public void centralizeY(Layer layer){
+		centralizeY(layer.getY(),layer.getY()+layer.getH());
+	}
+	
+	/**
+	 * 
+	 * @param startY
+	 * @param endY
+	 * @return
+	 */
+	public int centralizeY(int startY, int endY)
+	{
+		int y = (((startY+endY)/2)-(getH()/2));
+		setY(y);
+		
+		return y;
+	}
+	
+	/*
 	 * Colision Methods
 	 */
 	

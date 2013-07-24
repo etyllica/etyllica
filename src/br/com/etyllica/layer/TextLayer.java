@@ -87,19 +87,19 @@ public class TextLayer extends ImageLayer{
 	public void draw(Grafico g){
 
 		if(this.visible){
-			
+
 			if(opacity<255){
 				g.setOpacity(opacity);
 			}
-			
+
 			AffineTransform transform = new AffineTransform();
-			
+
 			Font f = this.font;
 
 			if(f==null){
 				f = g.getFont().deriveFont(style, size);
 			}
-					
+
 
 			g.setFont(f);
 
@@ -110,42 +110,42 @@ public class TextLayer extends ImageLayer{
 
 			float height = size;
 			float width = (float) Math.ceil(bounds.getWidth());
-			
+
 			float centerX = x+width/2;
 			float centerY = y-height/2;
-			
+
 			if(angle!=0){
-								
+
 				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle), centerX, centerY));
-				
+
 
 				frc = new FontRenderContext(transform, antiAliased, fractionalMetrics);
 				layout = new TextLayout(text, f, frc);
 
 			}
-			
+
 
 			if(scale!=1){
-				
-			    double sw = width*scale;
-			    double sh = height*scale;
-			    
-			    double dx = sw/2-width/2;
-			    double dy = sh/2-height/2;
-				
+
+				double sw = width*scale;
+				double sh = height*scale;
+
+				double dx = sw/2-width/2;
+				double dy = sh/2-height/2;
+
 				transform.translate(x-width/2-dx, y-height/2+dy);
-				
+
 				AffineTransform tr2 = new AffineTransform();
-				
+
 				tr2.translate(width/2, height/2);
 				tr2.scale(scale,scale);
 				tr2.translate(-x, -y);
-			    
-			    transform.concatenate(tr2);
-				
+
+				transform.concatenate(tr2);
+
 			}
-			
-			
+
+
 			g.setTransform(transform);			
 
 			if(!border){
@@ -168,7 +168,7 @@ public class TextLayer extends ImageLayer{
 			}
 
 			g.resetTransform();
-			
+
 			if(opacity<255){
 				g.resetOpacity();
 			}
@@ -194,10 +194,28 @@ public class TextLayer extends ImageLayer{
 	}
 
 	public void setText(String text) {
-		if(!text.isEmpty())
+		if(!text.isEmpty()){
 			this.text = text;
-		else
+			computeBoundingBox();
+		}else{
 			this.text = " ";
+		}
+	}
+
+	private void computeBoundingBox(){
+
+		if(font!=null){
+			//Compute Bounding box
+			FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
+			TextLayout layout = new TextLayout(text, font, frc);
+
+			Rectangle2D bounds = layout.getBounds();
+			
+			this.h = (int)size;
+			this.w = (int)Math.ceil(bounds.getWidth());
+
+		}
+
 	}
 
 	public void setBorder(boolean border) {

@@ -49,7 +49,7 @@ public class ByeWorld extends Application{
 
 				}else if(loading>=100){
 					loading = 100;
-					loadSimulator.shutdown();
+					loadSimulator.shutdownNow();
 				}
 
 			}

@@ -33,7 +33,7 @@ public abstract class Spinner<T extends Number> extends GUIComponent{
 		add(resultPanel);
 		
 		//TODO levar em consideracao o fontSize
-		resultLabel = new TextLabel(x+2,y+2+h/2,"0");
+		resultLabel = new TextLabel(x+10,y+2+h/2,"0");
 		add(resultLabel);
 		
 		int buttonWidth = w/6;
@@ -46,8 +46,7 @@ public abstract class Spinner<T extends Number> extends GUIComponent{
 		
 		minus = new DefaultButton(x+w-buttonWidth-miniBorder, y+h/2+miniBorder, buttonWidth, h/2-miniBorder);
 		minus.setLabel(new TextLabel("-"));
-		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "subReload"));
-		
+		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "subReload"));		
 		add(minus);
 				
 	}

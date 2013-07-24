@@ -1,8 +1,6 @@
 package examples.etyllica.tutorial9;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.Configuration;
-import br.com.etyllica.theme.mono.EtyllicMonoTheme;
 import examples.etyllica.tutorial9.application.SimpleGuiExample;
 
 public class Tutorial9 extends Etyllica {

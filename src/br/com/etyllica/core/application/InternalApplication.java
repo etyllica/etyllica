@@ -76,6 +76,11 @@ public abstract class InternalApplication extends GUIComponent{
 	 */
 	
 	protected long lastUpdate = 0;
+	
+	/**
+	 * Lock
+	 */
+	protected boolean locked = false;
 		
 	/**
 	 * Constructor
@@ -229,5 +234,12 @@ public abstract class InternalApplication extends GUIComponent{
 		this.lastUpdate = lastUpdate;
 	}
 	
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
 	
 }

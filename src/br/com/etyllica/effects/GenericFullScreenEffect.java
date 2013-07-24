@@ -1,13 +1,11 @@
 package br.com.etyllica.effects;
 
 import java.awt.Color;
-import java.util.Map;
 
 import br.com.etyllica.animation.scripts.OpacityAnimationScript;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.i18n.DefaultDictionary;
-import br.com.etyllica.i18n.Language;
 
 /**
  * 
@@ -18,12 +16,12 @@ import br.com.etyllica.i18n.Language;
 
 public class GenericFullScreenEffect extends GlobalEffect{
 	
-	private Map<Language,String> texts;
+	private DefaultDictionary dictionary;
 		
 	public GenericFullScreenEffect(int x, int y, int w, int h) {
 		super(x, y, w, h);
 			
-		texts = new DefaultDictionary().getWord(DefaultDictionary.MESSAGE_FULLSCREEN);
+		dictionary = new DefaultDictionary();
 		
 		//3 seconds animation
 		script = new OpacityAnimationScript(this, 3000);
@@ -49,8 +47,9 @@ public class GenericFullScreenEffect extends GlobalEffect{
 		g.setColor(Color.WHITE);
 		g.setFont(g.getFont().deriveFont(20f));
 		
-		//TODO Multi-Language Sentence
-		g.drawStringShadow(rectX,rectY,rectW, rectH, texts.get(Configuration.getInstance().getLanguage()),Color.BLACK);
+		String sentence = dictionary.getTranslatedWord(DefaultDictionary.MESSAGE_FULLSCREEN,Configuration.getInstance().getLanguage());
+		
+		g.drawStringShadow(rectX, rectY, rectW, rectH, sentence, Color.BLACK);
 		
 		g.setOpacity(255);
 				

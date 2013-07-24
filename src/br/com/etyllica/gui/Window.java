@@ -84,7 +84,7 @@ public class Window extends GUIComponent{
 	}
 	
 	public void restartWindow(){
-		
+		applicationLoader.cleanMemory();
 	}
 
 	public void setApplication(Application application) {
@@ -104,7 +104,7 @@ public class Window extends GUIComponent{
 	}
 
 	public void reload(Application application){
-		
+				
 		DefaultLoadApplication load = application.getLoadApplication();
 		load.load();
 		setLoadApplication(load);
@@ -114,9 +114,7 @@ public class Window extends GUIComponent{
 		applicationLoader.setLoadApplication(load);
 		
 		applicationLoader.loadApplication();
-		
-		new Thread(applicationLoader).start();
-		
+				
 	}
 	
 	public SessionMap getSessionMap() {

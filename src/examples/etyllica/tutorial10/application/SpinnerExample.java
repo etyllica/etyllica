@@ -1,33 +1,35 @@
-package examples.etyllica.tutorial1.application;
+package examples.etyllica.tutorial10.application;
 
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
-import br.com.etyllica.layer.ImageLayer;
+import br.com.etyllica.gui.spinner.IntegerSpinner;
 
-public class HelloWorld extends Application{
+public class SpinnerExample extends Application{
 
-	public HelloWorld(int w, int h) {
+	public SpinnerExample(int w, int h) {
 		super(w, h);
 	}
 
-	private ImageLayer hello;
-
 	@Override
 	public void load() {
-		hello = new ImageLayer(200,100,"hello.png");
+				
+		IntegerSpinner spinnerMaxPlayers = new IntegerSpinner(280, 100, 200, 40);
+		spinnerMaxPlayers.setValue(1);
+		spinnerMaxPlayers.setMaxValue(4);
+		spinnerMaxPlayers.setMinValue(1);
+		add(spinnerMaxPlayers);
 		
 		loading = 100;
 	}
 
 	@Override
 	public void draw(Grafico g) {
-		hello.draw(g);		
+		
 	}
 	
-
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
 		// TODO Auto-generated method stub

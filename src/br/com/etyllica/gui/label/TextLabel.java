@@ -9,6 +9,7 @@ import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Label;
+import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
 
 /**
@@ -91,6 +92,7 @@ public class TextLabel extends Label{
 		}else{
 			g.drawStringShadow(bx, by, bw, bh, layer.getText() ,theme.getShadowColor());
 		}
+		
 	}
 
 	@Override
@@ -108,6 +110,10 @@ public class TextLabel extends Label{
 		return this.layer.getText();
 	}
 
+	/**
+	 * 
+	 * @param text
+	 */
 	public void setText(String text) {
 		this.layer.setText(text);
 	}
@@ -116,20 +122,66 @@ public class TextLabel extends Label{
 		return this.layer.getSize();
 	}
 
-	public void setFontSize(float fontSize) {
-		this.layer.setSize(fontSize);
+	/**
+	 * 
+	 * @param size
+	 */
+	public void setFontSize(float size) {
+		this.layer.setSize(size);
 	}
 	
+	/**
+	 * 
+	 * @param border
+	 */
 	public void setBorder(boolean border) {
 		this.layer.setBorder(border);
 	}
 	
+	/**
+	 * 
+	 * @param borderColor
+	 */
 	public void setBorderColor(Color borderColor) {
 		this.layer.setBorderColor(borderColor);
 	}
 	
+	/**
+	 * 
+	 * @param borderWidh
+	 */
 	public void setBorderWidth(float borderWidh) {
 		this.layer.setBorderWidth(borderWidh);
-	}	
+	}
+
+	@Override
+	public void centralize(int x, int y, int w, int h) {
+		layer.centralize(x, y, w, h);
+	}
+
+	@Override
+	public void centralize(Layer layer) {
+		layer.centralize(layer);
+	}
 	
+	@Override
+	public void centralizeX(Layer layer) {
+		layer.centralizeX(layer);
+	}
+
+	@Override
+	public int centralizeX(int startX, int endX) {
+		return layer.centralizeX(startX, endX);
+	}
+
+	@Override
+	public void centralizeY(Layer layer) {
+		layer.centralizeY(layer);
+	}
+
+	@Override
+	public int centralizeY(int startY, int endY) {
+		return layer.centralizeY(startY, endY);
+	}
+		
 }

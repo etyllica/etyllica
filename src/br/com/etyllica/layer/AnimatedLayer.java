@@ -114,15 +114,6 @@ public class AnimatedLayer extends ImageLayer{
 		setYTile(yTile);
 	}
 
-	/**
-	 * Set Number of Frames
-	 * 
-	 * @param frames
-	 */
-	public void setFrame(int frames){
-		this.frames = frames;
-	}
-
 	public void anima(){
 		anim();
 	}
@@ -351,6 +342,16 @@ public class AnimatedLayer extends ImageLayer{
 
 	public boolean isStopped(){
 		return stopped;
+	}
+	
+
+	/**
+	 * Set Number of Frames
+	 * 
+	 * @param frames
+	 */
+	public void setFrames(int frames){
+		this.frames = frames;
 	}
 
 	public int getFrames(){

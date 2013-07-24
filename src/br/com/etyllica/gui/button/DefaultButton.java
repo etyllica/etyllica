@@ -261,11 +261,11 @@ public class DefaultButton extends RoundGUIComponent{
 			
 		}
 		
-		/*if(event.getPressed(Tecla.TSK_ENTER)){
+		if(event.getPressed(Tecla.TSK_ENTER)){
 
-			return GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
+			this.update(GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
 
-		}else if(event.getReleased(Tecla.TSK_ENTER)){
+		}/*else if(event.getReleased(Tecla.TSK_ENTER)){
 
 			return GUIEvent.MOUSE_LEFT_BUTTON_UP;
 

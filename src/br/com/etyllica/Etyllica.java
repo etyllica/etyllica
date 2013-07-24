@@ -106,7 +106,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 		executor = Executors.newScheduledThreadPool(2);
 		startEngine();
-		startAnimation();		
+		startAnimation();
 
 	}
 	

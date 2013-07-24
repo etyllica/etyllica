@@ -60,7 +60,7 @@ public class CustomLoadApplication extends Application{
 					
 				}else if(loading>=100){
 					loading = 100;
-					loadSimulator.shutdown();
+					loadSimulator.shutdownNow();
 				}
 				
 			}

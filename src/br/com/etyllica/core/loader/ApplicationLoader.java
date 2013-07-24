@@ -2,6 +2,9 @@ package br.com.etyllica.core.loader;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.application.InternalApplication;
@@ -15,8 +18,8 @@ import br.com.etyllica.gui.Window;
  *
  */
 
-public class ApplicationLoader implements Runnable{
-
+public class ApplicationLoader{
+	
 	private ExecutorService loadExecutor;
 
 	private Window window;
@@ -25,52 +28,53 @@ public class ApplicationLoader implements Runnable{
 
 	private LoadApplication loadApplication;
 
-	private static boolean loading = false;
-
 	public ApplicationLoader(){
 		super();
 	}
 
 	public void loadApplication(){
+		
+		loadExecutor = new ThreadPoolExecutor(2, 2, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(2));
+		//loadExecutor = Executors.newFixedThreadPool(2);
 
-		if(!loading){
+		loadExecutor.submit(new Runnable() {
 
-			loadExecutor = Executors.newSingleThreadExecutor();
+			@Override
+			public void run() {
 
-			loading = true;
+				application.load();
+				
+			}
 
-			loadExecutor.execute(new Runnable() {
+		});
+		
+		loadExecutor.execute(new Runnable() {
 
 
-				@Override
-				public void run() {
-					application.setSessionMap(window.getSessionMap());
-					application.load();
+			@Override
+			public void run() {
 
-					loading = false;
+				while(application.getLoading()<100){
+					loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
 				}
 
-			});
+				application.setLocked(false);
 
-			loadExecutor.shutdown();
-		}else{
-			System.out.println("Window still loading!");
-		}
+				window.setApplication(application);
 
-	}
+				window.restartWindow();
+												
+			}
 
-	public void run(){
-
-		while(application.getLoading()<100){
-			loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
-		}
-
-		window.setApplication(application);
-
-		window.restartWindow();
+		});				
 
 	}
-
+	
+	public void cleanMemory(){
+		loadExecutor.shutdownNow();
+		System.gc();
+	}
+	
 	public InternalApplication getApplication() {
 		return application;
 	}

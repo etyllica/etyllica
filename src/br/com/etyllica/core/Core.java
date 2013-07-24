@@ -37,8 +37,6 @@ public class Core{
 	//External Windows
 	private Window activeWindow = null;
 
-	//	private SessionMap sessionMap = new SessionMap();
-
 	private List<Window> windows = new ArrayList<Window>();
 
 	private List<AnimationScript> globalScripts = new ArrayList<AnimationScript>();
@@ -172,13 +170,15 @@ public class Core{
 
 			//Animate
 			//TODO Independent Thread
-			if(application.getLoading()==100){
+			if(!application.isLocked()){
+				
 				application.getAnimation().animate(getTimeNow());
-			}
-
-			//if activeWindow, receive command to change application
-			if(application.getReturnApplication()!=application){
-				this.changeApplication();
+			
+				//if activeWindow, receive command to change application
+				if(application.getReturnApplication()!=application){
+					this.changeApplication();
+				}
+			
 			}
 
 			//Creating Windows
@@ -782,11 +782,7 @@ public class Core{
 
 		//Change to wID system or
 		//Set<Windows>...
-		if(window!=activeWindow){
-
-			//TODO Fix this
-			//window.setSessionMap(sessionMap);
-			//window.getApplication().setSessionMap(sessionMap);
+		if(activeWindow!=window){
 
 			window.setClose(false);
 
@@ -795,7 +791,7 @@ public class Core{
 			activeWindow = window;
 
 			//Avoid unnecessary reload
-			if(window.getApplication().getLoading()!=100){
+			if(!window.getApplication().isLocked()){
 				reload(window.getApplication());
 			}
 
@@ -810,6 +806,12 @@ public class Core{
 
 	protected void changeApplication(){
 
+		//Lock old application
+		Application application = activeWindow.getApplication();
+		application.setLocked(true);
+		
+		application.setSessionMap(activeWindow.getSessionMap());
+		
 		reload(activeWindow.getApplication().getReturnApplication());
 
 	}
