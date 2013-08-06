@@ -7,7 +7,6 @@ public abstract class AnimationScript{
 	protected Layer target;
 
 	protected long startedAt = 0;
-
 	protected long time = 0;
 	protected long delay = 0;
 
@@ -16,11 +15,9 @@ public abstract class AnimationScript{
 	private boolean endless = false;
 
 	protected double startValue = 0;
-
 	protected double endValue = 0;
 
 	private AnimationScript next;
-
 
 	public AnimationScript(long time){
 		super();
@@ -62,6 +59,8 @@ public abstract class AnimationScript{
 		if(started&&!stopped){
 
 			if(now-startedAt-delay>=time){
+				//Last Update
+				calculate(1);
 				stopped = true;
 			}else{
 				if(now-startedAt>=delay){
@@ -79,11 +78,17 @@ public abstract class AnimationScript{
 
 		float factor = (float)timeElapsed/time;
 
+		calculate(factor);
+	}
+	
+	private void calculate(double factor){
+		
 		double value = startValue+(endValue-startValue)*factor;
 
 		update(value);
+		
 	}
-	
+		
 	protected abstract void update(double value);
 
 	public boolean isStopped() {
