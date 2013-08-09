@@ -123,7 +123,7 @@ public class Layer implements DrawableComponent{
 	 * @param offsetX
 	 */
 	public void setOffsetX(int offsetX){
-		setX(x+offsetX);
+		setX(this.x+offsetX);
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class Layer implements DrawableComponent{
 	 * @param offsetY
 	 */
 	public void setOffsetY(int offsetY){
-		setY(y+offsetY);
+		setY(this.y+offsetY);
 	}
 
 	/**

@@ -8,12 +8,12 @@
 
 - Keyboard and Mouse handling (and [Joystick](https://github.com/yuripourre/joystick) only for Linux)
 - Image Loader that supports (TGA, PCX, PNG, BMP, JPG)
-- Animation
-- Special Effects
 - Sound Loader that supports (MP3, OGG, WAV)
 - Background Music
+- Animation (Tween System)
+- Special Effects
 - GUI System
-- FullScreen
+- FullScreen Support (Even in Applets)
 - Multilanguage Support
 - UI Manager
 
