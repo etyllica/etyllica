@@ -33,7 +33,7 @@ public interface Component extends DrawableComponent{
 	 * @param event
 	 */
 	public void update(GUIEvent event);
-	
+		
 	/**
 	 * 
 	 * @param mx

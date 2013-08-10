@@ -10,11 +10,10 @@
 - Image Loader that supports (TGA, PCX, PNG, BMP, JPG)
 - Sound Loader that supports (MP3, OGG, WAV)
 - Background Music
-- Animation (Tween System)
-- Special Effects
-- GUI System
+- Animation Tween System
 - FullScreen Support (Even in Applets)
 - Multilanguage Support
+- GUI System
 - UI Manager
 
 ##Related Projects

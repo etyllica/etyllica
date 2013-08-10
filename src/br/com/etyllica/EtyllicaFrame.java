@@ -24,7 +24,7 @@ import br.com.etyllica.core.loader.MultimediaLoader;
 import br.com.etyllica.core.video.FullScreenWindow;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.effects.GenericFullScreenEffect;
-import br.com.etyllica.gui.window.DesktopWindow;
+import br.com.etyllica.gui.window.MainWindow;
 
 /**
  * 
@@ -52,7 +52,7 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 	private VolatileImage volatileImg;
 
-	private DesktopWindow desktop;
+	private MainWindow desktop;
 
 	protected Mouse mouse;
 
@@ -83,12 +83,12 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		//MeshLoader.getInstancia().setUrl(s);
 		grafico = new Grafico(w,h);		
 		grafico.setBufferedImage(volatileImg.getSnapshot());
-		desktop = new DesktopWindow(0,0,w,h);
+		desktop = new MainWindow(0,0,w,h);
 
 		mouse = core.getControl().getMouse();
 		//keyboard = core.getControl().getTeclado();
 
-		desktop = new DesktopWindow(0,0,w,h);
+		desktop = new MainWindow(0,0,w,h);
 
 		startGame();		
 		

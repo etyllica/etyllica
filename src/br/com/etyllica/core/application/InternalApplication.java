@@ -80,7 +80,12 @@ public abstract class InternalApplication extends GUIComponent{
 	/**
 	 * Lock
 	 */
-	protected boolean locked = false;
+	private boolean locked = false;
+	
+	/**
+	 * Lock
+	 */
+	protected boolean paused = false;
 		
 	/**
 	 * Constructor

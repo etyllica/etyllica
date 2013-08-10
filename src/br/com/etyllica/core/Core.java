@@ -23,7 +23,7 @@ import br.com.etyllica.debug.Logger;
 import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.GUIComponent;
 import br.com.etyllica.gui.Window;
-import br.com.etyllica.gui.window.DesktopWindow;
+import br.com.etyllica.gui.window.MainWindow;
 
 /**
  * 
@@ -63,7 +63,7 @@ public class Core{
 
 	//private List<JoystickEvent> joyEvents;
 
-	private DesktopWindow desktopWindow;
+	private MainWindow mainWindow;
 
 	private boolean drawCursor = true;
 
@@ -83,8 +83,8 @@ public class Core{
 
 	}
 
-	public DesktopWindow getDesktopWindow() {
-		return desktopWindow;
+	public MainWindow getDesktopWindow() {
+		return mainWindow;
 	}
 
 	private boolean enableFullScreen = false;

@@ -12,11 +12,10 @@ import br.com.etyllica.gui.Window;
  *
  */
 
-public class DesktopWindow extends Window{
+public class MainWindow extends Window{
 
-	public DesktopWindow(int x, int y, int w, int h) {
+	public MainWindow(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		this.sessionMap.put("NOME", "DESKTOP");
 	}
 	
 	@Override

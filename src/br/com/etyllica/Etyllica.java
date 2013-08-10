@@ -23,7 +23,7 @@ import br.com.etyllica.core.loader.MultimediaLoader;
 import br.com.etyllica.core.video.FullScreenWindow;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.effects.GenericFullScreenEffect;
-import br.com.etyllica.gui.window.DesktopWindow;
+import br.com.etyllica.gui.window.MainWindow;
 
 /**
  * 
@@ -52,7 +52,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	private VolatileImage volatileImg;
 
-	private DesktopWindow desktop;
+	private MainWindow desktop;
 
 	private Mouse mouse;
 
@@ -84,7 +84,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 		mouse = core.getControl().getMouse();
 		//keyboard = core.getControl().getTeclado();
 
-		desktop = new DesktopWindow(0,0,w,h);
+		desktop = new MainWindow(0,0,w,h);
 		
 		startGame();		
 		

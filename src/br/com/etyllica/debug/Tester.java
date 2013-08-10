@@ -9,9 +9,9 @@ public class Tester {
 		if(debug){
 			
 			if(should==value){
-				Logger.log(".");
+				Logger.logWithoutNewLine(".");
 			}else{
-				Logger.log("F");
+				Logger.logWithoutNewLine("F");
 			}
 		}
 		
@@ -22,9 +22,9 @@ public class Tester {
 		if(debug){
 			
 			if(should==value){
-				Logger.log(".");
+				Logger.logWithoutNewLine(".");
 			}else{
-				Logger.log("F");
+				Logger.logWithoutNewLine("F");
 			}
 		}
 		
@@ -35,9 +35,9 @@ public class Tester {
 		if(debug){
 			
 			if(should==value){
-				Logger.log(".");
+				Logger.logWithoutNewLine(".");
 			}else{
-				Logger.log("F");
+				Logger.logWithoutNewLine("F");
 			}
 		}
 		
@@ -48,9 +48,9 @@ public class Tester {
 		if(debug){
 			
 			if(should==value){
-				Logger.log(".");
+				Logger.logWithoutNewLine(".");
 			}else{
-				Logger.log("F");
+				Logger.logWithoutNewLine("F");
 			}
 		}
 		
@@ -61,9 +61,9 @@ public class Tester {
 		if(debug){
 			
 			if(should.equals(value)){
-				Logger.log(".");
+				Logger.logWithoutNewLine(".");
 			}else{
-				Logger.log("F");
+				Logger.logWithoutNewLine("F");
 			}
 		}
 		

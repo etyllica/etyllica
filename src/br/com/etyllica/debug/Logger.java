@@ -11,5 +11,12 @@ public class Logger {
 			System.out.println(message.toString());
 		}
 	}
+	
+	public static void logWithoutNewLine(Object message){
+		
+		if(debug){
+			System.out.print(message.toString());
+		}
+	}
 
 }
