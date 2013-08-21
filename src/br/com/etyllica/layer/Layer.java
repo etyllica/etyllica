@@ -1,5 +1,8 @@
 package br.com.etyllica.layer;
 
+import org.dyn4j.dynamics.Body;
+import org.dyn4j.dynamics.BodyFixture;
+
 import br.com.etyllica.core.DrawableComponent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Grafico;
@@ -49,12 +52,17 @@ public class Layer implements DrawableComponent{
 	protected double scale = 1;
 	
 	/**
+	 * Physic Body
+	 */
+	protected Body body = null;
+	
+	/**
      * if layer is visible
      */
 	protected boolean visible = true;
 		
 	public Layer(){
-		super();	
+		super();
 	}
 	
 	public Layer(int x, int y){
@@ -186,6 +194,14 @@ public class Layer implements DrawableComponent{
 	 */
 	public void setScale(double scale) {
 		this.scale = scale;
+	}
+	
+	public Body getBody() {
+		return body;
+	}
+
+	public void setBody(Body body) {
+		this.body = body;
 	}
 
 	/**
@@ -387,4 +403,13 @@ public class Layer implements DrawableComponent{
 		
 	}
 	
+	public void createRectangularBody(){
+		this.body = new Body();
+		
+		body.addFixture(new BodyFixture(new org.dyn4j.geometry.Rectangle(w*scale, h*scale)));
+		body.translate(x+(w*scale)/2, y+(h*scale)/2);
+		body.setMass();
+		
+	}
+		
 }

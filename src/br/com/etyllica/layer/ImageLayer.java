@@ -237,7 +237,7 @@ public class ImageLayer extends StaticLayer{
 	//Based on code http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
 	public boolean colisionRotated(int mx, int my){
 
-		//Pivot Point of rotation		
+		//Pivot Point of rotation
 		int px = x+w/2;
 		int py = y+h/2;
 
@@ -271,19 +271,31 @@ public class ImageLayer extends StaticLayer{
 	}
 
 	public void draw(Grafico g){
-
+		
 		if(visible){
 
 			if(opacity<255){
 				g.setOpacity(opacity);
 			}
-
+			
 			AffineTransform transform = new AffineTransform();
 
-			if(angle!=0){
-				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
-			}
+			if(body==null){
 
+				if(angle!=0){
+					transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
+				}
+				
+			}else{
+
+				int initialX = x+w/2;
+				int initialY = y+h/2;
+								
+				transform.translate(this.body.getTransform().getTranslationX()-initialX, this.body.getTransform().getTranslationY()-initialY);
+				transform.concatenate(AffineTransform.getRotateInstance(this.body.getTransform().getRotation(),x+w/2, y+h/2));
+				
+			}			
+						
 			if(scale!=1){
 
 				double sw = w*scale;
@@ -303,17 +315,17 @@ public class ImageLayer extends StaticLayer{
 				transform.concatenate(scaleTransform);
 
 			}
-
-			g.setTransform(transform);
 			
+			g.transform(transform);
+
 			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
 					xImage,yImage,xImage+w,yImage+h, null );
-
+			
 			g.resetTransform();
 
 			if(opacity<255){
 				g.resetOpacity();
-			}
+			}		
 
 		}
 
@@ -331,5 +343,5 @@ public class ImageLayer extends StaticLayer{
 
 		return colision;
 	}
-
+	
 }

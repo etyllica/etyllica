@@ -376,6 +376,17 @@ public class Grafico{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param tx
+	 */
+	public void transform(AffineTransform tx){
+		//Avoid Java Bug
+		if(screen!=null){
+			screen.transform(tx);
+		}
+	}
+	
 	public void resetTransform(){
 	
 		if(screen!=null){
@@ -730,6 +741,19 @@ public class Grafico{
 	 */
 	public void translate(int x, int y){
 		screen.translate(x, y);
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	public void translate(double x, double y){
+		screen.translate(x, y);
+	}
+
+	public void rotate(double angle) {
+		screen.rotate(angle);
 	}
 
 }
