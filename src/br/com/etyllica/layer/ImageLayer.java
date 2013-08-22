@@ -260,76 +260,64 @@ public class ImageLayer extends StaticLayer{
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
 
-	public void clone(ImageLayer b){
-		this.w = b.w;
-		this.h = b.h;
-
-		this.xImage = b.xImage;
-		this.yImage = b.yImage;
-
-		this.path = b.path;
-	}
-
 	public void draw(Grafico g){
 		
 		if(visible){
 
-			if(opacity<255){
+			if(opacity<0xff){
 				g.setOpacity(opacity);
 			}
 			
-			AffineTransform transform = new AffineTransform();
-
-			if(body==null){
-
-				if(angle!=0){
-					transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
-				}
-				
-			}else{
-
-				int initialX = x+w/2;
-				int initialY = y+h/2;
-								
-				transform.translate(this.body.getTransform().getTranslationX()-initialX, this.body.getTransform().getTranslationY()-initialY);
-				transform.concatenate(AffineTransform.getRotateInstance(this.body.getTransform().getRotation(),x+w/2, y+h/2));
-				
-			}			
-						
-			if(scale!=1){
-
-				double sw = w*scale;
-				double sh = h*scale;
-
-				double dx = sw/2-w/2;
-				double dy = sh/2-h/2;
-
-				transform.translate(x-w/2-dx, y-h/2-dy);
-
-				AffineTransform scaleTransform = new AffineTransform();
-
-				scaleTransform.translate(w/2, h/2);
-				scaleTransform.scale(scale,scale);
-				scaleTransform.translate(-x, -y);
-
-				transform.concatenate(scaleTransform);
-
-			}
-			
-			g.transform(transform);
-
-			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
-					xImage,yImage,xImage+w,yImage+h, null );
+			this.draw(g, getTransform());
 			
 			g.resetTransform();
 
-			if(opacity<255){
+			if(opacity<0xff){
 				g.resetOpacity();
 			}		
 
 		}
 
 	}
+	
+	@Override
+	public void draw(Grafico g, AffineTransform transform) {
+		g.transform(transform);
+
+		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
+				xImage,yImage,xImage+w,yImage+h, null );		
+	}
+	
+	protected AffineTransform getTransform(){
+		AffineTransform transform = new AffineTransform();
+
+		if(angle!=0){
+			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
+		}
+					
+		if(scale!=1){
+
+			double sw = w*scale;
+			double sh = h*scale;
+
+			double dx = sw/2-w/2;
+			double dy = sh/2-h/2;
+
+			transform.translate(x-w/2-dx, y-h/2-dy);
+
+			AffineTransform scaleTransform = new AffineTransform();
+
+			scaleTransform.translate(w/2, h/2);
+			scaleTransform.scale(scale,scale);
+			scaleTransform.translate(-x, -y);
+
+			transform.concatenate(scaleTransform);
+
+		}
+		
+		return transform;
+	}
+	
 
 	public boolean onMouse(Mouse mouse){
 
@@ -342,6 +330,16 @@ public class ImageLayer extends StaticLayer{
 		}
 
 		return colision;
+	}
+	
+	public void clone(ImageLayer b){
+		this.w = b.w;
+		this.h = b.h;
+
+		this.xImage = b.xImage;
+		this.yImage = b.yImage;
+
+		this.path = b.path;
 	}
 	
 }

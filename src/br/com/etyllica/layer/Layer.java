@@ -1,7 +1,6 @@
 package br.com.etyllica.layer;
 
-import org.dyn4j.dynamics.Body;
-import org.dyn4j.dynamics.BodyFixture;
+import java.awt.geom.AffineTransform;
 
 import br.com.etyllica.core.DrawableComponent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -50,12 +49,7 @@ public class Layer implements DrawableComponent{
 	 * Scale factor
 	 */
 	protected double scale = 1;
-	
-	/**
-	 * Physic Body
-	 */
-	protected Body body = null;
-	
+		
 	/**
      * if layer is visible
      */
@@ -194,14 +188,6 @@ public class Layer implements DrawableComponent{
 	 */
 	public void setScale(double scale) {
 		this.scale = scale;
-	}
-	
-	public Body getBody() {
-		return body;
-	}
-
-	public void setBody(Body body) {
-		this.body = body;
 	}
 
 	/**
@@ -402,14 +388,9 @@ public class Layer implements DrawableComponent{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public void createRectangularBody(){
-		this.body = new Body();
-		
-		body.addFixture(new BodyFixture(new org.dyn4j.geometry.Rectangle(w*scale, h*scale)));
-		body.translate(x+(w*scale)/2, y+(h*scale)/2);
-		body.setMass();
-		
+
+	public void draw(Grafico g, AffineTransform transform) {
+		// TODO Auto-generated method stub
 	}
 		
 }

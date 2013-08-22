@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dyn4j.RigidBody;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Mass;
 
@@ -21,8 +22,9 @@ public class ExampleApplication extends Application {
 		super(w, h);
 	}
 	
-	private Layer floor;
-	private List<ImageLayer> crates;	
+	private RigidBody floor;
+	
+	private List<RigidBody> crates;	
 	
 	protected World world;
 
@@ -31,22 +33,20 @@ public class ExampleApplication extends Application {
 
 		this.world = new World();
 				
-		floor = new Layer(0,500,w,20);
-		floor.createRectangularBody();
-		floor.getBody().setMass(Mass.Type.INFINITE);
-		this.world.addBody(floor.getBody());
+		floor = new RigidBody(new Layer(0,500,w,20));
+		floor.setMass(Mass.Type.INFINITE);
 		
-		crates = new ArrayList<ImageLayer>();
+		this.world.addBody(floor);
+		
+		crates = new ArrayList<RigidBody>();
 		loading = 10;
 		
 		for(int i=0;i<6;i++){
 			
-			ImageLayer crate = new ImageLayer(20+50*i, 10+70*i, "crate.jpg");
-			crate.createRectangularBody();
-			crate.getBody().getLinearVelocity().set(5, 0.0);
+			RigidBody crate = new RigidBody(new ImageLayer(20+50*i, 10+70*i, "crate.jpg"));
+			crate.getLinearVelocity().set(5, 0.0);
 						
-			this.world.addBody(crate.getBody());
-						
+			this.world.addBody(crate);
 			crates.add(crate);
 						
 		}
@@ -86,9 +86,9 @@ public class ExampleApplication extends Application {
 	public void draw(Grafico g) {
 
 		g.setColor(Color.BLACK);
-		g.drawRect(floor);
+		g.drawRect(floor.getLayer());
 		
-		for(ImageLayer crate: crates){
+		for(RigidBody crate: crates){
 			crate.draw(g);
 		}
 		

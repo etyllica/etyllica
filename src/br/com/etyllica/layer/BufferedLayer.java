@@ -259,53 +259,13 @@ public class BufferedLayer extends ImageLayer{
 	public BufferedImage getImagemBuffer(){
 		return imagemBuffer;
 	}
-
+	
 	@Override
-	public void draw(Grafico g){
-		if(visible){
+	public void draw(Grafico g, AffineTransform transform) {
+		g.transform(transform);
 
-			if(opacity<255){
-				g.setOpacity(opacity);
-			}
-
-			AffineTransform transform = new AffineTransform();
-
-			if(angle!=0){
-				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
-			}
-
-			if(scale!=1){
-
-				double sw = w*scale;
-				double sh = h*scale;
-
-				double dx = sw/2-w/2;
-				double dy = sh/2-h/2;
-
-				transform.translate(x-w/2-dx, y-h/2-dy);
-
-				AffineTransform scaleTransform = new AffineTransform();
-
-				scaleTransform.translate(w/2, h/2);
-				scaleTransform.scale(scale,scale);
-				scaleTransform.translate(-x, -y);
-
-				transform.concatenate(scaleTransform);
-
-			}
-
-			g.setTransform(transform);
-
-			g.drawImage( imagemBuffer, x, y, x+w,y+h,
-					xImage,yImage,xImage+w,yImage+h, null );
-
-			g.resetTransform();
-
-			if(opacity<255){
-				g.resetOpacity();
-			}
-
-		}
+		g.drawImage( imagemBuffer, x, y, x+w,y+h,
+				xImage,yImage,xImage+w,yImage+h, null );		
 	}
 
 }
