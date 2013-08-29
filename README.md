@@ -16,6 +16,7 @@
 - GUI System
 - UI Manager
 - Physics
+- Audio Capture (from Microphone)
 
 ##Related Projects
 
@@ -24,11 +25,14 @@
 - [Etyllic Animator](http://yuripourre.github.com/etyllic-animator/)
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme)
 
+- [Etyllica Mobile](http://yuripourre.github.com/etyllica-mobile) The Etyllica port to Android.
+
 ##Dependencies (*optional)
 
 - [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) (An OpenGL simulator)
 - [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library)
 - [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0)
+- [dyn4j](http://code.google.com/p/dyn4j/)
 
 ##How to Start
 You can follow the [HelloWorld](https://github.com/yuripourre/etyllica/wiki/Hello-World) example.
