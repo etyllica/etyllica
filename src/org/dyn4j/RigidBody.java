@@ -8,6 +8,15 @@ import org.dyn4j.dynamics.BodyFixture;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.layer.Layer;
 
+/**
+ * 
+ * Envelope of Layers to use physics
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
 public class RigidBody extends Body{
 	
 	private Layer layer;
