@@ -5,7 +5,7 @@
 
 ##Features
 
-- Keyboard and Mouse handling (and [Joystick](https://github.com/yuripourre/joystick) only for Linux)
+- Keyboard and Mouse handling (and Multiple Joystick Handling [for Linux])
 - Image Loader that supports (TGA, PCX, PNG, BMP, JPG)
 - Sound Loader that supports (MP3, OGG, WAV)
 - Background Music
@@ -24,7 +24,7 @@
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint)
 - [Etyllic Animator](http://yuripourre.github.com/etyllic-animator/)
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme)
-- [Etyllica Mobile](http://yuripourre.github.com/etyllica-mobile) The Etyllica port to Android.
+- [Etyllica Mobile](http://yuripourre.github.com/etyllica-mobile) - Etyllica port to Android.
 
 ##Dependencies (*optional)
 
