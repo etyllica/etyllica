@@ -7,7 +7,7 @@ package br.com.etyllica.core.input.keyboard;
  *
  */
 
-public enum OldKeyState {
+public enum KeyState {
 	FIRST_RELEASED,
 	RELEASED,
 	PRESSED,  // Down, but not the first time

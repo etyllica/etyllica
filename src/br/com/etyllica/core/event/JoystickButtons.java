@@ -1,4 +1,4 @@
-package br.com.etyllica.core.input.joystick;
+package br.com.etyllica.core.event;
 
 /**
  * 
@@ -7,7 +7,7 @@ package br.com.etyllica.core.input.joystick;
  *
  */
 
-public class JoystickEvent {
+public class JoystickButtons {
 
 	public static final int LEFT = 1050;
 	public static final int RIGHT = 1051;

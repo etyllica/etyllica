@@ -2,8 +2,6 @@ package br.com.etyllica.core.event;
 
 import java.awt.event.KeyEvent;
 
-import br.com.etyllica.core.input.joystick.JoystickEvent;
-
 /**
  * 
  * @author yuripourre
@@ -147,23 +145,23 @@ public enum Tecla {
 		
 	TSK_HIRAGANA (KeyEvent.VK_JAPANESE_HIRAGANA),
 		
-	JOYSTICK_UP(JoystickEvent.UP),
-	JOYSTICK_DOWN(JoystickEvent.DOWN),
-	JOYSTICK_LEFT(JoystickEvent.LEFT),
-	JOYSTICK_RIGHT(JoystickEvent.RIGHT),
+	JOYSTICK_UP(JoystickButtons.UP),
+	JOYSTICK_DOWN(JoystickButtons.DOWN),
+	JOYSTICK_LEFT(JoystickButtons.LEFT),
+	JOYSTICK_RIGHT(JoystickButtons.RIGHT),
 
-	JOYSTICK_BUTTON_1(JoystickEvent.BUTTON_1),
-	JOYSTICK_BUTTON_2(JoystickEvent.BUTTON_2),
-	JOYSTICK_BUTTON_3(JoystickEvent.BUTTON_3),
-	JOYSTICK_BUTTON_4(JoystickEvent.BUTTON_4),
-	JOYSTICK_BUTTON_5(JoystickEvent.BUTTON_5),
-	JOYSTICK_BUTTON_6(JoystickEvent.BUTTON_6),
-	JOYSTICK_BUTTON_7(JoystickEvent.BUTTON_7),
-	JOYSTICK_BUTTON_8(JoystickEvent.BUTTON_8),
-	JOYSTICK_BUTTON_9(JoystickEvent.BUTTON_9),
-	JOYSTICK_BUTTON_10(JoystickEvent.BUTTON_10),
-	JOYSTICK_BUTTON_11(JoystickEvent.BUTTON_11),
-	JOYSTICK_BUTTON_12(JoystickEvent.BUTTON_12),
+	JOYSTICK_BUTTON_1(JoystickButtons.BUTTON_1),
+	JOYSTICK_BUTTON_2(JoystickButtons.BUTTON_2),
+	JOYSTICK_BUTTON_3(JoystickButtons.BUTTON_3),
+	JOYSTICK_BUTTON_4(JoystickButtons.BUTTON_4),
+	JOYSTICK_BUTTON_5(JoystickButtons.BUTTON_5),
+	JOYSTICK_BUTTON_6(JoystickButtons.BUTTON_6),
+	JOYSTICK_BUTTON_7(JoystickButtons.BUTTON_7),
+	JOYSTICK_BUTTON_8(JoystickButtons.BUTTON_8),
+	JOYSTICK_BUTTON_9(JoystickButtons.BUTTON_9),
+	JOYSTICK_BUTTON_10(JoystickButtons.BUTTON_10),
+	JOYSTICK_BUTTON_11(JoystickButtons.BUTTON_11),
+	JOYSTICK_BUTTON_12(JoystickButtons.BUTTON_12),
 	//...
 	
 	NONE(0);

@@ -1,31 +1,33 @@
 package br.com.etyllica.core.event;
 
-import br.com.etyllica.core.input.keyboard.OldKeyState;
+import br.com.etyllica.core.input.keyboard.KeyState;
 
 public class KeyboardEvent{
 	
-	private Integer key;
-	private OldKeyState state;
+	private int id = 0;
 	
-	private Character character = '\0';
+	private int key;
+	private KeyState state;
 	
-	public KeyboardEvent(Integer key, OldKeyState state) {
+	private int amount = Character.getNumericValue('\0');
+	
+	public KeyboardEvent(int key, KeyState state) {
 		
 		this.key = key;
 		this.state = state;
 	}
 	
-	public KeyboardEvent(Integer key, Character c, OldKeyState state) {
+	public KeyboardEvent(int key, int amount, KeyState state) {
 		
 		this.key = key;
-		this.character = c;
+		this.amount = amount;
 		this.state = state;
 	}
 
 	public boolean getPressed(Tecla key){
 		
 		if(this.key == key.getCode()){
-			return state==OldKeyState.PRESSED;
+			return state==KeyState.PRESSED;
 		}
 		
 		return false;
@@ -34,14 +36,19 @@ public class KeyboardEvent{
 	public boolean getReleased(Tecla key){
 		
 		if(this.key == key.getCode()){
-			return state==OldKeyState.RELEASED;
+			return state==KeyState.RELEASED;
 		}
 		
 		return false;
 	}
 		
 	public char getChar(){
-		return character;
+		
+		if(amount>Character.MIN_VALUE&&amount<Character.MAX_VALUE){
+			return (char)amount;
+		}
+		
+		return '\0';
 	}
 	
 }

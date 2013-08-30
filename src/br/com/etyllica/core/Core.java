@@ -15,6 +15,7 @@ import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.input.HIDController;
+import br.com.etyllica.core.input.joystick.Joystick;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
@@ -49,6 +50,8 @@ public class Core{
 	protected Mouse mouse;
 
 	protected Keyboard keyboard;
+	
+	private Joystick joystick;
 
 	//Mouse Over Something
 	//Usado para acessibilidade talvez
@@ -61,7 +64,7 @@ public class Core{
 
 	private List<KeyboardEvent> keyEvents;
 
-	//private List<JoystickEvent> joyEvents;
+	private List<KeyboardEvent> joyEvents;
 
 	private MainWindow mainWindow;
 
@@ -78,8 +81,10 @@ public class Core{
 		mouseEvents = mouse.getEvents();
 
 		keyboard = control.getTeclado();
-
 		keyEvents = keyboard.getEvents();
+		
+		joystick = control.getJoystick();
+		joyEvents = joystick.getJoyEvents();		
 
 	}
 
@@ -121,6 +126,8 @@ public class Core{
 		updateMouse(components);
 
 		updateKeyboard();
+		
+		updateJoystick();
 
 
 		if(enableFullScreen){
@@ -198,6 +205,21 @@ public class Core{
 
 		}
 
+	}
+	
+	private void updateJoystick(){
+		
+		joystick.poll();
+		
+		List<KeyboardEvent> joystickEvents = new CopyOnWriteArrayList<KeyboardEvent>(joyEvents);
+	
+		for(KeyboardEvent joystickEvent: joystickEvents){
+
+			activeWindow.updateKeyboard(joystickEvent);
+		}
+		
+		joystickEvents.clear();
+		
 	}
 
 	private void updateKeyboard(){

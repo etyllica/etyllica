@@ -21,7 +21,7 @@ public class Keyboard implements KeyListener {
 	
 	private List<KeyboardEvent> keyEvents = new ArrayList<KeyboardEvent>();
 
-	private Map<Integer,OldKeyState> keyStates = new HashMap<Integer,OldKeyState>(0);
+	private Map<Integer,KeyState> keyStates = new HashMap<Integer,KeyState>(0);
 	private Map<Integer,Boolean> keys = new HashMap<Integer,Boolean>();
 
 	public Keyboard() {
@@ -30,7 +30,7 @@ public class Keyboard implements KeyListener {
 		//Reset Keyboard to avoid delay at first press
 		for (Tecla key: Tecla.values()) {
 			keys.put(key.getCode(),false);
-			keyStates.put(key.getCode(),OldKeyState.RELEASED);
+			keyStates.put(key.getCode(),KeyState.RELEASED);
 		}
 
 	}
@@ -40,40 +40,40 @@ public class Keyboard implements KeyListener {
 		for(Integer key: keys.keySet()){
 			if( keys.get(key) ) {
 
-				if( keyStates.get(key) == OldKeyState.RELEASED ){
-					keyStates.put(key,OldKeyState.ONCE);
+				if( keyStates.get(key) == KeyState.RELEASED ){
+					keyStates.put(key,KeyState.ONCE);
 					
-					keyEvents.add(new KeyboardEvent(key, OldKeyState.PRESSED));
+					keyEvents.add(new KeyboardEvent(key, KeyState.PRESSED));
 				}
 				else{
-					keyStates.put(key,OldKeyState.PRESSED);
+					keyStates.put(key,KeyState.PRESSED);
 				}
 
 			}else{
 
-				if(( keyStates.get(key) == OldKeyState.ONCE )||( keyStates.get(key) == OldKeyState.PRESSED )){
-					keyStates.put(key,OldKeyState.FIRST_RELEASED);
+				if(( keyStates.get(key) == KeyState.ONCE )||( keyStates.get(key) == KeyState.PRESSED )){
+					keyStates.put(key,KeyState.FIRST_RELEASED);
 
-					keyEvents.add(new KeyboardEvent(key, OldKeyState.RELEASED));
+					keyEvents.add(new KeyboardEvent(key, KeyState.RELEASED));
 				}
 				else{
-					keyStates.put(key,OldKeyState.RELEASED);
+					keyStates.put(key,KeyState.RELEASED);
 				}
 			}
 		}
 	}
 
 	public boolean keyDown( int keyCode ) {
-		return keyStates.get(keyCode) != OldKeyState.RELEASED;
+		return keyStates.get(keyCode) != KeyState.RELEASED;
 	}
 
 	public boolean keyDownOnce( int keyCode ) {
-		return keyStates.get(keyCode) == OldKeyState.ONCE;
+		return keyStates.get(keyCode) == KeyState.ONCE;
 	}
 
 	public boolean keyUp( int keyCode ) {
 
-		return keyStates.get(keyCode) == OldKeyState.FIRST_RELEASED;		
+		return keyStates.get(keyCode) == KeyState.FIRST_RELEASED;		
 	}
 
 	public synchronized void keyPressed( KeyEvent ke ) {
@@ -101,7 +101,7 @@ public class Keyboard implements KeyListener {
 
 		//TODO Ajeitar o typed
 		if ( c != KeyEvent.CHAR_UNDEFINED ) {
-			keyEvents.add(new KeyboardEvent(code, c, OldKeyState.TYPED));
+			keyEvents.add(new KeyboardEvent(code, c, KeyState.TYPED));
 		}
 		
 		ke.consume();
