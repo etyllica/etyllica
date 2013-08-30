@@ -3,6 +3,13 @@ package examples.etyllica.tutorial02;
 import br.com.etyllica.Etyllica;
 import examples.etyllica.tutorial02.application.HelloWorldAnimated;
 
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
 public class Tutorial2 extends Etyllica{
 
 	private static final long serialVersionUID = 1L;

@@ -8,6 +8,13 @@ import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.layer.ImageLayer;
 
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
 public class JoystickExample extends Application{
 
 	public JoystickExample(int w, int h) {
@@ -56,7 +63,13 @@ public class JoystickExample extends Application{
 		
 		if(event.getPressed(Tecla.JOYSTICK_BUTTON_1)){
 			hello.setOffsetAngle(10);
-			
+		}
+		
+		if(event.getPressed(Tecla.JOYSTICK_BUTTON_7)){
+			hello.setScale(1.5);
+		}
+		if(event.getPressed(Tecla.JOYSTICK_BUTTON_8)){
+			hello.setScale(1);
 		}
 				
 		// TODO Auto-generated method stub

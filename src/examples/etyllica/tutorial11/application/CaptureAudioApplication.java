@@ -12,12 +12,19 @@ import br.com.etyllica.core.video.Grafico;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.TextLabel;
 
-public class CaptureApplication extends Application {
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
+public class CaptureAudioApplication extends Application {
 	
 	protected boolean running;
 	ByteArrayOutputStream out;
 
-	public CaptureApplication(int w, int h) {
+	public CaptureAudioApplication(int w, int h) {
 		super(w,h);
 	}
 	

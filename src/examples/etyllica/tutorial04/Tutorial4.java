@@ -3,6 +3,13 @@ package examples.etyllica.tutorial04;
 import br.com.etyllica.Etyllica;
 import examples.etyllica.tutorial04.application.ProceduralColorChange;
 
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
 public class Tutorial4 extends Etyllica {
 
 	private static final long serialVersionUID = 1L;

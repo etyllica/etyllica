@@ -27,7 +27,7 @@ public class HIDController{
 		
 		teclado = new Keyboard();
 		
-		joystick = new Joystick(1);
+		joystick = new Joystick();
 
 	}
 

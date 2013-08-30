@@ -3,6 +3,13 @@ package examples.etyllica.tutorial10;
 import br.com.etyllica.Etyllica;
 import examples.etyllica.tutorial10.application.SpinnerExample;
 
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
 public class Tutorial10 extends Etyllica {
 
 	private static final long serialVersionUID = 1L;

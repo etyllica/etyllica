@@ -29,7 +29,7 @@ public class Joystick{
 
 	private List<KeyboardEvent> joyEvents = new ArrayList<KeyboardEvent>();
 
-	private Map<Integer, FileInputStream> iss = new HashMap<Integer, FileInputStream>();
+	private Map<Integer, FileInputStream> inputStreams = new HashMap<Integer, FileInputStream>();
 
 	//Define constants
 	private final int JS_EVENT_BUTTON = 0x01;
@@ -62,7 +62,7 @@ public class Joystick{
 
 			try {
 
-				this.iss.put(j, new FileInputStream(JOYSTICK_DIRECTORY+j));
+				this.inputStreams.put(j, new FileInputStream(JOYSTICK_DIRECTORY+j));
 				System.out.println("Joystick "+j+ " found.");
 
 			} catch (FileNotFoundException e) {
@@ -73,16 +73,28 @@ public class Joystick{
 
 		}
 		
-		executor = Executors.newSingleThreadScheduledExecutor();
+		this.joysticks = j;
+		executor = Executors.newScheduledThreadPool(this.joysticks);
 		
-		Runnable handler = new Runnable() {
-			public void run() {
-				poll();
-			}
-		};
+		for(int i=0;i<joysticks;i++){
+			System.out.println("Create Handler");
+			executor.scheduleAtFixedRate(new JoystickHandler(i), 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);	
+		}
 		
-		executor.scheduleAtFixedRate(handler, 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);
+	}
+	
+	private class JoystickHandler implements Runnable{
 		
+		private int id;
+		
+		public JoystickHandler(int id){
+			super();
+			this.id = id;
+		}
+		
+		public void run() {
+			listen(id,inputStreams.get(id));
+		}
 	}
 
 	public List<KeyboardEvent> getJoyEvents() {
@@ -91,7 +103,7 @@ public class Joystick{
 
 	public void poll(){
 		
-		for(Entry<Integer, FileInputStream> entry: iss.entrySet()){
+		for(Entry<Integer, FileInputStream> entry: inputStreams.entrySet()){
 			listen(entry.getKey(), entry.getValue());
 		}
 

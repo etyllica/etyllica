@@ -3,6 +3,13 @@ package examples.etyllica.tutorial09;
 import br.com.etyllica.Etyllica;
 import examples.etyllica.tutorial09.application.SimpleGuiExample;
 
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
 public class Tutorial9 extends Etyllica {
 
 	private static final long serialVersionUID = 1L;

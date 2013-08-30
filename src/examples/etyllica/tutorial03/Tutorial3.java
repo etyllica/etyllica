@@ -3,6 +3,13 @@ package examples.etyllica.tutorial03;
 import br.com.etyllica.Etyllica;
 import examples.etyllica.tutorial03.application.ChatWindowExample;
 
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
 public class Tutorial3 extends Etyllica {
 
 	private static final long serialVersionUID = 1L;

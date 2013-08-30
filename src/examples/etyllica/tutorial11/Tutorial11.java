@@ -1,6 +1,13 @@
 package examples.etyllica.tutorial11;
 import br.com.etyllica.Etyllica;
-import examples.etyllica.tutorial11.application.CaptureApplication;
+import examples.etyllica.tutorial11.application.CaptureAudioApplication;
+
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
 
 public class Tutorial11 extends Etyllica{
 
@@ -12,7 +19,7 @@ public class Tutorial11 extends Etyllica{
 
 	@Override
 	public void startGame() {
-		setMainApplication(new CaptureApplication(640, 480));
+		setMainApplication(new CaptureAudioApplication(640, 480));
 	}
 
 }
