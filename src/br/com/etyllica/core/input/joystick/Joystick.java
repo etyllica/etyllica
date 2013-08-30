@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.Tecla;
@@ -22,81 +25,76 @@ import br.com.etyllica.core.input.keyboard.KeyState;
 
 public class Joystick{
 
+	private int joysticks = 10;
+
 	private List<KeyboardEvent> joyEvents = new ArrayList<KeyboardEvent>();
-	
+
 	private Map<Integer, FileInputStream> iss = new HashMap<Integer, FileInputStream>();
 
 	//Define constants
-	private static final int JS_EVENT_BUTTON = 0x01;    /* button pressed/released */
-	private static final int JS_EVENT_AXIS = 0x02;   /* joystick moved */
-	private static final int JS_EVENT_INIT = 0x80;    /* initial state of device */
+	private final int JS_EVENT_BUTTON = 0x01;
+	private final int JS_EVENT_AXIS = 0x02;
+	private final int JS_EVENT_INIT = 0x80;
 
-	private final int MAX_AXIS_MOVEMENT = 32767;
-	private final int MIN_AXIS_MOVEMENT = -32767;
+	public static final int MAX_AXIS_MOVEMENT = 32767;
+	public static final int MIN_AXIS_MOVEMENT = -32767;
 
 	private final String JOYSTICK_DIRECTORY = "/dev/input/js";
+	
+	private ScheduledExecutorService executor;
+	
+	private final int UPDATE_DELAY = 20;
 
+	public Joystick() {
+		super();
+	}
+	
 	public Joystick(int joysticks) {
 		super();
-		
-		/*int j=0;
-		
+		this.joysticks = joysticks;
+	}
+	
+	public void start(){
+
+		int j=0;
+
 		for(;j<joysticks;j++){
-			
+
 			try {
 
 				this.iss.put(j, new FileInputStream(JOYSTICK_DIRECTORY+j));
-				System.out.println("Joystick "+j+ "found.");
-		
+				System.out.println("Joystick "+j+ " found.");
+
 			} catch (FileNotFoundException e) {
 
 				System.err.println("Joystick "+j+" not found.");
-				//e.printStackTrace();
+				break;
 			}
-			
-		}*/
+
+		}
 		
-		/*if(j==1){
-			System.out.println("Found "+j+" Joystick.");	
-		}else if(j>1){
-			System.out.println("Found "+j+" Joysticks.");	
-		}*/
+		executor = Executors.newSingleThreadScheduledExecutor();
 		
+		Runnable handler = new Runnable() {
+			public void run() {
+				poll();
+			}
+		};
 		
+		executor.scheduleAtFixedRate(handler, 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);
 		
 	}
-	
-/*	public Joystick(String joystickDirectory) {
-		super();
-		
-		try {
 
-			this.iss.put(0, new FileInputStream(joystickDirectory));
-	
-		} catch (FileNotFoundException e) {
-
-			System.err.println("Joystick not found: "+joystickDirectory);
-			//e.printStackTrace();
-		}
-
-
-	}*/
-	
 	public List<KeyboardEvent> getJoyEvents() {
 		return joyEvents;
 	}
 
-	public void setJoyEvents(List<KeyboardEvent> joyEvents) {
-		this.joyEvents = joyEvents;
-	}
-
-
 	public void poll(){
-
+		
 		for(Entry<Integer, FileInputStream> entry: iss.entrySet()){
 			listen(entry.getKey(), entry.getValue());
-		}		
-		
+		}
+
 	}
 
 	private void listen(Integer id, FileInputStream is){
@@ -111,56 +109,60 @@ public class Joystick{
 			e.printStackTrace();
 		}
 		if (n == 8) {
-			long time = buf[3] << 24
-					| (buf[2] & 0xff) << 16
-					| (buf[1] & 0xff) << 8 | (buf[0] & 0xff);
+			long time = buf[3] << 24 | (buf[2] & 0xff) << 16 | (buf[1] & 0xff) << 8 | (buf[0] & 0xff);
 			int value = buf[5] << 8 | (buf[4] & 0xff);
 			int type = buf[6] & 0xff;
 			int channel = buf[7] & 0xff;
-
-			//Lógica
 
 			if (type == JS_EVENT_AXIS) {
 
 				switch (channel) {
 
 				case 0:
-					joyEvents.add(new KeyboardEvent(Tecla.JOYSTICK_LEFT.getCode(), value, KeyState.PRESSED));
-					System.out.println("Left?");
 				case 2:
-					joyEvents.add(new KeyboardEvent(Tecla.JOYSTICK_RIGHT.getCode(), value,  KeyState.PRESSED));
-					System.out.println("Right?");
-					
+
+					if(value>0){
+						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_RIGHT.getCode(), value, KeyState.PRESSED));
+					}else if(value<0){					
+						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_LEFT.getCode(), value,  KeyState.PRESSED));
+					}else{
+						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_CENTER_X.getCode(), value,  KeyState.PRESSED));
+					}
+
 					break;
+
 				case 1:
-					joyEvents.add(new KeyboardEvent(Tecla.JOYSTICK_UP.getCode(), value, KeyState.PRESSED));
-					System.out.println("Up?");
 				case 3:
-					joyEvents.add(new KeyboardEvent(Tecla.JOYSTICK_DOWN.getCode(), value, KeyState.PRESSED));
-					System.out.println("Down?");
+
+					if(value>0){
+						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_DOWN.getCode(), value, KeyState.PRESSED));
+					}else if(value<0){					
+						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_UP.getCode(), value,  KeyState.PRESSED));
+					}else{
+						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_CENTER_Y.getCode(), value,  KeyState.PRESSED));
+					}
 
 					break;				
+
 				default:
 					break;
 				}
 
 			} else if (type == JS_EVENT_BUTTON) {
 
+				int buttonCode = (Tecla.JOYSTICK_BUTTON_1.getCode())+channel;
+
 				if(value==1){
-					joyEvents.add(new KeyboardEvent(channel, KeyState.PRESSED));
-					System.out.println("Button "+channel+" Pressed.");
+					joyEvents.add(new KeyboardEvent(id, buttonCode, 0,  KeyState.PRESSED));
 				}else{
-					joyEvents.add(new KeyboardEvent(channel, KeyState.RELEASED));
-					System.out.println("Button "+channel+" Released.");
+					joyEvents.add(new KeyboardEvent(id, buttonCode, 0, KeyState.RELEASED));
 				}
 
-			}
-
+			}			
 
 		} else {
 			System.err.println("only " + n + " of 8 bytes read");
 		}
-
 
 	}
 }

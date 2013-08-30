@@ -7,12 +7,17 @@ package br.com.etyllica.core.event;
  *
  */
 
-public class JoystickButtons {
+public class JoystickEvent {
 
+	public static final int AXIS_X = 1050;
+	public static final int AXIS_Y = 1051;
+	
 	public static final int LEFT = 1050;
 	public static final int RIGHT = 1051;
 	public static final int UP = 1052;
 	public static final int DOWN = 1053;
+	public static final int CENTER_X = 1054;
+	public static final int CENTER_Y = 1055;
 	
 	public static final int BUTTON_1 = 1001;
 	public static final int BUTTON_2 = 1002;

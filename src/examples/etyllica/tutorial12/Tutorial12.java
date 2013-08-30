@@ -1,19 +1,22 @@
-package examples.etyllica.tutorial01;
+package examples.etyllica.tutorial12;
 
 import br.com.etyllica.Etyllica;
 import examples.etyllica.tutorial01.application.HelloWorld;
+import examples.etyllica.tutorial12.application.JoystickExample;
 
-public class Tutorial1 extends Etyllica {
+public class Tutorial12 extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 
-	public Tutorial1() {
+	public Tutorial12() {
 		super(800, 600);
 	}
 	
 	@Override
 	public void startGame() {
-				
+		
+		initJoysick = true;
+		
 		//Etyllica tries to find the resources as your Application should be
 		//To avoid this you should put your /res/images in /Project/bin/examples/etyllica/tutorial1/
 		
@@ -21,7 +24,7 @@ public class Tutorial1 extends Etyllica {
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../../");
 		
-		setMainApplication(new HelloWorld(w,h));
+		setMainApplication(new JoystickExample(w,h));
 	}
 	
 }

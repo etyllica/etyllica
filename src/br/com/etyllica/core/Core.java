@@ -69,6 +69,7 @@ public class Core{
 	private MainWindow mainWindow;
 
 	private boolean drawCursor = true;
+	private boolean initJoystick = false;
 
 	public Core(){
 		super();
@@ -84,8 +85,13 @@ public class Core{
 		keyEvents = keyboard.getEvents();
 		
 		joystick = control.getJoystick();
-		joyEvents = joystick.getJoyEvents();		
+		joyEvents = joystick.getJoyEvents();	
 
+	}
+	
+	public void initJoystick(){
+		joystick.start();
+		initJoystick = true;
 	}
 
 	public MainWindow getDesktopWindow() {
@@ -127,7 +133,9 @@ public class Core{
 
 		updateKeyboard();
 		
-		updateJoystick();
+		if(initJoystick){
+			updateJoystick();
+		}
 
 
 		if(enableFullScreen){
@@ -208,17 +216,17 @@ public class Core{
 	}
 	
 	private void updateJoystick(){
-		
-		joystick.poll();
-		
+				
 		List<KeyboardEvent> joystickEvents = new CopyOnWriteArrayList<KeyboardEvent>(joyEvents);
 	
 		for(KeyboardEvent joystickEvent: joystickEvents){
+			
+			System.out.println("UpdateKeyboard "+joystickEvent.getKey());
 
-			activeWindow.updateKeyboard(joystickEvent);
+			activeWindow.getApplication().updateKeyboard(joystickEvent);
 		}
 		
-		joystickEvents.clear();
+		joyEvents.clear();
 		
 	}
 

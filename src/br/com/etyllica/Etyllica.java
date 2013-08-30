@@ -60,6 +60,12 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	//From Luvia
 	private ScheduledExecutorService executor;
+	
+	private String path = "";
+	
+	protected boolean initAll = false;
+	protected boolean initSound = false;
+	protected boolean initJoysick = false;
 
 	public Etyllica(int largura, int altura){
 
@@ -132,12 +138,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 		
 		executor.scheduleAtFixedRate(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
 	}
-	
-	private String path = "";
-	
-	protected boolean initAll = false;
-	protected boolean initSound = false;
-		
+			
 	protected void setPath(String path){
 		
 		//For Windows
@@ -157,6 +158,10 @@ public abstract class Etyllica extends Applet implements Runnable{
 			initSound();
 		}
 		
+		if(initAll||initJoysick){
+			initJoystick();
+		}
+		
 	}
 	
 	protected void initDefault(){
@@ -166,6 +171,10 @@ public abstract class Etyllica extends Applet implements Runnable{
 	
 	protected void initSound(){
 		MultimediaLoader.getInstance().setUrl(path);
+	}
+	
+	protected void initJoystick(){
+		core.initJoystick();
 	}
 
 	public abstract void startGame();

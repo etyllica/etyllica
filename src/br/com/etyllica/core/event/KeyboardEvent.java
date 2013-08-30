@@ -12,13 +12,24 @@ public class KeyboardEvent{
 	private int amount = Character.getNumericValue('\0');
 	
 	public KeyboardEvent(int key, KeyState state) {
+		super();
 		
 		this.key = key;
 		this.state = state;
 	}
 	
 	public KeyboardEvent(int key, int amount, KeyState state) {
+		super();
 		
+		this.key = key;
+		this.amount = amount;
+		this.state = state;
+	}
+	
+	public KeyboardEvent(int id, int key, int amount, KeyState state) {
+		super();
+		
+		this.id = id;
 		this.key = key;
 		this.amount = amount;
 		this.state = state;
@@ -50,5 +61,21 @@ public class KeyboardEvent{
 		
 		return '\0';
 	}
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
+	}
+			
 }
