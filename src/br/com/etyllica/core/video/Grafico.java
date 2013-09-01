@@ -55,6 +55,7 @@ public class Grafico{
 		this.bimg = vimg.getSnapshot();
 		this.screen = (Graphics2D)vimg.createGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		this.screen.setColor(Color.BLACK);
 		
 	}
 	
@@ -65,6 +66,7 @@ public class Grafico{
 		this.bimg = bimg;
 		this.screen = (Graphics2D)bimg.getGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		this.screen.setColor(Color.BLACK);
 		
 	}
 	

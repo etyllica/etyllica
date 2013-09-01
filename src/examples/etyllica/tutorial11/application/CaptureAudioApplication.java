@@ -1,5 +1,6 @@
 package examples.etyllica.tutorial11.application;
 
+import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 
 import sound.capture.CaptureHandler;
@@ -20,46 +21,54 @@ import br.com.etyllica.gui.label.TextLabel;
  */
 
 public class CaptureAudioApplication extends Application {
-	
+
 	protected boolean running;
 	ByteArrayOutputStream out;
+
+	private Button stop;
+	private Button play; 
 
 	public CaptureAudioApplication(int w, int h) {
 		super(w,h);
 	}
-	
+
 	public void load(){
-		
+
 		final Button capture = new Button(20,20,200,30);
 		capture.setLabel(new TextLabel("Capture"));
 		capture.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new GUIAction(this, "captureAudio"));
 		this.add(capture);
-		
-		final Button stop = new Button(20,60,200,30);
-		stop.setLabel(new TextLabel("Stop"));
+
+		stop = new Button(20,60,200,30);
+		stop.setLabel(new TextLabel("Stop Capture"));
 		stop.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new GUIAction(this, "stopCapture"));
+		stop.setDisabled(true);
 		this.add(stop);
-		
-		final Button play = new Button(20,100,200,30);
+
+		play = new Button(20,100,200,30);
 		play.setLabel(new TextLabel("Play"));
 		play.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new GUIAction(this, "playAudio"));
+		play.setDisabled(true);
 		this.add(play);
-				
+
 		loading = 100;
 	}
 
 	public void stopCapture(){
+		stop.setDisabled(true);
+		play.setDisabled(false);
 		CaptureHandler.getInstance().stopCapture();
 	}
-	
+
 	public void captureAudio() {
+		stop.setDisabled(false);
 		CaptureHandler.getInstance().captureAudio();
 	}
 
 	public void playAudio() {
 		CaptureHandler.getInstance().playAudio(); 
 	}
-	
+
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent arg0) {
 		// TODO Auto-generated method stub
@@ -72,10 +81,25 @@ public class CaptureAudioApplication extends Application {
 		return null;
 	}
 
+	int lastLength = 0;
+	
 	@Override
 	public void draw(Grafico g) {
 		// TODO Auto-generated method stub
+		g.setColor(Color.BLACK);
 		
+		if(CaptureHandler.getInstance().getInputBuffer()!=null){
+			
+			byte[] buffer = CaptureHandler.getInstance().getInputBuffer().toByteArray();
+			
+			for(int i=lastLength;i<buffer.length;i++){
+				//System.out.println(buffer[i]);
+				g.drawRect(i-lastLength, 200+buffer[i], 1, 1);
+			}
+			
+			lastLength = buffer.length;
+		}
+
 	}
 
 }

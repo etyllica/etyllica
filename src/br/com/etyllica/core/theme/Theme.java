@@ -53,6 +53,7 @@ public abstract class Theme implements ThemeFactory{
 	protected Color borderColor = new Color(0x00,0x00, 0x00, 0xa0);
 	
 	protected Color buttonColor = new Color(0x00,0x00, 0x00, 0xa0);
+	protected Color buttonDisabledColor = new Color(0x55,0x55, 0x55, 0xb0);
 	protected Color buttonOnFocus = new Color(0x33, 0x33, 0x99, 0xa0);
 	protected Color buttonOnMouse = new Color(0x33, 0x33, 0x33, 0xa0);
 	protected Color buttonOnClick = new Color(0x99, 0x99, 0x99, 0xa0);
@@ -153,6 +154,14 @@ public abstract class Theme implements ThemeFactory{
 
 	public void setButtonColor(Color buttonColor) {
 		this.buttonColor = buttonColor;
+	}
+	
+	public Color getButtonDisabledColor() {
+		return buttonDisabledColor;
+	}
+
+	public void setButtonDisabledColor(Color buttonDisabledColor) {
+		this.buttonDisabledColor = buttonDisabledColor;
 	}
 
 	public Color getButtonOnMouse() {

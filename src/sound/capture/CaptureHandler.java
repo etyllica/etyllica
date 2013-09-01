@@ -17,7 +17,7 @@ public class CaptureHandler{
 
 	private boolean recording = false;
 	
-	private ByteArrayOutputStream out;
+	private ByteArrayOutputStream inputBuffer;
 	
 	private static CaptureHandler instance = null;
 	
@@ -44,17 +44,16 @@ public class CaptureHandler{
 				byte buffer[] = new byte[bufferSize];
 
 				public void run() {
-					out = new ByteArrayOutputStream();
+					inputBuffer = new ByteArrayOutputStream();
 					recording = true;
 					try {
 						while (recording) {
-							int count = 
-									line.read(buffer, 0, buffer.length);
+							int count = line.read(buffer, 0, buffer.length);
 							if (count > 0) {
-								out.write(buffer, 0, count);
+								inputBuffer.write(buffer, 0, count);
 							}
 						}
-						out.close();
+						inputBuffer.close();
 					} catch (IOException e) {
 						System.err.println("I/O problems: " + e);
 						System.exit(-1);
@@ -79,7 +78,7 @@ public class CaptureHandler{
 		
 		try {
 			
-			byte audio[] = out.toByteArray();
+			byte audio[] = inputBuffer.toByteArray();
 			InputStream input = new ByteArrayInputStream(audio);
 			final AudioFormat format = getFormat();
 			final AudioInputStream ais = new AudioInputStream(input, format, audio.length / format.getFrameSize());
@@ -132,7 +131,7 @@ public class CaptureHandler{
 		
 	}
 	
-	public AudioFormat getFormat() {
+	private AudioFormat getFormat() {
 		
 		float sampleRate = 8000;
 		int sampleSizeInBits = 8;
@@ -144,5 +143,13 @@ public class CaptureHandler{
 		
 		return format;
 	}
-		
+
+	public ByteArrayOutputStream getInputBuffer() {
+		return inputBuffer;
+	}
+
+	public void setInputBuffer(ByteArrayOutputStream inputBuffer) {
+		this.inputBuffer = inputBuffer;
+	}
+			
 }

@@ -32,16 +32,16 @@ public class Button extends GUIComponent{
 		return button.getY();
 	}
 
-	public void draw(Grafico g) {
-		button.draw(g);
-	}
-
 	public int getW() {
 		return button.getW();
 	}
 
 	public int getH() {
 		return button.getH();
+	}
+	
+	public void draw(Grafico g) {
+		button.draw(g);
 	}
 
 	public GUIEvent getLastEvent() {
@@ -58,6 +58,14 @@ public class Button extends GUIComponent{
 
 	public boolean isOnFocus() {
 		return button.isOnFocus();
+	}
+	
+	public boolean isDisabled() {
+		return button.isDisabled();
+	}
+
+	public void setDisabled(boolean disabled) {
+		button.setDisabled(disabled);
 	}
 
 	public List<GUIAction> getActions() {

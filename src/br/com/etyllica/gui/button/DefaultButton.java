@@ -24,10 +24,12 @@ import br.com.etyllica.gui.RoundGUIComponent;
 public class DefaultButton extends RoundGUIComponent{
 
 	protected Label label;
-	
+
 	private Theme theme;
-	
+
 	private String alt = "";
+
+	private boolean disabled = false;
 
 	public DefaultButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -35,39 +37,47 @@ public class DefaultButton extends RoundGUIComponent{
 
 	@Override
 	public void draw(Grafico g){
-		
+
 		Theme theme = getTheme();		
 
-		if(!mouseOver){
+		if(!disabled){
 
-			g.setColor(theme.getButtonColor());
+			if(!mouseOver){
 
-		}else{
-
-			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
-
-				g.setColor(theme.getButtonOnClick());
+				g.setColor(theme.getButtonColor());
 
 			}else{
 
-				g.setColor(theme.getButtonOnMouse());
+				if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
+
+					g.setColor(theme.getButtonOnClick());
+
+				}else{
+
+					g.setColor(theme.getButtonOnMouse());
+
+				}
 
 			}
+
+		}else{
+
+			g.setColor(theme.getButtonDisabledColor());
 
 		}
 
 		g.fillRect(x,y,w,h);
-		
+
 		drawLabel(g);
 
 	}
 
 	protected void drawLabel(Grafico g){
-		
+
 		if(label!=null){
 			label.draw(g);
 		}
-		
+
 	}
 
 	public void update(GUIEvent event){
@@ -90,7 +100,9 @@ public class DefaultButton extends RoundGUIComponent{
 			break;
 
 		case MOUSE_OVER:
-			justOnMouse();
+			if(!disabled){
+				justOnMouse();
+			}
 			break;
 
 		case MOUSE_OUT:
@@ -100,7 +112,7 @@ public class DefaultButton extends RoundGUIComponent{
 		case GAIN_FOCUS:
 			onFocus = true;
 			break;
-			
+
 		case LOST_FOCUS:
 			onFocus = false;
 			break;
@@ -149,73 +161,76 @@ public class DefaultButton extends RoundGUIComponent{
 
 		GUIEvent retorno = GUIEvent.NONE;
 
-		if(mouseOver){
+		if(!disabled){
 
-			if(event.getState()==KeyState.PRESSED){
+			if(mouseOver){
 
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
+				if(event.getState()==KeyState.PRESSED){
 
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
+					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+						retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 
-					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
 
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
 
-					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+
+						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
+					}
 				}
-			}
-			else if(event.getState()==KeyState.RELEASED){
+				else if(event.getState()==KeyState.RELEASED){
 
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
-					
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
+					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
-					
-					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
+						retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
 
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
-					
-					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
-					
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+
+						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
+
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+
+						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
+
+					}
+
+				}else if(event.getState()==KeyState.DOUBLE_CLICK){
+
+					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
+
+						retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
+
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+
+						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
+
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+
+						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
+
+					}
+
+				}else if(event.getState()==KeyState.MOVE){
+
+					retorno = GUIEvent.MOUSE_OVER;
+
 				}
 
-			}else if(event.getState()==KeyState.DOUBLE_CLICK){
-			
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
-					
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
-					
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
-					
-					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
-					
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
-										
-					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
-					
+			}else{
+
+				if(event.getState()==KeyState.MOVE){
+
+					retorno = GUIEvent.MOUSE_OUT;
+
+				}else if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+
+					onFocus = false;
+
 				}
 
-			}else if(event.getState()==KeyState.MOVE){
-				
-				retorno = GUIEvent.MOUSE_OVER;
-				
 			}
-
-		}else{
-			
-			if(event.getState()==KeyState.MOVE){
-				
-				retorno = GUIEvent.MOUSE_OUT;
-				
-			}else if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
-				
-				onFocus = false;
-				
-			}
-
 		}
 
 		return retorno;
@@ -231,36 +246,36 @@ public class DefaultButton extends RoundGUIComponent{
 
 		label.setX(x+(w/2-label.getW()/2)+label.getX());
 		label.setY(y+(h/2-label.getH()/2)+label.getY());
-		
+
 		//int offsetX = label.getX();
 		//int offsetY = label.getY();
 
 		//label.setX(x+offsetX);
 		//label.setY(y+offsetY);
-		
+
 		label.setContentBounds(x, y, w, h);
 
 	}
-	
+
 	public void setCenterLabel(Label label) {
 		this.label = label;
 
 		label.setX(label.getX()+(x+w/2-label.getW()/2));
 		label.setY(label.getY()+(y+h/2-label.getH()/2));
-		
+
 		label.setContentBounds(x, y, w, h);
 
 	}
-	
+
 	@Override
 	public GUIEvent updateKeyboard(KeyboardEvent event) {
 
 		if(event.getPressed(Tecla.TSK_TAB)){
 
 			return GUIEvent.NEXT_COMPONENT;
-			
+
 		}
-		
+
 		if(event.getPressed(Tecla.TSK_ENTER)){
 
 			this.update(GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
@@ -275,13 +290,13 @@ public class DefaultButton extends RoundGUIComponent{
 	}
 
 	public Theme getTheme() {
-		
+
 		if(theme==null){
 			return Configuration.getInstance().getTheme();
 		}else{
 			return this.theme;
 		}		
-		
+
 	}
 
 	public void setTheme(Theme theme) {
@@ -295,5 +310,13 @@ public class DefaultButton extends RoundGUIComponent{
 	public void setAlt(String alt) {
 		this.alt = alt;
 	}
-		
+
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+
 }
