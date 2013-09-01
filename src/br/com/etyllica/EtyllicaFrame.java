@@ -33,7 +33,7 @@ import br.com.etyllica.gui.window.MainWindow;
  *
  */
 
-public abstract class EtyllicaFrame extends JFrame implements Runnable{
+public abstract class EtyllicaFrame extends JFrame{
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
@@ -60,6 +60,12 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 
 	//From Luvia
 	private ScheduledExecutorService executor;
+	
+	private String path = "";
+	
+	protected boolean initAll = false;
+	protected boolean initSound = false;
+	protected boolean initJoysick = false;
 
 	public EtyllicaFrame(int width, int height){
 
@@ -135,13 +141,8 @@ public abstract class EtyllicaFrame extends JFrame implements Runnable{
 		
 		executor.scheduleAtFixedRate(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
 	}
-	
-	private String path = "";
-	
-	protected boolean initAll = false;
-	protected boolean initSound = false;
 		
-protected void setPath(String path){
+	protected void setPath(String path){
 		
 		//For Windows
 		String s = path.replaceAll("%20"," ");
@@ -160,6 +161,10 @@ protected void setPath(String path){
 			initSound();
 		}
 		
+		if(initAll||initJoysick){
+			initJoystick();
+		}
+		
 	}
 	
 	protected void initDefault(){
@@ -170,14 +175,12 @@ protected void setPath(String path){
 	protected void initSound(){
 		MultimediaLoader.getInstance().setUrl(path);
 	}
+	
+	protected void initJoystick(){
+		core.initJoystick();
+	}
 
 	public abstract void startGame();
-
-
-	public void setTamanho(int largura, int altura){
-		this.w = largura;
-		this.h = altura;
-	}
 
 	@Override
 	public void paint( Graphics g ) {
@@ -203,14 +206,6 @@ protected void setPath(String path){
 				telaCheia.draw(grafico.getBimg());
 			}
 		}
-
-	}
-
-	@Override
-	public void run() {
-
-		draw();
-		gerencia();
 
 	}
 

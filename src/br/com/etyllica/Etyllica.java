@@ -32,7 +32,7 @@ import br.com.etyllica.gui.window.MainWindow;
  *
  */
 
-public abstract class Etyllica extends Applet implements Runnable{
+public abstract class Etyllica extends Applet{
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
@@ -76,7 +76,7 @@ public abstract class Etyllica extends Applet implements Runnable{
 
 	public void init() {
 		
-		defineTamanho(w,h);
+		defineSize(w,h);
 		
 		core = new Core();
 
@@ -213,11 +213,6 @@ public abstract class Etyllica extends Applet implements Runnable{
 	}
 
 	@Override
-	public void run() {
-
-	}
-
-	@Override
 	public void update(Graphics g) {
 		paint(g);
 	}
@@ -285,17 +280,17 @@ public abstract class Etyllica extends Applet implements Runnable{
 		return gc.createCompatibleVolatileImage(largura, altura, transparency);
 	}
 
-	private void defineTamanho(int largura, int altura){
+	private void defineSize(int width, int height){
 
-		this.w = largura;
-		this.h = altura;
+		this.w = width;
+		this.h = height;
 
-		setSize(largura, altura);
+		setSize(width, height);
 
-		volatileImg = createBackBuffer(largura, altura);
+		volatileImg = createBackBuffer(width, height);
 
 	}
-
+	
 	public void setFullScreen(boolean fullscreen){
 
 		if(fullscreen){
