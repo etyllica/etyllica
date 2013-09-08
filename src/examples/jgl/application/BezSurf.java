@@ -4,7 +4,7 @@ import jgl.GL;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class BezSurf extends GL{
 
@@ -52,7 +52,7 @@ public class BezSurf extends GL{
 		myReshape (w, h);
 	}
 
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		int i, j;
 
 		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

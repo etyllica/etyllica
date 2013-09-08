@@ -10,7 +10,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
 import br.com.etyllica.core.loader.FontLoader;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -84,7 +84,7 @@ public class TextLayer extends ImageLayer{
 	}
 
 	@Override
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		if(this.visible){
 

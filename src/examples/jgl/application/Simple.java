@@ -4,7 +4,7 @@ import jgl.GL;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class Simple extends GL{
 
@@ -18,7 +18,7 @@ public class Simple extends GL{
 	}
 
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);

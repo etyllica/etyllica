@@ -4,7 +4,7 @@ import jgl.GLAUX;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class Material extends GLAUX{
 
@@ -43,7 +43,7 @@ public class Material extends GLAUX{
 		myReshape(w, h);
 	}
 
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		float no_mat[]={0.0f,0.0f,0.0f,1.0f};
 		float mat_ambient[]={0.7f,0.7f,0.7f,1.0f};
 		float mat_ambient_color[]={0.8f,0.8f,0.2f,1.0f};

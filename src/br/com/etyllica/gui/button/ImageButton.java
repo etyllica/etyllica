@@ -1,6 +1,6 @@
 package br.com.etyllica.gui.button;
 
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.StaticLayer;
 
@@ -50,7 +50,7 @@ public class ImageButton extends DefaultButton{
 		this.som = som;
 	}
 
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 		
 		layer.draw(g);
 	

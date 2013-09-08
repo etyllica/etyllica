@@ -5,7 +5,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 
 /**
@@ -31,7 +31,7 @@ public class JoystickExample extends Application{
 	}
 
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		hello.draw(g);
 	}
 	

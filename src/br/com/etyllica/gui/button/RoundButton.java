@@ -2,7 +2,7 @@ package br.com.etyllica.gui.button;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -18,7 +18,7 @@ public class RoundButton extends DefaultButton{
 	}
 
 	@Override
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		Theme theme = getTheme();
 

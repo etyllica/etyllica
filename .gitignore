@@ -1,7 +1,7 @@
 # Pre-Compiled Files #
 *.class
 
-# Automatic generated Files#
+# Automatic Generated Files#
 *.applet
 
 sdk/
@@ -12,6 +12,3 @@ sdk/
 
 # Javazoom Decoder Files #
 *.ser
-
-# Automatic Created Files#
-*.applet

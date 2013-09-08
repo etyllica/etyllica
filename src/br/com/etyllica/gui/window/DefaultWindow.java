@@ -5,7 +5,7 @@ import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.Tecla;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.gui.button.RoundButton;
 import br.com.etyllica.gui.label.ImageLabel;
@@ -45,7 +45,7 @@ public class DefaultWindow extends Window{
 	}
 		
 	@Override
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		//TODO Change to panel
 		g.setColor(Configuration.getInstance().getTheme().getWindowBackgroundColor());

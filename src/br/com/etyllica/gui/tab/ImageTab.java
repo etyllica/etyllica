@@ -3,7 +3,7 @@ package br.com.etyllica.gui.tab;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.button.DefaultButton;
 
 /**
@@ -22,7 +22,7 @@ public class ImageTab extends DefaultButton{
 	}
 
 	@Override
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		Theme theme = Configuration.getInstance().getTheme();
 		

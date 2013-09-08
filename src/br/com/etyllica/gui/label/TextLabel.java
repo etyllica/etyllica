@@ -7,7 +7,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
@@ -74,7 +74,7 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 
 		Theme theme = Configuration.getInstance().getTheme();
 	

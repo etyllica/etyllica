@@ -9,7 +9,7 @@ import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.button.DefaultButton;
 
 public class Button extends GUIComponent{
@@ -40,7 +40,7 @@ public class Button extends GUIComponent{
 		return button.getH();
 	}
 	
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		button.draw(g);
 	}
 

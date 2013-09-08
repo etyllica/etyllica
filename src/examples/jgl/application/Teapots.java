@@ -7,7 +7,7 @@ import jgl.GLAUX;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class Teapots extends GLAUX{
 	
@@ -71,7 +71,7 @@ public class Teapots extends GLAUX{
 	 *  4th column:  black, cyan, green, red, white, yellow rubber
 	 */
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		Date startTime = new Date ();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

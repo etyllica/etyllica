@@ -22,7 +22,7 @@ import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.loader.ImageLoader;
 import br.com.etyllica.core.loader.MultimediaLoader;
 import br.com.etyllica.core.video.FullScreenWindow;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 
@@ -56,7 +56,7 @@ public abstract class EtyllicaFrame extends JFrame{
 
 	protected Mouse mouse;
 
-	private Grafico grafico;
+	private Graphic grafico;
 
 	//From Luvia
 	private ScheduledExecutorService executor;
@@ -87,7 +87,7 @@ public abstract class EtyllicaFrame extends JFrame{
 		setPath(s);
 
 		//MeshLoader.getInstancia().setUrl(s);
-		grafico = new Grafico(w,h);		
+		grafico = new Graphic(w,h);		
 		grafico.setBufferedImage(volatileImg.getSnapshot());
 		desktop = new MainWindow(0,0,w,h);
 

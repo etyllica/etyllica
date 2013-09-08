@@ -5,7 +5,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class Robot extends GLAUX{
 
@@ -59,7 +59,7 @@ public class Robot extends GLAUX{
 	}
 
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glPushMatrix();

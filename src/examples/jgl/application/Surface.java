@@ -5,7 +5,7 @@ import jgl.glu.GLUnurbsObj;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class Surface extends GLU{
 	
@@ -60,7 +60,7 @@ public class Surface extends GLU{
 		loading = 100;
 	}
 
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		float knots [] = { 0.0f, 0.0f, 0.0f, 0.0f,
 				1.0f, 1.0f, 1.0f, 1.0f };
 

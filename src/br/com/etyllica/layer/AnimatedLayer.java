@@ -4,7 +4,7 @@ import java.awt.geom.AffineTransform;
 
 import br.com.etyllica.core.loader.ImageLoader;
 import br.com.etyllica.core.timer.Timer;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -283,7 +283,7 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		if(visible){
 

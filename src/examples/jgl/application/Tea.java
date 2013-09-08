@@ -4,7 +4,7 @@ import jgl.GLAUX;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class Tea extends GLAUX{
 
@@ -43,7 +43,7 @@ public class Tea extends GLAUX{
 	}
 
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		
 		double eqn[] = { 1.0, 0.0, -1.0, 1.0 };
 		

@@ -10,7 +10,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.util.SVGColor;
 
 public class CustomLoadApplication extends Application{
@@ -69,7 +69,7 @@ public class CustomLoadApplication extends Application{
 	}
 
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 
 		//Set Color to SVG Crimson
 		g.setColor(SVGColor.CRIMSON);		

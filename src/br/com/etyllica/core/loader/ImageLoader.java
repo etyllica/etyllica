@@ -30,7 +30,7 @@ public class ImageLoader extends Loader{
 	private ImageLoader(){
 		super();
 		
-		folder = "res/images/";
+		folder = "assets/images/";
 	}
 
 	public static ImageLoader getInstance() {

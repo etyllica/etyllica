@@ -4,7 +4,7 @@ import java.awt.geom.AffineTransform;
 
 import br.com.etyllica.core.DrawableComponent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -384,12 +384,12 @@ public class Layer implements DrawableComponent{
 	}
 
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void draw(Grafico g, AffineTransform transform) {
+	public void draw(Graphic g, AffineTransform transform) {
 		// TODO Auto-generated method stub
 	}
 		

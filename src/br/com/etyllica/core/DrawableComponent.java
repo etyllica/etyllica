@@ -1,6 +1,6 @@
 package br.com.etyllica.core;
 
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -15,6 +15,6 @@ public interface DrawableComponent {
 	 * 
 	 * @param g
 	 */
-	public void draw(Grafico g);
+	public void draw(Graphic g);
 	
 }

@@ -25,7 +25,7 @@ import jgl.context.GL_Object;
 import jgl.context.GL_Util;
 import jgl.context.attrib.GL_Viewport;
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * GL is the main class of jGL 2.4.
@@ -1722,7 +1722,7 @@ public abstract class GL extends Application{
 	}
 
 	/** GLvoid glFlush (GLvoid) */
-	public void glFlush (Grafico g) {
+	public void glFlush (Graphic g) {
 		
 		if (Context.RenderMode != GL_RENDER) { 
 			return; 
@@ -6153,7 +6153,7 @@ public abstract class GL extends Application{
 
 	/** void glXSwapBuffers (Display *dpy, GLXDrawable drawable) */
 	//    public void glXSwapBuffers (Graphics g, Applet o) {
-	public void glXSwapBuffers (Grafico g) {
+	public void glXSwapBuffers (Graphic g) {
 
 		//g.getGraphics().drawImage(JavaImage, StartX, StartY, null);
 		glFlush(g);

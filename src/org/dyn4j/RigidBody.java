@@ -5,7 +5,7 @@ import java.awt.geom.AffineTransform;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.Layer;
 
 /**
@@ -31,7 +31,7 @@ public class RigidBody extends Body{
 		
 	}
 	
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 		
 		AffineTransform transform = new AffineTransform();
 		

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.PivotImageLayer;
 
 public class Part extends PivotImageLayer{
@@ -72,7 +72,7 @@ public class Part extends PivotImageLayer{
 	}
 	
 	@Override
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 		if(visible){
 
 			AffineTransform reset = g.getTransform();

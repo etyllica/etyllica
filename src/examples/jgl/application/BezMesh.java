@@ -4,7 +4,7 @@ import jgl.GL;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class BezMesh extends GL{
 
@@ -95,7 +95,7 @@ public class BezMesh extends GL{
 		System.out.println(ctrlpoints[0][0].length);
 	}
 
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glPushMatrix ();
 		glRotatef (85.0f, 1.0f, 1.0f, 1.0f);

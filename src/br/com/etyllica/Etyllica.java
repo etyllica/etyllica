@@ -21,7 +21,7 @@ import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.loader.ImageLoader;
 import br.com.etyllica.core.loader.MultimediaLoader;
 import br.com.etyllica.core.video.FullScreenWindow;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 
@@ -56,7 +56,7 @@ public abstract class Etyllica extends Applet{
 
 	private Mouse mouse;
 
-	private Grafico grafico;
+	private Graphic grafico;
 
 	//From Luvia
 	private ScheduledExecutorService executor;
@@ -84,7 +84,7 @@ public abstract class Etyllica extends Applet{
 		
 		setPath(s);
 
-		grafico = new Grafico(w,h);		
+		grafico = new Graphic(w,h);		
 		grafico.setBufferedImage(volatileImg.getSnapshot());
 				
 		mouse = core.getControl().getMouse();

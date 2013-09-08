@@ -2,7 +2,7 @@ package br.com.etyllica.gui.label;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Label;
 
 public class ColorLabel extends Label{
@@ -14,7 +14,7 @@ public class ColorLabel extends Label{
 	private Color color;
 	
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		
 		g.setColor(color);
 		g.fill3DRect(x, y, w, h,true);

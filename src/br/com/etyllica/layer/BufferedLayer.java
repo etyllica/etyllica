@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -261,7 +261,7 @@ public class BufferedLayer extends ImageLayer{
 	}
 	
 	@Override
-	public void draw(Grafico g, AffineTransform transform) {
+	public void draw(Graphic g, AffineTransform transform) {
 		g.transform(transform);
 
 		g.drawImage( imagemBuffer, x, y, x+w,y+h,

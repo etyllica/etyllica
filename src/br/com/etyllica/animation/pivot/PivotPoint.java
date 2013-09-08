@@ -3,7 +3,7 @@ package br.com.etyllica.animation.pivot;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.linear.vector.Vector2D;
 
 public class PivotPoint extends Vector2D{
@@ -70,7 +70,7 @@ public class PivotPoint extends Vector2D{
 		}
 	}
 	
-	public void drawPart(Grafico g) {
+	public void drawPart(Graphic g) {
 		for(Part part: partes){
 			part.draw(g);
 		}

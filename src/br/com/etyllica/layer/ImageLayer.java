@@ -4,7 +4,7 @@ import java.awt.geom.AffineTransform;
 
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.colision.ColisionArea;
 import br.com.etyllica.linear.Rectangle;
 
@@ -260,7 +260,7 @@ public class ImageLayer extends StaticLayer{
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
 
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 		
 		if(visible){
 
@@ -281,7 +281,7 @@ public class ImageLayer extends StaticLayer{
 	}
 	
 	@Override
-	public void draw(Grafico g, AffineTransform transform) {
+	public void draw(Graphic g, AffineTransform transform) {
 		g.transform(transform);
 
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,

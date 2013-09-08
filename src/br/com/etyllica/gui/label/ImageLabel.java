@@ -1,6 +1,6 @@
 package br.com.etyllica.gui.label;
 
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 
 /**
@@ -35,7 +35,7 @@ public class ImageLabel extends Icon{
 	}
 		
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		//camada.setOffset(x, y);
 		layer.draw(g);
 		//camada.setOffset(-x, -y);

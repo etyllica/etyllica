@@ -25,7 +25,7 @@ public class FontLoader extends Loader{
 	private FontLoader(){
 		super();
 		
-		folder = "res/fonts/";
+		folder = "assets/fonts/";
 	}
 
 	public static FontLoader getInstance() {

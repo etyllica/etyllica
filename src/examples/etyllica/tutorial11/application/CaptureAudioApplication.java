@@ -9,7 +9,7 @@ import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.TextLabel;
 
@@ -84,7 +84,7 @@ public class CaptureAudioApplication extends Application {
 	int lastLength = 0;
 	
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		// TODO Auto-generated method stub
 		g.setColor(Color.BLACK);
 		

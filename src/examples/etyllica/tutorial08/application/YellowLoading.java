@@ -6,7 +6,7 @@ import java.awt.Font;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.application.DefaultLoadApplication;
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class YellowLoading extends DefaultLoadApplication{
 
@@ -30,7 +30,7 @@ public class YellowLoading extends DefaultLoadApplication{
 	private Color backgroundColor = new Color(0xff,0xcc,0x0);
 	
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 
 		g.setFont(f);
 		

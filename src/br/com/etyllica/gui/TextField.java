@@ -10,7 +10,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.textfield.TextFieldValidator;
 
 /**
@@ -200,7 +200,7 @@ public class TextField extends GUIComponent{
 
 	//TODO escreve texto.sub(0,minMark);
 	//Para não sair da caixa
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		Theme theme = Configuration.getInstance().getTheme();
 

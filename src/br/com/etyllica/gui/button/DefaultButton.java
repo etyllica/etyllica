@@ -8,7 +8,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Tecla;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.RoundGUIComponent;
 
@@ -36,7 +36,7 @@ public class DefaultButton extends RoundGUIComponent{
 	}
 
 	@Override
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		Theme theme = getTheme();		
 
@@ -72,7 +72,7 @@ public class DefaultButton extends RoundGUIComponent{
 
 	}
 
-	protected void drawLabel(Grafico g){
+	protected void drawLabel(Graphic g){
 
 		if(label!=null){
 			label.draw(g);

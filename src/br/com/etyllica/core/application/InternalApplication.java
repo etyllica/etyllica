@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.GUIComponent;
 import br.com.etyllica.gui.Window;
@@ -122,7 +122,7 @@ public abstract class InternalApplication extends GUIComponent{
 	/**
 	 * Draw method
 	 */
-	public abstract void draw(Grafico g);
+	public abstract void draw(Graphic g);
 	
 	/**
 	 * Unload is not implemented yet but is useful when Applications needs free memory before change to next Application

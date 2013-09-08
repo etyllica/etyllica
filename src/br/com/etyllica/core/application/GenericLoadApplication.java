@@ -5,7 +5,7 @@ import java.awt.Font;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -36,7 +36,7 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 	private Color backgroundColor = new Color(0x00,0xcc,0xff);
 	
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 
 		g.setFont(f);
 		

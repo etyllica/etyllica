@@ -12,7 +12,7 @@ import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
@@ -131,7 +131,7 @@ public class AnimationExample extends Application{
 	}
 	
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 				
 		//Drawing background
 		g.setColor(Color.LIGHT_GRAY);

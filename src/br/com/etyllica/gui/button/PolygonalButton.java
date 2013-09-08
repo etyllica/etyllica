@@ -4,7 +4,7 @@ import java.awt.Polygon;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -23,7 +23,7 @@ public class PolygonalButton extends DefaultButton{
 	}
 
 	@Override
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		Theme theme = getTheme();
 

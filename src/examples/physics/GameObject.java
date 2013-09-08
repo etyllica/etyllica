@@ -7,7 +7,7 @@ import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.Convex;
 
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 
 /**
@@ -38,7 +38,7 @@ public class GameObject extends Body {
 	 * Only coded for polygons and circles.
 	 * @param g the graphics object to render to
 	 */
-	public void render(Grafico g) {
+	public void render(Graphic g) {
 		// save the original transform
 		AffineTransform resetTransform = g.getTransform();
 

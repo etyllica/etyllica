@@ -4,7 +4,7 @@ import jgl.GLU;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class Checker extends GLU{
 
@@ -58,7 +58,7 @@ public class Checker extends GLU{
 		myReshape(w, h);
 	}
 
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 		glClear (GL_COLOR_BUFFER_BIT);
 		glBegin (GL_QUADS);
 		glTexCoord2f (0.0f, 0.0f);

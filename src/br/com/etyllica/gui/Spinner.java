@@ -4,7 +4,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.button.DefaultButton;
 import br.com.etyllica.gui.label.TextLabel;
 
@@ -86,7 +86,7 @@ public abstract class Spinner<T extends Number> extends GUIComponent{
 	}
 
 	@Override
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		// TODO Auto-generated method stub
 		
 	}

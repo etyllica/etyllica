@@ -5,7 +5,7 @@ import java.awt.Polygon;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -56,7 +56,7 @@ public class DefaultArrow extends Polygon implements MouseArrow{
 
 	}
 
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		Theme theme = Configuration.getInstance().getTheme();
 

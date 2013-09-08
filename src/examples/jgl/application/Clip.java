@@ -4,7 +4,7 @@ import jgl.GLAUX;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class Clip extends GLAUX{
 
@@ -17,7 +17,7 @@ public class Clip extends GLAUX{
 		loading = 100;
 	}
 
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		double eqn [] = {0.0, 1.0, 0.0, 0.0};	/* y < 0 */
 		double eqn2 [] = {1.0, 0.0, 0.0, 0.0};	/* x < 0 */
 

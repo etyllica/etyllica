@@ -5,7 +5,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyboardEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 
 public class MoveLight extends GLAUX{
 
@@ -45,7 +45,7 @@ public class MoveLight extends GLAUX{
 		myReshape(w, h);
 	}
 
-	public void draw(Grafico g) {
+	public void draw(Graphic g) {
 		float position [] = {0.0f, 0.0f, 1.5f, 1.0f};
 
 		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

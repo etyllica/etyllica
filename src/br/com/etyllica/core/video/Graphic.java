@@ -29,7 +29,7 @@ import br.com.etyllica.linear.Ponto2D;
  *
  */
 
-public class Grafico{
+public class Graphic{
 
 	private BufferedImage bimg;
 	
@@ -39,7 +39,7 @@ public class Grafico{
 	private int width;
 	private int height;
 	
-	public Grafico(int width, int height){
+	public Graphic(int width, int height){
 		super();
 		
 		this.width = width;

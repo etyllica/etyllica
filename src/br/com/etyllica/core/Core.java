@@ -19,7 +19,7 @@ import br.com.etyllica.core.input.joystick.Joystick;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.core.video.Grafico;
+import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.debug.Logger;
 import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.GUIComponent;
@@ -522,7 +522,7 @@ public class Core{
 
 	}
 
-	public void draw(Grafico g){
+	public void draw(Graphic g){
 
 		List<Window> drawWindows = new CopyOnWriteArrayList<Window>(windows);
 
@@ -557,7 +557,7 @@ public class Core{
 
 	}
 
-	private void drawEffects(Grafico g){
+	private void drawEffects(Graphic g){
 
 		animation.animate(getTimeNow());
 				
@@ -583,7 +583,7 @@ public class Core{
 	private BasicStroke strokeThree = new BasicStroke(3F);
 	private BasicStroke strokeFive = new BasicStroke(5F);
 
-	private void drawMouse(Grafico g){
+	private void drawMouse(Graphic g){
 
 		g.getGraphics().setStroke(strokeOne);
 		mouse.getArrow().move(mouse.getX(), mouse.getY());
@@ -611,7 +611,7 @@ public class Core{
 	}
 
 	//TODO Some kind of Subimage to textfields for example
-	private void drawComponent(GUIComponent component, Grafico g){
+	private void drawComponent(GUIComponent component, Graphic g){
 
 		if(component.isVisible()){
 

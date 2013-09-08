@@ -35,7 +35,7 @@ public class MultimediaLoader extends Loader{
 
 	public MultimediaLoader(){
 
-		folder = "res/sounds/";
+		folder = "assets/sounds/";
 		
 		try {
 			
@@ -102,15 +102,15 @@ public class MultimediaLoader extends Loader{
 
 	}
 
-	public void tocaMusicaStream(String caminho) {
-		tocaMusicaStream(caminho, false);
+	public void tocaMusicaStream(String path) {
+		tocaMusicaStream(path, false);
 	}
 	
-	public void tocaMusicaStream(String caminho, boolean loop) {
+	public void tocaMusicaStream(String path, boolean loop) {
 
 		//mySoundSystem.newStreamingSource(true, caminho, caminho, loop, 0, 0, 0, SoundSystemConfig.ATTENUATION_NONE, 0);
-		mySoundSystem.backgroundMusic(caminho, caminho, loop);
-		mySoundSystem.play(caminho);
+		mySoundSystem.backgroundMusic(path, path, loop);
+		mySoundSystem.play(path);
 
 	}
 	
