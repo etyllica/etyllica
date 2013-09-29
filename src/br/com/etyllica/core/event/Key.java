@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
  *
  */
 
-public enum Tecla {
+public enum Key {
 
 	TSK_MENOS (KeyEvent.VK_MINUS),
 	TSK_MAIS (KeyEvent.VK_PLUS),
@@ -172,7 +172,7 @@ public enum Tecla {
 	
 	private final int code;
 
-	Tecla(int code){
+	Key(int code){
 		this.code = code;
 	}
 	

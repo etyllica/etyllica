@@ -2,9 +2,9 @@ package examples.jgl.application;
 
 import jgl.GLAUX;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 
 public class Robot extends GLAUX{
@@ -21,35 +21,35 @@ public class Robot extends GLAUX{
 	private void shoulderSubtract() { shoulder = (shoulder - 5) % 360; }
 
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event) {
+	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.getPressed(Tecla.TSK_CTRL_ESQUERDA)||event.getPressed(Tecla.TSK_CTRL_DIREITA)){
+		if(event.onKeyDown(Key.TSK_CTRL_ESQUERDA)||event.onKeyDown(Key.TSK_CTRL_DIREITA)){
 			
-			if(event.getPressed(Tecla.TSK_SETA_DIREITA)){
+			if(event.onKeyDown(Key.TSK_SETA_DIREITA)){
 				shoulderAdd();
 			}
-			else if(event.getPressed(Tecla.TSK_SETA_ESQUERDA)){
+			else if(event.onKeyDown(Key.TSK_SETA_ESQUERDA)){
 				shoulderSubtract();
 			}
-			else if(event.getPressed(Tecla.TSK_SETA_CIMA)){
+			else if(event.onKeyDown(Key.TSK_SETA_CIMA)){
 				elbowAdd();
 			}
-			else if(event.getPressed(Tecla.TSK_SETA_BAIXO)){
+			else if(event.onKeyDown(Key.TSK_SETA_BAIXO)){
 				elbowSubtract();
 			}
 			
 		}else{
 			
-			if(event.getPressed(Tecla.TSK_SETA_DIREITA)){
+			if(event.onKeyDown(Key.TSK_SETA_DIREITA)){
 				shoulderAdd();
 			}
-			else if(event.getPressed(Tecla.TSK_SETA_ESQUERDA)){
+			else if(event.onKeyDown(Key.TSK_SETA_ESQUERDA)){
 				shoulderSubtract();
 			}
-			else if(event.getPressed(Tecla.TSK_SETA_CIMA)){
+			else if(event.onKeyDown(Key.TSK_SETA_CIMA)){
 				elbowAdd();
 			}
-			else if(event.getPressed(Tecla.TSK_SETA_BAIXO)){
+			else if(event.onKeyDown(Key.TSK_SETA_BAIXO)){
 				elbowSubtract();
 			}
 			

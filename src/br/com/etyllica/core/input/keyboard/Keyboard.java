@@ -1,14 +1,13 @@
 package br.com.etyllica.core.input.keyboard;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.com.etyllica.core.event.KeyboardEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.Key;
 
 /**
  * 
@@ -19,7 +18,7 @@ import br.com.etyllica.core.event.Tecla;
 
 public class Keyboard implements KeyListener {
 	
-	private List<KeyboardEvent> keyEvents = new ArrayList<KeyboardEvent>();
+	private List<KeyEvent> keyEvents = new ArrayList<KeyEvent>();
 
 	private Map<Integer,KeyState> keyStates = new HashMap<Integer,KeyState>(0);
 	private Map<Integer,Boolean> keys = new HashMap<Integer,Boolean>();
@@ -28,7 +27,7 @@ public class Keyboard implements KeyListener {
 		super();
 		
 		//Reset Keyboard to avoid delay at first press
-		for (Tecla key: Tecla.values()) {
+		for (Key key: Key.values()) {
 			keys.put(key.getCode(),false);
 			keyStates.put(key.getCode(),KeyState.RELEASED);
 		}
@@ -43,7 +42,7 @@ public class Keyboard implements KeyListener {
 				if( keyStates.get(key) == KeyState.RELEASED ){
 					keyStates.put(key,KeyState.ONCE);
 					
-					keyEvents.add(new KeyboardEvent(key, KeyState.PRESSED));
+					keyEvents.add(new KeyEvent(key, KeyState.PRESSED));
 				}
 				else{
 					keyStates.put(key,KeyState.PRESSED);
@@ -54,7 +53,7 @@ public class Keyboard implements KeyListener {
 				if(( keyStates.get(key) == KeyState.ONCE )||( keyStates.get(key) == KeyState.PRESSED )){
 					keyStates.put(key,KeyState.FIRST_RELEASED);
 
-					keyEvents.add(new KeyboardEvent(key, KeyState.RELEASED));
+					keyEvents.add(new KeyEvent(key, KeyState.RELEASED));
 				}
 				else{
 					keyStates.put(key,KeyState.RELEASED);
@@ -76,7 +75,7 @@ public class Keyboard implements KeyListener {
 		return keyStates.get(keyCode) == KeyState.FIRST_RELEASED;		
 	}
 
-	public synchronized void keyPressed( KeyEvent ke ) {
+	public synchronized void keyPressed( java.awt.event.KeyEvent ke ) {
 
 		int code = getKeyFromEvent(ke);
 
@@ -84,7 +83,7 @@ public class Keyboard implements KeyListener {
 
 	}
 
-	public synchronized void keyReleased( KeyEvent ke ) {
+	public synchronized void keyReleased( java.awt.event.KeyEvent ke ) {
 
 		int code = getKeyFromEvent(ke);
 
@@ -93,32 +92,32 @@ public class Keyboard implements KeyListener {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent ke) {
+	public void keyTyped( java.awt.event.KeyEvent ke) {
 
 		int code = getKeyFromEvent(ke);
 		
 		char c = ke.getKeyChar();
 
 		//TODO Ajeitar o typed
-		if ( c != KeyEvent.CHAR_UNDEFINED ) {
-			keyEvents.add(new KeyboardEvent(code, c, KeyState.TYPED));
+		if ( c != java.awt.event.KeyEvent.CHAR_UNDEFINED ) {
+			keyEvents.add(new KeyEvent(code, c, KeyState.TYPED));
 		}
 		
 		ke.consume();
 
 	}
 	
-	private int getKeyFromEvent(KeyEvent ke){
+	private int getKeyFromEvent(java.awt.event.KeyEvent ke){
 		int code = ke.getKeyCode();
 
-		if(ke.getKeyLocation()!=KeyEvent.KEY_LOCATION_STANDARD){
+		if(ke.getKeyLocation()!=java.awt.event.KeyEvent.KEY_LOCATION_STANDARD){
 			code+=ke.getKeyLocation()*100;
 		}
 		
 		return code;
 	}
 
-	public List<KeyboardEvent> getEvents(){
+	public List<KeyEvent> getEvents(){
 		return keyEvents;
 	}
 

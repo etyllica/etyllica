@@ -7,7 +7,7 @@ import sound.capture.CaptureHandler;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Button;
@@ -70,7 +70,7 @@ public class CaptureAudioApplication extends Application {
 	}
 
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent arg0) {
+	public GUIEvent updateKeyboard(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}

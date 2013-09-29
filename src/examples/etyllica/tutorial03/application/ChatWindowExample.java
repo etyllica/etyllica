@@ -5,9 +5,9 @@ import java.awt.Color;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.ScrollerPanel;
@@ -55,29 +55,29 @@ public class ChatWindowExample extends Application{
 	}
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event){
+	public GUIEvent updateKeyboard(KeyEvent event){
 		
-		if(event.getPressed(Tecla.TSK_1)){
+		if(event.onKeyDown(Key.TSK_1)){
 			panel.addLine(friendname+": Hi");
 		}
 		
-		if(event.getPressed(Tecla.TSK_2)){
+		if(event.onKeyDown(Key.TSK_2)){
 			panel.addLine(friendname+": Hello");
 		}
 		
-		if(event.getPressed(Tecla.TSK_3)){
+		if(event.onKeyDown(Key.TSK_3)){
 			panel.addLine(friendname+": How are you?");
 		}
 		
-		if(event.getPressed(Tecla.TSK_4)){
+		if(event.onKeyDown(Key.TSK_4)){
 			panel.addLine(friendname+": I am fine, and you?");
 		}
 		
-		if(event.getPressed(Tecla.TSK_5)){
+		if(event.onKeyDown(Key.TSK_5)){
 			panel.addLine(friendname+": Thank You.");
 		}
 		
-		if(event.getPressed(Tecla.TSK_6)){
+		if(event.onKeyDown(Key.TSK_6)){
 			panel.addLine(friendname+": LOL :D");
 		}
 		

@@ -6,9 +6,9 @@ import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.util.SVGColor;
 
@@ -76,9 +76,9 @@ public class ByeWorld extends Application{
 	}
 
 	@Override
-	public GUIEvent updateKeyboard( KeyboardEvent event) {
+	public GUIEvent updateKeyboard( KeyEvent event) {
 
-		if(event.getPressed(Tecla.TSK_BACK_SPACE)){
+		if(event.onKeyDown(Key.TSK_BACK_SPACE)){
 			returnApplication = new CustomLoadApplication(w,h);
 		}
 

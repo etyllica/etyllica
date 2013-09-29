@@ -12,8 +12,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import br.com.etyllica.core.event.KeyboardEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.input.keyboard.KeyState;
 
 /**
@@ -27,7 +27,7 @@ public class Joystick{
 
 	private int joysticks = 10;
 
-	private List<KeyboardEvent> joyEvents = new ArrayList<KeyboardEvent>();
+	private List<KeyEvent> joyEvents = new ArrayList<KeyEvent>();
 
 	private Map<Integer, FileInputStream> inputStreams = new HashMap<Integer, FileInputStream>();
 
@@ -97,7 +97,7 @@ public class Joystick{
 		}
 	}
 
-	public List<KeyboardEvent> getJoyEvents() {
+	public List<KeyEvent> getJoyEvents() {
 		return joyEvents;
 	}
 
@@ -134,11 +134,11 @@ public class Joystick{
 				case 2:
 
 					if(value>0){
-						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_RIGHT.getCode(), value, KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_RIGHT.getCode(), value, KeyState.PRESSED));
 					}else if(value<0){					
-						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_LEFT.getCode(), value,  KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_LEFT.getCode(), value,  KeyState.PRESSED));
 					}else{
-						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_CENTER_X.getCode(), value,  KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_CENTER_X.getCode(), value,  KeyState.PRESSED));
 					}
 
 					break;
@@ -147,11 +147,11 @@ public class Joystick{
 				case 3:
 
 					if(value>0){
-						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_DOWN.getCode(), value, KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_DOWN.getCode(), value, KeyState.PRESSED));
 					}else if(value<0){					
-						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_UP.getCode(), value,  KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_UP.getCode(), value,  KeyState.PRESSED));
 					}else{
-						joyEvents.add(new KeyboardEvent(id, Tecla.JOYSTICK_CENTER_Y.getCode(), value,  KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_CENTER_Y.getCode(), value,  KeyState.PRESSED));
 					}
 
 					break;				
@@ -162,12 +162,12 @@ public class Joystick{
 
 			} else if (type == JS_EVENT_BUTTON) {
 
-				int buttonCode = (Tecla.JOYSTICK_BUTTON_1.getCode())+channel;
+				int buttonCode = (Key.JOYSTICK_BUTTON_1.getCode())+channel;
 
 				if(value==1){
-					joyEvents.add(new KeyboardEvent(id, buttonCode, 0,  KeyState.PRESSED));
+					joyEvents.add(new KeyEvent(id, buttonCode, 0,  KeyState.PRESSED));
 				}else{
-					joyEvents.add(new KeyboardEvent(id, buttonCode, 0, KeyState.RELEASED));
+					joyEvents.add(new KeyEvent(id, buttonCode, 0, KeyState.RELEASED));
 				}
 
 			}			

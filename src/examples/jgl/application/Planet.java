@@ -2,9 +2,9 @@ package examples.jgl.application;
 
 import jgl.GLAUX;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 
 public class Planet extends GLAUX{
@@ -38,18 +38,18 @@ public class Planet extends GLAUX{
 	}
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event) {
+	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.getPressed(Tecla.TSK_SETA_ESQUERDA)){
+		if(event.onKeyDown(Key.TSK_SETA_ESQUERDA)){
 			monthSubtract();
 		}
-		else if(event.getPressed(Tecla.TSK_SETA_DIREITA)){
+		else if(event.onKeyDown(Key.TSK_SETA_DIREITA)){
 			monthAdd();
 		}
-		else if(event.getPressed(Tecla.TSK_SETA_CIMA)){
+		else if(event.onKeyDown(Key.TSK_SETA_CIMA)){
 			dayAdd();
 		}
-		else if(event.getPressed(Tecla.TSK_SETA_BAIXO)){
+		else if(event.onKeyDown(Key.TSK_SETA_BAIXO)){
 			daySubtract();
 		}
 

@@ -11,9 +11,9 @@ import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyState;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.input.HIDController;
 import br.com.etyllica.core.input.joystick.Joystick;
 import br.com.etyllica.core.input.keyboard.Keyboard;
@@ -62,9 +62,9 @@ public class Core{
 
 	private List<PointerEvent> mouseEvents;
 
-	private List<KeyboardEvent> keyEvents;
+	private List<KeyEvent> keyEvents;
 
-	private List<KeyboardEvent> joyEvents;
+	private List<KeyEvent> joyEvents;
 
 	private MainWindow mainWindow;
 
@@ -217,9 +217,9 @@ public class Core{
 	
 	private void updateJoystick(){
 				
-		List<KeyboardEvent> joystickEvents = new CopyOnWriteArrayList<KeyboardEvent>(joyEvents);
+		List<KeyEvent> joystickEvents = new CopyOnWriteArrayList<KeyEvent>(joyEvents);
 	
-		for(KeyboardEvent joystickEvent: joystickEvents){
+		for(KeyEvent joystickEvent: joystickEvents){
 			
 			System.out.println("UpdateKeyboard "+joystickEvent.getKey());
 
@@ -234,9 +234,9 @@ public class Core{
 
 		keyboard.poll();
 
-		List<KeyboardEvent> keyboardEvents = new CopyOnWriteArrayList<KeyboardEvent>(keyEvents);
+		List<KeyEvent> keyboardEvents = new CopyOnWriteArrayList<KeyEvent>(keyEvents);
 
-		for(KeyboardEvent keyboardEvent: keyboardEvents){
+		for(KeyEvent keyboardEvent: keyboardEvents){
 
 			activeWindow.updateKeyboard(keyboardEvent);
 
@@ -686,28 +686,28 @@ public class Core{
 		
 	}
 
-	private void updateKeyboardEvents(KeyboardEvent event){
+	private void updateKeyboardEvents(KeyEvent event){
 
-		if(event.getPressed(Tecla.TSK_ALT_DIREITA)||event.getPressed(Tecla.TSK_ALT_ESQUERDA)){
+		if(event.onKeyDown(Key.TSK_ALT_DIREITA)||event.onKeyDown(Key.TSK_ALT_ESQUERDA)){
 
 			alt = true;
 		}
-		else if(event.getReleased(Tecla.TSK_ALT_DIREITA)||event.getReleased(Tecla.TSK_ALT_ESQUERDA)){
+		else if(event.onKeyUp(Key.TSK_ALT_DIREITA)||event.onKeyUp(Key.TSK_ALT_ESQUERDA)){
 
 			alt = false;
 		}
 
-		if(event.getPressed(Tecla.TSK_ENTER)){
+		if(event.onKeyDown(Key.TSK_ENTER)){
 			enter = true;
 		}
-		else if(event.getReleased(Tecla.TSK_ENTER)){
+		else if(event.onKeyUp(Key.TSK_ENTER)){
 			enter = false;
 		}
 
-		if(event.getPressed(Tecla.TSK_ESC)){
+		if(event.onKeyDown(Key.TSK_ESC)){
 			esc = true;
 		}
-		else if(event.getReleased(Tecla.TSK_ESC)){
+		else if(event.onKeyUp(Key.TSK_ESC)){
 			esc = false;
 		}
 
@@ -724,19 +724,19 @@ public class Core{
 
 	}
 
-	private void updateNumpadMouse(KeyboardEvent event){
+	private void updateNumpadMouse(KeyEvent event){
 
 		if(Configuration.getInstance().isNumpadMouse()){
 
 			int velocidade = 1;
 
 			//Move Left/Right
-			if(event.getPressed(Tecla.TSK_NUMPAD_SETA_ESQUERDA)){
+			if(event.onKeyDown(Key.TSK_NUMPAD_SETA_ESQUERDA)){
 
 				mouse.setX(mouse.getX()-velocidade);
 				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
 
-			}else if(event.getPressed(Tecla.TSK_NUMPAD_SETA_DIREITA)){
+			}else if(event.onKeyDown(Key.TSK_NUMPAD_SETA_DIREITA)){
 
 				mouse.setX(mouse.getX()+velocidade);
 				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
@@ -744,12 +744,12 @@ public class Core{
 			}
 
 			//Move Up/Down
-			if(event.getPressed(Tecla.TSK_NUMPAD_SETA_CIMA)){
+			if(event.onKeyDown(Key.TSK_NUMPAD_SETA_CIMA)){
 
 				mouse.setX(mouse.getY()-velocidade);
 				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
 
-			}else if(event.getPressed(Tecla.TSK_NUMPAD_SETA_BAIXO)){
+			}else if(event.onKeyDown(Key.TSK_NUMPAD_SETA_BAIXO)){
 
 				mouse.setX(mouse.getY()+velocidade);
 				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
@@ -757,18 +757,18 @@ public class Core{
 			}
 
 			//Mouse Left Button
-			if(event.getPressed(Tecla.TSK_NUMPAD_INS)){
+			if(event.onKeyDown(Key.TSK_NUMPAD_INS)){
 				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, KeyState.PRESSED));
-			}else if(event.getReleased(Tecla.TSK_NUMPAD_INS)){
+			}else if(event.onKeyUp(Key.TSK_NUMPAD_INS)){
 				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, KeyState.RELEASED));
 			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_INS)){
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_LEFT, KeyState.CLICK));
 			}*/
 
 			//Mouse Right Button
-			if(event.getPressed(Tecla.TSK_NUMPAD_DEL)){
+			if(event.onKeyDown(Key.TSK_NUMPAD_DEL)){
 				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.PRESSED));
-			}else if(event.getReleased(Tecla.TSK_NUMPAD_DEL)){
+			}else if(event.onKeyUp(Key.TSK_NUMPAD_DEL)){
 				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.RELEASED));
 			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_DEL)){
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_RIGHT, KeyState.CLICK));

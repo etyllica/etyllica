@@ -2,7 +2,7 @@ package examples.jgl.application;
 
 import jgl.GLAUX;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Graphic;
 
@@ -103,7 +103,7 @@ public class TextGen extends GLAUX{
 	}
 
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event) {
+	public GUIEvent updateKeyboard(KeyEvent event) {
 		// TODO Auto-generated method stub
 		return GUIEvent.NONE;
 	}

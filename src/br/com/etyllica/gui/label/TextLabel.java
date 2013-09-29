@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Label;
@@ -96,9 +96,9 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event) {
+	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.getPressed(Tecla.TSK_TAB)){
+		if(event.onKeyDown(Key.TSK_TAB)){
 
 			return GUIEvent.NEXT_COMPONENT;
 		}

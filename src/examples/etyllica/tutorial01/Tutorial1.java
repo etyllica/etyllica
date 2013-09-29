@@ -15,7 +15,7 @@ public class Tutorial1 extends Etyllica {
 	public void startGame() {
 				
 		//Etyllica tries to find the resources as your Application should be
-		//To avoid this you should put your /res/images in /Project/bin/examples/etyllica/tutorial1/
+		//To avoid this you should put your /assets/images in /Project/bin/examples/etyllica/tutorial1/
 		
 		//Upping three directories we have /Project/bin/res/images
 		String s = getClass().getResource("").toString();

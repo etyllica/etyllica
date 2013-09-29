@@ -2,7 +2,7 @@ package br.com.etyllica.gui;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
@@ -111,7 +111,7 @@ public class Slider extends GUIComponent{
 	}
 
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event) {
+	public GUIEvent updateKeyboard(KeyEvent event) {
 		// TODO Auto-generated method stub
 		return GUIEvent	.NONE;
 	}

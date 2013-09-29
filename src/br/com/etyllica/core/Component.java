@@ -2,7 +2,7 @@ package br.com.etyllica.core;
 
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 
 /**
  * 
@@ -26,7 +26,7 @@ public interface Component extends DrawableComponent{
 	 * @param event
 	 * @return
 	 */
-	public GUIEvent updateKeyboard(KeyboardEvent event);
+	public GUIEvent updateKeyboard(KeyEvent event);
 	
 	/**
 	 * 

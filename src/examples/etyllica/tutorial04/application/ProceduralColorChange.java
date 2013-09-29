@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.BufferedLayer;
@@ -27,7 +27,7 @@ public class ProceduralColorChange extends Application{
 	}
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event){
+	public GUIEvent updateKeyboard(KeyEvent event){
 		
 		
 		return GUIEvent.NONE;

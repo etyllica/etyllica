@@ -2,9 +2,9 @@ package examples.etyllica.tutorial12.application;
 
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Tecla;
+import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 
@@ -43,32 +43,32 @@ public class JoystickExample extends Application{
 	}
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event) {
+	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.getPressed(Tecla.JOYSTICK_RIGHT)){
+		if(event.onKeyDown(Key.JOYSTICK_RIGHT)){
 			hello.setOffsetX(10);
 		}
 		
-		else if(event.getPressed(Tecla.JOYSTICK_LEFT)){
+		else if(event.onKeyDown(Key.JOYSTICK_LEFT)){
 			hello.setOffsetX(-10);
 		}
 		
-		if(event.getPressed(Tecla.JOYSTICK_UP)){
+		if(event.onKeyDown(Key.JOYSTICK_UP)){
 			hello.setOffsetY(-10);
 		}
 		
-		else if(event.getPressed(Tecla.JOYSTICK_DOWN)){
+		else if(event.onKeyDown(Key.JOYSTICK_DOWN)){
 			hello.setOffsetY(10);
 		}
 		
-		if(event.getPressed(Tecla.JOYSTICK_BUTTON_1)){
+		if(event.onKeyDown(Key.JOYSTICK_BUTTON_1)){
 			hello.setOffsetAngle(10);
 		}
 		
-		if(event.getPressed(Tecla.JOYSTICK_BUTTON_7)){
+		if(event.onKeyDown(Key.JOYSTICK_BUTTON_7)){
 			hello.setScale(1.5);
 		}
-		if(event.getPressed(Tecla.JOYSTICK_BUTTON_8)){
+		if(event.onKeyDown(Key.JOYSTICK_BUTTON_8)){
 			hello.setScale(1);
 		}
 				

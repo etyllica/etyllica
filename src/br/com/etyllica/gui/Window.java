@@ -8,7 +8,7 @@ import br.com.etyllica.core.application.InternalApplication;
 import br.com.etyllica.core.application.DefaultLoadApplication;
 import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyboardEvent;
+import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.loader.ApplicationLoader;
 import br.com.etyllica.core.video.Graphic;
@@ -122,7 +122,7 @@ public class Window extends GUIComponent{
 	}
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyboardEvent event) {
+	public GUIEvent updateKeyboard(KeyEvent event) {
 		
 		//TODO Ctrl+F4...
 		
