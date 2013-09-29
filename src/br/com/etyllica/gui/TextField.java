@@ -7,7 +7,6 @@ import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
@@ -135,29 +134,29 @@ public class TextField extends GUIComponent{
 
 		if(!shift){
 
-			if((event.onKeyDown(Key.TSK_SHIFT_DIREITA))||(event.onKeyDown(Key.TSK_SHIFT_ESQUERDA))){
+			if((event.onKeyDown(KeyEvent.TSK_SHIFT_DIREITA))||(event.onKeyDown(KeyEvent.TSK_SHIFT_ESQUERDA))){
 				shift = true;
 				fixMark = cursor;
 			}
-			else if(event.onKeyDown(Key.TSK_SETA_ESQUERDA)||(event.onKeyDown(Key.TSK_SETA_DIREITA))){
+			else if(event.onKeyDown(KeyEvent.TSK_SETA_ESQUERDA)||(event.onKeyDown(KeyEvent.TSK_SETA_DIREITA))){
 				fixMark = -1;
 			}
 		}
 
-		if(event.onKeyDown(Key.TSK_END)){
+		if(event.onKeyDown(KeyEvent.TSK_END)){
 			cursor = text.length();
 		}
-		else if(event.onKeyDown(Key.TSK_HOME)){
+		else if(event.onKeyDown(KeyEvent.TSK_HOME)){
 			cursor = 0;
 		}
 
 		if(!control){
-			if(event.onKeyDown(Key.TSK_CTRL_DIREITA)||event.onKeyDown(Key.TSK_CTRL_ESQUERDA)){
+			if(event.onKeyDown(KeyEvent.TSK_CTRL_DIREITA)||event.onKeyDown(KeyEvent.TSK_CTRL_ESQUERDA)){
 				control = true;
 			}
 		}
 
-		if(event.onKeyDown(Key.TSK_SETA_ESQUERDA)){
+		if(event.onKeyDown(KeyEvent.TSK_SETA_ESQUERDA)){
 			if(control){
 				esquerdaControl();
 			}
@@ -165,7 +164,7 @@ public class TextField extends GUIComponent{
 				esquerdaNormal();
 			}
 		}
-		else if(event.onKeyDown(Key.TSK_SETA_DIREITA)){
+		else if(event.onKeyDown(KeyEvent.TSK_SETA_DIREITA)){
 
 			if(control){
 				direitaControl();
@@ -174,7 +173,7 @@ public class TextField extends GUIComponent{
 			}
 		}
 
-		if(event.onKeyDown(Key.TSK_TAB)){
+		if(event.onKeyDown(KeyEvent.TSK_TAB)){
 
 			return GUIEvent.NEXT_COMPONENT;
 		}
@@ -184,13 +183,13 @@ public class TextField extends GUIComponent{
 
 	private GUIEvent updateReleased(KeyEvent event){
 		if(control){
-			if(event.onKeyDown(Key.TSK_CTRL_DIREITA)||event.onKeyDown(Key.TSK_CTRL_ESQUERDA)){
+			if(event.onKeyDown(KeyEvent.TSK_CTRL_DIREITA)||event.onKeyDown(KeyEvent.TSK_CTRL_ESQUERDA)){
 				control = false;
 			}
 		}
 
 		if(shift){
-			if(event.onKeyDown(Key.TSK_SHIFT_DIREITA)||event.onKeyDown(Key.TSK_SHIFT_ESQUERDA)){
+			if(event.onKeyDown(KeyEvent.TSK_SHIFT_DIREITA)||event.onKeyDown(KeyEvent.TSK_SHIFT_ESQUERDA)){
 				shift = false;
 			}
 		}

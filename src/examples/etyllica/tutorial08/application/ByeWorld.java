@@ -8,7 +8,6 @@ import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.util.SVGColor;
 
@@ -78,7 +77,7 @@ public class ByeWorld extends Application{
 	@Override
 	public GUIEvent updateKeyboard( KeyEvent event) {
 
-		if(event.onKeyDown(Key.TSK_BACK_SPACE)){
+		if(event.onKeyDown(KeyEvent.TSK_BACK_SPACE)){
 			returnApplication = new CustomLoadApplication(w,h);
 		}
 

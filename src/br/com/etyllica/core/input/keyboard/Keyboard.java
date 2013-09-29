@@ -1,13 +1,14 @@
 package br.com.etyllica.core.input.keyboard;
 
 import java.awt.event.KeyListener;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.Key;
 
 /**
  * 
@@ -23,15 +24,29 @@ public class Keyboard implements KeyListener {
 	private Map<Integer,KeyState> keyStates = new HashMap<Integer,KeyState>(0);
 	private Map<Integer,Boolean> keys = new HashMap<Integer,Boolean>();
 
-	public Keyboard() {
+	public Keyboard(){
 		super();
+				
+	}
+	
+	public void reset(){
 		
-		//Reset Keyboard to avoid delay at first press
-		for (Key key: Key.values()) {
-			keys.put(key.getCode(),false);
-			keyStates.put(key.getCode(),KeyState.RELEASED);
+		Field[] fields = KeyEvent.class.getDeclaredFields();
+		
+		for (Field f : fields) {
+		    if (Modifier.isPublic(f.getModifiers()) && Modifier.isStatic(f.getModifiers()) && f.getName().startsWith("TSK_")) {
+		    	try {
+					keys.put(f.getInt(null),false);
+					keyStates.put(f.getInt(null),KeyState.RELEASED);
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+		    } 
 		}
-
 	}
 
 	public void poll(){

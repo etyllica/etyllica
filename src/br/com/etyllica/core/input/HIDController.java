@@ -17,7 +17,7 @@ public class HIDController{
 
 	private Mouse mouse;
 	
-	private Keyboard teclado;
+	private Keyboard keyboard;
 	
 	private Joystick joystick;
 		
@@ -25,7 +25,8 @@ public class HIDController{
 		
 		mouse = new Mouse(0,0);
 		
-		teclado = new Keyboard();
+		keyboard = new Keyboard();
+		keyboard.reset();
 		
 		joystick = new Joystick();
 
@@ -35,8 +36,8 @@ public class HIDController{
 		return mouse;
 	}
 	
-	public Keyboard getTeclado() {
-		return teclado;
+	public Keyboard getKeyboard() {
+		return keyboard;
 	}
 
 	public Joystick getJoystick() {

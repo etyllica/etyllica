@@ -36,18 +36,18 @@ public class KeyEvent{
 		this.state = state;
 	}
 
-	public boolean onKeyDown(Key key){
+	public boolean onKeyDown(int keyCode){
 		
-		if(this.key == key.getCode()){
+		if(this.key == keyCode){
 			return state==KeyState.PRESSED;
 		}
 		
 		return false;
 	}
 	
-	public boolean onKeyUp(Key key){
+	public boolean onKeyUp(int keyCode){
 		
-		if(this.key == key.getCode()){
+		if(this.key == keyCode){
 			return state==KeyState.RELEASED;
 		}
 		

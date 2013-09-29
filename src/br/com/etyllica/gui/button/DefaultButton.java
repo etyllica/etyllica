@@ -2,10 +2,9 @@ package br.com.etyllica.gui.button;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
@@ -270,13 +269,13 @@ public class DefaultButton extends RoundGUIComponent{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.onKeyDown(Key.TSK_TAB)){
+		if(event.onKeyDown(KeyEvent.TSK_TAB)){
 
 			return GUIEvent.NEXT_COMPONENT;
 
 		}
 
-		if(event.onKeyDown(Key.TSK_ENTER)){
+		if(event.onKeyDown(KeyEvent.TSK_ENTER)){
 
 			this.update(GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
 

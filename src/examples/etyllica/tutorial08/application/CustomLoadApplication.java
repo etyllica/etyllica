@@ -9,7 +9,6 @@ import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.util.SVGColor;
 
@@ -101,29 +100,29 @@ public class CustomLoadApplication extends Application{
 	public GUIEvent updateKeyboard(KeyEvent event) {
 				
 		//If Up Arrow is Pressed
-		if(event.onKeyDown(Key.TSK_SETA_CIMA)){
+		if(event.onKeyDown(KeyEvent.TSK_SETA_CIMA)){
 			yText-=10;
 		}
 		//Else If Down Arrow is Pressed
-		else if(event.onKeyDown(Key.TSK_SETA_BAIXO)){
+		else if(event.onKeyDown(KeyEvent.TSK_SETA_BAIXO)){
 			yText+=10;
 		}
 		
 		//If RIGHT Arrow is Pressed
-		if(event.onKeyDown(Key.TSK_SETA_DIREITA)){
+		if(event.onKeyDown(KeyEvent.TSK_SETA_DIREITA)){
 			xText+=10;
 		}
 		//If LEFT Arrow is Pressed
-		else if(event.onKeyDown(Key.TSK_SETA_ESQUERDA)){
+		else if(event.onKeyDown(KeyEvent.TSK_SETA_ESQUERDA)){
 			xText-=10;
 		}
 		
-		if(event.onKeyDown(Key.TSK_ENTER)){
+		if(event.onKeyDown(KeyEvent.TSK_ENTER)){
 			xText = 0;
 			yText = 100;
 		}
 		
-		if(event.onKeyDown(Key.TSK_ESPACO)){
+		if(event.onKeyDown(KeyEvent.TSK_ESPACO)){
 			returnApplication = new ByeWorld(w,h);
 		}
 

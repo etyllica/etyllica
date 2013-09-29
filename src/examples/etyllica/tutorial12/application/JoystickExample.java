@@ -4,7 +4,6 @@ import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 
@@ -45,30 +44,30 @@ public class JoystickExample extends Application{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.onKeyDown(Key.JOYSTICK_RIGHT)){
+		if(event.onKeyDown(KeyEvent.TSK_JOYSTICK_RIGHT)){
 			hello.setOffsetX(10);
 		}
 		
-		else if(event.onKeyDown(Key.JOYSTICK_LEFT)){
+		else if(event.onKeyDown(KeyEvent.TSK_JOYSTICK_LEFT)){
 			hello.setOffsetX(-10);
 		}
 		
-		if(event.onKeyDown(Key.JOYSTICK_UP)){
+		if(event.onKeyDown(KeyEvent.TSK_JOYSTICK_UP)){
 			hello.setOffsetY(-10);
 		}
 		
-		else if(event.onKeyDown(Key.JOYSTICK_DOWN)){
+		else if(event.onKeyDown(KeyEvent.TSK_JOYSTICK_DOWN)){
 			hello.setOffsetY(10);
 		}
 		
-		if(event.onKeyDown(Key.JOYSTICK_BUTTON_1)){
+		if(event.onKeyDown(KeyEvent.TSK_JOYSTICK_BUTTON_1)){
 			hello.setOffsetAngle(10);
 		}
 		
-		if(event.onKeyDown(Key.JOYSTICK_BUTTON_7)){
+		if(event.onKeyDown(KeyEvent.TSK_JOYSTICK_BUTTON_7)){
 			hello.setScale(1.5);
 		}
-		if(event.onKeyDown(Key.JOYSTICK_BUTTON_8)){
+		if(event.onKeyDown(KeyEvent.TSK_JOYSTICK_BUTTON_8)){
 			hello.setScale(1);
 		}
 				

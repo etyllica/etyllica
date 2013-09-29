@@ -108,7 +108,7 @@ public abstract class Etyllica extends Applet{
 		addMouseMotionListener( mouse );
 		addMouseWheelListener( mouse );
 		addMouseListener( mouse );
-		addKeyListener( core.getControl().getTeclado() );
+		addKeyListener( core.getControl().getKeyboard() );
 
 		executor = Executors.newScheduledThreadPool(2);
 		startEngine();

@@ -4,7 +4,6 @@ import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIAction;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.gui.button.RoundButton;
@@ -76,7 +75,7 @@ public class DefaultWindow extends Window{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.onKeyDown(Key.TSK_0)){
+		if(event.onKeyDown(KeyEvent.TSK_0)){
 			add(iconButton);
 			add(closeButton);
 			add(titleBar);

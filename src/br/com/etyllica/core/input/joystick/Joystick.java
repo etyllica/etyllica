@@ -13,7 +13,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.input.keyboard.KeyState;
 
 /**
@@ -134,11 +133,11 @@ public class Joystick{
 				case 2:
 
 					if(value>0){
-						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_RIGHT.getCode(), value, KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, KeyEvent.TSK_JOYSTICK_RIGHT, value, KeyState.PRESSED));
 					}else if(value<0){					
-						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_LEFT.getCode(), value,  KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, KeyEvent.TSK_JOYSTICK_LEFT, value,  KeyState.PRESSED));
 					}else{
-						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_CENTER_X.getCode(), value,  KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, KeyEvent.TSK_JOYSTICK_CENTER_X, value,  KeyState.PRESSED));
 					}
 
 					break;
@@ -147,11 +146,11 @@ public class Joystick{
 				case 3:
 
 					if(value>0){
-						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_DOWN.getCode(), value, KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, KeyEvent.TSK_JOYSTICK_DOWN, value, KeyState.PRESSED));
 					}else if(value<0){					
-						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_UP.getCode(), value,  KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id,KeyEvent.TSK_JOYSTICK_UP, value,  KeyState.PRESSED));
 					}else{
-						joyEvents.add(new KeyEvent(id, Key.JOYSTICK_CENTER_Y.getCode(), value,  KeyState.PRESSED));
+						joyEvents.add(new KeyEvent(id, KeyEvent.TSK_JOYSTICK_CENTER_Y, value,  KeyState.PRESSED));
 					}
 
 					break;				
@@ -162,7 +161,7 @@ public class Joystick{
 
 			} else if (type == JS_EVENT_BUTTON) {
 
-				int buttonCode = (Key.JOYSTICK_BUTTON_1.getCode())+channel;
+				int buttonCode = (KeyEvent.TSK_JOYSTICK_BUTTON_1)+channel;
 
 				if(value==1){
 					joyEvents.add(new KeyEvent(id, buttonCode, 0,  KeyState.PRESSED));

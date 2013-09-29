@@ -74,7 +74,7 @@ public class FullScreenWindow extends Window{
 	private void setListeners(){
 		
 		Mouse mouse = core.getControl().getMouse();
-		Keyboard keyboard = core.getControl().getTeclado();
+		Keyboard keyboard = core.getControl().getKeyboard();
 		
 		addMouseMotionListener( mouse );
 		addMouseWheelListener( mouse );

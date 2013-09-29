@@ -6,7 +6,6 @@ import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.Key;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Window;
 import examples.etyllica.tutorial09.application.SimpleGuiExample;
@@ -25,7 +24,7 @@ public class SubWindowExample extends Application{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event){
 		
-		if(event.onKeyDown(Key.TSK_1)){
+		if(event.onKeyDown(KeyEvent.TSK_1)){
 			
 			Window subWindow = new Window(200, 20, 160, 400);
 			subWindow.setApplication(new SimpleGuiExample(subWindow.getW(), subWindow.getH()));
