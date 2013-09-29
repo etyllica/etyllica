@@ -1,7 +1,5 @@
 package br.com.etyllica.core.application;
 
-import org.dyn4j.dynamics.World;
-
 
 public abstract class Application extends InternalApplication{
 
@@ -14,12 +12,7 @@ public abstract class Application extends InternalApplication{
 	 * Returned Application (next Application to show up)
 	 */
 	protected Application returnApplication = this;
-	
-	/**
-	 * The Physic World
-	 */
-	protected World world;
-	
+		
 	public Application(int w, int h) {
 		super(w, h);
 		loadApplication = new GenericLoadApplication(0,0,w,h);
@@ -44,14 +37,6 @@ public abstract class Application extends InternalApplication{
 	 */
 	public void setReturnApplication(Application returnApplication) {
 		this.returnApplication = returnApplication;
-	}
-
-	public World getWorld() {
-		return world;
-	}
-
-	public void setWorld(World world) {
-		this.world = world;
 	}
 		
 }

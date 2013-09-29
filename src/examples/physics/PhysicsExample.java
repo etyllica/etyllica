@@ -58,7 +58,7 @@ public class PhysicsExample extends EtyllicaFrame {
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../");
 		
-		setMainApplication(new ExampleApplication(w,h));
+		setMainApplication(new BoxesFalling(w,h));
 	}
 
 }

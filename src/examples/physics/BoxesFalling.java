@@ -4,11 +4,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dyn4j.PhysicsApplication;
 import org.dyn4j.RigidBody;
-import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Mass;
 
-import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -16,9 +15,9 @@ import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 
-public class ExampleApplication extends Application {
+public class BoxesFalling extends PhysicsApplication {
 		
-	public ExampleApplication(int w, int h) {
+	public BoxesFalling(int w, int h) {
 		super(w, h);
 	}
 	
@@ -26,12 +25,8 @@ public class ExampleApplication extends Application {
 	
 	private List<RigidBody> crates;	
 	
-	protected World world;
-
 	@Override
 	public void load() {
-
-		this.world = new World();
 				
 		floor = new RigidBody(new Layer(0,500,w,20));
 		floor.setMass(Mass.Type.INFINITE);

@@ -72,8 +72,6 @@ public abstract class EtyllicaFrame extends JFrame{
 		this.w = width;
 		this.h = height;
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
 	}
 
 	public void init() {
@@ -92,7 +90,6 @@ public abstract class EtyllicaFrame extends JFrame{
 		desktop = new MainWindow(0,0,w,h);
 
 		mouse = core.getControl().getMouse();
-		//keyboard = core.getControl().getTeclado();
 
 		desktop = new MainWindow(0,0,w,h);
 
@@ -105,9 +102,7 @@ public abstract class EtyllicaFrame extends JFrame{
 		mouse.updateArrowTheme();
 
 		this.setFocusTraversalKeysEnabled(false);
-		setFocusable(true);
-		requestFocus();
-
+		
 		addMouseMotionListener( mouse );
 		addMouseWheelListener( mouse );
 		addMouseListener( mouse );
@@ -115,7 +110,12 @@ public abstract class EtyllicaFrame extends JFrame{
 
 		executor = Executors.newScheduledThreadPool(2);
 		startEngine();
-		startAnimation();		
+		startAnimation();
+		
+		setFocusable(true);
+		setVisible(true);
+		requestFocus();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
 	
