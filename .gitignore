@@ -1,14 +1,15 @@
 # Pre-Compiled Files #
-*.class
+bin/
+!bin/assets/*
 
-# Automatic Generated Files#
-*.applet
+# SDK Projects
 
 sdk/
+
+# Automatic Generated Files #
+*.applet
 
 # Package Files #
 *.war
 *.ear
 
-# Javazoom Decoder Files #
-*.ser
