@@ -22,6 +22,14 @@
 		</delete>
 	</target>
 
+	<target name="prepare">
+		<copy todir="${build.dir}/sound/javazoom/decoder/">
+			<fileset dir="${src.dir}/sound/javazoom/decoder/">
+				<include name="**/*.ser"/>
+			</fileset>
+		</copy>
+	</target>
+
 	<target name="init">
 		<mkdir dir="${build.dir}" />
 	</target>
@@ -30,7 +38,7 @@
     		<javac srcdir="${src.dir}" destdir="${build.dir}" source="1.6" target="1.6" debug="off" />
 	</target>
 
-	<target name="package" depends="init, compile">
+	<target name="package" depends="init, compile, prepare">
 		<jar destfile="${lib.dir}/${libcore}.jar">
 			<fileset dir="${build.dir}">
 				<include name="**/br/*"/>
