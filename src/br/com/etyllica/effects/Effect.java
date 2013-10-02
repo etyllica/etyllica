@@ -30,13 +30,13 @@ public class Effect extends AnimatedLayer{
 		//parado = false;
 		
 		setVisible(true);
-		anim();
+		animate();
 	}
 	
 	public void desAnima(){
 		stopped = true;
 		setVisible(false);
-		desanim();
+		//desanim();
 	}
 
 }

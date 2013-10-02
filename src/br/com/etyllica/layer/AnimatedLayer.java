@@ -3,7 +3,6 @@ package br.com.etyllica.layer;
 import java.awt.geom.AffineTransform;
 
 import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.core.timer.Timer;
 import br.com.etyllica.core.video.Graphic;
 
 /**
@@ -20,7 +19,7 @@ public class AnimatedLayer extends ImageLayer{
 
 	protected boolean once = false;
 	protected boolean stopped = true;
-	protected boolean oscilar = false;
+	protected boolean oscilate = false;
 	protected boolean animaEmX = true;
 
 	protected boolean lockOnce = false;
@@ -32,7 +31,7 @@ public class AnimatedLayer extends ImageLayer{
 	protected int frames = 1;
 	protected int currentFrame = 0;
 
-	protected Timer timer = new Timer();
+	protected int speed;
 
 	/**
 	 * 
@@ -114,31 +113,25 @@ public class AnimatedLayer extends ImageLayer{
 		setYTile(yTile);
 	}
 
-	public void anima(){
-		anim();
-	}
+	public void animate(){
 
-	protected void anim(){
-
-		if(!lockOnce){
+		preAnima();
+		
+		/*if(!lockOnce){
 
 			timer.setParado(false);
 
 			if(timer.passou()){
-				preAnima();
+				
 			}
-		}
+		}*/
 
 		stopped = false;
 	}
 
 	public void desAnima(){
-		desanim();
-		//tymerAnimacao();
-	}
-	protected void desanim(){
-		timer.setParado(true);
-	}
+		//Stop
+	}	
 
 	public void animaOnce(){
 
@@ -161,7 +154,7 @@ public class AnimatedLayer extends ImageLayer{
 
 		if((currentFrame < frames-1)&&(currentFrame >= 0)){
 
-			if(oscilar){
+			if(oscilate){
 				inc = -inc;
 			}
 
@@ -177,7 +170,7 @@ public class AnimatedLayer extends ImageLayer{
 				return;
 			}
 
-			if(!oscilar){
+			if(!oscilate){
 				currentFrame = 0;
 			}else{
 				currentFrame+=inc;
@@ -190,7 +183,6 @@ public class AnimatedLayer extends ImageLayer{
 		if(!stopped){
 
 			if(animaEmX){
-
 				setXImage(xTile*currentFrame);
 			}
 			else{
@@ -199,11 +191,7 @@ public class AnimatedLayer extends ImageLayer{
 
 		}
 	}
-
-	public void setVelocidadeAnimacao(int velocidadeAnimacao){
-		this.timer.setVelocidade(velocidadeAnimacao);
-	}
-
+	
 	@Override
 	public int centralizeX(int xInicial, int xFinal)
 	{
@@ -370,4 +358,12 @@ public class AnimatedLayer extends ImageLayer{
 		this.lockOnce = lockOnce;
 	}
 
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	
 }

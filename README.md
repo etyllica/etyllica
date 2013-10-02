@@ -29,7 +29,8 @@
 
 ##Dependencies (*optional)
 
-If you don't need 3D Graphics, Sound nor Physics, you just have to include to your project the lib [etyllica-2.3.jar](https://github.com/yuripourre/etyllica/blob/master/libs/etyllica-2.3.jar) (160Kb)
+If you don't need 3D Graphics, Sound nor Physics, you just have to include to your project the lib 
+[etyllica-2.3.jar](https://github.com/yuripourre/etyllica/blob/master/libs/etyllica-2.3.jar) (160Kb)
 
 - [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) (An OpenGL simulator)
 - [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library)

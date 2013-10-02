@@ -31,7 +31,7 @@ public class EffectSound extends Effect{
 		playing = true;
 		
 		setVisible(true);
-		anim();
+		animate();
 	}
 	
 	@Override
@@ -39,7 +39,7 @@ public class EffectSound extends Effect{
 		stopped = true;
 		playing = false;
 		setVisible(false);
-		desanim();
+		//desanim();
 	}
 	
 	public boolean isPlaying(){

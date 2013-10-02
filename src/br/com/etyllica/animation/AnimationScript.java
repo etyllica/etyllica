@@ -12,7 +12,7 @@ public abstract class AnimationScript{
 
 	private boolean started = false;
 	private boolean stopped = false;
-	private boolean endless = false;
+	protected boolean endless = false;
 
 	protected double startValue = 0;
 	protected double endValue = 0;

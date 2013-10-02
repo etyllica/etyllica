@@ -26,14 +26,14 @@ public class EffectMovel extends MovementedLayer
 		resetAnimation();
 		
 		visible = true;
-		anim();
+		animate();
 		moviment();
 	}
 	
 	public void desAnima(){
 		stopped = true;
 		visible = false;
-		desanim();
+		//desanim();
 	}
 
 }
