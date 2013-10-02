@@ -1,7 +1,8 @@
 package examples.etyllica.tutorial11.application;
 
 import java.awt.Color;
-import java.io.ByteArrayOutputStream;
+
+import javax.sound.sampled.AudioInputStream;
 
 import sound.capture.CaptureHandler;
 import br.com.etyllica.core.application.Application;
@@ -22,11 +23,14 @@ import br.com.etyllica.gui.label.TextLabel;
 
 public class CaptureAudioApplication extends Application {
 
-	protected boolean running;
-	ByteArrayOutputStream out;
+	private AudioInputStream audioInputStream;
 
 	private Button stop;
-	private Button play; 
+	private Button play;
+	
+	private boolean canDraw = false;
+
+	private int[][] channels;
 
 	public CaptureAudioApplication(int w, int h) {
 		super(w,h);
@@ -51,13 +55,44 @@ public class CaptureAudioApplication extends Application {
 		play.setDisabled(true);
 		this.add(play);
 
-		loading = 100;
 	}
 
 	public void stopCapture(){
+		
 		stop.setDisabled(true);
 		play.setDisabled(false);
 		CaptureHandler.getInstance().stopCapture();
+		
+		byte[] buffer = CaptureHandler.getInstance().getInputBuffer().toByteArray();
+		audioInputStream = CaptureHandler.getInstance().getStream();		
+		
+		int numChannels = audioInputStream.getFormat().getChannels();
+		//int frameLength = (int) audioInputStream.getFrameLength();
+		int frameLength = buffer.length;
+				
+		channels = new int[numChannels][frameLength];
+
+		int sampleIndex = 0;
+
+		for (int t = 0; t < buffer.length;) {
+			for (int channel = 0; channel < numChannels; channel++) {
+
+				int low = (int) buffer[t];
+				t++;
+				int high = (int) buffer[t];
+				t++;
+
+				int sample = getSixteenBitSample(high, low);
+				channels[channel][sampleIndex] = sample;
+			}
+			sampleIndex++;
+		}
+
+		canDraw = true;
+	}
+
+	private int getSixteenBitSample(int high, int low) {
+		return (high << 8) + (low & 0x00ff);
 	}
 
 	public void captureAudio() {
@@ -70,36 +105,45 @@ public class CaptureAudioApplication extends Application {
 	}
 
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	int lastLength = 0;
-	
-	@Override
 	public void draw(Graphic g) {
-		// TODO Auto-generated method stub
-		g.setColor(Color.BLACK);
-		
-		if(CaptureHandler.getInstance().getInputBuffer()!=null){
-			
-			byte[] buffer = CaptureHandler.getInstance().getInputBuffer().toByteArray();
-			
-			for(int i=lastLength;i<buffer.length;i++){
-				//System.out.println(buffer[i]);
-				g.drawRect(i-lastLength, 200+buffer[i], 1, 1);
-			}
-			
-			lastLength = buffer.length;
-		}
 
+		g.setColor(Color.BLACK);
+
+		if(canDraw){
+
+			final int channel = 0;
+
+			int[] samples = channels[channel];
+
+			int xIndex = 0;
+			int oldX = 0;
+			int oldY = 0;
+			int increment = 10;
+			int offsetY = 290;
+						
+			for (int t=0 ; t < samples.length; t += increment) {
+				double scaleFactor = 0.1;
+				double scaledSample = samples[t]/20 * scaleFactor;
+				int y = (int) (15 - (scaledSample));
+				g.drawLine(oldX, oldY+offsetY, xIndex, y+offsetY);
+
+				xIndex++;
+				oldX = xIndex;
+				oldY = y;
+			}
+		}
+	}	
+
+	@Override
+	public GUIEvent updateKeyboard(KeyEvent event) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

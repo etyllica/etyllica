@@ -38,5 +38,9 @@ public abstract class Application extends InternalApplication{
 	public void setReturnApplication(Application returnApplication) {
 		this.returnApplication = returnApplication;
 	}
+
+	public void setLoading(float loading) {
+		this.loading = 100;
+	}
 		
 }

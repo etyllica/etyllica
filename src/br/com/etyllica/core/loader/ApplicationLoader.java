@@ -43,12 +43,15 @@ public class ApplicationLoader{
 
 				application.load();
 				
+				//This way, even if developer forget to put loading = 100;
+				//Application will start
+				application.setLoading(100);
+				
 			}
 
 		});
 		
 		loadExecutor.execute(new Runnable() {
-
 
 			@Override
 			public void run() {

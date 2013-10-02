@@ -28,6 +28,8 @@ public class CaptureHandler{
 
 		return instance;
 	}
+	
+	private TargetDataLine line;
 		
 	public synchronized void captureAudio(){
 		
@@ -35,7 +37,7 @@ public class CaptureHandler{
 			
 			final AudioFormat format = getFormat();
 			DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
-			final TargetDataLine line = (TargetDataLine) AudioSystem.getLine(info);
+			line = (TargetDataLine) AudioSystem.getLine(info);
 			line.open(format);
 			line.start();
 			
@@ -53,7 +55,9 @@ public class CaptureHandler{
 								inputBuffer.write(buffer, 0, count);
 							}
 						}
+						
 						inputBuffer.close();
+						
 					} catch (IOException e) {
 						System.err.println("I/O problems: " + e);
 						System.exit(-1);
@@ -128,6 +132,12 @@ public class CaptureHandler{
 			System.err.println("Line unavailable: " + e);
 			
 		}
+		
+	}
+	
+	public AudioInputStream getStream() {
+		
+		return new AudioInputStream(line);
 		
 	}
 	
