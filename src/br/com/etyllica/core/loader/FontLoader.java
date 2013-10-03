@@ -20,6 +20,8 @@ public class FontLoader extends Loader{
 
 	private static FontLoader instance = null;
 
+	private String[] systemFonts;
+	
 	private Map<String, Font>fonts = new HashMap<String, Font>();
 
 	private FontLoader(){
@@ -75,5 +77,13 @@ public class FontLoader extends Loader{
 		return fonts.get(fontName);
 
 	}
-	
+
+	public String[] getSystemFonts() {
+		return systemFonts;
+	}
+
+	public void setSystemFonts(String[] systemFonts) {
+		this.systemFonts = systemFonts;
+	}
+		
 }

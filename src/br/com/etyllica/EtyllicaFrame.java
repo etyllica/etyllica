@@ -3,6 +3,8 @@ package br.com.etyllica;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Transparency;
@@ -78,11 +80,9 @@ public abstract class EtyllicaFrame extends JFrame{
 		
 		defineSize(w,h);
 		
-		core = new Core();
-
-		String s = getClass().getResource("").toString();
+		initialSetup();
 		
-		setPath(s);
+		core = new Core();
 
 		//MeshLoader.getInstancia().setUrl(s);
 		grafico = new Graphic(w,h);		
@@ -117,6 +117,20 @@ public abstract class EtyllicaFrame extends JFrame{
 		requestFocus();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+	}
+	
+	private void initialSetup(){
+		
+		String s = getClass().getResource("").toString();
+		
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice[] gs = ge.getScreenDevices();
+		
+		String systemFonts[] = ge.getAvailableFontFamilyNames();
+		FontLoader.getInstance().setSystemFonts(systemFonts);
+		
+		setPath(s);
+		
 	}
 	
 	private void startEngine(){
