@@ -2,8 +2,6 @@ package examples.etyllica.tutorial11.application;
 
 import java.awt.Color;
 
-import javax.sound.sampled.AudioInputStream;
-
 import sound.capture.CaptureHandler;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIAction;
@@ -23,14 +21,12 @@ import br.com.etyllica.gui.label.TextLabel;
 
 public class CaptureAudioApplication extends Application {
 
-	private AudioInputStream audioInputStream;
-
 	private Button stop;
 	private Button play;
 	
 	private boolean canDraw = false;
 
-	private int[][] channels;
+	private int[][] waveSamples;
 
 	public CaptureAudioApplication(int w, int h) {
 		super(w,h);
@@ -62,37 +58,9 @@ public class CaptureAudioApplication extends Application {
 		stop.setDisabled(true);
 		play.setDisabled(false);
 		CaptureHandler.getInstance().stopCapture();
-		
-		byte[] buffer = CaptureHandler.getInstance().getInputBuffer().toByteArray();
-		audioInputStream = CaptureHandler.getInstance().getStream();		
-		
-		int numChannels = audioInputStream.getFormat().getChannels();
-		//int frameLength = (int) audioInputStream.getFrameLength();
-		int frameLength = buffer.length;
-				
-		channels = new int[numChannels][frameLength];
-
-		int sampleIndex = 0;
-
-		for (int t = 0; t < buffer.length;) {
-			for (int channel = 0; channel < numChannels; channel++) {
-
-				int low = (int) buffer[t];
-				t++;
-				int high = (int) buffer[t];
-				t++;
-
-				int sample = getSixteenBitSample(high, low);
-				channels[channel][sampleIndex] = sample;
-			}
-			sampleIndex++;
-		}
-
+						
+		waveSamples = CaptureHandler.getInstance().getWaveformSamples();
 		canDraw = true;
-	}
-
-	private int getSixteenBitSample(int high, int low) {
-		return (high << 8) + (low & 0x00ff);
 	}
 
 	public void captureAudio() {
@@ -111,25 +79,27 @@ public class CaptureAudioApplication extends Application {
 
 		if(canDraw){
 
+			//Just Draw the first channel, microphone is mono
 			final int channel = 0;
 
-			int[] samples = channels[channel];
+			int[] samples = waveSamples[channel];
 
-			int xIndex = 0;
-			int oldX = 0;
-			int oldY = 0;
-			int increment = 10;
+			int x = 0;
+			int lastX = 0;
+			int lastY = 0;
+			int increment = 8;
 			int offsetY = 290;
 						
 			for (int t=0 ; t < samples.length; t += increment) {
 				double scaleFactor = 0.1;
 				double scaledSample = samples[t]/20 * scaleFactor;
 				int y = (int) (15 - (scaledSample));
-				g.drawLine(oldX, oldY+offsetY, xIndex, y+offsetY);
+				g.drawLine(lastX, lastY+offsetY, x, y+offsetY);
 
-				xIndex++;
-				oldX = xIndex;
-				oldY = y;
+				x++;
+				
+				lastX = x;
+				lastY = y;
 			}
 		}
 	}	

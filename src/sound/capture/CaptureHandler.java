@@ -135,10 +135,40 @@ public class CaptureHandler{
 		
 	}
 	
-	public AudioInputStream getStream() {
+	public int[][] getWaveformSamples(){
 		
-		return new AudioInputStream(line);
+		int[][] waveSamples;
 		
+		byte[] buffer = inputBuffer.toByteArray();
+		AudioInputStream audioInputStream = new AudioInputStream(line);	
+		
+		int numChannels = audioInputStream.getFormat().getChannels();
+		//int frameLength = (int) audioInputStream.getFrameLength();
+		int frameLength = buffer.length;
+				
+		waveSamples = new int[numChannels][frameLength];
+
+		int sampleIndex = 0;
+
+		for (int t = 0; t < buffer.length;) {
+			for (int channel = 0; channel < numChannels; channel++) {
+
+				int low = (int) buffer[t];
+				t++;
+				int high = (int) buffer[t];
+				t++;
+
+				int sample = getSixteenBitSample(high, low);
+				waveSamples[channel][sampleIndex] = sample;
+			}
+			sampleIndex++;
+		}
+	
+		return waveSamples;
+	}
+	
+	private int getSixteenBitSample(int high, int low) {
+		return (high << 8) + (low & 0x00ff);
 	}
 	
 	private AudioFormat getFormat() {
