@@ -4,17 +4,17 @@ import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.layer.Layer;
 
 
-public class ScaleAnimationScript extends AnimationScript{
+public class ScaleAnimation extends AnimationScript{
 		
-	public ScaleAnimationScript(long time){
+	public ScaleAnimation(long time){
 		super(time);
 	}
 	
-	public ScaleAnimationScript(long delay, long time){
+	public ScaleAnimation(long delay, long time){
 		super(delay, time);
 	}
 	
-	public ScaleAnimationScript(Layer target, long time){
+	public ScaleAnimation(Layer target, long time){
 		super(target, time);
 	}
 		

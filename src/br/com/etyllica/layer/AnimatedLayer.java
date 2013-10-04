@@ -116,13 +116,13 @@ public class AnimatedLayer extends ImageLayer{
 	public void animate(){
 
 		preAnima();
-		
+
 		/*if(!lockOnce){
 
 			timer.setParado(false);
 
 			if(timer.passou()){
-				
+
 			}
 		}*/
 
@@ -181,17 +181,40 @@ public class AnimatedLayer extends ImageLayer{
 		}
 
 		if(!stopped){
-
-			if(animaEmX){
-				setXImage(xTile*currentFrame);
-			}
-			else{
-				setYImage(yTile*currentFrame);
-			}
-
+			setFrame(currentFrame);
 		}
 	}
-	
+
+	private boolean osc = true;
+
+	public void animate(int frame){
+
+		/*if(oscilate){
+
+			if(!osc){
+				frame = frames-frame-1;	
+			}
+			
+			if(frame==0){
+				osc = !osc;
+			}
+			
+		}*/		
+
+		setFrame(frame);
+	}
+
+	protected void setFrame(int frame){
+		
+		if(animaEmX){
+			setXImage(xTile*frame);
+		}
+		else{
+			setYImage(yTile*frame);
+		}
+
+	}
+
 	@Override
 	public int centralizeX(int xInicial, int xFinal)
 	{
@@ -306,7 +329,7 @@ public class AnimatedLayer extends ImageLayer{
 			}
 
 			g.setTransform(transform);
-			
+
 			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
 					xImage,yImage,xImage+xTile,yImage+yTile, null );
 			g.resetTransform();
@@ -331,7 +354,7 @@ public class AnimatedLayer extends ImageLayer{
 	public boolean isStopped(){
 		return stopped;
 	}
-	
+
 
 	/**
 	 * Set Number of Frames
@@ -364,6 +387,14 @@ public class AnimatedLayer extends ImageLayer{
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	public boolean isOscilate() {
+		return oscilate;
+	}
+
+	public void setOscilate(boolean oscilate) {
+		this.oscilate = oscilate;
 	}
 	
 }

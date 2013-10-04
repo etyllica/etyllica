@@ -4,23 +4,23 @@ import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.layer.Layer;
 
 
-public class OpacityAnimationScript extends AnimationScript{
+public class HorizontalMovement extends AnimationScript{
 		
-	public OpacityAnimationScript(long time){
+	public HorizontalMovement(long time){
 		super(time);
 	}
 	
-	public OpacityAnimationScript(long delay, long time){
+	public HorizontalMovement(long delay, long time){
 		super(delay, time);
 	}
 	
-	public OpacityAnimationScript(Layer target, long time){
+	public HorizontalMovement(Layer target, long time){
 		super(target, time);
 	}
-	
+
 	@Override
 	protected void update(double value){
-		target.setOpacity((int)value);
-	}	
+		target.setX((int)value);
+	}
 
 }

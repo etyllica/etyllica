@@ -41,6 +41,8 @@ public class ApplicationLoader{
 			@Override
 			public void run() {
 
+				application.setLocked(true);
+				
 				application.load();
 				
 				//This way, even if developer forget to put loading = 100;

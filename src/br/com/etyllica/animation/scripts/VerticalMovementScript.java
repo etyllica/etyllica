@@ -4,13 +4,13 @@ import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.layer.Layer;
 
 
-public class VerticalAnimationScript extends AnimationScript{
+public class VerticalMovementScript extends AnimationScript{
 		
-	public VerticalAnimationScript(long time){
+	public VerticalMovementScript(long time){
 		super(time);
 	}
 	
-	public VerticalAnimationScript(Layer target, long time){
+	public VerticalMovementScript(Layer target, long time){
 		super(target, time);
 	}
 		

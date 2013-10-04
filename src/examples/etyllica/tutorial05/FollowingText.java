@@ -1,4 +1,4 @@
-package examples.etyllica.tutorial05.application;
+package examples.etyllica.tutorial05;
 
 import java.awt.Color;
 
@@ -44,11 +44,11 @@ public class FollowingText extends Application{
 	@Override
 	public void draw(Graphic g) {
 				
-		//Drawing background
-		
+		//Drawing background		
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(x,y,w,h);
 		
+		//Drawing text		
 		text.draw(g);
 	}
 

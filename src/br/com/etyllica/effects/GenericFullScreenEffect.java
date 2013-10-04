@@ -2,7 +2,7 @@ package br.com.etyllica.effects;
 
 import java.awt.Color;
 
-import br.com.etyllica.animation.scripts.OpacityAnimationScript;
+import br.com.etyllica.animation.scripts.OpacityAnimation;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.i18n.DefaultDictionary;
@@ -24,7 +24,7 @@ public class GenericFullScreenEffect extends GlobalEffect{
 		dictionary = new DefaultDictionary();
 		
 		//3 seconds animation
-		script = new OpacityAnimationScript(this, 3000);
+		script = new OpacityAnimation(this, 3000);
 		script.setInterval(255, 0);
 		
 	}

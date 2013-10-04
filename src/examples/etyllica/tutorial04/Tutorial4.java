@@ -1,7 +1,6 @@
 package examples.etyllica.tutorial04;
 
 import br.com.etyllica.Etyllica;
-import examples.etyllica.tutorial04.application.ProceduralColorChange;
 
 /**
  * 

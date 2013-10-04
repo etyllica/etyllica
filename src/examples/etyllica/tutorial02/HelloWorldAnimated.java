@@ -1,7 +1,7 @@
-package examples.etyllica.tutorial02.application;
+package examples.etyllica.tutorial02;
 
-import br.com.etyllica.animation.scripts.RotateAnimationScript;
-import br.com.etyllica.animation.scripts.ScaleAnimationScript;
+import br.com.etyllica.animation.scripts.RotateAnimation;
+import br.com.etyllica.animation.scripts.ScaleAnimation;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -41,12 +41,12 @@ public class HelloWorldAnimated extends Application{
 		loadingPhrase = "Loading animations...";
 		loading = 50;
 		
-		ScaleAnimationScript scaleAnimation = new ScaleAnimationScript(0,10000);
+		ScaleAnimation scaleAnimation = new ScaleAnimation(0,10000);
 		scaleAnimation.setTarget(hello);
 		scaleAnimation.setInterval(0.1, 1);
 		this.animation.add(scaleAnimation);
 		
-		RotateAnimationScript rotateAnimation = new RotateAnimationScript(0,10000);
+		RotateAnimation rotateAnimation = new RotateAnimation(0,10000);
 		rotateAnimation.setTarget(hello);
 		rotateAnimation.setInterval(0, 360);
 		this.animation.add(rotateAnimation);

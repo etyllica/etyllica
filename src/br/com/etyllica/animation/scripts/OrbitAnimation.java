@@ -4,20 +4,20 @@ import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.layer.Layer;
 
 
-public class OrbitAnimationScript extends AnimationScript{
+public class OrbitAnimation extends AnimationScript{
 
 	private int centerX = 0, centerY = 0;
 	private int tx, ty, tw, th;
 	
-	public OrbitAnimationScript(long time){
+	public OrbitAnimation(long time){
 		super(time);
 	}
 
-	public OrbitAnimationScript(long delay, long time){
+	public OrbitAnimation(long delay, long time){
 		super(delay, time);
 	}
 
-	public OrbitAnimationScript(Layer target, long time){
+	public OrbitAnimation(Layer target, long time){
 		super(target, time);
 	}
 		

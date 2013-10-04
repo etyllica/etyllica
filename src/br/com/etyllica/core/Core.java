@@ -837,6 +837,7 @@ public class Core{
 
 		//Lock old application
 		Application application = activeWindow.getApplication();
+		
 		application.setLocked(true);
 		
 		application.setSessionMap(activeWindow.getSessionMap());

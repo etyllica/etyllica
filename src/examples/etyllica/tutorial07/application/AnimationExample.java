@@ -2,12 +2,12 @@ package examples.etyllica.tutorial07.application;
 
 import java.awt.Color;
 
-import br.com.etyllica.animation.scripts.HorizontalAnimationScript;
-import br.com.etyllica.animation.scripts.OpacityAnimationScript;
-import br.com.etyllica.animation.scripts.RotateAnimationScript;
-import br.com.etyllica.animation.scripts.ScaleAnimationScript;
-import br.com.etyllica.animation.scripts.OrbitAnimationScript;
-import br.com.etyllica.animation.scripts.VerticalAnimationScript;
+import br.com.etyllica.animation.scripts.HorizontalMovement;
+import br.com.etyllica.animation.scripts.OpacityAnimation;
+import br.com.etyllica.animation.scripts.RotateAnimation;
+import br.com.etyllica.animation.scripts.ScaleAnimation;
+import br.com.etyllica.animation.scripts.OrbitAnimation;
+import br.com.etyllica.animation.scripts.VerticalMovementScript;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -54,19 +54,19 @@ public class AnimationExample extends Application{
 		text2.setBorderColor(Color.BLACK);
 		text2.setBorderWidth(3f);
 		
-		HorizontalAnimationScript hscript = new HorizontalAnimationScript(text2, 10000);
+		HorizontalMovement hscript = new HorizontalMovement(text2, 10000);
 		hscript.setInterval(400, 10);
 		
-		HorizontalAnimationScript invscript = new HorizontalAnimationScript(text2, 10000);
+		HorizontalMovement invscript = new HorizontalMovement(text2, 10000);
 		invscript.setInterval(10, 400);
 		//After the hscript, execute invscript
 		hscript.setNext(invscript);
 		
-		VerticalAnimationScript vscript = new VerticalAnimationScript(text2, 600);
+		VerticalMovementScript vscript = new VerticalMovementScript(text2, 600);
 		vscript.setInterval(100, 200);
 		vscript.setEndless(true);
 		
-		VerticalAnimationScript invVscript = new VerticalAnimationScript(600);
+		VerticalMovementScript invVscript = new VerticalMovementScript(600);
 		invVscript.setTarget(text2);
 		invVscript.setInterval(200, 100);
 		vscript.setNext(invVscript);
@@ -74,24 +74,24 @@ public class AnimationExample extends Application{
 		this.animation.add(hscript);
 		this.animation.add(vscript);
 		
-		RotateAnimationScript rotate = new RotateAnimationScript(1000,6000);
+		RotateAnimation rotate = new RotateAnimation(1000,6000);
 		rotate.setTarget(text2);
 		rotate.setInterval(0, 360);
 		this.animation.add(rotate);
 		
 		
-		OpacityAnimationScript opacityAnimation = new OpacityAnimationScript(0,10000);
+		OpacityAnimation opacityAnimation = new OpacityAnimation(0,10000);
 		opacityAnimation.setTarget(text3);
 		opacityAnimation.setInterval(0, 255);
 		this.animation.add(opacityAnimation);
 		
-		ScaleAnimationScript scaleAnimation = new ScaleAnimationScript(0,10000);
+		ScaleAnimation scaleAnimation = new ScaleAnimation(0,10000);
 		scaleAnimation.setTarget(text3);
 		scaleAnimation.setInterval(1, 5);
 		this.animation.add(scaleAnimation);
 		
 				
-		OrbitAnimationScript orbit = new OrbitAnimationScript(0,60000);
+		OrbitAnimation orbit = new OrbitAnimation(0,60000);
 		orbit.setTarget(layer);
 		orbit.setInterval(0, 1080);
 		orbit.setCenter(cx, cy);
@@ -104,12 +104,12 @@ public class AnimationExample extends Application{
 		hello = new ImageLayer(200,100,"hello.png");
 		helloFix = new ImageLayer(200,100,"hello.png");
 		
-		ScaleAnimationScript scaleHello = new ScaleAnimationScript(0,10000);
+		ScaleAnimation scaleHello = new ScaleAnimation(0,10000);
 		scaleHello.setTarget(hello);
 		scaleHello.setInterval(1, 2);
 		this.animation.add(scaleHello);
 		
-		RotateAnimationScript rotateHello = new RotateAnimationScript(0,10000);
+		RotateAnimation rotateHello = new RotateAnimation(0,10000);
 		rotateHello.setTarget(hello);
 		rotateHello.setInterval(0, 360);
 		this.animation.add(rotateHello);

@@ -1,4 +1,4 @@
-package examples.etyllica.tutorial05;
+package examples.etyllica.tutorial15;
 
 import br.com.etyllica.Etyllica;
 
@@ -9,18 +9,18 @@ import br.com.etyllica.Etyllica;
  *
  */
 
-public class Tutorial5 extends Etyllica {
+public class Tutorial3 extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 
-	public Tutorial5() {
+	public Tutorial3() {
 		super(640, 480);
 	}
 	
 	@Override
 	public void startGame() {
 		
-		setMainApplication(new FollowingText(w,h));
+		setMainApplication(new ChatWindowExample(w,h));
 	}
 	
 }

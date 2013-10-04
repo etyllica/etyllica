@@ -21,22 +21,17 @@ public class Effect extends AnimatedLayer{
 	{
 		super(x,y,xTile,yTile,caminho);
 		setVisible(false);
-		once = true;
 	}
 	
-	public void anima()
-	{
-		//frameAtual = 0;
-		//parado = false;
+	@Override
+	public void animate(int frame){
+				
+		setFrame(frame);
 		
-		setVisible(true);
-		animate();
+		/*if(frame==frames){
+			setVisible(false);
+		}*/
+		
 	}
 	
-	public void desAnima(){
-		stopped = true;
-		setVisible(false);
-		//desanim();
-	}
-
 }
