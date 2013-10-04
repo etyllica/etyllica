@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.ApplicationLoader;
 import br.com.etyllica.core.application.InternalApplication;
 import br.com.etyllica.core.application.DefaultLoadApplication;
 import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.loader.ApplicationLoader;
 import br.com.etyllica.core.video.Graphic;
 
 /**

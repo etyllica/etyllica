@@ -1,13 +1,10 @@
-package br.com.etyllica.core.loader;
+package br.com.etyllica.core.application;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.InternalApplication;
-import br.com.etyllica.core.application.LoadApplication;
 import br.com.etyllica.gui.Window;
 
 /**
@@ -18,7 +15,7 @@ import br.com.etyllica.gui.Window;
  */
 
 public class ApplicationLoader{
-	
+
 	private ExecutorService loadExecutor;
 
 	private Window window;
@@ -32,7 +29,7 @@ public class ApplicationLoader{
 	}
 
 	public void loadApplication(){
-		
+
 		loadExecutor = new ThreadPoolExecutor(2, 2, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(2));
 		//loadExecutor = Executors.newFixedThreadPool(2);
 
@@ -42,43 +39,49 @@ public class ApplicationLoader{
 			public void run() {
 
 				application.setLocked(true);
-				
+
 				application.load();
-				
+
 				//This way, even if developer forget to put loading = 100;
 				//Application will start
 				application.setLoading(100);
-				
+
 			}
 
 		});
-		
+
 		loadExecutor.execute(new Runnable() {
 
 			@Override
-			public void run() {
+            public void run() {
 
-				while(application.getLoading()<100){
-					loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
-				}
+                String lastPhrase = application.getLoadingPhrase();
+               
+                while(application.getLoading()<100){
+                    //Its really important to not hang loading execution (probably the thread loses focus)
 
-				application.setLocked(false);
+                    if(!lastPhrase.equals(application.getLoadingPhrase())){
+                        loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
+                    }
+                }
+               
+                application.setLocked(false);
 
-				window.setApplication(application);
+                window.setApplication(application);
 
-				window.restartWindow();
-												
-			}
+                window.restartWindow();
+                                               
+            }
 
 		});				
 
 	}
-	
+
 	public void cleanMemory(){
 		loadExecutor.shutdownNow();
 		System.gc();
 	}
-	
+
 	public InternalApplication getApplication() {
 		return application;
 	}
