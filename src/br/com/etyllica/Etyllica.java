@@ -16,15 +16,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.Core;
+import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.FontLoader;
-import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.core.loader.MultimediaLoader;
-import br.com.etyllica.core.video.FullScreenWindow;
-import br.com.etyllica.core.video.Graphic;
-import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 
 /**
@@ -40,9 +36,8 @@ public abstract class Etyllica extends Applet{
 
 	private Core core;
 	
-	private FullScreenWindow telaCheia = null;
-	private boolean fullScreen = false;
-
+	private SharedCore sharedCore;
+	
 	protected int w = 640;
 	protected int h = 480;
 
@@ -58,12 +53,8 @@ public abstract class Etyllica extends Applet{
 
 	private Mouse mouse;
 
-	private Graphic grafico;
-
 	//From Luvia
 	private ScheduledExecutorService executor;
-	
-	private String path = "";
 	
 	protected boolean initAll = false;
 	protected boolean initSound = false;
@@ -80,12 +71,12 @@ public abstract class Etyllica extends Applet{
 		
 		defineSize(w,h);
 
+		sharedCore = new SharedCore(w,h);
+		this.core = sharedCore.getCore();
+		
 		initialSetup();
 		
-		core = new Core();	
-
-		grafico = new Graphic(w,h);		
-		grafico.setBufferedImage(volatileImg.getSnapshot());
+		sharedCore.getGraphic().setBufferedImage(volatileImg.getSnapshot());
 				
 		mouse = core.getControl().getMouse();
 		//keyboard = core.getControl().getTeclado();
@@ -94,8 +85,7 @@ public abstract class Etyllica extends Applet{
 		
 		startGame();		
 		
-		
-		desktop.setApplication(application);	
+		desktop.setApplication(application);
 		core.addWindow(desktop);
 		
 		hideDefaultCursor();
@@ -158,7 +148,7 @@ public abstract class Etyllica extends Applet{
 		//For Windows
 		String s = path.replaceAll("%20"," ");
 		
-		this.path = s;
+		sharedCore.setPath(s);
 		
 		initLoaders();
 				
@@ -166,25 +156,16 @@ public abstract class Etyllica extends Applet{
 	
 	private void initLoaders(){
 
-		initDefault();
+		sharedCore.initDefault();
 		
 		if(initAll||initSound){
-			initSound();
+			sharedCore.initSound();
 		}
 		
 		if(initAll||initJoysick){
 			initJoystick();
 		}
 		
-	}
-	
-	protected void initDefault(){
-		ImageLoader.getInstance().setUrl(path);
-		FontLoader.getInstance().setUrl(path);
-	}
-	
-	protected void initSound(){
-		MultimediaLoader.getInstance().setUrl(path);
 	}
 	
 	protected void initJoystick(){
@@ -207,19 +188,16 @@ public abstract class Etyllica extends Applet{
 			//grafico.setBimg(volatileImg.getSnapshot());
 		}
 
-		core.draw(grafico);
+		core.draw(sharedCore.getGraphic());
 
 		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
-		if(!fullScreen){
-			g.drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
+		if(!sharedCore.isFullScreenEnable()){
+			g.drawImage(sharedCore.getGraphic().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		}
 		else{
-			if(telaCheia!=null){
-				//telaCheia.desenha(volatileImg.getSnapshot());
-				telaCheia.draw(grafico.getBimg());
-			}
+			sharedCore.drawFullScreen();
 		}
 		
 		g.dispose();
@@ -244,9 +222,9 @@ public abstract class Etyllica extends Applet{
 		event = core.getSuperEvent();
 
 		if(event==GUIEvent.ENABLE_FULL_SCREEN){
-			enableFullScreen();
+			sharedCore.enableFullScreen();
 		}else if(event==GUIEvent.DISABLE_FULL_SCREEN){
-			disableFullScreen();
+			sharedCore.disableFullScreen();
 
 			//TODO When Frame
 		//}else if(event==GUIEvent.WINDOW_MOVE){
@@ -303,36 +281,6 @@ public abstract class Etyllica extends Applet{
 
 		volatileImg = createBackBuffer(width, height);
 
-	}
-	
-	public void setFullScreen(boolean fullscreen){
-
-		if(fullscreen){
-			enableFullScreen();
-		}else{
-			disableFullScreen();
-		}
-
-	}
-
-	private void enableFullScreen(){
-
-		if(!fullScreen){
-			fullScreen = true;
-
-			telaCheia = new FullScreenWindow(core);
-			
-			core.addEffect(new GenericFullScreenEffect(0, 0, w, h));
-		}
-	}
-
-	private void disableFullScreen(){
-		if(fullScreen){
-			fullScreen = false;
-
-			telaCheia.dispose();
-			telaCheia = null;
-		}
 	}
 
 }

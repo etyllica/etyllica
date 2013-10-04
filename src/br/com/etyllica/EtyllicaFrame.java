@@ -17,15 +17,11 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
 import br.com.etyllica.core.Core;
+import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.FontLoader;
-import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.core.loader.MultimediaLoader;
-import br.com.etyllica.core.video.FullScreenWindow;
-import br.com.etyllica.core.video.Graphic;
-import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 
 /**
@@ -38,11 +34,10 @@ import br.com.etyllica.gui.window.MainWindow;
 public abstract class EtyllicaFrame extends JFrame{
 
 	private static final long serialVersionUID = 4588303747276461888L;
-
+	
 	private Core core;
-
-	private FullScreenWindow telaCheia = null;
-	private boolean fullScreen = false;
+	
+	private SharedCore sharedCore;
 
 	protected int w = 640;
 	protected int h = 480;
@@ -58,12 +53,8 @@ public abstract class EtyllicaFrame extends JFrame{
 
 	protected Mouse mouse;
 
-	private Graphic grafico;
-
 	//From Luvia
 	private ScheduledExecutorService executor;
-	
-	private String path = "";
 	
 	protected boolean initAll = false;
 	protected boolean initSound = false;
@@ -81,12 +72,13 @@ public abstract class EtyllicaFrame extends JFrame{
 		defineSize(w,h);
 		
 		initialSetup();
-		
-		core = new Core();
 
 		//MeshLoader.getInstancia().setUrl(s);
-		grafico = new Graphic(w,h);		
-		grafico.setBufferedImage(volatileImg.getSnapshot());
+		sharedCore = new SharedCore(w,h);
+		this.core = sharedCore.getCore();
+		
+		sharedCore.getGraphic().setBufferedImage(volatileImg.getSnapshot());
+		
 		desktop = new MainWindow(0,0,w,h);
 
 		mouse = core.getControl().getMouse();
@@ -161,7 +153,7 @@ public abstract class EtyllicaFrame extends JFrame{
 		//For Windows
 		String s = path.replaceAll("%20"," ");
 		
-		this.path = s;
+		sharedCore.setPath(s);
 		
 		initLoaders();
 				
@@ -169,25 +161,16 @@ public abstract class EtyllicaFrame extends JFrame{
 	
 	private void initLoaders(){
 
-		initDefault();
+		sharedCore.initDefault();
 		
 		if(initAll||initSound){
-			initSound();
+			sharedCore.initSound();
 		}
 		
 		if(initAll||initJoysick){
 			initJoystick();
 		}
 		
-	}
-	
-	protected void initDefault(){
-		ImageLoader.getInstance().setUrl(path);
-		FontLoader.getInstance().setUrl(path);
-	}
-	
-	protected void initSound(){
-		MultimediaLoader.getInstance().setUrl(path);
 	}
 	
 	protected void initJoystick(){
@@ -207,18 +190,16 @@ public abstract class EtyllicaFrame extends JFrame{
 			volatileImg = createBackBuffer(w,h); // recreate the hardware accelerated image.
 		}
 
-		core.draw(grafico);
+		core.draw(sharedCore.getGraphic());
 
 		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
-		if(!fullScreen){
-			g.drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
+		if(!sharedCore.isFullScreenEnable()){
+			g.drawImage(sharedCore.getGraphic().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		}
 		else{
-			if(telaCheia!=null){
-				telaCheia.draw(grafico.getBimg());
-			}
+			sharedCore.drawFullScreen();
 		}
 
 	}
@@ -241,9 +222,9 @@ public abstract class EtyllicaFrame extends JFrame{
 		event = core.getSuperEvent();
 
 		if(event==GUIEvent.ENABLE_FULL_SCREEN){
-			enableFullScreen();
+			sharedCore.enableFullScreen();
 		}else if(event==GUIEvent.DISABLE_FULL_SCREEN){
-			disableFullScreen();
+			sharedCore.disableFullScreen();
 
 			//TODO When Frame
 		}else if(event==GUIEvent.WINDOW_MOVE){
@@ -300,36 +281,6 @@ public abstract class EtyllicaFrame extends JFrame{
 
 		volatileImg = createBackBuffer(width, height);
 
-	}
-
-	public void setFullScreen(boolean fullscreen){
-
-		if(fullscreen){
-			enableFullScreen();
-		}else{
-			disableFullScreen();
-		}
-
-	}
-
-	private void enableFullScreen(){
-
-		if(!fullScreen){
-			fullScreen = true;
-
-			telaCheia = new FullScreenWindow(core);
-			//telaCheia.setGerenciador(indice);
-			core.addEffect(new GenericFullScreenEffect(0, 0, w, h));
-		}
-	}
-
-	private void disableFullScreen(){
-		if(fullScreen){
-			fullScreen = false;
-
-			telaCheia.dispose();
-			telaCheia = null;
-		}
 	}
 
 }
