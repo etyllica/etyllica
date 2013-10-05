@@ -83,7 +83,7 @@ public abstract class InternalApplication extends GUIComponent{
 	private boolean locked = false;
 	
 	/**
-	 * Lock
+	 * Pause
 	 */
 	protected boolean paused = false;
 		

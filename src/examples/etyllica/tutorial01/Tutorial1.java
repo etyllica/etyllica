@@ -21,6 +21,7 @@ public class Tutorial1 extends Etyllica {
 		setPath(s+"../../../");
 		
 		setMainApplication(new HelloWorld(w,h));
+		
 	}
 	
 }

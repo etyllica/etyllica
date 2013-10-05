@@ -44,7 +44,7 @@ public class DefaultLoadApplication extends InternalApplication implements LoadA
 
 		by = h-100;
 		
-		loading = 100;
+		loading = 100;		
 	}
 
 	@Override

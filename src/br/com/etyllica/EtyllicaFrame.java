@@ -68,19 +68,16 @@ public abstract class EtyllicaFrame extends JFrame{
 	}
 
 	public void init() {
+				
+		sharedCore = new SharedCore(this, w, h);
+		sharedCore.defineSize(w, h);
 		
-		defineSize(w,h);
+		this.core = sharedCore.getCore();
 		
 		initialSetup();
 
-		//MeshLoader.getInstancia().setUrl(s);
-		sharedCore = new SharedCore(w,h);
-		this.core = sharedCore.getCore();
+		//MeshLoader.getInstance().setUrl(s);				
 		
-		sharedCore.getGraphic().setBufferedImage(volatileImg.getSnapshot());
-		
-		desktop = new MainWindow(0,0,w,h);
-
 		mouse = core.getControl().getMouse();
 
 		desktop = new MainWindow(0,0,w,h);
@@ -182,13 +179,7 @@ public abstract class EtyllicaFrame extends JFrame{
 	@Override
 	public void paint( Graphics g ) {
 
-		GraphicsConfiguration gc = this.getGraphicsConfiguration();
-		int valCode = volatileImg.validate(gc);
-
-		// This means the device doesn't match up to this hardware accelerated image.
-		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE){
-			volatileImg = createBackBuffer(w,h); // recreate the hardware accelerated image.
-		}
+		sharedCore.validateVolatileImage();
 
 		core.draw(sharedCore.getGraphic());
 
@@ -201,6 +192,8 @@ public abstract class EtyllicaFrame extends JFrame{
 		else{
 			sharedCore.drawFullScreen();
 		}
+		
+		g.dispose();
 
 	}
 
@@ -263,24 +256,6 @@ public abstract class EtyllicaFrame extends JFrame{
 		setCursor( transparentCursor );
 	}
 
-	private VolatileImage createBackBuffer(int largura, int altura){
-		return createBackBuffer(largura, altura, Transparency.OPAQUE);
-	}
 
-	private VolatileImage createBackBuffer(int largura, int altura, int transparency){
-		GraphicsConfiguration gc = getGraphicsConfiguration();
-		return gc.createCompatibleVolatileImage(largura, altura, transparency);
-	}
-
-	private void defineSize(int width, int height){
-
-		this.w = width;
-		this.h = height;
-
-		setSize(width, height);
-
-		volatileImg = createBackBuffer(width, height);
-
-	}
 
 }

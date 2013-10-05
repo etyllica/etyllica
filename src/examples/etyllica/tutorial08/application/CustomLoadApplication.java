@@ -32,7 +32,6 @@ public class CustomLoadApplication extends Application{
 			
 		//Simulating Loads
 		fakeLoad();
-		
 	}
 	
 	private void fakeLoad(){

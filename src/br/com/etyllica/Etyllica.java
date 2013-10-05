@@ -47,8 +47,6 @@ public abstract class Etyllica extends Applet{
 
 	private Application application;
 
-	private VolatileImage volatileImg;
-
 	private MainWindow desktop;
 
 	private Mouse mouse;
@@ -69,21 +67,19 @@ public abstract class Etyllica extends Applet{
 
 	public void init() {
 		
-		defineSize(w,h);
-
-		sharedCore = new SharedCore(w,h);
+		sharedCore = new SharedCore(this, w, h);
+		sharedCore.defineSize(w, h);
+		
 		this.core = sharedCore.getCore();
 		
 		initialSetup();
-		
-		sharedCore.getGraphic().setBufferedImage(volatileImg.getSnapshot());
 				
 		mouse = core.getControl().getMouse();
 		//keyboard = core.getControl().getTeclado();
 		
 		desktop = new MainWindow(0,0,w,h);
 		
-		startGame();		
+		startGame();
 		
 		desktop.setApplication(application);
 		core.addWindow(desktop);
@@ -179,14 +175,7 @@ public abstract class Etyllica extends Applet{
 
 		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
-		GraphicsConfiguration gc = this.getGraphicsConfiguration();
-		int valCode = volatileImg.validate(gc);
-
-		// This means the device doesn't match up to this hardware accelerated image.
-		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE){
-			volatileImg = createBackBuffer(w,h); // recreate the hardware accelerated image.
-			//grafico.setBimg(volatileImg.getSnapshot());
-		}
+		sharedCore.validateVolatileImage();		
 
 		core.draw(sharedCore.getGraphic());
 
@@ -261,26 +250,6 @@ public abstract class Etyllica extends Applet{
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
 				, new Point(0, 0), "invisibleCursor");
 		setCursor( transparentCursor );
-	}
-
-	private VolatileImage createBackBuffer(int largura, int altura){
-		return createBackBuffer(largura, altura, Transparency.OPAQUE);
-	}
-
-	private VolatileImage createBackBuffer(int largura, int altura, int transparency){
-		GraphicsConfiguration gc = getGraphicsConfiguration();
-		return gc.createCompatibleVolatileImage(largura, altura, transparency);
-	}
-
-	private void defineSize(int width, int height){
-
-		this.w = width;
-		this.h = height;
-
-		setSize(width, height);
-
-		volatileImg = createBackBuffer(width, height);
-
 	}
 
 }
