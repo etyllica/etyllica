@@ -1,27 +1,17 @@
 package br.com.etyllica;
 
 import java.applet.Applet;
-import java.awt.Cursor;
 import java.awt.Graphics;
-import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.Transparency;
-import java.awt.image.MemoryImageSource;
-import java.awt.image.VolatileImage;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import br.com.etyllica.core.Core;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.FontLoader;
-import br.com.etyllica.gui.window.MainWindow;
 
 /**
  * 
@@ -33,10 +23,8 @@ import br.com.etyllica.gui.window.MainWindow;
 public abstract class Etyllica extends Applet{
 
 	private static final long serialVersionUID = 4588303747276461888L;
-
-	private Core core;
 	
-	private SharedCore sharedCore;
+	private SharedCore core;
 	
 	protected int w = 640;
 	protected int h = 480;
@@ -47,9 +35,7 @@ public abstract class Etyllica extends Applet{
 
 	private Application application;
 
-	private MainWindow desktop;
-
-	private Mouse mouse;
+	//private Mouse mouse;
 
 	//From Luvia
 	private ScheduledExecutorService executor;
@@ -59,42 +45,20 @@ public abstract class Etyllica extends Applet{
 	protected boolean initJoysick = false;
 
 	public Etyllica(int largura, int altura){
-
 		this.w = largura;
-		this.h = altura;
-		
+		this.h = altura;		
 	}
 
 	public void init() {
 		
-		sharedCore = new SharedCore(this, w, h);
-		sharedCore.defineSize(w, h);
-		
-		this.core = sharedCore.getCore();
-		
-		initialSetup();
+		core = new SharedCore(this, w, h);
+		core.defineSize(w, h);
 				
-		mouse = core.getControl().getMouse();
-		//keyboard = core.getControl().getTeclado();
-		
-		desktop = new MainWindow(0,0,w,h);
+		initialSetup();
 		
 		startGame();
 		
-		desktop.setApplication(application);
-		core.addWindow(desktop);
-		
-		hideDefaultCursor();
-		mouse.updateArrowTheme();
-
-		this.setFocusTraversalKeysEnabled(false);
-		setFocusable(true);
-		requestFocus();
-
-		addMouseMotionListener( mouse );
-		addMouseWheelListener( mouse );
-		addMouseListener( mouse );
-		addKeyListener( core.getControl().getKeyboard() );
+		core.startCore(application);
 
 		executor = Executors.newScheduledThreadPool(2);
 		startEngine();
@@ -141,10 +105,7 @@ public abstract class Etyllica extends Applet{
 			
 	protected void setPath(String path){
 		
-		//For Windows
-		String s = path.replaceAll("%20"," ");
-		
-		sharedCore.setPath(s);
+		core.setPath(path);
 		
 		initLoaders();
 				
@@ -152,10 +113,10 @@ public abstract class Etyllica extends Applet{
 	
 	private void initLoaders(){
 
-		sharedCore.initDefault();
+		core.initDefault();
 		
 		if(initAll||initSound){
-			sharedCore.initSound();
+			core.initSound();
 		}
 		
 		if(initAll||initJoysick){
@@ -172,25 +133,7 @@ public abstract class Etyllica extends Applet{
 
 	@Override
 	public void paint( Graphics g ) {
-
-		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
-		sharedCore.validateVolatileImage();		
-
-		core.draw(sharedCore.getGraphic());
-
-		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
-		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
-
-		if(!sharedCore.isFullScreenEnable()){
-			g.drawImage(sharedCore.getGraphic().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
-		}
-		else{
-			sharedCore.drawFullScreen();
-		}
-		
-		g.dispose();
-
+		core.paint(g);
 	}
 
 	@Override
@@ -211,9 +154,9 @@ public abstract class Etyllica extends Applet{
 		event = core.getSuperEvent();
 
 		if(event==GUIEvent.ENABLE_FULL_SCREEN){
-			sharedCore.enableFullScreen();
+			core.enableFullScreen();
 		}else if(event==GUIEvent.DISABLE_FULL_SCREEN){
-			sharedCore.disableFullScreen();
+			core.disableFullScreen();
 
 			//TODO When Frame
 		//}else if(event==GUIEvent.WINDOW_MOVE){
@@ -232,24 +175,12 @@ public abstract class Etyllica extends Applet{
 
 	}
 
-	public void setMainApplication(Application application){
-		this.application = application;
-	}
-	
-	protected void hideCursor(){
+	protected void hideCursor() {
 		core.hideCursor();
 	}
-	
-	protected void showCursor(){
-		core.showCursor();
-	}
 
-	private void hideDefaultCursor(){
-		int[] pixels = new int[16 * 16];
-		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
-				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
-				, new Point(0, 0), "invisibleCursor");
-		setCursor( transparentCursor );
+	public void setMainApplication(Application application){
+		this.application = application;
 	}
 
 }

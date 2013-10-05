@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <project name="Etyllica" default="dist" basedir=".">
 
-	<property name="version"  value="2.4" />
+	<property name="version"  value="2.5" />
+
 	<property name="libcore"  value="etyllica-${version}" />
 	<property name="lib3d"  value="etyllica-${version}-3D" />
 	<property name="libsound"  value="etyllica-${version}-sound" />

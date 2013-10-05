@@ -223,7 +223,7 @@ public class DefaultButton extends RoundGUIComponent{
 
 					retorno = GUIEvent.MOUSE_OUT;
 
-				}else if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+				}else if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
 
 					onFocus = false;
 

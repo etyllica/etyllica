@@ -1,6 +1,5 @@
 package br.com.etyllica.core.application;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +31,7 @@ public class ApplicationLoader{
 
 		//loadExecutor = new ThreadPoolExecutor(2, 2, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(2));
 		loadExecutor = Executors.newScheduledThreadPool(2);
-
+		
 		loadExecutor.execute(new Runnable() {
 
 			@Override

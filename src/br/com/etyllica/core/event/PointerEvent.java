@@ -23,8 +23,8 @@ public class PointerEvent {
 		this.key = key;
 		this.state = state;
 		
-		this.x = -100;
-		this.y = -100;
+		this.x = 0;
+		this.y = 0;
 		this.amount = 0;
 		
 		//Ex: (Teclado, TSK_A, PRESSED);
@@ -90,16 +90,16 @@ public class PointerEvent {
 		return this.key==key;
 	}
 		
-	public boolean getMouseButtonDragged(MouseButton key){
+	public boolean onDragButton(MouseButton key){
 		return((state==KeyState.DRAGGED)&&this.key==key);
 	}
 	
-	public boolean getPressed(MouseButton key){
+	public boolean onButtonDown(MouseButton key){
 		//TODO Make sense?
 		return((state==KeyState.PRESSED||(state==KeyState.DRAGGED))&&this.key==key);
 	}
 	
-	public boolean getReleased(MouseButton key){
+	public boolean onButtonUp(MouseButton key){
 		return((state==KeyState.RELEASED)&&this.key==key);
 	}
 	

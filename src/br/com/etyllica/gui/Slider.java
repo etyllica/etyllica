@@ -36,7 +36,7 @@ public class Slider extends GUIComponent{
 	public GUIEvent updateMouse(PointerEvent event) {
 
 		if(mouseOver){
-			if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+			if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
 				//if(mouse.getPressionado(Mouse.BOTAO_ESQUERDO)){
 
 			

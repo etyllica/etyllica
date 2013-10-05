@@ -97,14 +97,14 @@ public class ScrollerPanel extends GUIComponent{
 
 		if(mouseOver){
 
-			if(event.getPressed(MouseButton.MOUSE_WHEEL_DOWN)){
+			if(event.onButtonDown(MouseButton.MOUSE_WHEEL_DOWN)){
 
 				for(int i=0;i<event.getAmount();i++){
 					scrollDown();
 				}
 			}
 
-			if(event.getPressed(MouseButton.MOUSE_WHEEL_UP)){
+			if(event.onButtonDown(MouseButton.MOUSE_WHEEL_UP)){
 
 				for(int i=event.getAmount();i<0;i++){
 					scrollUp();
@@ -114,7 +114,7 @@ public class ScrollerPanel extends GUIComponent{
 
 			if(knob.isMouseOver()){
 
-				if(event.getPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+				if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
 					//TODO Mouse dragged with knob move scroll
 				}
 

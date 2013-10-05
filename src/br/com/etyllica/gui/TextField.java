@@ -95,7 +95,7 @@ public class TextField extends GUIComponent{
 
 	public GUIEvent updateMouse(PointerEvent event){
 
-		if((event.getPressed(MouseButton.MOUSE_BUTTON_LEFT))){
+		if((event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT))){
 
 			if(mouseOver){
 
