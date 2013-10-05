@@ -294,53 +294,42 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public void draw(Graphic g){
+	public void draw(Graphic g, AffineTransform transform) {
+		g.setTransform(transform);
 
-		if(visible){
+		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
+				xImage,yImage,xImage+xTile,yImage+yTile, null );		
+	}
+	
+	@Override
+	protected AffineTransform getTransform(){
+		AffineTransform transform = new AffineTransform();
 
-			if(opacity<255){
-				g.setOpacity(opacity);
-			}
+		if(angle!=0){
+			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+xTile/2, y+yTile/2));
+		}
+					
+		if(scale!=1){
 
-			AffineTransform transform = new AffineTransform();
+			double sw = xTile*scale;
+			double sh = yTile*scale;
 
-			if(angle!=0){
-				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+xTile/2, y+yTile/2));
-			}
+			double dx = sw/2-xTile/2;
+			double dy = sh/2-yTile/2;
 
-			if(scale!=1){
+			transform.translate(x-xTile/2-dx, y-yTile/2-dy);
 
-				double sw = xTile*scale;
-				double sh = yTile*scale;
+			AffineTransform scaleTransform = new AffineTransform();
 
-				double dx = sw/2-xTile/2;
-				double dy = sh/2-yTile/2;
+			scaleTransform.translate(xTile/2, yTile/2);
+			scaleTransform.scale(scale,scale);
+			scaleTransform.translate(-x, -y);
 
-				transform.translate(x-xTile/2-dx, y-yTile/2-dy);
-
-				AffineTransform scaleTransform = new AffineTransform();
-
-				scaleTransform.translate(xTile/2, yTile/2);
-				scaleTransform.scale(scale,scale);
-				scaleTransform.translate(-x, -y);
-
-				transform.concatenate(scaleTransform);
-
-			}
-
-			g.setTransform(transform);
-
-			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
-					xImage,yImage,xImage+xTile,yImage+yTile, null );
-			g.resetTransform();
-
-			if(opacity<255){
-				g.resetOpacity();
-			}
+			transform.concatenate(scaleTransform);
 
 		}
-
-
+		
+		return transform;
 	}
 
 	/**
