@@ -35,6 +35,9 @@ public class Window extends GUIComponent{
 
 	protected boolean close = false;
 
+	private boolean loaded = true;
+	private boolean locked = false;
+
 	public Window(int x, int y, int w, int h){
 		super(x,y,w,h);
 
@@ -42,7 +45,7 @@ public class Window extends GUIComponent{
 		//load = new GenericLoadApplication(x,y,w,h);
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_ARGB));
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB));
-		
+
 		applicationLoader = new ApplicationLoader();
 	}
 
@@ -71,7 +74,7 @@ public class Window extends GUIComponent{
 			//changeApplication();
 			System.err.println("WINDOW - Not here anymore");
 		}
-				
+
 	}
 
 	@Override
@@ -82,57 +85,61 @@ public class Window extends GUIComponent{
 	public Application getApplication() {
 		return application;
 	}
-	
+
 	public void restartWindow(){
-		applicationLoader.cleanMemory();
+		
 	}
 
 	public void setApplication(Application application) {
 		this.application = application;
-		
+
 		clearComponents();
 		add(application);
-	
+
 	}
-	
+
 	public void setLoadApplication(DefaultLoadApplication loadApplication) {
-		//this.application = loadApplication;
-		
 		clearComponents();
 		add(loadApplication);
-	
 	}
 
 	public void reload(Application application){
-				
-		DefaultLoadApplication load = application.getLoadApplication();
-		load.load();
-		setLoadApplication(load);
 		
-		applicationLoader.setWindow(this);
-		applicationLoader.setApplication(application);
-		applicationLoader.setLoadApplication(load);
-		
-		applicationLoader.loadApplication();
-				
+		if(loaded&&!locked){
+			
+			loaded = false;
+			locked = true;
+
+			DefaultLoadApplication load = application.getLoadApplication();
+			load.load();
+			setLoadApplication(load);
+
+			applicationLoader.setWindow(this);
+			applicationLoader.setApplication(application);
+			applicationLoader.setLoadApplication(load);
+
+			applicationLoader.loadApplication();
+			
+		}
+
 	}
-	
+
 	public SessionMap getSessionMap() {
 		return sessionMap;
 	}
-	
+
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
-		
+
 		//TODO Ctrl+F4...
-		
+
 		return GUIEvent	.NONE;
 	}
-	
+
 	public void closeWindow(){
 		setClose(true);
 	}
-	
+
 	public boolean isClose() {
 		return close;
 	}
@@ -140,5 +147,21 @@ public class Window extends GUIComponent{
 	public void setClose(boolean close) {
 		this.close = close;
 	}
-	
+
+	public boolean isLoaded() {
+		return loaded;
+	}
+
+	public void setLoaded(boolean loaded) {
+		this.loaded = loaded;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
+		
 }

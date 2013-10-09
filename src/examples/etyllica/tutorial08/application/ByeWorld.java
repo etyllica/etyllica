@@ -1,9 +1,5 @@
 package examples.etyllica.tutorial08.application;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -25,35 +21,36 @@ public class ByeWorld extends Application{
 	}
 
 	private void fakeLoad(){
-
-		final ScheduledExecutorService loadSimulator = Executors.newSingleThreadScheduledExecutor();
-
-		loadSimulator.scheduleWithFixedDelay(new Runnable() {
-
-			@Override
-			public void run() {
-				loading+=3;
-
-				if(loading<30){
-
-					loadingPhrase = "Loading Nothing...";
-
-				}else if(loading<50){
-
-					loadingPhrase = "Loading Something...";
-
-				}else if(loading<90){
-
-					loadingPhrase = "Almost Loaded...";
-
-				}else if(loading>=100){
-					loading = 100;
-					loadSimulator.shutdownNow();
-				}
-
+		
+		while(loading<100){
+			
+			loading+=3;
+			
+			if(loading<30){
+				
+				loadingPhrase = "Loading Nothing...";
+				
+			}else if(loading<50){
+				
+				loadingPhrase = "Loading Something...";
+				
+			}else if(loading<90){
+				
+				loadingPhrase = "Almost Loaded...";
+				
+			}else if(loading>=100){
+				loading = 100;
+				
+				return;
 			}
-
-		}, 50, 50, TimeUnit.MILLISECONDS);	
+			
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override

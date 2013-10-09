@@ -820,9 +820,7 @@ public class Core{
 			activeWindow = window;
 
 			//Avoid unnecessary reload
-			if(!window.getApplication().isLocked()){
-				reload(window.getApplication());
-			}
+			reload(window.getApplication());			
 
 		}
 
@@ -837,8 +835,6 @@ public class Core{
 
 		//Lock old application
 		Application application = activeWindow.getApplication();
-		
-		application.setLocked(true);
 		
 		application.setSessionMap(activeWindow.getSessionMap());
 		
