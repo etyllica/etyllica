@@ -202,8 +202,8 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 
 		dragButton = me.getButton();
 		
-		addEvent(dragButton, KeyState.DRAGGED, dragX-x, dragY-y);
-		//addEvent(dragButton, KeyState.DRAGGED, x, y);
+		//addEvent(dragButton, KeyState.DRAGGED, dragX-x, dragY-y);
+		addEvent(dragButton, KeyState.DRAGGED, x, y);
 
 		me.consume();
 	}
