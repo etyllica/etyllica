@@ -49,10 +49,7 @@ public class StaticLayer extends Layer{
 		super(x,y);
 		
 		this.path = path;
-		
-		StaticLayer cam = ImageLoader.getInstance().loadImage(path);
-		this.w = cam.getW();
-		this.h = cam.getH();
+		load();
 	}
 	
 	/**
@@ -61,9 +58,7 @@ public class StaticLayer extends Layer{
 	 */
 	public StaticLayer(String path){
 		this.path = path;
-		StaticLayer cam = ImageLoader.getInstance().loadImage(path);
-		this.w = cam.getW();
-		this.h = cam.getH();
+		load();
 	}
 	
 	public String getPath(){
@@ -104,6 +99,12 @@ public class StaticLayer extends Layer{
 		this.path = layer.path;
 		w = layer.getW();
 		h = layer.getH();
+	}
+
+	public void load(){
+		StaticLayer cam = ImageLoader.getInstance().loadImage(path);
+		this.w = cam.getW();
+		this.h = cam.getH();
 	}
 
 }

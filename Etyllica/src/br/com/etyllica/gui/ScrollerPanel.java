@@ -66,8 +66,9 @@ public class ScrollerPanel extends GUIComponent{
 
 		g.fillRect(x,y,w,h);
 
+		//TODO Fix this
 		BufferedImage back = g.getBimg();
-		g.setBufferedImage(back.getSubimage(x, y, w, h));
+		//g.setBufferedImage(back.getSubimage(x, y, w, h));
 		
 		if(component!=null){
 			
@@ -83,7 +84,7 @@ public class ScrollerPanel extends GUIComponent{
 			
 		}
 		
-		g.setBufferedImage(back);
+		//g.setBufferedImage(back);
 
 	}
 

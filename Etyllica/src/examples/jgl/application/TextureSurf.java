@@ -1,6 +1,7 @@
 package examples.jgl.application;
 
-import jgl.GLU;
+import org.jgl.GLU;
+
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;

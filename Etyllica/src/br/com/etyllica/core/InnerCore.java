@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.AnimationScript;
@@ -69,6 +72,12 @@ public class InnerCore{
 
 	private boolean drawCursor = true;
 	private boolean initJoystick = false;
+	
+	private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+	
+	private final int ANIMATION_DELAY = 20;
+	
+	protected Animator animator = new Animator();
 
 	public InnerCore(){
 		super();
@@ -136,7 +145,6 @@ public class InnerCore{
 			updateJoystick();
 		}
 
-
 		if(enableFullScreen){
 			enableFullScreen = false;
 
@@ -190,7 +198,9 @@ public class InnerCore{
 			
 				//if activeWindow, receive command to change application
 				if(application.getReturnApplication()!=application){
+					
 					this.changeApplication();
+					
 				}
 			
 			}
@@ -893,6 +903,19 @@ public class InnerCore{
 
 	public void showCursor() {
 		drawCursor = true;		
+	}
+	
+
+	protected class Animator implements Runnable{
+
+		protected void startAnimation(){
+			executor.scheduleWithFixedDelay(new Animator(), ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
+		}
+		
+		public void run() { 
+			updateApplication();
+		}
+		
 	}
 
 }

@@ -3,14 +3,12 @@ package br.com.etyllica.core;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.loader.FontLoader;
@@ -20,8 +18,11 @@ import br.com.etyllica.core.video.FullScreenWindow;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
+import br.com.luvia.loader.MeshLoader;
 
 public class SharedCore extends InnerCore{
+
+	private GraphicsConfiguration configuration;
 
 	private int w;
 	private int h;
@@ -32,7 +33,6 @@ public class SharedCore extends InnerCore{
 
 	private VolatileImage volatileImage;
 
-
 	private String path = "";
 
 	private Graphic graphic;
@@ -40,15 +40,13 @@ public class SharedCore extends InnerCore{
 	private FullScreenWindow telaCheia = null;
 
 	private boolean fullScreenEnable;
-	
-	private ScheduledExecutorService executor;
-	
-	private final int ANIMATION_DELAY = 20;
-
 
 	public SharedCore(java.awt.Component component, int w, int h){
 		super();
 		this.component = component;
+
+		//this.configuration = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+		this.configuration = component.getGraphicsConfiguration();
 
 		this.w = w;
 		this.h = h;
@@ -56,17 +54,9 @@ public class SharedCore extends InnerCore{
 		this.graphic = new Graphic(w,h);
 
 		this.desktop = new MainWindow(0,0,w,h);
-		
+
 		defineSize(w, h);
 
-	}
-
-	public Graphic getGraphic() {
-		return graphic;
-	}
-
-	public void setGraphic(Graphic graphic) {
-		this.graphic = graphic;
 	}
 
 	public String getPath() {
@@ -82,12 +72,19 @@ public class SharedCore extends InnerCore{
 	}
 
 	public void initDefault(){
+
 		ImageLoader.getInstance().setUrl(path);
 		FontLoader.getInstance().setUrl(path);
+
 	}
 
 	public void initSound(){
 		MultimediaLoader.getInstance().setUrl(path);
+	}
+
+
+	public void init3D() {
+		MeshLoader.getInstance().setUrl(path);
 	}
 
 	public void enableFullScreen(){
@@ -115,6 +112,7 @@ public class SharedCore extends InnerCore{
 	}
 
 	public void startCore(Application application) {
+
 		this.desktop.setApplication(application);
 		this.addWindow(desktop);
 
@@ -130,11 +128,8 @@ public class SharedCore extends InnerCore{
 		component.addMouseListener( mouse );
 
 		component.addKeyListener( keyboard );
-		
-		//executor = Executors.newScheduledThreadPool(2);
-		executor = Executors.newSingleThreadScheduledExecutor();
-		
-		executor.scheduleWithFixedDelay(new Animator(), ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
+
+		animator.startAnimation();
 
 	}
 
@@ -144,8 +139,8 @@ public class SharedCore extends InnerCore{
 	}
 
 	private VolatileImage createBackBuffer(int largura, int altura, int transparency){
-		GraphicsConfiguration gc = component.getGraphicsConfiguration();
-		return gc.createCompatibleVolatileImage(largura, altura, transparency);
+
+		return configuration.createCompatibleVolatileImage(largura, altura, transparency);
 	}
 
 	public void defineSize(int width, int height){
@@ -154,20 +149,23 @@ public class SharedCore extends InnerCore{
 
 		volatileImage = createBackBuffer(width, height);
 
-		graphic.setBufferedImage(volatileImage.getSnapshot());
+		if(volatileImage!=null){
+			//graphic.setBufferedImage(volatileImage.getSnapshot());
+			graphic.setVolatileImage(volatileImage);
+		}		
 
 	}
 
 	public void validateVolatileImage() {
 
-		GraphicsConfiguration gc = component.getGraphicsConfiguration();
-		int valCode = volatileImage.validate(gc);
+		int valCode = volatileImage.validate(configuration);
 
 		// This means the device doesn't match up to this hardware accelerated image.
 		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE){
 			volatileImage = createBackBuffer(w,h); // recreate the hardware accelerated image.
-			//grafico.setBimg(volatileImg.getSnapshot());
+			graphic.setVolatileImage(volatileImage);
 		}
+
 	}
 
 	public void hideDefaultCursor(){
@@ -183,7 +181,7 @@ public class SharedCore extends InnerCore{
 		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
 
-		validateVolatileImage();		
+		validateVolatileImage();
 
 		draw(graphic);
 
@@ -214,13 +212,6 @@ public class SharedCore extends InnerCore{
 
 	public void setH(int h) {
 		this.h = h;
-	}
-
-	private class Animator implements Runnable{
-
-		public void run() { 
-			updateApplication();
-		}
 	}
 
 }

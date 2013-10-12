@@ -10,8 +10,6 @@ import sound.paulscode.codecs.CodecJOrbis;
 import sound.paulscode.codecs.CodecWav;
 import sound.paulscode.libraries.LibraryJavaSound;
 
-
-
 /**
  * 
  * @author yuripourre
@@ -23,14 +21,14 @@ public class MultimediaLoader extends Loader{
 
 	private SoundSystem mySoundSystem;
 
-	private static MultimediaLoader instancia = null;
+	private static MultimediaLoader instance = null;
 
 	public static MultimediaLoader getInstance() {
-		if(instancia==null){
-			instancia = new MultimediaLoader();
+		if(instance==null){
+			instance = new MultimediaLoader();
 		}
 
-		return instancia;
+		return instance;
 	}
 
 	public MultimediaLoader(){

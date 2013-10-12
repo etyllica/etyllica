@@ -26,7 +26,7 @@ import br.com.etyllica.core.loader.FontLoader;
 public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	private static final long serialVersionUID = 4588303747276461888L;
-	
+
 	private SharedCore core;
 
 	protected int w = 640;
@@ -40,87 +40,92 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	//From Luvia
 	private ScheduledExecutorService executor;
-	
+
 	protected boolean initAll = false;
 	protected boolean initSound = false;
 	protected boolean initJoysick = false;
+	protected boolean init3D = false;
+	protected boolean initSystemFonts = false;
 
 	public EtyllicaFrame(int width, int height){
 
 		this.w = width;
 		this.h = height;
-		
+
 	}
 
 	public void init() {
-				
+
 		core = new SharedCore(this, w, h);
 
 		initialSetup();
-		
+
 		startGame();
 
 		core.startCore(application);
 
 		executor = Executors.newScheduledThreadPool(2);
 		startEngine();
-			
+
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
-	
+
 	private void initialSetup(){
-		
+
+		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice[] gs = ge.getScreenDevices();*/
+
 		String s = getClass().getResource("").toString();
-		
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsDevice[] gs = ge.getScreenDevices();
-		
-		String systemFonts[] = ge.getAvailableFontFamilyNames();
-		FontLoader.getInstance().setSystemFonts(systemFonts);
-		
+
 		setPath(s);
-		
+
 	}
-	
+
+	protected void setPath(String path){
+
+		core.setPath(path);
+
+		initLoaders();
+
+	}
+
 	private void startEngine(){
-		
+
 		Runnable engine = new Runnable() {
 			public void run() {
 				draw();
 				update();
 			}
 		};
-		
+
 		executor.scheduleAtFixedRate(engine, 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);
-		
+
 	}
-			
-	protected void setPath(String path){
-		
-		core.setPath(path);
-		
-		initLoaders();
-				
-	}
-	
+
 	private void initLoaders(){
 
 		core.initDefault();
-		
+
 		if(initAll||initSound){
 			core.initSound();
 		}
-		
+
 		if(initAll||initJoysick){
-			initJoystick();
+			core.initJoystick();
 		}
-		
-	}
-	
-	protected void initJoystick(){
-		core.initJoystick();
+
+		if(initAll||init3D){
+			core.init3D();
+		}
+
+		if(initSystemFonts){
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			String systemFonts[] = ge.getAvailableFontFamilyNames();
+			FontLoader.getInstance().setSystemFonts(systemFonts);
+		}
+
 	}
 
 	public abstract void startGame();
@@ -168,7 +173,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		//System.gc();
 
 	}
-	
+
 	protected void hideCursor() {
 		core.hideCursor();
 	}

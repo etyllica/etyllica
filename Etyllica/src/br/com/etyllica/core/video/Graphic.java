@@ -31,7 +31,7 @@ import br.com.etyllica.linear.Ponto2D;
 
 public class Graphic{
 
-	private BufferedImage bimg;
+	//private BufferedImage bimg;
 	
 	private VolatileImage vimg;
 	protected Graphics2D screen;
@@ -52,14 +52,14 @@ public class Graphic{
 		this.width = vimg.getWidth();
 		this.height = vimg.getHeight();
 		
-		this.bimg = vimg.getSnapshot();
+		//this.bimg = vimg.getSnapshot();
 		this.screen = (Graphics2D)vimg.createGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.screen.setColor(Color.BLACK);
 		
 	}
 	
-	public void setBufferedImage(BufferedImage bimg){
+	/*public void setBufferedImage(BufferedImage bimg){
 		this.width = bimg.getWidth();
 		this.height = bimg.getHeight();
 		
@@ -68,7 +68,7 @@ public class Graphic{
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.screen.setColor(Color.BLACK);
 		
-	}
+	}*/
 	
 	public void escreveCamada(String texto, ImageLayer destino) {
 		FontMetrics fm = screen.getFontMetrics();
@@ -718,7 +718,7 @@ public class Graphic{
 	}*/
 	
 	public BufferedImage getBimg() {
-		return bimg;
+		return vimg.getSnapshot();
 	}
 
 	/**
@@ -731,9 +731,13 @@ public class Graphic{
 	 * @param offset
 	 * @param scansize
 	 */
-	public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
+	/*public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
 		
-		bimg.setRGB(startX, startY, w, h, rgbArray, offset, scansize);
+		vimg..setRGB(startX, startY, w, h, rgbArray, offset, scansize);
+	}*/
+	
+	public void drawImage(BufferedImage image, int x, int y){
+		screen.drawImage(image, null, x, y);
 	}
 	
 	/**

@@ -3,7 +3,8 @@ package examples.jgl.application;
 import java.awt.Color;
 import java.util.Date;
 
-import jgl.GLAUX;
+import org.jgl.GLAUX;
+
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
