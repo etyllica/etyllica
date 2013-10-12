@@ -8,12 +8,14 @@ import java.util.Map;
 
 import br.com.luvia.animation.skeletal.Bone;
 
-public class Animation {
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
 
-	//(Pneus)
-	//Ventus Prime 
-	//2565-7534
-	//R$ 300,00 cada
+public class Animation {
 
 	private List<Bone> bones;
 

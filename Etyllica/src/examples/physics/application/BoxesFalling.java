@@ -1,4 +1,4 @@
-package examples.physics;
+package examples.physics.application;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class BoxesFalling extends PhysicsApplication {
 		for(int i=0;i<6;i++){
 			
 			RigidBody crate = new RigidBody(new ImageLayer(20+50*i, 10+70*i, "crate.jpg"));
-			crate.getLinearVelocity().set(5, 0.0);
+			//crate.getLinearVelocity().set(5, 0.0);
 						
 			this.world.addBody(crate);
 			crates.add(crate);

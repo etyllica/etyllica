@@ -1,4 +1,5 @@
 package br.com.luvia.loader;
+
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
@@ -6,7 +7,7 @@ import org.lwjgl.BufferUtils;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

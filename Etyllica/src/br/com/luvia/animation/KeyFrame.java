@@ -1,5 +1,12 @@
 package br.com.luvia.animation;
 
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
 public class KeyFrame {
 
 	private double x = 0;

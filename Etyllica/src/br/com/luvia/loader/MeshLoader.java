@@ -10,7 +10,7 @@ import br.com.luvia.linear.Model3D;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

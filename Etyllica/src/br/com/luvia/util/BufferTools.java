@@ -5,6 +5,13 @@ import org.lwjgl.util.vector.Matrix4f;
 
 import java.nio.FloatBuffer;
 
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
 public class BufferTools {
 	
     public static String bufferToString(FloatBuffer buffer, int elements) {

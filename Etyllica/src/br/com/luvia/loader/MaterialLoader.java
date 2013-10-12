@@ -13,7 +13,7 @@ import br.com.luvia.material.Material;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

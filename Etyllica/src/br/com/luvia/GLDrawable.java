@@ -1,6 +1,5 @@
 package br.com.luvia;
 
-import org.jgl.GL;
 import org.jgl.GLAUX;
 
 /**

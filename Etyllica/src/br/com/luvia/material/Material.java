@@ -4,7 +4,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */

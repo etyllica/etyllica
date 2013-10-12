@@ -12,7 +12,7 @@ import br.com.luvia.GLDrawable;
 
 /**
  * 
- * @author mscythe
+ * @author yuripourre
  * @license LGPLv3
  *
  */
