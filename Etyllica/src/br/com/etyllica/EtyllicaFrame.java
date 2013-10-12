@@ -33,7 +33,6 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 	protected int h = 480;
 
 	private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
-	private final int ANIMATION_DELAY = 20; // 20ms. Implica em 50fps (1000/20) = 50
 
 	private Application application;
 
@@ -65,8 +64,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 		executor = Executors.newScheduledThreadPool(2);
 		startEngine();
-		startAnimation();
-		
+			
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -98,17 +96,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		executor.scheduleAtFixedRate(engine, 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);
 		
 	}
-	
-	private void startAnimation(){
-		Runnable animator = new Runnable() {           
-            public void run() { 
-                core.updateApplication();
-            }
-		};
-		
-		executor.scheduleAtFixedRate(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
-	}
-		
+			
 	protected void setPath(String path){
 		
 		core.setPath(path);

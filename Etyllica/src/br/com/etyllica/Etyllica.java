@@ -32,11 +32,9 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	//TODO determinar o fps por cada sessao
 	private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
-	private final int ANIMATION_DELAY = 20; // 20ms. Implica em 50fps (1000/20) = 50
+	//private final int ANIMATION_DELAY = 20; // 20ms. Implica em 50fps (1000/20) = 50
 
 	private Application application;
-
-	//private Mouse mouse;
 
 	//From Luvia
 	private ScheduledExecutorService executor;
@@ -50,21 +48,20 @@ public abstract class Etyllica extends Applet implements Engine{
 		this.h = altura;		
 	}
 
+	@Override
 	public void init() {
 		
 		core = new SharedCore(this, w, h);
-		
-				
+						
 		initialSetup();
 		
 		startGame();
 		
 		core.startCore(application);
 
-		executor = Executors.newScheduledThreadPool(2);
+		executor = Executors.newSingleThreadScheduledExecutor();
 		startEngine();
-		startAnimation();
-
+	
 	}
 	
 	private void initialSetup(){
@@ -92,16 +89,6 @@ public abstract class Etyllica extends Applet implements Engine{
 		
 		executor.scheduleAtFixedRate(engine, 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);
 		
-	}
-	
-	private void startAnimation(){
-		Runnable animator = new Runnable() {           
-            public void run() { 
-                core.updateApplication();
-            }
-		};
-		
-		executor.scheduleAtFixedRate(animator, ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
 	}
 			
 	protected void setPath(String path){

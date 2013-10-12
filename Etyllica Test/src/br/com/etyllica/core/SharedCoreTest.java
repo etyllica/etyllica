@@ -2,6 +2,8 @@ package br.com.etyllica.core;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Frame;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +16,7 @@ public class SharedCoreTest {
 	
 	@Before
 	public void setUp(){
-		core = new SharedCore(null,INITIAL_WIDTH,INITIAL_HEIGHT);
+		core = new SharedCore(new Frame(),INITIAL_WIDTH,INITIAL_HEIGHT);
 	}
 	
 	@Test

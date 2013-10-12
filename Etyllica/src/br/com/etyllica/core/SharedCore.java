@@ -8,6 +8,9 @@ import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.loader.FontLoader;
@@ -19,25 +22,29 @@ import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 
 public class SharedCore extends InnerCore{
-	
+
 	private int w;
 	private int h;
 
 	private java.awt.Component component;
-	
+
 	private MainWindow desktop;
-	
+
 	private VolatileImage volatileImage;
-	
-	
+
+
 	private String path = "";
-	
+
 	private Graphic graphic;
-		
+
 	private FullScreenWindow telaCheia = null;
-	
+
 	private boolean fullScreenEnable;
 	
+	private ScheduledExecutorService executor;
+	
+	private final int ANIMATION_DELAY = 20;
+
 
 	public SharedCore(java.awt.Component component, int w, int h){
 		super();
@@ -45,15 +52,15 @@ public class SharedCore extends InnerCore{
 
 		this.w = w;
 		this.h = h;
-				
+
 		this.graphic = new Graphic(w,h);
-		
+
 		this.desktop = new MainWindow(0,0,w,h);
 		
 		defineSize(w, h);
-		
+
 	}
-	
+
 	public Graphic getGraphic() {
 		return graphic;
 	}
@@ -61,39 +68,39 @@ public class SharedCore extends InnerCore{
 	public void setGraphic(Graphic graphic) {
 		this.graphic = graphic;
 	}
-	
+
 	public String getPath() {
 		return path;
 	}
 
 	public void setPath(String path) {
-		
+
 		//For Windows
 		String s = path.replaceAll("%20"," ");
-		
+
 		this.path = s;
 	}
-	
+
 	public void initDefault(){
 		ImageLoader.getInstance().setUrl(path);
 		FontLoader.getInstance().setUrl(path);
 	}
-	
+
 	public void initSound(){
 		MultimediaLoader.getInstance().setUrl(path);
 	}
-	
+
 	public void enableFullScreen(){
 		telaCheia = new FullScreenWindow(this);
 		addEffect(new GenericFullScreenEffect(0, 0, w, h));
-		
+
 		fullScreenEnable = true;
 	}
-	
+
 	public void disableFullScreen(){
 		telaCheia.dispose();
 		telaCheia = null;
-		
+
 		fullScreenEnable = false;
 	}
 
@@ -110,20 +117,25 @@ public class SharedCore extends InnerCore{
 	public void startCore(Application application) {
 		this.desktop.setApplication(application);
 		this.addWindow(desktop);
-		
+
 		component.setFocusTraversalKeysEnabled(false);
 		component.setFocusable(true);
 		component.requestFocus();
-		
+
 		hideDefaultCursor();
 		mouse.updateArrowTheme();
-		
+
 		component.addMouseMotionListener( mouse );
 		component.addMouseWheelListener( mouse );
 		component.addMouseListener( mouse );
-		
+
 		component.addKeyListener( keyboard );
 		
+		//executor = Executors.newScheduledThreadPool(2);
+		executor = Executors.newSingleThreadScheduledExecutor();
+		
+		executor.scheduleWithFixedDelay(new Animator(), ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
+
 	}
 
 	//Component Methods
@@ -141,12 +153,13 @@ public class SharedCore extends InnerCore{
 		component.setSize(width, height);
 
 		volatileImage = createBackBuffer(width, height);
-		
+
 		graphic.setBufferedImage(volatileImage.getSnapshot());
 
 	}
 
 	public void validateVolatileImage() {
+
 		GraphicsConfiguration gc = component.getGraphicsConfiguration();
 		int valCode = volatileImage.validate(gc);
 
@@ -156,7 +169,7 @@ public class SharedCore extends InnerCore{
 			//grafico.setBimg(volatileImg.getSnapshot());
 		}
 	}
-	
+
 	public void hideDefaultCursor(){
 		int[] pixels = new int[16 * 16];
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
@@ -164,12 +177,12 @@ public class SharedCore extends InnerCore{
 				, new Point(0, 0), "invisibleCursor");
 		component.setCursor( transparentCursor );
 	}
-	
+
 	public void paint( Graphics g ) {
-		
+
 		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
-		
+
 		validateVolatileImage();		
 
 		draw(graphic);
@@ -183,7 +196,7 @@ public class SharedCore extends InnerCore{
 		else{
 			drawFullScreen();
 		}
-		
+
 		g.dispose();
 	}
 
@@ -202,5 +215,12 @@ public class SharedCore extends InnerCore{
 	public void setH(int h) {
 		this.h = h;
 	}
-	
+
+	private class Animator implements Runnable{
+
+		public void run() { 
+			updateApplication();
+		}
+	}
+
 }

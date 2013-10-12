@@ -19,9 +19,6 @@ public class HelloWorld extends Application{
 	public void load() {
 		
 		hello = new ImageLayer(200,100,"hello.png");
-		
-		System.out.println("Loaded");
-		loading = 100;
 	}
 
 	@Override

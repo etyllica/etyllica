@@ -51,7 +51,6 @@ public class HelloWorldAnimated extends Application{
 		rotateAnimation.setInterval(0, 360);
 		this.animation.add(rotateAnimation);
 		
-		loading = 100;
 	}
 
 	@Override

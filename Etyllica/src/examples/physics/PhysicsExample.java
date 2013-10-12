@@ -49,7 +49,6 @@ public class PhysicsExample extends EtyllicaFrame {
 	public static void main(String[] args){
 		PhysicsExample physics = new PhysicsExample();
 		physics.init();
-		physics.setVisible(true);
 	}
 
 	@Override
