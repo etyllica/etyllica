@@ -1,5 +1,8 @@
 package br.com.etyllica.core.application;
 
+import br.com.etyllica.core.application.load.DefaultLoadApplication;
+import br.com.etyllica.core.application.load.GenericLoadApplication;
+
 
 public abstract class Application extends InternalApplication{
 

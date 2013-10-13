@@ -1,6 +1,5 @@
 package examples.etyllica.tutorial11;
 import br.com.etyllica.Etyllica;
-import examples.etyllica.tutorial11.application.CaptureAudioApplication;
 
 /**
  * 

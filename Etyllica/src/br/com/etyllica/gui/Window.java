@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.ApplicationLoader;
 import br.com.etyllica.core.application.InternalApplication;
-import br.com.etyllica.core.application.DefaultLoadApplication;
 import br.com.etyllica.core.application.SessionMap;
+import br.com.etyllica.core.application.load.ApplicationLoader;
+import br.com.etyllica.core.application.load.DefaultLoadApplication;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -36,7 +36,7 @@ public class Window extends GUIComponent{
 	protected boolean close = false;
 
 	private boolean loaded = true;
-	private boolean locked = false;
+	//private boolean locked = false;
 
 	public Window(int x, int y, int w, int h){
 		super(x,y,w,h);
@@ -105,10 +105,9 @@ public class Window extends GUIComponent{
 
 	public void reload(Application application){
 		
-		if(loaded&&!locked){
+		if(loaded){
 			
 			loaded = false;
-			locked = true;
 
 			DefaultLoadApplication load = application.getLoadApplication();
 			load.load();
@@ -156,12 +155,4 @@ public class Window extends GUIComponent{
 		this.loaded = loaded;
 	}
 
-	public boolean isLocked() {
-		return locked;
-	}
-
-	public void setLocked(boolean locked) {
-		this.locked = locked;
-	}
-		
 }

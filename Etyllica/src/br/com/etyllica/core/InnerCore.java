@@ -40,7 +40,7 @@ public class InnerCore{
 	//External Windows
 	private Window activeWindow = null;
 
-	private List<Window> windows = new ArrayList<Window>();
+	//private List<Window> windows = new ArrayList<Window>();
 
 	private List<AnimationScript> globalScripts = new ArrayList<AnimationScript>();
 	private AnimationHandler animation = new AnimationHandler();
@@ -161,7 +161,7 @@ public class InnerCore{
 
 	private void updateActiveWindow(){
 
-		if(activeWindow.isClose()){
+		/*if(activeWindow.isClose()){
 
 			if(windows.size()>0){
 				windows.remove(activeWindow);
@@ -170,7 +170,7 @@ public class InnerCore{
 				System.exit(0);
 			}
 
-		}
+		}*/
 	}
 
 	public void updateApplication(){
@@ -533,30 +533,13 @@ public class InnerCore{
 
 	public void draw(Graphic g){
 
-		List<Window> drawWindows = new CopyOnWriteArrayList<Window>(windows);
+		/*List<Window> drawWindows = new CopyOnWriteArrayList<Window>(windows);
 
 		for(Window window : drawWindows){
-
-			boolean offset = window.getX()!=0||window.getY()!=0; 
-			if(offset){
-				g.translate(window.getX(), window.getY());
-			}
-
-			window.draw(g);
-
-			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(window.getComponents());
-
-			//if(!window.isLocked()){
-			for(GUIComponent componente: components){
-
-				drawComponent(componente, g);
-
-			}
-			//}
-			if(offset){
-				g.translate(-window.getX(), -window.getY());
-			}
-		}
+			drawWindow(g, window);
+		}*/
+		
+		drawWindow(g, activeWindow);
 
 		drawEffects(g);
 
@@ -564,6 +547,30 @@ public class InnerCore{
 			drawMouse(g);
 		}
 
+	}
+	
+	private void drawWindow(Graphic g, Window window){
+		
+		boolean offset = window.getX()!=0||window.getY()!=0;
+		
+		if(offset){
+			g.translate(window.getX(), window.getY());
+		}
+
+		window.draw(g);
+
+		List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(window.getComponents());
+		
+		for(GUIComponent componente: components){
+
+			drawComponent(componente, g);
+
+		}
+		
+		if(offset){
+			g.translate(-window.getX(), -window.getY());
+		}
+		
 	}
 
 	private void drawEffects(Graphic g){
@@ -825,7 +832,7 @@ public class InnerCore{
 
 			window.setClose(false);
 
-			windows.add(window);
+			//windows.add(window);
 
 			activeWindow = window;
 

@@ -1,7 +1,8 @@
-package br.com.etyllica.core.application;
+package br.com.etyllica.core.application.load;
 
 import java.awt.Color;
 
+import br.com.etyllica.core.application.InternalApplication;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -18,13 +19,11 @@ public class DefaultLoadApplication extends InternalApplication implements LoadA
 
 	
 	public DefaultLoadApplication(int w, int h) {
-		this(0,0,w,h);
+		super(w,h);
 	}
 	
 	public DefaultLoadApplication(int x, int y, int w, int h) {
 		super(x,y,w,h);
-				
-		//load();
 	}
 
 	protected String phrase = "Loading...";

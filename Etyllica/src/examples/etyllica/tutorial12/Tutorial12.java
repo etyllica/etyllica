@@ -1,7 +1,6 @@
 package examples.etyllica.tutorial12;
 
 import br.com.etyllica.Etyllica;
-import examples.etyllica.tutorial12.application.JoystickExample;
 
 public class Tutorial12 extends Etyllica {
 
