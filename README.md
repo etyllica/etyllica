@@ -29,7 +29,7 @@
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint)
 - [Etyllic Animator](http://yuripourre.github.com/etyllic-animator)
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme)
-- [Etyllica Mobile](http://yuripourre.github.com/etyllica-mobile) - Etyllica port to Android.
+- [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android.
 
 ##Dependencies (optional)
 
