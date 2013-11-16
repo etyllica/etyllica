@@ -5,7 +5,7 @@
 
 ##Features
 
-- Keyboard and Mouse handling (and Multiple Joystick Handling [for Linux])
+- Keyboard and Mouse handling (and Multiple Joysticks Handling* [for Linux])
 - Image Loader that supports (TGA, PCX, PNG, BMP, JPG)
 - Animation Tween System
 - Animation Pivot System (Used in [Etyllic Animator](http://yuripourre.github.com/etyllic-animator/))
@@ -29,9 +29,9 @@
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint)
 - [Etyllic Animator](http://yuripourre.github.com/etyllic-animator)
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme)
-- [Etyllica Mobile](http://yuripourre.github.com/etyllica-mobile) - Etyllica port to Android.
+- [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android.
 
-##Dependencies (*optional)
+##Dependencies (optional)
 
 If you don't need 3D Graphics, Sound nor Physics, you just have to include to your project the lib 
 [etyllica-2.7.jar](https://github.com/yuripourre/etyllica/blob/master/Etyllica/libs/etyllica-2.7.jar) (160Kb)
