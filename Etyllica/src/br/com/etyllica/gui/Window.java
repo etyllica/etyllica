@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.InternalApplication;
+import br.com.etyllica.core.application.Context;
 import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.application.load.ApplicationLoader;
 import br.com.etyllica.core.application.load.DefaultLoadApplication;
@@ -25,7 +25,7 @@ public class Window extends GUIComponent{
 	protected Application application;
 
 	//TODO Change to Application backApplication
-	protected List<InternalApplication> oldApplications = new ArrayList<InternalApplication>();
+	protected List<Context> oldApplications = new ArrayList<Context>();
 
 	protected SessionMap sessionMap = new SessionMap();
 

@@ -1,12 +1,11 @@
 package br.com.etyllica.core.application.load;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.InternalApplication;
+import br.com.etyllica.core.application.Context;
 import br.com.etyllica.gui.Window;
 
 /**
@@ -16,7 +15,7 @@ import br.com.etyllica.gui.Window;
  *
  */
 
-public class ApplicationLoader{
+public class ApplicationLoader implements LoadListener{
 
 	private Loader loader;
 	private Updater updater;
@@ -27,6 +26,8 @@ public class ApplicationLoader{
 
 	private LoadApplication loadApplication;
 
+	private boolean called = false;
+	
 	public ApplicationLoader(){
 		super();
 	}
@@ -39,13 +40,15 @@ public class ApplicationLoader{
 		updater = new Updater();
 		
 		loadExecutor.submit(loader);
-		loadExecutor.scheduleAtFixedRate(updater, 0, 10, TimeUnit.MILLISECONDS);	
+		loadExecutor.scheduleAtFixedRate(updater, 0, 10, TimeUnit.MILLISECONDS);
 
 	}
 	
 	private class Loader implements Runnable{
 
 		public void run() {
+			called = false;
+			application.setLoadListener(ApplicationLoader.this);
 			application.startLoad();
 		}
 
@@ -55,24 +58,25 @@ public class ApplicationLoader{
 
 		public void run() {
 			
-			
-			while(application.isLocked()){
+			//while(application.isLocked()){
+			if(!called){
 				
-				if(application.isLocked()&&!window.isLoaded()){
+				if(!window.isLoaded()){
 					loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
 				}
 
+			}else{
+				
+				window.setApplication(application);
+
+				window.setLoaded(true);
 			}
-
-			window.setApplication(application);
-
-			window.setLoaded(true);
 			
 		}
 
 	}
 
-	public InternalApplication getApplication() {
+	public Context getApplication() {
 		return application;
 	}
 
@@ -94,6 +98,11 @@ public class ApplicationLoader{
 
 	public void setWindow(Window window) {
 		this.window = window;
+	}
+
+	@Override
+	public void loaded() {
+		called = true;
 	}
 
 }

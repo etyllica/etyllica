@@ -2,7 +2,7 @@ package br.com.etyllica.core.application.load;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.application.InternalApplication;
+import br.com.etyllica.core.application.Context;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -15,7 +15,7 @@ import br.com.etyllica.core.video.Graphic;
  *
  */
 
-public class DefaultLoadApplication extends InternalApplication implements LoadApplication{
+public class DefaultLoadApplication extends Context implements LoadApplication{
 
 	
 	public DefaultLoadApplication(int w, int h) {

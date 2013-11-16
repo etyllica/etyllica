@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.animation.AnimationHandler;
+import br.com.etyllica.core.application.load.LoadListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.TransitionEffect;
@@ -19,7 +20,7 @@ import br.com.etyllica.layer.ImageLayer;
  *
  */
 
-public abstract class InternalApplication extends GUIComponent{
+public abstract class Context extends GUIComponent{
 
 	/**
 	 * The updateInterval between executions
@@ -87,6 +88,8 @@ public abstract class InternalApplication extends GUIComponent{
 	 */
 	protected boolean paused = false;
 
+	private LoadListener loadListener;
+
 	/**
 	 * Constructor
 	 * 
@@ -95,12 +98,14 @@ public abstract class InternalApplication extends GUIComponent{
 	 * @param w Application width
 	 * @param h Application height
 	 */
-	public InternalApplication(int x, int y, int w, int h){
+	public Context(int x, int y, int w, int h){
 		super(x,y,w,h);
 
 		this.loading = 0;
 		//TODO Dictionary get "loading"+...
 		this.loadingPhrase = "Carregando...";
+
+		//loadListeners = new ArrayList<LoadListener>();
 	}
 
 	/**
@@ -109,20 +114,26 @@ public abstract class InternalApplication extends GUIComponent{
 	 * @param w Application width
 	 * @param h Application height
 	 */
-	public InternalApplication(int w, int h){
+	public Context(int w, int h){
 		this(0,0,w,h);
 	}
 
 	public void startLoad(){
 
-		if(!locked){
-			
-			locked = true;
-			this.loading = 0;
-			load();
-			locked = false;
-			
-		}
+		locked = true;
+		this.loading = 0;
+		load();
+		locked = false;
+		notifyListeners();
+
+	}
+
+	private void notifyListeners(){
+
+		//for(LoadListener listener: loadListeners){
+			loadListener.loaded();
+		//}
+
 	}
 
 	/**
@@ -253,6 +264,10 @@ public abstract class InternalApplication extends GUIComponent{
 
 	public boolean isLocked() {
 		return locked;
+	}
+
+	public void setLoadListener(LoadListener listener){
+		this.loadListener = listener;
 	}
 
 }
