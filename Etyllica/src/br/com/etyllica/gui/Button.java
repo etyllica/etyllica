@@ -2,7 +2,6 @@ package br.com.etyllica.gui;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIAction;
@@ -76,7 +75,7 @@ public class Button extends GUIComponent{
 		button.hide();
 	}
 
-	public Set<GUIComponent> getComponents() {
+	public List<GUIComponent> getComponents() {
 		return button.getComponents();
 	}
 

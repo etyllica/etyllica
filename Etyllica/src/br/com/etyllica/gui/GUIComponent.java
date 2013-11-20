@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import br.com.etyllica.core.Component;
 import br.com.etyllica.core.event.GUIAction;
@@ -30,7 +28,7 @@ public abstract class GUIComponent extends Layer implements Component{
 
 	protected GUIComponent root = null;
 	
-	private Set<GUIComponent> components = new LinkedHashSet<GUIComponent>();
+	private List<GUIComponent> components = new ArrayList<GUIComponent>();
 	
 	protected List<GUIAction> actions = new ArrayList<GUIAction>();
 	
@@ -97,7 +95,7 @@ public abstract class GUIComponent extends Layer implements Component{
 		this.actions = actions;
 	}
 
-	public Set<GUIComponent> getComponents() {
+	public List<GUIComponent> getComponents() {
 		return components;
 	}
 
