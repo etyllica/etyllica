@@ -21,7 +21,7 @@ import br.com.etyllica.layer.StaticLayer;
  *
  */
 
-public class ImageLoader extends Loader{
+public class ImageLoader extends LoaderImpl{
 
 	private static ImageLoader instance = null;
 

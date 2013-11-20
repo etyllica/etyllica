@@ -3,25 +3,25 @@ package br.com.etyllica.core;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
+import java.util.HashSet;
+import java.util.Set;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.loader.FontLoader;
-import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.core.loader.MultimediaLoader;
+import br.com.etyllica.core.loader.Loader;
 import br.com.etyllica.core.video.FullScreenWindow;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
-import br.com.luvia.loader.MeshLoader;
 
 public class SharedCore extends InnerCore{
 
+	private Set<Loader> loaders = new HashSet<Loader>();
+	
 	private GraphicsConfiguration configuration;
 
 	private int w;
@@ -73,18 +73,11 @@ public class SharedCore extends InnerCore{
 
 	public void initDefault(){
 
-		ImageLoader.getInstance().setUrl(path);
-		FontLoader.getInstance().setUrl(path);
-
-	}
-
-	public void initSound(){
-		MultimediaLoader.getInstance().setUrl(path);
-	}
-
-
-	public void init3D() {
-		MeshLoader.getInstance().setUrl(path);
+		for(Loader loader:loaders){
+			loader.setUrl(path);
+			loader.start();
+		}
+		
 	}
 
 	public void enableFullScreen(){
@@ -212,6 +205,10 @@ public class SharedCore extends InnerCore{
 
 	public void setH(int h) {
 		this.h = h;
+	}
+	
+	public void addLoader(Loader loader){
+		this.loaders.add(loader);
 	}
 
 }

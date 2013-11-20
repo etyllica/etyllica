@@ -2,16 +2,21 @@ package br.com.etyllica;
 
 import java.applet.Applet;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import sound.MultimediaLoader;
 import br.com.etyllica.core.Engine;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.FontLoader;
+import br.com.etyllica.core.loader.ImageLoader;
+import br.com.etyllica.core.loader.JoystickLoader;
+import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.core.loader.SystemFontLoader;
+import br.com.luvia.loader.MeshLoader;
 
 /**
  * 
@@ -37,12 +42,6 @@ public abstract class Etyllica extends Applet implements Engine{
 	//From Luvia
 	private ScheduledExecutorService executor;
 
-	protected boolean initAll = false;
-	protected boolean initSound = false;
-	protected boolean initJoysick = false;
-	protected boolean init3D = false;
-	protected boolean initSystemFonts = false;
-
 	public Etyllica(int largura, int altura){
 		this.w = largura;
 		this.h = altura;		
@@ -66,13 +65,14 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	private void initialSetup(){
 
+		//Load Monitors
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
 		String s = getClass().getResource("").toString();
 
 		setPath(s);
-
+		
 	}
 
 	protected void setPath(String path){
@@ -97,26 +97,19 @@ public abstract class Etyllica extends Applet implements Engine{
 	}
 
 	private void initLoaders(){
-
+		
+		core.addLoader(ImageLoader.getInstance());
+		core.addLoader(FontLoader.getInstance());
+		//initSound
+		core.addLoader(MultimediaLoader.getInstance());
+		//init3D
+		core.addLoader(MeshLoader.getInstance());
+		//initSystemFonts
+		core.addLoader(SystemFontLoader.getInstance());
+		
+		//core.addLoader(JoystickLoader.getInstance());
+		
 		core.initDefault();
-
-		if(initAll||initSound){
-			core.initSound();
-		}
-
-		if(initAll||initJoysick){
-			core.initJoystick();
-		}
-
-		if(initAll||init3D){
-			core.init3D();
-		}
-
-		if(initSystemFonts){
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			String systemFonts[] = ge.getAvailableFontFamilyNames();
-			FontLoader.getInstance().setSystemFonts(systemFonts);
-		}
 
 	}
 
@@ -164,6 +157,10 @@ public abstract class Etyllica extends Applet implements Engine{
 		//Calls Garbage Collector
 		//System.gc();
 
+	}
+
+	protected void addLoader(Loader loader) {
+		core.addLoader(loader);
 	}
 
 	protected void hideCursor() {

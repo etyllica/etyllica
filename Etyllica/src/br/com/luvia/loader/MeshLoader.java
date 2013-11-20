@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.core.loader.LoaderImpl;
 import br.com.luvia.linear.Model3D;
 
 /**
@@ -15,7 +15,7 @@ import br.com.luvia.linear.Model3D;
  *
  */
 
-public class MeshLoader extends Loader{
+public class MeshLoader extends LoaderImpl{
 
 	private static MeshLoader instancia = null;
 

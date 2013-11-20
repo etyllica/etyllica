@@ -1,8 +1,8 @@
 package br.com.etyllica.core.input;
 
-import br.com.etyllica.core.input.joystick.Joystick;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
+import br.com.etyllica.core.loader.JoystickLoader;
 
 /**
  * 
@@ -19,8 +19,8 @@ public class HIDController{
 	
 	private Keyboard keyboard;
 	
-	private Joystick joystick;
-		
+	private JoystickLoader joystick;
+			
 	public HIDController(){
 		
 		mouse = new Mouse(0,0);
@@ -28,7 +28,7 @@ public class HIDController{
 		keyboard = new Keyboard();
 		keyboard.reset();
 		
-		joystick = new Joystick();
+		joystick = JoystickLoader.getInstance();
 
 	}
 
@@ -39,9 +39,5 @@ public class HIDController{
 	public Keyboard getKeyboard() {
 		return keyboard;
 	}
-
-	public Joystick getJoystick() {
-		return joystick;
-	}	
 
 }

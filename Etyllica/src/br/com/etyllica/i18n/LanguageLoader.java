@@ -1,6 +1,6 @@
 package br.com.etyllica.i18n;
 
-import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.core.loader.LoaderImpl;
 
 /**
  * 
@@ -9,7 +9,7 @@ import br.com.etyllica.core.loader.Loader;
  *
  */
 
-public class LanguageLoader extends Loader{
+public class LanguageLoader extends LoaderImpl{
 
 	private LanguageLoader(){
 		super();

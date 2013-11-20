@@ -1,6 +1,7 @@
-package br.com.etyllica.core.loader;
+package sound;
 
 
+import br.com.etyllica.core.loader.LoaderImpl;
 import sound.paulscode.Library;
 import sound.paulscode.SoundSystem;
 import sound.paulscode.SoundSystemConfig;
@@ -17,7 +18,7 @@ import sound.paulscode.libraries.LibraryJavaSound;
  *
  */
 
-public class MultimediaLoader extends Loader{
+public class MultimediaLoader extends LoaderImpl{
 
 	private SoundSystem mySoundSystem;
 

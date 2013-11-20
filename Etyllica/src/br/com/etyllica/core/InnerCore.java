@@ -17,10 +17,10 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.input.HIDController;
-import br.com.etyllica.core.input.joystick.Joystick;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
+import br.com.etyllica.core.loader.JoystickLoader;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.debug.Logger;
 import br.com.etyllica.effects.GlobalEffect;
@@ -53,8 +53,6 @@ public class InnerCore{
 
 	protected Keyboard keyboard;
 	
-	private Joystick joystick;
-
 	//Mouse Over Something
 	//Usado para acessibilidade talvez
 	private boolean mouseOver = false;
@@ -91,17 +89,9 @@ public class InnerCore{
 
 		keyboard = control.getKeyboard();
 		keyEvents = keyboard.getEvents();
-		
-		joystick = control.getJoystick();
-		joyEvents = joystick.getJoyEvents();	
 
 	}
 	
-	public void initJoystick(){
-		joystick.start();
-		initJoystick = true;
-	}
-
 	public MainWindow getDesktopWindow() {
 		return mainWindow;
 	}
@@ -141,7 +131,7 @@ public class InnerCore{
 
 		updateKeyboard();
 		
-		if(initJoystick){
+		if(JoystickLoader.getInstance().isStarted()){
 			updateJoystick();
 		}
 
@@ -226,7 +216,7 @@ public class InnerCore{
 	
 	private void updateJoystick(){
 				
-		List<KeyEvent> joystickEvents = new CopyOnWriteArrayList<KeyEvent>(joyEvents);
+		List<KeyEvent> joystickEvents = new CopyOnWriteArrayList<KeyEvent>(JoystickLoader.getInstance().getJoyEvents());
 	
 		for(KeyEvent joystickEvent: joystickEvents){
 			
@@ -557,9 +547,9 @@ public class InnerCore{
 			g.translate(window.getX(), window.getY());
 		}
 
-		window.draw(g);
-
 		List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(window.getComponents());
+		
+		window.draw(g);
 		
 		for(GUIComponent componente: components){
 

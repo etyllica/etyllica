@@ -16,13 +16,13 @@ import java.util.Map;
  *
  */
 
-public class FontLoader extends Loader{
+public class FontLoader extends LoaderImpl{
 
 	private static FontLoader instance = null;
 
 	private String[] systemFonts;
 	
-	private Map<String, Font>fonts = new HashMap<String, Font>();
+	private Map<String, Font> fonts = new HashMap<String, Font>();
 
 	private FontLoader(){
 		super();

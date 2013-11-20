@@ -1,20 +1,24 @@
 package br.com.etyllica;
 
 import java.awt.Graphics;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
+import sound.MultimediaLoader;
 import br.com.etyllica.core.Engine;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.FontLoader;
+import br.com.etyllica.core.loader.ImageLoader;
+import br.com.etyllica.core.loader.JoystickLoader;
+import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.core.loader.SystemFontLoader;
+import br.com.luvia.loader.MeshLoader;
 
 /**
  * 
@@ -80,7 +84,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		String s = getClass().getResource("").toString();
 
 		setPath(s);
-
+		
 	}
 
 	protected void setPath(String path){
@@ -104,27 +108,20 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	}
 
-	private void initLoaders(){
-
+private void initLoaders(){
+		
+		core.addLoader(ImageLoader.getInstance());
+		core.addLoader(FontLoader.getInstance());
+		//initSound
+		core.addLoader(MultimediaLoader.getInstance());
+		//init3D
+		core.addLoader(MeshLoader.getInstance());
+		//initSystemFonts
+		core.addLoader(SystemFontLoader.getInstance());
+		
+		//core.addLoader(JoystickLoader.getInstance());
+		
 		core.initDefault();
-
-		if(initAll||initSound){
-			core.initSound();
-		}
-
-		if(initAll||initJoysick){
-			core.initJoystick();
-		}
-
-		if(initAll||init3D){
-			core.init3D();
-		}
-
-		if(initSystemFonts){
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			String systemFonts[] = ge.getAvailableFontFamilyNames();
-			FontLoader.getInstance().setSystemFonts(systemFonts);
-		}
 
 	}
 
@@ -172,6 +169,10 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		//Calls Garbage Collector
 		//System.gc();
 
+	}
+	
+	protected void addLoader(Loader loader) {
+		core.addLoader(loader);
 	}
 
 	protected void hideCursor() {

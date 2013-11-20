@@ -1,6 +1,6 @@
-package br.com.etyllica.multimedia;
+package sound.model;
 
-import br.com.etyllica.core.loader.MultimediaLoader;
+import sound.MultimediaLoader;
 
 /**
  * 
