@@ -1,7 +1,5 @@
 package br.com.etyllica.linear;
 
-import java.awt.geom.Point2D;
-
 /**
  * 
  * @author yuripourre
@@ -9,28 +7,28 @@ import java.awt.geom.Point2D;
  *
  */
 
-public class Ponto2D extends Point2D {
+public class Point2D extends java.awt.geom.Point2D {
 
 	protected String nome;
 	protected double x;
 	protected double y;
 	protected int cor;
 
-	public Ponto2D(double x, double y, int cor){
+	public Point2D(double x, double y, int cor){
 		this.x = x;
 		this.y = y;
 		this.cor = cor;
 		this.nome = "";
 	}
 
-	public Ponto2D(double x, double y, String nome){
+	public Point2D(double x, double y, String nome){
 		this.x = x;
 		this.y = y;
 		this.nome = nome;
 		this.cor = 0;
 	}
 
-	public Ponto2D(double x, double y){
+	public Point2D(double x, double y){
 		this(x,y,"");
 	}
 

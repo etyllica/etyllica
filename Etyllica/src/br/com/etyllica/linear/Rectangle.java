@@ -7,7 +7,7 @@ package br.com.etyllica.linear;
  *
  */
 
-public class Rectangle extends Ponto2D{
+public class Rectangle extends Point2D{
 
 	protected double w;
 	protected double h;
