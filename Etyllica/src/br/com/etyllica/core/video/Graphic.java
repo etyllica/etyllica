@@ -20,7 +20,7 @@ import java.awt.image.VolatileImage;
 
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
-import br.com.etyllica.linear.Ponto2D;
+import br.com.etyllica.linear.Point2D;
 
 /**
  * 
@@ -514,7 +514,7 @@ public class Graphic{
 	 * @param p
 	 * @param q
 	 */
-	public void drawLine(Ponto2D p, Ponto2D q){
+	public void drawLine(Point2D p, Point2D q){
 		screen.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
 	}
 	
@@ -652,7 +652,7 @@ public class Graphic{
 	 * @param point
 	 * @param radius
 	 */
-	public void drawCircle(Ponto2D point, int radius ){
+	public void drawCircle(Point2D point, int radius ){
 		screen.drawOval((int)point.getX()-radius, (int)point.getY()-radius, radius*2, radius*2);
 	}
 
@@ -671,7 +671,7 @@ public class Graphic{
 	 * @param point
 	 * @param radius
 	 */
-	public void fillCircle(Ponto2D point, int radius ){
+	public void fillCircle(Point2D point, int radius ){
 		screen.fillOval((int)point.getX()-radius, (int)point.getY()-radius, radius*2, radius*2);
 	}
 	

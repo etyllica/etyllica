@@ -39,8 +39,6 @@ public class SharedCore extends InnerCore{
 
 	private FullScreenWindow telaCheia = null;
 
-	private boolean fullScreenEnable;
-
 	public SharedCore(java.awt.Component component, int w, int h){
 		super();
 		this.component = component;

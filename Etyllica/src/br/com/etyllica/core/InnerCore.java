@@ -69,13 +69,14 @@ public class InnerCore{
 	private MainWindow mainWindow;
 
 	private boolean drawCursor = true;
-	private boolean initJoystick = false;
 	
 	private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 	
 	private final int ANIMATION_DELAY = 20;
 	
 	protected Animator animator = new Animator();
+	
+	protected boolean fullScreenEnable = false;
 
 	public InnerCore(){
 		super();
@@ -724,8 +725,12 @@ public class InnerCore{
 		}
 
 		if(esc){
+			
 			esc = false;
-			disableFullScreen = true;
+			
+			if(fullScreenEnable){
+				disableFullScreen = true;
+			}
 		}
 
 	}
