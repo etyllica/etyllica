@@ -97,7 +97,7 @@ public abstract class Spinner<T extends Number> extends GUIComponent{
 	}
 	
 	public T getValue() {
-		return value;
+		return this.value;
 	}
 
 	public T getStep() {

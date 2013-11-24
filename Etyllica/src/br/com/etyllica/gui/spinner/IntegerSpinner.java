@@ -33,6 +33,10 @@ public class IntegerSpinner extends Spinner<Integer> {
 			this.value = value.intValue() - step.intValue();
 		}
 	}
+	
+	public Integer getValue() {
+		return this.value.intValue();
+	}
 
 }
 
