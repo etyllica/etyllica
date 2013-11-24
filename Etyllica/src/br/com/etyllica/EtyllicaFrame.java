@@ -113,11 +113,11 @@ private void initLoaders(){
 		core.addLoader(ImageLoader.getInstance());
 		core.addLoader(FontLoader.getInstance());
 		//initSound
-		core.addLoader(MultimediaLoader.getInstance());
+		//core.addLoader(MultimediaLoader.getInstance());
 		//init3D
-		core.addLoader(MeshLoader.getInstance());
+		//core.addLoader(MeshLoader.getInstance());
 		//initSystemFonts
-		core.addLoader(SystemFontLoader.getInstance());
+		//core.addLoader(SystemFontLoader.getInstance());
 		
 		//core.addLoader(JoystickLoader.getInstance());
 		
