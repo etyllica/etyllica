@@ -1,13 +1,14 @@
 package br.com.etyllica;
 
 import java.awt.Graphics;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
-import sound.MultimediaLoader;
 import br.com.etyllica.core.Engine;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.application.Application;
@@ -15,10 +16,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.core.loader.JoystickLoader;
 import br.com.etyllica.core.loader.Loader;
-import br.com.etyllica.core.loader.SystemFontLoader;
-import br.com.luvia.loader.MeshLoader;
 
 /**
  * 
@@ -40,16 +38,12 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	private Application application;
 
+	private Set<Loader> loaders = new HashSet<Loader>();
+
 	protected Mouse mouse;
 
 	//From Luvia
 	private ScheduledExecutorService executor;
-
-	protected boolean initAll = false;
-	protected boolean initSound = false;
-	protected boolean initJoysick = false;
-	protected boolean init3D = false;
-	protected boolean initSystemFonts = false;
 
 	public EtyllicaFrame(int width, int height){
 
@@ -84,7 +78,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		String s = getClass().getResource("").toString();
 
 		setPath(s);
-		
+
 	}
 
 	protected void setPath(String path){
@@ -108,19 +102,21 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	}
 
-private void initLoaders(){
-		
-		core.addLoader(ImageLoader.getInstance());
-		core.addLoader(FontLoader.getInstance());
+	private void initLoaders(){
+
+		addLoader(ImageLoader.getInstance());
+		addLoader(FontLoader.getInstance());
+
+		core.setLoaders(loaders);
 		//initSound
 		//core.addLoader(MultimediaLoader.getInstance());
 		//init3D
 		//core.addLoader(MeshLoader.getInstance());
 		//initSystemFonts
 		//core.addLoader(SystemFontLoader.getInstance());
-		
+
 		//core.addLoader(JoystickLoader.getInstance());
-		
+
 		core.initDefault();
 
 	}
@@ -170,9 +166,9 @@ private void initLoaders(){
 		//System.gc();
 
 	}
-	
+
 	protected void addLoader(Loader loader) {
-		core.addLoader(loader);
+		loaders.add(loader);
 	}
 
 	protected void hideCursor() {

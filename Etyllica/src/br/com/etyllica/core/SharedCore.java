@@ -20,7 +20,7 @@ import br.com.etyllica.gui.window.MainWindow;
 
 public class SharedCore extends InnerCore{
 
-	private Set<Loader> loaders = new HashSet<Loader>();
+	private Set<Loader> loaders;
 	
 	private GraphicsConfiguration configuration;
 
@@ -205,8 +205,8 @@ public class SharedCore extends InnerCore{
 		this.h = h;
 	}
 	
-	public void addLoader(Loader loader){
-		this.loaders.add(loader);
+	public void setLoaders(Set<Loader> loaders) {
+		this.loaders = loaders;
 	}
-
+	
 }

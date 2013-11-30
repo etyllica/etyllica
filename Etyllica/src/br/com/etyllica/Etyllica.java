@@ -2,21 +2,19 @@ package br.com.etyllica;
 
 import java.applet.Applet;
 import java.awt.Graphics;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import sound.MultimediaLoader;
 import br.com.etyllica.core.Engine;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.loader.ImageLoader;
-import br.com.etyllica.core.loader.JoystickLoader;
 import br.com.etyllica.core.loader.Loader;
-import br.com.etyllica.core.loader.SystemFontLoader;
-import br.com.luvia.loader.MeshLoader;
 
 /**
  * 
@@ -38,20 +36,24 @@ public abstract class Etyllica extends Applet implements Engine{
 	private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
 
 	private Application application;
+	
+	private Set<Loader> loaders = new HashSet<Loader>();
 
 	//From Luvia
 	private ScheduledExecutorService executor;
 
 	public Etyllica(int largura, int altura){
+		
 		this.w = largura;
-		this.h = altura;		
+		this.h = altura;
+		
 	}
 
 	@Override
 	public void init() {
 
 		core = new SharedCore(this, w, h);
-
+		
 		initialSetup();
 
 		startGame();
@@ -64,7 +66,7 @@ public abstract class Etyllica extends Applet implements Engine{
 	}
 
 	private void initialSetup(){
-
+		
 		//Load Monitors
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
@@ -98,14 +100,17 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	private void initLoaders(){
 		
-		core.addLoader(ImageLoader.getInstance());
-		core.addLoader(FontLoader.getInstance());
+		addLoader(ImageLoader.getInstance());
+		addLoader(FontLoader.getInstance());
+		
+		core.setLoaders(loaders);
+		
 		//initSound
-		//core.addLoader(MultimediaLoader.getInstance());
+		//addLoader(MultimediaLoader.getInstance());
 		//init3D
-		//core.addLoader(MeshLoader.getInstance());
+		//addLoader(MeshLoader.getInstance());
 		//initSystemFonts
-		//core.addLoader(SystemFontLoader.getInstance());
+		//addLoader(SystemFontLoader.getInstance());
 		
 		//core.addLoader(JoystickLoader.getInstance());
 		
@@ -160,7 +165,7 @@ public abstract class Etyllica extends Applet implements Engine{
 	}
 
 	protected void addLoader(Loader loader) {
-		core.addLoader(loader);
+		loaders.add(loader);
 	}
 
 	protected void hideCursor() {
