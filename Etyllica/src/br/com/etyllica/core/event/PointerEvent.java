@@ -13,11 +13,16 @@ import br.com.etyllica.core.input.mouse.MouseButton;
 public class PointerEvent {
 
 	private MouseButton key;
+	
 	private KeyState state;
 	
 	private int x;
+	
 	private int y;
+	
 	private int amount;
+	
+	private long timestamp = System.currentTimeMillis();
 	
 	public PointerEvent(MouseButton key, KeyState state){
 		this.key = key;
@@ -85,6 +90,10 @@ public class PointerEvent {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
 	
 	public boolean isKey(MouseButton key){
 		return this.key==key;
@@ -102,7 +111,6 @@ public class PointerEvent {
 	public boolean onButtonUp(MouseButton key){
 		return((state==KeyState.RELEASED)&&this.key==key);
 	}
-	
-	
+		
 }
 

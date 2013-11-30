@@ -10,8 +10,10 @@ public class KeyEvent{
 	private int key;
 	
 	private KeyState state;
-	
+		
 	private int amount = Character.getNumericValue('\0');
+	
+	private long timestamp = System.currentTimeMillis();
 	
 	public KeyEvent(int key, KeyState state) {
 		super();
@@ -79,7 +81,11 @@ public class KeyEvent{
 	public void setKey(int key) {
 		this.key = key;
 	}
-	
+		
+	public long getTimestamp() {
+		return timestamp;
+	}
+
 	//List of Inputs
 	public static final int TSK_MENOS = java.awt.event.KeyEvent.VK_MINUS;
 	public static final int TSK_MAIS = java.awt.event.KeyEvent.VK_PLUS;
