@@ -115,7 +115,7 @@ public class AnimatedLayer extends ImageLayer{
 
 	public void animate(){
 
-		preAnima();
+		nextFrame();
 
 		/*if(!lockOnce){
 
@@ -150,7 +150,7 @@ public class AnimatedLayer extends ImageLayer{
 
 	}
 
-	public void preAnima(){
+	public void nextFrame(){
 
 		if((currentFrame < frames-1)&&(currentFrame >= 0)){
 
@@ -184,7 +184,7 @@ public class AnimatedLayer extends ImageLayer{
 			setFrame(currentFrame);
 		}
 	}
-
+	
 	private boolean osc = true;
 
 	public void animate(int frame){
