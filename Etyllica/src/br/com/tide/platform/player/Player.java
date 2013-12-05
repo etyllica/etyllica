@@ -1,4 +1,4 @@
-package br.com.shortcut.platform.player;
+package br.com.tide.platform.player;
 
 import java.util.HashSet;
 import java.util.Set;
