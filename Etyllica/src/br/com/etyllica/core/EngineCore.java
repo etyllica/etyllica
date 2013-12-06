@@ -35,7 +35,7 @@ import br.com.etyllica.gui.window.MainWindow;
  *
  */
 
-public class InnerCore{
+public class EngineCore implements Core{
 
 	//External Windows
 	private Window activeWindow = null;
@@ -68,7 +68,7 @@ public class InnerCore{
 
 	private MainWindow mainWindow;
 
-	private boolean drawCursor = true;
+	protected boolean drawCursor = false;
 	
 	private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 	
@@ -78,7 +78,7 @@ public class InnerCore{
 	
 	protected boolean fullScreenEnable = false;
 
-	public InnerCore(){
+	public EngineCore(){
 		super();
 
 		guiEvents = new ArrayList<GUIEvent>();
@@ -554,7 +554,11 @@ public class InnerCore{
 		
 		for(GUIComponent componente: components){
 
-			drawComponent(componente, g);
+			if(componente!=null){
+				drawComponent(componente, g);
+			}else{
+				System.out.println("Draw Null Component");
+			}
 
 		}
 		
@@ -832,7 +836,7 @@ public class InnerCore{
 			activeWindow = window;
 
 			//Avoid unnecessary reload
-			reload(window.getApplication());			
+			reload(window.getApplication());
 
 		}
 
@@ -900,7 +904,7 @@ public class InnerCore{
 	}
 
 	public void hideCursor() {
-		drawCursor = false;		
+		drawCursor = false;
 	}
 
 	public void showCursor() {

@@ -111,8 +111,8 @@ public abstract class Etyllica extends Applet implements Engine{
 		//addLoader(MeshLoader.getInstance());
 		//initSystemFonts
 		//addLoader(SystemFontLoader.getInstance());
-		
-		//core.addLoader(JoystickLoader.getInstance());
+		//initJoystick
+		//addLoader(JoystickLoader.getInstance());
 		
 		core.initDefault();
 
@@ -138,9 +138,18 @@ public abstract class Etyllica extends Applet implements Engine{
 
 		GUIEvent event = GUIEvent.NONE;
 
-		core.gerencia();
+		core.update();
 
 		event = core.getSuperEvent();
+
+		listen(event);
+
+		//Calls Garbage Collector
+		//System.gc();
+
+	}
+	
+	public void listen(GUIEvent event){
 
 		if(event==GUIEvent.ENABLE_FULL_SCREEN){
 			core.enableFullScreen();
@@ -151,17 +160,12 @@ public abstract class Etyllica extends Applet implements Engine{
 			//}else if(event==GUIEvent.WINDOW_MOVE){
 			//	setLocation(this.getX()+(mouse.getX()-mouse.getDragX()), this.getY()+(mouse.getY()-mouse.getDragY()));
 		}
-
 		else if(event==GUIEvent.REQUEST_FOCUS){
 
 			if ( !hasFocus() ) {
 				requestFocus();
 			}
 		}
-
-		//Calls Garbage Collector
-		//System.gc();
-
 	}
 
 	protected void addLoader(Loader loader) {

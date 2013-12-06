@@ -8,24 +8,25 @@ import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
-import java.util.HashSet;
 import java.util.Set;
 
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.Loader;
 import br.com.etyllica.core.video.FullScreenWindow;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 
-public class SharedCore extends InnerCore{
+public class SharedCore {
 
+	private int width;
+	
+	private int height;
+	
 	private Set<Loader> loaders;
 	
 	private GraphicsConfiguration configuration;
-
-	private int w;
-	private int h;
 
 	private java.awt.Component component;
 
@@ -38,23 +39,28 @@ public class SharedCore extends InnerCore{
 	private Graphic graphic;
 
 	private FullScreenWindow telaCheia = null;
+	
+	private EngineCore innerCore;
 
-	public SharedCore(java.awt.Component component, int w, int h){
+	public SharedCore(java.awt.Component component, int width, int height){
 		super();
+		
 		this.component = component;
 
 		//this.configuration = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
 		this.configuration = component.getGraphicsConfiguration();
 
-		this.w = w;
-		this.h = h;
+		this.width = width;
+		this.height = height;
 
-		this.graphic = new Graphic(w,h);
+		this.graphic = new Graphic(width,height);
 
-		this.desktop = new MainWindow(0,0,w,h);
+		this.desktop = new MainWindow(0,0,width,height);
 
-		defineSize(w, h);
+		defineSize(width, height);
 
+		innerCore = new EngineCore();
+		
 	}
 
 	public String getPath() {
@@ -79,48 +85,47 @@ public class SharedCore extends InnerCore{
 	}
 
 	public void enableFullScreen(){
-		telaCheia = new FullScreenWindow(this);
-		addEffect(new GenericFullScreenEffect(0, 0, w, h));
+		telaCheia = new FullScreenWindow(innerCore);
+		innerCore.addEffect(new GenericFullScreenEffect(0, 0, width, height));
 
-		fullScreenEnable = true;
+		innerCore.fullScreenEnable = true;
 	}
 
 	public void disableFullScreen(){
 		telaCheia.dispose();
 		telaCheia = null;
 
-		fullScreenEnable = false;
+		innerCore.fullScreenEnable = false;
 	}
 
 	public void drawFullScreen(){
-		if(fullScreenEnable){
+		if(innerCore.fullScreenEnable){
 			telaCheia.draw(graphic.getBimg());
 		}
 	}
 
 	public boolean isFullScreenEnable() {
-		return fullScreenEnable;
+		return innerCore.fullScreenEnable;
 	}
 
 	public void startCore(Application application) {
 
 		this.desktop.setApplication(application);
-		this.addWindow(desktop);
+		innerCore.addWindow(desktop);
 
 		component.setFocusTraversalKeysEnabled(false);
 		component.setFocusable(true);
 		component.requestFocus();
 
 		hideDefaultCursor();
-		mouse.updateArrowTheme();
+		
+		component.addMouseMotionListener( innerCore.mouse );
+		component.addMouseWheelListener( innerCore.mouse );
+		component.addMouseListener( innerCore.mouse );
 
-		component.addMouseMotionListener( mouse );
-		component.addMouseWheelListener( mouse );
-		component.addMouseListener( mouse );
+		component.addKeyListener( innerCore.keyboard );
 
-		component.addKeyListener( keyboard );
-
-		animator.startAnimation();
+		innerCore.animator.startAnimation();
 
 	}
 
@@ -143,7 +148,7 @@ public class SharedCore extends InnerCore{
 		if(volatileImage!=null){
 			//graphic.setBufferedImage(volatileImage.getSnapshot());
 			graphic.setVolatileImage(volatileImage);
-		}		
+		}
 
 	}
 
@@ -153,7 +158,7 @@ public class SharedCore extends InnerCore{
 
 		// This means the device doesn't match up to this hardware accelerated image.
 		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE){
-			volatileImage = createBackBuffer(w,h); // recreate the hardware accelerated image.
+			volatileImage = createBackBuffer(width,height); // recreate the hardware accelerated image.
 			graphic.setVolatileImage(volatileImage);
 		}
 
@@ -165,6 +170,7 @@ public class SharedCore extends InnerCore{
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
 				, new Point(0, 0), "invisibleCursor");
 		component.setCursor( transparentCursor );
+		innerCore.drawCursor = true;
 	}
 
 	public void paint( Graphics g ) {
@@ -174,12 +180,12 @@ public class SharedCore extends InnerCore{
 
 		validateVolatileImage();
 
-		draw(graphic);
+		innerCore.draw(graphic);
 
 		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
-		if(!fullScreenEnable){
+		if(!innerCore.fullScreenEnable){
 			g.drawImage(graphic.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), component);
 		}
 		else{
@@ -190,23 +196,35 @@ public class SharedCore extends InnerCore{
 	}
 
 	public int getW() {
-		return w;
+		return width;
 	}
 
 	public void setW(int w) {
-		this.w = w;
+		this.width = w;
 	}
 
 	public int getH() {
-		return h;
+		return height;
 	}
 
 	public void setH(int h) {
-		this.h = h;
+		this.height = h;
 	}
 	
 	public void setLoaders(Set<Loader> loaders) {
 		this.loaders = loaders;
 	}
 	
+	public void update(){
+		innerCore.gerencia();
+	}
+	
+	public GUIEvent getSuperEvent(){
+		return innerCore.getSuperEvent();
+	}
+	
+	public void hideCursor(){
+		innerCore.hideCursor();
+	}
+		
 }

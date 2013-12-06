@@ -24,6 +24,7 @@ public class HIDController{
 	public HIDController(){
 		
 		mouse = new Mouse(0,0);
+		mouse.updateArrowTheme();
 		
 		keyboard = new Keyboard();
 		keyboard.reset();

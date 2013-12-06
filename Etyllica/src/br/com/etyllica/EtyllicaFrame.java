@@ -46,12 +46,13 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 	private ScheduledExecutorService executor;
 
 	public EtyllicaFrame(int width, int height){
-
+		super();
+		
 		this.w = width;
 		this.h = height;
 
 	}
-
+	
 	public void init() {
 
 		core = new SharedCore(this, w, h);
@@ -141,7 +142,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 		GUIEvent event = GUIEvent.NONE;
 
-		core.gerencia();
+		core.update();
 
 		event = core.getSuperEvent();
 
