@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.etyllica.core.Component;
-import br.com.etyllica.core.event.GUIAction;
+import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.layer.Layer;
 
@@ -30,10 +30,10 @@ public abstract class GUIComponent extends Layer implements Component{
 	
 	private List<GUIComponent> components = new ArrayList<GUIComponent>();
 	
-	protected List<GUIAction> actions = new ArrayList<GUIAction>();
+	protected List<Action> actions = new ArrayList<Action>();
 	
 	//GUIAction's Map
-	protected Map<GUIEvent,GUIAction> map = new HashMap<GUIEvent, GUIAction>();
+	protected Map<GUIEvent,Action> map = new HashMap<GUIEvent, Action>();
 				
 	public GUIComponent(int x, int y) {
 		super(x,y,1,1);
@@ -83,7 +83,7 @@ public abstract class GUIComponent extends Layer implements Component{
 		this.onFocus = focus;
 	}
 
-	public List<GUIAction> getActions() {
+	public List<Action> getActions() {
 		return actions;
 	}
 
@@ -91,7 +91,7 @@ public abstract class GUIComponent extends Layer implements Component{
 	 * 
 	 * @param actions
 	 */
-	public void setActions(List<GUIAction> actions) {
+	public void setActions(List<Action> actions) {
 		this.actions = actions;
 	}
 
@@ -179,7 +179,7 @@ public abstract class GUIComponent extends Layer implements Component{
 	 * @param event
 	 * @param action
 	 */
-	public void addAction(GUIEvent event, GUIAction action){
+	public void addAction(GUIEvent event, Action action){
 		map.put(event, action);
 	}
 	

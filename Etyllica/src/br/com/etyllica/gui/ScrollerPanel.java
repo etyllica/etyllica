@@ -3,7 +3,7 @@ package br.com.etyllica.gui;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import br.com.etyllica.core.event.GUIAction;
+import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -42,12 +42,12 @@ public class ScrollerPanel extends GUIComponent{
 
 		upButton = new DefaultButton(w-buttonSize,0,buttonSize,buttonSize);
 		upButton.setLabel(new UpArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
-		upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollUp"));
+		upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollUp"));
 		upButton.setVisible(false);		
 		
 		downButton = new DefaultButton(w-buttonSize,h-buttonSize,buttonSize,buttonSize);
 		downButton.setLabel(new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
-		downButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "scrollDown"));
+		downButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollDown"));
 		downButton.setVisible(false);
 		
 		track = new ScrollBackground(w-buttonSize, buttonSize, buttonSize, h-buttonSize*2);

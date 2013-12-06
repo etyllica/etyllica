@@ -1,7 +1,7 @@
 package br.com.etyllica.gui.window;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.event.GUIAction;
+import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.video.Graphic;
@@ -38,7 +38,7 @@ public class DefaultWindow extends Window{
 		closeButton = new RoundButton(w-buttonRadius,-buttonRadius, buttonRadius*2, buttonRadius*2);
 		closeButton.setLabel(new ImageLabel(-20,20,"mystic/icons/default/close.png"));
 		
-		closeButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "closeWindow"));
+		closeButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "closeWindow"));
 		
 		titleBar = new TextLabel(w/-50,15, "...");
 	}

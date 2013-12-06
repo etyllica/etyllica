@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.event.GUIAction;
+import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -33,7 +33,7 @@ public class Select extends GUIComponent{
 		
 		DownArrow arrow = new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2);
 		button.setLabel(arrow);
-		button.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "swapShowOptions"));
+		button.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "swapShowOptions"));
 		
 		add(button);
 		

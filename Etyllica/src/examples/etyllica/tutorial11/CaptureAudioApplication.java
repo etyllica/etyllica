@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import sound.capture.CaptureHandler;
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.event.GUIAction;
+import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -36,18 +36,18 @@ public class CaptureAudioApplication extends Application {
 
 		final Button capture = new Button(20,20,200,30);
 		capture.setLabel(new TextLabel("Capture"));
-		capture.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new GUIAction(this, "captureAudio"));
+		capture.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new Action(this, "captureAudio"));
 		this.add(capture);
 
 		stop = new Button(20,60,200,30);
 		stop.setLabel(new TextLabel("Stop Capture"));
-		stop.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new GUIAction(this, "stopCapture"));
+		stop.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new Action(this, "stopCapture"));
 		stop.setDisabled(true);
 		this.add(stop);
 
 		play = new Button(20,100,200,30);
 		play.setLabel(new TextLabel("Play"));
-		play.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new GUIAction(this, "playAudio"));
+		play.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new Action(this, "playAudio"));
 		play.setDisabled(true);
 		this.add(play);
 

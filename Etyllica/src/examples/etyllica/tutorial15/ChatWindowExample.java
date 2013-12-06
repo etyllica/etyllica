@@ -3,7 +3,7 @@ package examples.etyllica.tutorial15;
 import java.awt.Color;
 
 import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.event.GUIAction;
+import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -42,7 +42,7 @@ public class ChatWindowExample extends Application{
 		
 		Button button = new Button(tf.getX()+tf.getW()+10, tf.getY(), 90, tf.getH());
 		button.setLabel(new TextLabel("Send!"));
-		button.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new GUIAction(this, "sendMsg"));
+		button.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "sendMsg"));
 		add(button);
 		
 		loading = 100;

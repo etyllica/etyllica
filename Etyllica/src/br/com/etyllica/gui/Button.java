@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.event.GUIAction;
+import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -67,7 +67,7 @@ public class Button extends GUIComponent{
 		button.setDisabled(disabled);
 	}
 
-	public List<GUIAction> getActions() {
+	public List<Action> getActions() {
 		return button.getActions();
 	}
 
@@ -115,7 +115,7 @@ public class Button extends GUIComponent{
 		button.executeAction(event);
 	}
 
-	public void addAction(GUIEvent event, GUIAction action) {
+	public void addAction(GUIEvent event, Action action) {
 		button.addAction(event, action);
 	}
 
@@ -203,7 +203,7 @@ public class Button extends GUIComponent{
 		button.setOnFocus(focus);
 	}
 
-	public void setActions(List<GUIAction> actions) {
+	public void setActions(List<Action> actions) {
 		button.setActions(actions);
 	}
 

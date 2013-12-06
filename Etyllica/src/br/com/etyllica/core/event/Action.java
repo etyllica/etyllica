@@ -12,12 +12,12 @@ import java.util.List;
  *
  */
 
-public class GUIAction {
-		
+public class Action {
+
 	private Object object;
-	
+
 	private String methodName = "";
-	
+
 	private List<Object> parameters = new ArrayList<Object>();
 
 	/**
@@ -28,81 +28,110 @@ public class GUIAction {
 	 * @param object - object that have the component and the method to be executed
 	 * @param methodName - the name of a public method form object
 	 */
-	public GUIAction(Object object, String methodName) {
+	public Action(Object object, String methodName) {
 		super();
-		
+
 		this.object = object;
 		this.methodName = methodName;
 	}
-	
-	public GUIAction(Object object, String methodName, List<Object> parameters){
+
+	public Action(Object object, String methodName, List<Object> parameters){
 		this(object, methodName);
-		
+
 		this.parameters.addAll(parameters);
 	}
-	
-	public GUIAction(Object object, String methodName, Object ... parameters){
+
+	public Action(Object object, String methodName, Object ... parameters){
 		this(object, methodName);
-		
+
 		for(Object obj: parameters){
 			this.parameters.add(obj);	
 		}
-		
+
 	}
-		
+
 	public void executeAction(){
 
 		Method method = null;
-		
+
 		/**
 		 * Classes of parameters
 		 */
 		Class<?>[] classes = null;
 		Object[] values = null;
-		
+
 		if(!parameters.isEmpty()){
-		
+
 			classes = new Class<?>[parameters.size()];
-			
+
 			for(int i=0;i<parameters.size();i++){
 				classes[i] = parameters.get(i).getClass();
 			}
-			
+
 			values = parameters.toArray();
-			
+
 		}else{
-			
+
 			classes = new Class<?>[]{};
-			
+
 			values = new Object[]{};
 		}
-		
+
 		//Creating method from Object Class.
 		//Telling the parameters' classes
-		 
+
 		Class<?> cls = object.getClass();
-		
+
+		method = getMethod(cls, methodName, classes);
+
+		if(method!=null){
+			//Invoking method with parameters
+
+			try {
+				method.invoke(object, values);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+	}
+
+	private Method getMethod(Class<?> cls, String methodName, Class<?>[] classes){
+
+		Method method = null;
+
 		try {
+
 			method = cls.getMethod(methodName, classes);
-		} catch (SecurityException e) {
-			e.printStackTrace();
+
 		} catch (NoSuchMethodException e) {
+
+			Class<?> superClass = cls.getSuperclass();
+
+			if(superClass != null){
+
+				method = getMethod(superClass, methodName, classes);
+
+				return method;
+
+			}else{
+
+				e.printStackTrace();
+
+			}
+
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
-		//Invoking method with parameters
-		
-		try {
-			method.invoke(object, values);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		
+		}	
+
+		return method;		
+
 	}
 
 	public List<Object> getParameters() {
@@ -112,5 +141,5 @@ public class GUIAction {
 	public void setParameters(List<Object> parameters) {
 		this.parameters = parameters;
 	}
-	
+
 }
