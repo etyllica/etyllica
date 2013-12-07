@@ -103,34 +103,49 @@ public class Action {
 
 	private Method getMethod(Class<?> cls, String methodName, Class<?>[] classes){
 
-		Method method = null;
+		for(Method method :cls.getMethods()){
 
-		try {
+			//Find method by name
+			if(method.getName().equals(methodName)){
 
-			method = cls.getMethod(methodName, classes);
+				//Verify parameters length
+				if(method.getParameterTypes().length==classes.length){
 
-		} catch (NoSuchMethodException e) {
+					for(int i=0; i<classes.length;i++){
 
-			Class<?> superClass = cls.getSuperclass();
+						Class<?> clazz = method.getParameterTypes()[i];
+						
+						if(clazz.isPrimitive()){
+						
+							String name = classes[i].getSimpleName().toLowerCase();
+							
+							String parameterName = method.getParameterTypes()[i].getName();
+							
+							if(!name.equals(parameterName)){
+								
+								return null;
+							}
+							
+						}else{
+						
+							if(!classes[i].getName().equals(method.getParameterTypes()[i].getComponentType())){
+								return null;
+							}
+							
+						}
+						
 
-			if(superClass != null){
+					}
+					
+					return method;
 
-				method = getMethod(superClass, methodName, classes);
-
-				return method;
-
-			}else{
-
-				e.printStackTrace();
+				}
 
 			}
 
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+		}
 
-		return method;		
+		return null;		
 
 	}
 
