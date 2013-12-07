@@ -121,7 +121,7 @@ public class Action {
 							
 							String parameterName = method.getParameterTypes()[i].getName();
 							
-							if(!name.equals(parameterName)){
+							if(!name.startsWith(parameterName)){
 								
 								return null;
 							}
