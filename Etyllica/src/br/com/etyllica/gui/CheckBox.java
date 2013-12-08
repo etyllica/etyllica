@@ -2,7 +2,7 @@ package br.com.etyllica.gui;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyState;
+import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
@@ -35,7 +35,7 @@ public class CheckBox extends DefaultButton{
 
 		if(mouseOver){
 
-			if(event.getState()==KeyState.PRESSED){
+			if(event.getState()==PointerState.PRESSED){
 
 				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
@@ -51,7 +51,7 @@ public class CheckBox extends DefaultButton{
 					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
 				}
 				
-			}else if(event.getState()==KeyState.RELEASED){
+			}else if(event.getState()==PointerState.RELEASED){
 
 				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 					

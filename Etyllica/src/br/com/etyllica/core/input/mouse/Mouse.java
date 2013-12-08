@@ -13,7 +13,7 @@ import java.util.List;
 import javax.swing.event.MouseInputListener;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.event.KeyState;
+import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.gui.mouse.arrow.MouseArrow;
 import br.com.etyllica.gui.mouse.theme.ArrowTheme;
@@ -105,13 +105,13 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 	protected int dragX = 0;
 	protected int dragY = 0;
 
-	private void addEvent(int button, KeyState state){
+	private void addEvent(int button, PointerState state){
 
 		addEvent(button, state, x, y );
 
 	}
 
-	private void addEvent(int button, KeyState state, int x, int y){
+	private void addEvent(int button, PointerState state, int x, int y){
 
 		MouseButton key = MouseButton.MOUSE_NONE;
 
@@ -134,10 +134,10 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 	@Override
 	public void mouseClicked( MouseEvent me ) {
 
-		KeyState state = KeyState.CLICK;
+		PointerState state = PointerState.CLICK;
 
 		if (me.getClickCount() == 2) {
-			state = KeyState.DOUBLE_CLICK;
+			state = PointerState.DOUBLE_CLICK;
 		}
 
 		addEvent(me.getButton(),state);
@@ -150,7 +150,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 	@Override
 	public void mousePressed( MouseEvent me ) {
 
-		addEvent(me.getButton(),KeyState.PRESSED);
+		addEvent(me.getButton(),PointerState.PRESSED);
 
 		setCoordenadas(me.getX(),me.getY());
 
@@ -160,7 +160,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 	@Override
 	public void mouseReleased( MouseEvent me ) {
 
-		addEvent(me.getButton(),KeyState.RELEASED);
+		addEvent(me.getButton(),PointerState.RELEASED);
 
 		dragged = false;
 
@@ -170,7 +170,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 	@Override
 	public void mouseMoved( MouseEvent me ) {
 
-		events.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, x, y));
+		events.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y));
 
 		setCoordenadas(me.getX(),me.getY());
 
@@ -203,7 +203,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 		dragButton = me.getButton();
 		
 		//addEvent(dragButton, KeyState.DRAGGED, dragX-x, dragY-y);
-		addEvent(dragButton, KeyState.DRAGGED, x, y);
+		addEvent(dragButton, PointerState.DRAGGED, x, y);
 
 		me.consume();
 	}
@@ -217,7 +217,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 			key = MouseButton.MOUSE_WHEEL_UP;
 		}
 		
-		events.add(new PointerEvent(key, KeyState.PRESSED, x, y, mwe.getWheelRotation()));
+		events.add(new PointerEvent(key, PointerState.PRESSED, x, y, mwe.getWheelRotation()));
 	}
 
 	//TODO Remover colisoes e incluir em layer

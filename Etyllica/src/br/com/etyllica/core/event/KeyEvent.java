@@ -1,7 +1,6 @@
 package br.com.etyllica.core.event;
 
 
-import br.com.etyllica.core.input.keyboard.KeyState;
 
 public class KeyEvent{
 	

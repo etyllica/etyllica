@@ -14,7 +14,7 @@ import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.KeyState;
+import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.input.HIDController;
 import br.com.etyllica.core.input.keyboard.Keyboard;
@@ -498,7 +498,7 @@ public class EngineCore implements Core{
 			 */
 
 		case UPDATE_MOUSE:
-			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
+			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 			break;
 
 		case APPLICATION_CHANGED:
@@ -749,12 +749,12 @@ public class EngineCore implements Core{
 			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_ESQUERDA)){
 
 				mouse.setX(mouse.getX()-velocidade);
-				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
+				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
 			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_DIREITA)){
 
 				mouse.setX(mouse.getX()+velocidade);
-				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
+				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
 			}
 
@@ -762,29 +762,29 @@ public class EngineCore implements Core{
 			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_CIMA)){
 
 				mouse.setX(mouse.getY()-velocidade);
-				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
+				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
 			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_BAIXO)){
 
 				mouse.setX(mouse.getY()+velocidade);
-				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, KeyState.MOVE, mouse.getX(), mouse.getY()));
+				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
 			}
 
 			//Mouse Left Button
 			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_INS)){
-				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, KeyState.PRESSED));
+				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
 			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_INS)){
-				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, KeyState.RELEASED));
+				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
 			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_INS)){
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_LEFT, KeyState.CLICK));
 			}*/
 
 			//Mouse Right Button
 			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_DEL)){
-				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.PRESSED));
+				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
 			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_DEL)){
-				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.RELEASED));
+				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
 			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_DEL)){
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
 			}*/
@@ -794,11 +794,11 @@ public class EngineCore implements Core{
 
 	private GUIEvent updateFrameEvents(PointerEvent event){
 
-		if(event.getState()==KeyState.CLICK){
+		if(event.getState()==PointerState.CLICK){
 			return GUIEvent.REQUEST_FOCUS;
 		}
 
-		if(event.getState()==KeyState.DRAGGED){
+		if(event.getState()==PointerState.DRAGGED){
 
 			if(mouse.getY()<=50){
 				/*Logger.log("Evento Mouse dragged");
@@ -882,7 +882,7 @@ public class EngineCore implements Core{
 					mouse.setArc(arc+speed);
 				}else{
 					//TODO if timerMouse
-					mouseEvents.add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, KeyState.CLICK));
+					mouseEvents.add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.CLICK));
 					//Simula Click
 					click = true;
 				}

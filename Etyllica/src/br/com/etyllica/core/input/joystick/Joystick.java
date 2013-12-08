@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.input.keyboard.KeyState;
+import br.com.etyllica.core.event.KeyState;
 
 public class Joystick {
 

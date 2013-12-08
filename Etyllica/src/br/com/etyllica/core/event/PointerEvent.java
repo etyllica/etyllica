@@ -14,7 +14,7 @@ public class PointerEvent {
 
 	private MouseButton key;
 	
-	private KeyState state;
+	private PointerState state;
 	
 	private int x;
 	
@@ -24,7 +24,7 @@ public class PointerEvent {
 	
 	private long timestamp = System.currentTimeMillis();
 	
-	public PointerEvent(MouseButton key, KeyState state){
+	public PointerEvent(MouseButton key, PointerState state){
 		this.key = key;
 		this.state = state;
 		
@@ -41,7 +41,7 @@ public class PointerEvent {
 		
 	}
 	
-	public PointerEvent(MouseButton key, KeyState state, int x, int y){
+	public PointerEvent(MouseButton key, PointerState state, int x, int y){
 		this.key = key;
 		this.state = state;
 		
@@ -50,7 +50,7 @@ public class PointerEvent {
 		this.amount = 0;
 	}
 	
-	public PointerEvent(MouseButton key, KeyState state, int x, int y, int amount){
+	public PointerEvent(MouseButton key, PointerState state, int x, int y, int amount){
 		this.key = key;
 		this.state = state;
 		
@@ -59,11 +59,11 @@ public class PointerEvent {
 		this.amount = amount;
 	}
 
-	public KeyState getState() {
+	public PointerState getState() {
 		return state;
 	}
 
-	public void setState(KeyState state) {
+	public void setState(PointerState state) {
 		this.state = state;
 	}
 
@@ -100,16 +100,16 @@ public class PointerEvent {
 	}
 		
 	public boolean onDragButton(MouseButton key){
-		return((state==KeyState.DRAGGED)&&this.key==key);
+		return((state==PointerState.DRAGGED)&&this.key==key);
 	}
 	
 	public boolean onButtonDown(MouseButton key){
 		//TODO Make sense?
-		return((state==KeyState.PRESSED||(state==KeyState.DRAGGED))&&this.key==key);
+		return((state==PointerState.PRESSED||(state==PointerState.DRAGGED))&&this.key==key);
 	}
 	
 	public boolean onButtonUp(MouseButton key){
-		return((state==KeyState.RELEASED)&&this.key==key);
+		return((state==PointerState.RELEASED)&&this.key==key);
 	}
 		
 }

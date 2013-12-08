@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyState;
+import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.video.Graphic;
@@ -37,7 +37,7 @@ public class Radio extends CheckBox{
 		
 		if(mouseOver){
 
-			if(event.getState()==KeyState.PRESSED){
+			if(event.getState()==PointerState.PRESSED){
 
 				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
@@ -46,7 +46,7 @@ public class Radio extends CheckBox{
 					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 				}
 
-			}else if(event.getState()==KeyState.RELEASED){
+			}else if(event.getState()==PointerState.RELEASED){
 				
 				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 					

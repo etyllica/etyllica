@@ -8,15 +8,10 @@ package br.com.etyllica.core.event;
  */
 
 public enum KeyState {
-
+	FIRST_RELEASED,
 	RELEASED,
-	PRESSED,  // Pressed but not for the first time 
-	DRAGGED,
+	PRESSED,  // Down, but not the first time
+	ONCE,      // Down for the first time
 	
-	CLICK,
-	DOUBLE_CLICK,
-	MOVE,
-	
-	ENTER,
-	
+	TYPED;
 }

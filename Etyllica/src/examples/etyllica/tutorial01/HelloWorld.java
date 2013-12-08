@@ -29,6 +29,20 @@ public class HelloWorld extends Application{
 	@Override
 	public void draw(Graphic g) {
 		hello.draw(g);		
+		
+		if(right){
+			hello.setOffsetX(1);
+		}
+		if(left){
+			hello.setOffsetX(-1);
+		}
+		
+		if(down){
+			hello.setOffsetY(1);
+		}
+		if(up){
+			hello.setOffsetY(-1);
+		}
 	}
 	
 
@@ -38,9 +52,43 @@ public class HelloWorld extends Application{
 		return null;
 	}
 	
+	private boolean up = false;
+	private boolean down = false;
+	
+	private boolean right = false;
+	private boolean left = false;
+	
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
-			
+		
+		if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)){
+			right = true;
+		}
+		if(event.isKeyUp(KeyEvent.TSK_RIGHT_ARROW)){
+			right = false;
+		}
+		
+		if(event.isKeyDown(KeyEvent.TSK_LEFT_ARROW)){
+			left = true;
+		}
+		if(event.isKeyUp(KeyEvent.TSK_LEFT_ARROW)){
+			left = false;
+		}
+		
+		if(event.isKeyDown(KeyEvent.TSK_UP_ARROW)){
+			up = true;
+		}
+		if(event.isKeyUp(KeyEvent.TSK_UP_ARROW)){
+			up = false;
+		}
+		
+		if(event.isKeyDown(KeyEvent.TSK_DOWN_ARROW)){
+			down = true;
+		}
+		if(event.isKeyUp(KeyEvent.TSK_DOWN_ARROW)){
+			down = false;
+		}
+		
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,7 +3,7 @@ package br.com.etyllica.gui.button;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.KeyState;
+import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
@@ -164,7 +164,7 @@ public class DefaultButton extends RoundGUIComponent{
 
 			if(mouseOver){
 
-				if(event.getState()==KeyState.PRESSED){
+				if(event.getState()==PointerState.PRESSED){
 
 					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
@@ -179,7 +179,7 @@ public class DefaultButton extends RoundGUIComponent{
 						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
 					}
 				}
-				else if(event.getState()==KeyState.RELEASED){
+				else if(event.getState()==PointerState.RELEASED){
 
 					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
@@ -195,7 +195,7 @@ public class DefaultButton extends RoundGUIComponent{
 
 					}
 
-				}else if(event.getState()==KeyState.DOUBLE_CLICK){
+				}else if(event.getState()==PointerState.DOUBLE_CLICK){
 
 					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
 
@@ -211,7 +211,7 @@ public class DefaultButton extends RoundGUIComponent{
 
 					}
 
-				}else if(event.getState()==KeyState.MOVE){
+				}else if(event.getState()==PointerState.MOVE){
 
 					retorno = GUIEvent.MOUSE_OVER;
 
@@ -219,7 +219,7 @@ public class DefaultButton extends RoundGUIComponent{
 
 			}else{
 
-				if(event.getState()==KeyState.MOVE){
+				if(event.getState()==PointerState.MOVE){
 
 					retorno = GUIEvent.MOUSE_OUT;
 
