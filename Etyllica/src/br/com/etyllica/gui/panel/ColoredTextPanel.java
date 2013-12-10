@@ -6,9 +6,9 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Graphic;
-import br.com.etyllica.gui.GUIComponent;
+import br.com.etyllica.gui.View;
 
-public class ColoredTextPanel extends GUIComponent{
+public class ColoredTextPanel extends View{
 
 	private Color backgroundcolor = Color.GRAY;
 	private Color bordercolor = Color.BLACK;

@@ -3,15 +3,14 @@ package br.com.etyllica.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.application.Context;
 import br.com.etyllica.core.application.SessionMap;
 import br.com.etyllica.core.application.load.ApplicationLoader;
 import br.com.etyllica.core.application.load.DefaultLoadApplication;
+import br.com.etyllica.core.application.load.GenericLoadApplication;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Graphic;
 
 /**
  * 
@@ -20,9 +19,9 @@ import br.com.etyllica.core.video.Graphic;
  *
  */
 
-public class Window extends GUIComponent{
+public class Window extends View{
 
-	protected Application application;
+	protected Context application;
 
 	//TODO Change to Application backApplication
 	protected List<Context> oldApplications = new ArrayList<Context>();
@@ -37,6 +36,13 @@ public class Window extends GUIComponent{
 
 	private boolean loaded = true;
 	//private boolean locked = false;
+	
+	private List<Window> windows = new ArrayList<Window>();
+	
+	/**
+	 * Load Application
+	 */
+	protected DefaultLoadApplication loadApplication = null;
 
 	public Window(int x, int y, int w, int h){
 		super(x,y,w,h);
@@ -47,6 +53,9 @@ public class Window extends GUIComponent{
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB));
 
 		applicationLoader = new ApplicationLoader();
+		
+		loadApplication = new GenericLoadApplication(x,y,w,h);
+		loadApplication.load();
 	}
 
 	@Override
@@ -56,13 +65,6 @@ public class Window extends GUIComponent{
 			//TODO Melhorar evento de colisao com janela
 			//return GUIEvent.MOUSE_OVER_UNCLICKABLE;	
 		}
-
-		//if(event.getKeyPressed(Tecla.TSK_ESC)){
-
-		//System.out.println("Close Window@");
-
-		//}
-
 
 		return GUIEvent.NONE;
 	}
@@ -77,12 +79,7 @@ public class Window extends GUIComponent{
 
 	}
 
-	@Override
-	public void draw(Graphic g) {
-		// TODO Auto-generated method stub
-	}
-
-	public Application getApplication() {
+	public Context getApplication() {
 		return application;
 	}
 
@@ -90,35 +87,36 @@ public class Window extends GUIComponent{
 		
 	}
 
-	public void setApplication(Application application) {
-		this.application = application;
-
+	public void setApplication(Context application) {
 		clearComponents();
-		add(application);
-
+		this.application = application;
 	}
 
 	public void setLoadApplication(DefaultLoadApplication loadApplication) {
 		clearComponents();
-		add(loadApplication);
+		this.application = loadApplication;
 	}
 
-	public void reload(Application application){
+	public void reload(Context context){
 		
 		if(loaded){
 			
 			loaded = false;
 
-			DefaultLoadApplication load = application.getLoadApplication();
-			load.load();
-			setLoadApplication(load);
+			/*application.load();
+			this.application = context;
+			this.loaded = true;*/
+			
+			
+			loadApplication.load();
+			setLoadApplication(loadApplication);
 
 			applicationLoader.setWindow(this);
-			applicationLoader.setApplication(application);
-			applicationLoader.setLoadApplication(load);
+			applicationLoader.setApplication(context);
+			applicationLoader.setLoadApplication(loadApplication);
 
 			applicationLoader.loadApplication();
-			
+						
 		}
 
 	}
@@ -155,4 +153,12 @@ public class Window extends GUIComponent{
 		this.loaded = loaded;
 	}
 
+	public List<Window> getWindows() {
+		return windows;
+	}
+
+	public void setWindows(List<Window> windows) {
+		this.windows = windows;
+	}
+	
 }

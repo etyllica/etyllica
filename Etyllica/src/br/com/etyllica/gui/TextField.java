@@ -19,7 +19,7 @@ import br.com.etyllica.gui.textfield.TextFieldValidator;
  *
  */
 
-public class TextField extends GUIComponent{
+public class TextField extends View{
 
 	private final int TEXT_BACKSPACE = 8;
 	private final int TEXT_TAB = 9;

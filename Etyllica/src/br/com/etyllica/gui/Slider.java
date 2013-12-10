@@ -16,7 +16,7 @@ import br.com.etyllica.gui.button.DefaultButton;
  *
  */
 
-public class Slider extends GUIComponent{
+public class Slider extends View{
 
 	private int minValue = 0;
 	private int maxValue = 255;

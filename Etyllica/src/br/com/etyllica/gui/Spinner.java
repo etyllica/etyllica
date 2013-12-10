@@ -15,7 +15,7 @@ import br.com.etyllica.gui.label.TextLabel;
  *
  */
 
-public abstract class Spinner<T extends Number> extends GUIComponent{
+public abstract class Spinner<T extends Number> extends View{
 
 	private DefaultButton plus;
 	private DefaultButton minus;

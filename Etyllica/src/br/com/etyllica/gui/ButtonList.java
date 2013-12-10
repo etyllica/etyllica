@@ -17,7 +17,7 @@ import br.com.etyllica.gui.button.DefaultButton;
  *
  */
 
-public class ButtonList extends GUIComponent{
+public class ButtonList extends View{
 	
 	List<DefaultButton> buttons = new ArrayList<DefaultButton>();
 	

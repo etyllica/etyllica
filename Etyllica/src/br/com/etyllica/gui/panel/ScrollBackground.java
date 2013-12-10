@@ -6,9 +6,9 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Graphic;
-import br.com.etyllica.gui.GUIComponent;
+import br.com.etyllica.gui.View;
 
-public class ScrollBackground extends GUIComponent{
+public class ScrollBackground extends View{
 
 	public ScrollBackground(int x, int y, int w, int h){
 		super(x,y,w,h);

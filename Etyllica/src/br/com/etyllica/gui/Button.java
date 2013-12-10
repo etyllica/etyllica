@@ -11,7 +11,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.button.DefaultButton;
 
-public class Button extends GUIComponent{
+public class Button extends View{
 	
 	private DefaultButton button;
 	
@@ -75,7 +75,7 @@ public class Button extends GUIComponent{
 		button.hide();
 	}
 
-	public List<GUIComponent> getComponents() {
+	public List<View> getComponents() {
 		return button.getComponents();
 	}
 
@@ -91,11 +91,11 @@ public class Button extends GUIComponent{
 		return button.colideCircleCircle(bx, by, bw, bh);
 	}
 
-	public void add(GUIComponent component) {
+	public void add(View component) {
 		button.add(component);
 	}
 
-	public void addAll(Collection<? extends GUIComponent> components) {
+	public void addAll(Collection<? extends View> components) {
 		button.addAll(components);
 	}
 
@@ -123,7 +123,7 @@ public class Button extends GUIComponent{
 		return button.equals(obj);
 	}
 
-	public GUIComponent findNext() {
+	public View findNext() {
 		return button.findNext();
 	}
 
@@ -211,11 +211,11 @@ public class Button extends GUIComponent{
 		button.swapVisible();
 	}
 
-	public void remove(GUIComponent component) {
+	public void remove(View component) {
 		button.remove(component);
 	}
 
-	public void removeAll(Collection<? extends GUIComponent> components) {
+	public void removeAll(Collection<? extends View> components) {
 		button.removeAll(components);
 	}
 

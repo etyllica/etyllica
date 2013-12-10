@@ -9,7 +9,6 @@ import br.com.etyllica.gui.Window;
 import br.com.etyllica.gui.button.RoundButton;
 import br.com.etyllica.gui.label.ImageLabel;
 import br.com.etyllica.gui.label.TextLabel;
-import br.com.etyllica.layer.ImageLayer;
 
 /**
  * 
@@ -21,8 +20,10 @@ import br.com.etyllica.layer.ImageLayer;
 public class DefaultWindow extends Window{
 
 	//private Panel panel;
+	//private RoundButton iconButton;
+	
 	private RoundButton closeButton;
-	private RoundButton iconButton;
+	
 	private TextLabel titleBar;
 		
 	public DefaultWindow(int x, int y, int w, int h){
@@ -33,7 +34,7 @@ public class DefaultWindow extends Window{
 		
 		int buttonRadius = 50;
 		
-		iconButton = new RoundButton(-buttonRadius,-buttonRadius, buttonRadius*2, buttonRadius*2);
+		//iconButton = new RoundButton(-buttonRadius,-buttonRadius, buttonRadius*2, buttonRadius*2);
 		
 		closeButton = new RoundButton(w-buttonRadius,-buttonRadius, buttonRadius*2, buttonRadius*2);
 		closeButton.setLabel(new ImageLabel(-20,20,"mystic/icons/default/close.png"));
@@ -56,17 +57,17 @@ public class DefaultWindow extends Window{
 	public void restartWindow() {
 				
 		//Here I get Icon and title to title bar
-		if(application.getIcon()!=null){
+		/*if(application.getIcon()!=null){
 			
 			ImageLayer icon = application.getIcon();
 			
 			iconButton.setLabel(new ImageLabel(icon.getW()-icon.getW()/3, icon.getH()-icon.getH()/3, application.getIcon()));
-		}
+		}*/
 		if(!application.getTitle().isEmpty()){
 			titleBar.setText(application.getTitle());
 		}
 		
-		add(iconButton);
+		//add(iconButton);
 		add(closeButton);
 		add(titleBar);
 		
@@ -76,7 +77,7 @@ public class DefaultWindow extends Window{
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.TSK_0)){
-			add(iconButton);
+			//add(iconButton);
 			add(closeButton);
 			add(titleBar);
 			

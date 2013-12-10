@@ -15,7 +15,7 @@ import br.com.etyllica.layer.BufferedLayer;
  *
  */
 
-public class ColorPicker extends GUIComponent{
+public class ColorPicker extends View{
 
 	private BufferedLayer colors;
 	

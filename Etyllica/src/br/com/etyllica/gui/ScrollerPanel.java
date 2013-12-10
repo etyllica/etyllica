@@ -21,10 +21,10 @@ import br.com.etyllica.gui.panel.ScrollBackground;
  *
  */
 
-public class ScrollerPanel extends GUIComponent{
+public class ScrollerPanel extends View{
 
 	private int lastComponentH = 0;
-	private GUIComponent component;
+	private View component;
 
 	private int buttonSize = 20;
 	private int scrollAmount = 10;
@@ -139,7 +139,7 @@ public class ScrollerPanel extends GUIComponent{
 		return GUIEvent.NONE;
 	}
 
-	public void setComponent(GUIComponent component){
+	public void setComponent(View component){
 		this.component = component;
 		lastComponentH = component.getH();
 
