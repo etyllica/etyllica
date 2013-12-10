@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import br.com.etyllica.core.Component;
+import br.com.etyllica.core.GUIComponent;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.layer.Layer;
@@ -19,31 +19,31 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public abstract class GUIComponent extends Layer implements Component{
+public abstract class View extends Layer implements GUIComponent{
 	
 	protected GUIEvent lastEvent = GUIEvent.NONE;
 	
 	protected boolean onFocus = false;
 	protected boolean mouseOver = false;
 
-	protected GUIComponent root = null;
+	protected View root = null;
 	
-	private List<GUIComponent> components = new ArrayList<GUIComponent>();
+	private List<View> views = new ArrayList<View>();
 	
 	protected List<Action> actions = new ArrayList<Action>();
 	
 	//GUIAction's Map
 	protected Map<GUIEvent,Action> map = new HashMap<GUIEvent, Action>();
 				
-	public GUIComponent(int x, int y) {
+	public View(int x, int y) {
 		super(x,y,1,1);
 	}
 	
-	public GUIComponent(int x, int y, int w, int h){
+	public View(int x, int y, int w, int h){
 		super(x,y,w,h);
 	}
 	
-	public GUIComponent(){
+	public View(){
 		this(0,0);
 	}
 	
@@ -95,45 +95,45 @@ public abstract class GUIComponent extends Layer implements Component{
 		this.actions = actions;
 	}
 
-	public List<GUIComponent> getComponents() {
-		return components;
+	public List<View> getComponents() {
+		return views;
 	}
 
 	public void clearComponents(){
-		this.components.clear();
+		this.views.clear();
 	}
 	
 	/**
 	 * 
 	 * @param component
 	 */
-	public void remove(GUIComponent component){
-		this.components.remove(component);
+	public void remove(View component){
+		this.views.remove(component);
 	}
 	
 	/**
 	 * 
 	 * @param components
 	 */
-	public void removeAll(Collection<? extends GUIComponent> components){
-		this.components.removeAll(components);
+	public void removeAll(Collection<? extends View> components){
+		this.views.removeAll(components);
 	}
 	
 	/**
 	 * @param component
 	 */
-	public void add(GUIComponent component) {
+	public void add(View component) {
 		component.setRoot(this);
-		this.components.add(component);
+		this.views.add(component);
 	}
 	
 	/**
 	 * 
 	 * @param components
 	 */
-	public void addAll(Collection<? extends GUIComponent> components) {
+	public void addAll(Collection<? extends View> components) {
 		
-		for(GUIComponent component: components)	{
+		for(View component: components)	{
 			add(component);
 		}
 		
@@ -145,16 +145,16 @@ public abstract class GUIComponent extends Layer implements Component{
 	 * @param y
 	 */
 	public void translateComponents(int x, int y){
-		for(GUIComponent component: components){
+		for(View component: views){
 			translateComponent(x, y, component);
 		}
 	}
 	
-	private void translateComponent(int x, int y, GUIComponent component){
+	private void translateComponent(int x, int y, View component){
 		
 		component.setOffset(x, y);
 		
-		for(GUIComponent child: component.components){
+		for(View child: component.views){
 			translateComponent(x, y, child);
 		}
 		
@@ -183,15 +183,15 @@ public abstract class GUIComponent extends Layer implements Component{
 		map.put(event, action);
 	}
 	
-	protected void setRoot(GUIComponent root){
+	protected void setRoot(View root){
 		this.root = root;
 	}
 	
-	public GUIComponent findNext(){
+	public View findNext(){
 						
 		if(root!=null){
 			
-			Iterator<GUIComponent> it = root.getComponents().iterator();
+			Iterator<View> it = root.getComponents().iterator();
 
 	        while(it.hasNext()){
 	        	

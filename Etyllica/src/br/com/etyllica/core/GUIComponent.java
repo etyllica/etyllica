@@ -11,7 +11,7 @@ import br.com.etyllica.core.event.KeyEvent;
  *
  */
 
-public interface Component extends Drawable{
+public interface GUIComponent extends Drawable{
 	
 	/**
 	 * 
