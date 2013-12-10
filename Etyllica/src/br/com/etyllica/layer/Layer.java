@@ -1,6 +1,8 @@
 package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.PointerEvent;
@@ -54,7 +56,9 @@ public class Layer implements Drawable{
      * if layer is visible
      */
 	protected boolean visible = true;
-		
+	
+	protected List<Layer> children;
+
 	public Layer(){
 		super();
 	}
@@ -393,4 +397,21 @@ public class Layer implements Drawable{
 		// TODO Auto-generated method stub
 	}
 		
+	public List<Layer> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Layer> children) {
+		this.children = children;
+	}
+
+	public void addChild(Layer layer){
+		
+		if(children==null){
+			children = new ArrayList<Layer>();
+		}
+		
+		children.add(layer);
+	}
+
 }
