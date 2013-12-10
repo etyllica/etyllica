@@ -75,8 +75,8 @@ public class Button extends View{
 		button.hide();
 	}
 
-	public List<View> getComponents() {
-		return button.getComponents();
+	public List<View> getViews() {
+		return button.getViews();
 	}
 
 	public boolean colideRect(int bx, int by, int bw, int bh) {

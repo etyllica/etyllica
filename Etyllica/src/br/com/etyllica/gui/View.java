@@ -95,7 +95,7 @@ public abstract class View extends Layer implements GUIComponent{
 		this.actions = actions;
 	}
 
-	public List<View> getComponents() {
+	public List<View> getViews() {
 		return views;
 	}
 
@@ -191,7 +191,7 @@ public abstract class View extends Layer implements GUIComponent{
 						
 		if(root!=null){
 			
-			Iterator<View> it = root.getComponents().iterator();
+			Iterator<View> it = root.getViews().iterator();
 
 	        while(it.hasNext()){
 	        	

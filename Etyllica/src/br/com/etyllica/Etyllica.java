@@ -32,8 +32,9 @@ public abstract class Etyllica extends Applet implements Engine{
 	protected int w = 640;
 	protected int h = 480;
 
-	//TODO determinar o fps por cada sessao
-	private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
+	//TODO define fps by Application
+	//private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
+	private final int UPDATE_DELAY = 20; // 40ms. Implica em 25fps (1000/20) = 50
 
 	private Application application;
 	

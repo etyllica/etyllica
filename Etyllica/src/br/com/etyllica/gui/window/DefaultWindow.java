@@ -82,7 +82,7 @@ public class DefaultWindow extends Window{
 			add(titleBar);
 			
 			System.out.println("Adicionado");
-			System.out.println("Components: "+getComponents().size());
+			System.out.println("Components: "+getViews().size());
 		}
 		
 		return GUIEvent	.NONE;

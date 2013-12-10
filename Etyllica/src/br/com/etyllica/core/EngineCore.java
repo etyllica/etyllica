@@ -120,7 +120,8 @@ public class EngineCore implements Core{
 
 		superEvent = GUIEvent.NONE;
 
-		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getComponents());
+		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getApplication().getViews());
+		components.addAll(activeWindow.getViews());
 
 		updateActiveWindow();
 
@@ -370,7 +371,7 @@ public class EngineCore implements Core{
 		component.update(event);
 
 		//Update Childs
-		for(View child: component.getComponents()){
+		for(View child: component.getViews()){
 
 			updateGuiComponent(child, event);
 
@@ -408,7 +409,7 @@ public class EngineCore implements Core{
 			}
 
 			//Update Childs
-			for(View child: component.getComponents()){
+			for(View child: component.getViews()){
 
 				child.setOffset(component.getX(), component.getY());
 
@@ -553,14 +554,14 @@ public class EngineCore implements Core{
 
 		window.draw(g);
 		
-		window.getApplication().drawScene(g);
+		drawContext(window.getApplication(), g);		
 		
-		List<View> components = window.getComponents();
+		List<View> components = window.getViews();
 
 		for(View view: components){
 
 			if(view!=null){
-				drawComponent(view, g);
+				drawView(view, g);
 			}else{
 				System.out.println("Draw Null Component");
 			}
@@ -571,6 +572,16 @@ public class EngineCore implements Core{
 			g.translate(-window.getX(), -window.getY());
 		}
 
+	}
+	
+	private void drawContext(Context context, Graphic g){
+		
+		context.drawScene(g);
+		
+		for(View view: context.getViews()){
+			drawView(view, g);
+		}
+		
 	}
 
 	private void drawEffects(Graphic g){
@@ -627,19 +638,19 @@ public class EngineCore implements Core{
 	}
 
 	//TODO Some kind of Subimage to textfields for example
-	private void drawComponent(View component, Graphic g){
+	private void drawView(View component, Graphic g){
 
 		if(component.isVisible()){
 
 			//Draw Component
 			component.draw(g);
 
-			List<View> components = new CopyOnWriteArrayList<View>(component.getComponents());
+			List<View> components = new CopyOnWriteArrayList<View>(component.getViews());
 
 			for(View child: components){
 				child.setOffset(component.getX(), component.getY());
 				//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
-				drawComponent(child,g);
+				drawView(child,g);
 				child.setOffset(-component.getX(), -component.getY());
 			}
 
@@ -653,7 +664,7 @@ public class EngineCore implements Core{
 	}
 
 	public void translateComponents(int x, int y){
-		for(View component: activeWindow.getComponents()){
+		for(View component: activeWindow.getViews()){
 			translateComponent(x, y, component);
 		}
 	}
@@ -662,7 +673,7 @@ public class EngineCore implements Core{
 
 		component.setOffset(x, y);
 
-		for(View child: component.getComponents()){
+		for(View child: component.getViews()){
 			translateComponent(x, y, child);
 		}
 
