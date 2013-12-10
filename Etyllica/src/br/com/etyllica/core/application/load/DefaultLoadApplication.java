@@ -17,7 +17,6 @@ import br.com.etyllica.core.video.Graphic;
 
 public class DefaultLoadApplication extends Context implements LoadApplication{
 
-	
 	public DefaultLoadApplication(int w, int h) {
 		super(w,h);
 	}

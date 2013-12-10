@@ -23,12 +23,12 @@ public class HelloWorld extends Application{
 		hello = new ImageLayer(200,100,"hello.png");
 				
 		loading = 100;
-		
+				
 	}
 
 	@Override
 	public void draw(Graphic g) {
-		hello.draw(g);		
+		hello.draw(g);
 		
 		if(right){
 			hello.setOffsetX(1);

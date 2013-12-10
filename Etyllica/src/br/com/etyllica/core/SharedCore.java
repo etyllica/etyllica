@@ -41,6 +41,8 @@ public class SharedCore {
 	private FullScreenWindow telaCheia = null;
 	
 	private EngineCore innerCore;
+	
+	private boolean drawing = false;
 
 	public SharedCore(java.awt.Component component, int width, int height){
 		super();
@@ -96,16 +98,6 @@ public class SharedCore {
 		telaCheia = null;
 
 		innerCore.fullScreenEnable = false;
-	}
-
-	public void drawFullScreen(){
-		if(innerCore.fullScreenEnable){
-			telaCheia.draw(graphic.getBimg());
-		}
-	}
-
-	public boolean isFullScreenEnable() {
-		return innerCore.fullScreenEnable;
 	}
 
 	public void startCore(Application application) {
@@ -172,12 +164,15 @@ public class SharedCore {
 		component.setCursor( transparentCursor );
 		innerCore.drawCursor = true;
 	}
-
+	
 	public void paint( Graphics g ) {
 
+		drawing = true;
+		
 		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
 
+		
 		validateVolatileImage();
 
 		innerCore.draw(graphic);
@@ -188,11 +183,13 @@ public class SharedCore {
 		if(!innerCore.fullScreenEnable){
 			g.drawImage(graphic.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), component);
 		}
-		else{
-			drawFullScreen();
+		else{			
+			telaCheia.draw(graphic.getBimg());
 		}
 
 		g.dispose();
+		
+		drawing = false;
 	}
 
 	public int getW() {
@@ -216,7 +213,9 @@ public class SharedCore {
 	}
 	
 	public void update(){
-		innerCore.gerencia();
+		if(!drawing){
+			innerCore.gerencia();
+		}
 	}
 	
 	public GUIEvent getSuperEvent(){

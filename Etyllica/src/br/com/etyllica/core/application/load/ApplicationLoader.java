@@ -4,7 +4,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.application.Context;
 import br.com.etyllica.gui.Window;
 
@@ -22,7 +21,7 @@ public class ApplicationLoader implements LoadListener{
 	
 	private Window window;
 
-	private Application application;
+	private Context application;
 
 	private LoadApplication loadApplication;
 
@@ -80,7 +79,7 @@ public class ApplicationLoader implements LoadListener{
 		return application;
 	}
 
-	public void setApplication(Application application) {
+	public void setApplication(Context application) {
 		this.application = application;
 	}
 

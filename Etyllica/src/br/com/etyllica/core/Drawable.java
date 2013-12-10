@@ -13,7 +13,7 @@ public interface Drawable {
 
 	/**
 	 * 
-	 * @param g
+	 * @param Graphic g
 	 */
 	public void draw(Graphic g);
 	

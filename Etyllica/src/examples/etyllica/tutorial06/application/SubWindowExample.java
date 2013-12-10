@@ -29,7 +29,8 @@ public class SubWindowExample extends Application{
 			Window subWindow = new Window(200, 20, 160, 400);
 			subWindow.setApplication(new SimpleGuiExample(subWindow.getW(), subWindow.getH()));
 			
-			addWindow(subWindow);
+			//core.addWindow(subWindow);
+			//Parent.addWindow(subWindow);
 		}
 		
 		return GUIEvent.NONE;

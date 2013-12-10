@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.core.application.Application;
+import br.com.etyllica.core.application.Context;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerState;
@@ -24,7 +25,7 @@ import br.com.etyllica.core.loader.JoystickLoader;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.debug.Logger;
 import br.com.etyllica.effects.GlobalEffect;
-import br.com.etyllica.gui.GUIComponent;
+import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.gui.window.MainWindow;
 
@@ -40,19 +41,18 @@ public class EngineCore implements Core{
 	//External Windows
 	private Window activeWindow = null;
 
-	//private List<Window> windows = new ArrayList<Window>();
-
 	private List<AnimationScript> globalScripts = new ArrayList<AnimationScript>();
+	
 	private AnimationHandler animation = new AnimationHandler();
 
-	private GUIComponent focus;
+	private View focus;
 
 	protected HIDController control;
 
 	protected Mouse mouse;
 
 	protected Keyboard keyboard;
-	
+
 	//Mouse Over Something
 	//Usado para acessibilidade talvez
 	private boolean mouseOver = false;
@@ -69,13 +69,13 @@ public class EngineCore implements Core{
 	private MainWindow mainWindow;
 
 	protected boolean drawCursor = false;
-	
+
 	private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-	
+
 	private final int ANIMATION_DELAY = 20;
-	
+
 	protected Animator animator = new Animator();
-	
+
 	protected boolean fullScreenEnable = false;
 
 	public EngineCore(){
@@ -92,7 +92,7 @@ public class EngineCore implements Core{
 		keyEvents = keyboard.getEvents();
 
 	}
-	
+
 	public MainWindow getDesktopWindow() {
 		return mainWindow;
 	}
@@ -120,7 +120,7 @@ public class EngineCore implements Core{
 
 		superEvent = GUIEvent.NONE;
 
-		List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
+		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getComponents());
 
 		updateActiveWindow();
 
@@ -131,7 +131,7 @@ public class EngineCore implements Core{
 		updateMouse(components);
 
 		updateKeyboard();
-		
+
 		if(JoystickLoader.getInstance().isStarted()){
 			updateJoystick();
 		}
@@ -150,23 +150,9 @@ public class EngineCore implements Core{
 
 	}
 
-	private void updateActiveWindow(){
-
-		/*if(activeWindow.isClose()){
-
-			if(windows.size()>0){
-				windows.remove(activeWindow);
-				activeWindow = windows.get(windows.size()-1);
-			}else{
-				System.exit(0);
-			}
-
-		}*/
-	}
-
 	public void updateApplication(){
 
-		Application application = activeWindow.getApplication();
+		Context application = activeWindow.getApplication();
 
 		if(application!=null){
 
@@ -184,50 +170,67 @@ public class EngineCore implements Core{
 			//Animate
 			//TODO Independent Thread
 			if(!application.isLocked()){
-				
+
 				application.getAnimation().animate(getTimeNow());
-			
+
 				//if activeWindow, receive command to change application
 				if(application.getReturnApplication()!=application){
-					
+
 					this.changeApplication();
-					
-				}
-			
-			}
-
-			//Creating Windows
-			//if application has windows
-			if(!application.getWindows().isEmpty()){
-
-				//For each new window in application.windows
-				for(Window window:application.getWindows()){
-
-					//if this !windows.contains(window)
-					addWindow(window);
 
 				}
 
-				application.getWindows().clear();
 			}
 
 		}
 
 	}
-	
+
+	private void updateActiveWindow(){
+
+		List<Window> windows = activeWindow.getWindows(); 
+
+		//Creating Windows
+		//if application has windows
+		if(!windows.isEmpty()){
+
+			//For each new window in application.windows
+			for(Window window : windows){
+
+				//if this !windows.contains(window)
+				addWindow(window);
+
+			}
+
+			activeWindow.getWindows().clear();
+		}
+
+		/*if(activeWindow.isClose()){
+
+			if(windows.size()>0){
+				windows.remove(activeWindow);
+				activeWindow = windows.get(windows.size()-1);
+			}else{
+				System.exit(0);
+			}
+
+	    }*/
+
+	}
+
 	private void updateJoystick(){
-				
+
 		List<KeyEvent> joystickEvents = new CopyOnWriteArrayList<KeyEvent>(JoystickLoader.getInstance().getJoyEvents());
-	
+
 		for(KeyEvent joystickEvent: joystickEvents){
-			
+
 			System.out.println("UpdateKeyboard "+joystickEvent.getKey());
 
 			activeWindow.getApplication().updateKeyboard(joystickEvent);
 		}
-		
+
 		joyEvents.clear();
-		
+
 	}
 
 	private void updateKeyboard(){
@@ -256,7 +259,7 @@ public class EngineCore implements Core{
 					//TODO Update NExtComponent
 					Logger.log(focusEvent);
 
-					GUIComponent next = focus.findNext();
+					View next = focus.findNext();
 
 					if(next!=null){
 
@@ -283,7 +286,7 @@ public class EngineCore implements Core{
 		keyEvents.clear();
 	}
 
-	private void updateMouse(List<GUIComponent> components){
+	private void updateMouse(List<View> components){
 
 		mouseOver = false;
 		mouseOverClickable = false;
@@ -302,7 +305,7 @@ public class EngineCore implements Core{
 			//Update components in reverse order
 			//Collections.reverse(components);
 
-			for(GUIComponent component: components){
+			for(View component: components){
 
 				GUIEvent nextEvent = updateMouse(component, event);
 
@@ -311,7 +314,7 @@ public class EngineCore implements Core{
 					if(nextEvent==GUIEvent.NEXT_COMPONENT){
 						//Its necessary in NEXT_COMPONENT Events
 
-						GUIComponent next = component.findNext();
+						View next = component.findNext();
 
 						if(next!=null){
 							gerenciaEvento(component.findNext(), nextEvent);	
@@ -347,11 +350,11 @@ public class EngineCore implements Core{
 		mouseEvents.clear();
 	}
 
-	private void updateGui(List<GUIComponent> components){
+	private void updateGui(List<View> components){
 
 		for(GUIEvent event: guiEvents){
 
-			for(GUIComponent component: components){
+			for(View component: components){
 
 				updateGuiComponent(component, event);
 
@@ -362,19 +365,19 @@ public class EngineCore implements Core{
 		guiEvents.clear();
 	}
 
-	private void updateGuiComponent(GUIComponent component, GUIEvent event){
+	private void updateGuiComponent(View component, GUIEvent event){
 
 		component.update(event);
 
 		//Update Childs
-		for(GUIComponent child: component.getComponents()){
+		for(View child: component.getComponents()){
 
 			updateGuiComponent(child, event);
 
 		}
 	}
 
-	private GUIEvent updateMouse(GUIComponent component, PointerEvent event){
+	private GUIEvent updateMouse(View component, PointerEvent event){
 
 		//If componente is visible
 		if(component.isVisible()){
@@ -405,7 +408,7 @@ public class EngineCore implements Core{
 			}
 
 			//Update Childs
-			for(GUIComponent child: component.getComponents()){
+			for(View child: component.getComponents()){
 
 				child.setOffset(component.getX(), component.getY());
 
@@ -421,7 +424,7 @@ public class EngineCore implements Core{
 
 	}
 
-	private void gerenciaEvento(GUIComponent componente, GUIEvent lastEvent){
+	private void gerenciaEvento(View componente, GUIEvent lastEvent){
 
 		//switch (event.action) {
 		switch (lastEvent) {
@@ -521,7 +524,7 @@ public class EngineCore implements Core{
 		componente.executeAction(lastEvent);
 
 	}
-
+	
 	public void draw(Graphic g){
 
 		/*List<Window> drawWindows = new CopyOnWriteArrayList<Window>(windows);
@@ -529,7 +532,7 @@ public class EngineCore implements Core{
 		for(Window window : drawWindows){
 			drawWindow(g, window);
 		}*/
-		
+
 		drawWindow(g, activeWindow);
 
 		drawEffects(g);
@@ -539,51 +542,53 @@ public class EngineCore implements Core{
 		}
 
 	}
-	
+
 	private void drawWindow(Graphic g, Window window){
-		
+
 		boolean offset = window.getX()!=0||window.getY()!=0;
-		
+
 		if(offset){
 			g.translate(window.getX(), window.getY());
 		}
 
-		List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(window.getComponents());
-		
 		window.draw(g);
 		
-		for(GUIComponent componente: components){
+		window.getApplication().drawScene(g);
+		
+		List<View> components = window.getComponents();
 
-			if(componente!=null){
-				drawComponent(componente, g);
+		for(View view: components){
+
+			if(view!=null){
+				drawComponent(view, g);
 			}else{
 				System.out.println("Draw Null Component");
 			}
 
 		}
-		
+
 		if(offset){
 			g.translate(-window.getX(), -window.getY());
 		}
-		
+
 	}
 
 	private void drawEffects(Graphic g){
 
 		animation.animate(getTimeNow());
-				
+
 		List<AnimationScript> remove = new ArrayList<AnimationScript>();
-		
+
 		for(AnimationScript script: globalScripts){
-						
+
 			if(!script.isStopped()){
 				script.getTarget().draw(g);
 			}else{
 				remove.add(script);
 			}
-			
+
 		}
-		
+
 		for(AnimationScript script: remove){
 			globalScripts.remove(script);
 		}
@@ -622,16 +627,16 @@ public class EngineCore implements Core{
 	}
 
 	//TODO Some kind of Subimage to textfields for example
-	private void drawComponent(GUIComponent component, Graphic g){
+	private void drawComponent(View component, Graphic g){
 
 		if(component.isVisible()){
 
 			//Draw Component
 			component.draw(g);
 
-			List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(component.getComponents());
+			List<View> components = new CopyOnWriteArrayList<View>(component.getComponents());
 
-			for(GUIComponent child: components){
+			for(View child: components){
 				child.setOffset(component.getX(), component.getY());
 				//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
 				drawComponent(child,g);
@@ -648,16 +653,16 @@ public class EngineCore implements Core{
 	}
 
 	public void translateComponents(int x, int y){
-		for(GUIComponent component: activeWindow.getComponents()){
+		for(View component: activeWindow.getComponents()){
 			translateComponent(x, y, component);
 		}
 	}
 
-	private void translateComponent(int x, int y, GUIComponent component){
+	private void translateComponent(int x, int y, View component){
 
 		component.setOffset(x, y);
 
-		for(GUIComponent child: component.getComponents()){
+		for(View child: component.getComponents()){
 			translateComponent(x, y, child);
 		}
 
@@ -688,13 +693,13 @@ public class EngineCore implements Core{
 	}
 
 	public void addEffect(GlobalEffect effect){
-		
+
 		animation.add(effect.getScript());
 		globalScripts.add(effect.getScript());
-		
+
 		//TODO add animation
 		//globalEffects.add(effect);
-		
+
 	}
 
 	private void updateKeyboardEvents(KeyEvent event){
@@ -729,9 +734,9 @@ public class EngineCore implements Core{
 		}
 
 		if(esc){
-			
+
 			esc = false;
-			
+
 			if(fullScreenEnable){
 				disableFullScreen = true;
 			}
@@ -844,21 +849,22 @@ public class EngineCore implements Core{
 
 	public void setMainApplication(Application application){
 
-		reload(application);
+		reload(application);		
+		
 	}
 
 	protected void changeApplication(){
 
 		//Lock old application
-		Application application = activeWindow.getApplication();
-		
+		Context application = activeWindow.getApplication();
+
 		application.setSessionMap(activeWindow.getSessionMap());
-		
+
 		reload(activeWindow.getApplication().getReturnApplication());
 
 	}
 
-	private void reload(Application application){
+	private void reload(Context application){
 
 		activeWindow.reload(application);
 
@@ -910,18 +916,18 @@ public class EngineCore implements Core{
 	public void showCursor() {
 		drawCursor = true;		
 	}
-	
+
 
 	protected class Animator implements Runnable{
 
 		protected void startAnimation(){
 			executor.scheduleWithFixedDelay(new Animator(), ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
 		}
-		
+
 		public void run() { 
 			updateApplication();
 		}
-		
+
 	}
 
 }

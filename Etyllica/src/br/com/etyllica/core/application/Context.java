@@ -8,9 +8,8 @@ import br.com.etyllica.core.application.load.LoadListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.TransitionEffect;
-import br.com.etyllica.gui.GUIComponent;
-import br.com.etyllica.gui.Window;
-import br.com.etyllica.layer.ImageLayer;
+import br.com.etyllica.gui.View;
+import br.com.etyllica.layer.Layer;
 
 /**
  * Class to represent sessions of the Main Application like Mini-Applications.  
@@ -20,7 +19,7 @@ import br.com.etyllica.layer.ImageLayer;
  *
  */
 
-public abstract class Context extends GUIComponent{
+public abstract class Context extends View{
 
 	/**
 	 * The updateInterval between executions
@@ -48,11 +47,6 @@ public abstract class Context extends GUIComponent{
 	protected String title = "Application";
 
 	/**
-	 * Application icon (useful with windows) 
-	 */
-	protected ImageLayer icon = null;
-
-	/**
 	 * Clear application before every draw call  
 	 */
 	protected boolean clearBeforeDraw = true;
@@ -63,9 +57,9 @@ public abstract class Context extends GUIComponent{
 	protected SessionMap sessionMap;
 
 	/**
-	 * Child Windows
+	 * Scene Graph Windows
 	 */
-	protected List<Window> windows = new ArrayList<Window>();
+	protected List<Layer> scene = new ArrayList<Layer>();
 
 	/**
 	 * Animation
@@ -90,6 +84,11 @@ public abstract class Context extends GUIComponent{
 
 	private LoadListener loadListener;
 
+	/**
+	 * Returned Application (next Application to show up)
+	 */
+	protected Context returnApplication = this;
+	
 	/**
 	 * Constructor
 	 * 
@@ -131,7 +130,7 @@ public abstract class Context extends GUIComponent{
 	private void notifyListeners(){
 
 		//for(LoadListener listener: loadListeners){
-			loadListener.loaded();
+		loadListener.loaded();
 		//}
 
 	}
@@ -141,6 +140,38 @@ public abstract class Context extends GUIComponent{
 	 * Application gets lock while load() and unlocks when loading = 100;     
 	 */
 	public abstract void load();
+
+	/**
+	 * Draw Scene method with recurrency
+	 */
+	public void drawScene(Graphic g){
+
+		this.draw(g);
+		
+		for(Layer layer: scene){
+			drawLayer(layer, g);
+		}
+
+	}
+
+	private void drawLayer(Layer layer, Graphic g){
+
+		layer.draw(g);
+		
+		List<Layer> children = layer.getChildren();
+
+		if(children==null||children.isEmpty()){
+			
+			return;
+			
+		}else{
+			
+			for(Layer child: layer.getChildren()){
+				drawLayer(child,g);
+			}
+			
+		}
+	}
 
 	/**
 	 * Draw method
@@ -214,14 +245,6 @@ public abstract class Context extends GUIComponent{
 		this.title = title;
 	}
 
-	public ImageLayer getIcon() {
-		return icon;
-	}
-
-	public void setIcon(ImageLayer icon) {
-		this.icon = icon;
-	}
-
 	protected  void updateAtFixedRate(int interval){
 		updateInterval = interval;
 	}
@@ -232,14 +255,6 @@ public abstract class Context extends GUIComponent{
 
 	public void timeUpdate(){
 
-	}
-
-	protected void addWindow(Window window){
-		this.windows.add(window);
-	}
-
-	public List<Window> getWindows(){
-		return windows;
 	}
 
 	public AnimationHandler getAnimation() {
@@ -268,6 +283,10 @@ public abstract class Context extends GUIComponent{
 
 	public void setLoadListener(LoadListener listener){
 		this.loadListener = listener;
+	}
+	
+	public Context getReturnApplication() {
+		return returnApplication;
 	}
 
 }
