@@ -96,7 +96,7 @@ public class Action {
 			} catch (InvocationTargetException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 
 	}
@@ -111,32 +111,38 @@ public class Action {
 				//Verify parameters length
 				if(method.getParameterTypes().length==classes.length){
 
-					for(int i=0; i<classes.length;i++){
+					for(int i=0; i<classes.length; i++){
 
 						Class<?> clazz = method.getParameterTypes()[i];
-						
+
 						if(clazz.isPrimitive()){
-						
+
 							String name = classes[i].getSimpleName().toLowerCase();
-							
+
 							String parameterName = method.getParameterTypes()[i].getName();
-							
+
 							if(!name.startsWith(parameterName)){
-								
+
 								return null;
 							}
-							
+
 						}else{
-						
-							if(!classes[i].getName().equals(method.getParameterTypes()[i].getComponentType())){
-								return null;
+
+							Class<?> typ = method.getParameterTypes()[i].getComponentType();
+
+							if(typ!=null){
+
+								if(!classes[i].getName().equals(typ.getName())){
+									return null;
+								}
+								
 							}
-							
+
 						}
-						
+
 
 					}
-					
+
 					return method;
 
 				}
