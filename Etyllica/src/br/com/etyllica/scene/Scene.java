@@ -31,9 +31,9 @@ public class Scene implements Updatable {
 		animationHandler.add(animation);
 	}
 	
-	public void addEmitter(Emitter emmiter){
-		updatables.add(emmiter);
-		graph.add(emmiter);	
+	public void addEmitter(Emitter emitter){
+		updatables.add(emitter);
+		graph.add(emitter);	
 	}
 	
 	public void add(Layer layer){

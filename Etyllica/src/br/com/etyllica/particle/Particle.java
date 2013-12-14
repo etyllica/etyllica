@@ -1,7 +1,11 @@
 package br.com.etyllica.particle;
 
-import br.com.etyllica.core.Drawable;
+import br.com.etyllica.layer.Layer;
 
-public abstract class Particle implements Drawable{
+public abstract class Particle extends Layer{
+	
+	public Particle(int x, int y){
+		super(x,y);
+	}
 	
 }

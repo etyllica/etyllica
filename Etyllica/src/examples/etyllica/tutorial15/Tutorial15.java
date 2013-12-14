@@ -9,11 +9,11 @@ import br.com.etyllica.Etyllica;
  *
  */
 
-public class Tutorial3 extends Etyllica {
+public class Tutorial15 extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 
-	public Tutorial3() {
+	public Tutorial15() {
 		super(640, 480);
 	}
 	

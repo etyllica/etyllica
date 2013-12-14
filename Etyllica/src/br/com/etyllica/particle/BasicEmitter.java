@@ -1,0 +1,33 @@
+package br.com.etyllica.particle;
+
+import java.awt.Color;
+
+import br.com.etyllica.core.video.Graphic;
+
+public class BasicEmitter extends Emitter{
+
+	public BasicEmitter(int x, int y){
+		super(x, y, 20, 20);
+	}
+	
+	@Override
+	public void drawEmitter(Graphic g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(x, y, w, h);
+	}
+
+	@Override
+	protected Particle createParticle() {
+		
+		BasicParticle particle = new BasicParticle(x,y-10);
+		
+		return particle;
+		
+	}
+
+	@Override
+	protected void updateParticle(Particle particle) {
+		particle.setOffsetY(-1);
+	}
+
+}
