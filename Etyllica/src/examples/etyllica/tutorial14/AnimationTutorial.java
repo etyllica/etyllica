@@ -25,7 +25,7 @@ public class AnimationTutorial extends Application{
 		//fruit.setOscilate(true);
 		fruit.setSpeed(500);
 		
-		animation.add(new FrameAnimation(fruit));
+		this.scene.addAnimation(new FrameAnimation(fruit));
 		
 		loading = 100;
 	}

@@ -71,24 +71,24 @@ public class AnimationExample extends Application{
 		invVscript.setInterval(200, 100);
 		vscript.setNext(invVscript);
 				
-		this.animation.add(hscript);
-		this.animation.add(vscript);
+		this.scene.addAnimation(hscript);
+		this.scene.addAnimation(vscript);
 		
 		RotateAnimation rotate = new RotateAnimation(1000,6000);
 		rotate.setTarget(text2);
 		rotate.setInterval(0, 360);
-		this.animation.add(rotate);
+		this.scene.addAnimation(rotate);
 		
 		
 		OpacityAnimation opacityAnimation = new OpacityAnimation(0,10000);
 		opacityAnimation.setTarget(text3);
 		opacityAnimation.setInterval(0, 255);
-		this.animation.add(opacityAnimation);
+		this.scene.addAnimation(opacityAnimation);
 		
 		ScaleAnimation scaleAnimation = new ScaleAnimation(0,10000);
 		scaleAnimation.setTarget(text3);
 		scaleAnimation.setInterval(1, 5);
-		this.animation.add(scaleAnimation);
+		this.scene.addAnimation(scaleAnimation);
 		
 				
 		OrbitAnimation orbit = new OrbitAnimation(0,60000);
@@ -98,7 +98,7 @@ public class AnimationExample extends Application{
 		
 		orbit.setEndless(true);
 				
-		this.animation.add(orbit);
+		this.scene.addAnimation(orbit);
 		
 		
 		hello = new ImageLayer(200,100,"hello.png");
@@ -107,12 +107,12 @@ public class AnimationExample extends Application{
 		ScaleAnimation scaleHello = new ScaleAnimation(0,10000);
 		scaleHello.setTarget(hello);
 		scaleHello.setInterval(1, 2);
-		this.animation.add(scaleHello);
+		this.scene.addAnimation(scaleHello);
 		
 		RotateAnimation rotateHello = new RotateAnimation(0,10000);
 		rotateHello.setTarget(hello);
 		rotateHello.setInterval(0, 360);
-		this.animation.add(rotateHello);
+		this.scene.addAnimation(rotateHello);
 		
 		
 		loading = 100;

@@ -47,13 +47,13 @@ public class StriderAnimation extends Application{
 		orbitAnimation.setCenter(machine.getX(), machine.getY()+70);
 		orbitAnimation.setInterval(0, 360);
 		orbitAnimation.setEndless(true);
-		this.animation.add(orbitAnimation);
+		this.scene.addAnimation(orbitAnimation);
 		
 		RotateAnimation rotateAnimation = new RotateAnimation(0,5000);
 		rotateAnimation.setTarget(machine);
 		rotateAnimation.setInterval(0, 360);
 		rotateAnimation.setEndless(true);
-		this.animation.add(rotateAnimation);
+		this.scene.addAnimation(rotateAnimation);
 		
 	}
 

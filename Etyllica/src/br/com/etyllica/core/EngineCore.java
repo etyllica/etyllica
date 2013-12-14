@@ -177,7 +177,7 @@ public class EngineCore implements Core{
 			//TODO Independent Thread
 			if(!application.isLocked()){
 
-				application.getAnimation().update(getTimeNow());
+				application.getScene().update(getTimeNow());
 
 				//if activeWindow, receive command to change application
 				if(application.getReturnApplication()!=application){

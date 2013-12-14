@@ -10,6 +10,7 @@ import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.layer.Layer;
+import br.com.etyllica.scene.Scene;
 
 /**
  * Class to represent sessions of the Main Application like Mini-Applications.  
@@ -59,12 +60,7 @@ public abstract class Context extends View{
 	/**
 	 * Scene Graph Windows
 	 */
-	protected List<Layer> scene = new ArrayList<Layer>();
-
-	/**
-	 * Animation
-	 */
-	protected AnimationHandler animation = new AnimationHandler();
+	protected Scene scene = new Scene();
 
 	/**
 	 * Last time updated
@@ -148,7 +144,7 @@ public abstract class Context extends View{
 
 		this.draw(g);
 		
-		for(Layer layer: scene){
+		for(Layer layer: scene.getGraph()){
 			drawLayer(layer, g);
 		}
 
@@ -257,13 +253,13 @@ public abstract class Context extends View{
 
 	}
 
-	public AnimationHandler getAnimation() {
+	/*public AnimationHandler getAnimation() {
 		return animation;
 	}
 
 	public void setAnimation(AnimationHandler animation) {
 		this.animation = animation;
-	}
+	}*/
 
 	public int getUpdateInterval() {
 		return updateInterval;
@@ -289,4 +285,12 @@ public abstract class Context extends View{
 		return returnApplication;
 	}
 
+	public Scene getScene() {
+		return scene;
+	}
+
+	public void setScene(Scene scene) {
+		this.scene = scene;
+	}
+	
 }
