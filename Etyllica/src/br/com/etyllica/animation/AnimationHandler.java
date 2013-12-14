@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class AnimationHandler {
+public class AnimationHandler implements Updatable{
 
 	private List<AnimationScript> scripts = new ArrayList<AnimationScript>();
 
@@ -21,7 +21,7 @@ public class AnimationHandler {
 		super();
 	}
 
-	public void animate(long now){
+	public void update(long now){
 
 		for(AnimationScript script: scripts){
 

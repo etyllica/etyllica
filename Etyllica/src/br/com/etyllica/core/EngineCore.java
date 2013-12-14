@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.AnimationScript;
+import br.com.etyllica.animation.Updatable;
 import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.application.Context;
 import br.com.etyllica.core.event.GUIEvent;
@@ -42,6 +43,8 @@ public class EngineCore implements Core{
 	private Window activeWindow = null;
 
 	private List<AnimationScript> globalScripts = new ArrayList<AnimationScript>();
+	
+	private List<Updatable> updatables = new ArrayList<Updatable>();
 	
 	private AnimationHandler animation = new AnimationHandler();
 
@@ -90,6 +93,8 @@ public class EngineCore implements Core{
 
 		keyboard = control.getKeyboard();
 		keyEvents = keyboard.getEvents();
+		
+		updatables.add(animation);
 
 	}
 
@@ -172,7 +177,7 @@ public class EngineCore implements Core{
 			//TODO Independent Thread
 			if(!application.isLocked()){
 
-				application.getAnimation().animate(getTimeNow());
+				application.getAnimation().update(getTimeNow());
 
 				//if activeWindow, receive command to change application
 				if(application.getReturnApplication()!=application){
@@ -586,7 +591,9 @@ public class EngineCore implements Core{
 
 	private void drawEffects(Graphic g){
 
-		animation.animate(getTimeNow());
+		for(Updatable updatable: updatables){
+			updatable.update(getTimeNow());	
+		}		
 
 		List<AnimationScript> remove = new ArrayList<AnimationScript>();
 
