@@ -19,6 +19,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.input.HIDController;
+import br.com.etyllica.core.input.InputListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
@@ -37,7 +38,7 @@ import br.com.etyllica.gui.window.MainWindow;
  *
  */
 
-public class EngineCore implements Core{
+public class EngineCore implements Core, InputListener{
 
 	//External Windows
 	private Window activeWindow = null;
@@ -247,46 +248,7 @@ public class EngineCore implements Core{
 
 		for(KeyEvent keyboardEvent: keyboardEvents){
 
-			activeWindow.updateKeyboard(keyboardEvent);
-
-			//Application sempre eh gerenciada pelo teclado
-			activeWindow.getApplication().updateKeyboard(keyboardEvent);
-
-			//TODO Same as UpdateMouse
-			//List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
-			//Collections.reverse(components);
-
-			//Apenas o componente quem tem foco eh gerenciado pelo teclado
-			if(focus!=null){
-
-				GUIEvent focusEvent = focus.updateKeyboard(keyboardEvent);
-
-				if(focusEvent!=GUIEvent.NONE&&focusEvent!=null){
-					//TODO Update NExtComponent
-					Logger.log(focusEvent);
-
-					View next = focus.findNext();
-
-					if(next!=null){
-
-						if(focusEvent==GUIEvent.NEXT_COMPONENT){
-
-							gerenciaEvento(focus, focusEvent);
-							gerenciaEvento(next, GUIEvent.GAIN_FOCUS);
-
-						}else{
-
-							gerenciaEvento(next, focusEvent);
-
-						}
-
-					}
-				}
-			}
-
-			updateKeyboardEvents(keyboardEvent);
-
-			updateNumpadMouse(keyboardEvent);
+			updateKeyEvent(keyboardEvent);
 		}
 
 		keyEvents.clear();
@@ -302,10 +264,9 @@ public class EngineCore implements Core{
 
 		//Update components with events
 		for(PointerEvent event: events){
-
-			event.setX(event.getX()-activeWindow.getX());
-			event.setY(event.getY()-activeWindow.getY());
-
+			
+			updateMouseEvent(event);
+			
 			//Avoid concurrency problems
 			//
 			//Update components in reverse order
@@ -945,6 +906,59 @@ public class EngineCore implements Core{
 		public void run() { 
 			updateApplication();
 		}
+
+	}
+
+	@Override
+	public void updateKeyEvent(KeyEvent event) {
+		
+		activeWindow.updateKeyboard(event);
+
+		//Application sempre eh gerenciada pelo teclado
+		activeWindow.getApplication().updateKeyboard(event);
+
+		//TODO Same as UpdateMouse
+		//List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
+		//Collections.reverse(components);
+
+		//Apenas o componente quem tem foco eh gerenciado pelo teclado
+		if(focus!=null){
+
+			GUIEvent focusEvent = focus.updateKeyboard(event);
+
+			if(focusEvent!=GUIEvent.NONE&&focusEvent!=null){
+				//TODO Update NExtComponent
+				Logger.log(focusEvent);
+
+				View next = focus.findNext();
+
+				if(next!=null){
+
+					if(focusEvent==GUIEvent.NEXT_COMPONENT){
+
+						gerenciaEvento(focus, focusEvent);
+						gerenciaEvento(next, GUIEvent.GAIN_FOCUS);
+
+					}else{
+
+						gerenciaEvento(next, focusEvent);
+
+					}
+
+				}
+			}
+		}
+
+		updateKeyboardEvents(event);
+
+		updateNumpadMouse(event);
+	}
+
+	@Override
+	public void updateMouseEvent(PointerEvent event) {
+		
+		event.setX(event.getX()-activeWindow.getX());
+		event.setY(event.getY()-activeWindow.getY());
 
 	}
 
