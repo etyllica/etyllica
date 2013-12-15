@@ -19,7 +19,7 @@ public class BasicEmitter extends Emitter{
 	@Override
 	protected Particle createParticle() {
 		
-		BasicParticle particle = new BasicParticle(x,y-10);
+		BasicParticle particle = new BasicParticle(x,y-20);
 		
 		return particle;
 		

@@ -19,34 +19,30 @@ public abstract class Emitter extends Layer implements Updatable{
 		super(x, y, w, h);
 	}
 
+	private int maxParticles = 15;
+	
 	private long lastUpdate = 0;
+	private long lastParticleUpdate = 0;
 	
-	private long initialDelay = 4000;
 	private long delay = 40;
-	
-	private boolean emit = false;
-	
+	private long particleDelay = 1500;
+		
 	@Override
 	public void update(long now) {
-		
-		System.out.println("time: "+now);
 
 		long diff = now-lastUpdate;
 		
-		System.out.println("diff: "+diff);
-		
-		if(!emit){
-		
-			if(now>initialDelay){
-				
-				particles.add(createParticle());
-				
-				emit = true;
-				
+		if(now-lastParticleUpdate>=particleDelay){
+			
+			if(particles.size()>=maxParticles){
+				particles.remove(0);
 			}
 			
+			particles.add(createParticle());
+			
+			lastParticleUpdate = now;
 		}
-				
+						
 		if(diff>=delay){
 		
 			for(Particle particle: particles){
