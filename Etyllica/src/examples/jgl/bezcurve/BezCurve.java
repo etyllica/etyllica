@@ -1,4 +1,4 @@
-package examples.jgl.application;
+package examples.jgl.bezcurve;
 
 import org.jgl.GL;
 
@@ -63,7 +63,7 @@ public class BezCurve extends GL{
 		glFlush(g);
 	}
 
-	private void myReshape (int w, int h) {
+	private void myReshape (float w, float h) {
 				
 		glViewport (0, 0, w, h);
 		glMatrixMode (GL_PROJECTION);

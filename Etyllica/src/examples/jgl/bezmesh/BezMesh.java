@@ -1,4 +1,4 @@
-package examples.jgl.application;
+package examples.jgl.bezmesh;
 
 import org.jgl.GL;
 
@@ -90,10 +90,6 @@ public class BezMesh extends GL{
 		initlights ();		/* for lighted version only */
 
 		myReshape (w, h);
-
-		System.out.println(ctrlpoints.length);
-		System.out.println(ctrlpoints[0].length);
-		System.out.println(ctrlpoints[0][0].length);
 	}
 
 	public void draw(Graphic g) {
@@ -105,7 +101,7 @@ public class BezMesh extends GL{
 		glFlush (g);
 	}
 
-	private void myReshape (int w, int h) {
+	private void myReshape (float w, float h) {
 		glViewport (0, 0, w, h);
 		glMatrixMode (GL_PROJECTION);
 		glLoadIdentity ();

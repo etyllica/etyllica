@@ -558,6 +558,19 @@ public class Graphic{
 	
 	/**
 	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param startAngle
+	 * @param arcAngle
+	 */
+	public void drawArc(float x, float y, float w, float h, int startAngle, int arcAngle){
+		this.drawArc((int)x, (int)y, (int)w, (int)h, startAngle, arcAngle);
+	}
+	
+	/**
+	 * 
 	 * @param x1
 	 * @param y1
 	 * @param x2
