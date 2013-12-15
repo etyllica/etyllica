@@ -34,7 +34,7 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	//TODO define fps by Application
 	//private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
-	protected int UPDATE_DELAY = 20; // 40ms. Implica em 25fps (1000/20) = 50
+	protected int updateDelay = 20; // 40ms. Implica em 25fps (1000/20) = 50
 
 	private Application application;
 	
@@ -95,7 +95,7 @@ public abstract class Etyllica extends Applet implements Engine{
 			}
 		};
 
-		executor.scheduleAtFixedRate(engine, 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);
+		executor.scheduleAtFixedRate(engine, 0, updateDelay, TimeUnit.MILLISECONDS);
 
 	}
 
