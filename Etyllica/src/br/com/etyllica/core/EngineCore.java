@@ -125,8 +125,8 @@ public class EngineCore implements Core{
 
 		superEvent = GUIEvent.NONE;
 
-		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getApplication().getViews());
-		components.addAll(activeWindow.getViews());
+		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getViews());
+		components.add(activeWindow.getApplication());
 
 		updateActiveWindow();
 
