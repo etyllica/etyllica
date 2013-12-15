@@ -9,7 +9,7 @@ import br.com.etyllica.util.SVGColor;
 
 public class ByeWorld extends Application{
 
-	public ByeWorld(int w, int h) {
+	public ByeWorld(float w, float h) {
 		super(w, h);
 	}
 
@@ -60,7 +60,7 @@ public class ByeWorld extends Application{
 		g.setColor(SVGColor.ORANGE_RED);
 
 		//Draw Background
-		g.getGraphics().fillRect(0, 0, w, h);
+		g.fillRect(0, 0, w, h);
 
 		g.setColor(SVGColor.FOREST_GREEN);
 

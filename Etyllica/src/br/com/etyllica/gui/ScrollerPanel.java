@@ -23,7 +23,7 @@ import br.com.etyllica.gui.panel.ScrollBackground;
 
 public class ScrollerPanel extends View{
 
-	private int lastComponentH = 0;
+	private float lastComponentH = 0;
 	private View component;
 
 	private int buttonSize = 20;
@@ -182,7 +182,7 @@ public class ScrollerPanel extends View{
 
 	public void scrollDown(){
 
-		int panelDif = h-component.getH();
+		float panelDif = h-component.getH();
 
 		if(component.getY()-panelDif>0){
 

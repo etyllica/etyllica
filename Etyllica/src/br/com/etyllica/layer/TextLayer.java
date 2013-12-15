@@ -151,7 +151,7 @@ public class TextLayer extends ImageLayer{
 			if(!border){
 
 				g.setColor(color);
-				g.drawString(text,x,y);
+				g.write(x,y,text);
 
 			}else{
 

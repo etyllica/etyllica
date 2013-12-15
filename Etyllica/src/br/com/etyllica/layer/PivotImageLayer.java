@@ -14,30 +14,30 @@ import br.com.etyllica.core.video.Graphic;
 
 public class PivotImageLayer extends ImageLayer{
 
-	protected int xPivot = 0;
-	protected int yPivot = 0;
+	protected float xPivot = 0;
+	protected float yPivot = 0;
 
-	public PivotImageLayer(int x, int y){
+	public PivotImageLayer(float x, float y){
 		super(x,y);
 	}
 
-	public PivotImageLayer(int x, int y, String caminho){
+	public PivotImageLayer(float x, float y, String caminho){
 		super(x,y,caminho);
 
 		this.xPivot = w/2;
 		this.yPivot = h/2;
 	}	
 
-	public void setPivotCoordinates(int xPivot,int yPivot){
+	public void setPivotCoordinates(float xPivot,float yPivot){
 		this.xPivot = xPivot;
 		this.yPivot = yPivot;
 	}
 
-	public int getXPivot(){
+	public float getXPivot(){
 		return xPivot;
 	}
 
-	public int getYPivot(){
+	public float getYPivot(){
 		return yPivot;
 	}
 
@@ -45,8 +45,8 @@ public class PivotImageLayer extends ImageLayer{
 	public boolean colisionRotated(int mx, int my){
 
 		//Pivot Point of rotation
-		int px = x+xPivot;
-		int py = y+yPivot;
+		float px = x+xPivot;
+		float py = y+yPivot;
 
 		double c = Math.cos(Math.toRadians(-angle));
 		double s = Math.sin(Math.toRadians(-angle));
@@ -57,10 +57,10 @@ public class PivotImageLayer extends ImageLayer{
 
 		// perform a normal check if the new point is inside the 
 		// bounds of the UNrotated rectangle
-		int leftX = px - xPivot;
-		int rightX = px - xPivot + w;
-		int topY = py - yPivot;
-		int bottomY = py - yPivot + h;
+		float leftX = px - xPivot;
+		float rightX = px - xPivot + w;
+		float topY = py - yPivot;
+		float bottomY = py - yPivot + h;
 
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
@@ -104,7 +104,7 @@ public class PivotImageLayer extends ImageLayer{
 
 			g.setTransform(transform);
 			
-			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
+			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, y+h,
 					xImage,yImage,xImage+w,yImage+h, null );
 
 			g.resetTransform();

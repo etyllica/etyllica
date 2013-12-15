@@ -43,12 +43,12 @@ public class Layer extends GeometricLayer implements Drawable{
 		super();
 	}
 	
-	public Layer(int x, int y){
+	public Layer(float x, float y){
 		this.x = x;
 		this.y = y;
 	}
 	
-	public Layer(int x, int y, int w, int h){
+	public Layer(float x, float y, float w, float h){
 		this.x = x;
 		this.y = y;
 		this.w = w;
@@ -139,7 +139,7 @@ public class Layer extends GeometricLayer implements Drawable{
 	public boolean onMouse(PointerEvent event) {
 		
 		return onMouse(event.getX(), event.getY());
-				
+		
 	}
 	
 	/**
@@ -148,7 +148,7 @@ public class Layer extends GeometricLayer implements Drawable{
 	 * @param my
 	 * @return
 	 */
-	public boolean onMouse(int mx, int my) {
+	public boolean onMouse(float mx, float my) {
 		return colideRect(mx, my, 1, 1);
 	}
 

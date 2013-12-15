@@ -1,9 +1,7 @@
 package br.com.etyllica.core.application;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.core.application.load.LoadListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Graphic;
@@ -93,7 +91,7 @@ public abstract class Context extends View{
 	 * @param w Application width
 	 * @param h Application height
 	 */
-	public Context(int x, int y, int w, int h){
+	public Context(float x, float y, float w, float h){
 		super(x,y,w,h);
 
 		this.loading = 0;
@@ -109,7 +107,7 @@ public abstract class Context extends View{
 	 * @param w Application width
 	 * @param h Application height
 	 */
-	public Context(int w, int h){
+	public Context(float w, float h){
 		this(0,0,w,h);
 	}
 
@@ -191,7 +189,7 @@ public abstract class Context extends View{
 	}
 
 	@Override
-	public boolean onMouse(int mx, int my) {
+	public boolean onMouse(float mx, float my) {
 		return false;
 	}
 

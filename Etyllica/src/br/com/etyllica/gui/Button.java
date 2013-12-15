@@ -15,7 +15,7 @@ public class Button extends View{
 	
 	private DefaultButton button;
 	
-	public Button(int x, int y, int w, int h){
+	public Button(float x, float y, float w, float h){
 		button = Configuration.getInstance().getTheme().createButton(x, y, w, h);
 	}
 
@@ -23,19 +23,19 @@ public class Button extends View{
 		return button.getRoundness();
 	}
 
-	public int getX() {
+	public float getX() {
 		return button.getX();
 	}
 
-	public int getY() {
+	public float getY() {
 		return button.getY();
 	}
 
-	public int getW() {
+	public float getW() {
 		return button.getW();
 	}
 
-	public int getH() {
+	public float getH() {
 		return button.getH();
 	}
 	

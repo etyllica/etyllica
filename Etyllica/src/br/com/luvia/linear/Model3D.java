@@ -178,7 +178,7 @@ public class Model3D extends Polygon3D implements GLDrawable{
 
 	protected void setTexture(GL gl, Texture texture){
 
-		gl.glTexImage2D(GL.GL_TEXTURE_2D, 0, GL.GL_RGB, texture.getW(), texture.getH(), 0,
+		gl.glTexImage2D(GL.GL_TEXTURE_2D, 0, GL.GL_RGB, (int)texture.getW(), (int)texture.getH(), 0,
 				GL.GL_RGB, GL.GL_UNSIGNED_BYTE, texture.getBytes());
 
 		//gl.glTexGeni(GL.GL_S, GL.GL_TEXTURE_GEN_MODE, GL.GL_OBJECT_LINEAR);
@@ -194,7 +194,7 @@ public class Model3D extends Polygon3D implements GLDrawable{
 
 		//gl.glEnable(GL.GL_ALPHA_TEST);
 
-		gl.glTexImage2D(GL.GL_TEXTURE_2D, 0, GL.GL_RGBA, texture.getW(), texture.getH(), 0,
+		gl.glTexImage2D(GL.GL_TEXTURE_2D, 0, GL.GL_RGBA, (int)texture.getW(), (int)texture.getH(), 0,
 				GL.GL_RGBA, GL.GL_UNSIGNED_BYTE, texture.getAlphaBytes());
 
 		gl.glEnable(GL.GL_BLEND);

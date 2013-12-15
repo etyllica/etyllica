@@ -35,11 +35,11 @@ public abstract class View extends Layer implements GUIComponent{
 	//GUIAction's Map
 	protected Map<GUIEvent,Action> map = new HashMap<GUIEvent, Action>();
 				
-	public View(int x, int y) {
+	public View(float x, float y) {
 		super(x,y,1,1);
 	}
 	
-	public View(int x, int y, int w, int h){
+	public View(float x, float y, float w, float h){
 		super(x,y,w,h);
 	}
 	

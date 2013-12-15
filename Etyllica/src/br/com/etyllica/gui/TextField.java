@@ -213,7 +213,7 @@ public class TextField extends View{
 
 		FontMetrics metrics = g.getGraphics().getFontMetrics();
 
-		int dif = w-metrics.stringWidth(text);
+		float dif = w-metrics.stringWidth(text);
 
 		//Remover
 		if(onFocus){

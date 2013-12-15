@@ -17,8 +17,8 @@ import br.com.etyllica.linear.Rectangle;
 
 public class ImageLayer extends StaticLayer{
 
-	protected int xImage = 0;
-	protected int yImage = 0;
+	protected float xImage = 0;
+	protected float yImage = 0;
 
 	protected ColisionArea colisionArea = null;
 
@@ -31,7 +31,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param x
 	 * @param y
 	 */
-	public ImageLayer(int x, int y){
+	public ImageLayer(float x, float y){
 		super();
 		this.x = x;
 		this.y = y;
@@ -44,7 +44,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param w
 	 * @param h
 	 */
-	public ImageLayer(int x, int y, int w, int h){
+	public ImageLayer(float x, float y, float w, float h){
 		super(x,y,w,h);
 	}
 
@@ -56,7 +56,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param h
 	 * @param path
 	 */
-	public ImageLayer(int x, int y, int w, int h, String path){
+	public ImageLayer(float x, float y, float w, float h, String path){
 		super(x,y,w,h,path);
 	}
 
@@ -70,7 +70,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param yImagem
 	 * @param path
 	 */
-	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String path){
+	public ImageLayer(float x, float y, float w, float h, int xImagem, int yImagem, String path){
 		super(x,y,w,h,path);
 		this.xImage = xImagem;
 		this.yImage = yImagem;
@@ -82,7 +82,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param y
 	 * @param path
 	 */
-	public ImageLayer(int x, int y, String path){
+	public ImageLayer(float x, float y, String path){
 		super(path);
 		setCoordinates(x, y);
 	}
@@ -95,7 +95,7 @@ public class ImageLayer extends StaticLayer{
 		this(0,0,path);
 	}
 
-	public int getXImage() {
+	public float getXImage() {
 		return xImage;
 	}
 
@@ -103,11 +103,11 @@ public class ImageLayer extends StaticLayer{
 	 * 
 	 * @param xImage
 	 */
-	public void setXImage(int xImage) {
+	public void setXImage(float xImage) {
 		this.xImage = xImage;
 	}
 
-	public int getYImage() {
+	public float getYImage() {
 		return yImage;
 	}
 
@@ -141,7 +141,7 @@ public class ImageLayer extends StaticLayer{
 		this.yImage = yImage;
 	}	
 
-	public boolean colideRetangular(int bx, int by, int bw, int bh){
+	public boolean colideRetangular(float bx, float by, float bw, float bh){
 
 		return colideRect(bx, by, bw, bh);
 
@@ -152,38 +152,7 @@ public class ImageLayer extends StaticLayer{
 		return colideRetangular(b.getX(), b.getY(), b.getW(), b.getH());
 	}
 
-	public boolean colideCircular(Layer b)
-	{
-		return colideCircular(b.getX(), b.getY(), b.getW(), b.getH());
-	}
-
-	public boolean colideCircularPonto(int px, int py){
-
-		int centroX = x+w/2;
-		int centroY = y+h/2;
-
-		return (px-centroX)*(px-centroX) + (py - centroY)*(py - centroY) < (w/2)*(w/2);
-	}
-
-	public boolean colideCircular(int bx, int by, int bw, int bh)
-	{
-		int xdiff = bx - x;
-		int ydiff = by - y;
-
-		int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
-
-		int r_sum_sq = bw/2 + w/2;
-		r_sum_sq *= r_sum_sq;
-
-		if(dcentre_sq - r_sum_sq<=0)
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	private boolean colideRetangulo(Rectangle rect, Rectangle rect2, int rect2x, int rect2y){
+	private boolean colideRetangulo(Rectangle rect, Rectangle rect2, float rect2x, float rect2y){
 
 		if(rect2x+rect2.getX() + rect2.getW() < x+rect.getX())	return false;
 		if(rect2x+rect2.getX() > x+rect.getX() + rect.getW())		return false;
@@ -194,7 +163,7 @@ public class ImageLayer extends StaticLayer{
 		return true;	
 	}
 
-	private boolean colideAreaRetangulo(Rectangle rect2, int rect2x, int rect2y){
+	private boolean colideAreaRetangulo(Rectangle rect2, float rect2x, float rect2y){
 
 		for(Rectangle rect: colisionArea.getArea()){
 
@@ -238,8 +207,8 @@ public class ImageLayer extends StaticLayer{
 	public boolean colisionRotated(int mx, int my){
 
 		//Pivot Point of rotation
-		int px = x+w/2;
-		int py = y+h/2;
+		float px = x+w/2;
+		float py = y+h/2;
 
 		double c = Math.cos(angle);
 
@@ -252,10 +221,10 @@ public class ImageLayer extends StaticLayer{
 
 		// perform a normal check if the new point is inside the 
 		// bounds of the UNrotated rectangle
-		int leftX = px - w / 2;
-		int rightX = px + w / 2;
-		int topY = py - h / 2;
-		int bottomY = py + h / 2;
+		float leftX = px - w / 2;
+		float rightX = px + w / 2;
+		float topY = py - h / 2;
+		float bottomY = py + h / 2;
 
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
@@ -284,8 +253,8 @@ public class ImageLayer extends StaticLayer{
 	public void draw(Graphic g, AffineTransform transform) {
 		g.transform(transform);
 
-		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w,y+h,
-				xImage,yImage,xImage+w,yImage+h, null );		
+		g.drawImage( ImageLoader.getInstance().getImage(path), (int)x, (int)y, (int)(x+w), (int)(y+h),
+				xImage,yImage,xImage+(int)w,yImage+(int)h, null );
 	}
 	
 	protected AffineTransform getTransform(){

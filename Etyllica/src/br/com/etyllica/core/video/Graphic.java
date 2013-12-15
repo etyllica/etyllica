@@ -78,8 +78,8 @@ public class Graphic{
 		int ascent = fm.getMaxAscent();
 		int descent= fm.getMaxDescent();
 
-		int x = destino.getX()+destino.getW()/2 - msg_width/2;
-		int y = destino.getY()+destino.getH()/2 - descent/2 + ascent/2;
+		float x = destino.getX()+destino.getW()/2 - msg_width/2;
+		float y = destino.getY()+destino.getH()/2 - descent/2 + ascent/2;
 
 		screen.drawString(texto, x, y);
 	}
@@ -113,6 +113,18 @@ public class Graphic{
 	 * @param w
 	 * @param h
 	 * @param text
+	 */
+	public void drawString(float x, float y, float w, float h, String text) {
+		this.drawString((int) x, (int) y, (int) w, (int) h, text);
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param text
 	 * @param shadowColor
 	 */
 	public void drawStringShadow(int x, int y, int w, int h, String text, Color shadowColor) {
@@ -128,6 +140,19 @@ public class Graphic{
 
 		drawShadow(dx, dy, text, shadowColor);
 	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param text
+	 * @param shadowColor
+	 */
+	public void drawStringShadow(float x, float y, float w, float h, String text, Color shadowColor) {
+		this.drawStringShadow((int)x, (int)y, (int)w, (int)h, text, shadowColor);
+	}
 
 	/**
 	 * 
@@ -136,15 +161,15 @@ public class Graphic{
 	 * @param text
 	 * @param border
 	 */
-	public void escreveX(int offsetX, int y, String text, boolean border){
+	public void writeX(float offsetX, float y, String text, boolean border){
 
 		if((text!=null)&&(!text.isEmpty())){
 
 			FontMetrics fm = screen.getFontMetrics();
 			Font f = getFont();
 
-			int x = (width/2)-(fm.stringWidth(text)/2)+offsetX;
-			int fy = y+fm.getHeight();
+			float x = (width/2)-(fm.stringWidth(text)/2)+offsetX;
+			float fy = y+fm.getHeight();
 
 			if(!border){
 				screen.drawString(text,x,fy);
@@ -176,8 +201,17 @@ public class Graphic{
 	 * @param frase
 	 */
 	public void drawShadow(int x, int y, String frase){
-				
 		drawShadow(x, y, frase,Color.BLACK);
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param frase
+	 */
+	public void drawShadow(float x, float y, String frase){
+		this.drawShadow(x, y, frase, Color.BLACK);
 	}
 	
 	/**
@@ -202,6 +236,17 @@ public class Graphic{
 	
 	/**
 	 * 
+	 * @param x
+	 * @param y
+	 * @param frase
+	 * @param shadowColor
+	 */
+	public void drawShadow(float x, float y, String frase, Color shadowColor){
+		this.drawShadow((int)x, (int)y, frase, shadowColor);
+	}
+	
+	/**
+	 * 
 	 * @param y
 	 * @param text
 	 */
@@ -220,11 +265,20 @@ public class Graphic{
 	
 	/**
 	 * 
+	 * @param y
+	 * @param text
+	 */
+	public void drawStringShadowX(float y, String text){
+		this.drawStringShadowX((int)y, text);
+	}
+	
+	/**
+	 * 
 	 * @param x
 	 * @param y
 	 * @param frase
 	 */
-	public void escreve(int x, int y, String frase){
+	public void write(float x, float y, String frase){
 		if((frase!=null)&&(!frase.isEmpty())){
 			screen.drawString(frase,x,y);
 		}
@@ -237,7 +291,7 @@ public class Graphic{
 	 */
 	public void escreveX(int y, String frase) {
 
-		escreveX(0,y,frase, false);
+		writeX(0,y,frase, false);
 	}
 	
 	/**
@@ -248,7 +302,7 @@ public class Graphic{
 	 */
 	public void escreveX(int offsetX, int y, String frase) {
 
-		escreveX(offsetX, y,frase, false);
+		writeX(offsetX, y,frase, false);
 	}
 	
 	/**
@@ -257,8 +311,8 @@ public class Graphic{
 	 * @param frase
 	 * @param borda
 	 */
-	public void escreveX(int y, String frase, boolean borda) {
-		escreveX(0,y,frase, borda);
+	public void writeX(float y, String frase, boolean borda) {
+		writeX(0,y,frase, borda);
 	}
 	
 	
@@ -324,6 +378,10 @@ public class Graphic{
 		screen.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);
 	}
 	
+	public void drawImage( Image img, float dx1, float dy1, float dx2, float dy2, float sx1 , float sy1, float sx2, float sy2, ImageObserver observer ){
+		screen.drawImage(img, (int)dx1, (int)dy1, (int)dx2, (int)dy2, (int)sx1, (int)sy1, (int)sx2, (int)sy2, observer);
+	}
+	
 	
 	public Graphics2D getGraphics(){
 		return screen;
@@ -334,14 +392,14 @@ public class Graphic{
 	 * @param layer
 	 */
 	public void drawRect(Layer layer){
-		screen.drawRect(layer.getX(), layer.getY(), layer.getW(), layer.getH());
+		drawRect(layer.getX(), layer.getY(), layer.getW(), layer.getH());
 	}
 	/**
 	 * 
 	 * @param layer
 	 */
 	public void fillOval(Layer layer){
-		screen.fillOval(layer.getX(), layer.getY(), layer.getW(), layer.getH());
+		screen.fillOval((int)layer.getX(), (int)layer.getY(), (int)layer.getW(), (int)layer.getH());
 	}
 	
 	/**
@@ -351,7 +409,7 @@ public class Graphic{
 	 * @param arcAngle
 	 */
 	public void fillArc(Layer layer, int startAngle, int arcAngle){
-		screen.fillArc(layer.getX(), layer.getY(), layer.getW(), layer.getH(), startAngle, arcAngle);
+		screen.fillArc((int)layer.getX(), (int)layer.getY(), (int)layer.getW(), (int)layer.getH(), startAngle, arcAngle);
 	}
 	
 	/** Funções Delegadas */
@@ -511,6 +569,17 @@ public class Graphic{
 	
 	/**
 	 * 
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 */
+	public void drawLine(float x1,float y1,float x2,float y2){
+		this.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
+	}
+	
+	/**
+	 * 
 	 * @param p
 	 * @param q
 	 */
@@ -539,7 +608,7 @@ public class Graphic{
 	 * @param layer
 	 */
 	public void fillRect(Layer layer) {
-		screen.fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
+		fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 	}
 	
 	/**
@@ -559,10 +628,34 @@ public class Graphic{
 	 * @param y
 	 * @param w
 	 * @param h
+	 */
+	public void fillRect(float x, float y, float w, float h) {
+		screen.fillRect((int)x,(int)y,(int)w,(int)h);
+	}
+	
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
 	 * @param raised
 	 */
 	public void fill3DRect(int x, int y, int w, int h, boolean raised) {
 		screen.fill3DRect(x, y, w, h, raised);
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param raised
+	 */
+	public void fill3DRect(float x, float y, float w, float h, boolean raised) {
+		this.fill3DRect((int)x, (int)y, (int)w, (int)h, raised);
 	}
 	
 	/**
@@ -576,6 +669,19 @@ public class Graphic{
 	 */
 	public void fillArc(int x, int y, int w, int h, int startAngle, int arcAngle){
 		screen.fillArc(x, y, w, h, startAngle, arcAngle);
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param startAngle
+	 * @param arcAngle
+	 */
+	public void fillArc(float x, float y, float w, float h, int startAngle, int arcAngle){
+		this.fillArc((int)x, (int)y, (int)w, (int)h, startAngle, arcAngle);
 	}
 
 	/**
@@ -639,12 +745,33 @@ public class Graphic{
 	
 	/**
 	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
+	public void drawOval(float x, float y, float w, float h ){
+		this.drawOval((int)x,(int)y,(int)w,(int)h);
+	}
+	
+	/**
+	 * 
 	 * @param cx
 	 * @param cy
 	 * @param radius
 	 */
 	public void drawCircle(int cx, int cy, int radius ){
 		screen.drawOval(cx-radius, cy-radius, radius*2, radius*2);
+	}
+	
+	/**
+	 * 
+	 * @param cx
+	 * @param cy
+	 * @param radius
+	 */
+	public void drawCircle(float cx, float cy, float radius ){
+		this.drawCircle((int)cx, (int)cy, (int)radius);
 	}
 	
 	/**
@@ -668,6 +795,16 @@ public class Graphic{
 	
 	/**
 	 * 
+	 * @param cx
+	 * @param cy
+	 * @param radius
+	 */
+	public void fillCircle(float cx, float cy, float radius ){
+		screen.fillOval((int)(cx-radius), (int)(cy-radius), (int)(radius*2), (int)(radius*2));
+	}
+	
+	/**
+	 * 
 	 * @param point
 	 * @param radius
 	 */
@@ -684,6 +821,17 @@ public class Graphic{
 	 */
 	public void fillOval(int x, int y, int w, int h ){
 		screen.fillOval(x, y, w, h);
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
+	public void fillOval(float x, float y, float w, float h ){
+		this.fillOval((int)x, (int)y, (int)w, (int)h);
 	}
 	
 	/**
@@ -738,6 +886,10 @@ public class Graphic{
 	
 	public void drawImage(BufferedImage image, int x, int y){
 		screen.drawImage(image, null, x, y);
+	}
+	
+	public void drawImage(BufferedImage image, float x, float y){
+		screen.drawImage(image, null, (int)x, (int)y);
 	}
 	
 	/**

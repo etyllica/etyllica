@@ -28,10 +28,10 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 		p = new Font(theme.getFontName(), theme.getFontStyle(), 18);
 	}
 	
-	private int rectW = w*2/3;
-	private int rectX = w/2-rectW/2;
-	private int rectY = h/2+100;
-	private int rectH = 32;
+	private float rectW = w*2/3;
+	private float rectX = w/2-rectW/2;
+	private float rectY = h/2+100;
+	private float rectH = 32;
 
 	private Color backgroundColor = new Color(0x00,0xcc,0xff);
 	

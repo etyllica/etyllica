@@ -18,9 +18,9 @@ import br.com.etyllica.gui.button.DefaultButton;
 
 public class Slider extends View{
 
-	private int minValue = 0;
-	private int maxValue = 255;
-	private int value = 0;
+	private float minValue = 0;
+	private float maxValue = 255;
+	private float value = 0;
 	
 	protected DefaultButton button;
 
@@ -37,13 +37,10 @@ public class Slider extends View{
 
 		if(mouseOver){
 			if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
-				//if(mouse.getPressionado(Mouse.BOTAO_ESQUERDO)){
-
-			
 				
-				int interval = maxValue-minValue;
+				float interval = maxValue-minValue;
 				
-				int mx = event.getX()-x;
+				float mx = event.getX()-x;
 				
 				value = (mx*interval)/w; 
 				
@@ -77,33 +74,33 @@ public class Slider extends View{
 
 	}
 
-	public int getMinValue() {
+	public float getMinValue() {
 		return minValue;
 	}
 
-	public void setMinValue(int minValue) {
+	public void setMinValue(float minValue) {
 		this.minValue = minValue;
 	}
 
-	public int getMaxValue() {
+	public float getMaxValue() {
 		return maxValue;
 	}
 
-	public void setMaxValue(int maxValue) {
+	public void setMaxValue(float maxValue) {
 		this.maxValue = maxValue;
 	}
 
-	public int getValue() {
+	public float getValue() {
 		return value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(float value) {
 		
 		this.value = value;
 		
-		int interval = maxValue-minValue; 
+		float interval = maxValue-minValue; 
 
-		int bx = x+((value*w)/interval);
+		float bx = x+((value*w)/interval);
 		
 		button.setX(bx-button.getW()/2);
 		

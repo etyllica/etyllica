@@ -30,7 +30,7 @@ public class DefaultButton extends RoundGUIComponent{
 
 	private boolean disabled = false;
 
-	public DefaultButton(int x, int y, int w, int h) {
+	public DefaultButton(float x, float y, float w, float h) {
 		super(x, y, w, h);
 	}
 

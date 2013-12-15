@@ -14,25 +14,25 @@ import br.com.etyllica.core.event.PointerEvent;
 
 public abstract class Label extends View{
 	
-	protected int bx;
-	protected int by;
-	protected int bw;
-	protected int bh;
+	protected float bx;
+	protected float by;
+	protected float bw;
+	protected float bh;
 	
-	public Label(int x, int y) {
+	public Label(float x, float y) {
 		this(x, y, 0, 0);
 	}
 	
-	public Label(int x, int y, int w) {
+	public Label(float x, float y, float w) {
 		this(x, y, w, 0);
 	}
 	
-	public Label(int x, int y, int w, int h) {
+	public Label(float x, float y, float w, float h) {
 		super(x, y, w, h);
 		setContentBounds(x, y, w, h);
 	}
 
-	public void setContentBounds(int bx, int by, int bw, int bh){
+	public void setContentBounds(float bx, float by, float bw, float bh){
 		this.bx = bx;
 		this.by = by;
 		this.bw = bw;

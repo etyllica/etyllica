@@ -11,11 +11,11 @@ public abstract class Emitter extends Layer implements Updatable{
 	
 	protected List<Particle> particles = new ArrayList<Particle>();
 	
-	public Emitter(int x, int y){
+	public Emitter(float x, float y){
 		super(x, y);
 	}
 	
-	public Emitter(int x, int y, int w, int h){
+	public Emitter(float x, float y, float w, float h){
 		super(x, y, w, h);
 	}
 
@@ -38,7 +38,7 @@ public abstract class Emitter extends Layer implements Updatable{
 				particles.remove(0);
 			}
 			
-			particles.add(createParticle());
+			particles.add(createParticle(now));
 			
 			lastParticleUpdate = now;
 		}
@@ -46,7 +46,7 @@ public abstract class Emitter extends Layer implements Updatable{
 		if(diff>=delay){
 		
 			for(Particle particle: particles){
-				updateParticle(particle);
+				particle.update(now);				
 			}
 			
 			lastUpdate = now;
@@ -55,9 +55,7 @@ public abstract class Emitter extends Layer implements Updatable{
 
 	}
 	
-	protected abstract void updateParticle(Particle particle);
-	
-	protected abstract Particle createParticle();
+	protected abstract Particle createParticle(long now);
 	
 	@Override
 	public void draw(Graphic g){

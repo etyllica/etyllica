@@ -21,7 +21,12 @@ public class Texture extends BufferedLayer{
 	}
 		
 	public byte[][][] getAlphaBytes(){
-		byte imagem2D[][][] = new byte [w][h][4];
+		
+		int width = (int)w;
+		
+		int height = (int)h;
+		
+		byte imagem2D[][][] = new byte [width][height][4];
 
 		Color c;
 

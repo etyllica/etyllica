@@ -225,17 +225,16 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 	//Colisao
 	public boolean sobMouseCircular(ImageLayer b)
 	{
-		int raio = b.getW()/2;
+		float raio = b.getW()/2;
 		return sobMouseCircular(b.getX()+raio,b.getY()+raio, raio);
 	}
 
-	public boolean sobMouseCircular(int cx, int cy, int raio)
+	public boolean sobMouseCircular(float cx, float cy, float raio)
 	{
-		int dx = cx - x;
-		int dy = cy - y;
+		float dx = cx - x;
+		float dy = cy - y;
 
-		if ( ( dx * dx )  + ( dy * dy ) < raio * raio )
-		{
+		if ( ( dx * dx )  + ( dy * dy ) < raio * raio )	{
 			return true;
 		}
 
@@ -245,11 +244,11 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 
 	public boolean sobMouseIso(ImageLayer cam){
 
-		int my = cam.getH()/2;
-		int mx = cam.getW()/2;
+		float my = cam.getH()/2;
+		float mx = cam.getW()/2;
 
-		int x = this.x-cam.getX();
-		int y = this.y-cam.getY();
+		float x = this.x-cam.getX();
+		float y = this.y-cam.getY();
 
 		if(y>+my)
 			y=my-(y-my);
@@ -261,7 +260,7 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 
 	}
 
-	public boolean sobMouse(int x, int y, int w, int h)
+	public boolean sobMouse(float x, float y, float w, float h)
 	{
 		if((this.x<x)||(this.x>x + w))
 		{
@@ -278,8 +277,8 @@ public class Mouse implements MouseMotionListener,MouseInputListener, MouseWheel
 	public boolean sobMouse(ImageLayer cam)
 	{
 		if(cam.getAngle()==0){
-			int cx = cam.getX();
-			int cy = cam.getY();
+			float cx = cam.getX();
+			float cy = cam.getY();
 
 			return sobMouse(cx, cy, cam.getW(), cam.getH());
 

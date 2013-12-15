@@ -6,8 +6,8 @@ import br.com.etyllica.layer.Layer;
 
 public class OrbitAnimation extends AnimationScript{
 
-	private int centerX = 0, centerY = 0;
-	private int tx, ty, tw, th;
+	private float centerX = 0, centerY = 0;
+	private float tx, ty, tw, th;
 	
 	public OrbitAnimation(long time){
 		super(time);
@@ -21,7 +21,7 @@ public class OrbitAnimation extends AnimationScript{
 		super(target, time);
 	}
 		
-	public void setCenter(int centerX, int centerY){
+	public void setCenter(float centerX, float centerY){
 		this.centerX = centerX;
 		this.centerY = centerY;
 	}
@@ -46,8 +46,8 @@ public class OrbitAnimation extends AnimationScript{
 		double c = Math.cos(angle);
 
 		// translate point back to origin:
-		int px = tx+tw-centerX;
-		int py = ty+th-centerY;
+		float px = tx+tw-centerX;
+		float py = ty+th-centerY;
 
 		// rotate point
 		double xnew = px * c - py * s;

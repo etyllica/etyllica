@@ -625,11 +625,11 @@ public abstract class GL extends Application{
 	protected GL_Context context = new GL_Context ();
 	private GL_Object CC = (GL_Object)context;
 	protected GL_List List;
-	//    protected MemoryImageSource JavaImageSource;
+
 	protected static int StartX = 0;
 	protected static int StartY = 0;
 
-	private transient BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+	private transient BufferedImage image;
 
 	/**
 	 *
@@ -1893,14 +1893,16 @@ public abstract class GL extends Application{
 		if (width < 1) { width = 1; }
 		if (height < 1) { height = 1; }
 		CC.gl_viewport (x, y, width, height);
-		/*
-	JavaImageSource = new MemoryImageSource (Context.Viewport.Width, Context.Viewport.Height,
-						 Context.ColorBuffer.Buffer, 0, Context.Viewport.Width);
-	JavaImageSource.setAnimated (true);
-	JavaImageSource.setFullBufferUpdates (true);
-	JavaImage = JavaComponent.createImage (JavaImageSource);
-		 */
+		
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		
 	}
+	
+	public void glViewport (float x, float y, float width, float height) {
+		this.glViewport((int)x, (int)y, (int)width, (int)height);
+	}
+	
+	
 
 	/** GLvoid glPushMatrix (GLvoid) */
 	public void glPushMatrix () {
@@ -6205,9 +6207,9 @@ public abstract class GL extends Application{
 	}
 	 */
 	
-	public GL(int largura, int altura) {
-		super(largura,altura);
-		glViewport (0, 0, w, h);		
+	public GL(int w, int h) {
+		super(w,h);
+		glViewport (0, 0, w, h);
 	}
 
 }

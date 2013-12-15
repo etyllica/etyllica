@@ -64,12 +64,12 @@ public class Select extends View{
 		int fontSize = g.getFont().getSize()+1;
 		int textOffset = 2;
 		
-		g.escreve(x+textOffset, y+fontSize, options.get(selectedOption).getLabel());
+		g.write(x+textOffset, y+fontSize, options.get(selectedOption).getLabel());
 		
 		if(showOptions){
 		
-			int initialY = y+h;
-			int finalY = h*(options.size()+1);
+			float initialY = y+h;
+			float finalY = h*(options.size()+1);
 			
 			g.setColor(Color.WHITE);
 			g.fillRect(x, initialY, w, finalY);
@@ -78,7 +78,7 @@ public class Select extends View{
 			int i=0;			
 			
 			for(Option option: options){
-				g.escreve(x+textOffset, y+h*(2+i), option.getLabel());
+				g.write(x+textOffset, y+h*(2+i), option.getLabel());
 				
 				i++;
 			}

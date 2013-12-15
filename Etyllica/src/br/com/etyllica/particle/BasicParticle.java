@@ -8,7 +8,7 @@ public class BasicParticle extends Particle{
 
 	private ImageLayer layer;
 	
-	public BasicParticle(int x, int y){
+	public BasicParticle(float x, float y){
 		super(x,y);
 		
 		layer = new ImageLayer(x, y, "particle.png");
@@ -22,17 +22,22 @@ public class BasicParticle extends Particle{
 	}
 	
 	@Override
-	public void setX(int x){
+	public void setX(float x){
 		this.x = x;
 		
 		layer.setX(x);
 	}
 	
 	@Override
-	public void setY(int y){
+	public void setY(float y){
 		this.y = y;
 		
 		layer.setY(y);
+	}
+
+	@Override
+	public void update(long now) {		
+		setOffsetY(-1);
 	}
 	
 }

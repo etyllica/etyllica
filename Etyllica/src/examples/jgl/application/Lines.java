@@ -86,7 +86,7 @@ public class Lines extends GLU{
 		myReshape(w, h);
 	}
 
-	public void myReshape (int w, int h) {
+	public void myReshape (float w, float h) {
 		glViewport (0, 0, w, h);
 		glMatrixMode (GL.GL_PROJECTION);
 		glLoadIdentity ();

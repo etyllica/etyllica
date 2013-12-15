@@ -54,7 +54,7 @@ public class PolygonalButton extends DefaultButton{
 	}
 
 	@Override
-	public boolean onMouse(int mx, int my){
+	public boolean onMouse(float mx, float my){
 
 		return polygon.contains(mx, my);
 	}

@@ -29,10 +29,10 @@ public class GenericFullScreenEffect extends GlobalEffect{
 		
 	}
 	
-	private final int rectW = 360;
-	private final int rectH = 50;
-	private final int rectX = w/2-rectW/2;
-	private final int rectY = h/2-h/4;
+	private final float rectW = 360;
+	private final float rectH = 50;
+	private final float rectX = w/2-rectW/2;
+	private final float rectY = h/2-h/4;
 	
 	@Override
 	public void draw(Graphic g) {
@@ -40,9 +40,9 @@ public class GenericFullScreenEffect extends GlobalEffect{
 		g.setOpacity(opacity);
 				
 		g.setColor(Color.BLACK);
-		g.fillArc(rectX-rectH/2, rectY, rectH, rectH,90,180);
+		g.fillArc(rectX-rectH/2, rectY, rectH, rectH, 90, 180);
 		g.fillRect(rectX, rectY, rectW, rectH);
-		g.fillArc(rectX+rectW-rectH/2, rectY, rectH, rectH,270,180);
+		g.fillArc(rectX+rectW-rectH/2, rectY, rectH, rectH, 270, 180);
 		
 		g.setColor(Color.WHITE);
 		g.setFont(g.getFont().deriveFont(20f));

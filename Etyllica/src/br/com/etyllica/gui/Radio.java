@@ -95,7 +95,7 @@ public class Radio extends CheckBox{
 	}
 
 	@Override
-	public boolean onMouse(int mx, int my) {
+	public boolean onMouse(float mx, float my) {
 		return colideCirclePoint(mx, my);
 	}
 

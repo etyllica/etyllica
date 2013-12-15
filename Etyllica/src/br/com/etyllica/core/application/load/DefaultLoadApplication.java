@@ -17,11 +17,11 @@ import br.com.etyllica.core.video.Graphic;
 
 public class DefaultLoadApplication extends Context implements LoadApplication{
 
-	public DefaultLoadApplication(int w, int h) {
+	public DefaultLoadApplication(float w, float h) {
 		super(w,h);
 	}
 	
-	public DefaultLoadApplication(int x, int y, int w, int h) {
+	public DefaultLoadApplication(float x, float y, float w, float h) {
 		super(x,y,w,h);
 	}
 
@@ -34,9 +34,9 @@ public class DefaultLoadApplication extends Context implements LoadApplication{
 	private int bxLimite = 400;
 	private int byLimite = 30;
 
-	private int bx = (w/2)-bxLimite/2;
+	private float bx = (w/2)-bxLimite/2;
 
-	private int by = 395;
+	private float by = 395;
 
 	public void load(){
 
@@ -49,22 +49,22 @@ public class DefaultLoadApplication extends Context implements LoadApplication{
 	public void draw(Graphic g) {
 		
 		g.setColor(Color.BLACK);
-		g.getGraphics().fillRect(x,y,w,h);
+		g.fillRect(x,y,w,h);
 
 		g.setColor(Color.BLACK);
-		g.getGraphics().drawRect(bx,by,bxLimite,byLimite);
+		g.drawRect(bx,by,bxLimite,byLimite);
 		g.setColor(Color.WHITE);
-		g.getGraphics().drawRect(bx-1,by-1,bxLimite+2,byLimite+2);
+		g.drawRect(bx-1,by-1,bxLimite+2,byLimite+2);
 
 		g.setColor(Color.WHITE);
-		g.escreveX(100, phrase,true);
+		g.writeX(100, phrase,true);
 			
 		//Desenha preenchimento da barra
 		g.fillRect(bx+2, by+2, (int)fill*4, byLimite-3);
 
 
 		g.setColor(Color.WHITE);
-		g.escreveX(h-85, percent,true);
+		g.writeX(h-85, percent,true);
 
 	}
 

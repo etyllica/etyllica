@@ -47,7 +47,7 @@ public class Smooth extends GLU{
 	}
 
 
-	private void myReshape (int w, int h) {
+	private void myReshape (float w, float h) {
 		glViewport (0, 0, w, h);
 		glMatrixMode (GL_PROJECTION);
 		glLoadIdentity ();

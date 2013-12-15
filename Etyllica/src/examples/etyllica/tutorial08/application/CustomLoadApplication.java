@@ -11,7 +11,7 @@ import br.com.etyllica.util.SVGColor;
 
 public class CustomLoadApplication extends Application{
 	
-	public CustomLoadApplication(int w, int h) {
+	public CustomLoadApplication(float w, float h) {
 		super(w, h);
 		//loadApplication = new YellowLoading(x, y, w, h);
 	}
@@ -21,8 +21,8 @@ public class CustomLoadApplication extends Application{
 	private int xText = 0;
 	
 	//Hold Mouse position
-	private int mx = 0;
-	private int my = 0;
+	private float mx = 0;
+	private float my = 0;
 	
 	@Override
 	public void load() {
@@ -70,7 +70,7 @@ public class CustomLoadApplication extends Application{
 		//Set Color to SVG Crimson
 		g.setColor(SVGColor.CRIMSON);		
 		//Draw Background
-		g.getGraphics().fillRect(0, 0, w, h);
+		g.fillRect(0, 0, w, h);
 		
 		//Set Color to Black
 		g.setColor(Color.BLACK);

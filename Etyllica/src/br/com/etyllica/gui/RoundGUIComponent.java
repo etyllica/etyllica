@@ -2,7 +2,7 @@ package br.com.etyllica.gui;
 
 public abstract class RoundGUIComponent extends View{
 
-	public RoundGUIComponent(int x, int y, int w, int h){
+	public RoundGUIComponent(float x, float y, float w, float h){
 		super(x,y,w,h);
 	}
 	

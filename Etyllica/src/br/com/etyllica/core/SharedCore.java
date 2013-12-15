@@ -181,7 +181,7 @@ public class SharedCore {
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
 		if(!innerCore.fullScreenEnable){
-			g.drawImage(graphic.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), component);
+			g.drawImage(graphic.getBimg(), (int)desktop.getApplication().getX(), (int)desktop.getApplication().getY(), component);
 		}
 		else{			
 			telaCheia.draw(graphic.getBimg());

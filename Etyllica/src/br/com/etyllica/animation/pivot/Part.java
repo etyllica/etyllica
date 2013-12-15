@@ -15,11 +15,11 @@ public class Part extends PivotImageLayer{
 
 	private Color borderColor = Color.BLUE;
 
-	public Part(int x, int y){
+	public Part(float x, float y){
 		super(x,y);
 	}
 
-	public Part(int x, int y, String caminho){
+	public Part(float x, float y, String caminho){
 		super(x,y,caminho);
 	}
 	
@@ -28,10 +28,10 @@ public class Part extends PivotImageLayer{
 	}
 
 	public void addPoint(PivotPoint p){
-		this.addPoint((int)p.getX(),(int)p.getY());
+		this.addPoint((float)p.getX(),(float)p.getY());
 	}
 
-	public void addPoint(int px, int py){
+	public void addPoint(float px, float py){
 		points.add(new PivotPoint(x+px,y+py));
 	}
 	
@@ -78,8 +78,8 @@ public class Part extends PivotImageLayer{
 			AffineTransform reset = g.getTransform();
 
 			g.setTransform(getTransform());
-			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, y+h,
-					xImage,yImage,xImage+w,yImage+h, null );
+			g.drawImage( ImageLoader.getInstance().getImage(path), (int)x, (int)y, (int)(x+w), (int)(y+h),
+					xImage,yImage,xImage+(int)w,yImage+(int)h, null );
 
 			g.setTransform(reset);
 			
@@ -87,7 +87,7 @@ public class Part extends PivotImageLayer{
 	}	
 	
 	@Override
-	public void setOffsetX(int x){
+	public void setOffsetX(float x){
 		
 		this.x += x;
 
@@ -98,7 +98,7 @@ public class Part extends PivotImageLayer{
 	}
 	
 	@Override
-	public void setOffsetY(int y){
+	public void setOffsetY(float y){
 		
 		this.y += y;
 

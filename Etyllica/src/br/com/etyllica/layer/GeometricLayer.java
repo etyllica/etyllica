@@ -5,52 +5,52 @@ public class GeometricLayer {
 	/**
      * x position of a Layer
      */
-	protected int x = 0;
+	protected float x = 0;
 	
 	/**
      * y position of a Layer
      */
-	protected int y = 0;
+	protected float y = 0;
 	
 	/**
      * Layer's width
      */
-	protected int w = 0;
+	protected float w = 0;
 	
 	/**
      * Layer's height
      */
-	protected int h = 0;
+	protected float h = 0;
 	
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 
-	public int getW() {
+	public float getW() {
 		return w;
 	}
 
-	public void setW(int w) {
+	public void setW(float w) {
 		this.w = w;
 	}
 
-	public int getH() {
+	public float getH() {
 		return h;
 	}
 
-	public void setH(int h) {
+	public void setH(float h) {
 		this.h = h;
 	}
 	
@@ -66,7 +66,7 @@ public class GeometricLayer {
 	 * @param x
 	 * @param y
 	 */
-	public void setCoordinates(int x, int y){
+	public void setCoordinates(float x, float y){
 		setX(x);
 		setY(y);
 	}
@@ -75,7 +75,7 @@ public class GeometricLayer {
 	 * 
 	 * @param offsetX
 	 */
-	public void setOffsetX(int offsetX){
+	public void setOffsetX(float offsetX){
 		setX(this.x+offsetX);
 	}
 	
@@ -83,7 +83,7 @@ public class GeometricLayer {
 	 * 
 	 * @param offsetY
 	 */
-	public void setOffsetY(int offsetY){
+	public void setOffsetY(float offsetY){
 		setY(this.y+offsetY);
 	}
 
@@ -92,7 +92,7 @@ public class GeometricLayer {
 	 * @param offsetX
 	 * @param offsetY
 	 */
-	public void setOffset(int offsetX, int offsetY){
+	public void setOffset(float offsetX, float offsetY){
 		setOffsetX(offsetX);
 		setOffsetY(offsetY);
 	}
@@ -108,7 +108,7 @@ public class GeometricLayer {
 	 * @param w
 	 * @param h
 	 */
-	public void centralize(int x, int y, int w, int h){
+	public void centralize(float x, float y, float w, float h){
 		centralizeX(x,x+w);
 		centralizeY(y,y+h);
 	}
@@ -136,9 +136,9 @@ public class GeometricLayer {
 	 * @param endX
 	 * @return
 	 */
-	public int centralizeX(int startX, int endX)
+	public float centralizeX(float startX, float endX)
 	{
-		int x = (((startX+endX)/2)-(getW()/2));
+		float x = (((startX+endX)/2)-(getW()/2));
 		setX(x);
 		
 		return x;
@@ -158,9 +158,9 @@ public class GeometricLayer {
 	 * @param endY
 	 * @return
 	 */
-	public int centralizeY(int startY, int endY)
+	public float centralizeY(float startY, float endY)
 	{
-		int y = (((startY+endY)/2)-(getH()/2));
+		float y = (((startY+endY)/2)-(getH()/2));
 		setY(y);
 		
 		return y;
@@ -178,7 +178,7 @@ public class GeometricLayer {
 	 * @param bh
 	 * @return
 	 */
-	public boolean colideRect(int bx, int by, int bw, int bh){
+	public boolean colideRect(float bx, float by, float bw, float bh){
 
 		if(bx + bw < getX())	return false;
 		if(bx > getX() + getW())		return false;
@@ -198,18 +198,17 @@ public class GeometricLayer {
 	 * @param bh
 	 * @return
 	 */
-	public boolean colideCircleCircle(int bx, int by, int bw, int bh)
+	public boolean colideCircleCircle(float bx, float by, float bw, float bh)
 	{
-		int xdiff = bx - x;
-		int ydiff = by - y;
+		float xdiff = bx - x;
+		float ydiff = by - y;
 
-		int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
+		float dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
 
-		int r_sum_sq = bw/2 + w/2;
+		float r_sum_sq = bw/2 + w/2;
 		r_sum_sq *= r_sum_sq;
 
-		if(dcentre_sq - r_sum_sq<=0)
-		{
+		if(dcentre_sq - r_sum_sq<=0){
 			return true;
 		}
 
@@ -222,15 +221,15 @@ public class GeometricLayer {
 	 * @param py
 	 * @return
 	 */
-	public boolean colideCirclePoint(int px, int py){
+	public boolean colideCirclePoint(float px, float py){
 		
-		int cx = x+w/2;
-		int cy = y+h/2;
+		float cx = x+w/2;
+		float cy = y+h/2;
 		
-		int dx = (px - cx) * (px - cx);
-		int dy = (py - cy) * (py - cy);
+		float dx = (px - cx) * (px - cx);
+		float dy = (py - cy) * (py - cy);
 		
-		int radius = w/2;
+		float radius = w/2;
 		
 		double distance = Math.sqrt((double)(dx + dy));
 

@@ -7,12 +7,12 @@ public class UpArrow extends PolygonalIcon{
 				
 	}	
 	
-	protected void initPolygon(int x, int y){
+	protected void initPolygon(float x, float y){
 		polygon.reset();
 		
-		polygon.addPoint(x+size/2, y);
-		polygon.addPoint(x, y+size);
-		polygon.addPoint(x+size, y+size);
+		polygon.addPoint((int)(x+size/2), (int)y);
+		polygon.addPoint((int)x, (int)(y+size));
+		polygon.addPoint((int)(x+size), (int)(y+size));
 	}
 
 }

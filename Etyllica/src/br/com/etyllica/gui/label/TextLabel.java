@@ -154,7 +154,7 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public void centralize(int x, int y, int w, int h) {
+	public void centralize(float x, float y, float w, float h) {
 		layer.centralize(x, y, w, h);
 	}
 
@@ -169,7 +169,7 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public int centralizeX(int startX, int endX) {
+	public float centralizeX(float startX, float endX) {
 		return layer.centralizeX(startX, endX);
 	}
 
@@ -179,7 +179,7 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public int centralizeY(int startY, int endY) {
+	public float centralizeY(float startY, float endY) {
 		return layer.centralizeY(startY, endY);
 	}
 		

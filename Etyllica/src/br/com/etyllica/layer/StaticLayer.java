@@ -22,7 +22,7 @@ public class StaticLayer extends Layer{
 	 * @param x
 	 * @param y
 	 */
-	public StaticLayer(int x, int y){
+	public StaticLayer(float x, float y){
 		super(x,y);
 	}
 	
@@ -33,7 +33,7 @@ public class StaticLayer extends Layer{
 	 * @param w
 	 * @param h
 	 */
-	public StaticLayer(int x, int y, int w, int h){
+	public StaticLayer(float x, float y, float w, float h){
 		super(x,y,w,h);
 	}
 	
@@ -45,7 +45,7 @@ public class StaticLayer extends Layer{
 	 * @param h
 	 * @param path
 	 */
-	public StaticLayer(int x, int y, int w, int h, String path){
+	public StaticLayer(float x, float y, float w, float h, String path){
 		super(x,y);
 		
 		this.path = path;

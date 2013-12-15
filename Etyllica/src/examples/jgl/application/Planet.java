@@ -72,7 +72,7 @@ public class Planet extends GLAUX{
 		glFlush(g);
 	}
 
-	private void myReshape (int w, int h) {
+	private void myReshape (float w, float h) {
 		glShadeModel (GL_FLAT);
 		glViewport (0, 0, w, h);
 		glMatrixMode (GL_PROJECTION);

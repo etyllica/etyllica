@@ -62,7 +62,7 @@ public class ColoredTextPanel extends View{
 				break;
 			}
 
-			g.escreve(paddingRight, y+paddingTop+(int)(fontSize+(i*fontSize+spacing)), text);
+			g.write(paddingRight, y+paddingTop+(int)(fontSize+(i*fontSize+spacing)), text);
 			
 		}
 

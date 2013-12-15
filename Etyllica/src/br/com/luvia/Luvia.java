@@ -109,7 +109,7 @@ public abstract class Luvia extends GLAUX{
 
 	protected void setTexture(Texture texture){
 		
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.getW(), texture.getH(), 0,
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, (int)texture.getW(), (int)texture.getH(), 0,
 				GL_RGB, GL_UNSIGNED_BYTE, texture.getBytes());
 
 		//glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
@@ -125,7 +125,7 @@ public abstract class Luvia extends GLAUX{
 		//glEnable(GL_ALPHA_TEST);
 		
 		
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.getW(), texture.getH(), 0,
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)texture.getW(), (int)texture.getH(), 0,
 				GL_RGBA, GL_UNSIGNED_BYTE, texture.getAlphaBytes());
 		
 		glEnable(GL_BLEND);

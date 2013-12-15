@@ -120,7 +120,7 @@ public class BufferedLayer extends ImageLayer{
 		w = buffer.getWidth();
 		h = buffer.getHeight();
 
-		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		originalBuffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
 		originalBuffer.getGraphics().drawImage(buffer,0,0,null);
 
 		resetImage();
@@ -131,7 +131,7 @@ public class BufferedLayer extends ImageLayer{
 	 * ImagemBuffer volta ao estado original
 	 */
 	public void resetImage(){
-		imagemBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		imagemBuffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
 		imagemBuffer.getGraphics().drawImage(originalBuffer,0,0,null);
 	}
 
@@ -233,13 +233,16 @@ public class BufferedLayer extends ImageLayer{
 		DataBufferInt db = (DataBufferInt)imagemBuffer.getRaster().getDataBuffer();
 
 		int[] by = db.getData(); 
+		
+		int width = (int) w;
+		int height = (int) h;
 
-		byte imagem2D[][][] = new byte[w][h][3];
+		byte imagem2D[][][] = new byte[width][height][3];
 
 		for(int j=0;j<h;j++){
-			for(int i=0;i<w;i++){
+			for(int i=0;i<width;i++){
 
-				int rgb = by[i+j*w];
+				int rgb = by[i+j*width];
 
 				byte r = (byte) ((rgb & 0x00ff0000) >> 16);
 				byte g = (byte) ((rgb & 0x0000ff00) >> 8);

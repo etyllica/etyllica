@@ -14,7 +14,7 @@ import br.com.etyllica.util.SVGColor;
 
 public class SimpleGuiExample extends Application{
 
-	public SimpleGuiExample(int w, int h){
+	public SimpleGuiExample(float w, float h){
 		super(w,h);
 	}
 	

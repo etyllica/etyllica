@@ -21,15 +21,15 @@ public class ImageButton extends DefaultButton{
 	
 	protected ImageLayer layer;
 
-	public ImageButton(int x, int y, int w, int h, String normal){
+	public ImageButton(float x, float y, float w, float h, String normal){
 		this(x,y,w,h, normal, normal, normal);
 	}
 
-	public ImageButton(int x, int y, int w, int h, String normal, String sobMouse){
+	public ImageButton(float x, float y, float w, float h, String normal, String sobMouse){
 		this(x,y,w,h,normal, sobMouse, sobMouse);
 	}
 	
-	public ImageButton(int x, int y, int w, int h, String normal, String sobMouse, String click){
+	public ImageButton(float x, float y, float w, float h, String normal, String sobMouse, String click){
 		super(x,y,w,h);
 		this.normal = normal;
 		this.sobMouse = sobMouse;
@@ -38,11 +38,11 @@ public class ImageButton extends DefaultButton{
 		this.layer = new ImageLayer(x,y,normal);
 	}
 
-	public ImageButton(int x, int y, StaticLayer normal, StaticLayer sobMouse) {
+	public ImageButton(float x, float y, StaticLayer normal, StaticLayer sobMouse) {
 		this(x,y,normal.getW(),normal.getH(),normal.getPath(),sobMouse.getPath());
 	}
 
-	public ImageButton(int x, int y, StaticLayer normal, StaticLayer sobMouse, StaticLayer click) {
+	public ImageButton(float x, float y, StaticLayer normal, StaticLayer sobMouse, StaticLayer click) {
 		this(x,y,normal.getW(),normal.getH(),normal.getPath(),sobMouse.getPath(),click.getPath());
 	}
 
@@ -84,20 +84,20 @@ public class ImageButton extends DefaultButton{
 	}
 
 	@Override
-	public void setX(int x){
+	public void setX(float x){
 		this.x = x;
 
 		centralizaLayer();		
 	}
 
 	@Override
-	public void setY(int y){
+	public void setY(float y){
 		this.y = y;
 
 		centralizaLayer();		
 	}
 
-	public void setCoordenadas(int x, int y){
+	public void setCoordenadas(float x, float y){
 		this.x = x;
 		this.y = y;
 

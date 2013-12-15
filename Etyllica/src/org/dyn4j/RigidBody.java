@@ -35,8 +35,8 @@ public class RigidBody extends Body{
 		
 		AffineTransform transform = new AffineTransform();
 		
-		int initialX = layer.getX()+layer.getW()/2;
-		int initialY = layer.getY()+layer.getH()/2;
+		float initialX = layer.getX()+layer.getW()/2;
+		float initialY = layer.getY()+layer.getH()/2;
 						
 		transform.translate(this.transform.getTranslationX()-initialX, this.transform.getTranslationY()-initialY);
 		transform.concatenate(AffineTransform.getRotateInstance(this.transform.getRotation(),layer.getX()+layer.getW()/2, layer.getY()+layer.getH()/2));

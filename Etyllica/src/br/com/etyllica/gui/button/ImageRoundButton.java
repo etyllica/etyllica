@@ -20,7 +20,7 @@ public class ImageRoundButton extends ImageButton{
 	}
 
 	@Override
-	public boolean onMouse(int mx, int my) {
+	public boolean onMouse(float mx, float my) {
 
 		return colideCircleCircle(mx-w/2, my-w/2, 1, 1);
 	}

@@ -7,7 +7,7 @@ import br.com.etyllica.gui.button.DefaultButton;
 
 public class BorderButton extends DefaultButton{
 
-	public BorderButton(int x, int y, int w, int h) {
+	public BorderButton(float x, float y, float w, float h) {
 		super(x, y, w, h);
 	}
 	

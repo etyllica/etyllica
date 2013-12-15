@@ -8,18 +8,18 @@ import br.com.etyllica.gui.label.Icon;
 
 public abstract class PolygonalIcon extends Icon{
 
-	protected int size;
+	protected float size;
 	
 	protected Polygon polygon;
 	
-	public PolygonalIcon(int x, int y){
+	public PolygonalIcon(float x, float y){
 		super(x,y);
 		this.size = 12;
 		polygon = new Polygon();
 		initPolygon(x, y);	
 	}
 	
-	public PolygonalIcon(int x, int y, int size){
+	public PolygonalIcon(float x, float y, float size){
 		super(x,y);
 		this.size = size;
 		polygon = new Polygon();
@@ -27,18 +27,18 @@ public abstract class PolygonalIcon extends Icon{
 	}
 	
 	@Override
-	public void setX(int x){
+	public void setX(float x){
 		this.x = x;
 		initPolygon(this.x, y);
 	}
 	
 	@Override
-	public void setY(int y){
+	public void setY(float y){
 		this.y = y;
 		initPolygon(x, this.y);
 	}
 	
-	protected abstract void initPolygon(int x, int y);
+	protected abstract void initPolygon(float x, float y);
 	
 	@Override
 	public void draw(Graphic g) {

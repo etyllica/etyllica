@@ -9,7 +9,7 @@ public class EtyllicTheme extends Theme{
 		super();
 	}
 	
-	public DefaultButton createButton(int x, int y, int w, int h){
+	public DefaultButton createButton(float x, float y, float w, float h){
 		DefaultButton button = new DefaultButton(x, y, w, h);
 		button.setTheme(this);
 		return button;

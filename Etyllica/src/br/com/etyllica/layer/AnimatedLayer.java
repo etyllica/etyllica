@@ -216,19 +216,17 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public int centralizeX(int xInicial, int xFinal)
+	public float centralizeX(float xInicial, float xFinal)
 	{
-		int x;
-		x = (((xInicial+xFinal)/2)-(getXTile()/2));
+		float x = (((xInicial+xFinal)/2)-(getXTile()/2));
 		setX(x);
 		return x;
 	}
 
 	@Override
-	public int centralizeY(int yInicial, int yFinal)
+	public float centralizeY(float yInicial, float yFinal)
 	{
-		int y;
-		y = (((yInicial+yFinal)/2)-(getYTile()/2));
+		float y = (((yInicial+yFinal)/2)-(getYTile()/2));
 		setY(y);
 		return y;
 	}
@@ -258,31 +256,12 @@ public class AnimatedLayer extends ImageLayer{
 
 	public boolean colideCircular(AnimatedLayer b)
 	{
-		int xdiff = b.getX() - getX();
-		int ydiff = b.getY() - getY();
+		float xdiff = b.getX() - getX();
+		float ydiff = b.getY() - getY();
 
-		int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
+		float dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
 
-		int r_sum_sq = b.getXTile()/2 + xTile/2;
-		r_sum_sq *= r_sum_sq;
-
-		if(dcentre_sq - r_sum_sq<=0)
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	@Override
-	public boolean colideCircular(Layer b)
-	{
-		int xdiff = b.getX() - getX();
-		int ydiff = b.getY() - getY();
-
-		int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
-
-		int r_sum_sq = b.getW()/2 + xTile/2;
+		float r_sum_sq = b.getXTile()/2 + xTile/2;
 		r_sum_sq *= r_sum_sq;
 
 		if(dcentre_sq - r_sum_sq<=0)

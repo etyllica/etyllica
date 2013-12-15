@@ -13,11 +13,10 @@ public class EtyllicMonoTheme extends Theme{
 		this.borderColor = Color.BLACK;
 		
 		this.buttonColor = Color.WHITE;
-		
-		
+				
 	}
 	
-	public DefaultButton createButton(int x, int y, int w, int h){
+	public DefaultButton createButton(float x, float y, float w, float h){
 		DefaultButton button = new BorderButton(x, y, w, h);
 		button.setTheme(this);
 		return button;

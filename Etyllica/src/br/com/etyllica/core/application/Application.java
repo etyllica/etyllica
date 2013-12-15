@@ -4,11 +4,11 @@ package br.com.etyllica.core.application;
 
 public abstract class Application extends Context{
 		
-	public Application(int w, int h) {
+	public Application(float w, float h) {
 		super(w, h);
 	}
 	
-	public Application(int x, int y, int w, int h) {
+	public Application(float x, float y, float w, float h) {
 		super(x, y, w, h);
 	}
 			

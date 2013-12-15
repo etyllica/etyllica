@@ -17,7 +17,7 @@ public class BasicEmitter extends Emitter{
 	}
 
 	@Override
-	protected Particle createParticle() {
+	protected Particle createParticle(long now) {
 		
 		BasicParticle particle = new BasicParticle(x,y-20);
 		
@@ -25,9 +25,5 @@ public class BasicEmitter extends Emitter{
 		
 	}
 
-	@Override
-	protected void updateParticle(Particle particle) {
-		particle.setOffsetY(-1);
-	}
 
 }
