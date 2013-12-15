@@ -47,7 +47,7 @@ public class TextLayer extends ImageLayer{
 		this(0,0,text);
 	}
 
-	public TextLayer(int x, int y, String text){
+	public TextLayer(float x, float y, String text){
 		super(x,y);
 
 		this.color = new Color(0xff,0xff,0xff);
@@ -99,7 +99,6 @@ public class TextLayer extends ImageLayer{
 			if(f==null){
 				f = g.getFont().deriveFont(style, size);
 			}
-
 
 			g.setFont(f);
 

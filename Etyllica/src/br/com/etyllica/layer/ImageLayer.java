@@ -204,7 +204,7 @@ public class ImageLayer extends StaticLayer{
 	}
 
 	//Based on code http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
-	public boolean colisionRotated(int mx, int my){
+	public boolean colisionRotated(float mx, float my){
 
 		//Pivot Point of rotation
 		float px = x+w/2;
