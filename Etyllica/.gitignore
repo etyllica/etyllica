@@ -12,5 +12,3 @@ sdk/
 # Package Files #
 *.war
 *.ear
-
-/bin

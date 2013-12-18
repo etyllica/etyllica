@@ -21,12 +21,12 @@ public class HIDController{
 	
 	private JoystickLoader joystick;
 			
-	public HIDController(){
+	public HIDController(InputListener listener){
 		
 		mouse = new Mouse(0,0);
 		mouse.updateArrowTheme();
 		
-		keyboard = new Keyboard();
+		keyboard = new Keyboard(listener);
 		keyboard.reset();
 		
 		joystick = JoystickLoader.getInstance();

@@ -81,6 +81,10 @@ public class KeyEvent{
 		this.key = key;
 	}
 		
+	public KeyState getState() {
+		return state;
+	}
+
 	public long getTimestamp() {
 		return timestamp;
 	}

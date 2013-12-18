@@ -66,7 +66,7 @@ public class EngineCore implements Core, InputListener{
 
 	private List<PointerEvent> mouseEvents;
 
-	private List<KeyEvent> keyEvents;
+	//private List<KeyEvent> keyEvents;
 
 	private List<KeyEvent> joyEvents;
 
@@ -87,13 +87,13 @@ public class EngineCore implements Core, InputListener{
 
 		guiEvents = new ArrayList<GUIEvent>();
 
-		control = new HIDController();
+		control = new HIDController(this);
 
 		mouse = control.getMouse();
 		mouseEvents = mouse.getEvents();
 
 		keyboard = control.getKeyboard();
-		keyEvents = keyboard.getEvents();
+		//keyEvents = keyboard.getEvents();
 		
 		updatables.add(animation);
 
@@ -137,7 +137,9 @@ public class EngineCore implements Core, InputListener{
 
 		updateMouse(components);
 
-		updateKeyboard();
+		//updateKeyboard();
+		
+		keyboard.update();
 
 		if(JoystickLoader.getInstance().isStarted()){
 			updateJoystick();
@@ -240,7 +242,7 @@ public class EngineCore implements Core, InputListener{
 
 	}
 
-	private void updateKeyboard(){
+	/*private void updateKeyboard(){
 
 		keyboard.poll();
 
@@ -252,7 +254,7 @@ public class EngineCore implements Core, InputListener{
 		}
 
 		keyEvents.clear();
-	}
+	}*/
 
 	private void updateMouse(List<View> components){
 
