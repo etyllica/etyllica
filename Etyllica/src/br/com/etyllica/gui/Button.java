@@ -3,20 +3,20 @@ package br.com.etyllica.gui;
 import java.util.Collection;
 import java.util.List;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.button.DefaultButton;
+import br.com.etyllica.theme.ThemeManager;
 
 public class Button extends View{
 	
 	private DefaultButton button;
 	
 	public Button(float x, float y, float w, float h){
-		button = Configuration.getInstance().getTheme().createButton(x, y, w, h);
+		button = ThemeManager.getInstance().getTheme().createButton(x, y, w, h);
 	}
 
 	public int getRoundness() {

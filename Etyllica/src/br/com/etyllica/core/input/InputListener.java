@@ -9,4 +9,6 @@ public interface InputListener {
 	
 	public void updateMouseEvent(PointerEvent event);
 	
+	public void updateJoystickEvent(KeyEvent event);
+	
 }

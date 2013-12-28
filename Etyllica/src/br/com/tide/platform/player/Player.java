@@ -5,8 +5,8 @@ import java.util.Set;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.input.controller.Controller;
 import br.com.etyllica.core.video.Graphic;
+import br.com.tide.input.controller.Controller;
 
 public class Player implements Drawable{
 

@@ -2,12 +2,12 @@ package br.com.etyllica.gui;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -74,13 +74,13 @@ public class Radio extends CheckBox{
 		//g.fillOval(x, y, w, h);
 		
 		if(!mouseOver){
-			g.setColor(Configuration.getInstance().getTheme().getTextFieldWithoutFocusColor());
+			g.setColor(ThemeManager.getInstance().getTheme().getTextFieldWithoutFocusColor());
 		}else{
-			g.setColor(Configuration.getInstance().getTheme().getTextFieldOnMouseColor());
+			g.setColor(ThemeManager.getInstance().getTheme().getTextFieldOnMouseColor());
 		}
 		g.drawOval(x, y, w, h);
 		
-		g.setColor(Configuration.getInstance().getTheme().getTextFieldWithoutFocusColor());
+		g.setColor(ThemeManager.getInstance().getTheme().getTextFieldWithoutFocusColor());
 		if(checked){
 			g.fillCircle(x+w/2, y+h/2, w/5);
 		}

@@ -13,7 +13,8 @@ public class EtyllicMonoTheme extends Theme{
 		this.borderColor = Color.BLACK;
 		
 		this.buttonColor = Color.WHITE;
-				
+		
+		this.buttonOnMouse = Color.GRAY;
 	}
 	
 	public DefaultButton createButton(float x, float y, float w, float h){

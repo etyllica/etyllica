@@ -1,6 +1,5 @@
 package br.com.etyllica.gui;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -8,6 +7,7 @@ import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.button.DefaultButton;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -63,7 +63,7 @@ public class Slider extends View{
 	public void draw(Graphic g){
 
 		//Draw Slide
-		Theme theme = Configuration.getInstance().getTheme();
+		Theme theme = ThemeManager.getInstance().getTheme();
 
 		g.setColor(theme.getBarColor());
 

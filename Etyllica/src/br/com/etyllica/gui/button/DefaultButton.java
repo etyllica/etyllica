@@ -1,15 +1,15 @@
 package br.com.etyllica.gui.button;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.RoundGUIComponent;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  *
@@ -291,7 +291,7 @@ public class DefaultButton extends RoundGUIComponent{
 	public Theme getTheme() {
 
 		if(theme==null){
-			return Configuration.getInstance().getTheme();
+			return ThemeManager.getInstance().getTheme();
 		}else{
 			return this.theme;
 		}		

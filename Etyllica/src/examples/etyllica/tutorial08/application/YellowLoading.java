@@ -3,10 +3,10 @@ package examples.etyllica.tutorial08.application;
 import java.awt.Color;
 import java.awt.Font;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.application.load.DefaultLoadApplication;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.theme.ThemeManager;
 
 public class YellowLoading extends DefaultLoadApplication{
 
@@ -16,7 +16,7 @@ public class YellowLoading extends DefaultLoadApplication{
 	public YellowLoading(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		
-		Theme theme = Configuration.getInstance().getTheme();
+		Theme theme = ThemeManager.getInstance().getTheme();
 		
 		f = new Font(theme.getFontName(), theme.getFontStyle(), 26);
 		p = new Font(theme.getFontName(), theme.getFontStyle(), 18);

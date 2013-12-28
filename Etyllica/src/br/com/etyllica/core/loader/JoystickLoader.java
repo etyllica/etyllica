@@ -6,11 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
+import br.com.etyllica.animation.Updatable;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.input.InputListener;
 import br.com.etyllica.core.input.joystick.Joystick;
 
 /**
@@ -20,7 +19,7 @@ import br.com.etyllica.core.input.joystick.Joystick;
  *
  */
 
-public class JoystickLoader extends LoaderImpl{
+public class JoystickLoader extends LoaderImpl implements Updatable{
 
 	private static JoystickLoader instance = null;
 
@@ -32,17 +31,13 @@ public class JoystickLoader extends LoaderImpl{
 		return instance;
 	}
 	
-	private int joysticks = 10;
+	private InputListener listener;
 	
-	private boolean started = false;
+	private int joysticks = 10;
 
 	private List<KeyEvent> joystickEvents = new ArrayList<KeyEvent>();
 
 	private Map<Integer, Joystick> inputStreams = new HashMap<Integer, Joystick>();
-	
-	private ScheduledExecutorService executor;
-	
-	private final int UPDATE_DELAY = 20;
 	
 	public void start(){
 
@@ -68,41 +63,30 @@ public class JoystickLoader extends LoaderImpl{
 		}
 		
 		this.joysticks = j;
-		executor = Executors.newScheduledThreadPool(this.joysticks);
-		
-		for(int i=0;i<joysticks;i++){
-			System.out.println("Create Handler");
-			executor.scheduleAtFixedRate(new JoystickHandler(i), 0, UPDATE_DELAY, TimeUnit.MILLISECONDS);
-		}
-		
-		started = true;
-		
-	}
 	
-	private class JoystickHandler implements Runnable{
-		
-		private int id;
-		
-		public JoystickHandler(int id){
-			super();
-			this.id = id;
-		}
-		
-		public void run() {
-			listen(id);
-		}
-		
 	}
 
 	public List<KeyEvent> getJoyEvents() {
 		return joystickEvents;
 	}
 
-	public void poll(){
+	public void update(long now){
 		
 		for(Entry<Integer, Joystick> entry: inputStreams.entrySet()){
 			listen(entry.getKey());
 		}
+		
+		notifyListener();
+
+	}
+	
+	private void notifyListener(){
+
+		for(KeyEvent event: joystickEvents){
+			listener.updateJoystickEvent(event);
+		}
+
+		joystickEvents.clear();
 
 	}
 
@@ -116,8 +100,12 @@ public class JoystickLoader extends LoaderImpl{
 		
 	}
 
-	public boolean isStarted() {
-		return started;
+	public InputListener getListener() {
+		return listener;
+	}
+
+	public void setListener(InputListener listener) {
+		this.listener = listener;
 	}
 	
 }

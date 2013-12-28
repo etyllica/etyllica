@@ -1,6 +1,8 @@
 package examples.etyllica.tutorial09;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.theme.mono.EtyllicMonoTheme;
 import examples.etyllica.tutorial09.application.SimpleGuiExample;
 
 /**
@@ -21,7 +23,7 @@ public class Tutorial9 extends Etyllica {
 	@Override
 	public void startGame() {
 		
-		//Configuration.getInstance().setTheme(new EtyllicMonoTheme());
+		ThemeManager.getInstance().setTheme(new EtyllicMonoTheme());
 		
 		setMainApplication(new SimpleGuiExample(w,h));
 	}

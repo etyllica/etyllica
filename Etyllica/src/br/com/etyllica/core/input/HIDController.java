@@ -30,6 +30,7 @@ public class HIDController{
 		keyboard.reset();
 		
 		joystick = JoystickLoader.getInstance();
+		joystick.setListener(listener);
 
 	}
 

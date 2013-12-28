@@ -1,9 +1,8 @@
 package br.com.etyllica.core;
 
 import br.com.etyllica.core.theme.Theme;
-import br.com.etyllica.gui.mouse.theme.ArrowTheme;
 import br.com.etyllica.i18n.Language;
-import br.com.etyllica.theme.EtyllicTheme;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -15,10 +14,6 @@ import br.com.etyllica.theme.EtyllicTheme;
 public class Configuration {
 
 	private static Configuration instance = null;
-	
-		
-	private Theme theme = new EtyllicTheme();
-	private ArrowTheme arrowTheme = new ArrowTheme();
 	
 	//private Language lang = Language.JAPANESE;
 	//private Language lang = Language.ENGLISH_USA;
@@ -42,26 +37,6 @@ public class Configuration {
 
 		return instance;
 	}
-	
-	public Theme getTheme() {
-		return theme;
-	}
-
-	public void setTheme(Theme theme) {
-		this.theme = theme;
-	}
-	
-	public ArrowTheme getArrowTheme() {
-		return arrowTheme;
-	}
-
-	/**
-	 * 
-	 * @param arrowTheme
-	 */
-	public void setArrowTheme(ArrowTheme arrowTheme) {
-		this.arrowTheme = arrowTheme;
-	}
 
 	public Language getLanguage() {
 		return language;
@@ -75,12 +50,12 @@ public class Configuration {
 		this.language = language;
 		
 		if(language==Language.JAPANESE){
-			theme.setFontName(Theme.FONT_JAPANESE);
+			ThemeManager.getInstance().getTheme().setFontName(Theme.FONT_JAPANESE);
 		}else{
-			theme.setFontName(Theme.FONT_DEFAULT);
+			ThemeManager.getInstance().getTheme().setFontName(Theme.FONT_DEFAULT);
 		}
 		
-		theme.reloadFonts();
+		ThemeManager.getInstance().getTheme().reloadFonts();
 		
 		setLanguageChanged(true);
 		

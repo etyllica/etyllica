@@ -214,7 +214,7 @@ public class SharedCore {
 	
 	public void update(){
 		if(!drawing){
-			innerCore.gerencia();
+			innerCore.update(System.currentTimeMillis());
 		}
 	}
 	

@@ -34,7 +34,7 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	//TODO define fps by Application
 	//private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
-	protected int updateDelay = 20; // 40ms. Implica em 25fps (1000/20) = 50
+	protected int updateDelay = 20; // 20ms. Implica em 25fps (1000/20) = 50
 
 	private Application application;
 	
@@ -73,7 +73,7 @@ public abstract class Etyllica extends Applet implements Engine{
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
 		String s = getClass().getResource("").toString();
-
+		
 		setPath(s);
 		
 	}

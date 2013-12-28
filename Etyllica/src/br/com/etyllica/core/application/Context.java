@@ -2,6 +2,7 @@ package br.com.etyllica.core.application;
 
 import java.util.List;
 
+import br.com.etyllica.animation.Updatable;
 import br.com.etyllica.core.application.load.LoadListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Graphic;
@@ -18,7 +19,7 @@ import br.com.etyllica.scene.Scene;
  *
  */
 
-public abstract class Context extends View{
+public abstract class Context extends View implements Updatable{
 
 	/**
 	 * The updateInterval between executions
@@ -182,10 +183,12 @@ public abstract class Context extends View{
 	/**
 	 * Method to Update by GUI events
 	 */
-
-	@Override
 	public void update(GUIEvent event) {
 		// TODO Auto-generated method stub
+	}
+	
+	public void update(long now){
+		
 	}
 
 	@Override

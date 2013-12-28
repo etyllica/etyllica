@@ -47,7 +47,7 @@ public class BoxesFalling extends PhysicsApplication {
 		}
 		
 		
-		this.last = System.nanoTime();		
+		this.last = System.nanoTime();
 		//TODO Change to update Physics
 		updateAtFixedRate(10);
 		

@@ -7,7 +7,7 @@ import java.io.IOException;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyState;
 
-public class Joystick {
+public class Joystick{
 
 	private static final int JS_EVENT_BUTTON = 0x01;
 	private static final int JS_EVENT_AXIS = 0x02;

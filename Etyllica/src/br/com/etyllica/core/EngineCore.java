@@ -1,7 +1,5 @@
 package br.com.etyllica.core;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -16,8 +14,8 @@ import br.com.etyllica.core.application.Application;
 import br.com.etyllica.core.application.Context;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.input.HIDController;
 import br.com.etyllica.core.input.InputListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
@@ -38,15 +36,15 @@ import br.com.etyllica.gui.window.MainWindow;
  *
  */
 
-public class EngineCore implements Core, InputListener{
+public class EngineCore implements Core, InputListener, Updatable{
 
 	//External Windows
 	private Window activeWindow = null;
 
 	private List<AnimationScript> globalScripts = new ArrayList<AnimationScript>();
-	
+
 	private List<Updatable> updatables = new ArrayList<Updatable>();
-	
+
 	private AnimationHandler animation = new AnimationHandler();
 
 	private View focus;
@@ -64,11 +62,7 @@ public class EngineCore implements Core, InputListener{
 
 	private List<GUIEvent> guiEvents;
 
-	private List<PointerEvent> mouseEvents;
-
-	//private List<KeyEvent> keyEvents;
-
-	private List<KeyEvent> joyEvents;
+	//private List<KeyEvent> joyEvents;
 
 	private MainWindow mainWindow;
 
@@ -90,11 +84,9 @@ public class EngineCore implements Core, InputListener{
 		control = new HIDController(this);
 
 		mouse = control.getMouse();
-		mouseEvents = mouse.getEvents();
 
 		keyboard = control.getKeyboard();
-		//keyEvents = keyboard.getEvents();
-		
+
 		updatables.add(animation);
 
 	}
@@ -112,7 +104,7 @@ public class EngineCore implements Core, InputListener{
 
 	private GUIEvent superEvent = GUIEvent.NONE;
 
-	public void gerencia(){
+	public void update(long now){
 
 		if(Configuration.getInstance().isLanguageChanged()){
 			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
@@ -127,7 +119,12 @@ public class EngineCore implements Core, InputListener{
 		superEvent = GUIEvent.NONE;
 
 		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getViews());
-		components.add(activeWindow.getApplication());
+		
+		Context application = activeWindow.getApplication();
+		
+		components.add(application);
+
+		application.update(getTimeNow());
 
 		updateActiveWindow();
 
@@ -138,12 +135,10 @@ public class EngineCore implements Core, InputListener{
 		updateMouse(components);
 
 		//updateKeyboard();
-		
-		keyboard.update();
 
-		if(JoystickLoader.getInstance().isStarted()){
-			updateJoystick();
-		}
+		keyboard.update(now);
+
+		JoystickLoader.getInstance().update(now);
 
 		if(enableFullScreen){
 			enableFullScreen = false;
@@ -166,7 +161,7 @@ public class EngineCore implements Core, InputListener{
 		if(application!=null){
 
 			long now = getTimeNow();
-
+			
 			if(application.getUpdateInterval()>0){
 
 				if(now-application.getLastUpdate()>application.getUpdateInterval()){
@@ -227,34 +222,14 @@ public class EngineCore implements Core, InputListener{
 
 	}
 
-	private void updateJoystick(){
+	@Override
+	public void updateJoystickEvent(KeyEvent event) {
 
-		List<KeyEvent> joystickEvents = new CopyOnWriteArrayList<KeyEvent>(JoystickLoader.getInstance().getJoyEvents());
+		System.out.println("UpdateJoystick "+event.getKey());
 
-		for(KeyEvent joystickEvent: joystickEvents){
-
-			System.out.println("UpdateKeyboard "+joystickEvent.getKey());
-
-			activeWindow.getApplication().updateKeyboard(joystickEvent);
-		}
-
-		joyEvents.clear();
+		activeWindow.getApplication().updateKeyboard(event);
 
 	}
-
-	/*private void updateKeyboard(){
-
-		keyboard.poll();
-
-		List<KeyEvent> keyboardEvents = new CopyOnWriteArrayList<KeyEvent>(keyEvents);
-
-		for(KeyEvent keyboardEvent: keyboardEvents){
-
-			updateKeyEvent(keyboardEvent);
-		}
-
-		keyEvents.clear();
-	}*/
 
 	private void updateMouse(List<View> components){
 
@@ -262,13 +237,15 @@ public class EngineCore implements Core, InputListener{
 		mouseOverClickable = false;
 
 		//Solving ConcurrentModification
-		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouseEvents);
+		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
+
+		//System.out.println(mouseEvents.size());
 
 		//Update components with events
 		for(PointerEvent event: events){
-			
+
 			updateMouseEvent(event);
-			
+
 			//Avoid concurrency problems
 			//
 			//Update components in reverse order
@@ -316,7 +293,7 @@ public class EngineCore implements Core, InputListener{
 
 		}
 
-		mouseEvents.clear();
+		mouse.clearEvents();
 	}
 
 	private void updateGui(List<View> components){
@@ -493,7 +470,7 @@ public class EngineCore implements Core, InputListener{
 		componente.executeAction(lastEvent);
 
 	}
-	
+
 	public void draw(Graphic g){
 
 		/*List<Window> drawWindows = new CopyOnWriteArrayList<Window>(windows);
@@ -507,7 +484,7 @@ public class EngineCore implements Core, InputListener{
 		drawEffects(g);
 
 		if(drawCursor){
-			drawMouse(g);
+			mouse.draw(g);
 		}
 
 	}
@@ -521,9 +498,9 @@ public class EngineCore implements Core, InputListener{
 		}
 
 		window.draw(g);
-		
+
 		drawContext(window.getApplication(), g);		
-		
+
 		List<View> components = window.getViews();
 
 		for(View view: components){
@@ -541,15 +518,15 @@ public class EngineCore implements Core, InputListener{
 		}
 
 	}
-	
+
 	private void drawContext(Context context, Graphic g){
-		
+
 		context.drawScene(g);
-		
+
 		for(View view: context.getViews()){
 			drawView(view, g);
 		}
-		
+
 	}
 
 	private void drawEffects(Graphic g){
@@ -572,37 +549,6 @@ public class EngineCore implements Core, InputListener{
 
 		for(AnimationScript script: remove){
 			globalScripts.remove(script);
-		}
-
-	}
-
-	private BasicStroke strokeOne = new BasicStroke(1F);
-	private BasicStroke strokeThree = new BasicStroke(3F);
-	private BasicStroke strokeFive = new BasicStroke(5F);
-
-	private void drawMouse(Graphic g){
-
-		g.getGraphics().setStroke(strokeOne);
-		mouse.getArrow().move(mouse.getX(), mouse.getY());
-		mouse.getArrow().draw(g);
-
-		if(Configuration.getInstance().isTimerClick()){
-
-			g.setColor(Color.WHITE);
-			g.getGraphics().setStroke(strokeFive);  // set stroke width of 5
-
-			int raio = 26;
-
-			g.drawArc(mouse.getX()-raio+2, mouse.getY()-raio+2, raio*2, raio*2, 0, 360);
-
-			g.setColor(Color.BLUE);
-
-			//Only if component was Clickable
-			if(mouseOverClickable){
-				g.getGraphics().setStroke(strokeThree);  // set stroke width of 3
-				g.drawArc(mouse.getX()-raio+2, mouse.getY()-raio+2, raio*2, raio*2, 0, mouse.getArc());
-				g.getGraphics().setStroke(strokeOne);  // set stroke width of 1
-			}
 		}
 
 	}
@@ -665,13 +611,13 @@ public class EngineCore implements Core, InputListener{
 		this.mouseOver = mouseOver;
 	}
 
-	public List<PointerEvent> getEvents(){
+	/*public List<PointerEvent> getEvents(){
 		return mouseEvents;
 	}
 
 	public void addEvent(PointerEvent event){
 		mouseEvents.add(event);		
-	}
+	}*/
 
 	public void addEffect(GlobalEffect effect){
 
@@ -735,12 +681,12 @@ public class EngineCore implements Core, InputListener{
 			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_ESQUERDA)){
 
 				mouse.setX(mouse.getX()-velocidade);
-				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
 			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_DIREITA)){
 
 				mouse.setX(mouse.getX()+velocidade);
-				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
 			}
 
@@ -748,12 +694,12 @@ public class EngineCore implements Core, InputListener{
 			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_CIMA)){
 
 				mouse.setX(mouse.getY()-velocidade);
-				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
 			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_BAIXO)){
 
 				mouse.setX(mouse.getY()+velocidade);
-				mouseEvents.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
 			}
 
@@ -831,7 +777,7 @@ public class EngineCore implements Core, InputListener{
 	public void setMainApplication(Application application){
 
 		reload(application);		
-		
+
 	}
 
 	protected void changeApplication(){
@@ -869,7 +815,7 @@ public class EngineCore implements Core, InputListener{
 					mouse.setArc(arc+speed);
 				}else{
 					//TODO if timerMouse
-					mouseEvents.add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.CLICK));
+					mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.CLICK));
 					//Simula Click
 					click = true;
 				}
@@ -913,7 +859,7 @@ public class EngineCore implements Core, InputListener{
 
 	@Override
 	public void updateKeyEvent(KeyEvent event) {
-		
+
 		activeWindow.updateKeyboard(event);
 
 		//Application sempre eh gerenciada pelo teclado
@@ -958,7 +904,7 @@ public class EngineCore implements Core, InputListener{
 
 	@Override
 	public void updateMouseEvent(PointerEvent event) {
-		
+
 		event.setX(event.getX()-activeWindow.getX());
 		event.setY(event.getY()-activeWindow.getY());
 

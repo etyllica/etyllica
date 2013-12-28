@@ -1,4 +1,4 @@
-package br.com.etyllica.core.input.controller;
+package br.com.tide.input.controller;
 
 import br.com.etyllica.core.event.KeyEvent;
 

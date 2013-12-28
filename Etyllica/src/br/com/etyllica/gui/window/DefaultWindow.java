@@ -1,6 +1,5 @@
 package br.com.etyllica.gui.window;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -9,6 +8,7 @@ import br.com.etyllica.gui.Window;
 import br.com.etyllica.gui.button.RoundButton;
 import br.com.etyllica.gui.label.ImageLabel;
 import br.com.etyllica.gui.label.TextLabel;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -48,7 +48,7 @@ public class DefaultWindow extends Window{
 	public void draw(Graphic g){
 
 		//TODO Change to panel
-		g.setColor(Configuration.getInstance().getTheme().getWindowBackgroundColor());
+		g.setColor(ThemeManager.getInstance().getTheme().getWindowBackgroundColor());
 		g.fillRect(x,y,w,h);
 		
 	}

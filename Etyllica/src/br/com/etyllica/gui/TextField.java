@@ -3,7 +3,6 @@ package br.com.etyllica.gui;
 import java.awt.Color;
 import java.awt.FontMetrics;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -11,6 +10,7 @@ import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.textfield.TextFieldValidator;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -201,7 +201,7 @@ public class TextField extends View{
 	//Para não sair da caixa
 	public void draw(Graphic g){
 
-		Theme theme = Configuration.getInstance().getTheme();
+		Theme theme = ThemeManager.getInstance().getTheme();
 
 		//TODO
 		//g.setFont(theme.getFont());

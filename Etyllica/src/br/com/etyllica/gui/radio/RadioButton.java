@@ -1,10 +1,10 @@
 package br.com.etyllica.gui.radio;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Radio;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -22,7 +22,7 @@ public class RadioButton extends Radio{
 	@Override
 	public void draw(Graphic g){
 
-		Theme theme = Configuration.getInstance().getTheme();
+		Theme theme = ThemeManager.getInstance().getTheme();
 
 		if(!mouseOver){
 

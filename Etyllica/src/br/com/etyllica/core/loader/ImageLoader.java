@@ -139,7 +139,6 @@ public class ImageLoader extends LoaderImpl{
 
 			}
 
-
 			return img;
 		}
 	}

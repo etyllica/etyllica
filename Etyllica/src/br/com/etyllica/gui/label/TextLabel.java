@@ -2,7 +2,6 @@ package br.com.etyllica.gui.label;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.theme.Theme;
@@ -10,6 +9,7 @@ import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -75,7 +75,7 @@ public class TextLabel extends Label{
 	@Override
 	public void draw(Graphic g) {
 
-		Theme theme = Configuration.getInstance().getTheme();
+		Theme theme = ThemeManager.getInstance().getTheme();
 	
 		g.setFont(theme.getFont().deriveFont(layer.getSize()));
 		

@@ -3,9 +3,9 @@ package br.com.etyllica.gui.mouse.arrow;
 import java.awt.Color;
 import java.awt.Polygon;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -58,7 +58,7 @@ public class DefaultArrow extends Polygon implements MouseArrow{
 
 	public void draw(Graphic g){
 
-		Theme theme = Configuration.getInstance().getTheme();
+		Theme theme = ThemeManager.getInstance().getTheme();
 
 		if(color==null){
 			g.setColor(theme.getMouseArrowColor());
