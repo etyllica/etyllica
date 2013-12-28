@@ -22,6 +22,25 @@ public class GeometricLayer {
      */
 	protected float h = 0;
 	
+	public GeometricLayer(){
+		super();
+	}
+	
+	public GeometricLayer(float x, float y){
+		super();
+		this.x = x;
+		this.y = y;
+	}
+	
+	public GeometricLayer(float x, float y, float w, float h){
+		super();
+		
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+	}
+
 	public float getX() {
 		return x;
 	}

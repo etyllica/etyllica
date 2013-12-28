@@ -44,19 +44,16 @@ public class Layer extends GeometricLayer implements Drawable{
 	}
 	
 	public Layer(float x, float y){
+		super();
+		
 		this.x = x;
 		this.y = y;
 	}
 	
 	public Layer(float x, float y, float w, float h){
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
+		super(x,y,w,h);
 	}
-		
 	
-		
 	public int getOpacity() {
 		return opacity;
 	}
