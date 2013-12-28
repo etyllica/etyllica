@@ -36,7 +36,7 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 	protected int y = 0;
 	protected int z = 0;
 
-	//TimeClick
+	//Arc for TimeClick
 	private int arc = 0;
 
 	private boolean overText = false;
