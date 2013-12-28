@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.dyn4j.PhysicsApplication;
 import org.dyn4j.RigidBody;
+import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Mass;
 
 import br.com.etyllica.core.event.GUIEvent;
@@ -28,34 +29,29 @@ public class BoxesFalling extends PhysicsApplication {
 	@Override
 	public void load() {
 				
-		floor = new RigidBody(new Layer(0,500,w,20));
+		floor = new RigidBody(new Layer(60,500,w-60,20));
 		floor.setMass(Mass.Type.INFINITE);
 		
 		this.world.addBody(floor);
+		this.world.setGravity(World.EARTH_GRAVITY);
 		
 		crates = new ArrayList<RigidBody>();
 		loading = 10;
 		
 		for(int i=0;i<6;i++){
 			
-			RigidBody crate = new RigidBody(new ImageLayer(20+50*i, 10+70*i, "crate.jpg"));
-			//crate.getLinearVelocity().set(5, 0.0);
+			RigidBody crate = new RigidBody(new ImageLayer(180+50*i, 10+70*i, "crate.jpg"));
 						
 			this.world.addBody(crate);
 			crates.add(crate);
 						
 		}
 		
-		
-		this.last = System.nanoTime();
-		//TODO Change to update Physics
-		updateAtFixedRate(10);
+		//crates.get(0).getLinearVelocity().set(50, 20.0);
+		this.last = System.currentTimeMillis();
 		
 		loading = 100;
 	}
-
-	/** The conversion factor from nano to base */
-	final double NANO_TO_BASE = 1.0e9;
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
@@ -72,9 +68,9 @@ public class BoxesFalling extends PhysicsApplication {
 	}
 
 	@Override
-	public void timeUpdate(){
+	public void update(long now){
 				
-		updateWorld();
+		updateWorld(now);
 	}
 
 	@Override
@@ -92,17 +88,15 @@ public class BoxesFalling extends PhysicsApplication {
 	/** The time stamp for the last iteration */
 	protected long last;
 
-	private void updateWorld(){
+	private void updateWorld(long time){
 
-		long time = System.nanoTime();
 		// get the elapsed time from the last iteration
 		long diff = time - this.last;
 		// set the last time
 		this.last = time;
-		// convert from nanoseconds to seconds
-		double elapsedTime = (double)diff / NANO_TO_BASE;
+		
 		// update the world with the elapsed time
-		this.world.update(elapsedTime);
+		this.world.update(diff);
 	}
 
 }

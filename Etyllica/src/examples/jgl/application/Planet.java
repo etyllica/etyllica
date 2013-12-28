@@ -32,7 +32,7 @@ public class Planet extends GLAUX{
 	private void monthSubtract(){ month = (month - 5) % 360; }
 
 	@Override
-	public void timeUpdate(){
+	public void timeUpdate(long now){
 		monthAdd();
 		dayAdd();
 	}

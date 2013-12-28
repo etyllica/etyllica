@@ -165,7 +165,7 @@ public class EngineCore implements Core, InputListener, Updatable{
 			if(application.getUpdateInterval()>0){
 
 				if(now-application.getLastUpdate()>application.getUpdateInterval()){
-					application.timeUpdate();
+					application.timeUpdate(now);
 					application.setLastUpdate(now);
 				}
 

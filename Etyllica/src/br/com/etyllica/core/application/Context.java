@@ -250,7 +250,7 @@ public abstract class Context extends View implements Updatable{
 		updateInterval = 0;
 	}
 
-	public void timeUpdate(){
+	public void timeUpdate(long now){
 
 	}
 
