@@ -1,16 +1,12 @@
 package br.com.etyllica.core.video;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
-import java.awt.image.MemoryImageSource;
 
 import br.com.etyllica.core.EngineCore;
 import br.com.etyllica.core.input.keyboard.Keyboard;
@@ -63,7 +59,7 @@ public class FullScreenWindow extends Window{
 				
 		//setLayout(null);
 
-		hideCursor();
+		core.hideCursor();
 		
 		setVisible(true);
 		setAlwaysOnTop(true);
@@ -82,13 +78,6 @@ public class FullScreenWindow extends Window{
 		addKeyListener( keyboard );
 	}
 		
-	protected void hideCursor(){
-		int[] pixels = new int[16 * 16];
-		Image image = Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16));
-		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0, 0), "invisibleCursor");
-		setCursor( transparentCursor );
-	}
-	
 	public void draw(BufferedImage volatileImage){
 		
 		//int w, int h;
@@ -97,10 +86,10 @@ public class FullScreenWindow extends Window{
 		BufferedImage resized = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 	    Graphics2D g = resized.createGraphics();
 	    
-	    //Better
-	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+	    //Better Quality
+	    //g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 	    //Fastest (in multicore)
-	    //g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
 	    
 	    //g.drawImage(volatileImage, 0, 0, largura, altura, 0, 0, volatileImage.getWidth(), volatileImage.getHeight(), null);
 	    g.drawImage(volatileImage, 0, y, w, h, 0, 0, volatileImage.getWidth(), y+volatileImage.getHeight(), null);

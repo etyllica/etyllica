@@ -95,7 +95,6 @@ public class SharedCore {
 
 	public void disableFullScreen(){
 		telaCheia.dispose();
-		telaCheia = null;
 
 		innerCore.fullScreenEnable = false;
 	}
@@ -122,13 +121,13 @@ public class SharedCore {
 	}
 
 	//Component Methods
-	private VolatileImage createBackBuffer(int largura, int altura){
-		return createBackBuffer(largura, altura, Transparency.OPAQUE);
+	private VolatileImage createBackBuffer(int width, int height){
+		return createBackBuffer(width, height, Transparency.OPAQUE);
 	}
 
-	private VolatileImage createBackBuffer(int largura, int altura, int transparency){
+	private VolatileImage createBackBuffer(int width, int height, int transparency){
 
-		return configuration.createCompatibleVolatileImage(largura, altura, transparency);
+		return configuration.createCompatibleVolatileImage(width, height, transparency);
 	}
 
 	public void defineSize(int width, int height){

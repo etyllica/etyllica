@@ -657,7 +657,9 @@ public class EngineCore implements Core, InputListener, Updatable{
 		if(alt&&enter){
 			alt = false;
 			enter = false;
-			enableFullScreen = true;
+			if(!fullScreenEnable){
+				enableFullScreen = true;
+			}
 		}
 
 		if(esc){
