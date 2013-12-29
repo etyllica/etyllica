@@ -255,4 +255,22 @@ public class GeometricLayer {
 		return (distance <= radius);
 	}
 	
+	public boolean colideIsometric(float px, float py){
+
+		float my = this.getH()/2;
+		float mx = this.getW()/2;
+
+		float x = px-this.getX();
+		float y = py-this.getY();
+
+		if(y>+my)
+			y=my-(y-my);
+
+		if((x>mx+1+(2*y))||(x<mx-1-(2*y)))
+			return false;
+		else
+			return true;
+
+	}
+	
 }
