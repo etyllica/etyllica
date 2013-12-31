@@ -2,12 +2,11 @@ package br.com.etyllica.gui.icon;
 
 public class UpArrow extends PolygonalIcon{
 
-	public UpArrow(int x, int y, int size){
-		super(x, y, size);
-				
+	public UpArrow(int x, int y, float size){
+		super(x, y, size);				
 	}	
 	
-	protected void initPolygon(float x, float y){
+	protected void initPolygon(int x, int y){
 		polygon.reset();
 		
 		polygon.addPoint((int)(x+size/2), (int)y);

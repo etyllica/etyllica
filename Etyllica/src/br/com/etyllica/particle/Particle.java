@@ -5,7 +5,7 @@ import br.com.etyllica.layer.Layer;
 
 public abstract class Particle extends Layer implements Updatable{
 	
-	public Particle(float x, float y){
+	public Particle(int x, int y){
 		super(x,y);
 	}
 	

@@ -39,6 +39,6 @@ public interface GUIComponent extends Drawable{
 	 * @param my mouse coordinate y
 	 * @return
 	 */
-	public boolean onMouse(float mx, float my);
+	public boolean onMouse(int mx, int my);
 
 }

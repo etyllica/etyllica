@@ -11,7 +11,7 @@ import br.com.etyllica.util.SVGColor;
 
 public class CustomLoadApplication extends Application{
 	
-	public CustomLoadApplication(float w, float h) {
+	public CustomLoadApplication(int w, int h) {
 		super(w, h);
 		//loadApplication = new YellowLoading(x, y, w, h);
 	}

@@ -14,39 +14,39 @@ import br.com.etyllica.core.video.Graphic;
 
 public class PivotImageLayer extends ImageLayer{
 
-	protected float xPivot = 0;
-	protected float yPivot = 0;
+	protected int xPivot = 0;
+	protected int yPivot = 0;
 
-	public PivotImageLayer(float x, float y){
+	public PivotImageLayer(int x, int y){
 		super(x,y);
 	}
 
-	public PivotImageLayer(float x, float y, String caminho){
+	public PivotImageLayer(int x, int y, String caminho){
 		super(x,y,caminho);
 
 		this.xPivot = w/2;
 		this.yPivot = h/2;
 	}	
 
-	public void setPivotCoordinates(float xPivot,float yPivot){
+	public void setPivotCoordinates(int xPivot,int yPivot){
 		this.xPivot = xPivot;
 		this.yPivot = yPivot;
 	}
 
-	public float getXPivot(){
+	public int getXPivot(){
 		return xPivot;
 	}
 
-	public float getYPivot(){
+	public int getYPivot(){
 		return yPivot;
 	}
 
 	@Override
-	public boolean colisionRotated(float mx, float my){
+	public boolean colisionRotated(int mx, int my){
 
 		//Pivot Point of rotation
-		float px = x+xPivot;
-		float py = y+yPivot;
+		int px = x+xPivot;
+		int py = y+yPivot;
 
 		double c = Math.cos(Math.toRadians(-angle));
 		double s = Math.sin(Math.toRadians(-angle));
@@ -57,10 +57,10 @@ public class PivotImageLayer extends ImageLayer{
 
 		// perform a normal check if the new point is inside the 
 		// bounds of the UNrotated rectangle
-		float leftX = px - xPivot;
-		float rightX = px - xPivot + w;
-		float topY = py - yPivot;
-		float bottomY = py - yPivot + h;
+		int leftX = px - xPivot;
+		int rightX = px - xPivot + w;
+		int topY = py - yPivot;
+		int bottomY = py - yPivot + h;
 
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}

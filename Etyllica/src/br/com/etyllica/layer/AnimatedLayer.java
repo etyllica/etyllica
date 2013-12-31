@@ -183,18 +183,18 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public float centralizeX(float xInicial, float xFinal){
+	public int centralizeX(int xInicial, int xFinal){
 		
-		float x = (((xInicial+xFinal)/2)-(getTileW()/2));
+		int x = (((xInicial+xFinal)/2)-(getTileW()/2));
 		setX(x);
 		return x;
 		
 	}
 
 	@Override
-	public float centralizeY(float yInicial, float yFinal)
+	public int centralizeY(int yInicial, int yFinal)
 	{
-		float y = (((yInicial+yFinal)/2)-(getTileH()/2));
+		int y = (((yInicial+yFinal)/2)-(getTileH()/2));
 		setY(y);
 		return y;
 	}
@@ -224,12 +224,12 @@ public class AnimatedLayer extends ImageLayer{
 
 	public boolean colideCircular(AnimatedLayer b)
 	{
-		float xdiff = b.getX() - getX();
-		float ydiff = b.getY() - getY();
+		int xdiff = b.getX() - getX();
+		int ydiff = b.getY() - getY();
 
-		float dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
+		int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
 
-		float r_sum_sq = b.getTileW()/2 + tileW/2;
+		int r_sum_sq = b.getTileW()/2 + tileW/2;
 		r_sum_sq *= r_sum_sq;
 
 		if(dcentre_sq - r_sum_sq<=0)

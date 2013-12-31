@@ -43,22 +43,22 @@ public class ImageLabel extends Icon{
 	
 	//Useful methods to centralize label
 	@Override
-	public void setX(float x){
+	public void setX(int x){
 		layer.setX(x);
 	}
 	
 	@Override
-	public void setY(float y){
+	public void setY(int y){
 		layer.setY(y);
 	}
 	
 	@Override
-	public float getW(){
+	public int getW(){
 		return layer.getW();
 	}
 	
 	@Override
-	public float getH(){
+	public int getH(){
 		return layer.getH();
 	}
 	

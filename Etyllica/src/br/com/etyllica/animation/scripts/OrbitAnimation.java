@@ -54,8 +54,8 @@ public class OrbitAnimation extends AnimationScript{
 		double ynew = px * s + py * c;
 
 		// translate point back:
-		target.setX((int)xnew + centerX - tw);
-		target.setY((int)ynew + centerY - th);
+		target.setX((int)(xnew + centerX - tw));
+		target.setY((int)(ynew + centerY - th));
 
 	}	
 

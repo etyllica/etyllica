@@ -17,7 +17,7 @@ public class EtyllicMonoTheme extends Theme{
 		this.buttonOnMouse = Color.GRAY;
 	}
 	
-	public DefaultButton createButton(float x, float y, float w, float h){
+	public DefaultButton createButton(int x, int y, int w, int h){
 		DefaultButton button = new BorderButton(x, y, w, h);
 		button.setTheme(this);
 		return button;

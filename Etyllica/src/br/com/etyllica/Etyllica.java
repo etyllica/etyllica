@@ -35,8 +35,7 @@ public abstract class Etyllica extends Applet implements Engine{
 	protected int h = 480;
 
 	//TODO define fps by Application
-	//private final int UPDATE_DELAY = 40; // 40ms. Implica em 25fps (1000/40) = 25
-	protected int updateDelay = 20; // 20ms. Implica em 25fps (1000/20) = 50
+	protected int updateDelay = 40; // 40ms. Implica em 25fps (1000/40) = 25	
 
 	private Application application;
 	
@@ -63,7 +62,7 @@ public abstract class Etyllica extends Applet implements Engine{
 				
 		core.startCore(application);
 
-		executor = Executors.newSingleThreadScheduledExecutor();
+		executor = Executors.newScheduledThreadPool(2);
 		startEngine();
 
 	}
@@ -90,16 +89,24 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	private void startEngine(){
 
-		Runnable engine = new Runnable() {
+		Runnable updateEngine = new Runnable() {
 			public void run() {
-				draw();
-				update();
+				update();				
 			}
 		};
-
-		executor.scheduleAtFixedRate(engine, 0, updateDelay, TimeUnit.MILLISECONDS);
+		
+		Runnable drawEngine = new Runnable() {
+			public void run() {
+				draw();				
+			}
+		};
+		
+		executor.scheduleAtFixedRate(updateEngine, 0, updateDelay, TimeUnit.MILLISECONDS);
+		executor.scheduleAtFixedRate(drawEngine, 0, updateDelay, TimeUnit.MILLISECONDS);
 
 	}
+	
+	
 
 	private void initLoaders(){
 		

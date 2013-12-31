@@ -34,7 +34,8 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 	protected int w = 640;
 	protected int h = 480;
 
-	protected int updateDelay = 20; // 40ms. Implica em 25fps (1000/20) = 50
+	protected int updateDelay = 40; // 40ms. Implica em 25fps (1000/20) = 50
+	protected int drawDelay = 25; // 40ms. Implica em 25fps (1000/20) = 50
 
 	private Application application;
 
@@ -92,14 +93,20 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	private void startEngine(){
 
-		Runnable engine = new Runnable() {
+		Runnable updateEngine = new Runnable() {
 			public void run() {
-				draw();
-				update();
+				update();				
 			}
 		};
-
-		executor.scheduleAtFixedRate(engine, 0, updateDelay, TimeUnit.MILLISECONDS);
+		
+		Runnable drawEngine = new Runnable() {
+			public void run() {
+				draw();
+			}
+		};
+		
+		executor.scheduleAtFixedRate(updateEngine, 0, updateDelay, TimeUnit.MILLISECONDS);
+		executor.scheduleAtFixedRate(drawEngine, 0, drawDelay, TimeUnit.MILLISECONDS);
 
 	}
 

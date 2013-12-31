@@ -224,7 +224,6 @@ public class SharedCore {
 		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
 
-
 		validateVolatileImage();
 
 		innerCore.draw(graphic);
@@ -235,7 +234,7 @@ public class SharedCore {
 		if(!innerCore.fullScreenEnable){
 			g.drawImage(graphic.getBimg(), (int)desktop.getApplication().getX(), (int)desktop.getApplication().getY(), component);
 		}
-		else{			
+		else{
 			telaCheia.draw(graphic.getBimg());
 		}
 

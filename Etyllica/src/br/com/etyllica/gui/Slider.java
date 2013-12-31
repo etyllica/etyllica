@@ -18,9 +18,9 @@ import br.com.etyllica.theme.ThemeManager;
 
 public class Slider extends View{
 
-	private float minValue = 0;
-	private float maxValue = 255;
-	private float value = 0;
+	private int minValue = 0;
+	private int maxValue = 255;
+	private int value = 0;
 	
 	protected DefaultButton button;
 
@@ -38,9 +38,9 @@ public class Slider extends View{
 		if(mouseOver){
 			if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
 				
-				float interval = maxValue-minValue;
+				int interval = maxValue-minValue;
 				
-				float mx = event.getX()-x;
+				int mx = event.getX()-x;
 				
 				value = (mx*interval)/w; 
 				
@@ -78,7 +78,7 @@ public class Slider extends View{
 		return minValue;
 	}
 
-	public void setMinValue(float minValue) {
+	public void setMinValue(int minValue) {
 		this.minValue = minValue;
 	}
 
@@ -86,7 +86,7 @@ public class Slider extends View{
 		return maxValue;
 	}
 
-	public void setMaxValue(float maxValue) {
+	public void setMaxValue(int maxValue) {
 		this.maxValue = maxValue;
 	}
 
@@ -94,13 +94,13 @@ public class Slider extends View{
 		return value;
 	}
 
-	public void setValue(float value) {
+	public void setValue(int value) {
 		
 		this.value = value;
 		
-		float interval = maxValue-minValue; 
+		int interval = maxValue-minValue; 
 
-		float bx = x+((value*w)/interval);
+		int bx = x+((value*w)/interval);
 		
 		button.setX(bx-button.getW()/2);
 		

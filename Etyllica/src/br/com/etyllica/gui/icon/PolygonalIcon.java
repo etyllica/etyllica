@@ -12,14 +12,14 @@ public abstract class PolygonalIcon extends Icon{
 	
 	protected Polygon polygon;
 	
-	public PolygonalIcon(float x, float y){
+	public PolygonalIcon(int x, int y){
 		super(x,y);
 		this.size = 12;
 		polygon = new Polygon();
-		initPolygon(x, y);	
+		initPolygon(x, y);
 	}
 	
-	public PolygonalIcon(float x, float y, float size){
+	public PolygonalIcon(int x, int y, float size){
 		super(x,y);
 		this.size = size;
 		polygon = new Polygon();
@@ -27,18 +27,18 @@ public abstract class PolygonalIcon extends Icon{
 	}
 	
 	@Override
-	public void setX(float x){
+	public void setX(int x){
 		this.x = x;
 		initPolygon(this.x, y);
 	}
 	
 	@Override
-	public void setY(float y){
+	public void setY(int y){
 		this.y = y;
 		initPolygon(x, this.y);
 	}
 	
-	protected abstract void initPolygon(float x, float y);
+	protected abstract void initPolygon(int x, int y);
 	
 	@Override
 	public void draw(Graphic g) {

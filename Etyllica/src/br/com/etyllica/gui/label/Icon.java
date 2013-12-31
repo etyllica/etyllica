@@ -4,7 +4,7 @@ import br.com.etyllica.gui.Label;
 
 public abstract class Icon extends Label{
 
-	public Icon(float x, float y){
+	public Icon(int x, int y){
 		super(x,y);
 	}
 

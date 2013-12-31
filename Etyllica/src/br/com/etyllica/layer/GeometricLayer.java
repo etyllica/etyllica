@@ -5,34 +5,34 @@ public class GeometricLayer {
 	/**
      * x position of a Layer
      */
-	protected float x = 0;
+	protected int x = 0;
 	
 	/**
      * y position of a Layer
      */
-	protected float y = 0;
+	protected int y = 0;
 	
 	/**
      * Layer's width
      */
-	protected float w = 0;
+	protected int w = 0;
 	
 	/**
      * Layer's height
      */
-	protected float h = 0;
+	protected int h = 0;
 	
 	public GeometricLayer(){
 		super();
 	}
 	
-	public GeometricLayer(float x, float y){
+	public GeometricLayer(int x, int y){
 		super();
 		this.x = x;
 		this.y = y;
 	}
 	
-	public GeometricLayer(float x, float y, float w, float h){
+	public GeometricLayer(int x, int y, int w, int h){
 		super();
 		
 		this.x = x;
@@ -41,35 +41,35 @@ public class GeometricLayer {
 		this.h = h;
 	}
 
-	public float getX() {
+	public int getX() {
 		return x;
 	}
 
-	public void setX(float x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 
-	public float getY() {
+	public int getY() {
 		return y;
 	}
 
-	public void setY(float y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 
-	public float getW() {
+	public int getW() {
 		return w;
 	}
 
-	public void setW(float w) {
+	public void setW(int w) {
 		this.w = w;
 	}
 
-	public float getH() {
+	public int getH() {
 		return h;
 	}
 
-	public void setH(float h) {
+	public void setH(int h) {
 		this.h = h;
 	}
 	
@@ -85,7 +85,7 @@ public class GeometricLayer {
 	 * @param x
 	 * @param y
 	 */
-	public void setCoordinates(float x, float y){
+	public void setCoordinates(int x, int y){
 		setX(x);
 		setY(y);
 	}
@@ -94,7 +94,7 @@ public class GeometricLayer {
 	 * 
 	 * @param offsetX
 	 */
-	public void setOffsetX(float offsetX){
+	public void setOffsetX(int offsetX){
 		setX(this.x+offsetX);
 	}
 	
@@ -102,7 +102,7 @@ public class GeometricLayer {
 	 * 
 	 * @param offsetY
 	 */
-	public void setOffsetY(float offsetY){
+	public void setOffsetY(int offsetY){
 		setY(this.y+offsetY);
 	}
 
@@ -111,7 +111,7 @@ public class GeometricLayer {
 	 * @param offsetX
 	 * @param offsetY
 	 */
-	public void setOffset(float offsetX, float offsetY){
+	public void setOffset(int offsetX, int offsetY){
 		setOffsetX(offsetX);
 		setOffsetY(offsetY);
 	}
@@ -127,7 +127,7 @@ public class GeometricLayer {
 	 * @param w
 	 * @param h
 	 */
-	public void centralize(float x, float y, float w, float h){
+	public void centralize(int x, int y, int w, int h){
 		centralizeX(x,x+w);
 		centralizeY(y,y+h);
 	}
@@ -155,9 +155,9 @@ public class GeometricLayer {
 	 * @param endX
 	 * @return
 	 */
-	public float centralizeX(float startX, float endX)
+	public int centralizeX(int startX, int endX)
 	{
-		float x = (((startX+endX)/2)-(getW()/2));
+		int x = (((startX+endX)/2)-(getW()/2));
 		setX(x);
 		
 		return x;
@@ -177,9 +177,9 @@ public class GeometricLayer {
 	 * @param endY
 	 * @return
 	 */
-	public float centralizeY(float startY, float endY)
+	public int centralizeY(int startY, int endY)
 	{
-		float y = (((startY+endY)/2)-(getH()/2));
+		int y = (((startY+endY)/2)-(getH()/2));
 		setY(y);
 		
 		return y;
@@ -197,7 +197,7 @@ public class GeometricLayer {
 	 * @param bh
 	 * @return
 	 */
-	public boolean colideRect(float bx, float by, float bw, float bh){
+	public boolean colideRect(int bx, int by, int bw, int bh){
 
 		if(bx + bw < getX())	return false;
 		if(bx > getX() + getW())		return false;
@@ -215,7 +215,7 @@ public class GeometricLayer {
 	 * @param py
 	 * @return
 	 */
-	public boolean colideRectPoint(float px, float py){
+	public boolean colideRectPoint(int px, int py){
 		
 		if((px<x)||(px>x + w)){
 			return false;
@@ -236,14 +236,14 @@ public class GeometricLayer {
 	 * @param bh
 	 * @return
 	 */
-	public boolean colideCircleCircle(float bx, float by, float bw, float bh)
+	public boolean colideCircleCircle(int bx, int by, int bw, int bh)
 	{
-		float xdiff = bx - x;
-		float ydiff = by - y;
+		int xdiff = bx - x;
+		int ydiff = by - y;
 
-		float dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
+		int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
 
-		float r_sum_sq = bw/2 + w/2;
+		int r_sum_sq = bw/2 + w/2;
 		r_sum_sq *= r_sum_sq;
 
 		if(dcentre_sq - r_sum_sq<=0){
@@ -259,28 +259,28 @@ public class GeometricLayer {
 	 * @param py
 	 * @return
 	 */
-	public boolean colideCirclePoint(float px, float py){
+	public boolean colideCirclePoint(int px, int py){
 		
-		float cx = x+w/2;
-		float cy = y+h/2;
+		int cx = x+w/2;
+		int cy = y+h/2;
 		
-		float dx = (px - cx) * (px - cx);
-		float dy = (py - cy) * (py - cy);
+		int dx = (px - cx) * (px - cx);
+		int dy = (py - cy) * (py - cy);
 		
-		float radius = w/2;
+		int radius = w/2;
 		
 		double distance = Math.sqrt((double)(dx + dy));
 
 		return (distance <= radius);
 	}
 	
-	public boolean colideIsometric(float px, float py){
+	public boolean colideIsometric(int px, int py){
 
-		float my = this.getH()/2;
-		float mx = this.getW()/2;
+		int my = this.getH()/2;
+		int mx = this.getW()/2;
 
-		float x = px-this.getX();
-		float y = py-this.getY();
+		int x = px-this.getX();
+		int y = py-this.getY();
 
 		if(y>+my)
 			y=my-(y-my);

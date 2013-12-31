@@ -22,19 +22,19 @@ public class TextLabel extends Label{
 
 	protected TextLayer layer;
 		
-	public TextLabel(float x, float y) {
+	public TextLabel(int x, int y) {
 		super(x, y);
 		
 		this.layer = new TextLayer(x,y,"");
 	}
 	
-	public TextLabel(float x, float y, float w) {
+	public TextLabel(int x, int y, int w) {
 		super(x, y, w);
 		
 		this.layer = new TextLayer(x,y,"");
 	}
 	
-	public TextLabel(float x, float y, String text) {
+	public TextLabel(int x, int y, String text) {
 		super(x, y);
 		
 		this.layer = new TextLayer(x,y,text);
@@ -125,7 +125,7 @@ public class TextLabel extends Label{
 	 * 
 	 * @param size
 	 */
-	public void setFontSize(float size) {
+	public void setFontSize(int size) {
 		this.layer.setSize(size);
 	}
 	
@@ -149,12 +149,12 @@ public class TextLabel extends Label{
 	 * 
 	 * @param borderWidh
 	 */
-	public void setBorderWidth(float borderWidh) {
+	public void setBorderWidth(int borderWidh) {
 		this.layer.setBorderWidth(borderWidh);
 	}
 
 	@Override
-	public void centralize(float x, float y, float w, float h) {
+	public void centralize(int x, int y, int w, int h) {
 		layer.centralize(x, y, w, h);
 	}
 
@@ -169,7 +169,7 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public float centralizeX(float startX, float endX) {
+	public int centralizeX(int startX, int endX) {
 		return layer.centralizeX(startX, endX);
 	}
 
@@ -179,7 +179,7 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public float centralizeY(float startY, float endY) {
+	public int centralizeY(int startY, int endY) {
 		return layer.centralizeY(startY, endY);
 	}
 		

@@ -92,7 +92,7 @@ public abstract class Context extends View implements Updatable{
 	 * @param w Application width
 	 * @param h Application height
 	 */
-	public Context(float x, float y, float w, float h){
+	public Context(int x, int y, int w, int h){
 		super(x,y,w,h);
 
 		this.loading = 0;
@@ -108,7 +108,7 @@ public abstract class Context extends View implements Updatable{
 	 * @param w Application width
 	 * @param h Application height
 	 */
-	public Context(float w, float h){
+	public Context(int w, int h){
 		this(0,0,w,h);
 	}
 
@@ -192,7 +192,7 @@ public abstract class Context extends View implements Updatable{
 	}
 
 	@Override
-	public boolean onMouse(float mx, float my) {
+	public boolean onMouse(int mx, int my) {
 		return false;
 	}
 

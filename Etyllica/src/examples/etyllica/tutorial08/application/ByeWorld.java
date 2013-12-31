@@ -9,7 +9,7 @@ import br.com.etyllica.util.SVGColor;
 
 public class ByeWorld extends Application{
 
-	public ByeWorld(float w, float h) {
+	public ByeWorld(int w, int h) {
 		super(w, h);
 	}
 

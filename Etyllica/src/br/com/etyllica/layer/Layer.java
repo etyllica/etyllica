@@ -43,14 +43,14 @@ public class Layer extends GeometricLayer implements Drawable{
 		super();
 	}
 	
-	public Layer(float x, float y){
+	public Layer(int x, int y){
 		super();
 		
 		this.x = x;
 		this.y = y;
 	}
 	
-	public Layer(float x, float y, float w, float h){
+	public Layer(int x, int y, int w, int h){
 		super(x,y,w,h);
 	}
 	
@@ -145,7 +145,7 @@ public class Layer extends GeometricLayer implements Drawable{
 	 * @param my
 	 * @return
 	 */
-	public boolean onMouse(float mx, float my) {
+	public boolean onMouse(int mx, int my) {
 		return colideRect(mx, my, 1, 1);
 	}
 

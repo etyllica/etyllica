@@ -37,8 +37,8 @@ public class ProceduralColorChange extends Application{
 	@Override
 	public GUIEvent updateMouse(PointerEvent event){
 		
-		float ex = event.getX();
-		float ey = event.getY();
+		int ex = event.getX();
+		int ey = event.getY();
 		cursor.setCoordinates(ex, ey);
 			
 		

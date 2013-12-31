@@ -47,7 +47,7 @@ public class TextLayer extends ImageLayer{
 		this(0,0,text);
 	}
 
-	public TextLayer(float x, float y, String text){
+	public TextLayer(int x, int y, String text){
 		super(x,y);
 
 		this.color = new Color(0xff,0xff,0xff);

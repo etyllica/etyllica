@@ -10,7 +10,7 @@ public class PivotPoint extends Vector2D{
 	
 	private List<Part> partes = new ArrayList<Part>();
 	
-	public PivotPoint(float x, float y){
+	public PivotPoint(int x, int y){
 		super(x,y);
 	}
 
@@ -34,8 +34,8 @@ public class PivotPoint extends Vector2D{
 		float px = part.getX()+part.getXPivot();
 		float py = part.getY()+part.getYPivot();
 
-		float ox = (int)x-px;
-		float oy = (int)y-py;
+		int ox = (int)(x-px);
+		int oy = (int)(y-py);
 		
 		part.setOffset(ox,oy);
 	}
@@ -49,7 +49,7 @@ public class PivotPoint extends Vector2D{
 			
 			float px = parte.getX()+parte.getXPivot();
 
-			float ox = (float)x-px;
+			int ox = (int)(x-px);
 			
 			parte.setOffsetX(ox);
 		}
@@ -64,7 +64,7 @@ public class PivotPoint extends Vector2D{
 			
 			float py = parte.getY()+parte.getYPivot();
 
-			float oy = (float)y-py;
+			int oy = (int)(y-py);
 			
 			parte.setOffsetY(oy);
 		}

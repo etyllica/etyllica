@@ -18,7 +18,7 @@ public class GenericFullScreenEffect extends GlobalEffect{
 	
 	private DefaultDictionary dictionary;
 		
-	public GenericFullScreenEffect(float x, float y, float w, float h) {
+	public GenericFullScreenEffect(int x, int y, int w, int h) {
 		super(x, y, w, h);
 			
 		dictionary = new DefaultDictionary();

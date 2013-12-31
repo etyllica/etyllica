@@ -11,11 +11,11 @@ public abstract class Emitter extends Layer implements Updatable{
 	
 	protected List<Particle> particles = new ArrayList<Particle>();
 	
-	public Emitter(float x, float y){
+	public Emitter(int x, int y){
 		super(x, y);
 	}
 	
-	public Emitter(float x, float y, float w, float h){
+	public Emitter(int x, int y, int w, int h){
 		super(x, y, w, h);
 	}
 

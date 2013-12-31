@@ -17,11 +17,11 @@ import br.com.etyllica.core.video.Graphic;
 
 public class DefaultLoadApplication extends Context implements LoadApplication{
 
-	public DefaultLoadApplication(float w, float h) {
+	public DefaultLoadApplication(int w, int h) {
 		super(w,h);
 	}
 	
-	public DefaultLoadApplication(float x, float y, float w, float h) {
+	public DefaultLoadApplication(int x, int y, int w, int h) {
 		super(x,y,w,h);
 	}
 
