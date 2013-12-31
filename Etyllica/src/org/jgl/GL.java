@@ -39,6 +39,11 @@ import br.com.etyllica.core.video.Graphic;
 
 public abstract class GL extends Application{
 
+	public GL(int w, int h) {
+		super(w,h);
+		glViewport (0, 0, w, h);
+	}
+	
 	/* Constant of jGL */
 	/* Null values */
 	public static final int None				= 0;
@@ -622,14 +627,14 @@ public abstract class GL extends Application{
 	public static final int GLX_BAD_ENUM		= 7;
 
 	/* Private Data Member */
-	protected GL_Context context = new GL_Context ();
+	protected GL_Context context = new GL_Context();
 	private GL_Object CC = (GL_Object)context;
 	protected GL_List List;
 
 	protected static int StartX = 0;
 	protected static int StartY = 0;
 
-	private transient BufferedImage image;
+	private static volatile BufferedImage image;
 
 	/**
 	 *
@@ -3417,9 +3422,11 @@ public abstract class GL extends Application{
 	public void glLightModeliv (int pname, boolean param []) {
 		// used for some boolean parameters
 		int temp [] = new int [param.length];
+		
 		for (int i = 0; i < param.length; i++) {
 			if (param[i]) temp[i] = 1; else temp[i] = 0;
 		}
+		
 		glLightModeliv (pname, temp);
 	}
 
@@ -6165,51 +6172,5 @@ public abstract class GL extends Application{
 		glFlush(g);
 
 	}
-
-	/*
-    public void glXSwapBuffers (Graphics g, Applet o) {
-	glXSwapBuffers (g, (ImageObserver)o);
-	glXSwapBuffers 
-    }
-	 */
-
-	/*
-    public void glJViewport (int x, int y, int width, int height) {
-	glViewport (x, y, width, height);
-	JavaImageSource = new MemoryImageSource (Context.Viewport.Width, Context.Viewport.Height,
-						 Context.ColorBuffer.Buffer, 0, Context.Viewport.Width);
-	JavaImageSource.setAnimated (true);
-	JavaImageSource.setFullBufferUpdates (true);
-	JavaImage = JavaComponent.createImage (JavaImageSource);
-    }
-
-    public void glJFlush () {
-    	if (Context.RenderMode != GL_RENDER) { return; }
-	JavaImageSource.newPixels();
-    }
-	 */
-
-	/** the following functions are only for developpers **/
-	//public MemoryImageSource glJGetImageSource () {
-	//	return new MemoryImageSource(Context.Viewport.Width, Context.Viewport.Height,
-	//			Context.ColorBuffer.Buffer, 0, Context.Viewport.Width);
-	//}
-
-	//If this method is really necessary
-	/*
-    public Image glJGetImage (MemoryImageSource imagesource) {
-	return Toolkit.getDefaultToolkit().createImage (imagesource);
-    }
-
-
-	public Image glGetImage(){
-		return JavaImage;
-	}
-	 */
 	
-	public GL(int w, int h) {
-		super(w,h);
-		glViewport (0, 0, w, h);
-	}
-
 }

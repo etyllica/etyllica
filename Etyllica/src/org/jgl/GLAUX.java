@@ -33,6 +33,11 @@ import org.jgl.glu.GLUquadricObj;
 
 public abstract class GLAUX extends GLU{
 
+
+	public GLAUX(int w, int h) {
+		super(w,h);
+	}
+	
 	/**
 	 * Aux Functions
 	 *     Java is not C language, not all the auxiliary functions
@@ -756,10 +761,5 @@ public abstract class GLAUX extends GLU{
 	public void auxSolidTeapot (double scale) {
 		new Teapot(this).aux_solid_teapot (scale);
 	}
-
-	public GLAUX(int w, int h) {
-		super(w,h);
-	}
-
 
 }

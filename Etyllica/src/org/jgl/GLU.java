@@ -37,6 +37,10 @@ import org.jgl.glu.GLUquadricObj;
 
 public abstract class GLU extends GL{
 
+	public GLU(int w, int h) {
+		super(w,h);
+	}
+	
 	/** Constants of GLU */
 
 	/** Boolean */ 
@@ -1266,10 +1270,6 @@ public abstract class GLU extends GL{
 		nobj.glu_nurbs_surface (sknot_count, sknot, tknot_count, tknot,
 				s_stride, t_stride, ctlarray, sorder, torder,
 				type);
-	}
-
-	public GLU(int w, int h) {
-		super(w,h);
 	}
 
 }

@@ -11,7 +11,7 @@ import br.com.etyllica.gui.Spinner;
 
 public class IntegerSpinner extends Spinner<Integer> {
 
-	public IntegerSpinner(int x, int y, int w, int h) {
+	public IntegerSpinner(float x, float y, float w, float h) {
 		super(x, y, w, h);
 		this.value = 0;
 		this.step = 1;

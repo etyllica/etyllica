@@ -22,19 +22,19 @@ public class TextLabel extends Label{
 
 	protected TextLayer layer;
 		
-	public TextLabel(int x, int y) {
+	public TextLabel(float x, float y) {
 		super(x, y);
 		
 		this.layer = new TextLayer(x,y,"");
 	}
 	
-	public TextLabel(int x, int y, int w) {
+	public TextLabel(float x, float y, float w) {
 		super(x, y, w);
 		
 		this.layer = new TextLayer(x,y,"");
 	}
 	
-	public TextLabel(int x, int y, String text) {
+	public TextLabel(float x, float y, String text) {
 		super(x, y);
 		
 		this.layer = new TextLayer(x,y,text);

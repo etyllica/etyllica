@@ -27,7 +27,7 @@ public abstract class Spinner<T extends Number> extends View{
 	protected T maxValue;
 	protected T minValue;
 	
-	public Spinner(int x, int y, int w, int h){
+	public Spinner(float x, float y, float w, float h){
 		
 		resultPanel = new Panel(x, y, w, h);
 		add(resultPanel);
@@ -36,7 +36,7 @@ public abstract class Spinner<T extends Number> extends View{
 		resultLabel = new TextLabel(x+10,y+2+h/2,"0");
 		add(resultLabel);
 		
-		int buttonWidth = w/6;
+		float buttonWidth = w/6;
 		int miniBorder = 1;
 		
 		plus = new DefaultButton(x+w-buttonWidth-miniBorder, y+miniBorder, buttonWidth, h/2-miniBorder-1);
