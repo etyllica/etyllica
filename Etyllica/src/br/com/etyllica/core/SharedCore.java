@@ -46,7 +46,7 @@ public class SharedCore {
 
 	private FullScreenWindow telaCheia = null;
 
-	private EngineCore innerCore;
+	private InnerCore innerCore;
 
 	private boolean drawing = false;
 
@@ -68,7 +68,7 @@ public class SharedCore {
 
 		defineSize(width, height);
 
-		innerCore = new EngineCore();
+		innerCore = new InnerCore();
 
 		initMonitors();
 
@@ -94,7 +94,7 @@ public class SharedCore {
 				int height = gcBounds.height;
 
 				monitors.add(new Monitor(x,y,width,height));
-
+				
 			}
 			
 		}else{
@@ -128,9 +128,19 @@ public class SharedCore {
 
 	public void enableFullScreen(){
 
-		Monitor monitor = monitors.get(0);
-
-		telaCheia = new FullScreenWindow(innerCore, monitor);
+		Monitor selectedMonitor = monitors.get(0);
+		
+		Point p = this.component.getLocation();
+		
+		for(Monitor monitor: monitors){
+			
+			if(monitor.colideRectPoint(p.x, p.y)){
+				selectedMonitor = monitor;
+			}
+			
+		}
+		
+		telaCheia = new FullScreenWindow(innerCore, selectedMonitor);
 		innerCore.addEffect(new GenericFullScreenEffect(0, 0, this.width, height));
 
 		innerCore.fullScreenEnable = true;

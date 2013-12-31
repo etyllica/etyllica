@@ -36,7 +36,7 @@ import br.com.etyllica.gui.window.MainWindow;
  *
  */
 
-public class EngineCore implements Core, InputListener, Updatable{
+public class InnerCore implements Core, InputListener, Updatable{
 
 	//External Windows
 	private Window activeWindow = null;
@@ -76,7 +76,7 @@ public class EngineCore implements Core, InputListener, Updatable{
 
 	protected boolean fullScreenEnable = false;
 
-	public EngineCore(){
+	public InnerCore(){
 		super();
 
 		guiEvents = new ArrayList<GUIEvent>();

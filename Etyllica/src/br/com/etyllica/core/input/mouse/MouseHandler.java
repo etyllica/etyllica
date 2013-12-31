@@ -313,7 +313,7 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 
 	public boolean sobMouse(AnimatedLayer cam)
 	{
-		return sobMouse(cam.getX(), cam.getY(), cam.getXTile(), cam.getYTile());
+		return sobMouse(cam.getX(), cam.getY(), cam.getTileW(), cam.getTileH());
 	}
 
 	public boolean sobMouse(Polygon poligono){

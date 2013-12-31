@@ -211,6 +211,25 @@ public class GeometricLayer {
 	
 	/**
 	 * 
+	 * @param px
+	 * @param py
+	 * @return
+	 */
+	public boolean colideRectPoint(float px, float py){
+		
+		if((px<x)||(px>x + w)){
+			return false;
+		}
+		
+		if((py<y)||(py>y + h)){
+			return false;
+		}
+
+		return true;
+	}
+	
+	/**
+	 * 
 	 * @param bx
 	 * @param by
 	 * @param bw

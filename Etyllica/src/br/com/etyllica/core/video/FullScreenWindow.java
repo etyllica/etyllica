@@ -6,7 +6,7 @@ import java.awt.RenderingHints;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
 
-import br.com.etyllica.core.EngineCore;
+import br.com.etyllica.core.InnerCore;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 
@@ -21,7 +21,7 @@ public class FullScreenWindow extends Window{
 	
 	private static final long serialVersionUID = -5176767672500250086L;
 	
-	private EngineCore core;
+	private InnerCore core;
 	
 	private int w;
 	private int h;
@@ -30,7 +30,7 @@ public class FullScreenWindow extends Window{
 	
 	private int offsetY = 0;
 	
-	public FullScreenWindow(EngineCore core, Monitor monitor) {
+	public FullScreenWindow(InnerCore core, Monitor monitor) {
 
 		super(new Frame());
 				

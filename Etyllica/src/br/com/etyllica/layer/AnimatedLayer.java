@@ -14,21 +14,22 @@ import br.com.etyllica.core.video.Graphic;
 
 public class AnimatedLayer extends ImageLayer{
 
-	protected int xTile = 0;
-	protected int yTile = 0;
+	protected int tileW = 0;
+	protected int tileH = 0;
+	protected int needleX = 0;
+	protected int needleY = 0;
 
 	protected boolean once = false;
 	protected boolean stopped = true;
-	protected boolean oscilate = false;
+	
 	protected boolean animaEmX = true;
 
 	protected boolean lockOnce = false;
 
 	private int inc = 1;
 
-	private int loop = 0;
-
 	protected int frames = 1;
+	
 	protected int currentFrame = 0;
 
 	protected int speed;
@@ -52,8 +53,8 @@ public class AnimatedLayer extends ImageLayer{
 	 */
 	public AnimatedLayer(int x, int y, int xTile, int yTile, String path){
 		super(x,y,path);
-		this.xTile = xTile;
-		this.yTile = yTile;
+		this.tileW = xTile;
+		this.tileH = yTile;
 	}
 
 	/**
@@ -65,8 +66,8 @@ public class AnimatedLayer extends ImageLayer{
 	 */
 	public AnimatedLayer(int x, int y, int xTile, int yTile){
 		super(x,y);
-		this.xTile = xTile;
-		this.yTile = yTile;
+		this.tileW = xTile;
+		this.tileH = yTile;
 	}
 
 	protected void resetAnimation(){
@@ -79,52 +80,43 @@ public class AnimatedLayer extends ImageLayer{
 		animaEmX = animaX;
 	}
 
-	public int getXTile(){
-		return xTile;
+	public int getTileW(){
+		return tileW;
 	}
 
-	public int getYTile(){
-		return yTile;
+	public int getTileH(){
+		return tileH;
+	}
+
+	/**
+	 * 
+	 * @param tileW
+	 */
+	public void setXTile(int tileW){
+		this.tileW = tileW;
+	}
+
+	/**
+	 * 
+	 * @param tileH
+	 */
+	public void setTileH(int tileH){
+		this.tileH = tileH;
 	}
 
 	/**
 	 * 
 	 * @param xTile
-	 */
-	public void setXTile(int xTile){
-		this.xTile = xTile;
-	}
-
-	/**
-	 * 
 	 * @param yTile
 	 */
-	public void setYTile(int yTile){
-		this.yTile = yTile;
-	}
-
-	/**
-	 * 
-	 * @param xTile
-	 * @param yTile
-	 */
-	public void setTileCoordinates(int xTile, int yTile){
-		setXTile(xTile);
-		setYTile(yTile);
+	public void setTileCoordinates(int tileW, int tileH){
+		setXTile(tileW);
+		setTileH(tileH);
 	}
 
 	public void animate(){
 
 		nextFrame();
-
-		/*if(!lockOnce){
-
-			timer.setParado(false);
-
-			if(timer.passou()){
-
-			}
-		}*/
 
 		stopped = false;
 	}
@@ -153,11 +145,6 @@ public class AnimatedLayer extends ImageLayer{
 	public void nextFrame(){
 
 		if((currentFrame < frames-1)&&(currentFrame >= 0)){
-
-			if(oscilate){
-				inc = -inc;
-			}
-
 			currentFrame+=inc;
 		}
 		else{
@@ -166,17 +153,11 @@ public class AnimatedLayer extends ImageLayer{
 				visible = false;
 				lockOnce = true;
 				//stopped = true;
-				setXImage(xTile*currentFrame);
+				setFrame(currentFrame);
 				return;
 			}
 
-			if(!oscilate){
-				currentFrame = 0;
-			}else{
-				currentFrame+=inc;
-			}
-
-			loop++;
+			currentFrame = 0;
 
 		}
 
@@ -185,21 +166,7 @@ public class AnimatedLayer extends ImageLayer{
 		}
 	}
 	
-	private boolean osc = true;
-
 	public void animate(int frame){
-
-		/*if(oscilate){
-
-			if(!osc){
-				frame = frames-frame-1;	
-			}
-			
-			if(frame==0){
-				osc = !osc;
-			}
-			
-		}*/		
 
 		setFrame(frame);
 	}
@@ -207,26 +174,27 @@ public class AnimatedLayer extends ImageLayer{
 	protected void setFrame(int frame){
 		
 		if(animaEmX){
-			setXImage(xTile*frame);
+			setXImage(needleX+tileW*frame);
 		}
 		else{
-			setYImage(yTile*frame);
+			setYImage(needleY+tileH*frame);
 		}
 
 	}
 
 	@Override
-	public float centralizeX(float xInicial, float xFinal)
-	{
-		float x = (((xInicial+xFinal)/2)-(getXTile()/2));
+	public float centralizeX(float xInicial, float xFinal){
+		
+		float x = (((xInicial+xFinal)/2)-(getTileW()/2));
 		setX(x);
 		return x;
+		
 	}
 
 	@Override
 	public float centralizeY(float yInicial, float yFinal)
 	{
-		float y = (((yInicial+yFinal)/2)-(getYTile()/2));
+		float y = (((yInicial+yFinal)/2)-(getTileH()/2));
 		setY(y);
 		return y;
 	}
@@ -235,21 +203,21 @@ public class AnimatedLayer extends ImageLayer{
 	public boolean colideRetangular(Layer b)
 	{
 		if(b.getX() + b.getW() < getX())	return false;
-		if(b.getX() > getX() + getXTile())		return false;
+		if(b.getX() > getX() + getTileW())		return false;
 
 		if(b.getY() + b.getH() < getY())	return false;
-		if(b.getY() > getY() + getYTile())		return false;
+		if(b.getY() > getY() + getTileH())		return false;
 
 		return true;
 	}
 
 	public boolean colideRetangular(AnimatedLayer b)
 	{
-		if(b.getX() + b.getXTile() < getX())	return false;
-		if(b.getX() > getX() + getXTile())		return false;
+		if(b.getX() + b.getTileW() < getX())	return false;
+		if(b.getX() > getX() + getTileW())		return false;
 
-		if(b.getY() + b.getYTile() < getY())	return false;
-		if(b.getY() > getY() + getYTile())		return false;
+		if(b.getY() + b.getTileH() < getY())	return false;
+		if(b.getY() > getY() + getTileH())		return false;
 
 		return true;
 	}
@@ -261,7 +229,7 @@ public class AnimatedLayer extends ImageLayer{
 
 		float dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
 
-		float r_sum_sq = b.getXTile()/2 + xTile/2;
+		float r_sum_sq = b.getTileW()/2 + tileW/2;
 		r_sum_sq *= r_sum_sq;
 
 		if(dcentre_sq - r_sum_sq<=0)
@@ -276,8 +244,8 @@ public class AnimatedLayer extends ImageLayer{
 	public void draw(Graphic g, AffineTransform transform) {
 		g.setTransform(transform);
 
-		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+xTile,y+yTile,
-				xImage,yImage,xImage+xTile,yImage+yTile, null );		
+		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+tileW,y+tileH,
+				xImage,yImage,xImage+tileW,yImage+tileH, null );		
 	}
 	
 	@Override
@@ -285,22 +253,22 @@ public class AnimatedLayer extends ImageLayer{
 		AffineTransform transform = new AffineTransform();
 
 		if(angle!=0){
-			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+xTile/2, y+yTile/2));
+			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+tileW/2, y+tileH/2));
 		}
 					
 		if(scale!=1){
 
-			double sw = xTile*scale;
-			double sh = yTile*scale;
+			double sw = tileW*scale;
+			double sh = tileH*scale;
 
-			double dx = sw/2-xTile/2;
-			double dy = sh/2-yTile/2;
+			double dx = sw/2-tileW/2;
+			double dy = sh/2-tileH/2;
 
-			transform.translate(x-xTile/2-dx, y-yTile/2-dy);
+			transform.translate(x-tileW/2-dx, y-tileH/2-dy);
 
 			AffineTransform scaleTransform = new AffineTransform();
 
-			scaleTransform.translate(xTile/2, yTile/2);
+			scaleTransform.translate(tileW/2, tileH/2);
 			scaleTransform.scale(scale,scale);
 			scaleTransform.translate(-x, -y);
 
@@ -341,10 +309,6 @@ public class AnimatedLayer extends ImageLayer{
 		return animaEmX;
 	}
 
-	public int getLoop(){
-		return loop;
-	}
-
 	public void setLockOnce(boolean lockOnce) {
 		this.lockOnce = lockOnce;
 	}
@@ -355,14 +319,6 @@ public class AnimatedLayer extends ImageLayer{
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
-	}
-
-	public boolean isOscilate() {
-		return oscilate;
-	}
-
-	public void setOscilate(boolean oscilate) {
-		this.oscilate = oscilate;
 	}
 	
 }

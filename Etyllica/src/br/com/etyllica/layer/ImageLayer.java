@@ -177,7 +177,7 @@ public class ImageLayer extends StaticLayer{
 	}
 
 	public boolean colideAreaCamada(AnimatedLayer b){
-		Rectangle rect2 = new Rectangle(0, 0, b.getXTile(), b.getYTile());
+		Rectangle rect2 = new Rectangle(0, 0, b.getTileW(), b.getTileH());
 		return colideAreaRetangulo(rect2,b.getX(), b.getY());
 	}
 
