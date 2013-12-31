@@ -86,6 +86,9 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 	public void setCoordenadas(int x, int y){
 		setX(x);
 		setY(y);
+		
+		moveEvent.setX(x);
+		moveEvent.setY(y);
 	}
 
 	public void click(int botao) {
@@ -110,12 +113,6 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 	protected int dragY = 0;
 
 	private void addEvent(int button, PointerState state){
-
-		addEvent(button, state, x, y );
-
-	}
-
-	private void addEvent(int button, PointerState state, int x, int y){
 
 		MouseButton key = MouseButton.MOUSE_NONE;
 
@@ -142,11 +139,13 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 
 		if (me.getClickCount() == 2) {
 			state = PointerState.DOUBLE_CLICK;
+		}else if (me.getClickCount() == 3) {
+			state = PointerState.TRIPLE_CLICK;
 		}
 
-		addEvent(me.getButton(),state);
-
 		setCoordenadas(me.getX(),me.getY());
+		
+		addEvent(me.getButton(),state);	
 		
 		me.consume();
 	}
@@ -154,9 +153,9 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 	@Override
 	public void mousePressed( MouseEvent me ) {
 
-		addEvent(me.getButton(),PointerState.PRESSED);
-
 		setCoordenadas(me.getX(),me.getY());
+		
+		addEvent(me.getButton(),PointerState.PRESSED);
 
 		me.consume();
 	}
@@ -164,6 +163,8 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 	@Override
 	public void mouseReleased( MouseEvent me ) {
 
+		setCoordenadas(me.getX(),me.getY());
+		
 		addEvent(me.getButton(),PointerState.RELEASED);
 
 		dragged = false;
@@ -206,8 +207,7 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 
 		dragButton = me.getButton();
 		
-		//addEvent(dragButton, KeyState.DRAGGED, dragX-x, dragY-y);
-		addEvent(dragButton, PointerState.DRAGGED, x, y);
+		addEvent(dragButton, PointerState.DRAGGED);
 
 		me.consume();
 	}
