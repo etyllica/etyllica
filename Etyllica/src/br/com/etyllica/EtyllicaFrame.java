@@ -47,7 +47,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	public EtyllicaFrame(int width, int height){
 		super();
-		
+
 		this.w = width;
 		this.h = height;
 

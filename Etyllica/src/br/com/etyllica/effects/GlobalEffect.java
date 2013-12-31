@@ -14,7 +14,7 @@ public abstract class GlobalEffect extends Layer {
 
 	protected AnimationScript script;
 	
-	public GlobalEffect(int x, int y, int w, int h){
+	public GlobalEffect(float x, float y, float w, float h){
 		super(x,y,w,h);
 	}
 	

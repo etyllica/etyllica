@@ -3,11 +3,16 @@ package br.com.etyllica.core;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import br.com.etyllica.core.application.Application;
@@ -15,17 +20,18 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.Loader;
 import br.com.etyllica.core.video.FullScreenWindow;
 import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.video.Monitor;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 
 public class SharedCore {
 
 	private int width;
-	
+
 	private int height;
-	
+
 	private Set<Loader> loaders;
-	
+
 	private GraphicsConfiguration configuration;
 
 	private java.awt.Component component;
@@ -39,17 +45,18 @@ public class SharedCore {
 	private Graphic graphic;
 
 	private FullScreenWindow telaCheia = null;
-	
+
 	private EngineCore innerCore;
-	
+
 	private boolean drawing = false;
+
+	private List<Monitor> monitors = new ArrayList<Monitor>();
 
 	public SharedCore(java.awt.Component component, int width, int height){
 		super();
-		
+
 		this.component = component;
 
-		//this.configuration = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
 		this.configuration = component.getGraphicsConfiguration();
 
 		this.width = width;
@@ -62,7 +69,40 @@ public class SharedCore {
 		defineSize(width, height);
 
 		innerCore = new EngineCore();
-		
+
+		initMonitors();
+
+	}
+
+	private void initMonitors(){
+
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice[] devices = ge.getScreenDevices();
+
+		if(devices.length>0){
+
+			for (int i = 0; i < devices.length; i++) {
+
+				Rectangle gcBounds = devices[i].getDefaultConfiguration().getBounds();
+
+				int x = gcBounds.x;
+
+				int y = gcBounds.y;
+
+				int width = gcBounds.width;
+
+				int height = gcBounds.height;
+
+				monitors.add(new Monitor(x,y,width,height));
+
+			}
+			
+		}else{
+			
+			monitors.add(new Monitor(0,0,width,height));
+			
+		}
+
 	}
 
 	public String getPath() {
@@ -83,12 +123,15 @@ public class SharedCore {
 			loader.setUrl(path);
 			loader.start();
 		}
-		
+
 	}
 
 	public void enableFullScreen(){
-		telaCheia = new FullScreenWindow(innerCore);
-		innerCore.addEffect(new GenericFullScreenEffect(0, 0, width, height));
+
+		Monitor monitor = monitors.get(0);
+
+		telaCheia = new FullScreenWindow(innerCore, monitor);
+		innerCore.addEffect(new GenericFullScreenEffect(0, 0, this.width, height));
 
 		innerCore.fullScreenEnable = true;
 	}
@@ -109,7 +152,7 @@ public class SharedCore {
 		component.requestFocus();
 
 		hideDefaultCursor();
-		
+
 		component.addMouseMotionListener( innerCore.mouse );
 		component.addMouseWheelListener( innerCore.mouse );
 		component.addMouseListener( innerCore.mouse );
@@ -163,15 +206,15 @@ public class SharedCore {
 		component.setCursor( transparentCursor );
 		innerCore.drawCursor = true;
 	}
-	
+
 	public void paint( Graphics g ) {
 
 		drawing = true;
-		
+
 		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
 
-		
+
 		validateVolatileImage();
 
 		innerCore.draw(graphic);
@@ -187,7 +230,7 @@ public class SharedCore {
 		}
 
 		g.dispose();
-		
+
 		drawing = false;
 	}
 
@@ -206,23 +249,23 @@ public class SharedCore {
 	public void setH(int h) {
 		this.height = h;
 	}
-	
+
 	public void setLoaders(Set<Loader> loaders) {
 		this.loaders = loaders;
 	}
-	
+
 	public void update(){
 		if(!drawing){
 			innerCore.update(System.currentTimeMillis());
 		}
 	}
-	
+
 	public GUIEvent getSuperEvent(){
 		return innerCore.getSuperEvent();
 	}
-	
+
 	public void hideCursor(){
 		innerCore.hideCursor();
 	}
-		
+
 }

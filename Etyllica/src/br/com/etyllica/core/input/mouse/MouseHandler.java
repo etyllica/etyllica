@@ -173,13 +173,10 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 
 	@Override
 	public void mouseMoved( MouseEvent me ) {
-
-		int x = me.getX();
-		int y = me.getY();
+		
+		setCoordenadas(me.getX(),me.getY());
 		
 		addMouseMoveEvent(x, y);
-
-		setCoordenadas(me.getX(),me.getY());
 
 		me.consume();
 	}

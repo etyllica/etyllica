@@ -2,6 +2,8 @@ package br.com.etyllica;
 
 import java.applet.Applet;
 import java.awt.Graphics;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executors;
@@ -52,13 +54,13 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	@Override
 	public void init() {
-
+		
 		core = new SharedCore(this, w, h);
 		
 		initialSetup();
-
+		
 		startGame();
-
+				
 		core.startCore(application);
 
 		executor = Executors.newSingleThreadScheduledExecutor();
@@ -81,7 +83,7 @@ public abstract class Etyllica extends Applet implements Engine{
 	protected void setPath(String path){
 
 		core.setPath(path);
-
+		
 		initLoaders();
 
 	}

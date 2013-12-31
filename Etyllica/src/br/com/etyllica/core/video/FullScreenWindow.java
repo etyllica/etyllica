@@ -1,10 +1,8 @@
 package br.com.etyllica.core.video;
 
-import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
 
@@ -32,11 +30,9 @@ public class FullScreenWindow extends Window{
 	
 	private int offsetY = 0;
 	
-	public FullScreenWindow(EngineCore core) {
+	public FullScreenWindow(EngineCore core, Monitor monitor) {
 
 		super(new Frame());
-
-		Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
 				
 		this.core = core;
 		
@@ -44,18 +40,18 @@ public class FullScreenWindow extends Window{
 		
 		//setBounds(0, gnomebar, ss.width, ss.height-gnomebar*2);
 		//setBounds(0, 0, ss.width, ss.height-gnomebar*2);
-		setBounds(0, 0, ss.width, ss.height);
+		setBounds((int)monitor.getX(), (int)monitor.getY(), (int)monitor.getW(), (int)monitor.getH());
 		
-		w = ss.width;
-		h = ss.height;
+		this.w = (int)monitor.getW();
+		this.h = (int)monitor.getH();
 		
 		//TODO Calcular se eh widescreen
 		
-		int wfactor = ss.width/16;
+		int wfactor = this.w/16;
 		
 		utilHeight = 9*wfactor;
 		
-		offsetY = (ss.height-utilHeight)/2;
+		offsetY = (this.h-utilHeight)/2;
 				
 		//setLayout(null);
 
