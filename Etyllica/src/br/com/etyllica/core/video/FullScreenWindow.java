@@ -1,10 +1,14 @@
 package br.com.etyllica.core.video;
 
+import java.awt.Cursor;
 import java.awt.Frame;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
+import java.awt.image.MemoryImageSource;
 
 import br.com.etyllica.core.InnerCore;
 import br.com.etyllica.core.input.keyboard.Keyboard;
@@ -55,7 +59,7 @@ public class FullScreenWindow extends Window{
 				
 		//setLayout(null);
 
-		core.hideCursor();
+		hideDefaultCursor();
 		
 		setVisible(true);
 		setAlwaysOnTop(true);
@@ -92,6 +96,16 @@ public class FullScreenWindow extends Window{
 	    g.dispose();
 				
 		getGraphics().drawImage(resized,0,0,null);
+	}
+	
+	private void hideDefaultCursor(){
+		int[] pixels = new int[16 * 16];
+		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
+				, new Point(0, 0), "invisibleCursor");
+		setCursor( transparentCursor );
+		
+		core.showCursor();
 	}
 	
 }
