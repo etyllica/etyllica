@@ -55,11 +55,8 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	protected Keyboard keyboard;
 
-	//Mouse Over Something
-	//Usado para acessibilidade talvez
+	//Mouse Over View
 	private View mouseOver = null;
-
-	//private boolean mouseOverClickable = false;
 
 	private List<GUIEvent> guiEvents;
 
@@ -77,7 +74,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	protected boolean fullScreenEnable = false;
 
-	protected boolean timerClickEnable = true;
+	private Configuration configuration = Configuration.getInstance();
 
 	public InnerCore(){
 		super();
@@ -130,8 +127,6 @@ public class InnerCore implements Core, InputListener, Updatable{
 		application.update(getTimeNow());
 
 		updateActiveWindow();
-
-		//updateApplication();
 
 		updateGui(components);
 
@@ -263,13 +258,13 @@ public class InnerCore implements Core, InputListener, Updatable{
 						View next = component.findNext();
 
 						if(next!=null){
-							gerenciaEvento(component.findNext(), nextEvent);	
+							updateEvent(component.findNext(), nextEvent);	
 						}
 
 					}else{
 
 						//if overMouve
-						gerenciaEvento(component.findNext(), nextEvent);	
+						updateEvent(component.findNext(), nextEvent);	
 
 					}
 
@@ -278,22 +273,21 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 			}
 
-			if(timerClickEnable){
-				updateTimerClick();
-			}
-
 			//TODO Melhorar isso para fechar janela com ctrl+F4 ou algo assim
 
 			GUIEvent windowEvent = activeWindow.updateMouse(event);
 
 			if(windowEvent!=GUIEvent.NONE){
-				gerenciaEvento(activeWindow, windowEvent);
+				updateEvent(activeWindow, windowEvent);
 			}
 
 			GUIEvent frameEvent = updateFrameEvents(event); 
 			if(frameEvent!=GUIEvent.NONE){
 				superEvent = frameEvent;
 			}
+			
+			//Helper UI Methods
+			updateTimerClick();
 
 		}
 
@@ -357,7 +351,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		if(result!=GUIEvent.NONE&&result!=null){
 
-			gerenciaEvento(component, result);
+			updateEvent(component, result);
 
 			return result;
 		}
@@ -377,7 +371,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private void gerenciaEvento(View componente, GUIEvent lastEvent){
+	private void updateEvent(View componente, GUIEvent lastEvent){
 
 		//switch (event.action) {
 		switch (lastEvent) {
@@ -606,14 +600,6 @@ public class InnerCore implements Core, InputListener, Updatable{
 		return mouseOver!=null;
 	}
 
-	/*public List<PointerEvent> getEvents(){
-		return mouseEvents;
-	}
-
-	public void addEvent(PointerEvent event){
-		mouseEvents.add(event);		
-	}*/
-
 	public void addEffect(GlobalEffect effect){
 
 		animation.add(effect.getScript());
@@ -660,7 +646,6 @@ public class InnerCore implements Core, InputListener, Updatable{
 		if(esc){
 
 			esc = false;
-
 			if(fullScreenEnable){
 				disableFullScreen = true;
 			}
@@ -796,38 +781,94 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	private void updateTimerClick(){
 
-		Configuration config = Configuration.getInstance();
-
 		int speed = 3;
 
 		if(mouseOver!=null){
 
-			if(config.isTimerClick()){
+			if(configuration.isTimerClick()){
 
 				//TODO Ativar timer do mouse que incrementa sozinho
 				int arc = control.getMouse().getArc();
 				if(arc<360){
 					mouse.setArc(arc+speed);
 				}else{
-					//TODO if timerMouse
 					
-					gerenciaEvento(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
-					gerenciaEvento(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_UP);
+					updateEvent(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
+					updateEvent(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_UP);
 
 					resetMouseOver();
-					//updateMouse(mouseOver, new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.CLICK));
-					
-					//mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.CLICK));
-					
 
 				}
 			}
 
 		}else{
-			if(config.isTimerClick()){
+			
+			if(configuration.isTimerClick()){
 				mouse.setArc(0);
 			}
+			
 		}
+	}
+	
+	protected class Animator implements Runnable{
+
+		protected void startAnimation(){
+			executor.scheduleWithFixedDelay(new Animator(), ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
+		}
+
+		public void run() { 
+			updateApplication();
+		}
+
+	}
+
+	@Override
+	public void updateKeyEvent(KeyEvent event) {
+
+		activeWindow.updateKeyboard(event);
+
+		//Application sempre eh gerenciada pelo teclado
+		activeWindow.getApplication().updateKeyboard(event);
+
+		//Apenas o componente quem tem foco eh gerenciado pelo teclado
+		if(focus!=null){
+
+			GUIEvent focusEvent = focus.updateKeyboard(event);
+
+			if(focusEvent!=GUIEvent.NONE&&focusEvent!=null){
+				//TODO Update NExtComponent
+				Logger.log(focusEvent);
+
+				View next = focus.findNext();
+
+				if(next!=null){
+
+					if(focusEvent==GUIEvent.NEXT_COMPONENT){
+
+						updateEvent(focus, focusEvent);
+						updateEvent(next, GUIEvent.GAIN_FOCUS);
+
+					}else{
+
+						updateEvent(next, focusEvent);
+
+					}
+
+				}
+			}
+		}
+
+		updateKeyboardEvents(event);
+
+		updateNumpadMouse(event);
+	}
+
+	@Override
+	public void updateMouseEvent(PointerEvent event) {
+
+		event.setX(event.getX()-activeWindow.getX());
+		event.setY(event.getY()-activeWindow.getY());
+
 	}
 	
 	private void setMouseOver(View component){
@@ -854,72 +895,6 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	public void showCursor() {
 		drawCursor = true;		
-	}
-
-
-	protected class Animator implements Runnable{
-
-		protected void startAnimation(){
-			executor.scheduleWithFixedDelay(new Animator(), ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
-		}
-
-		public void run() { 
-			updateApplication();
-		}
-
-	}
-
-	@Override
-	public void updateKeyEvent(KeyEvent event) {
-
-		activeWindow.updateKeyboard(event);
-
-		//Application sempre eh gerenciada pelo teclado
-		activeWindow.getApplication().updateKeyboard(event);
-
-		//TODO Same as UpdateMouse
-		//List<GUIComponent> components = new CopyOnWriteArrayList<GUIComponent>(activeWindow.getComponents());
-		//Collections.reverse(components);
-
-		//Apenas o componente quem tem foco eh gerenciado pelo teclado
-		if(focus!=null){
-
-			GUIEvent focusEvent = focus.updateKeyboard(event);
-
-			if(focusEvent!=GUIEvent.NONE&&focusEvent!=null){
-				//TODO Update NExtComponent
-				Logger.log(focusEvent);
-
-				View next = focus.findNext();
-
-				if(next!=null){
-
-					if(focusEvent==GUIEvent.NEXT_COMPONENT){
-
-						gerenciaEvento(focus, focusEvent);
-						gerenciaEvento(next, GUIEvent.GAIN_FOCUS);
-
-					}else{
-
-						gerenciaEvento(next, focusEvent);
-
-					}
-
-				}
-			}
-		}
-
-		updateKeyboardEvents(event);
-
-		updateNumpadMouse(event);
-	}
-
-	@Override
-	public void updateMouseEvent(PointerEvent event) {
-
-		event.setX(event.getX()-activeWindow.getX());
-		event.setY(event.getY()-activeWindow.getY());
-
 	}
 
 }
