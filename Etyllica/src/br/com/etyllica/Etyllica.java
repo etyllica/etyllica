@@ -2,8 +2,6 @@ package br.com.etyllica;
 
 import java.applet.Applet;
 import java.awt.Graphics;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executors;

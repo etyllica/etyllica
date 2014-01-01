@@ -253,6 +253,14 @@ public class ImageLayer extends StaticLayer{
 	public void draw(Graphic g, AffineTransform transform) {
 		g.transform(transform);
 
+		simpleDraw(g);
+	}
+	
+	public void simpleDraw(Graphic g) {
+		simpleDraw(g, x, y);
+	}
+	
+	public void simpleDraw(Graphic g, int x, int y) {
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, (y+h),
 				xImage,yImage,xImage+w,yImage+h, null );
 	}
@@ -263,7 +271,7 @@ public class ImageLayer extends StaticLayer{
 		if(angle!=0){
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
 		}
-					
+		
 		if(scale!=1){
 
 			double sw = w*scale;
