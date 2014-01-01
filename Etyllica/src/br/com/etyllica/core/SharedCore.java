@@ -140,10 +140,13 @@ public class SharedCore {
 			
 		}
 		
-		telaCheia = new FullScreenWindow(innerCore, selectedMonitor);
+		if(!innerCore.fullScreenEnable){
+			telaCheia = new FullScreenWindow(innerCore, selectedMonitor);
+			innerCore.fullScreenEnable = true;
+		}
+		
 		innerCore.addEffect(new GenericFullScreenEffect(0, 0, this.width, height));
 
-		innerCore.fullScreenEnable = true;
 	}
 
 	public void disableFullScreen(){
