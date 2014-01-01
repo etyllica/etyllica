@@ -17,9 +17,9 @@ import br.com.luvia.util.Lamp;
  *
  */
 
-public abstract class Luvia extends GLAUX{
+public abstract class Application3D extends GLAUX{
 
-	public Luvia(int w, int h) {
+	public Application3D(int w, int h) {
 		super(w,h);
 	}
 

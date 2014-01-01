@@ -898,11 +898,11 @@ public class Graphic{
 	}*/
 	
 	public void drawImage(BufferedImage image, int x, int y){
-		screen.drawImage(image, null, x, y);
+		screen.drawImage(image, x, y, null);
 	}
 	
 	public void drawImage(BufferedImage image, float x, float y){
-		screen.drawImage(image, null, (int)x, (int)y);
+		screen.drawImage(image, (int)x, (int)y, null);
 	}
 	
 	/**

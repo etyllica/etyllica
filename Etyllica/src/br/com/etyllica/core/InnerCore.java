@@ -105,7 +105,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 	private GUIEvent superEvent = GUIEvent.NONE;
 
 	public void update(long now){
-
+		
 		if(Configuration.getInstance().isLanguageChanged()){
 			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
 			Configuration.getInstance().setLanguageChanged(false);
@@ -230,7 +230,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 	}
 
 	private void updateMouse(List<View> components){
-
+		
 		//Solving ConcurrentModification
 		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
 
@@ -474,12 +474,6 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	public void draw(Graphic g){
 
-		/*List<Window> drawWindows = new CopyOnWriteArrayList<Window>(windows);
-
-		for(Window window : drawWindows){
-			drawWindow(g, window);
-		}*/
-
 		drawWindow(g, activeWindow);
 
 		drawEffects(g);
@@ -502,14 +496,15 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		drawContext(window.getApplication(), g);		
 
-		List<View> components = window.getViews();
+		
+		List<View> components = new CopyOnWriteArrayList<View>(window.getViews());
 
 		for(View view: components){
 
 			if(view!=null){
 				drawView(view, g);
 			}else{
-				System.out.println("Draw Null Component");
+				System.out.println(this.getClass().getSimpleName()+" - Draw Null Component");
 			}
 
 		}
