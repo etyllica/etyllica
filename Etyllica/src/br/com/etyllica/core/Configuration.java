@@ -20,7 +20,7 @@ public class Configuration {
 	private Language language = Language.PORTUGUESE_BRAZIL;
 		
 	
-	private boolean timerClick = false;
+	private boolean timerClick = true;
 	private boolean numpadMouse = false;
 	
 	private boolean languageChanged = false;

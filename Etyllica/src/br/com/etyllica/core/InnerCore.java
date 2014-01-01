@@ -57,8 +57,9 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	//Mouse Over Something
 	//Usado para acessibilidade talvez
-	private boolean mouseOver = false;
-	private boolean mouseOverClickable = false;
+	private View mouseOver = null;
+
+	//private boolean mouseOverClickable = false;
 
 	private List<GUIEvent> guiEvents;
 
@@ -75,6 +76,8 @@ public class InnerCore implements Core, InputListener, Updatable{
 	protected Animator animator = new Animator();
 
 	protected boolean fullScreenEnable = false;
+
+	protected boolean timerClickEnable = true;
 
 	public InnerCore(){
 		super();
@@ -119,9 +122,9 @@ public class InnerCore implements Core, InputListener, Updatable{
 		superEvent = GUIEvent.NONE;
 
 		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getViews());
-		
+
 		Context application = activeWindow.getApplication();
-		
+
 		components.add(application);
 
 		application.update(getTimeNow());
@@ -161,7 +164,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 		if(application!=null){
 
 			long now = getTimeNow();
-			
+
 			if(application.getUpdateInterval()>0){
 
 				if(now-application.getLastUpdate()>application.getUpdateInterval()){
@@ -233,9 +236,6 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	private void updateMouse(List<View> components){
 
-		mouseOver = false;
-		mouseOverClickable = false;
-
 		//Solving ConcurrentModification
 		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
 
@@ -267,15 +267,19 @@ public class InnerCore implements Core, InputListener, Updatable{
 						}
 
 					}else{
-						gerenciaEvento(component.findNext(), nextEvent);
+
+						//if overMouve
+						gerenciaEvento(component.findNext(), nextEvent);	
+
 					}
 
 					break;
 				}
 
-				//TODO Coisas de acessibilidade
-				//gerenciaTimerClick();
+			}
 
+			if(timerClickEnable){
+				updateTimerClick();
 			}
 
 			//TODO Melhorar isso para fechar janela com ctrl+F4 ou algo assim
@@ -325,44 +329,47 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	private GUIEvent updateMouse(View component, PointerEvent event){
 
-		//If componente is visible
-		if(component.isVisible()){
+		if(!component.isVisible()){
+			return GUIEvent.NONE;
+		}
 
-			//Verify onMouse
-			if(component.onMouse(event)){
+		//Verify onMouse
+		if(component.onMouse(event)){
 
-				if(!component.isMouseOver()){
-					component.setMouseOver(true);
-				}
-
-			}else{
-
-				if(component.isMouseOver()){
-					component.setMouseOver(false);
-				}
-
+			if(!component.isMouseOver()){
+				component.setMouseOver(true);
+				
+				setMouseOver(component);
 			}
 
-			//Update Component
-			GUIEvent result = component.updateMouse(event);
+		}else{
 
-			if(result!=GUIEvent.NONE&&result!=null){
-
-				gerenciaEvento(component, result);
-
-				return result;
+			if(component.isMouseOver()){
+				component.setMouseOver(false);
+				
+				resetMouseOver();
 			}
 
-			//Update Childs
-			for(View child: component.getViews()){
+		}
 
-				child.setOffset(component.getX(), component.getY());
+		//Update Component
+		GUIEvent result = component.updateMouse(event);
 
-				updateMouse(child, event);
+		if(result!=GUIEvent.NONE&&result!=null){
 
-				child.setOffset(-component.getX(), -component.getY());
+			gerenciaEvento(component, result);
 
-			}
+			return result;
+		}
+
+		//Update Childs
+		for(View child: component.getViews()){
+
+			child.setOffset(component.getX(), component.getY());
+
+			updateMouse(child, event);
+
+			child.setOffset(-component.getX(), -component.getY());
 
 		}
 
@@ -398,14 +405,14 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 			break;
 
-		case MOUSE_OVER:
+			/*case MOUSE_OVER:
 			if(!mouseOver){
 				mouseOver = true;
 				mouseOverClickable = true;
 				//TODO componente.setMouseOver(true);
 			}
 
-			break;
+			break;*/
 
 			/*case MOUSE_OVER_UNCLICKABLE:
 			if(!mouseOver){
@@ -596,19 +603,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 	}
 
 	public boolean isMouseOver() {
-		return mouseOver;
-	}
-
-	public boolean isMouseOverClickable() {
-		return mouseOverClickable;
-	}
-
-	public void setMouseOverClickable(boolean mouseOverClickable) {
-		this.mouseOverClickable = mouseOverClickable;
-	}
-
-	public void setMouseOver(boolean mouseOver) {
-		this.mouseOver = mouseOver;
+		return mouseOver!=null;
 	}
 
 	/*public List<PointerEvent> getEvents(){
@@ -799,15 +794,13 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private boolean click = false;
-
 	private void updateTimerClick(){
 
 		Configuration config = Configuration.getInstance();
 
 		int speed = 3;
 
-		if(mouseOverClickable){
+		if(mouseOver!=null){
 
 			if(config.isTimerClick()){
 
@@ -817,9 +810,16 @@ public class InnerCore implements Core, InputListener, Updatable{
 					mouse.setArc(arc+speed);
 				}else{
 					//TODO if timerMouse
-					mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.CLICK));
-					//Simula Click
-					click = true;
+					
+					gerenciaEvento(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
+					gerenciaEvento(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_UP);
+
+					resetMouseOver();
+					//updateMouse(mouseOver, new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.CLICK));
+					
+					//mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.CLICK));
+					
+
 				}
 			}
 
@@ -827,7 +827,17 @@ public class InnerCore implements Core, InputListener, Updatable{
 			if(config.isTimerClick()){
 				mouse.setArc(0);
 			}
-		}				
+		}
+	}
+	
+	private void setMouseOver(View component){
+		mouseOver = component;
+		mouse.setOverClickable(true);		
+	}
+	
+	private void resetMouseOver(){
+		mouseOver = null;
+		mouse.setOverClickable(false);
 	}
 
 	public HIDController getControl(){

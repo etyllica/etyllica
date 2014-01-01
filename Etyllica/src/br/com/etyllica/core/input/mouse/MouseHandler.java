@@ -37,14 +37,18 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 	protected int z = 0;
 
 	//Arc for TimeClick
-	private int arc = 0;
+	protected int arc = 0;
 
-	private boolean overText = false;
+	protected boolean overText = false;
+	
+	protected boolean overClickable = false;
 
 	protected ArrowTheme arrowTheme;
 
 	protected MouseArrow arrow;
 
+	private PointerEvent moveEvent;
+	
 	public MouseHandler(int x, int y) {
 		super();
 		
@@ -379,8 +383,6 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 		return events;
 	}
 	
-	private PointerEvent moveEvent;
-	
 	public void addMouseMoveEvent(int x, int y){
 
 		moveEvent.setX(x);
@@ -394,6 +396,14 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 	
 	public void addEvent(PointerEvent event){
 		events.add(event);
+	}
+
+	public boolean isOverClickable() {
+		return overClickable;
+	}
+
+	public void setOverClickable(boolean overClickable) {
+		this.overClickable = overClickable;
 	}
 
 }
