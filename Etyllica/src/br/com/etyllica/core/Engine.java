@@ -1,9 +1,10 @@
 package br.com.etyllica.core;
 
+
 public interface Engine {
 
-	public void draw();
+	public void init();
 	
-	public void update(long delta);
+	public void draw();	
 	
 }

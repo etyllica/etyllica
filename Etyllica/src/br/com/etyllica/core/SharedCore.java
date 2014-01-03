@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import br.com.etyllica.core.application.Application;
+import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.Loader;
 import br.com.etyllica.core.video.FullScreenWindow;
@@ -24,7 +24,7 @@ import br.com.etyllica.core.video.Monitor;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 
-public class SharedCore {
+public class SharedCore implements Runnable{
 
 	private int width;
 
@@ -51,6 +51,8 @@ public class SharedCore {
 	private boolean drawing = false;
 
 	private List<Monitor> monitors = new ArrayList<Monitor>();
+	
+	boolean quit = false;
 
 	public SharedCore(java.awt.Component component, int width, int height){
 		super();
@@ -94,13 +96,13 @@ public class SharedCore {
 				int height = gcBounds.height;
 
 				monitors.add(new Monitor(x,y,width,height));
-				
+
 			}
-			
+
 		}else{
-			
+
 			monitors.add(new Monitor(0,0,width,height));
-			
+
 		}
 
 	}
@@ -129,22 +131,22 @@ public class SharedCore {
 	public void enableFullScreen(){
 
 		Monitor selectedMonitor = monitors.get(0);
-		
+
 		Point p = this.component.getLocation();
-		
+
 		for(Monitor monitor: monitors){
-			
+
 			if(monitor.colideRectPoint(p.x, p.y)){
 				selectedMonitor = monitor;
 			}
-			
+
 		}
-		
+
 		if(!innerCore.fullScreenEnable){
 			telaCheia = new FullScreenWindow(innerCore, selectedMonitor);
 			innerCore.fullScreenEnable = true;
 		}
-		
+
 		innerCore.addEffect(new GenericFullScreenEffect(0, 0, this.width, height));
 
 	}
@@ -267,9 +269,9 @@ public class SharedCore {
 	}
 
 	public void update(long now){
-		if(!drawing){
+		//if(!drawing){
 			innerCore.update(now);
-		}
+		//}
 	}
 
 	public GUIEvent getSuperEvent(){
@@ -278,6 +280,98 @@ public class SharedCore {
 
 	public void hideCursor(){
 		innerCore.hideCursor();
+	}
+
+	private Engine engine;
+
+	public void setEngine(Engine engine){
+		this.engine = engine;
+	}
+
+	public void startEngine() {
+		
+		component.setVisible(true);
+		
+		new Thread(this).start();
+		
+	}
+	
+	@Override
+	public void run() {
+
+		boolean quit = false;
+
+		long lastTime = System.nanoTime();
+		double nsPerTick = 1000000000D / 60D; //~60fps
+
+		int ups = 0;
+		int fps = 0;
+
+		long lastTimer = System.currentTimeMillis();
+		double delta = 0;
+
+		while(!quit) {
+
+			long now = System.nanoTime();
+			delta += (now - lastTime) / nsPerTick;
+			lastTime = now;
+
+			boolean renderOK = false;
+
+			while(delta >= 1) {
+				ups++;
+				updateEngine((long)delta);
+				delta -= 1;
+				renderOK = true;				
+			}
+
+			if(renderOK) {
+				fps++;
+				engine.draw();
+			}
+
+			if(System.currentTimeMillis() - lastTimer >= 1000) {
+				lastTimer += 1000;
+
+				//System.out.println("frames: " + fps + " | updates: " + ups);
+				innerCore.setFps(fps);
+
+				fps = 0;
+				ups = 0;
+			}
+
+		}
+
+	}
+	
+	private void updateEngine(long delta){
+		
+		GUIEvent event = GUIEvent.NONE;
+
+		this.update(delta);
+
+		event = this.getSuperEvent();
+
+		listen(event);
+	}
+	
+	private void listen(GUIEvent event){
+
+		if(event==GUIEvent.ENABLE_FULL_SCREEN){
+			enableFullScreen();
+		}else if(event==GUIEvent.DISABLE_FULL_SCREEN){
+			disableFullScreen();
+
+			//TODO When Frame
+			//}else if(event==GUIEvent.WINDOW_MOVE){
+			//	setLocation(this.getX()+(mouse.getX()-mouse.getDragX()), this.getY()+(mouse.getY()-mouse.getDragY()));
+		}
+		else if(event==GUIEvent.REQUEST_FOCUS){
+
+			if ( !component.hasFocus() ) {
+				component.requestFocus();
+			}
+		}
 	}
 
 }

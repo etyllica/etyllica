@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.animation.Updatable;
-import br.com.etyllica.core.application.Application;
-import br.com.etyllica.core.application.Context;
+import br.com.etyllica.context.Application;
+import br.com.etyllica.context.Context;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -75,6 +75,8 @@ public class InnerCore implements Core, InputListener, Updatable{
 	protected boolean fullScreenEnable = false;
 
 	private Configuration configuration = Configuration.getInstance();
+	
+	private int fps = 0;
 
 	public InnerCore(){
 		super();
@@ -892,4 +894,12 @@ public class InnerCore implements Core, InputListener, Updatable{
 		drawCursor = true;		
 	}
 
+	public int getFps() {
+		return fps;
+	}
+
+	public void setFps(int fps) {
+		this.fps = fps;
+	}
+	
 }
