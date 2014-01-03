@@ -105,7 +105,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 	private GUIEvent superEvent = GUIEvent.NONE;
 
 	public void update(long now){
-		
+				
 		if(Configuration.getInstance().isLanguageChanged()){
 			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
 			Configuration.getInstance().setLanguageChanged(false);

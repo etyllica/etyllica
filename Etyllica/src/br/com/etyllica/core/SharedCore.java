@@ -266,9 +266,9 @@ public class SharedCore {
 		this.loaders = loaders;
 	}
 
-	public void update(){
+	public void update(long now){
 		if(!drawing){
-			innerCore.update(System.currentTimeMillis());
+			innerCore.update(now);
 		}
 	}
 

@@ -36,83 +36,129 @@ public abstract class Etyllica extends Applet implements Engine{
 	protected int updateDelay = 40; // 40ms. Implica em 25fps (1000/40) = 25	
 
 	private Application application;
-	
+
 	private Set<Loader> loaders = new HashSet<Loader>();
 
 	//From Luvia
 	private ScheduledExecutorService executor;
 
 	public Etyllica(int largura, int altura){
-		
+
 		this.w = largura;
 		this.h = altura;
-		
+
 	}
 
 	@Override
 	public void init() {
-		
+
 		core = new SharedCore(this, w, h);
-		
+
 		initialSetup();
-		
+
 		startGame();
-				
+
 		core.startCore(application);
 
-		executor = Executors.newScheduledThreadPool(2);
 		startEngine();
+		//startEngineLoop();
 
 	}
 
 	private void initialSetup(){
-		
+
 		//Load Monitors
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
 		String s = getClass().getResource("").toString();
-		
+
 		setPath(s);
-		
+
 	}
 
 	protected void setPath(String path){
 
 		core.setPath(path);
-		
+
 		initLoaders();
+
+	}
+
+	boolean quit = false;
+	
+	private void startEngineLoop(){
+
+		long lastTime = System.nanoTime();
+		double nsPerTick = 1000000000D / 60D; //~60fps
+
+		int ups = 0;
+		int fps = 0;
+
+		long lastTimer = System.currentTimeMillis();
+		long delta = 0;
+
+		while(quit) {
+			
+			long now = System.nanoTime();
+			delta += (now - lastTime) / nsPerTick;
+			lastTime = now;
+			
+			boolean renderOK = false;
+			
+			while(delta >= 1) {
+				ups++;
+				update(delta);
+				delta -= 1;
+				renderOK = true;
+			}
+			
+			if(renderOK) {
+				fps++;
+				draw();
+			}
+			
+			if(System.currentTimeMillis() - lastTimer >= 1000) {
+				lastTimer += 1000;
+				
+				System.out.println("frames: " + fps + " | updates: " + ups);
+				
+				fps = 0;
+				ups = 0;
+			}
+			
+		}
 
 	}
 
 	private void startEngine(){
 
+		executor = Executors.newScheduledThreadPool(2);		
+
 		Runnable updateEngine = new Runnable() {
 			public void run() {
-				update();				
+				update(System.currentTimeMillis());
 			}
 		};
-		
+
 		Runnable drawEngine = new Runnable() {
 			public void run() {
 				draw();				
 			}
 		};
-		
+
 		executor.scheduleAtFixedRate(updateEngine, 0, updateDelay, TimeUnit.MILLISECONDS);
 		executor.scheduleAtFixedRate(drawEngine, 0, updateDelay, TimeUnit.MILLISECONDS);
 
 	}
-	
-	
 
 	private void initLoaders(){
-		
+
 		addLoader(ImageLoader.getInstance());
 		addLoader(FontLoader.getInstance());
-		
+
 		core.setLoaders(loaders);
-		
+
 		//initSound
 		//addLoader(MultimediaLoader.getInstance());
 		//init3D
@@ -121,7 +167,7 @@ public abstract class Etyllica extends Applet implements Engine{
 		//addLoader(SystemFontLoader.getInstance());
 		//initJoystick
 		//addLoader(JoystickLoader.getInstance());
-		
+
 		core.initDefault();
 
 	}
@@ -142,11 +188,11 @@ public abstract class Etyllica extends Applet implements Engine{
 		repaint();
 	}
 
-	public void update(){
+	public void update(long delta){
 
 		GUIEvent event = GUIEvent.NONE;
 
-		core.update();
+		core.update(System.currentTimeMillis());
 
 		event = core.getSuperEvent();
 
@@ -156,7 +202,7 @@ public abstract class Etyllica extends Applet implements Engine{
 		//System.gc();
 
 	}
-	
+
 	public void listen(GUIEvent event){
 
 		if(event==GUIEvent.ENABLE_FULL_SCREEN){

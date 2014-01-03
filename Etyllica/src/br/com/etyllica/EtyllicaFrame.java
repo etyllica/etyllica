@@ -63,15 +63,15 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		startGame();
 
 		core.startCore(application);
-
-		executor = Executors.newScheduledThreadPool(2);
-		startEngine();
-
+		
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//startEngineLoop();
+		
+		startEngine();
 
 	}
-
+	
 	private void initialSetup(){
 
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -90,12 +90,58 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		initLoaders();
 
 	}
+	
+	boolean quit = false;
+	
+	private void startEngineLoop(){
+				
+		long lastTime = System.nanoTime();
+		double nsPerTick = 1000000000D / 60D; //~60fps
+
+		int ups = 0;
+		int fps = 0;
+
+		long lastTimer = System.currentTimeMillis();
+		long delta = 0;
+
+		while(!quit) {
+			
+			long now = System.nanoTime();
+			delta += (now - lastTime) / nsPerTick;
+			lastTime = now;
+			
+			boolean renderOK = false;
+			
+			while(delta >= 1) {
+				ups++;
+				update(delta);
+				delta -= 1;
+				renderOK = true;
+			}
+			
+			if(renderOK) {
+				fps++;
+				draw();
+			}
+			
+			if(System.currentTimeMillis() - lastTimer >= 1000) {
+				lastTimer += 1000;
+				System.out.println("frames: " + fps + " | updates: " + ups);
+				fps = 0;
+				ups = 0;
+			}
+			
+		}
+
+	}
 
 	private void startEngine(){
+		
+		executor = Executors.newScheduledThreadPool(2);
 
 		Runnable updateEngine = new Runnable() {
 			public void run() {
-				update();				
+				update(System.currentTimeMillis());
 			}
 		};
 		
@@ -145,11 +191,11 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		repaint();
 	}
 
-	public void update(){
+	public void update(long now){
 
 		GUIEvent event = GUIEvent.NONE;
-
-		core.update();
+		
+		core.update(now);
 
 		event = core.getSuperEvent();
 

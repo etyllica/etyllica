@@ -4,6 +4,6 @@ public interface Engine {
 
 	public void draw();
 	
-	public void update();
+	public void update(long delta);
 	
 }
