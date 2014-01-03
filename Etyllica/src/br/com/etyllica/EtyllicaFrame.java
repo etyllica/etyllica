@@ -44,6 +44,8 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 		this.w = width;
 		this.h = height;
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
 	
@@ -57,7 +59,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		startGame();
 
 		core.startCore(application);
-
+		
 		core.startEngine();
 		
 	}
