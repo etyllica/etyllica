@@ -2,7 +2,7 @@ package examples.etyllica.tutorial03;
 
 import br.com.etyllica.animation.scripts.OrbitAnimation;
 import br.com.etyllica.animation.scripts.RotateAnimation;
-import br.com.etyllica.core.application.Application;
+import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;

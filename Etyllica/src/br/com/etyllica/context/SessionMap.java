@@ -1,4 +1,4 @@
-package br.com.etyllica.core.application;
+package br.com.etyllica.context;
 
 import java.util.HashMap;
 

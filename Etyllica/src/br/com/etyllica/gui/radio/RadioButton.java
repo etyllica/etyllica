@@ -1,9 +1,9 @@
 package br.com.etyllica.gui.radio;
 
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.Radio;
+import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 /**

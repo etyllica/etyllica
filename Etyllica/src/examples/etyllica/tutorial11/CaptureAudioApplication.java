@@ -3,7 +3,7 @@ package examples.etyllica.tutorial11;
 import java.awt.Color;
 
 import sound.capture.CaptureHandler;
-import br.com.etyllica.core.application.Application;
+import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;

@@ -3,14 +3,15 @@ package examples.etyllica.tutorial08.application;
 import java.awt.Color;
 import java.awt.Font;
 
-import br.com.etyllica.core.application.load.DefaultLoadApplication;
-import br.com.etyllica.core.theme.Theme;
+import br.com.etyllica.context.load.DefaultLoadApplication;
 import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 public class YellowLoading extends DefaultLoadApplication{
 
 	private Font f;
+	
 	private Font p;
 		
 	public YellowLoading(int x, int y, int w, int h) {

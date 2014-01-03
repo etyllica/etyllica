@@ -1,10 +1,10 @@
-package br.com.etyllica.core.application.load;
+package br.com.etyllica.context.load;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import br.com.etyllica.core.application.Context;
+import br.com.etyllica.context.Context;
 import br.com.etyllica.gui.Window;
 
 /**

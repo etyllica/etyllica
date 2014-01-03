@@ -1,12 +1,11 @@
 package examples.etyllica.tutorial17;
 
-import br.com.etyllica.core.application.Application;
+import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.ImageLayer;
-import br.com.etyllica.particle.BasicEmitter;
 
 public class TimedApplication extends Application{
 	

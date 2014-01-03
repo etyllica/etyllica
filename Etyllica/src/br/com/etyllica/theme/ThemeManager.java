@@ -1,7 +1,7 @@
 package br.com.etyllica.theme;
 
-import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.gui.mouse.theme.ArrowTheme;
+import br.com.etyllica.gui.theme.Theme;
 
 
 public class ThemeManager {

@@ -3,8 +3,8 @@ package br.com.etyllica.gui.mouse.arrow;
 import java.awt.Color;
 import java.awt.Polygon;
 
-import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 /**

@@ -1,8 +1,8 @@
-package br.com.etyllica.core.application.load;
+package br.com.etyllica.context.load;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.application.Context;
+import br.com.etyllica.context.Context;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;

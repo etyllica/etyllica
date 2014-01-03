@@ -3,11 +3,11 @@ package br.com.etyllica.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.application.Context;
-import br.com.etyllica.core.application.SessionMap;
-import br.com.etyllica.core.application.load.ApplicationLoader;
-import br.com.etyllica.core.application.load.DefaultLoadApplication;
-import br.com.etyllica.core.application.load.GenericLoadApplication;
+import br.com.etyllica.context.Context;
+import br.com.etyllica.context.SessionMap;
+import br.com.etyllica.context.load.ApplicationLoader;
+import br.com.etyllica.context.load.DefaultLoadApplication;
+import br.com.etyllica.context.load.GenericLoadApplication;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;

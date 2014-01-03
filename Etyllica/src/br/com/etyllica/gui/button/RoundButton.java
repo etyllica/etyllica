@@ -1,8 +1,8 @@
 package br.com.etyllica.gui.button;
 
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.theme.Theme;
 import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.gui.theme.Theme;
 
 /**
  * 

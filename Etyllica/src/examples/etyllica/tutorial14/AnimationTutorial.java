@@ -2,7 +2,7 @@ package examples.etyllica.tutorial14;
 
 
 import br.com.etyllica.animation.scripts.FrameAnimation;
-import br.com.etyllica.core.application.Application;
+import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;

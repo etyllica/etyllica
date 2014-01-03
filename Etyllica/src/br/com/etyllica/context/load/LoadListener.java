@@ -1,4 +1,4 @@
-package br.com.etyllica.core.application.load;
+package br.com.etyllica.context.load;
 
 public interface LoadListener {
 

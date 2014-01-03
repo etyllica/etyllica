@@ -2,7 +2,7 @@ package examples.etyllica.tutorial09.application;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.application.Application;
+import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;

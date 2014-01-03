@@ -1,4 +1,4 @@
-package br.com.etyllica.core.theme;
+package br.com.etyllica.gui.theme;
 
 import br.com.etyllica.gui.button.DefaultButton;
 

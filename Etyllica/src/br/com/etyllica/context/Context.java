@@ -1,15 +1,14 @@
-package br.com.etyllica.core.application;
+package br.com.etyllica.context;
 
 import java.util.List;
 
 import br.com.etyllica.animation.Updatable;
-import br.com.etyllica.core.application.load.LoadListener;
+import br.com.etyllica.context.load.LoadListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.layer.Layer;
-import br.com.etyllica.scene.Scene;
 
 /**
  * Class to represent sessions of the Main Application like Mini-Applications.  

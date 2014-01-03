@@ -4,11 +4,11 @@ import java.awt.Color;
 
 import br.com.etyllica.animation.scripts.HorizontalMovement;
 import br.com.etyllica.animation.scripts.OpacityAnimation;
+import br.com.etyllica.animation.scripts.OrbitAnimation;
 import br.com.etyllica.animation.scripts.RotateAnimation;
 import br.com.etyllica.animation.scripts.ScaleAnimation;
-import br.com.etyllica.animation.scripts.OrbitAnimation;
 import br.com.etyllica.animation.scripts.VerticalMovementScript;
-import br.com.etyllica.core.application.Application;
+import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;

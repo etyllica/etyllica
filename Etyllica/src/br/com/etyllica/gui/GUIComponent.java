@@ -1,5 +1,6 @@
-package br.com.etyllica.core;
+package br.com.etyllica.gui;
 
+import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
