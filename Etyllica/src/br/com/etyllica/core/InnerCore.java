@@ -900,6 +900,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	public void setFps(int fps) {
 		this.fps = fps;
+		this.activeWindow.getApplication().setFps(fps);
 	}
 	
 }

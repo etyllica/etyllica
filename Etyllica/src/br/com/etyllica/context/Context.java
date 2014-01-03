@@ -83,6 +83,8 @@ public abstract class Context extends View implements Updatable{
 	 */
 	protected Context returnApplication = this;
 	
+	protected int fps = 0;
+	
 	/**
 	 * Constructor
 	 * 
@@ -291,6 +293,14 @@ public abstract class Context extends View implements Updatable{
 
 	public void setScene(Scene scene) {
 		this.scene = scene;
+	}
+
+	public int getFps() {
+		return fps;
+	}
+
+	public void setFps(int fps) {
+		this.fps = fps;
 	}
 	
 }
