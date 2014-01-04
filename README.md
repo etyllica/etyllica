@@ -31,7 +31,7 @@
 - [Etyllic Animator](http://yuripourre.github.com/etyllic-animator) - Pivot Animator
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme) - A Game developed at [GGJ 2013](http://globalgamejam.org/)
 - [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android.
-- [Etyllic-TTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
+- [EtyllicTTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
 - [Veete](https://github.com/yuripourre/veete) - A Map Editor
 
 ##Dependencies (optional)
