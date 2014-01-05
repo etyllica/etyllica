@@ -18,6 +18,10 @@ public class OpacityAnimation extends AnimationScript{
 		super(target, time);
 	}
 	
+	public OpacityAnimation(Layer target, long delay, long time){
+		super(target, delay, time);
+	}
+	
 	@Override
 	protected void update(double value){
 		target.setOpacity((int)value);

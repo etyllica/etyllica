@@ -38,6 +38,14 @@ public abstract class AnimationScript{
 		setTarget(target);
 		this.time = time;
 	}
+	
+	public AnimationScript(Layer target, long delay, long time){
+		super();
+
+		setTarget(target);
+		this.delay = delay;
+		this.time = time;
+	}
 
 	public void restart(){
 		started = false;
