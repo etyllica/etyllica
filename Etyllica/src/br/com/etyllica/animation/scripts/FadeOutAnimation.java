@@ -16,15 +16,15 @@ public class FadeOutAnimation extends OpacityAnimation{
 	public FadeOutAnimation(long delay, long time){
 		super(delay, time);
 		
-		startValue = 0;
-		endValue = 255;
+		startValue = 255;
+		endValue = 0;
 	}
 	
 	public FadeOutAnimation(Layer target, long time){
 		super(target, time);
 		
-		startValue = 0;
-		endValue = 255;
+		startValue = 255;
+		endValue = 0;
 	}
 	
 	@Override
