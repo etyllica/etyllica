@@ -44,6 +44,11 @@ public class TextLabel extends Label{
 		this(0,0,text);
 	}
 	
+	public TextLabel(String text, float size) {
+		this(0,0,text);
+		this.layer.setSize(size);
+	}
+	
 	public void setX(int x) {
 		this.x = x;
 		this.layer.setX(x);
