@@ -383,9 +383,25 @@ public class Bone implements GLDrawable{
 		gl.glEnd();
 
 		//gl.glPopMatrix();
+		//drawVertexes(gl);
 
 		end.draw(gl);
 
+	}
+	
+	public void drawVertexes(GLAUX gl){
+		
+		double vsize = 0.005;
+		
+		for(Vector3f vector: vectors){
+
+			gl.glPushMatrix();
+			gl.glTranslated(vector.getX(), vector.getY(), vector.getZ());
+			gl.auxSolidCube(vsize);
+			gl.glPopMatrix();
+			
+		}
+		
 	}
 
 	public Joint getEnd(){

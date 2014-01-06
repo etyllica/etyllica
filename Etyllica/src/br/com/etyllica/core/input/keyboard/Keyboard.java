@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.animation.Updatable;
 import br.com.etyllica.core.event.KeyEvent;
@@ -93,7 +94,9 @@ public class Keyboard implements KeyListener, Updatable {
 
 	private void notifyListener(){
 
-		for(KeyEvent event: keyEvents){
+		List<KeyEvent> events = new CopyOnWriteArrayList<KeyEvent>(keyEvents);
+		
+		for(KeyEvent event: events){
 			listener.updateKeyEvent(event);
 		}
 

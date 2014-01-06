@@ -129,9 +129,13 @@ public class Teapots extends GLAUX{
 
 
 		Date endTime = new Date ();
-		//System.out.println ("Run Time : " + (endTime.getTime () - startTime.getTime ()) + " ms");
+
 		g.setColor(Color.WHITE);
+		
+		g.write(30,20, "FPS : " + this.fps);
+		
 		g.write(300,20, "Run Time : " + (endTime.getTime () - startTime.getTime ()) + " ms");
+		
 	}
 
 	private void myReshape (float w, float h) {

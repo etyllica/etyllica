@@ -80,76 +80,94 @@ public class Model3D extends Polygon3D implements GLDrawable{
 		gl.glRotated(anguloZ, 0, 0, 1);
 		//gl.glBegin(GL.GL_QUADS);
 
-		if(drawFaces){
+		drawFaces(gl);
 
-			for(Group group: groups){
+		drawVertexes(gl);
 
-				String map = group.getMaterial().getMap_d();
-				//map = "";
+		//gl.glEnd();
 
-				if(!map.isEmpty()){
+		gl.glPopMatrix();
 
-					//System.out.println("Trying to load: "+map);
+	}
+
+	private void drawFaces(GLAUX gl){
+
+		if(!drawFaces){
+			return;
+		}
+		
+		for(Group group: groups){
+
+			String map = group.getMaterial().getMap_d();
+			//map = "";
+
+			if(!map.isEmpty()){
+
+				//System.out.println("Trying to load: "+map);
+
+				if(drawTexture){
+					Texture texture = new Texture(ImageLoader.getInstance().getImage(map,true));
+
+					setTexture(gl, texture);
+					gl.glEnable (GL.GL_DEPTH_TEST);
+					gl.glEnable (GL.GL_TEXTURE_2D);
+					gl.glEnable (GL.GL_CULL_FACE);
+
+				}
+
+				//gl.glBegin(GL.GL_QUADS);
+
+				float offsetX = 1f;
+				float offsetZ = -3f;
+				float size = 1.0f;
+
+				/*gl.glTexCoord2f(0.0f, 1.0f);
+			gl.glVertex3f(-offsetX-size, 0, +size+offsetZ);
+			gl.glTexCoord2f(1.0f, 1.0f);
+			gl.glVertex3f(-offsetX+size, 0.8f, +size+offsetZ);
+			gl.glTexCoord2f(1.0f, 0.0f);
+			gl.glVertex3f(-offsetX+size, 0.6f, +offsetZ);
+			gl.glTexCoord2f(0.0f, 0.0f);
+			gl.glVertex3f(-offsetX-size, 0, +offsetZ);*/
+
+
+				//gl.glEnd();
+			}
+
+			for(Face face: group.getFaces()){
+
+				if(face.vertex.length==3){
+
+					gl.glBegin(GL.GL_TRIANGLES);
+
+				}else{ //TODO Transform all faces in tris
+
+					gl.glBegin(GL.GL_QUADS);
+
+				}
+
+				for(int i=0;i<face.vertex.length;i++){
 
 					if(drawTexture){
-						Texture texture = new Texture(ImageLoader.getInstance().getImage(map,true));
-
-						setTexture(gl, texture);
-						gl.glEnable (GL.GL_DEPTH_TEST);
-						gl.glEnable (GL.GL_TEXTURE_2D);
-						gl.glEnable (GL.GL_CULL_FACE);
-
+						gl.glNormal3d(face.normal[i].getX(), face.normal[i].getY(), face.normal[i].getZ());
+						gl.glTexCoord2d(face.texture[i].getX(), face.texture[i].getY());
 					}
-
-					//gl.glBegin(GL.GL_QUADS);
-
-					float offsetX = 1f;
-					float offsetZ = -3f;
-					float size = 1.0f;
-
-					/*gl.glTexCoord2f(0.0f, 1.0f);
-				gl.glVertex3f(-offsetX-size, 0, +size+offsetZ);
-				gl.glTexCoord2f(1.0f, 1.0f);
-				gl.glVertex3f(-offsetX+size, 0.8f, +size+offsetZ);
-				gl.glTexCoord2f(1.0f, 0.0f);
-				gl.glVertex3f(-offsetX+size, 0.6f, +offsetZ);
-				gl.glTexCoord2f(0.0f, 0.0f);
-				gl.glVertex3f(-offsetX-size, 0, +offsetZ);*/
-
-
-					//gl.glEnd();
+					gl.glVertex3d(face.vertex[i].getX(), face.vertex[i].getY(), face.vertex[i].getZ());
 				}
 
-				for(Face face: group.getFaces()){
+				gl.glEnd();
 
-					if(face.vertex.length==3){
-
-						gl.glBegin(GL.GL_TRIANGLES);
-
-					}else{ //TODO Transform all faces in tris
-
-						gl.glBegin(GL.GL_QUADS);
-
-					}
-
-					for(int i=0;i<face.vertex.length;i++){
-
-						if(drawTexture){
-							gl.glNormal3d(face.normal[i].getX(), face.normal[i].getY(), face.normal[i].getZ());
-							gl.glTexCoord2d(face.texture[i].getX(), face.texture[i].getY());
-						}
-						gl.glVertex3d(face.vertex[i].getX(), face.vertex[i].getY(), face.vertex[i].getZ());
-					}
-
-					gl.glEnd();
-
-				}
 			}
+		
 		}
 
-		for(int i=0;i<vertexes.size(); i++){
+	}
 
-			double vsize = 0.005;
+	private void drawVertexes(GLAUX gl){
+
+		double vsize = 0.015;
+		
+		for(int i=0;i<vertexes.size(); i++){
 
 			if(vertexSelection.contains(i)){
 				gl.glColor3i(0xff,0xff,0xff);
@@ -169,10 +187,6 @@ public class Model3D extends Polygon3D implements GLDrawable{
 			gl.auxSolidCube(vsize);
 			gl.glPopMatrix();
 		}
-
-		//gl.glEnd();
-
-		gl.glPopMatrix();
 
 	}
 
