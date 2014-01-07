@@ -20,7 +20,8 @@ import br.com.etyllica.core.video.Graphic;
 public class BufferedLayer extends ImageLayer{
 
 	private BufferedImage originalBuffer;
-	protected BufferedImage imagemBuffer;
+	
+	protected BufferedImage imageBuffer;
 
 	/**
 	 * 
@@ -131,8 +132,8 @@ public class BufferedLayer extends ImageLayer{
 	 * ImagemBuffer volta ao estado original
 	 */
 	public void resetImage(){
-		imagemBuffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
-		imagemBuffer.getGraphics().drawImage(originalBuffer,0,0,null);
+		imageBuffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
+		imageBuffer.getGraphics().drawImage(originalBuffer,0,0,null);
 	}
 
 	/**
@@ -200,7 +201,7 @@ public class BufferedLayer extends ImageLayer{
 				//	a += 255;
 				//}
 
-				imagemBuffer.setRGB(i, j, new Color(r,g,b,a).getRGB());
+				imageBuffer.setRGB(i, j, new Color(r,g,b,a).getRGB());
 
 			}
 		}
@@ -212,25 +213,25 @@ public class BufferedLayer extends ImageLayer{
 		AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
 		tx.translate(0, -h);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		imagemBuffer = op.filter(imagemBuffer, null);
+		imageBuffer = op.filter(imageBuffer, null);
 	}
 	public void espelharHorizontal(){
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
 		tx.translate(-w, 0);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		imagemBuffer = op.filter(imagemBuffer, null);
+		imageBuffer = op.filter(imageBuffer, null);
 	}
 
 	public void girar180(){
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, -1);
 		tx.translate(-w, -h);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		imagemBuffer = op.filter(imagemBuffer, null);
+		imageBuffer = op.filter(imageBuffer, null);
 	}
 
 	public byte[][][] getBytes(){
 
-		DataBufferInt db = (DataBufferInt)imagemBuffer.getRaster().getDataBuffer();
+		DataBufferInt db = (DataBufferInt)imageBuffer.getRaster().getDataBuffer();
 
 		int[] by = db.getData(); 
 		
@@ -260,14 +261,56 @@ public class BufferedLayer extends ImageLayer{
 	}
 
 	public BufferedImage getImagemBuffer(){
-		return imagemBuffer;
+		return imageBuffer;
+	}
+	
+	public boolean colideAlphaPoint(int px, int py){
+		
+		if(colideRectPoint(px, py)){
+			
+			int mx = px-x;
+			
+			int my = py-y;
+			
+			if(mx>=imageBuffer.getWidth()||my>=imageBuffer.getHeight()){
+				return false;
+			}
+			
+			Color color = new Color(imageBuffer.getRGB(mx, my), true);	
+			
+			return color.getAlpha()==255;
+		}
+		
+		return false;
+		
+	}	
+	
+	public Color getColorPoint(int px, int py){
+		
+		if(colideRectPoint(px, py)){
+			
+			int mx = px-x;
+			
+			int my = py-y;
+			
+			if(mx>=imageBuffer.getWidth()||my>=imageBuffer.getHeight()){
+				return null;
+			}
+			
+			Color color = new Color(imageBuffer.getRGB(mx, my), true);	
+			
+			return color;
+		}
+		
+		return null;
+		
 	}
 	
 	@Override
 	public void draw(Graphic g, AffineTransform transform) {
 		g.transform(transform);
 
-		g.drawImage( imagemBuffer, x, y, x+w,y+h,
+		g.drawImage( imageBuffer, x, y, x+w,y+h,
 				xImage,yImage,xImage+w,yImage+h, null );		
 	}
 
