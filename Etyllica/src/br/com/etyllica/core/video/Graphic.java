@@ -881,6 +881,10 @@ public class Graphic{
 	public BufferedImage getBimg() {
 		return vimg.getSnapshot();
 	}
+	
+	public VolatileImage getVimg() {
+		return vimg;
+	}
 
 	/**
 	 * 

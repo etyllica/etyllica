@@ -237,10 +237,10 @@ public class SharedCore implements Runnable{
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
 		if(!innerCore.fullScreenEnable){
-			g.drawImage(graphic.getBimg(), (int)desktop.getApplication().getX(), (int)desktop.getApplication().getY(), component);
+			g.drawImage(graphic.getVimg(), (int)desktop.getApplication().getX(), (int)desktop.getApplication().getY(), component);
 		}
 		else{
-			telaCheia.draw(graphic.getBimg());
+			telaCheia.draw(graphic.getVimg());
 		}
 
 		g.dispose();

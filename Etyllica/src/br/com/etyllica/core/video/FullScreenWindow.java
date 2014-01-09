@@ -3,6 +3,7 @@ package br.com.etyllica.core.video;
 import java.awt.Cursor;
 import java.awt.Frame;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
@@ -78,7 +79,7 @@ public class FullScreenWindow extends Window{
 		addKeyListener( keyboard );
 	}
 		
-	public void draw(BufferedImage volatileImage){
+	public void draw(Image volatileImage){
 		
 		//int w, int h;
 		int y = offsetY;
@@ -92,7 +93,7 @@ public class FullScreenWindow extends Window{
 	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
 	    
 	    //g.drawImage(volatileImage, 0, 0, largura, altura, 0, 0, volatileImage.getWidth(), volatileImage.getHeight(), null);
-	    g.drawImage(volatileImage, 0, y, w, h, 0, 0, volatileImage.getWidth(), y+volatileImage.getHeight(), null);
+	    g.drawImage(volatileImage, 0, y, w, h, 0, 0, volatileImage.getWidth(null), y+volatileImage.getHeight(null), null);
 	    g.dispose();
 				
 		getGraphics().drawImage(resized,0,0,null);
