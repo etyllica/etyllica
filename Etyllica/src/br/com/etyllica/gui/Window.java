@@ -27,7 +27,7 @@ public class Window extends View{
 	//TODO Change to Application backApplication
 	protected List<Context> oldApplications = new ArrayList<Context>();
 
-	protected Camera camera = new Camera();
+	protected Camera camera;
 	
 	protected SessionMap sessionMap = new SessionMap();
 
@@ -49,6 +49,8 @@ public class Window extends View{
 
 	public Window(int x, int y, int w, int h){
 		super(x,y,w,h);
+		
+		camera = new Camera(0, 0, w, h);
 
 		//load = new LoadApplication(x,y,w,h);
 		//load = new GenericLoadApplication(x,y,w,h);
@@ -124,10 +126,6 @@ public class Window extends View{
 
 	}
 
-	public SessionMap getSessionMap() {
-		return sessionMap;
-	}
-
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
@@ -163,8 +161,15 @@ public class Window extends View{
 	public void setWindows(List<Window> windows) {
 		this.windows = windows;
 	}
+	
+	public SessionMap getSessionMap() {
+		return sessionMap;
+	}
 
-	//Camera belongs to Application
+	public void setSessionMap(SessionMap sessionMap) {
+		this.sessionMap = sessionMap;
+	}
+
 	public Camera getCamera() {
 		return camera;
 	}

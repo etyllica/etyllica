@@ -1,5 +1,7 @@
 package br.com.etyllica.core;
 
+import java.awt.Color;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -10,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.animation.Updatable;
+import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Context;
 import br.com.etyllica.core.event.GUIEvent;
@@ -487,16 +490,16 @@ public class InnerCore implements Core, InputListener, Updatable{
 	}
 
 	private void drawWindow(Graphic g, Window window){
-
+				
 		boolean offset = window.getX()!=0||window.getY()!=0;
 
 		if(offset){
 			g.translate(window.getX(), window.getY());
 		}
-
+	
 		window.draw(g);
 
-		drawContext(window.getApplication(), g);		
+		drawContext(window.getApplication(), g);
 
 		
 		List<View> components = new CopyOnWriteArrayList<View>(window.getViews());
@@ -514,9 +517,9 @@ public class InnerCore implements Core, InputListener, Updatable{
 		if(offset){
 			g.translate(-window.getX(), -window.getY());
 		}
-
+			
 	}
-
+	
 	private void drawContext(Context context, Graphic g){
 
 		context.drawScene(g);
@@ -762,9 +765,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 	protected void changeApplication(){
 
 		//Lock old application
-		Context application = activeWindow.getApplication();
-
-		application.setSessionMap(activeWindow.getSessionMap());
+		//Context application = activeWindow.getApplication();
 
 		reload(activeWindow.getApplication().getReturnApplication());
 
@@ -773,6 +774,10 @@ public class InnerCore implements Core, InputListener, Updatable{
 	private void reload(Context application){
 
 		activeWindow.reload(application);
+		
+		application.setSessionMap(activeWindow.getSessionMap());
+		
+		application.setCamera(activeWindow.getCamera());
 
 	}
 

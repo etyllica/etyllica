@@ -3,6 +3,7 @@ package br.com.etyllica.context;
 import java.util.List;
 
 import br.com.etyllica.animation.Updatable;
+import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.load.LoadListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Graphic;
@@ -55,6 +56,11 @@ public abstract class Context extends View implements Updatable{
 	 */
 	protected SessionMap sessionMap;
 
+	/**
+	 * Scene camera  
+	 */
+	protected Camera camera;
+	
 	/**
 	 * Scene Graph Windows
 	 */
@@ -294,6 +300,14 @@ public abstract class Context extends View implements Updatable{
 	public void setScene(Scene scene) {
 		this.scene = scene;
 	}
+	
+	public Camera getCamera() {
+		return camera;
+	}
+
+	public void setCamera(Camera camera) {
+		this.camera = camera;
+	}
 
 	public int getFps() {
 		return fps;
@@ -302,5 +316,5 @@ public abstract class Context extends View implements Updatable{
 	public void setFps(int fps) {
 		this.fps = fps;
 	}
-	
+		
 }
