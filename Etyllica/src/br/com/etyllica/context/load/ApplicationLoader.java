@@ -17,6 +17,7 @@ import br.com.etyllica.gui.Window;
 public class ApplicationLoader implements LoadListener{
 
 	private Loader loader;
+	
 	private Updater updater;
 	
 	private Window window;

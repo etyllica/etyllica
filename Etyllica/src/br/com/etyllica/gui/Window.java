@@ -3,6 +3,7 @@ package br.com.etyllica.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.Context;
 import br.com.etyllica.context.SessionMap;
 import br.com.etyllica.context.load.ApplicationLoader;
@@ -20,12 +21,14 @@ import br.com.etyllica.core.event.PointerEvent;
  */
 
 public class Window extends View{
-
+	
 	protected Context application;
 
 	//TODO Change to Application backApplication
 	protected List<Context> oldApplications = new ArrayList<Context>();
 
+	protected Camera camera = new Camera();
+	
 	protected SessionMap sessionMap = new SessionMap();
 
 	//protected DefaultLoadApplication load;
@@ -160,5 +163,14 @@ public class Window extends View{
 	public void setWindows(List<Window> windows) {
 		this.windows = windows;
 	}
-	
+
+	//Camera belongs to Application
+	public Camera getCamera() {
+		return camera;
+	}
+
+	public void setCamera(Camera camera) {
+		this.camera = camera;
+	}
+		
 }
