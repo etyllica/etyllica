@@ -132,7 +132,27 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 			break;
 		}
 
-		events.add(new PointerEvent(key, state, x, y ));
+		events.add(new PointerEvent(key, state, x, y));
+
+	}
+	
+	private void addEvent(int button, PointerState state, int amount){
+
+		MouseButton key = MouseButton.MOUSE_NONE;
+
+		switch (button) {
+		case MouseEvent.BUTTON1:
+			key = MouseButton.MOUSE_BUTTON_LEFT;
+			break;
+		case MouseEvent.BUTTON2:
+			key = MouseButton.MOUSE_BUTTON_MIDDLE;
+			break;
+		case MouseEvent.BUTTON3:
+			key = MouseButton.MOUSE_BUTTON_RIGHT;
+			break;
+		}
+
+		events.add(new PointerEvent(key, state, x, y, amount));
 
 	}
 
@@ -143,13 +163,13 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 
 		if (me.getClickCount() == 2) {
 			state = PointerState.DOUBLE_CLICK;
-		}else if (me.getClickCount() == 3) {
-			state = PointerState.TRIPLE_CLICK;
+		}else if (me.getClickCount() > 2) {
+			state = PointerState.MULTIPLE_CLICK;
 		}
 
 		setCoordenadas(me.getX(),me.getY());
 		
-		addEvent(me.getButton(),state);	
+		addEvent(me.getButton(),state, me.getClickCount());
 		
 		me.consume();
 	}

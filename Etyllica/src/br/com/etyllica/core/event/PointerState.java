@@ -15,7 +15,7 @@ public enum PointerState {
 	
 	CLICK,
 	DOUBLE_CLICK,
-	TRIPLE_CLICK,
+	MULTIPLE_CLICK,
 	MOVE,
 	
 	ENTER,
