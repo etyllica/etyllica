@@ -1,6 +1,7 @@
 package br.com.etyllica.core;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
@@ -268,8 +269,12 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 					}else{
 
-						//if overMouve
-						updateEvent(component.findNext(), nextEvent);	
+						View next = component.findNext();
+						
+						if(next!=null){
+							//if overMouse
+							updateEvent(component.findNext(), nextEvent);
+						}
 
 					}
 
