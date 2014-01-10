@@ -1,5 +1,6 @@
 package examples.etyllica.tutorial01;
 
+import br.com.etyllica.animation.scripts.VerticalMovementScript;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -22,6 +23,11 @@ public class HelloWorld extends Application{
 		
 		hello = new ImageLayer(200,100,"hello.png");
 				
+		VerticalMovementScript script = new VerticalMovementScript(camera, 10000);
+		script.setInterval(0, 200);
+		
+		this.scene.addAnimation(script);		
+		
 		loading = 100;
 				
 	}
@@ -29,7 +35,7 @@ public class HelloWorld extends Application{
 	@Override
 	public void draw(Graphic g) {
 		hello.draw(g);
-		
+				
 		if(right){
 			hello.setOffsetX(1);
 		}
@@ -62,6 +68,9 @@ public class HelloWorld extends Application{
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)){
+			
+			System.out.println(camera.getY());
+			
 			right = true;
 		}
 		if(event.isKeyUp(KeyEvent.TSK_RIGHT_ARROW)){
