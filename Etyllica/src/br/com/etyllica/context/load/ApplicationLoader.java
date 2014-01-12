@@ -36,6 +36,8 @@ public class ApplicationLoader implements LoadListener{
 	
 	public void loadApplication(){
 
+		window.setLoaded(false);
+		
 		loader = new Loader();
 		updater = new Updater();
 		
@@ -48,8 +50,10 @@ public class ApplicationLoader implements LoadListener{
 
 		public void run() {
 			called = false;
+						
 			application.setLoadListener(ApplicationLoader.this);
 			application.startLoad();
+			
 		}
 
 	}

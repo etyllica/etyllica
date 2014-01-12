@@ -134,7 +134,9 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		components.add(application);
 
-		application.update(getTimeNow());
+		if(!application.isLocked()){
+			application.update(now);
+		}
 
 		updateActiveWindow();
 
