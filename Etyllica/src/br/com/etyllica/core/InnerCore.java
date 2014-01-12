@@ -112,6 +112,10 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	public void update(long now){
 				
+		if(!activeWindow.isLoaded()){
+			return;
+		}
+		
 		if(Configuration.getInstance().isLanguageChanged()){
 			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
 			Configuration.getInstance().setLanguageChanged(false);
