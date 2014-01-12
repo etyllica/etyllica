@@ -43,6 +43,7 @@ public class Model3D extends Polygon3D implements GLDrawable{
 
 	private boolean drawTexture = true;
 	private boolean drawFaces = true;
+	private boolean drawVertices = true;
 
 	//TODO Just for test, Remove!
 	public Integer specialVertex = 0;
@@ -165,6 +166,10 @@ public class Model3D extends Polygon3D implements GLDrawable{
 
 	private void drawVertexes(GLAUX gl){
 
+		if(!drawVertices){
+			return;
+		}
+		
 		double vsize = 0.015;
 		
 		for(int i=0;i<vertexes.size(); i++){
@@ -249,4 +254,12 @@ public class Model3D extends Polygon3D implements GLDrawable{
 		this.drawFaces = drawFaces;
 	}
 
+	public boolean isDrawVertices() {
+		return drawVertices;
+	}
+
+	public void setDrawVertices(boolean drawVertices) {
+		this.drawVertices = drawVertices;
+	}
+	
 }
