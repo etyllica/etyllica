@@ -203,17 +203,23 @@ public class TextLayer extends ImageLayer{
 
 	private void computeBoundingBox(){
 
-		if(font!=null){
-			//Compute Bounding box
-			FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
-			TextLayout layout = new TextLayout(text, font, frc);
+		Font font;
 
-			Rectangle2D bounds = layout.getBounds();
-			
-			this.h = (int)size;
-			this.w = (int)Math.ceil(bounds.getWidth());
-
+		if(this.font!=null){
+			font = this.font;
+		}else{
+			font = new Font(Font.DIALOG, Font.PLAIN, (int)size);
 		}
+
+		//Compute Bounding box
+		FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
+		TextLayout layout = new TextLayout(text, font, frc);
+
+		Rectangle2D bounds = layout.getBounds();
+
+		this.h = (int)size;
+		this.w = (int)Math.ceil(bounds.getWidth());
+
 
 	}
 
