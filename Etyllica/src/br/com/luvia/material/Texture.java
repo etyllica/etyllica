@@ -17,7 +17,7 @@ public class Texture extends BufferedLayer{
 	public Texture(BufferedImage imagem) {
 		super(imagem);
 		
-		espelharHorizontal();
+		flipHorizontal();
 	}
 		
 	public byte[][][] getAlphaBytes(){
@@ -33,7 +33,7 @@ public class Texture extends BufferedLayer{
 		for(int i=0;i<h;i++){
 			for(int j=0;j<w;j++){
 
-				c = new Color(getImagemBuffer().getRGB(j,i));
+				c = new Color(modifiedBuffer.getRGB(j,i));
 
 				imagem2D[j][i][0] = (byte)c.getRed();
 				imagem2D[j][i][1] = (byte)c.getGreen();

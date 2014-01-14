@@ -19,9 +19,9 @@ import br.com.etyllica.core.video.Graphic;
 
 public class BufferedLayer extends ImageLayer{
 
-	private BufferedImage originalBuffer;
+	private BufferedImage buffer;
 	
-	protected BufferedImage imageBuffer;
+	protected BufferedImage modifiedBuffer;
 
 	/**
 	 * 
@@ -76,8 +76,8 @@ public class BufferedLayer extends ImageLayer{
 		this.w = w;
 		this.h = h;
 
-		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		originalBuffer.getGraphics().fillRect(0,0,w,h);
+		buffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		buffer.getGraphics().fillRect(0,0,w,h);
 
 		resetImage();
 	}
@@ -105,8 +105,8 @@ public class BufferedLayer extends ImageLayer{
 		this.w = w;
 		this.h = h;
 
-		originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		originalBuffer.getGraphics().drawImage(buffer,0,0,null);
+		buffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		buffer.getGraphics().drawImage(buffer,0,0,null);
 
 		resetImage();
 
@@ -118,12 +118,12 @@ public class BufferedLayer extends ImageLayer{
 	 */
 	public void igualaImagem(BufferedImage buffer){
 
+		buffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
+		buffer.getGraphics().drawImage(buffer,0,0,null);
+
 		w = buffer.getWidth();
 		h = buffer.getHeight();
-
-		originalBuffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
-		originalBuffer.getGraphics().drawImage(buffer,0,0,null);
-
+		
 		resetImage();
 
 	}
@@ -132,8 +132,8 @@ public class BufferedLayer extends ImageLayer{
 	 * ImagemBuffer volta ao estado original
 	 */
 	public void resetImage(){
-		imageBuffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
-		imageBuffer.getGraphics().drawImage(originalBuffer,0,0,null);
+		modifiedBuffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
+		modifiedBuffer.getGraphics().drawImage(buffer,0,0,null);
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class BufferedLayer extends ImageLayer{
 			for(int i=0;i<w;i++){
 
 				//Pego o rgb do pixel selecionado
-				int rgb = originalBuffer.getRGB(i,j);
+				int rgb = buffer.getRGB(i,j);
 
 				int a = (rgb>>24) & 0xff;
 
@@ -201,37 +201,47 @@ public class BufferedLayer extends ImageLayer{
 				//	a += 255;
 				//}
 
-				imageBuffer.setRGB(i, j, new Color(r,g,b,a).getRGB());
+				modifiedBuffer.setRGB(i, j, new Color(r,g,b,a).getRGB());
 
 			}
 		}
 
 	}
 
-	//Manipulação de Imagens
-	public void espelharVertical(){
+	//Image Manipulation
+	public void flipVertical(){
 		AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
+		
 		tx.translate(0, -h);
+		
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		imageBuffer = op.filter(imageBuffer, null);
+		
+		modifiedBuffer = op.filter(modifiedBuffer, null);
+		
 	}
-	public void espelharHorizontal(){
+	
+	public void flipHorizontal(){
+		
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+		
 		tx.translate(-w, 0);
+		
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		imageBuffer = op.filter(imageBuffer, null);
+		
+		modifiedBuffer = op.filter(modifiedBuffer, null);
+		
 	}
 
 	public void girar180(){
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, -1);
 		tx.translate(-w, -h);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		imageBuffer = op.filter(imageBuffer, null);
+		modifiedBuffer = op.filter(modifiedBuffer, null);
 	}
 
 	public byte[][][] getBytes(){
 
-		DataBufferInt db = (DataBufferInt)imageBuffer.getRaster().getDataBuffer();
+		DataBufferInt db = (DataBufferInt)modifiedBuffer.getRaster().getDataBuffer();
 
 		int[] by = db.getData(); 
 		
@@ -260,8 +270,18 @@ public class BufferedLayer extends ImageLayer{
 
 	}
 
-	public BufferedImage getImagemBuffer(){
-		return imageBuffer;
+	public void setBuffer(BufferedImage buffer){
+		this.buffer = buffer;
+		
+		this.w = buffer.getWidth();
+		this.h = buffer.getHeight();
+		
+		resetImage();
+		
+	}
+	
+	public BufferedImage getModifiedBuffer(){
+		return modifiedBuffer;
 	}
 	
 	public boolean colideAlphaPoint(int px, int py){
@@ -272,11 +292,11 @@ public class BufferedLayer extends ImageLayer{
 			
 			int my = py-y;
 			
-			if(mx>=imageBuffer.getWidth()||my>=imageBuffer.getHeight()){
+			if(mx>=modifiedBuffer.getWidth()||my>=modifiedBuffer.getHeight()){
 				return false;
 			}
 			
-			Color color = new Color(imageBuffer.getRGB(mx, my), true);	
+			Color color = new Color(modifiedBuffer.getRGB(mx, my), true);	
 			
 			return color.getAlpha()==255;
 		}
@@ -293,11 +313,11 @@ public class BufferedLayer extends ImageLayer{
 			
 			int my = py-y;
 			
-			if(mx>=imageBuffer.getWidth()||my>=imageBuffer.getHeight()){
+			if(mx>=modifiedBuffer.getWidth()||my>=modifiedBuffer.getHeight()){
 				return null;
 			}
 			
-			Color color = new Color(imageBuffer.getRGB(mx, my), true);	
+			Color color = new Color(modifiedBuffer.getRGB(mx, my), true);	
 			
 			return color;
 		}
@@ -310,7 +330,7 @@ public class BufferedLayer extends ImageLayer{
 	public void draw(Graphic g, AffineTransform transform) {
 		g.transform(transform);
 
-		g.drawImage( imageBuffer, x, y, x+w,y+h,
+		g.drawImage( modifiedBuffer, x, y, x+w,y+h,
 				xImage,yImage,xImage+w,yImage+h, null );		
 	}
 
