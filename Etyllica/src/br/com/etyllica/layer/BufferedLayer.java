@@ -231,6 +231,24 @@ public class BufferedLayer extends ImageLayer{
 		modifiedBuffer = op.filter(modifiedBuffer, null);
 		
 	}
+	
+	public void resize(int width, int height){
+				
+		double scaleW = (double)width/(double)buffer.getWidth();
+		
+		double scaleH = (double)height/(double)buffer.getHeight();		
+		
+		AffineTransform transform = AffineTransform.getScaleInstance(scaleW, scaleH);
+		
+		AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+				
+		modifiedBuffer = op.filter(modifiedBuffer, null);
+		
+		this.w = width;
+		
+		this.h = height;
+		
+	}
 
 	public void girar180(){
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, -1);
