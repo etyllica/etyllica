@@ -113,17 +113,25 @@ public class ImageLoader extends LoaderImpl{
 					img = TGAReader.getInstance().loadImage(dir);
 
 					camadas.put(diretorio,img);
+					
 				} catch (IOException e) {
+					
+					System.err.println("Image "+diretorio+" not found.");
+					
 					e.printStackTrace();
 				}
 
 			}else if(ext.equals("pcx")){
 
 				try {
+					
 					img = PCXReader.getInstance().loadImage(dir);
 
 					camadas.put(diretorio,img);
 				} catch (IOException e) {
+					
+					System.err.println("Image "+diretorio+" not found.");
+					
 					e.printStackTrace();
 				}
 
@@ -133,7 +141,11 @@ public class ImageLoader extends LoaderImpl{
 					img = ICOReader.getInstance().loadImage(dir);
 
 					camadas.put(diretorio,img);
+					
 				} catch (IOException e) {
+					
+					System.err.println("Image "+diretorio+" not found.");
+					
 					e.printStackTrace();
 				}
 
