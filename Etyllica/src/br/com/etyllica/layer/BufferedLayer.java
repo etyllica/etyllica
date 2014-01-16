@@ -58,7 +58,11 @@ public class BufferedLayer extends ImageLayer{
 	 * @param buffer
 	 */
 	public BufferedLayer(int x, int y, BufferedImage buffer) {
-		this(x,y);
+		super(x,y);
+		
+		this.w = buffer.getWidth();
+		this.h = buffer.getHeight();
+		
 		igualaImagem(buffer);
 	}
 
@@ -70,7 +74,6 @@ public class BufferedLayer extends ImageLayer{
 	 * @param h
 	 */
 	public BufferedLayer(int x, int y, int w, int h) {
-
 		this(x,y);
 
 		this.w = w;
@@ -105,8 +108,8 @@ public class BufferedLayer extends ImageLayer{
 		this.w = w;
 		this.h = h;
 
-		buffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		buffer.getGraphics().drawImage(buffer,0,0,null);
+		this.buffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		this.buffer.getGraphics().drawImage(buffer,0,0,null);
 
 		resetImage();
 
@@ -118,8 +121,8 @@ public class BufferedLayer extends ImageLayer{
 	 */
 	public void igualaImagem(BufferedImage buffer){
 
-		buffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
-		buffer.getGraphics().drawImage(buffer,0,0,null);
+		this.buffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
+		this.buffer.getGraphics().drawImage(buffer,0,0,null);
 
 		w = buffer.getWidth();
 		h = buffer.getHeight();
