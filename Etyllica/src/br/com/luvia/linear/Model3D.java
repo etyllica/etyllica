@@ -47,6 +47,8 @@ public class Model3D extends Polygon3D implements GLDrawable{
 
 	//TODO Just for test, Remove!
 	public Integer specialVertex = 0;
+	
+	private Map<String, Texture> textureMap = new HashMap<String, Texture>();
 
 	public Model3D() {
 		super(0,0,0);
@@ -90,7 +92,7 @@ public class Model3D extends Polygon3D implements GLDrawable{
 		gl.glPopMatrix();
 
 	}
-
+	
 	private void drawFaces(GLAUX gl){
 
 		if(!drawFaces){
@@ -104,10 +106,10 @@ public class Model3D extends Polygon3D implements GLDrawable{
 
 			if(!map.isEmpty()){
 
-				//System.out.println("Trying to load: "+map);
-
+				Texture texture = getTexture(map);
+				
+				
 				if(drawTexture){
-					Texture texture = new Texture(ImageLoader.getInstance().getImage(map,true));
 
 					setTexture(gl, texture);
 					gl.glEnable (GL.GL_DEPTH_TEST);
@@ -162,6 +164,23 @@ public class Model3D extends Polygon3D implements GLDrawable{
 		
 		}
 
+	}
+	
+	private Texture getTexture(String map){
+		
+		Texture texture = textureMap.get(map);
+		
+		if(texture==null){
+			
+			//System.out.println("Trying to load: "+map);
+			
+			texture = new Texture(ImageLoader.getInstance().getImage(map,true));
+			textureMap.put(map, texture);
+			
+		}
+		
+		return texture;
+		
 	}
 
 	private void drawVertexes(GLAUX gl){
