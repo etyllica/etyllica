@@ -16,10 +16,9 @@
     <div class="wrapper">
       <header>
         <h1>Etyllica</h1>
-        <p>A 2D Game Engine in pure Java.</p>
+        <p>A 2D / 3D Game Engine in pure Java.</p>
 
         <p class="view"><a href="https://github.com/yuripourre/etyllica">View the Project on GitHub <small>yuripourre/etyllica</small></a></p>
-
 
         <ul>
           <li><a href="https://github.com/yuripourre/etyllica/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -28,24 +27,47 @@
         </ul>
       </header>
       <section>
+
+	<h3>Features</h3>
+        <ul>
+		<li> Keyboard and Mouse handling (and Multiple Joysticks Handling* [for Linux])</li>
+		<li> Image Loader that supports (TGA, PCX, PNG, BMP, JPG, GIF [yes, animated])</li>
+		<li> Animation Tween System</li>
+		<li> Animation Pivot System (Used in [Etyllic Animator](http://yuripourre.github.com/etyllic-animator/))</li>
+		<li> FullScreen Support (Even in Applets)</li>
+		<li> Multilanguage Support</li>
+		<li> GUI System</li>
+		<li> Theme Manager</li>
+		<li> Sound Loader that supports (MP3, OGG, WAV)</li>
+		<li> Background Music</li>
+		<li> Audio Capture</li> 
+		<li> WaveForm Drawing</li>
+		<li> OpenGL simulation with software Rendering (Even in Unsigned Applets)</li>
+		<li> Basic Particle System</li>
+		<li> Physics</li>
+
         <h3>About the Engine</h3>
 
 	<p>Etyllica is a pure Java Game Engine to make games fast. It can render 3D (by software) using jGL in unsigned applets and streams audio with SoundSystem Library. Etyllica have its own GUI System.</p>
 
 	<h3>Related Projects</h3>
-
 	<ul>
-	<li><p><a href="http://yuripourre.github.com/etyllic-mario">Etyllic Mario</a></p></li>
-	<li><p><a href="http://yuripourre.github.com/etyllic-paint">Etyllic Paint</a></p></li>
-	<li><p><a href="http://yuripourre.github.com/etyllic-animator">Etyllic Animator</a></p></li>
-	<li><p><a href="http://yuripourre.github.com/hardtobeatme">Hard To Beat Me</a></p></li>
+		<li><a href="http://yuripourre.github.com/etyllic-pong">Etyllic Pong</a> - Pong Clone</li>
+		<li><a href="http://yuripourre.github.com/etyllic-mario">Etyllic Mario</a> - Mario Clone</li>
+		<li><a href="http://yuripourre.github.com/etyllic-paint">Etyllic Paint</a> - Paint Clone</li>
+		<li><a href="http://yuripourre.github.com/etyllic-animator">Etyllic Animator</a> Pivot Animator</li>
+		<li><a href="http://yuripourre.github.com/hardtobeatme">Hard to Beat Me</a> - A Game developed at <a href="http://globalgamejam.org/">GGJ 2013</a></li>
+		<li><a href="https://github.com/yuripourre/etyllica-mobile">Etyllica Mobile</a> - Etyllica port to Android.</li>
+		<li><a href="https://github.com/yuripourre/etyllic-tts">EtyllicTTS</a> - A FreeTTS fork</li>
+		<li><a href="https://github.com/yuripourre/veete">Veete</a> A Map Editor</li>
 	</ul>
 
 	<h3>Dependencies (included)</h3>
 
 	<ul>
-	<li><p>jGL (An OpenGL simulator - <a href="http://www.cmlab.csie.ntu.edu.tw/%7Erobin/jGL/">http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/</a>).</p></li>
-	<li><p>SoundSystem (Audio Library - <a href="http://www.paulscode.com/forum/index.php?topic=4.0">http://www.paulscode.com/forum/index.php?topic=4.0</a>), WAV, JOgg, JOrbis and MP3 codec plug-in (<a href="http://www.paulscode.com/forum/index.php?topic=496.0">http://www.paulscode.com/forum/index.php?topic=496.0</a>).</p></li>
+	<li>jGL (An OpenGL simulator - <a href="http://www.cmlab.csie.ntu.edu.tw/%7Erobin/jGL/">http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/</a>).</li>
+	<li>SoundSystem (Audio Library - <a href="http://www.paulscode.com/forum/index.php?topic=4.0">http://www.paulscode.com/forum/index.php?topic=4.0</a>), WAV, JOgg, JOrbis and MP3 codec plug-in (<a href="http://www.paulscode.com/forum/index.php?topic=496.0">http://www.paulscode.com/forum/index.php?topic=496.0</a>).</li>
+	<li>dyn4j (A 2D Physics Library - <a href="http://code.google.com/p/dyn4j/"></a>).</li>
 	</ul>
 
 	<h3>Examples</h3>
