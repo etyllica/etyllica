@@ -1,4 +1,4 @@
-#Etyllica (v 3.3)
+#Etyllica (v 3.4)
 
 
 [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games fast. It can render 3D (by software) using [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) in unsigned applets and streams audio with [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) Library.
@@ -6,7 +6,7 @@
 ##Features
 
 - Keyboard and Mouse handling (and Multiple Joysticks Handling* [for Linux])
-- Image Loader that supports (TGA, PCX, PNG, BMP, JPG)
+- Image Loader that supports (TGA, PCX, PNG, BMP, JPG, GIF [yes, animated])
 - Animation Tween System
 - Animation Pivot System (Used in [Etyllic Animator](http://yuripourre.github.com/etyllic-animator/))
 - FullScreen Support (Even in Applets)
@@ -36,7 +36,7 @@
 
 ##Dependencies (optional)
 
-If you don't need 3D Graphics, Sound nor Physics, you just have to include the [etyllica-3.3.jar](https://github.com/yuripourre/etyllica/blob/master/Etyllica/libs/etyllica-3.3.jar) (166Kb)
+If you don't need 3D Graphics, Sound nor Physics, you just have to include the [etyllica-3.4.jar](https://github.com/yuripourre/etyllica/blob/master/Etyllica/libs/etyllica-3.4.jar) (166Kb)
 
 - [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) (An OpenGL simulator)
 - [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library)

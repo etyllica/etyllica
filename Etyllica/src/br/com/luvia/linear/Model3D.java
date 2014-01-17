@@ -13,7 +13,7 @@ import org.jgl.GLAUX;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.etyllica.core.loader.ImageLoader;
+import br.com.etyllica.core.loader.image.ImageLoader;
 import br.com.luvia.GLDrawable;
 import br.com.luvia.material.Material;
 import br.com.luvia.material.Texture;
@@ -172,7 +172,7 @@ public class Model3D extends Polygon3D implements GLDrawable{
 		
 		if(texture==null){
 			
-			//System.out.println("Trying to load: "+map);
+			System.out.println("Trying to load: "+map);
 			
 			texture = new Texture(ImageLoader.getInstance().getImage(map,true));
 			textureMap.put(map, texture);

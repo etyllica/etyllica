@@ -11,8 +11,8 @@ import br.com.etyllica.core.Engine;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.FontLoader;
-import br.com.etyllica.core.loader.ImageLoader;
 import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.core.loader.image.ImageLoader;
 
 /**
  * 

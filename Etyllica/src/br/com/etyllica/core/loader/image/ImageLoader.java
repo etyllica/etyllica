@@ -1,17 +1,16 @@
-package br.com.etyllica.core.loader;
+package br.com.etyllica.core.loader.image;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 
-import br.com.etyllica.core.loader.image.ICOReader;
-import br.com.etyllica.core.loader.image.PCXReader;
-import br.com.etyllica.core.loader.image.TGAReader;
+import br.com.etyllica.core.loader.LoaderImpl;
 import br.com.etyllica.layer.StaticLayer;
 
 /**
@@ -26,6 +25,8 @@ public class ImageLoader extends LoaderImpl{
 	private static ImageLoader instance = null;
 
 	private Map<String, BufferedImage> camadas = new HashMap<String, BufferedImage>();
+	
+	private Map<String, List<ImageFrame>> animations = new HashMap<String, List<ImageFrame>>();
 
 	private ImageLoader(){
 		super();
@@ -51,24 +52,29 @@ public class ImageLoader extends LoaderImpl{
 
 		return cam;
 	}
-
+	
 	public BufferedImage getImage(String path){
 		
 		return getImage(path, false);
 		
 	}
 	
-	public BufferedImage getImage(String path, boolean absolute){
-
+	private String getDiretorio(String path, boolean absolute){
+		
 		StringBuilder sb = new StringBuilder();
-				
+		
 		if(!absolute){
 			sb.append(folder);
 		}
 		
 		sb.append(path);
 		
-		String diretorio = sb.toString();
+		return sb.toString();
+	}
+	
+	public BufferedImage getImage(String path, boolean absolute){
+
+		String diretorio = getDiretorio(path, absolute);
 
 		if(camadas.containsKey(diretorio)){
 
@@ -149,10 +155,78 @@ public class ImageLoader extends LoaderImpl{
 					e.printStackTrace();
 				}
 
+			}else if(ext.equals("gif")){
+
+				try {
+					img = GIFReader.getInstance().loadImage(dir);
+
+					camadas.put(diretorio,img);
+					
+				} catch (IOException e) {
+					
+					System.err.println("Image "+diretorio+" not found.");
+					
+					e.printStackTrace();
+				}
+
 			}
+			
+			
 
 			return img;
 		}
+		
+	}
+	
+	public List<ImageFrame> getAnimation(String path){
+		
+		return getAnimation(path, false);
+		
+	}
+	
+	public List<ImageFrame> getAnimation(String path, boolean absolute){
+		
+		String diretorio = getDiretorio(path, absolute);
+		
+		if(animations.containsKey(diretorio)){
+
+			return animations.get(diretorio);
+
+		}else{
+
+			List<ImageFrame> list = null;
+
+			URL dir = null;
+			
+			try {
+				dir = new URL(url, diretorio);
+			} catch (MalformedURLException e1) {
+				e1.printStackTrace();
+			}
+
+			int mid= diretorio.lastIndexOf(".");
+			String ext=diretorio.substring(mid+1,diretorio.length()).toLowerCase();
+						
+			if(ext.equals("gif")){
+
+				try {
+					list = GIFReader.getInstance().loadAnimation(dir);
+
+					animations.put(diretorio, list);
+					
+				} catch (IOException e) {
+					
+					System.err.println("Image "+diretorio+" not found.");
+					
+					e.printStackTrace();
+				}
+
+			}
+			
+			return list;
+		}
+		
 	}
 
+	
 }

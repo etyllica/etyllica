@@ -75,7 +75,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public class PCXReader implements ImageReader{
+public class PCXReader extends ImageReaderImpl{
 
 	private static PCXReader instance = null;
 	

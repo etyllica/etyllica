@@ -7,7 +7,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-import br.com.etyllica.core.loader.ImageLoader;
+import br.com.etyllica.core.loader.image.ImageLoader;
 import br.com.etyllica.core.video.Graphic;
 
 /**

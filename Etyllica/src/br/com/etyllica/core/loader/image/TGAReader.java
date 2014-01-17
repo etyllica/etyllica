@@ -11,7 +11,7 @@ import java.net.URL;
 //http://paulbourke.net/dataformats/tga/
 //little endian multi-byte integers: "low-order byte,high-order byte"
 //       00,04 -> 04,00 -> 1024
-public class TGAReader implements ImageReader{
+public class TGAReader extends ImageReaderImpl{
 
 	private static TGAReader instance = null;
 
@@ -124,5 +124,7 @@ public class TGAReader implements ImageReader{
 		bimg = op.filter(bimg, null);
 
 		return bimg;
+		
 	}
+	
 }

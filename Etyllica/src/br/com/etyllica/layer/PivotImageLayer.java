@@ -2,7 +2,7 @@ package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
 
-import br.com.etyllica.core.loader.ImageLoader;
+import br.com.etyllica.core.loader.image.ImageLoader;
 import br.com.etyllica.core.video.Graphic;
 
 /**

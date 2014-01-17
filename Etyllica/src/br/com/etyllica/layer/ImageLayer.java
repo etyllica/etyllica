@@ -3,7 +3,7 @@ package br.com.etyllica.layer;
 import java.awt.geom.AffineTransform;
 
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.core.loader.ImageLoader;
+import br.com.etyllica.core.loader.image.ImageLoader;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.colision.ColisionArea;
 import br.com.etyllica.linear.Rectangle;

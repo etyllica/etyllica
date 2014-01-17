@@ -15,19 +15,66 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class ICOReader implements ImageReader{
+public class ICOReader extends ImageReaderImpl{
 
+	private static final short ICO = 1;
+	private static final short CUR = 2;
+	
 	private static ICOReader instance = null;
 	
-	public static ICOReader getInstance() {
+	public static ICOReader getInstance(){
 		if(instance==null){
 			instance = new ICOReader();
 		}
 
 		return instance;
+	}
+	
+	private class ICOHeader{
+		
+		private short	reserved;
+		private short	imageType;
+		private short	images;
+		
+		ICOHeader(DataInputStream in) throws IOException{
+			
+			reserved = in.readShort();
+			System.out.println("Reserved = "+reserved);
+			
+			ByteBuffer bbType = ByteBuffer.allocate(2);
+			bbType.order(ByteOrder.LITTLE_ENDIAN);
+			bbType.put(in.readByte());
+			bbType.put(in.readByte());
+			imageType = bbType.getShort(0);
+			
+			printImageType(imageType);
+			
+			ByteBuffer bbImages = ByteBuffer.allocate(2);
+			bbImages.order(ByteOrder.LITTLE_ENDIAN);
+			bbImages.put(in.readByte());
+			bbImages.put(in.readByte());
+			images = bbImages.getShort(0);
+			System.out.println("images = "+images);
+
+						
+		}
+			
+	}
+	
+	private void printImageType(short imageType){
+		
+		if(imageType==ICO){
+			System.out.println("imageType = ICO");	
+		}
+		else if(imageType==CUR){
+			System.out.println("imageType = CUR");	
+		}
+		
 	}
 	
 	private class ImageEntry{
@@ -103,39 +150,6 @@ public class ICOReader implements ImageReader{
 		}
 	}
 	
-	private class ICOHeader{
-		
-		private short	reserved;
-		private short	imageType;
-		private short	images;
-		
-		ICOHeader(DataInputStream in) throws IOException{
-			
-			reserved = in.readShort();
-			System.out.println("Reserved = "+reserved);
-			
-			ByteBuffer bbType = ByteBuffer.allocate(2);
-			bbType.order(ByteOrder.LITTLE_ENDIAN);
-			bbType.put(in.readByte());
-			bbType.put(in.readByte());
-			imageType = bbType.getShort(0);
-			System.out.println("imageType = "+imageType);
-			
-			//if imageType!=1 invalid ico format
-			
-			ByteBuffer bbImages = ByteBuffer.allocate(2);
-			bbImages.order(ByteOrder.LITTLE_ENDIAN);
-			bbImages.put(in.readByte());
-			bbImages.put(in.readByte());
-			images = bbImages.getShort(0);
-			System.out.println("images = "+images);
-
-						
-		}
-			
-	}
-	
-
 	public BufferedImage loadImage(URL url) throws IOException{
 
 		InputStream	f = url.openStream();
@@ -148,22 +162,20 @@ public class ICOReader implements ImageReader{
 		
 		f.close();
 		
-		InputStream is = new ByteArrayInputStream(fakeBMPHeader(ie.width, ie.height, ie.data));
-		BufferedImage bimg = ImageIO.read(is);
+		//InputStream is = new ByteArrayInputStream(fakeBMPHeader(ie.width, ie.height, ie.data));
+		//BufferedImage bimg = ImageIO.read(is);
 		
 		//BufferedImage bimg = getBmpByteArray(ie.data, ie.width, ie.height, ie.bitsPerPixel);
 		
-		return bimg;
+		//return bimg;
 		
 		
-		/*List<ImageEntry> entries = new ArrayList<ImageEntry>();
+		List<ImageEntry> entries = new ArrayList<ImageEntry>();
 		
 		for(int i=0;i<header.images;i++){
 			
 			System.out.println("loading image "+i);
-			
-		
-			
+					
 			InputStream is = new ByteArrayInputStream(ie.data);
 			BufferedImage bimg = ImageIO.read(in);
 			
@@ -173,8 +185,7 @@ public class ICOReader implements ImageReader{
 			
 		}
 
-		return null;
-		*/
+		return null;		
 
 	}
 	
