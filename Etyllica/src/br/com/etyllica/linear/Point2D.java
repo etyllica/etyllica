@@ -10,8 +10,11 @@ package br.com.etyllica.linear;
 public class Point2D extends java.awt.geom.Point2D {
 
 	protected String nome;
+	
 	protected double x;
+	
 	protected double y;
+	
 	protected int cor;
 
 	public Point2D(double x, double y, int cor){
