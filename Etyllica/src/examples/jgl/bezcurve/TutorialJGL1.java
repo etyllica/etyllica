@@ -1,6 +1,7 @@
 package examples.jgl.bezcurve;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 
 public class TutorialJGL1 extends Etyllica {
 
@@ -11,9 +12,9 @@ public class TutorialJGL1 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 		
-		setMainApplication(new BezCurve(w,h));
+		return new BezCurve(w,h);
 		
 	}
 	

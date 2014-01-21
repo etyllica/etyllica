@@ -1,6 +1,7 @@
 package examples.etyllica.tutorial05;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 
 /**
  * 
@@ -18,9 +19,9 @@ public class Tutorial5 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 		
-		setMainApplication(new FollowingText(w,h));
+		return new FollowingText(w,h);
 	}
 	
 }

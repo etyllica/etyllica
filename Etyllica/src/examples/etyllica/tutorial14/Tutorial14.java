@@ -1,6 +1,7 @@
 package examples.etyllica.tutorial14;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 
 public class Tutorial14 extends Etyllica {
 
@@ -11,12 +12,12 @@ public class Tutorial14 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 		
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../../");
 		
-		setMainApplication(new AnimationTutorial(w,h));
+		return new AnimationTutorial(w,h);
 	}
 	
 }

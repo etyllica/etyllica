@@ -1,6 +1,7 @@
 package examples.etyllica.tutorial04;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 
 /**
  * 
@@ -18,7 +19,7 @@ public class Tutorial4 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 
 		//Three file levels up
 		String s = getClass().getResource("").toString();
@@ -26,7 +27,7 @@ public class Tutorial4 extends Etyllica {
 		
 		hideCursor();
 		
-		setMainApplication(new ProceduralColorChange(w,h));
+		return new ProceduralColorChange(w,h);
 	}
 	
 }

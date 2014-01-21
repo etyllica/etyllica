@@ -1,6 +1,7 @@
 package examples.etyllica.tutorial15;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 
 /**
  * 
@@ -18,9 +19,9 @@ public class Tutorial15 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 		
-		setMainApplication(new ChatWindowExample(w,h));
+		return new ChatWindowExample(w,h);
 	}
 	
 }

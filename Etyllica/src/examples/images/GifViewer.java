@@ -1,6 +1,7 @@
 package examples.images;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 
 public class GifViewer extends Etyllica {
 
@@ -11,7 +12,7 @@ public class GifViewer extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 				
 		//Etyllica tries to find the resources as your Application should be
 		//To avoid this you should put your /assets/images in /Project/bin/examples/etyllica/tutorial1/
@@ -20,7 +21,7 @@ public class GifViewer extends Etyllica {
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../");
 		
-		setMainApplication(new GifAnimation(w,h));
+		return new GifAnimation(w,h);
 		
 	}
 	

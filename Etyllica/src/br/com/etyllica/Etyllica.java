@@ -50,7 +50,7 @@ public abstract class Etyllica extends Applet implements Engine{
 
 		initialSetup();
 
-		startGame();
+		this.application = startApplication();
 
 		core.startCore(application);
 
@@ -98,7 +98,7 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	}
 
-	public abstract void startGame();
+	public abstract Application startApplication();
 
 	@Override
 	public void paint( Graphics g ) {
@@ -120,10 +120,6 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	protected void hideCursor() {
 		core.hideCursor();
-	}
-
-	public void setMainApplication(Application application){
-		this.application = application;
 	}
 
 }

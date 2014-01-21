@@ -1,6 +1,7 @@
 package examples.jgl;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 import examples.jgl.application.Teapots;
 
 public class JGLTutorials extends Etyllica {
@@ -12,7 +13,7 @@ public class JGLTutorials extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 		
 		//setMainApplication(new BezCurve(w,h));
 		//setMainApplication(new BezMesh(w,h));
@@ -31,7 +32,7 @@ public class JGLTutorials extends Etyllica {
 		//setMainApplication(new Smooth(w,h));
 		//setMainApplication(new Surface(w,h));
 		//setMainApplication(new Tea(w,h));
-		setMainApplication(new Teapots(w,h));
+		return new Teapots(w,h);
 		//setMainApplication(new TextureSurf(w,h));
 		
 		//Problem

@@ -1,6 +1,7 @@
 package examples.etyllica.tutorial06;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 import examples.etyllica.tutorial06.application.SubWindowExample;
 
 /**
@@ -19,9 +20,9 @@ public class Tutorial6 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 		
-		setMainApplication(new SubWindowExample(w,h));
+		return new SubWindowExample(w,h);
 	}
 	
 }

@@ -1,6 +1,7 @@
 package examples.etyllica.tutorial17;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 
 public class Tutorial17 extends Etyllica {
 
@@ -11,7 +12,7 @@ public class Tutorial17 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 		
 		//Etyllica tries to find the resources as your Application should be
 		//To avoid this you should put your /assets/images in /Project/bin/examples/etyllica/tutorial2/
@@ -20,7 +21,7 @@ public class Tutorial17 extends Etyllica {
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../../");
 		
-		setMainApplication(new TimedApplication(w,h));
+		return new TimedApplication(w,h);
 	}
 	
 }

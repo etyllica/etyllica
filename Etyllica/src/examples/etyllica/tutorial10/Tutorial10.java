@@ -1,6 +1,7 @@
 package examples.etyllica.tutorial10;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 import examples.etyllica.tutorial10.application.SpinnerExample;
 
 /**
@@ -19,8 +20,8 @@ public class Tutorial10 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
-		setMainApplication(new SpinnerExample(w,h));
+	public Application startApplication() {
+		return new SpinnerExample(w,h);
 	}
 	
 }

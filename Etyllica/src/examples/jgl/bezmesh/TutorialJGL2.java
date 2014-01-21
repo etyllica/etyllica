@@ -1,6 +1,7 @@
 package examples.jgl.bezmesh;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 
 public class TutorialJGL2 extends Etyllica {
 
@@ -11,9 +12,9 @@ public class TutorialJGL2 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 		
-		setMainApplication(new BezMesh(w,h));
+		return new BezMesh(w,h);
 		
 	}
 	

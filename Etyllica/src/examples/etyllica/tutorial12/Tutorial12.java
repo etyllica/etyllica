@@ -1,6 +1,7 @@
 package examples.etyllica.tutorial12;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.context.Application;
 import br.com.etyllica.core.loader.JoystickLoader;
 
 public class Tutorial12 extends Etyllica {
@@ -14,7 +15,7 @@ public class Tutorial12 extends Etyllica {
 	}
 	
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 				
 		//Etyllica tries to find the resources as your Application should be
 		//To avoid this you should put your /res/images in /Project/bin/examples/etyllica/tutorial1/
@@ -23,7 +24,7 @@ public class Tutorial12 extends Etyllica {
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../../");
 		
-		setMainApplication(new JoystickExample(w,h));
+		return new JoystickExample(w,h);
 	}
 	
 }
