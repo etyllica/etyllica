@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.VolatileImage;
 
+import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.linear.Point2D;
@@ -391,7 +392,7 @@ public class Graphic{
 	 * 
 	 * @param layer
 	 */
-	public void drawRect(Layer layer){
+	public void drawRect(GeometricLayer layer){
 		drawRect(layer.getX(), layer.getY(), layer.getW(), layer.getH());
 	}
 	/**
@@ -620,7 +621,7 @@ public class Graphic{
 	 * 
 	 * @param layer
 	 */
-	public void fillRect(Layer layer) {
+	public void fillRect(GeometricLayer layer) {
 		fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 	}
 	
