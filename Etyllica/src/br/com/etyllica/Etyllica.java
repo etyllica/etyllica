@@ -98,8 +98,6 @@ public abstract class Etyllica extends Applet implements Engine{
 
 	}
 
-	public abstract Application startApplication();
-
 	@Override
 	public void paint( Graphics g ) {
 		core.paint(g);

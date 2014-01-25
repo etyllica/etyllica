@@ -56,7 +56,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 		initialSetup();
 
-		startGame();
+		this.application = startApplication();
 
 		core.startCore(application);
 		
@@ -101,8 +101,6 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		core.initDefault();
 
 	}
-
-	public abstract void startGame();
 
 	@Override
 	public void paint( Graphics g ) {

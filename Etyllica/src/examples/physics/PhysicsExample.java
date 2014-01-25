@@ -26,6 +26,7 @@ package examples.physics;
 
 import examples.physics.application.BoxesFalling;
 import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.context.Application;
 
 /**
  * Class used to show a simple example of using the dyn4j project using
@@ -54,12 +55,12 @@ public class PhysicsExample extends EtyllicaFrame {
 	}
 
 	@Override
-	public void startGame() {
+	public Application startApplication() {
 		
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../");
 		
-		setMainApplication(new BoxesFalling(w,h));
+		return new BoxesFalling(w,h);
 	}
 
 }
