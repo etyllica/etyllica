@@ -94,6 +94,10 @@ public class KeyEvent{
 	public static final int TSK_MAIS = java.awt.event.KeyEvent.VK_PLUS;
 	public static final int TSK_IGUAL = java.awt.event.KeyEvent.VK_EQUALS;
 	
+	public static final int TSK_MINUS = java.awt.event.KeyEvent.VK_MINUS;
+	public static final int TSK_PLUS = java.awt.event.KeyEvent.VK_PLUS;
+	public static final int TSK_EQUALS = java.awt.event.KeyEvent.VK_EQUALS;
+	
 	public static final int TSK_A = java.awt.event.KeyEvent.VK_A;
 	public static final int TSK_B = java.awt.event.KeyEvent.VK_B;
 	public static final int TSK_C = java.awt.event.KeyEvent.VK_C;
