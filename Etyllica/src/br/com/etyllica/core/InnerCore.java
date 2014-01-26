@@ -81,6 +81,8 @@ public class InnerCore implements Core, InputListener, Updatable{
 	private Configuration configuration = Configuration.getInstance();
 	
 	private int fps = 0;
+	
+	private long start = 0;
 
 	public InnerCore(){
 		super();
@@ -94,6 +96,8 @@ public class InnerCore implements Core, InputListener, Updatable{
 		keyboard = control.getKeyboard();
 
 		updatables.add(animation);
+		
+		start = System.currentTimeMillis();
 
 	}
 
@@ -185,7 +189,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 			//TODO Independent Thread
 			if(!application.isLocked()){
 
-				application.getScene().update(getTimeNow());
+				application.getScene().update(now);
 
 				//if activeWindow, receive command to change application
 				if(application.getReturnApplication()!=application){
@@ -237,6 +241,12 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		System.out.println("UpdateJoystick "+event.getKey());
 
+		//activeWindow.getApplication().updateKeyboard(event);
+		//updateKeyEvent(event);
+		
+		activeWindow.updateKeyboard(event);
+
+		//Application sempre eh gerenciada pelo teclado
 		activeWindow.getApplication().updateKeyboard(event);
 
 	}
@@ -588,7 +598,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 	}
 
 	public long getTimeNow(){
-		return System.currentTimeMillis();
+		return System.currentTimeMillis()-start;
 	}
 
 	public void translateComponents(int x, int y){
