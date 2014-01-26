@@ -55,6 +55,8 @@ public class AnimatedLayer extends ImageLayer{
 		super(x,y,path);
 		this.tileW = xTile;
 		this.tileH = yTile;
+		
+		animate();
 	}
 
 	/**
@@ -68,6 +70,8 @@ public class AnimatedLayer extends ImageLayer{
 		super(x,y);
 		this.tileW = xTile;
 		this.tileH = yTile;
+		
+		animate();
 	}
 
 	protected void resetAnimation(){
@@ -143,11 +147,12 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	public void nextFrame(){
-
+		
 		if((currentFrame < frames-1)&&(currentFrame >= 0)){
+		
 			currentFrame+=inc;
-		}
-		else{
+			
+		}else{
 
 			if(once){
 				visible = false;
@@ -241,7 +246,7 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public void draw(Graphic g, AffineTransform transform) {
+	public void draw(Graphic g, AffineTransform transform){
 		g.setTransform(transform);
 
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+tileW,y+tileH,
@@ -309,16 +314,32 @@ public class AnimatedLayer extends ImageLayer{
 		return animaEmX;
 	}
 
-	public void setLockOnce(boolean lockOnce) {
+	public void setLockOnce(boolean lockOnce){
 		this.lockOnce = lockOnce;
 	}
 
-	public int getSpeed() {
+	public int getSpeed(){
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(int speed){
 		this.speed = speed;
+	}
+
+	public int getNeedleX(){
+		return needleX;
+	}
+
+	public void setNeedleX(int needleX){
+		this.needleX = needleX;
+	}
+
+	public int getNeedleY(){
+		return needleY;
+	}
+
+	public void setNeedleY(int needleY){
+		this.needleY = needleY;
 	}
 	
 }
