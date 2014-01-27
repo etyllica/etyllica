@@ -90,13 +90,13 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 		core.setLoaders(loaders);
 		//initSound
-		//core.addLoader(MultimediaLoader.getInstance());
+		//addLoader(MultimediaLoader.getInstance());
 		//init3D
-		//core.addLoader(MeshLoader.getInstance());
+		//addLoader(MeshLoader.getInstance());
 		//initSystemFonts
-		//core.addLoader(SystemFontLoader.getInstance());
+		//addLoader(SystemFontLoader.getInstance());
 
-		//core.addLoader(JoystickLoader.getInstance());
+		//addLoader(JoystickLoader.getInstance());
 
 		core.initDefault();
 
