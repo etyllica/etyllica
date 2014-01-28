@@ -48,11 +48,11 @@ public class SharedCore implements Runnable{
 
 	private InnerCore innerCore;
 
-	private boolean drawing = false;
-
 	private List<Monitor> monitors = new ArrayList<Monitor>();
 	
-	boolean quit = false;
+	private boolean quit = false;
+	
+	private long start = 0;
 
 	public SharedCore(java.awt.Component component, int width, int height){
 		super();
@@ -73,6 +73,8 @@ public class SharedCore implements Runnable{
 		innerCore = new InnerCore();
 
 		initMonitors();
+		
+		start = System.currentTimeMillis();
 
 	}
 
@@ -174,8 +176,6 @@ public class SharedCore implements Runnable{
 
 		component.addKeyListener( innerCore.keyboard );
 
-		innerCore.animator.startAnimation();
-
 	}
 
 	//Component Methods
@@ -224,8 +224,6 @@ public class SharedCore implements Runnable{
 
 	public void paint( Graphics g ) {
 
-		drawing = true;
-
 		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
 
@@ -245,7 +243,6 @@ public class SharedCore implements Runnable{
 
 		g.dispose();
 
-		drawing = false;
 	}
 
 	public int getW() {
@@ -268,9 +265,12 @@ public class SharedCore implements Runnable{
 		this.loaders = loaders;
 	}
 
-	public void update(long now){
+	public void update(){
+		
+		long delta = System.currentTimeMillis()-start;
+				
 		//if(!drawing){
-			innerCore.update(now);
+			innerCore.update(delta);
 		//}
 	}
 
@@ -322,7 +322,7 @@ public class SharedCore implements Runnable{
 				ups++;
 				updateEngine((long)delta);
 				delta -= 1;
-				renderOK = true;				
+				renderOK = true;
 			}
 
 			if(renderOK) {
@@ -345,10 +345,10 @@ public class SharedCore implements Runnable{
 	}
 	
 	private void updateEngine(long delta){
-		
+				
 		GUIEvent event = GUIEvent.NONE;
 
-		this.update(delta);
+		this.update();
 
 		event = this.getSuperEvent();
 

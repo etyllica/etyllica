@@ -28,9 +28,6 @@ public abstract class Etyllica extends Applet implements Engine{
 	protected int w = 640;
 	protected int h = 480;
 
-	//TODO define fps by Application
-	protected int updateDelay = 40; // 40ms. Implica em 25fps (1000/40) = 25	
-
 	private Application application;
 
 	private Set<Loader> loaders = new HashSet<Loader>();

@@ -30,9 +30,6 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 	protected int w = 640;
 	protected int h = 480;
 
-	protected int updateDelay = 40; // 40ms. Implica em 25fps (1000/20) = 50
-	protected int drawDelay = 25; // 40ms. Implica em 25fps (1000/20) = 50
-
 	private Application application;
 
 	private Set<Loader> loaders = new HashSet<Loader>();

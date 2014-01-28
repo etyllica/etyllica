@@ -1,19 +1,12 @@
 package br.com.etyllica.core;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.animation.Updatable;
-import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Context;
 import br.com.etyllica.core.event.GUIEvent;
@@ -70,20 +63,12 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	protected boolean drawCursor = false;
 
-	private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-
-	private final int ANIMATION_DELAY = 20;
-
-	protected Animator animator = new Animator();
-
 	protected boolean fullScreenEnable = false;
 
 	private Configuration configuration = Configuration.getInstance();
 	
 	private int fps = 0;
 	
-	private long start = 0;
-
 	public InnerCore(){
 		super();
 
@@ -97,8 +82,6 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		updatables.add(animation);
 		
-		start = System.currentTimeMillis();
-
 	}
 
 	public MainWindow getDesktopWindow() {
@@ -138,11 +121,11 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		components.add(application);
 
-		if(!application.isLocked()){
-			application.update(now);
-		}
+		updateEffects(now);
+		
+		updateApplication(application, now);		
 
-		updateActiveWindow();
+		updateActiveWindow(now);
 
 		updateGui(components);
 
@@ -167,36 +150,36 @@ public class InnerCore implements Core, InputListener, Updatable{
 		}
 
 	}
-
-	public void updateApplication(){
-
-		Context application = activeWindow.getApplication();
-
-		if(application!=null){
-
-			long now = getTimeNow();
-
-			if(application.getUpdateInterval()>0){
-
-				if(now-application.getLastUpdate()>application.getUpdateInterval()){
-					application.timeUpdate(now);
-					application.setLastUpdate(now);
+	
+	public void updateApplication(Context context, long now){
+				
+		if(!context.isLocked()){
+						
+			if(context.getUpdateInterval()==0){
+							
+				context.update(now);
+				
+				context.setLastUpdate(now);
+				
+			}else{
+				
+				if(now-context.getLastUpdate()>=context.getUpdateInterval()){
+										
+					context.timeUpdate(now);
+					context.setLastUpdate(now);
+					
+					context.getScene().update(now);
+					
 				}
 
 			}
 
-			//Animate
-			//TODO Independent Thread
-			if(!application.isLocked()){
+			context.getScene().update(now);
 
-				application.getScene().update(now);
+			//if activeWindow, receive command to change application
+			if(context.getReturnApplication()!=context){
 
-				//if activeWindow, receive command to change application
-				if(application.getReturnApplication()!=application){
-
-					this.changeApplication();
-
-				}
+				this.changeApplication();
 
 			}
 
@@ -204,7 +187,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private void updateActiveWindow(){
+	private void updateActiveWindow(long now){
 
 		List<Window> windows = activeWindow.getWindows(); 
 
@@ -551,11 +534,13 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private void drawEffects(Graphic g){
-
+	private void updateEffects(long now){
 		for(Updatable updatable: updatables){
-			updatable.update(getTimeNow());	
-		}		
+			updatable.update(now);	
+		}
+	}
+	
+	private void drawEffects(Graphic g){
 
 		List<AnimationScript> remove = new ArrayList<AnimationScript>();
 
@@ -595,10 +580,6 @@ public class InnerCore implements Core, InputListener, Updatable{
 		}
 
 
-	}
-
-	public long getTimeNow(){
-		return System.currentTimeMillis()-start;
 	}
 
 	public void translateComponents(int x, int y){
@@ -833,18 +814,6 @@ public class InnerCore implements Core, InputListener, Updatable{
 		}
 	}
 	
-	protected class Animator implements Runnable{
-
-		protected void startAnimation(){
-			executor.scheduleWithFixedDelay(new Animator(), ANIMATION_DELAY, ANIMATION_DELAY, TimeUnit.MILLISECONDS);
-		}
-
-		public void run() { 
-			updateApplication();
-		}
-
-	}
-
 	@Override
 	public void updateKeyEvent(KeyEvent event) {
 

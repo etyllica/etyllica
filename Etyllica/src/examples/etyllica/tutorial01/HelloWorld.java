@@ -23,13 +23,17 @@ public class HelloWorld extends Application{
 		hello = new ImageLayer(200,100,"hello.png");
 				
 		loading = 100;
-				
+
 	}
 
 	@Override
 	public void draw(Graphic g) {
 		hello.draw(g);
-				
+	}
+	
+	@Override
+	public void update(long now) {
+		
 		if(right){
 			hello.setOffsetX(1);
 		}
@@ -43,9 +47,9 @@ public class HelloWorld extends Application{
 		if(up){
 			hello.setOffsetY(-1);
 		}
+		
 	}
 	
-
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
 		// TODO Auto-generated method stub
@@ -62,9 +66,6 @@ public class HelloWorld extends Application{
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)){
-			
-			System.out.println(camera.getY());
-			
 			right = true;
 		}
 		if(event.isKeyUp(KeyEvent.TSK_RIGHT_ARROW)){
