@@ -174,7 +174,8 @@ public class Graphic{
 
 			if(!border){
 				screen.drawString(text,x,fy);
-			}			
+			}
+			
 			else{
 
 				FontRenderContext frc = screen.getFontRenderContext();
@@ -316,6 +317,9 @@ public class Graphic{
 		writeX(0,y,frase, borda);
 	}
 	
+	public void writeX(float y, String frase) {
+		writeX(0,y,frase, false);
+	}
 	
 	/*
 	 * Write Methods
@@ -480,7 +484,7 @@ public class Graphic{
 	}
 	
 	public Font getFont(){
-		return screen.getFont();		
+		return screen.getFont();
 	}
 	
 	public FontRenderContext getFontRenderContext(){
@@ -501,6 +505,10 @@ public class Graphic{
 	 */
 	public void setColor(Color color){
 		screen.setColor(color);
+	}
+	
+	public void setFontSize(float size){
+		screen.getFont().deriveFont(size);
 	}
 	
 	/**
