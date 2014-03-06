@@ -32,9 +32,9 @@
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme) - A Game developed at [GGJ 2013](http://globalgamejam.org/)
 - [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android.
 - [EtyllicTTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
-- [Rubik Solver](https://github.com/yuripourre/rubik-solver) - A Simple Rubik Cube Application.
 - [Etyllic GameBoy](https://github.com/yuripourre/etyllic-gameboy) - A [Javaboy](http://www.millstone.demon.co.uk/download/javaboy/) fork with faster rendering.
-- [Etyllic Motion](https://github.com/yuripourre/etyllic-motion) - An Image Processing Library with focus in Augmented Reality
+- [E-Motion](https://github.com/yuripourre/e-motion) - An Image Processing Library with focus in Augmented Reality
+- [Rubik Solver](https://github.com/yuripourre/rubik-solver) - A Simple Rubik Cube Application.
 - [Veete](https://github.com/yuripourre/veete) - A Tiled Map Editor
 
 ##Dependencies (optional)
