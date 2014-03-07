@@ -36,6 +36,7 @@
 - [E-Motion](https://github.com/yuripourre/e-motion) - An Image Processing Library with focus in Augmented Reality
 - [Rubik Solver](https://github.com/yuripourre/rubik-solver) - A Simple Rubik Cube Application.
 - [Veete](https://github.com/yuripourre/veete) - A Tiled Map Editor
+- [Luvia](https://github.com/yuripourre/luvia) - An Etyllica fork using [JoGL](http://jogamp.org/jogl/www/) and [glg2d](https://github.com/brandonborkholder/glg2d) for GPU rendering.
 
 ##Dependencies (optional)
 
