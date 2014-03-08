@@ -4,8 +4,8 @@ import org.jgl.GL;
 import org.jgl.GLAUX;
 
 import br.com.luvia.linear.Box3D;
-import br.com.luvia.linear.Polygon3D;
 import br.com.luvia.linear.Point3D;
+import br.com.luvia.linear.Polygon3D;
 import br.com.luvia.material.Texture;
 import br.com.luvia.util.Camera;
 import br.com.luvia.util.Lamp;
@@ -17,13 +17,13 @@ import br.com.luvia.util.Lamp;
  *
  */
 
-public abstract class Application3D extends GLAUX{
+public abstract class Application3D extends GLAUX {
 
 	public Application3D(int w, int h) {
 		super(w,h);
 	}
 
-	protected void desenhaPoligono(Polygon3D polygon){
+	protected void desenhaPoligono(Polygon3D polygon) {
 		glPushMatrix();
 		glLoadIdentity();
 		glColor3d(polygon.getColor().getRed()/0xff,polygon.getColor().getGreen()/0xff,polygon.getColor().getBlue()/0xff);
@@ -131,6 +131,31 @@ public abstract class Application3D extends GLAUX{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
+	}
+	
+	protected int[] getViewPort(GL gl) {
+
+		int viewport[] = new int[4];
+		gl.glGetIntegerv(GL.GL_VIEWPORT, viewport);
+
+		return viewport;
+	}
+
+	protected double[] getModelView(GL gl) {
+
+		double modelView[] = new double[16];
+		gl.glGetDoublev(GL.GL_MODELVIEW_MATRIX, modelView);
+
+		return modelView;
+	}
+
+	protected double[] getProjection(GL gl) {
+
+		double projection[] = new double[16];
+
+		gl.glGetDoublev(GL.GL_PROJECTION_MATRIX, projection);
+
+		return projection;
 	}
 
 }
