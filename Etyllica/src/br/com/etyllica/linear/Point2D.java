@@ -60,12 +60,18 @@ public class Point2D extends java.awt.geom.Point2D {
 	}
 	
 	public double angle(Point2D point){
+
+		return angle(point.getX(), point.getY());
+		
+	}
 	
+	public double angle(double px, double py){
+		
 		//From Peter O.'s Answer 
 		//http://stackoverflow.com/questions/7586063/how-to-calculate-the-angle-between-two-points-relative-to-the-horizontal-axis
 		
-		double deltaX = point.x - x;
-		double deltaY = point.y - y;
+		double deltaX = px - x;
+		double deltaY = py - y;
 
 		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
 		
