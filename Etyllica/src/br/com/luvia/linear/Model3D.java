@@ -85,7 +85,7 @@ public class Model3D extends Polygon3D implements GLDrawable{
 
 		drawFaces(gl);
 
-		drawVertexes(gl);
+		//drawVertexes(gl);
 
 		//gl.glEnd();
 
@@ -183,11 +183,7 @@ public class Model3D extends Polygon3D implements GLDrawable{
 		
 	}
 
-	private void drawVertexes(GLAUX gl){
-
-		if(!drawVertices){
-			return;
-		}
+	public void drawVertexes(GLAUX gl){
 		
 		double vsize = 0.015;
 		
