@@ -430,6 +430,10 @@ public class Bone implements GLDrawable{
 
 	public double getAngleZ(){
 		return angleZ;
-	}	
+	}
 
+	public double getSize() {
+		return size;
+	}
+	
 }
