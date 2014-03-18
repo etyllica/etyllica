@@ -9,7 +9,7 @@ package br.com.etyllica.linear;
 
 public class Point2D extends java.awt.geom.Point2D {
 
-	protected String nome;
+	protected String name;
 	
 	protected double x;
 	
@@ -17,21 +17,21 @@ public class Point2D extends java.awt.geom.Point2D {
 	
 	protected int cor;
 
-	public Point2D(double x, double y, int cor){
+	public Point2D(double x, double y, int color) {
 		this.x = x;
 		this.y = y;
-		this.cor = cor;
-		this.nome = "";
+		this.cor = color;
+		this.name = "";
 	}
 
-	public Point2D(double x, double y, String nome){
+	public Point2D(double x, double y, String nome) {
 		this.x = x;
 		this.y = y;
-		this.nome = nome;
+		this.name = nome;
 		this.cor = 0;
 	}
 
-	public Point2D(double x, double y){
+	public Point2D(double x, double y) {
 		this(x,y,"");
 	}
 
@@ -51,21 +51,21 @@ public class Point2D extends java.awt.geom.Point2D {
 		this.y = y;
 	}
 
-	public void setOffsetX(double x){
+	public void setOffsetX(double x) {
 		this.x += x;
 	}
 
-	public void setOffsetY(double y){
+	public void setOffsetY(double y) {
 		this.y += y;
 	}
 	
-	public double angle(Point2D point){
+	public double angle(Point2D point) {
 
 		return angle(point.getX(), point.getY());
 		
 	}
 	
-	public double angle(double px, double py){
+	public double angle(double px, double py) {
 		
 		//From Peter O.'s Answer 
 		//http://stackoverflow.com/questions/7586063/how-to-calculate-the-angle-between-two-points-relative-to-the-horizontal-axis
