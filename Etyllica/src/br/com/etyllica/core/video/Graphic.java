@@ -40,14 +40,14 @@ public class Graphic{
 	private int width;
 	private int height;
 	
-	public Graphic(int width, int height){
+	public Graphic(int width, int height) {
 		super();
 		
 		this.width = width;
 		this.height = height;
 	}
 	
-	public void setVolatileImage(VolatileImage vimg){
+	public void setVolatileImage(VolatileImage vimg) {
 	
 		this.vimg = vimg;
 		this.width = vimg.getWidth();
@@ -60,7 +60,7 @@ public class Graphic{
 		
 	}
 	
-	/*public void setBufferedImage(BufferedImage bimg){
+	/*public void setBufferedImage(BufferedImage bimg) {
 		this.width = bimg.getWidth();
 		this.height = bimg.getHeight();
 		
@@ -162,9 +162,9 @@ public class Graphic{
 	 * @param text
 	 * @param border
 	 */
-	public void writeX(float offsetX, float y, String text, boolean border){
+	public void writeX(float offsetX, float y, String text, boolean border) {
 
-		if((text!=null)&&(!text.isEmpty())){
+		if((text!=null)&&(!text.isEmpty())) {
 
 			FontMetrics fm = screen.getFontMetrics();
 			Font f = getFont();
@@ -172,7 +172,7 @@ public class Graphic{
 			float x = (width/2)-(fm.stringWidth(text)/2)+offsetX;
 			float fy = y+fm.getHeight();
 
-			if(!border){
+			if(!border) {
 				screen.drawString(text,x,fy);
 			}
 			
@@ -202,7 +202,7 @@ public class Graphic{
 	 * @param y
 	 * @param frase
 	 */
-	public void drawShadow(int x, int y, String frase){
+	public void drawShadow(int x, int y, String frase) {
 		drawShadow(x, y, frase,Color.BLACK);
 	}
 	
@@ -212,7 +212,7 @@ public class Graphic{
 	 * @param y
 	 * @param frase
 	 */
-	public void drawShadow(float x, float y, String frase){
+	public void drawShadow(float x, float y, String frase) {
 		this.drawShadow(x, y, frase, Color.BLACK);
 	}
 	
@@ -223,9 +223,9 @@ public class Graphic{
 	 * @param frase
 	 * @param shadowColor
 	 */
-	public void drawShadow(int x, int y, String frase, Color shadowColor){
+	public void drawShadow(int x, int y, String frase, Color shadowColor) {
 		
-		if((frase!=null)&&(!frase.isEmpty())){
+		if((frase!=null)&&(!frase.isEmpty())) {
 			
 			Color lastColor = screen.getColor();
 			
@@ -243,7 +243,7 @@ public class Graphic{
 	 * @param frase
 	 * @param shadowColor
 	 */
-	public void drawShadow(float x, float y, String frase, Color shadowColor){
+	public void drawShadow(float x, float y, String frase, Color shadowColor) {
 		this.drawShadow((int)x, (int)y, frase, shadowColor);
 	}
 	
@@ -252,8 +252,8 @@ public class Graphic{
 	 * @param y
 	 * @param text
 	 */
-	public void drawStringShadowX(int y, String text){
-		if((text!=null)&&(!text.isEmpty())){
+	public void drawStringShadowX(int y, String text) {
+		if((text!=null)&&(!text.isEmpty())) {
 
 			FontMetrics fm = screen.getFontMetrics();
 
@@ -270,7 +270,7 @@ public class Graphic{
 	 * @param y
 	 * @param text
 	 */
-	public void drawStringShadowX(float y, String text){
+	public void drawStringShadowX(float y, String text) {
 		this.drawStringShadowX((int)y, text);
 	}
 	
@@ -280,8 +280,8 @@ public class Graphic{
 	 * @param y
 	 * @param frase
 	 */
-	public void write(float x, float y, String frase){
-		if((frase!=null)&&(!frase.isEmpty())){
+	public void write(float x, float y, String frase) {
+		if((frase!=null)&&(!frase.isEmpty())) {
 			screen.drawString(frase,x,y);
 		}
 	}
@@ -379,16 +379,16 @@ public class Graphic{
 	 * @param sy2
 	 * @param observer
 	 */
-	public void drawImage( Image img, int dx1, int dy1,int dx2, int dy2, int sx1 , int sy1, int sx2, int sy2, ImageObserver observer ){
+	public void drawImage( Image img, int dx1, int dy1,int dx2, int dy2, int sx1 , int sy1, int sx2, int sy2, ImageObserver observer ) {
 		screen.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);
 	}
 	
-	public void drawImage( Image img, float dx1, float dy1, float dx2, float dy2, float sx1 , float sy1, float sx2, float sy2, ImageObserver observer ){
+	public void drawImage( Image img, float dx1, float dy1, float dx2, float dy2, float sx1 , float sy1, float sx2, float sy2, ImageObserver observer ) {
 		drawImage(img, (int)dx1, (int)dy1, (int)dx2, (int)dy2, (int)sx1, (int)sy1, (int)sx2, (int)sy2, observer);
 	}
 	
 	
-	public Graphics2D getGraphics(){
+	public Graphics2D getGraphics() {
 		return screen;
 	}
 
@@ -396,14 +396,14 @@ public class Graphic{
 	 * 
 	 * @param layer
 	 */
-	public void drawRect(GeometricLayer layer){
+	public void drawRect(GeometricLayer layer) {
 		drawRect(layer.getX(), layer.getY(), layer.getW(), layer.getH());
 	}
 	/**
 	 * 
 	 * @param layer
 	 */
-	public void fillOval(Layer layer){
+	public void fillOval(Layer layer) {
 		screen.fillOval((int)layer.getX(), (int)layer.getY(), (int)layer.getW(), (int)layer.getH());
 	}
 	
@@ -413,7 +413,7 @@ public class Graphic{
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void fillArc(Layer layer, int startAngle, int arcAngle){
+	public void fillArc(Layer layer, int startAngle, int arcAngle) {
 		screen.fillArc((int)layer.getX(), (int)layer.getY(), (int)layer.getW(), (int)layer.getH(), startAngle, arcAngle);
 	}
 	
@@ -422,11 +422,11 @@ public class Graphic{
 	 * 
 	 * @param width
 	 */
-	public void setBasicStroke(float width){
+	public void setBasicStroke(float width) {
 		screen.setStroke(new BasicStroke(width));
 	}
 	
-	public AffineTransform getTransform(){
+	public AffineTransform getTransform() {
 		return screen.getTransform();
 	}
 	
@@ -434,9 +434,9 @@ public class Graphic{
 	 * 
 	 * @param tx
 	 */
-	public void setTransform(AffineTransform tx){
+	public void setTransform(AffineTransform tx) {
 		//Avoid Java Bug
-		if(screen!=null){
+		if(screen!=null) {
 			screen.setTransform(tx);
 		}
 	}
@@ -445,16 +445,16 @@ public class Graphic{
 	 * 
 	 * @param tx
 	 */
-	public void transform(AffineTransform tx){
+	public void transform(AffineTransform tx) {
 		//Avoid Java Bug
-		if(screen!=null){
+		if(screen!=null) {
 			screen.transform(tx);
 		}
 	}
 	
-	public void resetTransform(){
+	public void resetTransform() {
 	
-		if(screen!=null){
+		if(screen!=null) {
 			//Identity matrix
 			screen.setTransform(AffineTransform.getScaleInstance(1, 1));
 		}
@@ -463,7 +463,7 @@ public class Graphic{
 	/**
 	 * Set basic stroke with width 1f 
 	 */
-	public void resetStroke(){
+	public void resetStroke() {
 		screen.setStroke(new BasicStroke(1f));
 	}
 	
@@ -471,7 +471,7 @@ public class Graphic{
 	 * 
 	 * @param stroke
 	 */
-	public void setStroke(Stroke stroke){
+	public void setStroke(Stroke stroke) {
 		screen.setStroke(stroke);
 	}
 	
@@ -479,15 +479,15 @@ public class Graphic{
 	 * 
 	 * @param font
 	 */
-	public void setFont(Font font){
+	public void setFont(Font font) {
 		screen.setFont(font);
 	}
 	
-	public Font getFont(){
+	public Font getFont() {
 		return screen.getFont();
 	}
 	
-	public FontRenderContext getFontRenderContext(){
+	public FontRenderContext getFontRenderContext() {
 		return screen.getFontRenderContext();
 	}
 	
@@ -495,7 +495,7 @@ public class Graphic{
 	 * 
 	 * @param color
 	 */
-	public void setColor(int color){
+	public void setColor(int color) {
 		screen.setColor(new Color(color));
 	}
 	
@@ -503,19 +503,19 @@ public class Graphic{
 	 * 
 	 * @param color
 	 */
-	public void setColor(Color color){
+	public void setColor(Color color) {
 		screen.setColor(color);
 	}
 	
-	public void setFontSize(float size){
-		screen.getFont().deriveFont(size);
+	public void setFontSize(float size) {
+		screen.setFont(screen.getFont().deriveFont(size));
 	}
 	
 	/**
 	 * 
 	 * @param percent
 	 */
-	public void setAlpha(int percent){
+	public void setAlpha(int percent) {
 
 		float a = (float)percent/100;
 
@@ -526,7 +526,7 @@ public class Graphic{
 	 * 
 	 * @param opacity
 	 */
-	public void setOpacity(int opacity){
+	public void setOpacity(int opacity) {
 
 		float a = (float)opacity/255;
 
@@ -534,7 +534,7 @@ public class Graphic{
 		
 	}
 	
-	public void resetOpacity(){
+	public void resetOpacity() {
 
 		float a = 1f;
 
@@ -548,7 +548,7 @@ public class Graphic{
 	 * @param x
 	 * @param y
 	 */
-	public void drawImage(Image img, int x, int y){
+	public void drawImage(Image img, int x, int y) {
 		screen.drawImage(img, x, y, null);
 	}
 	
@@ -561,7 +561,7 @@ public class Graphic{
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void drawArc(int x, int y, int w, int h, int startAngle, int arcAngle){
+	public void drawArc(int x, int y, int w, int h, int startAngle, int arcAngle) {
 		screen.drawArc(x, y, w, h, startAngle, arcAngle);
 	}
 	
@@ -574,7 +574,7 @@ public class Graphic{
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void drawArc(float x, float y, float w, float h, int startAngle, int arcAngle){
+	public void drawArc(float x, float y, float w, float h, int startAngle, int arcAngle) {
 		this.drawArc((int)x, (int)y, (int)w, (int)h, startAngle, arcAngle);
 	}
 	
@@ -585,7 +585,7 @@ public class Graphic{
 	 * @param x2
 	 * @param y2
 	 */
-	public void drawLine(int x1,int y1,int x2,int y2){
+	public void drawLine(int x1,int y1,int x2,int y2) {
 		screen.drawLine(x1, y1, x2, y2);
 	}
 	
@@ -596,7 +596,7 @@ public class Graphic{
 	 * @param x2
 	 * @param y2
 	 */
-	public void drawLine(float x1,float y1,float x2,float y2){
+	public void drawLine(float x1,float y1,float x2,float y2) {
 		this.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
 	}
 	
@@ -605,7 +605,7 @@ public class Graphic{
 	 * @param p
 	 * @param q
 	 */
-	public void drawLine(Point2D p, Point2D q){
+	public void drawLine(Point2D p, Point2D q) {
 		screen.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
 	}
 	
@@ -613,7 +613,7 @@ public class Graphic{
 	 * 
 	 * @param polygon
 	 */
-	public void drawPolygon(Polygon polygon){
+	public void drawPolygon(Polygon polygon) {
 		screen.drawPolygon(polygon);
 	}
 	
@@ -621,7 +621,7 @@ public class Graphic{
 	 * 
 	 * @param polygon
 	 */
-	public void fillPolygon(Polygon polygon){
+	public void fillPolygon(Polygon polygon) {
 		screen.fillPolygon(polygon);
 	}
 	
@@ -689,7 +689,7 @@ public class Graphic{
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void fillArc(int x, int y, int w, int h, int startAngle, int arcAngle){
+	public void fillArc(int x, int y, int w, int h, int startAngle, int arcAngle) {
 		screen.fillArc(x, y, w, h, startAngle, arcAngle);
 	}
 	
@@ -702,7 +702,7 @@ public class Graphic{
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void fillArc(float x, float y, float w, float h, int startAngle, int arcAngle){
+	public void fillArc(float x, float y, float w, float h, int startAngle, int arcAngle) {
 		this.fillArc((int)x, (int)y, (int)w, (int)h, startAngle, arcAngle);
 	}
 
@@ -761,7 +761,7 @@ public class Graphic{
 	 * @param w
 	 * @param h
 	 */
-	public void drawOval(int x, int y, int w, int h ){
+	public void drawOval(int x, int y, int w, int h ) {
 		screen.drawOval(x,y,w,h);
 	}
 	
@@ -772,7 +772,7 @@ public class Graphic{
 	 * @param w
 	 * @param h
 	 */
-	public void drawOval(float x, float y, float w, float h ){
+	public void drawOval(float x, float y, float w, float h ) {
 		this.drawOval((int)x,(int)y,(int)w,(int)h);
 	}
 	
@@ -782,7 +782,7 @@ public class Graphic{
 	 * @param cy
 	 * @param radius
 	 */
-	public void drawCircle(int cx, int cy, int radius ){
+	public void drawCircle(int cx, int cy, int radius ) {
 		screen.drawOval(cx-radius, cy-radius, radius*2, radius*2);
 	}
 	
@@ -792,7 +792,7 @@ public class Graphic{
 	 * @param cy
 	 * @param radius
 	 */
-	public void drawCircle(float cx, float cy, float radius ){
+	public void drawCircle(float cx, float cy, float radius ) {
 		this.drawCircle((int)cx, (int)cy, (int)radius);
 	}
 	
@@ -801,7 +801,7 @@ public class Graphic{
 	 * @param point
 	 * @param radius
 	 */
-	public void drawCircle(Point2D point, int radius ){
+	public void drawCircle(Point2D point, int radius ) {
 		screen.drawOval((int)point.getX()-radius, (int)point.getY()-radius, radius*2, radius*2);
 	}
 
@@ -811,7 +811,7 @@ public class Graphic{
 	 * @param cy
 	 * @param radius
 	 */
-	public void fillCircle(int cx, int cy, int radius ){
+	public void fillCircle(int cx, int cy, int radius ) {
 		screen.fillOval(cx-radius, cy-radius, radius*2, radius*2);
 	}
 	
@@ -821,7 +821,7 @@ public class Graphic{
 	 * @param cy
 	 * @param radius
 	 */
-	public void fillCircle(float cx, float cy, float radius ){
+	public void fillCircle(float cx, float cy, float radius ) {
 		screen.fillOval((int)(cx-radius), (int)(cy-radius), (int)(radius*2), (int)(radius*2));
 	}
 	
@@ -830,7 +830,7 @@ public class Graphic{
 	 * @param point
 	 * @param radius
 	 */
-	public void fillCircle(Point2D point, int radius ){
+	public void fillCircle(Point2D point, int radius ) {
 		screen.fillOval((int)point.getX()-radius, (int)point.getY()-radius, radius*2, radius*2);
 	}
 	
@@ -841,7 +841,7 @@ public class Graphic{
 	 * @param w
 	 * @param h
 	 */
-	public void fillOval(int x, int y, int w, int h ){
+	public void fillOval(int x, int y, int w, int h ) {
 		screen.fillOval(x, y, w, h);
 	}
 	
@@ -852,7 +852,7 @@ public class Graphic{
 	 * @param w
 	 * @param h
 	 */
-	public void fillOval(float x, float y, float w, float h ){
+	public void fillOval(float x, float y, float w, float h ) {
 		this.fillOval((int)x, (int)y, (int)w, (int)h);
 	}
 	
@@ -862,7 +862,7 @@ public class Graphic{
 	 * @param x
 	 * @param y
 	 */
-	public void drawString(String text, int x, int y){
+	public void drawString(String text, int x, int y) {
 		screen.drawString(text, x, y);
 	}
 	
@@ -870,7 +870,7 @@ public class Graphic{
 	 * 
 	 * @param shape
 	 */
-	public void draw(Shape shape){
+	public void draw(Shape shape) {
 		screen.draw(shape);
 	}
 	
@@ -878,11 +878,11 @@ public class Graphic{
 	 * 
 	 * @param shape
 	 */
-	public void fill(Shape shape){
+	public void fill(Shape shape) {
 		screen.fill(shape);
 	}
 
-	/*public void setGraphics(GLGraphics2D graphics){		
+	/*public void setGraphics(GLGraphics2D graphics) {		
 		this.screen = graphics;
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 	}*/
@@ -910,11 +910,11 @@ public class Graphic{
 		vimg..setRGB(startX, startY, w, h, rgbArray, offset, scansize);
 	}*/
 	
-	public void drawImage(BufferedImage image, int x, int y){
+	public void drawImage(BufferedImage image, int x, int y) {
 		screen.drawImage(image, x, y, null);
 	}
 	
-	public void drawImage(BufferedImage image, float x, float y){
+	public void drawImage(BufferedImage image, float x, float y) {
 		screen.drawImage(image, (int)x, (int)y, null);
 	}
 	
@@ -923,7 +923,7 @@ public class Graphic{
 	 * @param x
 	 * @param y
 	 */
-	public void translate(int x, int y){
+	public void translate(int x, int y) {
 		screen.translate(x, y);
 	}
 	
@@ -932,7 +932,7 @@ public class Graphic{
 	 * @param x
 	 * @param y
 	 */
-	public void translate(double x, double y){
+	public void translate(double x, double y) {
 		screen.translate(x, y);
 	}
 
