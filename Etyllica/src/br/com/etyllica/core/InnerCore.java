@@ -775,6 +775,10 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	private void reload(Context application){
 
+		if(application==null) {
+			System.err.println("Application cannot be null.");
+		}
+		
 		activeWindow.reload(application);
 		
 		application.setSessionMap(activeWindow.getSessionMap());
