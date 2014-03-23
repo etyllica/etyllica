@@ -33,6 +33,9 @@ public class AnimatedLayer extends ImageLayer{
 	protected int currentFrame = 0;
 
 	protected int speed;
+	
+	protected long startedAt = 0;
+	protected long changedAt = 0;
 
 	/**
 	 * 
@@ -118,6 +121,25 @@ public class AnimatedLayer extends ImageLayer{
 		setTileH(tileH);
 	}
 
+	public void animate(long now) {
+
+		if(stopped) {
+			
+			startedAt = now;
+			changedAt = now;
+		
+			stopped = false;
+		}
+	
+		if(now>=changedAt+speed) {
+						
+			changedAt = now;
+			nextFrame();
+			
+		}
+		
+	}
+	
 	public void animate(){
 
 		nextFrame();
@@ -145,8 +167,8 @@ public class AnimatedLayer extends ImageLayer{
 		}
 
 	}
-
-	public void nextFrame(){
+	
+	public void nextFrame() {
 		
 		if((currentFrame < frames-1)&&(currentFrame >= 0)){
 		
