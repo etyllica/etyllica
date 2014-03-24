@@ -1,0 +1,8 @@
+# Pre-Compiled Files #
+*.class
+bin/
+sdk/
+
+# Package Files #
+*.war
+*.ear
