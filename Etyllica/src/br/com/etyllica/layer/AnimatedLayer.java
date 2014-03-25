@@ -12,7 +12,7 @@ import br.com.etyllica.core.video.Graphic;
  *
  */
 
-public class AnimatedLayer extends ImageLayer{
+public class AnimatedLayer extends ImageLayer {
 
 	protected int tileW = 0;
 	protected int tileH = 0;
@@ -42,7 +42,7 @@ public class AnimatedLayer extends ImageLayer{
 	 * @param x
 	 * @param y
 	 */
-	public AnimatedLayer(int x, int y){
+	public AnimatedLayer(int x, int y) {
 		this(x, y, 0, 0);
 	}
 
@@ -54,7 +54,7 @@ public class AnimatedLayer extends ImageLayer{
 	 * @param yTile
 	 * @param path
 	 */
-	public AnimatedLayer(int x, int y, int xTile, int yTile, String path){
+	public AnimatedLayer(int x, int y, int xTile, int yTile, String path) {
 		super(x,y,path);
 		this.tileW = xTile;
 		this.tileH = yTile;
@@ -69,7 +69,7 @@ public class AnimatedLayer extends ImageLayer{
 	 * @param xTile
 	 * @param yTile
 	 */
-	public AnimatedLayer(int x, int y, int xTile, int yTile){
+	public AnimatedLayer(int x, int y, int xTile, int yTile) {
 		super(x,y);
 		this.tileW = xTile;
 		this.tileH = yTile;
@@ -77,21 +77,21 @@ public class AnimatedLayer extends ImageLayer{
 		animate();
 	}
 
-	protected void resetAnimation(){
+	protected void resetAnimation() {
 		xImage = 0;
 		yImage = 0;
 		currentFrame = 0;
 	}
 
-	public void setAnimaEmX(boolean animaX){
+	public void setAnimaEmX(boolean animaX) {
 		animaEmX = animaX;
 	}
 
-	public int getTileW(){
+	public int getTileW() {
 		return tileW;
 	}
 
-	public int getTileH(){
+	public int getTileH() {
 		return tileH;
 	}
 
@@ -99,7 +99,7 @@ public class AnimatedLayer extends ImageLayer{
 	 * 
 	 * @param tileW
 	 */
-	public void setXTile(int tileW){
+	public void setTileW(int tileW) {
 		this.tileW = tileW;
 	}
 
@@ -107,7 +107,7 @@ public class AnimatedLayer extends ImageLayer{
 	 * 
 	 * @param tileH
 	 */
-	public void setTileH(int tileH){
+	public void setTileH(int tileH) {
 		this.tileH = tileH;
 	}
 
@@ -116,8 +116,8 @@ public class AnimatedLayer extends ImageLayer{
 	 * @param xTile
 	 * @param yTile
 	 */
-	public void setTileCoordinates(int tileW, int tileH){
-		setXTile(tileW);
+	public void setTileCoordinates(int tileW, int tileH) {
+		setTileW(tileW);
 		setTileH(tileH);
 	}
 
@@ -140,18 +140,18 @@ public class AnimatedLayer extends ImageLayer{
 		
 	}
 	
-	public void animate(){
+	public void animate() {
 
 		nextFrame();
 
 		stopped = false;
 	}
 
-	public void desAnima(){
+	public void desAnima() {
 		//Stop
 	}	
 
-	public void animaOnce(){
+	public void animaOnce() {
 
 		visible = true;
 		lockOnce = false;
@@ -160,7 +160,7 @@ public class AnimatedLayer extends ImageLayer{
 
 		currentFrame = 0;
 
-		if(animaEmX){
+		if(animaEmX) {
 			xImage = 0;
 		}else{
 			yImage = 0;
@@ -170,13 +170,13 @@ public class AnimatedLayer extends ImageLayer{
 	
 	public void nextFrame() {
 		
-		if((currentFrame < frames-1)&&(currentFrame >= 0)){
+		if((currentFrame < frames-1)&&(currentFrame >= 0)) {
 		
 			currentFrame+=inc;
 			
 		}else{
 
-			if(once){
+			if(once) {
 				visible = false;
 				lockOnce = true;
 				//stopped = true;
@@ -188,29 +188,28 @@ public class AnimatedLayer extends ImageLayer{
 
 		}
 
-		if(!stopped){
+		if(!stopped) {
 			setFrame(currentFrame);
 		}
 	}
 	
-	public void animate(int frame){
+	public void animate(int frame) {
 
 		setFrame(frame);
 	}
 
-	protected void setFrame(int frame){
+	protected void setFrame(int frame) {
 		
-		if(animaEmX){
+		if(animaEmX) {
 			setXImage(needleX+tileW*frame);
-		}
-		else{
+		} else {
 			setYImage(needleY+tileH*frame);
 		}
 
 	}
 
 	@Override
-	public int centralizeX(int xInicial, int xFinal){
+	public int centralizeX(int xInicial, int xFinal) {
 		
 		int x = (((xInicial+xFinal)/2)-(getTileW()/2));
 		setX(x);
@@ -268,7 +267,7 @@ public class AnimatedLayer extends ImageLayer{
 	}
 
 	@Override
-	public void draw(Graphic g, AffineTransform transform){
+	public void draw(Graphic g, AffineTransform transform) {
 		g.setTransform(transform);
 
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+tileW,y+tileH,
@@ -276,14 +275,14 @@ public class AnimatedLayer extends ImageLayer{
 	}
 	
 	@Override
-	protected AffineTransform getTransform(){
+	protected AffineTransform getTransform() {
 		AffineTransform transform = new AffineTransform();
 
-		if(angle!=0){
+		if(angle!=0) {
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+tileW/2, y+tileH/2));
 		}
 					
-		if(scale!=1){
+		if(scale!=1) {
 
 			double sw = tileW*scale;
 			double sh = tileH*scale;
@@ -310,11 +309,11 @@ public class AnimatedLayer extends ImageLayer{
 	 * 
 	 * @param stopped
 	 */
-	public void setStopped(boolean stopped){
+	public void setStopped(boolean stopped) {
 		this.stopped = stopped;
 	}
 
-	public boolean isStopped(){
+	public boolean isStopped() {
 		return stopped;
 	}
 
@@ -324,43 +323,43 @@ public class AnimatedLayer extends ImageLayer{
 	 * 
 	 * @param frames
 	 */
-	public void setFrames(int frames){
+	public void setFrames(int frames) {
 		this.frames = frames;
 	}
 
-	public int getFrames(){
+	public int getFrames() {
 		return frames;
 	}
 
-	public boolean getAnimaEmX(){
+	public boolean getAnimaEmX() {
 		return animaEmX;
 	}
 
-	public void setLockOnce(boolean lockOnce){
+	public void setLockOnce(boolean lockOnce) {
 		this.lockOnce = lockOnce;
 	}
 
-	public int getSpeed(){
+	public int getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed){
+	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
 
-	public int getNeedleX(){
+	public int getNeedleX() {
 		return needleX;
 	}
 
-	public void setNeedleX(int needleX){
+	public void setNeedleX(int needleX) {
 		this.needleX = needleX;
 	}
 
-	public int getNeedleY(){
+	public int getNeedleY() {
 		return needleY;
 	}
 
-	public void setNeedleY(int needleY){
+	public void setNeedleY(int needleY) {
 		this.needleY = needleY;
 	}
 	
