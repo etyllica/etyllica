@@ -4,13 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import br.com.etyllica.animation.Updatable;
-import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.video.Graphic;
-import br.com.etyllica.layer.GeometricLayer;
 import br.com.tide.input.controller.Controller;
 
-public class Player extends GeometricLayer implements Drawable, Updatable, PlayerListener {
+public class Player implements Updatable, PlayerListener {
 
 	protected float health = 100;
 
@@ -28,14 +25,10 @@ public class Player extends GeometricLayer implements Drawable, Updatable, Playe
 
 	protected long wasHit = 0;
 
-	public Player(int x, int y, int w, int h) {
-		super(x,y,w,h);
+	public Player() {
+		super();
 
 		state.add(PlayerState.STAND);
-	}
-
-	public void draw(Graphic g) {
-
 	}
 
 	public void update(long now) {
