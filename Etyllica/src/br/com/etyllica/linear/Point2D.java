@@ -75,4 +75,8 @@ public class Point2D extends java.awt.geom.Point2D {
 		
 	}
 	
+	public static boolean isRightTurn(Point2D a, Point2D b, Point2D c) {
+		return (b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x) > 0;
+	}
+	
 }
