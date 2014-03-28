@@ -1,6 +1,8 @@
 package br.com.etyllica.context.load;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +16,7 @@ import br.com.etyllica.gui.Window;
  *
  */
 
-public class ApplicationLoader implements LoadListener{
+public class ApplicationLoader implements LoadListener {
 
 	private Loader loader;
 	
@@ -41,12 +43,23 @@ public class ApplicationLoader implements LoadListener{
 		loader = new Loader();
 		updater = new Updater();
 		
-		loadExecutor.submit(loader);
+		Future<?> future = loadExecutor.submit(loader);
+		
+		try {
+		    future.get();
+		} catch (ExecutionException e) {
+		    Throwable cause = e.getCause();
+		    cause.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		loadExecutor.scheduleAtFixedRate(updater, 0, 10, TimeUnit.MILLISECONDS);
 
 	}
 	
-	private class Loader implements Runnable{
+	private class Loader implements Runnable {
 
 		public void run() {
 			called = false;
@@ -58,7 +71,7 @@ public class ApplicationLoader implements LoadListener{
 
 	}
 	
-	private class Updater implements Runnable{
+	private class Updater implements Runnable {
 
 		public void run() {
 			
