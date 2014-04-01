@@ -1,9 +1,12 @@
 package br.com.tide.input.controller;
 
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.tide.input.ControllerListener;
 
 public class Controller {
-
+	
+	private ControllerListener listener;
+	
 	protected int upButton = KeyEvent.TSK_UP_ARROW;
 	
 	protected int downButton = KeyEvent.TSK_DOWN_ARROW;
@@ -24,6 +27,12 @@ public class Controller {
 	
 	public Controller(){
 		super();
+	}
+	
+	public Controller(ControllerListener listener){
+		super();
+		
+		this.listener = listener;
 	}
 
 	public int getUpButton() {
@@ -88,6 +97,52 @@ public class Controller {
 
 	public void setStartButton(int startButton) {
 		this.startButton = startButton;
+	}
+	
+	public void handleEvent(KeyEvent event) {
+
+		if(event.isKeyDown(rightButton)) {
+			listener.onRightButtonPressed();
+		}else if(event.isKeyUp(rightButton)) {
+			listener.onRightButtonReleased();
+		}
+
+		if(event.isKeyDown(leftButton)) {
+			listener.onLeftButtonPressed();
+		}else if(event.isKeyUp(leftButton)) {
+			listener.onLeftButtonReleased();
+		}
+
+		if(event.isKeyDown(upButton)) {
+			listener.onUpButtonPressed();
+		}else if(event.isKeyUp(upButton)) {
+			listener.onUpButtonReleased();
+		}
+
+		if(event.isKeyDown(downButton)) {
+			listener.onDownButtonPressed();
+		}else if(event.isKeyUp(downButton)) {
+			listener.onDownButtonReleased();
+		}
+
+		if(event.isKeyDown(ButtonA)) {
+			listener.onAButtonPressed();
+		}else if(event.isKeyUp(ButtonA)) {
+			listener.onAButtonReleased();
+		}
+		
+		if(event.isKeyDown(ButtonB)) {
+			listener.onBButtonPressed();
+		}else if(event.isKeyUp(ButtonB)) {
+			listener.onBButtonReleased();
+		}
+		
+		if(event.isKeyDown(ButtonC)) {
+			listener.onCButtonPressed();
+		}else if(event.isKeyUp(ButtonC)) {
+			listener.onCButtonReleased();
+		}
+
 	}
 		
 }

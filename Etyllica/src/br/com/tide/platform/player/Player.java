@@ -4,18 +4,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import br.com.etyllica.animation.Updatable;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.tide.input.controller.Controller;
+import br.com.tide.input.ControllerListener;
 
-public class Player implements Updatable, PlayerListener {
+public class Player implements Updatable, PlayerListener, ControllerListener {
 
 	protected float health = 100;
 
 	protected String name = "Player";
 
 	protected int walkSpeed = 5;
-
-	private Controller controller;
 
 	protected Set<PlayerState> state = new HashSet<PlayerState>();
 
@@ -48,8 +45,8 @@ public class Player implements Updatable, PlayerListener {
 	}
 
 	public void walkLeft() {
-		state.add(PlayerState.WALK_LEFT);
 		onWalkLeft();
+		state.add(PlayerState.WALK_LEFT);
 	}
 
 	public void stopWalkLeft() {
@@ -58,8 +55,8 @@ public class Player implements Updatable, PlayerListener {
 	}
 
 	public void walkRight() {
-		state.add(PlayerState.WALK_RIGHT);
 		onWalkRight();
+		state.add(PlayerState.WALK_RIGHT);
 	}
 
 	public void stopWalkRight() {
@@ -68,8 +65,8 @@ public class Player implements Updatable, PlayerListener {
 	}
 
 	public void walkUp() {
-		state.add(PlayerState.WALK_UP);
 		onWalkUp();
+		state.add(PlayerState.WALK_UP);
 	}
 
 	public void stopWalkUp() {
@@ -78,8 +75,8 @@ public class Player implements Updatable, PlayerListener {
 	}
 
 	public void walkDown() {
-		state.add(PlayerState.WALK_DOWN);
 		onWalkDown();
+		state.add(PlayerState.WALK_DOWN);
 	}
 
 	public void stopWalkDown() {
@@ -118,48 +115,6 @@ public class Player implements Updatable, PlayerListener {
 		onStopAttack();
 	}
 
-	public void handleEvent(KeyEvent event) {
-
-		if(event.isKeyDown(controller.getRightButton())) {
-			walkRight();
-		}else if(event.isKeyUp(controller.getRightButton())) {
-			stopWalkRight();
-		}
-
-		if(event.isKeyDown(controller.getLeftButton())) {
-			walkLeft();
-		}else if(event.isKeyUp(controller.getLeftButton())) {
-			stopWalkLeft();
-		}
-
-		if(event.isKeyDown(controller.getUpButton())) {
-			walkUp();
-		}else if(event.isKeyUp(controller.getUpButton())) {
-			stopWalkUp();
-		}
-
-		if(event.isKeyDown(controller.getDownButton())) {
-			walkDown();
-		}else if(event.isKeyUp(controller.getDownButton())) {
-			stopWalkDown();
-		}
-
-		if(event.isKeyDown(controller.getButtonA())) {
-			attack();
-		}else if(event.isKeyUp(controller.getButtonA())) {
-			onStopAttack();
-			stand();
-		}
-		
-		if(event.isKeyDown(controller.getButtonB())) {
-			specialAttack();
-		}else if(event.isKeyUp(controller.getButtonB())) {
-			onStopSpecialAttack();
-			stand();
-		}
-
-	}
-
 	public boolean isWalking() {
 		return state.contains(PlayerState.WALK_RIGHT)||state.contains(PlayerState.WALK_LEFT)||state.contains(PlayerState.WALK_UP)||state.contains(PlayerState.WALK_DOWN);
 	}
@@ -180,100 +135,130 @@ public class Player implements Updatable, PlayerListener {
 		return state.contains(PlayerState.BEING_HIT);
 	}
 
-	public Controller getController() {
-		return controller;
-	}
-
-	public void setController(Controller controller) {
-		this.controller = controller;
-	}
-
-	@Override
 	public void onWalkLeft() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onWalkRight() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onWalkUp() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onWalkDown() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onStopWalkLeft() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onStopWalkRight() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onStopWalkUp() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onStopWalkDown() {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onAttack() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onStopAttack() {
-		// TODO Auto-generated method stub
-
 	}
 	
-	@Override
+	public void onAttack() {
+		// TODO Auto-generated method stub
+	}
+
+	public void onStopAttack() {
+		// TODO Auto-generated method stub
+	}
+	
 	public void onSpecialAttack() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onStopSpecialAttack() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onStand() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void onBeignHit(Player attacker) {
 		// TODO Auto-generated method stub
+	}
 
+	public void onDie() {
+		// TODO Auto-generated method stub
+	}
+
+	public void onUpButtonPressed() {
+		walkUp();
 	}
 
 	@Override
-	public void onDie() {
+	public void onUpButtonReleased() {
+		stopWalkUp();
+	}
+
+	@Override
+	public void onDownButtonPressed() {
+		walkDown();
+	}
+
+	@Override
+	public void onDownButtonReleased() {
+		stopWalkDown();
+	}
+
+	@Override
+	public void onRightButtonPressed() {
+		walkRight();
+	}
+
+	@Override
+	public void onRightButtonReleased() {
+		stopWalkRight();
+	}
+
+	@Override
+	public void onLeftButtonPressed() {
+		walkLeft();
+	}
+
+	@Override
+	public void onLeftButtonReleased() {
+		stopWalkLeft();
+	}
+
+	@Override
+	public void onAButtonPressed() {
+		attack();
+	}
+
+	public void onAButtonReleased() {
+		stopAttack();
+		stand();	
+	}
+
+	public void onBButtonPressed() {
+		specialAttack();
+	}
+
+	public void onBButtonReleased() {
+		onStopSpecialAttack();
+		stand();	
+	}
+
+	public void onCButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onCButtonReleased() {
 		// TODO Auto-generated method stub
 		
 	}
