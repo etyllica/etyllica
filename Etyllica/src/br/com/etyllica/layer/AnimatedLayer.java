@@ -3,6 +3,7 @@ package br.com.etyllica.layer;
 import java.awt.geom.AffineTransform;
 
 import br.com.etyllica.core.loader.image.ImageLoader;
+import br.com.etyllica.animation.AnimationListener;
 import br.com.etyllica.core.video.Graphic;
 
 /**
@@ -15,11 +16,15 @@ import br.com.etyllica.core.video.Graphic;
 public class AnimatedLayer extends ImageLayer {
 
 	protected int tileW = 0;
+	
 	protected int tileH = 0;
+	
 	protected int needleX = 0;
+	
 	protected int needleY = 0;
 
 	protected boolean once = false;
+	
 	protected boolean stopped = true;
 	
 	protected boolean animaEmX = true;
@@ -35,8 +40,11 @@ public class AnimatedLayer extends ImageLayer {
 	protected int speed;
 	
 	protected long startedAt = 0;
+	
 	protected long changedAt = 0;
 
+	protected AnimationListener listener;
+	
 	/**
 	 * 
 	 * @param x
@@ -188,7 +196,12 @@ public class AnimatedLayer extends ImageLayer {
 			}
 
 			currentFrame = 0;
-
+			
+			//Notify Listeners end of animation
+			if(listener != null) {
+				listener.onEndAnimation();
+			}
+			
 		}
 
 		if(!stopped) {
