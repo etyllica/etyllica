@@ -5,7 +5,7 @@ import java.awt.geom.AffineTransform;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.image.ImageLoader;
 import br.com.etyllica.core.video.Graphic;
-import br.com.etyllica.layer.colision.ColisionArea;
+import br.com.etyllica.layer.colision.HitBox;
 import br.com.etyllica.linear.Rectangle;
 
 /**
@@ -15,14 +15,14 @@ import br.com.etyllica.linear.Rectangle;
  *
  */
 
-public class ImageLayer extends StaticLayer{
+public class ImageLayer extends StaticLayer {
 
 	protected int xImage = 0;
 	protected int yImage = 0;
 
-	protected ColisionArea colisionArea = null;
+	protected HitBox colisionArea = null;
 
-	public ImageLayer(){
+	public ImageLayer() {
 		super();
 	}
 
@@ -31,7 +31,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param x
 	 * @param y
 	 */
-	public ImageLayer(int x, int y){
+	public ImageLayer(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -44,7 +44,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param w
 	 * @param h
 	 */
-	public ImageLayer(int x, int y, int w, int h){
+	public ImageLayer(int x, int y, int w, int h) {
 		super(x,y,w,h);
 	}
 
@@ -56,7 +56,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param h
 	 * @param path
 	 */
-	public ImageLayer(int x, int y, int w, int h, String path){
+	public ImageLayer(int x, int y, int w, int h, String path) {
 		super(x,y,w,h,path);
 	}
 
@@ -70,7 +70,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param yImagem
 	 * @param path
 	 */
-	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String path){
+	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String path) {
 		super(x,y,w,h,path);
 		this.xImage = xImagem;
 		this.yImage = yImagem;
@@ -82,7 +82,7 @@ public class ImageLayer extends StaticLayer{
 	 * @param y
 	 * @param path
 	 */
-	public ImageLayer(int x, int y, String path){
+	public ImageLayer(int x, int y, String path) {
 		super(path);
 		setCoordinates(x, y);
 	}
@@ -91,7 +91,7 @@ public class ImageLayer extends StaticLayer{
 	 * 
 	 * @param path
 	 */
-	public ImageLayer(String path){
+	public ImageLayer(String path) {
 		this(0,0,path);
 	}
 
@@ -119,7 +119,7 @@ public class ImageLayer extends StaticLayer{
 		this.yImage = yImage;
 	}
 
-	public ColisionArea getColisionArea() {
+	public HitBox getColisionArea() {
 		return colisionArea;
 	}
 
@@ -127,7 +127,7 @@ public class ImageLayer extends StaticLayer{
 	 * 
 	 * @param colisionArea
 	 */
-	public void setColisionArea(ColisionArea colisionArea) {
+	public void setColisionArea(HitBox colisionArea) {
 		this.colisionArea = colisionArea;
 	}
 
@@ -141,7 +141,7 @@ public class ImageLayer extends StaticLayer{
 		this.yImage = yImage;
 	}	
 
-	public boolean colideRetangular(int bx, int by, int bw, int bh){
+	public boolean colideRetangular(int bx, int by, int bw, int bh) {
 
 		return colideRect(bx, by, bw, bh);
 
@@ -152,7 +152,7 @@ public class ImageLayer extends StaticLayer{
 		return colideRetangular(b.getX(), b.getY(), b.getW(), b.getH());
 	}
 
-	private boolean colideRetangulo(Rectangle rect, Rectangle rect2, int rect2x, int rect2y){
+	private boolean colideRectangle(Rectangle rect, Rectangle rect2, int rect2x, int rect2y) {
 
 		if(rect2x+rect2.getX() + rect2.getW() < x+rect.getX())	return false;
 		if(rect2x+rect2.getX() > x+rect.getX() + rect.getW())		return false;
@@ -163,11 +163,11 @@ public class ImageLayer extends StaticLayer{
 		return true;	
 	}
 
-	private boolean colideAreaRetangulo(Rectangle rect2, int rect2x, int rect2y){
+	private boolean colideHitBox(Rectangle hitBox, int rect2x, int rect2y) {
 
-		for(Rectangle rect: colisionArea.getArea()){
+		for(Rectangle rect: colisionArea.getAreas()) {
 
-			if(colideRetangulo(rect, rect2, rect2x, rect2y)){
+			if(colideRectangle(rect, hitBox, rect2x, rect2y)) {
 				return true;
 			}
 
@@ -176,23 +176,23 @@ public class ImageLayer extends StaticLayer{
 		return false;
 	}
 
-	public boolean colideAreaCamada(AnimatedLayer b){
+	public boolean colideAreaHitBox(AnimatedLayer b) {
 		Rectangle rect2 = new Rectangle(0, 0, b.getTileW(), b.getTileH());
-		return colideAreaRetangulo(rect2,b.getX(), b.getY());
+		return colideHitBox(rect2,b.getX(), b.getY());
 	}
 
-	public boolean colideAreaCamada(ImageLayer b){
+	public boolean colideAreaHitBox(ImageLayer b) {
 		Rectangle rect2 = new Rectangle(0, 0,b.getW(),b.getH());
-		return colideAreaRetangulo(rect2,b.getX(),b.getY());
+		return colideHitBox(rect2,b.getX(),b.getY());
 	}
 
-	public boolean colideAreas(ImageLayer b){
+	public boolean colideHitBoxes(ImageLayer b) {
 
-		for(Rectangle rect: colisionArea.getArea()){
+		for(Rectangle rect: colisionArea.getAreas()) {
 
-			for(Rectangle rect2: b.getColisionArea().getArea()){
+			for(Rectangle rect2: b.getColisionArea().getAreas()) {
 
-				if(colideRetangulo(rect, rect2, b.getX(), b.getY())){
+				if(colideRectangle(rect, rect2, b.getX(), b.getY())) {
 					return true;
 				}
 
@@ -204,7 +204,7 @@ public class ImageLayer extends StaticLayer{
 	}
 
 	//Based on code http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
-	public boolean colisionRotated(int mx, int my){
+	public boolean colisionRotated(int mx, int my) {
 
 		//Pivot Point of rotation
 		int px = x+w/2;
@@ -229,11 +229,11 @@ public class ImageLayer extends StaticLayer{
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
 
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 		
-		if(visible){
+		if(visible) {
 
-			if(opacity<0xff){
+			if(opacity<0xff) {
 				g.setOpacity(opacity);
 			}
 			
@@ -241,7 +241,7 @@ public class ImageLayer extends StaticLayer{
 			
 			g.resetTransform();
 
-			if(opacity<0xff){
+			if(opacity<0xff) {
 				g.resetOpacity();
 			}		
 
@@ -265,14 +265,14 @@ public class ImageLayer extends StaticLayer{
 				xImage,yImage,xImage+w,yImage+h, null );
 	}
 	
-	protected AffineTransform getTransform(){
+	protected AffineTransform getTransform() {
 		AffineTransform transform = new AffineTransform();
 
-		if(angle!=0){
+		if(angle!=0) {
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
 		}
 		
-		if(scale!=1){
+		if(scale!=1) {
 
 			double sw = w*scale;
 			double sh = h*scale;
@@ -296,11 +296,11 @@ public class ImageLayer extends StaticLayer{
 	}
 	
 
-	public boolean onMouse(Mouse mouse){
+	public boolean onMouse(Mouse mouse) {
 
 		boolean colision = false;
 
-		if(angle==0){
+		if(angle==0) {
 			colision = colideRetangular(mouse.getX(), mouse.getY(), 1, 1);
 		}else{
 			colision = colisionRotated(mouse.getX(), mouse.getY());
@@ -309,7 +309,7 @@ public class ImageLayer extends StaticLayer{
 		return colision;
 	}
 	
-	public void clone(ImageLayer b){
+	public void clone(ImageLayer b) {
 		this.w = b.w;
 		this.h = b.h;
 
