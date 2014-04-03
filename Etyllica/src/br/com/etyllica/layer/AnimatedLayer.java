@@ -132,7 +132,7 @@ public class AnimatedLayer extends ImageLayer {
 		}
 	
 		if(now>=changedAt+speed) {
-						
+			
 			changedAt = now;
 			nextFrame();
 			
@@ -154,8 +154,11 @@ public class AnimatedLayer extends ImageLayer {
 	public void animaOnce() {
 
 		visible = true;
+		
 		lockOnce = false;
+		
 		once = true;
+		
 		stopped = false;
 
 		currentFrame = 0;
@@ -196,6 +199,7 @@ public class AnimatedLayer extends ImageLayer {
 	public void animate(int frame) {
 
 		setFrame(frame);
+		
 	}
 
 	protected void setFrame(int frame) {
@@ -329,6 +333,10 @@ public class AnimatedLayer extends ImageLayer {
 
 	public int getFrames() {
 		return frames;
+	}
+	
+	public int getCurrentFrame() {
+		return currentFrame;
 	}
 
 	public boolean getAnimaEmX() {
