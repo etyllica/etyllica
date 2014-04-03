@@ -383,5 +383,13 @@ public class AnimatedLayer extends ImageLayer {
 	public void setNeedleY(int needleY) {
 		this.needleY = needleY;
 	}
-	
+
+	public AnimationListener getListener() {
+		return listener;
+	}
+
+	public void setListener(AnimationListener listener) {
+		this.listener = listener;
+	}
+		
 }
