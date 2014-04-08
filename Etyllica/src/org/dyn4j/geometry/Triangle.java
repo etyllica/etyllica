@@ -24,7 +24,6 @@
  */
 package org.dyn4j.geometry;
 
-
 /**
  * Represents a {@link Triangle}.
  * <p>

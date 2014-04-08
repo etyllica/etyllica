@@ -182,5 +182,4 @@ public class Circle extends AbstractShape implements Convex, Shape, Transformabl
 		// return a new aabb
 		return new AABB(center, this.radius);
 	}
-	
 }

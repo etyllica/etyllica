@@ -47,26 +47,26 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 	 * (% of projected normal) to help select the edge in cases where the collision normal is nearly parallel to the edge normal.
 	 */
 	protected static final double EDGE_FEATURE_SELECTION_CRITERIA = 0.98;
-
+	
 	/**
 	 * Because we are selecting an edge even when the farthest feature should be a vertex, when the edges are clipped
 	 * against each other (in the ClippingManifoldSolver) they will not overlap. Due to this, we introduce an expansion
 	 * value (% of the width) that expands the edge feature so that in these cases a collision manifold is still generated.
 	 */
 	protected static final double EDGE_FEATURE_EXPANSION_FACTOR = 0.1;
-
+	
 	/** The bounding rectangle width */
 	protected double length;
-
+	
 	/** The end cap radius */
 	protected double capRadius;
-
+	
 	/** The focal points for the caps */
 	protected Vector2[] foci;
-
+	
 	/** The local x-axis */
 	protected Vector2 localXAxis;
-
+	
 	/**
 	 * Minimal constructor.
 	 * <p>
@@ -80,10 +80,10 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 		// validate the width and height
 		if (width <= 0) throw new IllegalArgumentException(Messages.getString("geometry.capsule.invalidWidth"));
 		if (height <= 0) throw new IllegalArgumentException(Messages.getString("geometry.capsule.invalidHeight"));
-
+		
 		// check for basically a circle
 		if (Math.abs(width - height) < Epsilon.E) throw new IllegalArgumentException(Messages.getString("geometry.capsule.degenerate"));
-
+		
 		// determine the major and minor axis
 		double major = width;
 		double minor = height;
@@ -93,40 +93,40 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 			minor = width;
 			vertical = true;
 		}
-
+		
 		// set the width
 		this.length = major;
 		// the cap radius is half the height
 		this.capRadius = minor * 0.5;
-
+		
 		// set the maximum rotation radius
 		this.radius = major * 0.5;
 
 		// the center will always be (0,0) initially
 		this.center = new Vector2();
-
+		
 		// generate the cap focal points on the
 		// major axis
 		double f = (major - minor) * 0.5;
 		if (vertical) {
 			this.foci = new Vector2[] {
-					new Vector2(0, -f),
-					new Vector2(0,  f)
+				new Vector2(0, -f),
+				new Vector2(0,  f)
 			};
-
+			
 			// set the local x-axis (to the y-axis)
 			this.localXAxis = new Vector2(0.0, 1.0);
 		} else {
 			this.foci = new Vector2[] {
-					new Vector2(-f, 0),
-					new Vector2( f, 0)
+				new Vector2(-f, 0),
+				new Vector2( f, 0)
 			};
-
+			
 			// set the local x-axis
 			this.localXAxis = new Vector2(1.0, 0.0);
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.dyn4j.geometry.AbstractShape#toString()
 	 */
@@ -150,24 +150,24 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 		if (foci != null) {
 			// we need to include the shortest vector from foci to foci
 			Vector2[] axes = new Vector2[2 + foci.length];
-
+			
 			axes[0] = transform.getTransformedR(this.localXAxis);
 			axes[1] = transform.getTransformedR(this.localXAxis.getRightHandOrthogonalVector());
-
+			
 			Vector2 f1 = transform.getTransformed(this.foci[0]);
 			Vector2 f2 = transform.getTransformed(this.foci[1]);
 			for (int i = 0; i < foci.length; i++) {
 				// get the one closest to the given focus
 				double d1 = f1.distanceSquared(foci[i]);
 				double d2 = f2.distanceSquared(foci[i]);
-
+				
 				Vector2 v = null;
 				if (d1 < d2) {
 					v = f1.to(foci[i]);
 				} else {
 					v = f2.to(foci[i]);
 				}
-
+				
 				v.normalize();
 				axes[2 + i] = v;
 			}
@@ -176,8 +176,8 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 		// if there were no foci given then just return the normal axes for the
 		// rectangular region
 		return new Vector2[] {
-				transform.getTransformedR(this.localXAxis),
-				transform.getTransformedR(this.localXAxis.getRightHandOrthogonalVector())
+			transform.getTransformedR(this.localXAxis),
+			transform.getTransformedR(this.localXAxis.getRightHandOrthogonalVector())
 		};
 	}
 
@@ -188,8 +188,8 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 	public Vector2[] getFoci(Transform transform) {
 		// return the cap foci
 		return new Vector2[] {
-				transform.getTransformed(this.foci[0]),
-				transform.getTransformed(this.foci[1])
+			transform.getTransformed(this.foci[0]),
+			transform.getTransformed(this.foci[1])
 		};
 	}
 
@@ -205,7 +205,7 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 		// apply the radial expansion
 		return p.add(n.product(this.capRadius));
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.dyn4j.geometry.Convex#getFarthestFeature(org.dyn4j.geometry.Vector2, org.dyn4j.geometry.Transform)
 	 */
@@ -215,13 +215,13 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 		// local x axis. if so, use the edge feature rather than the point
 		Vector2 localAxis = transform.getInverseTransformedR(n);
 		Vector2 n1 = this.localXAxis.getLeftHandOrthogonalVector();
-
+		
 		// get the squared length of the localaxis and add the fudge factor
 		// should always 1.0 * factor since localaxis is normalized
 		double d = localAxis.dot(localAxis) * Capsule.EDGE_FEATURE_SELECTION_CRITERIA;
 		// project the normal onto the localaxis normal
 		double d1 = localAxis.dot(n1);
-
+		
 		// we only need to test one normal since we only care about its projection length
 		// we can later determine which direction by the sign of the projection
 		if (Math.abs(d1) < d) {
@@ -270,7 +270,7 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 	public AABB createAABB(Transform transform) {
 		Interval x = this.project(Vector2.X_AXIS, transform);
 		Interval y = this.project(Vector2.Y_AXIS, transform);
-
+		
 		return new AABB(x.getMin(), y.getMin(), x.getMax(), y.getMax());
 	}
 
@@ -281,11 +281,11 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 	public Mass createMass(double density) {
 		// the mass of a capsule is the mass of the rectangular section plus the mass
 		// of two half circles (really just one circle)
-
+		
 		double h = this.capRadius * 2.0;
 		double w = this.length - h;
 		double r2 = this.capRadius * this.capRadius;
-
+		
 		// compute the rectangular area
 		double ra = w * h;
 		// compuate the circle area
@@ -293,7 +293,7 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 		double rm = density * ra;
 		double cm = density * ca;
 		double m = rm + cm;
-
+		
 		// the inertia is slightly different. Its the inertia of the rectangular
 		// region plus the inertia of half a circle moved from the center
 		double d = w * 0.5;
@@ -302,7 +302,7 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 		double rI = rm * (h * h + w * w) / 12.0;
 		// add the rectangular inertia and cicle inertia
 		double I = rI + cI;
-
+		
 		return new Mass(this.center, m, I);
 	}
 
@@ -338,7 +338,7 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 		// rotate the local x-axis
 		this.localXAxis.rotate(theta);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.dyn4j.geometry.AbstractShape#translate(double, double)
 	 */
@@ -357,7 +357,7 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 	public double getRotation() {
 		return Vector2.X_AXIS.getAngleBetween(this.localXAxis);
 	}
-
+	
 	/**
 	 * Returns the length of the capsule.
 	 * <p>
@@ -368,7 +368,7 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 	public double getLength() {
 		return this.length;
 	}
-
+	
 	/**
 	 * Returns the end cap radius.
 	 * @return double
@@ -376,5 +376,4 @@ public class Capsule extends AbstractShape implements Convex, Shape, Transformab
 	public double getCapRadius() {
 		return this.capRadius;
 	}
-
 }

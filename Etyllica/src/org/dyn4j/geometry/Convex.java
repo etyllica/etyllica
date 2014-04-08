@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 William Bittle  http://www.dyn4j.org/
+ * Copyright (c) 2010-2013 William Bittle  http://www.dyn4j.org/
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted 
@@ -23,8 +23,6 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.dyn4j.geometry;
-
-
 
 /**
  * Represents a {@link Convex} {@link Shape}.
@@ -80,5 +78,4 @@ public interface Convex extends Shape, Transformable {
 	 * @return {@link Vector2}
 	 */
 	public abstract Vector2 getFarthestPoint(Vector2 n, Transform transform);
-	
 }

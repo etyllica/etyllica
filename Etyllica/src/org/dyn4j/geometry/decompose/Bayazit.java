@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 William Bittle  http://www.dyn4j.org/
+ * Copyright (c) 2010-2013 William Bittle  http://www.dyn4j.org/
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted 
@@ -202,7 +202,7 @@ public class Bayazit implements Decomposer {
 					for (int j = lowerIndex; j <= upperIndex; j++) {
 						Vector2 q = polygon.get(j % size);
 						
-						if (q == p || q == p0 || q == p1) continue;
+						//if (q == p || q == p0 || q == p1) continue;
 						
 						// make sure q is in the range made by extending the
 						// previous and next edges of p

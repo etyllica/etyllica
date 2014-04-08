@@ -1380,4 +1380,372 @@ public class Geometry {
 		}
 		return new Polygon(nv);
 	}
+	
+	/**
+	 * Returns the Minkowski Sum of the given convex shapes.
+	 * <p>
+	 * This method computes the Minkowski Sum in O(n + m) time where n and m are the number
+	 * of vertices of the first and second convex respectively.
+	 * <p>
+	 * This method accepts any {@link Convex} {@link Wound} shape which basically means
+	 * {@link Polygon}s or {@link Segment}s.
+	 * <p>
+	 * This method throws an IllegalArgumentException if two {@link Segment}s are supplied
+	 * that are colinear (in this case the resulting Minkowski Sum would be another segment
+	 * rather than a polygon).
+	 * @param convex1 the first convex
+	 * @param convex2 the second convex
+	 * @return {@link Polygon}
+	 * @throws NullPointerException if convex1 or convex2 are null
+	 * @throws IllegalArgumentException if both convex1 and convex2 are {@link Segment}s and are colinear
+	 * @since 3.1.5
+	 */
+	public static final <E extends Wound & Convex> Polygon minkowskiSum(E convex1, E convex2) {
+		if (convex1 == null) throw new NullPointerException(Messages.getString("geometry.nullMinkowskiSumConvex"));
+		if (convex2 == null) throw new NullPointerException(Messages.getString("geometry.nullMinkowskiSumConvex"));
+		
+		// check for two segments
+		if (convex1 instanceof Segment && convex2 instanceof Segment) {
+			// check if they are colinear
+			Vector2 s1 = convex1.vertices[0].to(convex1.vertices[1]);
+			Vector2 s2 = convex2.vertices[0].to(convex2.vertices[1]);
+			if (s1.cross(s2) <= Epsilon.E) {
+				throw new IllegalArgumentException(Messages.getString("geometry.invalidMinkowskiSumSegments"));
+			}
+		}
+		
+		Vector2[] p1v = convex1.vertices;
+		Vector2[] p2v = convex2.vertices;
+		int c1 = p1v.length;
+		int c2 = p2v.length;
+		
+		// find the minimum y-coordinate vertex in the first polygon
+		// (in the case of a tie, use the minimum x-coordinate vertex)
+		int i = 0, j = 0;
+		Vector2 min = new Vector2(Double.MAX_VALUE, Double.MAX_VALUE);
+		for (int k = 0; k < c1; k++) {
+			Vector2 v = p1v[k];
+			if (v.y < min.y) {
+				min.set(v);
+				i = k;
+			} else if (v.y == min.y) {
+				if (v.x < min.x) {
+					min.set(v);
+					i = k;
+				}
+			}
+		}
+		// find the minimum y-coordinate vertex in the second polygon
+		// (in the case of a tie, use the minimum x-coordinate vertex)
+		min.set(Double.MAX_VALUE, Double.MAX_VALUE);
+		for (int k = 0; k < c2; k++) {
+			Vector2 v = p2v[k];
+			if (v.y < min.y) {
+				min.set(v);
+				j = k;
+			} else if (v.y == min.y) {
+				if (v.x < min.x) {
+					min.set(v);
+					j = k;
+				}
+			}
+		}
+		
+		// iterate through the vertices
+		int n1 = c1 + i;
+		int n2 = c2 + j;
+		// the maximum number of vertices for the output shape is m + n
+		List<Vector2> sum = new ArrayList<Vector2>(c1 + c2);
+		for (; i <= n1 && j <= n2;) {
+			// get the current edges
+			Vector2 v1s = p1v[i % c1];
+			Vector2 v1e = p1v[(i + 1) % c1];
+			
+			Vector2 v2s = p2v[j % c2];
+			Vector2 v2e = p2v[(j + 1) % c2];
+			
+			// add the vertex to the final output
+			
+			// on the first iteration we can assume this is a correct
+			// one since we started at the minimum y-coordinate vertices
+			
+			// on subsequent interations we can assume this is a correct
+			// one since the angle condition was used to increment the
+			// vertex index
+			sum.add(v1s.sum(v2s));
+			
+			// compute the edge vectors
+			Vector2 e1 = v1s.to(v1e);
+			Vector2 e2 = v2s.to(v2e);
+			
+			// get the angles between the x-axis; in the range [-pi, pi]
+			double a1 = Vector2.X_AXIS.getAngleBetween(e1);
+			double a2 = Vector2.X_AXIS.getAngleBetween(e2);
+			
+			// put the angles in the range [0, 2pi]
+			if (a1 < 0) a1 += Geometry.TWO_PI;
+			if (a2 < 0) a2 += Geometry.TWO_PI;
+			
+			// determine which vertex to use next
+			if (a1 < a2) {
+				i++;
+			} else if (a1 > a2) {
+				j++;
+			} else {
+				i++;
+				j++;
+			}
+		}
+		
+		return new Polygon(sum.toArray(new Vector2[0]));
+	}
+	
+	/**
+	 * Performs the Minkowski Sum of the given {@link Polygon} and {@link Circle}.
+	 * <p>
+	 * Use the count parameter to specify the number of vertices to use per round corner.
+	 * <p>
+	 * If the given polygon has <i>n</i> number of vertices, the returned polygon will have 
+	 * <i>n * 2 + n * count</i> number of vertices.
+	 * <p>
+	 * This method is O(n) where n is the number of vertices in the given polygon.
+	 * @param polygon the polygon
+	 * @param circle the circle to add to the polygon
+	 * @param count the number of vertices to add for each rounded corner; must be greater than zero
+	 * @return {@link Polygon}
+	 * @throws NullPointerException if the given polygon or circle is null
+	 * @throws IllegalArgumentException if the given radius or count is less than or equal to zero
+	 * @since 3.1.5
+	 * @see #minkowskiSum(Polygon, double, int)
+	 */
+	public static final Polygon minkowskiSum(Circle circle, Polygon polygon, int count) {
+		return Geometry.minkowskiSum(polygon, circle, count);
+	}
+	
+	/**
+	 * Performs the Minkowski Sum of the given {@link Polygon} and {@link Circle}.
+	 * <p>
+	 * Use the count parameter to specify the number of vertices to use per round corner.
+	 * <p>
+	 * If the given polygon has <i>n</i> number of vertices, the returned polygon will have 
+	 * <i>n * 2 + n * count</i> number of vertices.
+	 * <p>
+	 * This method is O(n) where n is the number of vertices in the given polygon.
+	 * @param polygon the polygon
+	 * @param circle the circle to add to the polygon
+	 * @param count the number of vertices to add for each rounded corner; must be greater than zero
+	 * @return {@link Polygon}
+	 * @throws NullPointerException if the given polygon or circle is null
+	 * @throws IllegalArgumentException if the given radius or count is less than or equal to zero
+	 * @since 3.1.5
+	 * @see #minkowskiSum(Polygon, double, int)
+	 */
+	public static final Polygon minkowskiSum(Polygon polygon, Circle circle, int count) {
+		if (circle == null) throw new NullPointerException(Messages.getString("geometry.nullMinkowskiSumCircle"));
+		return Geometry.minkowskiSum(polygon, circle.radius, count);
+	}
+	
+	/**
+	 * Returns a new polygon that has been radially expanded.  This is equivalent to the Minkowski sum of
+	 * a circle, of the given radius, and the given polygon.
+	 * <p>
+	 * Use the count parameter to specify the number of vertices to use per round corner.
+	 * <p>
+	 * If the given polygon has <i>n</i> number of vertices, the returned polygon will have 
+	 * <i>n * 2 + n * count</i> number of vertices.
+	 * <p>
+	 * This method is O(n) where n is the number of vertices in the given polygon.
+	 * @param polygon the polygon to expand radially
+	 * @param radius the radial expansion; must be greater than zero
+	 * @param count the number of vertices to add for each rounded corner; must be greater than zero
+	 * @return {@link Polygon}
+	 * @throws NullPointerException if the given polygon is null
+	 * @throws IllegalArgumentException if the given radius or count is less than or equal to zero
+	 * @since 3.1.5
+	 */
+	public static final Polygon minkowskiSum(Polygon polygon, double radius, int count) {
+		// check for valid input
+		if (polygon == null) throw new NullPointerException(Messages.getString("geometry.nullMinkowskiSumPolygon"));
+		if (radius <= 0) throw new IllegalArgumentException(Messages.getString("geometry.invalidMinkowskiSumRadius"));
+		if (count <= 0) throw new IllegalArgumentException(Messages.getString("geometry.invalidMinkowskiSumCount"));
+		
+		Vector2[] vertices = polygon.vertices;
+		Vector2[] normals = polygon.normals;
+		int size = vertices.length;
+		
+		Vector2[] nVerts = new Vector2[size * 2 + size * count];
+		// perform the expansion
+		int j = 0;
+		for (int i = 0; i < size; i++) {
+			Vector2 v1 = vertices[i];
+			Vector2 v2 = vertices[i + 1 == size ? 0 : i + 1];
+			Vector2 normal = normals[i];
+			Vector2 nv1 = normal.product(radius).add(v1); 
+			Vector2 nv2 = normal.product(radius).add(v2);
+			
+			// generate the previous polygonal arc with count vertices
+			// compute (circular) angle between the edges
+			Vector2 cv1 = null;
+			if (i == 0) {
+				// if its the first iteration, then we need to compute the
+				// last vertex's new position
+				Vector2 tn = normals[size - 1];
+				cv1 = v1.to(tn.product(radius).add(v1));
+			} else {
+				cv1 = v1.to(nVerts[j - 1]);
+			}
+			Vector2 cv2 = v1.to(nv1);
+			final double theta = cv1.getAngleBetween(cv2);
+			// compute the angular increment
+			final double pin = theta / (count + 1);
+			
+			final double c = Math.cos(pin);
+			final double s = Math.sin(pin);
+			double t = 0;
+
+			// compute the start theta
+			double sTheta = Vector2.X_AXIS.getAngleBetween(normals[i - 1 < 0 ? size - 1 : i - 1]);
+			if (sTheta < 0) {
+				sTheta += Geometry.TWO_PI;
+			}
+			
+			// initialize at minus theta
+			double x = radius * Math.cos(sTheta);
+			double y = radius * Math.sin(sTheta);
+			
+			for(int k = 0; k < count; k++) {
+				//apply the rotation matrix
+				t = x;
+				x = c * x - s * y;
+				y = s * t + c * y;
+				// add a point
+				nVerts[j++] = new Vector2(x, y).add(v1);
+			}
+			
+			nVerts[j++] = nv1;
+			nVerts[j++] = nv2;
+		}
+		
+		return new Polygon(nVerts);
+	}
+	
+	/**
+	 * Returns a scaled version of the given circle.
+	 * @param circle the circle
+	 * @param scale the scale; must be greater than zero
+	 * @return {@link Circle}
+	 * @throws NullPointerException if the given circle is null
+	 * @throws IllegalArgumentException if the given scale is less than or equal to zero
+	 * @since 3.1.5
+	 */
+	public static final Circle scale(Circle circle, double scale) {
+		if (circle == null) throw new NullPointerException(Messages.getString("geometry.nullShape"));
+		if (scale <= 0) throw new IllegalArgumentException(Messages.getString("geometry.invalidScale"));
+		return new Circle(circle.radius * scale);
+	}
+	
+	/**
+	 * Returns a scaled version of the given capsule.
+	 * @param capsule the capsule
+	 * @param scale the scale; must be greater than zero
+	 * @return {@link Capsule}
+	 * @throws NullPointerException if the given capsule is null
+	 * @throws IllegalArgumentException if the given scale is less than or equal to zero
+	 * @since 3.1.5
+	 */
+	public static final Capsule scale(Capsule capsule, double scale) {
+		if (capsule == null) throw new NullPointerException(Messages.getString("geometry.nullShape"));
+		if (scale <= 0) throw new IllegalArgumentException(Messages.getString("geometry.invalidScale"));
+		return new Capsule(capsule.length * scale, capsule.capRadius * 2.0 * scale);
+	}
+	
+	/**
+	 * Returns a scaled version of the given ellipse.
+	 * @param ellipse the ellipse
+	 * @param scale the scale; must be greater than zero
+	 * @return {@link Ellipse}
+	 * @throws NullPointerException if the given ellipse is null
+	 * @throws IllegalArgumentException if the given scale is less than or equal to zero
+	 * @since 3.1.5
+	 */
+	public static final Ellipse scale(Ellipse ellipse, double scale) {
+		if (ellipse == null) throw new NullPointerException(Messages.getString("geometry.nullShape"));
+		if (scale <= 0) throw new IllegalArgumentException(Messages.getString("geometry.invalidScale"));
+		return new Ellipse(ellipse.width * scale, ellipse.height * scale);
+	}
+
+	/**
+	 * Returns a scaled version of the given half-ellipse.
+	 * @param halfEllipse the half-ellipse
+	 * @param scale the scale; must be greater than zero
+	 * @return {@link HalfEllipse}
+	 * @throws NullPointerException if the given half-ellipse is null
+	 * @throws IllegalArgumentException if the given scale is less than or equal to zero
+	 * @since 3.1.5
+	 */
+	public static final HalfEllipse scale(HalfEllipse halfEllipse, double scale) {
+		if (halfEllipse == null) throw new NullPointerException(Messages.getString("geometry.nullShape"));
+		if (scale <= 0) throw new IllegalArgumentException(Messages.getString("geometry.invalidScale"));
+		return new HalfEllipse(halfEllipse.width * scale, halfEllipse.height * scale);
+	}
+	
+	/**
+	 * Returns a scaled version of the given slice.
+	 * @param slice the slice
+	 * @param scale the scale; must be greater than zero
+	 * @return {@link Slice}
+	 * @throws NullPointerException if the given slice is null
+	 * @throws IllegalArgumentException if the given scale is less than or equal to zero
+	 * @since 3.1.5
+	 */
+	public static final Slice scale(Slice slice, double scale) {
+		if (slice == null) throw new NullPointerException(Messages.getString("geometry.nullShape"));
+		if (scale <= 0) throw new IllegalArgumentException(Messages.getString("geometry.invalidScale"));
+		return new Slice(slice.sliceRadius * scale, slice.theta);
+	}
+	
+	/**
+	 * Returns a scaled version of the given polygon.
+	 * @param polygon the polygon
+	 * @param scale the scale; must be greater than zero
+	 * @return {@link Polygon}
+	 * @throws NullPointerException if the given polygon is null
+	 * @throws IllegalArgumentException if the given scale is less than or equal to zero
+	 * @since 3.1.5
+	 */
+	public static final Polygon scale(Polygon polygon, double scale) {
+		if (polygon == null) throw new NullPointerException(Messages.getString("geometry.nullShape"));
+		if (scale <= 0) throw new IllegalArgumentException(Messages.getString("geometry.invalidScale"));
+		
+		Vector2[] oVertices = polygon.vertices;
+		int size = oVertices.length;
+		
+		Vector2[] vertices = new Vector2[size];
+		Vector2 center = polygon.center;
+		for (int i = 0; i < size; i++) {
+			vertices[i] = center.to(oVertices[i]).multiply(scale).add(center);
+		}
+		
+		return new Polygon(vertices);
+	}
+	
+	/**
+	 * Returns a scaled version of the given segment.
+	 * @param segment the segment
+	 * @param scale the scale; must be greater than zero
+	 * @return {@link Segment}
+	 * @throws NullPointerException if the given segment is null
+	 * @throws IllegalArgumentException if the given scale is less than or equal to zero
+	 * @since 3.1.5
+	 */
+	public static final Segment scale(Segment segment, double scale) {
+		if (segment == null) throw new NullPointerException(Messages.getString("geometry.nullShape"));
+		if (scale <= 0) throw new IllegalArgumentException(Messages.getString("geometry.invalidScale"));
+		
+		final double length = segment.getLength() * scale * 0.5;
+		Vector2 n = segment.vertices[0].to(segment.vertices[1]);
+		n.normalize();
+		n.multiply(length);
+		return new Segment(segment.center.sum(n.x, n.y), segment.center.difference(n.x, n.y));
+	}
 }

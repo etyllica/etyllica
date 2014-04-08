@@ -392,5 +392,4 @@ public class Slice extends AbstractShape implements Convex, Shape, Transformable
 	public Vector2 getCircleCenter() {
 		return this.vertices[0];
 	}
-
 }

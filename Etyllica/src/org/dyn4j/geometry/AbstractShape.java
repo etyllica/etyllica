@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2013 William Bittle  http://www.dyn4j.org/
+ * Copyright (c) 2010-2013 William Bittle  http://www.dyn4j.org/
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted 
@@ -43,7 +43,7 @@ public abstract class AbstractShape implements Shape, Transformable {
 	protected double radius;
 	
 	/** Custom user data object */
-	protected Object userData;		
+	protected Object userData;
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -172,5 +172,4 @@ public abstract class AbstractShape implements Shape, Transformable {
 	public AABB createAABB() {
 		return this.createAABB(Transform.IDENTITY);
 	}
-		
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2013 William Bittle  http://www.dyn4j.org/
+ * Copyright (c) 2010-2013 William Bittle  http://www.dyn4j.org/
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted 
@@ -41,7 +41,7 @@ import org.dyn4j.Epsilon;
  * </pre>
  * This can decrease the number of temporary vectors.
  * @author William Bittle
- * @version 3.1.5
+ * @version 3.1.8
  * @since 1.0.0
  */
 public class Vector2 {
@@ -138,7 +138,7 @@ public class Vector2 {
 	 * @return double
 	 */
 	public double distance(double x, double y) {
-		return Math.hypot(x, y);
+		return Math.hypot(this.x - x, this.y - y);
 	}
 	
 	/**
@@ -202,6 +202,35 @@ public class Vector2 {
 		r.x = b.x * ac - a.x * bc;
 		r.y = b.y * ac - a.y * bc;
 		return r;
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(x);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(y);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) return false;
+		if (obj == this) return true;
+		if (obj instanceof Vector2) {
+			Vector2 vector = (Vector2)obj;
+			return this.x == vector.x && this.y == vector.y;
+		}
+		return false;
 	}
 
 	/**
