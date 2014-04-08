@@ -22,40 +22,21 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.dyn4j.collision;
-
-import org.dyn4j.dynamics.BodyFixture;
-import org.dyn4j.geometry.Transform;
-import org.dyn4j.geometry.Transformable;
-import org.dyn4j.geometry.Vector2;
 
 /**
- * Represents the {@link Bounds} of the simulation/world.
- * @author William Bittle
- * @version 3.1.0
- * @since 1.0.0
+ * This package contains algorithms used to create convex hull of point clouds.
+ * <p>
+ * Currently supported algorithms:
+ * <ul>
+ * <li>{@link org.dyn4j.geometry.hull.GiftWrap}</li>
+ * <li>{@link org.dyn4j.geometry.hull.GrahamScan}</li>
+ * <li>{@link org.dyn4j.geometry.hull.MonotoneChain}</li>
+ * <li>{@link org.dyn4j.geometry.hull.DivideAndConquer}</li>
+ * </ul>
+ * All algorithms should produce identical hulls.  Some may be faster than others but consume more
+ * memory.  These classes are intended to be used as a pre-processing step or at runtime.
+ * @author William Bittle 
+ * @version 2.2.2
+ * @since 2.2.0
  */
-public interface Bounds extends Transformable {
-	/**
-	 * Returns the {@link Bounds} {@link Transform}.
-	 * @return {@link Transform}
-	 */
-	public abstract Transform getTransform();
-	
-	/**
-	 * Translates the bounds to match the given coordinate shift.
-	 * @param shift the amount to shift along the x and y axes
-	 * @since 3.1.0
-	 */
-	public abstract void shiftCoordinates(Vector2 shift);
-	
-	/**
-	 * Returns true if the given {@link Collidable} is outside the bounds.
-	 * <p>
-	 * If the {@link Collidable} contains zero {@link BodyFixture}s then 
-	 * {@link Collidable} is considered to be outside the bounds.
-	 * @param collidable the {@link Collidable} to test
-	 * @return boolean true if outside the bounds
-	 */
-	public abstract boolean isOutside(Collidable collidable);
-}
+package org.dyn4j.geometry.hull;

@@ -22,40 +22,31 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.dyn4j.collision;
-
-import org.dyn4j.dynamics.BodyFixture;
-import org.dyn4j.geometry.Transform;
-import org.dyn4j.geometry.Transformable;
-import org.dyn4j.geometry.Vector2;
 
 /**
- * Represents the {@link Bounds} of the simulation/world.
+ * Sub package of the Collision package handling contact manifold generation.
+ * <p>
+ * Once a penetration vector and depth have been found between two 
+ * {@link org.dyn4j.collision.Collidable}s, the next step is to find where the collision occurred.
+ * <p>
+ * A contact {@link org.dyn4j.collision.manifold.Manifold} is an object representing the surface 
+ * where the two {@link org.dyn4j.collision.Collidable}s are colliding.
+ * <p>
+ * {@link org.dyn4j.collision.manifold.Manifold}s have been designed to represent two types of 
+ * surfaces: edge and point.
+ * <p>
+ * A {@link org.dyn4j.collision.manifold.Manifold} contains a number of 
+ * {@link org.dyn4j.collision.manifold.ManifoldPoint}s who represent the surface. For 2D this will 
+ * either be 1 or 2 points.
+ * <p>
+ * A {@link org.dyn4j.collision.manifold.ManifoldSolver} is used to obtain a collision 
+ * {@link org.dyn4j.collision.manifold.Manifold} from a 
+ * {@link org.dyn4j.collision.narrowphase.Penetration} object.
+ * <p>
+ * Only one implementation of the {@link org.dyn4j.collision.manifold.ManifoldSolver} is provided: 
+ * {@link org.dyn4j.collision.manifold.ClippingManifoldSolver}.
  * @author William Bittle
- * @version 3.1.0
+ * @version 2.2.2
  * @since 1.0.0
  */
-public interface Bounds extends Transformable {
-	/**
-	 * Returns the {@link Bounds} {@link Transform}.
-	 * @return {@link Transform}
-	 */
-	public abstract Transform getTransform();
-	
-	/**
-	 * Translates the bounds to match the given coordinate shift.
-	 * @param shift the amount to shift along the x and y axes
-	 * @since 3.1.0
-	 */
-	public abstract void shiftCoordinates(Vector2 shift);
-	
-	/**
-	 * Returns true if the given {@link Collidable} is outside the bounds.
-	 * <p>
-	 * If the {@link Collidable} contains zero {@link BodyFixture}s then 
-	 * {@link Collidable} is considered to be outside the bounds.
-	 * @param collidable the {@link Collidable} to test
-	 * @return boolean true if outside the bounds
-	 */
-	public abstract boolean isOutside(Collidable collidable);
-}
+package org.dyn4j.collision.manifold;

@@ -22,51 +22,36 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.dyn4j.collision;
 
 /**
- * Interface representing a filter for collision detection.
+ * This package contains algorithms to decompose polygons into 
+ * {@link org.dyn4j.geometry.Convex} pieces.
  * <p>
- * Filters allow the collision detection system to skip expensive operations
- * between {@link Collidable}s that should be colliding at all (as determined by
- * the application).
+ * Three implementations of the {@link org.dyn4j.geometry.decompose.Decomposer} 
+ * interface are provided: {@link org.dyn4j.geometry.decompose.Bayazit}, 
+ * {@link org.dyn4j.geometry.decompose.EarClipping}, and 
+ * {@link org.dyn4j.geometry.decompose.SweepLine}.
  * <p>
- * The {@link #DEFAULT_FILTER} allows all collisions.
- * @author William Bittle
- * @version 3.0.2
- * @since 1.0.0
+ * The {@link org.dyn4j.geometry.decompose.Bayazit} algorithm is O(nr) and finds a non-optimal 
+ * convex decomposition.
+ * <p>
+ * The {@link org.dyn4j.geometry.decompose.EarClipping} algorithm is O(n<sup>2</sup>) and finds 
+ * a valid triangulation, then uses the Hertel-Mehlhorn algorithm to combine triangles into convex pieces.  
+ * This is also an non-optimal decomposition.
+ * <p>
+ * The {@link org.dyn4j.geometry.decompose.SweepLine} algorithm is O(n log n) and, like 
+ * {@link org.dyn4j.geometry.decompose.EarClipping}, finds a valid triangulation,
+ * then uses the Hertel-Mehlhorn algorithm to combine triangles into convex pieces.  This is also a
+ * non-optimal decomposition.
+ * <p>
+ * In general the algorithms will generate different decompositions.  If used for pre-processing just
+ * choose the best result, for runtime generation, the {@link org.dyn4j.geometry.decompose.Bayazit} 
+ * may be slower but will generally produce a better decomposition.
+ * <p>
+ * A "better" decomposition is one that contains fewer convex pieces and the convex pieces that are created
+ * are of better quality for simulation.
+ * @author William Bittle 
+ * @version 2.2.2
+ * @since 2.2.0
  */
-public interface Filter {
-	/** The default filter which always returns true */
-	public static final Filter DEFAULT_FILTER = new Filter() {
-		/* (non-Javadoc)
-		 * @see org.dyn4j.collision.Filter#isAllowed(org.dyn4j.collision.Filter)
-		 */
-		@Override
-		public boolean isAllowed(Filter filter) {
-			// always return true
-			return true;
-		}
-		
-		/* (non-Javadoc)
-		 * @see java.lang.Object#toString()
-		 */
-		public String toString() {
-			return "DefaultFilter[]";
-		}
-	};
-	
-	/**
-	 * Returns true if the given {@link Filter} and this {@link Filter}
-	 * allow the objects to interact.
-	 * <p>
-	 * If the given {@link Filter} is not the same type as this {@link Filter}
-	 * its up to the implementing class to specify the behavior.
-	 * <p>
-	 * In addition, if the given {@link Filter} is null its up to the implementing 
-	 * class to specify the behavior.
-	 * @param filter the other {@link Filter}
-	 * @return boolean
-	 */
-	public abstract boolean isAllowed(Filter filter);
-}
+package org.dyn4j.geometry.decompose;

@@ -22,40 +22,73 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.dyn4j.collision;
+package org.dyn4j.dynamics;
 
-import org.dyn4j.dynamics.BodyFixture;
-import org.dyn4j.geometry.Transform;
-import org.dyn4j.geometry.Transformable;
-import org.dyn4j.geometry.Vector2;
+import org.dyn4j.collision.narrowphase.Penetration;
 
 /**
- * Represents the {@link Bounds} of the simulation/world.
+ * Represents the result of a static detect of the world.
  * @author William Bittle
- * @version 3.1.0
- * @since 1.0.0
+ * @version 3.1.9
+ * @since 3.1.9
  */
-public interface Bounds extends Transformable {
-	/**
-	 * Returns the {@link Bounds} {@link Transform}.
-	 * @return {@link Transform}
-	 */
-	public abstract Transform getTransform();
+public class DetectResult {
+	/** The overlapping {@link Body} */
+	protected Body body;
+	
+	/** The overlapping {@link BodyFixture} */
+	protected BodyFixture fixture;
+	
+	/** The overlap {@link Penetration}; may be null */
+	protected Penetration penetration;
 	
 	/**
-	 * Translates the bounds to match the given coordinate shift.
-	 * @param shift the amount to shift along the x and y axes
-	 * @since 3.1.0
+	 * Returns the overlapping body.
+	 * @return {@link Body}
 	 */
-	public abstract void shiftCoordinates(Vector2 shift);
+	public Body getBody() {
+		return this.body;
+	}
 	
 	/**
-	 * Returns true if the given {@link Collidable} is outside the bounds.
+	 * Sets the overlapping body.
+	 * @param body the body
+	 */
+	public void setBody(Body body) {
+		this.body = body;
+	}
+	
+	/**
+	 * Returns the overlapping fixture.
+	 * @return {@link BodyFixture}
+	 */
+	public BodyFixture getFixture() {
+		return this.fixture;
+	}
+	
+	/**
+	 * Sets the overlapping fixture.
+	 * @param fixture the fixture
+	 */
+	public void setFixture(BodyFixture fixture) {
+		this.fixture = fixture;
+	}
+	
+	/**
+	 * Returns the overlap penetration (collision data).
 	 * <p>
-	 * If the {@link Collidable} contains zero {@link BodyFixture}s then 
-	 * {@link Collidable} is considered to be outside the bounds.
-	 * @param collidable the {@link Collidable} to test
-	 * @return boolean true if outside the bounds
+	 * This will return null if the collision data was flagged to not be included. 
+	 * @return {@link Penetration}
 	 */
-	public abstract boolean isOutside(Collidable collidable);
+	public Penetration getPenetration() {
+		return this.penetration;
+	}
+	
+	/**
+	 * Sets the overlap penetration (collision data).
+	 * @param penetration the penetration
+	 */
+	public void setPenetration(Penetration penetration) {
+		this.penetration = penetration;
+	}
 }

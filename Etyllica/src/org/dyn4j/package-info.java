@@ -22,40 +22,20 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.dyn4j.collision;
-
-import org.dyn4j.dynamics.BodyFixture;
-import org.dyn4j.geometry.Transform;
-import org.dyn4j.geometry.Transformable;
-import org.dyn4j.geometry.Vector2;
 
 /**
- * Represents the {@link Bounds} of the simulation/world.
+ * Main package containing general classes used by the library.
+ * <p>
+ * The {@link org.dyn4j.Version} class can be used to retrieve the version of the library that is
+ * currently running.
+ * <p>
+ * The {@link org.dyn4j.Epsilon} class can be used to test near zero values (using an estimated
+ * double precision value)
+ * <p>
+ * The {@link org.dyn4j.UnitConversion} class can be used to convert to and from various units 
+ * to MKS.  Its recommended that this be used instead of using a different system and reconfiguring.
  * @author William Bittle
- * @version 3.1.0
- * @since 1.0.0
+ * @version 2.2.2
+ * @since 2.2.2
  */
-public interface Bounds extends Transformable {
-	/**
-	 * Returns the {@link Bounds} {@link Transform}.
-	 * @return {@link Transform}
-	 */
-	public abstract Transform getTransform();
-	
-	/**
-	 * Translates the bounds to match the given coordinate shift.
-	 * @param shift the amount to shift along the x and y axes
-	 * @since 3.1.0
-	 */
-	public abstract void shiftCoordinates(Vector2 shift);
-	
-	/**
-	 * Returns true if the given {@link Collidable} is outside the bounds.
-	 * <p>
-	 * If the {@link Collidable} contains zero {@link BodyFixture}s then 
-	 * {@link Collidable} is considered to be outside the bounds.
-	 * @param collidable the {@link Collidable} to test
-	 * @return boolean true if outside the bounds
-	 */
-	public abstract boolean isOutside(Collidable collidable);
-}
+package org.dyn4j;

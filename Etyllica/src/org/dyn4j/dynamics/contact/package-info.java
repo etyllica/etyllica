@@ -22,40 +22,28 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.dyn4j.collision;
-
-import org.dyn4j.dynamics.BodyFixture;
-import org.dyn4j.geometry.Transform;
-import org.dyn4j.geometry.Transformable;
-import org.dyn4j.geometry.Vector2;
 
 /**
- * Represents the {@link Bounds} of the simulation/world.
+ * Sub package of the Dynamics package handling contacts.
+ * <p>
+ * Contacts are solved using an iterative constraint based approach.
+ * <p>
+ * The {@link org.dyn4j.dynamics.World} object will determine all collisions between the 
+ * {@link org.dyn4j.dynamics.Body}s and will turn each 
+ * {@link org.dyn4j.collision.manifold.Manifold} into a 
+ * {@link org.dyn4j.dynamics.contact.ContactConstraint}.  Once all the 
+ * {@link org.dyn4j.dynamics.contact.ContactConstraint}s have been gathered the 
+ * {@link org.dyn4j.dynamics.World} object will perform a depth first search on the 
+ * {@link org.dyn4j.dynamics.contact.ContactConstraint} graph to yield 
+ * {@link org.dyn4j.dynamics.Island}s.  The {@link org.dyn4j.dynamics.Island}s will 
+ * use the {@link org.dyn4j.dynamics.contact.ContactManager} to warm start the 
+ * {@link org.dyn4j.dynamics.contact.ContactConstraint}s and then use the 
+ * {@link org.dyn4j.dynamics.contact.ContactConstraintSolver} to solve them.
+ * <p>
+ * The {@link org.dyn4j.dynamics.contact.ContactListener} can be used to receive 
+ * notifications of sensed, begin, end, persisted, and pre/post solve events.
  * @author William Bittle
- * @version 3.1.0
+ * @version 3.1.1
  * @since 1.0.0
  */
-public interface Bounds extends Transformable {
-	/**
-	 * Returns the {@link Bounds} {@link Transform}.
-	 * @return {@link Transform}
-	 */
-	public abstract Transform getTransform();
-	
-	/**
-	 * Translates the bounds to match the given coordinate shift.
-	 * @param shift the amount to shift along the x and y axes
-	 * @since 3.1.0
-	 */
-	public abstract void shiftCoordinates(Vector2 shift);
-	
-	/**
-	 * Returns true if the given {@link Collidable} is outside the bounds.
-	 * <p>
-	 * If the {@link Collidable} contains zero {@link BodyFixture}s then 
-	 * {@link Collidable} is considered to be outside the bounds.
-	 * @param collidable the {@link Collidable} to test
-	 * @return boolean true if outside the bounds
-	 */
-	public abstract boolean isOutside(Collidable collidable);
-}
+package org.dyn4j.dynamics.contact;

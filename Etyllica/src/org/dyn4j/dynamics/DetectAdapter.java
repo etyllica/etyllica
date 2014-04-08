@@ -22,40 +22,44 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.dyn4j.collision;
+package org.dyn4j.dynamics;
 
-import org.dyn4j.dynamics.BodyFixture;
+import org.dyn4j.Listener;
+import org.dyn4j.geometry.AABB;
+import org.dyn4j.geometry.Convex;
 import org.dyn4j.geometry.Transform;
-import org.dyn4j.geometry.Transformable;
-import org.dyn4j.geometry.Vector2;
 
 /**
- * Represents the {@link Bounds} of the simulation/world.
+ * Convience class for implementing the {@link DetectListener} interface.
+ * <p>
+ * This class can be used to implement only the methods desired instead of all
+ * the methods contained in the {@link DetectListener} interface.
  * @author William Bittle
- * @version 3.1.0
- * @since 1.0.0
+ * @version 3.1.9
+ * @since 3.1.9
  */
-public interface Bounds extends Transformable {
-	/**
-	 * Returns the {@link Bounds} {@link Transform}.
-	 * @return {@link Transform}
+public class DetectAdapter implements DetectListener, Listener {
+	/* (non-Javadoc)
+	 * @see org.dyn4j.dynamics.DetectListener#allow(org.dyn4j.geometry.AABB, org.dyn4j.dynamics.Body)
 	 */
-	public abstract Transform getTransform();
+	@Override
+	public boolean allow(AABB aabb, Body body) { return true; }
 	
-	/**
-	 * Translates the bounds to match the given coordinate shift.
-	 * @param shift the amount to shift along the x and y axes
-	 * @since 3.1.0
+	/* (non-Javadoc)
+	 * @see org.dyn4j.dynamics.DetectListener#allow(org.dyn4j.geometry.AABB, org.dyn4j.dynamics.Body, org.dyn4j.dynamics.BodyFixture)
 	 */
-	public abstract void shiftCoordinates(Vector2 shift);
+	@Override
+	public boolean allow(AABB aabb, Body body, BodyFixture fixture) { return false; }
 	
-	/**
-	 * Returns true if the given {@link Collidable} is outside the bounds.
-	 * <p>
-	 * If the {@link Collidable} contains zero {@link BodyFixture}s then 
-	 * {@link Collidable} is considered to be outside the bounds.
-	 * @param collidable the {@link Collidable} to test
-	 * @return boolean true if outside the bounds
+	/* (non-Javadoc)
+	 * @see org.dyn4j.dynamics.DetectListener#allow(org.dyn4j.geometry.Convex, org.dyn4j.geometry.Transform, org.dyn4j.dynamics.Body)
 	 */
-	public abstract boolean isOutside(Collidable collidable);
+	@Override
+	public boolean allow(Convex convex, Transform transform, Body body) { return true; }
+	
+	/* (non-Javadoc)
+	 * @see org.dyn4j.dynamics.DetectListener#allow(org.dyn4j.geometry.Convex, org.dyn4j.geometry.Transform, org.dyn4j.dynamics.Body, org.dyn4j.dynamics.BodyFixture)
+	 */
+	@Override
+	public boolean allow(Convex convex, Transform transform, Body body, BodyFixture fixture) { return true; }
 }
