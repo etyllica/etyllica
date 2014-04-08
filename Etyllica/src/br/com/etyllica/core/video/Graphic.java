@@ -20,7 +20,6 @@ import java.awt.image.VolatileImage;
 
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.ImageLayer;
-import br.com.etyllica.layer.Layer;
 import br.com.etyllica.linear.Point2D;
 
 /**
@@ -403,7 +402,7 @@ public class Graphic{
 	 * 
 	 * @param layer
 	 */
-	public void fillOval(Layer layer) {
+	public void fillOval(GeometricLayer layer) {
 		screen.fillOval((int)layer.getX(), (int)layer.getY(), (int)layer.getW(), (int)layer.getH());
 	}
 	
@@ -413,7 +412,7 @@ public class Graphic{
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void fillArc(Layer layer, int startAngle, int arcAngle) {
+	public void fillArc(GeometricLayer layer, int startAngle, int arcAngle) {
 		screen.fillArc((int)layer.getX(), (int)layer.getY(), (int)layer.getW(), (int)layer.getH(), startAngle, arcAngle);
 	}
 	
