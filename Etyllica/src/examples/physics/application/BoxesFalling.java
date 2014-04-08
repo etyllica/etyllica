@@ -33,8 +33,7 @@ public class BoxesFalling extends PhysicsApplication {
 		floor.setMass(Mass.Type.INFINITE);
 		
 		this.world.addBody(floor);
-		this.world.setGravity(World.EARTH_GRAVITY);
-		
+				
 		crates = new ArrayList<RigidBody>();
 		loading = 10;
 		
