@@ -7,6 +7,7 @@
 
 - Keyboard and Mouse handling (and Multiple Joysticks Handling* [for Linux])
 - Image Loader that supports (TGA, PCX, PNG, BMP, JPG, GIF [yes, animated])
+- True Type Fonts loader (.ttf)
 - Animation Tween System
 - Animation Pivot System (Used in [Etyllic Animator](http://yuripourre.github.com/etyllic-animator/))
 - FullScreen Support (Even in Applets)
@@ -20,7 +21,6 @@
 - OpenGL simulation with software Rendering (Even in Unsigned Applets)
 - Basic Particle System
 - Physics (2D)
-
 
 
 ##Related Projects
