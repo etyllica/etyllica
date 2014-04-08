@@ -83,6 +83,13 @@ public class Player implements Updatable, PlayerListener, ControllerListener {
 		state.remove(PlayerState.WALK_DOWN);
 		onStopWalkDown();
 	}
+	
+	public void stopWalk() {
+		state.remove(PlayerState.WALK_UP);
+		state.remove(PlayerState.WALK_DOWN);
+		state.remove(PlayerState.WALK_LEFT);
+		state.remove(PlayerState.WALK_RIGHT);		
+	}
 
 	public void stand() {
 		state.clear();
