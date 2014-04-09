@@ -28,6 +28,19 @@ public class Player implements Updatable, PlayerListener, ControllerListener {
 		state.add(PlayerState.STAND);
 	}
 
+	public boolean hasState(PlayerState ... playerStates) {
+		
+		for(PlayerState playerState: playerStates) {
+			
+			if(state.contains(playerState)) {
+				return true;
+			}
+			
+		}
+		
+		return false;
+	}
+
 	public void update(long now) {
 
 		if(isBeignHit()) {
