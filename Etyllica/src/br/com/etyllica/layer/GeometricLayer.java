@@ -35,10 +35,7 @@ public class GeometricLayer {
 	public GeometricLayer(int x, int y, int w, int h){
 		super();
 		
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
+		setBounds(x, y, w, h);
 	}
 
 	public int getX() {
