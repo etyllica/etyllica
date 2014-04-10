@@ -24,8 +24,10 @@ public class EffectSound extends Effect{
 	}
 	
 	@Override
-	public void animate(int frame){
+	public void animate(int frame) {
+		
 		currentFrame = 0;
+		
 		stopped = false;
 		once = true;
 		playing = true;
