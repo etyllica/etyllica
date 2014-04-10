@@ -64,10 +64,9 @@ public class AnimatedLayer extends ImageLayer {
 	 */
 	public AnimatedLayer(int x, int y, int xTile, int yTile, String path) {
 		super(x,y,path);
-		this.tileW = xTile;
-		this.tileH = yTile;
 		
-		animate();
+		this.tileW = xTile;
+		this.tileH = yTile;		
 	}
 
 	/**
@@ -79,10 +78,9 @@ public class AnimatedLayer extends ImageLayer {
 	 */
 	public AnimatedLayer(int x, int y, int xTile, int yTile) {
 		super(x,y);
-		this.tileW = xTile;
-		this.tileH = yTile;
 		
-		animate();
+		this.tileW = xTile;
+		this.tileH = yTile;		
 	}
 
 	protected void resetAnimation() {
@@ -142,8 +140,22 @@ public class AnimatedLayer extends ImageLayer {
 		if(now>=changedAt+speed) {
 			
 			changedAt = now;
-			nextFrame();
 			
+			if(nextFrame()) {
+				
+				notifyListener(now);
+				
+			}
+			
+		}
+		
+	}
+	
+	private void notifyListener(long now) {
+		
+		//Notify Listeners end of animation
+		if(listener != null) {
+			listener.onEndAnimation(now);
 		}
 		
 	}
@@ -179,34 +191,35 @@ public class AnimatedLayer extends ImageLayer {
 
 	}
 	
-	public void nextFrame() {
+	public boolean nextFrame() {
 		
 		if((currentFrame < frames-1)&&(currentFrame >= 0)) {
 		
 			currentFrame+=inc;
 			
-		}else{
+		} else {
 
 			if(once) {
 				visible = false;
 				lockOnce = true;
 				//stopped = true;
 				setFrame(currentFrame);
-				return;
-			}
-
-			currentFrame = 0;
+				
+			} else {
 			
-			//Notify Listeners end of animation
-			if(listener != null) {
-				listener.onEndAnimation();
+				currentFrame = 0;
+				
 			}
 			
+			return true;
+						
 		}
 
 		if(!stopped) {
 			setFrame(currentFrame);
 		}
+		
+		return false;
 	}
 	
 	public void animate(int frame) {
@@ -229,22 +242,24 @@ public class AnimatedLayer extends ImageLayer {
 	public int centralizeX(int xInicial, int xFinal) {
 		
 		int x = (((xInicial+xFinal)/2)-(getTileW()/2));
-		setX(x);
-		return x;
 		
+		setX(x);
+		
+		return x;
 	}
 
 	@Override
-	public int centralizeY(int yInicial, int yFinal)
-	{
+	public int centralizeY(int yInicial, int yFinal) {
+		
 		int y = (((yInicial+yFinal)/2)-(getTileH()/2));
+		
 		setY(y);
+		
 		return y;
 	}
 
 	@Override
-	public boolean colideRetangular(Layer b)
-	{
+	public boolean colideRetangular(Layer b) {
 		if(b.getX() + b.getW() < getX())	return false;
 		if(b.getX() > getX() + getTileW())		return false;
 
@@ -254,8 +269,8 @@ public class AnimatedLayer extends ImageLayer {
 		return true;
 	}
 
-	public boolean colideRetangular(AnimatedLayer b)
-	{
+	public boolean colideRetangular(AnimatedLayer b) {
+		
 		if(b.getX() + b.getTileW() < getX())	return false;
 		if(b.getX() > getX() + getTileW())		return false;
 
@@ -263,10 +278,11 @@ public class AnimatedLayer extends ImageLayer {
 		if(b.getY() > getY() + getTileH())		return false;
 
 		return true;
+		
 	}
 
-	public boolean colideCircular(AnimatedLayer b)
-	{
+	public boolean colideCircular(AnimatedLayer b) {
+		
 		int xdiff = b.getX() - getX();
 		int ydiff = b.getY() - getY();
 
@@ -293,6 +309,7 @@ public class AnimatedLayer extends ImageLayer {
 	
 	@Override
 	protected AffineTransform getTransform() {
+		
 		AffineTransform transform = new AffineTransform();
 
 		if(angle!=0) {
