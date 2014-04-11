@@ -21,7 +21,7 @@ import br.com.etyllica.core.loader.image.ImageLoader;
  *
  */
 
-public abstract class EtyllicaFrame extends JFrame implements Engine{
+public abstract class EtyllicaFrame extends JFrame implements Engine {
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
@@ -36,7 +36,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	protected Mouse mouse;
 
-	public EtyllicaFrame(int width, int height){
+	public EtyllicaFrame(int width, int height) {
 		super();
 
 		this.w = width;
@@ -61,7 +61,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		
 	}
 	
-	private void initialSetup(){
+	private void initialSetup() {
 
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
@@ -72,7 +72,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	}
 
-	protected void setPath(String path){
+	protected void setPath(String path) {
 
 		core.setPath(path);
 
@@ -80,7 +80,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 
 	}
 	
-	private void initLoaders(){
+	private void initLoaders() {
 
 		addLoader(ImageLoader.getInstance());
 		addLoader(FontLoader.getInstance());
@@ -109,7 +109,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		paint(g);
 	}
 
-	public void draw(){
+	public void draw() {
 		repaint();
 	}
 
@@ -121,7 +121,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine{
 		core.hideCursor();
 	}
 
-	public void setMainApplication(Application application){
+	public void setMainApplication(Application application) {
 		this.application = application;
 	}	
 

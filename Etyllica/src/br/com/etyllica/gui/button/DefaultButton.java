@@ -20,7 +20,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class DefaultButton extends RoundGUIComponent{
+public class DefaultButton extends RoundGUIComponent {
 
 	protected Label label;
 

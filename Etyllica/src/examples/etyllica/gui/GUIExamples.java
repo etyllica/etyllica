@@ -1,5 +1,7 @@
 package examples.etyllica.gui;
 
+import examples.etyllica.gui.applications.DarknessUI;
+import examples.etyllica.gui.applications.ThemeApplication;
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.Configuration;
@@ -26,9 +28,9 @@ public class GUIExamples extends EtyllicaFrame {
 
 	@Override
 	public Application startApplication() {
-		// TODO Auto-generated method stub
 		
-		return new ThemeApplication(w, h);
+		//return new ThemeApplication(w, h);
+		return new DarknessUI(w, h);
 	}
 	
 }

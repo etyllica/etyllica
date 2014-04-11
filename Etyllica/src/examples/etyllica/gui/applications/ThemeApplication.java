@@ -1,4 +1,4 @@
-package examples.etyllica.gui;
+package examples.etyllica.gui.applications;
 
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
@@ -18,7 +18,7 @@ public class ThemeApplication extends Application {
 	@Override
 	public void load() {
 		
-		button = new Button(80,80, 200, 20);
+		button = new Button(80, 80, 200, 40);
 		
 		this.add(button);
 		
