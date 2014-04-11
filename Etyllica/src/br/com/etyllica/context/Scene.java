@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.AnimationScript;
-import br.com.etyllica.animation.Updatable;
+import br.com.etyllica.core.Updatable;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.particle.Emitter;
 

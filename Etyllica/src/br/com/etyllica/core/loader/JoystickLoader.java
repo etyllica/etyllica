@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import br.com.etyllica.animation.Updatable;
+import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.input.InputListener;
 import br.com.etyllica.core.input.joystick.Joystick;

@@ -37,7 +37,7 @@ public class EffectSound extends Effect{
 	}
 	
 	@Override
-	public void desAnima(){
+	public void stopAnimation(){
 		stopped = true;
 		playing = false;
 		setVisible(false);

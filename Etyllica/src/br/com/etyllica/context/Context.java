@@ -2,9 +2,9 @@ package br.com.etyllica.context;
 
 import java.util.List;
 
-import br.com.etyllica.animation.Updatable;
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.load.LoadListener;
+import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.effects.TransitionEffect;

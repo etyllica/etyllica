@@ -1,4 +1,4 @@
-package br.com.etyllica.animation;
+package br.com.etyllica.core;
 
 public interface Updatable {
 

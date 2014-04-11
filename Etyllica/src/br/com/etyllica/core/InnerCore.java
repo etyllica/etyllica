@@ -6,7 +6,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.AnimationScript;
-import br.com.etyllica.animation.Updatable;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Context;
 import br.com.etyllica.core.event.GUIEvent;

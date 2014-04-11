@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.etyllica.core.Updatable;
+
 public class AnimationHandler implements Updatable{
 
 	private List<AnimationScript> scripts = new ArrayList<AnimationScript>();

@@ -3,7 +3,7 @@ package br.com.tide.platform.player;
 import java.util.HashSet;
 import java.util.Set;
 
-import br.com.etyllica.animation.Updatable;
+import br.com.etyllica.core.Updatable;
 import br.com.tide.input.ControllerListener;
 
 public class Player implements Updatable, PlayerListener, ControllerListener {

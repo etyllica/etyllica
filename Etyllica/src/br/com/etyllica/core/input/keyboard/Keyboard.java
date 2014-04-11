@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import br.com.etyllica.animation.Updatable;
+import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.input.InputListener;
