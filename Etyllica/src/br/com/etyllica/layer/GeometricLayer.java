@@ -22,17 +22,17 @@ public class GeometricLayer {
      */
 	protected int h = 0;
 	
-	public GeometricLayer(){
+	public GeometricLayer() {
 		super();
 	}
 	
-	public GeometricLayer(int x, int y){
+	public GeometricLayer(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
 	
-	public GeometricLayer(int x, int y, int w, int h){
+	public GeometricLayer(int x, int y, int w, int h) {
 		super();
 		
 		setBounds(x, y, w, h);
@@ -70,7 +70,7 @@ public class GeometricLayer {
 		this.h = h;
 	}
 	
-	public void setBounds(int x, int y, int w, int h){
+	public void setBounds(int x, int y, int w, int h) {
 		this.x = x;
 		this.y = y;
 		this.w = w;
@@ -82,7 +82,7 @@ public class GeometricLayer {
 	 * @param x
 	 * @param y
 	 */
-	public void setCoordinates(int x, int y){
+	public void setCoordinates(int x, int y) {
 		setX(x);
 		setY(y);
 	}
@@ -91,7 +91,7 @@ public class GeometricLayer {
 	 * 
 	 * @param offsetX
 	 */
-	public void setOffsetX(int offsetX){
+	public void setOffsetX(int offsetX) {
 		setX(this.x+offsetX);
 	}
 	
@@ -99,7 +99,7 @@ public class GeometricLayer {
 	 * 
 	 * @param offsetY
 	 */
-	public void setOffsetY(int offsetY){
+	public void setOffsetY(int offsetY) {
 		setY(this.y+offsetY);
 	}
 
@@ -108,7 +108,7 @@ public class GeometricLayer {
 	 * @param offsetX
 	 * @param offsetY
 	 */
-	public void setOffset(int offsetX, int offsetY){
+	public void setOffset(int offsetX, int offsetY) {
 		setOffsetX(offsetX);
 		setOffsetY(offsetY);
 	}
@@ -124,7 +124,7 @@ public class GeometricLayer {
 	 * @param w
 	 * @param h
 	 */
-	public void centralize(int x, int y, int w, int h){
+	public void centralize(int x, int y, int w, int h) {
 		centralizeX(x,x+w);
 		centralizeY(y,y+h);
 	}
@@ -133,7 +133,7 @@ public class GeometricLayer {
 	 * 
 	 * @param layer
 	 */
-	public void centralize(Layer layer){
+	public void centralize(Layer layer) {
 		centralizeX(layer);
 		centralizeY(layer);
 	}
@@ -142,7 +142,7 @@ public class GeometricLayer {
 	 * 
 	 * @param layer
 	 */
-	public void centralizeX(Layer layer){
+	public void centralizeX(Layer layer) {
 		centralizeX(layer.getX(),layer.getX()+layer.getW());
 	}
 	
@@ -164,7 +164,7 @@ public class GeometricLayer {
 	 * 
 	 * @param layer
 	 */
-	public void centralizeY(Layer layer){
+	public void centralizeY(Layer layer) {
 		centralizeY(layer.getY(),layer.getY()+layer.getH());
 	}
 	
@@ -194,7 +194,7 @@ public class GeometricLayer {
 	 * @param bh
 	 * @return
 	 */
-	public boolean colideRect(int bx, int by, int bw, int bh){
+	public boolean colideRect(int bx, int by, int bw, int bh) {
 
 		if(bx + bw < getX())	return false;
 		if(bx > getX() + getW())		return false;
@@ -212,13 +212,13 @@ public class GeometricLayer {
 	 * @param py
 	 * @return
 	 */
-	public boolean colideRectPoint(int px, int py){
+	public boolean colideRectPoint(int px, int py) {
 		
-		if((px<x)||(px>x + w)){
+		if((px<getX())||(px>getX() + getW())) {
 			return false;
 		}
 		
-		if((py<y)||(py>y + h)){
+		if((py<getY())||(py>getY() + getH())) {
 			return false;
 		}
 
@@ -243,7 +243,7 @@ public class GeometricLayer {
 		int r_sum_sq = bw/2 + w/2;
 		r_sum_sq *= r_sum_sq;
 
-		if(dcentre_sq - r_sum_sq<=0){
+		if(dcentre_sq - r_sum_sq<=0) {
 			return true;
 		}
 
@@ -256,7 +256,7 @@ public class GeometricLayer {
 	 * @param py
 	 * @return
 	 */
-	public boolean colideCirclePoint(int px, int py){
+	public boolean colideCirclePoint(int px, int py) {
 		
 		int cx = x+w/2;
 		int cy = y+h/2;
@@ -271,7 +271,7 @@ public class GeometricLayer {
 		return (distance <= radius);
 	}
 	
-	public boolean colideIsometric(int px, int py){
+	public boolean colideIsometric(int px, int py) {
 
 		int my = this.getH()/2;
 		int mx = this.getW()/2;
