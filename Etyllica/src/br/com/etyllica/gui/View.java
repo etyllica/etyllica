@@ -33,7 +33,7 @@ public abstract class View extends Layer implements GUIComponent{
 	
 	//GUIAction's Map
 	protected Map<GUIEvent,Action> map = new HashMap<GUIEvent, Action>();
-				
+		
 	public View(int x, int y) {
 		super(x,y,1,1);
 	}
@@ -42,8 +42,8 @@ public abstract class View extends Layer implements GUIComponent{
 		super(x,y,w,h);
 	}
 	
-	public View(){
-		this(0,0);
+	public View() {
+		super(0, 0);
 	}
 	
 	public GUIEvent getLastEvent() {

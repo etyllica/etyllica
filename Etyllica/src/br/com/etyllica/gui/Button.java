@@ -11,12 +11,14 @@ import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.gui.button.DefaultButton;
 import br.com.etyllica.theme.ThemeManager;
 
-public class Button extends View{
+public class Button extends View {
 	
 	private DefaultButton button;
 	
-	public Button(int x, int y, int w, int h){
-		button = ThemeManager.getInstance().getTheme().createButton(x, y, w, h);
+	public Button(int x, int y, int w, int h) {
+		super();
+		
+		this.button = ThemeManager.getInstance().getTheme().createButton(x, y, w, h);
 	}
 
 	public int getRoundness() {
