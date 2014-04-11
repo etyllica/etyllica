@@ -3,7 +3,8 @@ package br.com.etyllica.layer;
 import java.awt.geom.AffineTransform;
 
 import br.com.etyllica.core.loader.image.ImageLoader;
-import br.com.etyllica.animation.AnimationListener;
+import br.com.etyllica.animation.listener.OnAnimationFinishListener;
+import br.com.etyllica.animation.listener.OnFrameChangeListener;
 import br.com.etyllica.core.video.Graphic;
 
 /**
@@ -43,7 +44,9 @@ public class AnimatedLayer extends ImageLayer {
 	
 	protected long changedAt = 0;
 
-	protected AnimationListener listener;
+	protected OnAnimationFinishListener onAnimationFinishListener;
+	
+	protected OnFrameChangeListener onFrameChangeListener;
 	
 	/**
 	 * 
@@ -141,9 +144,13 @@ public class AnimatedLayer extends ImageLayer {
 			
 			changedAt = now;
 			
-			if(nextFrame()) {
+			if(!nextFrame()) {
 				
-				notifyListener(now);
+				notifyFrameChangeListener(now);
+				
+			} else {
+
+				notifyAnimationFinishListener(now);
 				
 			}
 			
@@ -151,11 +158,20 @@ public class AnimatedLayer extends ImageLayer {
 		
 	}
 	
-	private void notifyListener(long now) {
+	//Notify Listener about the end of animation
+	private void notifyAnimationFinishListener(long now) {
 		
-		//Notify Listeners end of animation
-		if(listener != null) {
-			listener.onEndAnimation(now);
+		if(onAnimationFinishListener != null) {
+			onAnimationFinishListener.onAnimationFinish(now);
+		}
+		
+	}
+	
+	//Notify Listener about the frame change
+	private void notifyFrameChangeListener(long now) {
+		
+		if(onFrameChangeListener != null) {
+			onFrameChangeListener.onFrameChange(now);
 		}
 		
 	}
@@ -167,8 +183,8 @@ public class AnimatedLayer extends ImageLayer {
 		stopped = false;
 	}
 
-	public void desAnima() {
-		//Stop
+	public void stopAnimation() {
+		stopped = true;
 	}	
 
 	public void animaOnce() {
@@ -401,12 +417,12 @@ public class AnimatedLayer extends ImageLayer {
 		this.needleY = needleY;
 	}
 
-	public AnimationListener getListener() {
-		return listener;
+	public OnAnimationFinishListener getListener() {
+		return onAnimationFinishListener;
 	}
 
-	public void setListener(AnimationListener listener) {
-		this.listener = listener;
+	public void setListener(OnAnimationFinishListener listener) {
+		this.onAnimationFinishListener = listener;
 	}
 		
 }
