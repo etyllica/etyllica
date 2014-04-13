@@ -421,8 +421,12 @@ public class AnimatedLayer extends ImageLayer {
 		return onAnimationFinishListener;
 	}
 
-	public void setListener(OnAnimationFinishListener listener) {
-		this.onAnimationFinishListener = listener;
+	public void setOnAnimationFinishListener(OnAnimationFinishListener onAnimationFinishListener) {
+		this.onAnimationFinishListener = onAnimationFinishListener;
+	}
+	
+	public void setOnFrameChangeListener(OnFrameChangeListener onFrameChangeListener) {
+		this.onFrameChangeListener = onFrameChangeListener;
 	}
 		
 }
