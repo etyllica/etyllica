@@ -5,6 +5,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Polygon;
@@ -29,10 +30,8 @@ import br.com.etyllica.linear.Point2D;
  *
  */
 
-public class Graphic{
+public class Graphic {
 
-	//private BufferedImage bimg;
-	
 	private VolatileImage vimg;
 	protected Graphics2D screen;
 
@@ -46,13 +45,18 @@ public class Graphic{
 		this.height = height;
 	}
 	
+	public Graphic(Graphics graphics) {
+		super();
+		
+		this.screen = (Graphics2D) graphics;
+	}
+	
 	public void setVolatileImage(VolatileImage vimg) {
 	
 		this.vimg = vimg;
 		this.width = vimg.getWidth();
 		this.height = vimg.getHeight();
 		
-		//this.bimg = vimg.getSnapshot();
 		this.screen = (Graphics2D)vimg.createGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.screen.setColor(Color.BLACK);
@@ -937,6 +941,14 @@ public class Graphic{
 
 	public void rotate(double angle) {
 		screen.rotate(angle);
+	}
+	
+	public void setBackground(Color color) {
+		screen.setBackground(color);
+	}
+	
+	public void clearRect(int x, int y, int width, int height) {
+		screen.clearRect(x, y, width, height);
 	}
 
 }

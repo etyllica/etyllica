@@ -1,6 +1,7 @@
 package br.com.etyllica.layer;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -22,6 +23,8 @@ public class BufferedLayer extends ImageLayer{
 	private BufferedImage buffer;
 	
 	protected BufferedImage modifiedBuffer;
+	
+	private Graphic g;
 
 	/**
 	 * 
@@ -79,9 +82,12 @@ public class BufferedLayer extends ImageLayer{
 		this.w = w;
 		this.h = h;
 
-		buffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		buffer.getGraphics().fillRect(0,0,w,h);
-
+		buffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		
+		modifiedBuffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+				
+		clearGraphics();		
+		
 		resetImage();
 	}
 
@@ -132,11 +138,29 @@ public class BufferedLayer extends ImageLayer{
 	}
 
 	/**
-	 * ImagemBuffer volta ao estado original
+	 * ImagemBuffer back to original state
 	 */
-	public void resetImage(){
-		modifiedBuffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
-		modifiedBuffer.getGraphics().drawImage(buffer,0,0,null);
+	public void resetImage() {
+		
+		modifiedBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		modifiedBuffer.getGraphics().drawImage(buffer, 0, 0, null);
+		
+	}
+	
+	public void clearGraphics() {
+		
+		g = new Graphic(buffer.createGraphics());
+        g.setBackground(new Color(255, 255, 255, 0));
+        g.clearRect(0, 0, w, h);
+        
+        Graphics2D modifiedGraphic = modifiedBuffer.createGraphics();
+        modifiedGraphic.setBackground(new Color(255, 255, 255, 0));
+        modifiedGraphic.clearRect(0, 0, w, h); 
+		
+	}
+	
+	public void refresh() {
+		modifiedBuffer.getGraphics().drawImage(buffer, 0, 0, null);
 	}
 
 	/**
@@ -353,6 +377,10 @@ public class BufferedLayer extends ImageLayer{
 
 		g.drawImage( modifiedBuffer, x, y, x+w,y+h,
 				xImage,yImage,xImage+w,yImage+h, null );		
+	}
+	
+	public Graphic getGraphics() {
+		return g;
 	}
 
 }
