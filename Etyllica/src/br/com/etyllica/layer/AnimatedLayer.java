@@ -209,7 +209,9 @@ public class AnimatedLayer extends ImageLayer {
 	
 	public boolean nextFrame() {
 		
-		if((currentFrame < frames-1)&&(currentFrame >= 0)) {
+		boolean hasNextFrame = true;
+		
+		if((currentFrame < frames-1) && (currentFrame >= 0)) {
 		
 			currentFrame+=inc;
 			
@@ -219,7 +221,7 @@ public class AnimatedLayer extends ImageLayer {
 				visible = false;
 				lockOnce = true;
 				//stopped = true;
-				setFrame(currentFrame);
+				//setFrame(currentFrame);
 				
 			} else {
 			
@@ -227,7 +229,7 @@ public class AnimatedLayer extends ImageLayer {
 				
 			}
 			
-			return false;
+			hasNextFrame = false;
 						
 		}
 
@@ -235,7 +237,7 @@ public class AnimatedLayer extends ImageLayer {
 			setFrame(currentFrame);
 		}
 		
-		return true;
+		return hasNextFrame;
 	}
 	
 	public void animate(int frame) {
