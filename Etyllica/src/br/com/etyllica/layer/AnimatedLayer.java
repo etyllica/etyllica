@@ -144,16 +144,16 @@ public class AnimatedLayer extends ImageLayer {
 			
 			changedAt = now;
 			
-			if(!nextFrame()) {
-				
-				notifyFrameChangeListener(now);
-				
-			} else {
+			boolean hasNextFrame = nextFrame(); 
+			
+			notifyFrameChangeListener(now);
+			
+			if(!hasNextFrame) {
 
 				notifyAnimationFinishListener(now);
 				
 			}
-			
+						
 		}
 		
 	}
@@ -227,7 +227,7 @@ public class AnimatedLayer extends ImageLayer {
 				
 			}
 			
-			return true;
+			return false;
 						
 		}
 
@@ -235,7 +235,7 @@ public class AnimatedLayer extends ImageLayer {
 			setFrame(currentFrame);
 		}
 		
-		return false;
+		return true;
 	}
 	
 	public void animate(int frame) {
