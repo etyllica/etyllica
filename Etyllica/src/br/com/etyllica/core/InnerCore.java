@@ -24,6 +24,8 @@ import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.gui.window.MainWindow;
+import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.theme.mouse.DefaultArrowTheme;
 
 /**
  * 
@@ -68,7 +70,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 	
 	private int fps = 0;
 	
-	public InnerCore(){
+	public InnerCore() {
 		super();
 
 		guiEvents = new ArrayList<GUIEvent>();
@@ -76,10 +78,20 @@ public class InnerCore implements Core, InputListener, Updatable{
 		control = new HIDController(this);
 
 		mouse = control.getMouse();
-
+				
 		keyboard = control.getKeyboard();
 
+		initTheme();
+
 		updatables.add(animation);
+		
+	}
+	
+	private void initTheme() {
+
+		ThemeManager.getInstance().setArrowThemeListener(mouse);
+		
+		ThemeManager.getInstance().setArrowTheme(new DefaultArrowTheme());
 		
 	}
 
@@ -96,18 +108,18 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	private GUIEvent superEvent = GUIEvent.NONE;
 
-	public void update(long now){
+	public void update(long now) {
 				
-		if(!activeWindow.isLoaded()){
+		if(!activeWindow.isLoaded()) {
 			return;
 		}
 		
-		if(Configuration.getInstance().isLanguageChanged()){
+		if(Configuration.getInstance().isLanguageChanged()) {
 			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
 			Configuration.getInstance().setLanguageChanged(false);
 		}
 
-		if(Configuration.getInstance().isThemeChanged()){
+		if(Configuration.getInstance().isThemeChanged()) {
 			guiEvents.add(GUIEvent.THEME_CHANGED);
 			Configuration.getInstance().setThemeChanged(false);
 		}
@@ -136,13 +148,13 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		JoystickLoader.getInstance().update(now);
 
-		if(enableFullScreen){
+		if(enableFullScreen) {
 			enableFullScreen = false;
 
 			superEvent = GUIEvent.ENABLE_FULL_SCREEN;
 		}
 
-		if(disableFullScreen){
+		if(disableFullScreen) {
 			disableFullScreen = false;
 
 			superEvent = GUIEvent.DISABLE_FULL_SCREEN;
@@ -150,11 +162,11 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 	
-	public void updateApplication(Context context, long now){
+	public void updateApplication(Context context, long now) {
 				
-		if(!context.isLocked()){
+		if(!context.isLocked()) {
 						
-			if(context.getUpdateInterval()==0){
+			if(context.getUpdateInterval()==0) {
 							
 				context.update(now);
 				
@@ -162,7 +174,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 				
 			}else{
 				
-				if(now-context.getLastUpdate()>=context.getUpdateInterval()){
+				if(now-context.getLastUpdate()>=context.getUpdateInterval()) {
 										
 					context.timeUpdate(now);
 					context.setLastUpdate(now);
@@ -176,7 +188,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 			context.getScene().update(now);
 
 			//if activeWindow, receive command to change application
-			if(context.getReturnApplication()!=context){
+			if(context.getReturnApplication()!=context) {
 
 				this.changeApplication();
 
@@ -186,16 +198,16 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private void updateActiveWindow(long now){
+	private void updateActiveWindow(long now) {
 
 		List<Window> windows = activeWindow.getWindows(); 
 
 		//Creating Windows
 		//if application has windows
-		if(!windows.isEmpty()){
+		if(!windows.isEmpty()) {
 
 			//For each new window in application.windows
-			for(Window window : windows){
+			for(Window window : windows) {
 
 				//if this !windows.contains(window)
 				addWindow(window);
@@ -205,9 +217,9 @@ public class InnerCore implements Core, InputListener, Updatable{
 			activeWindow.getWindows().clear();
 		}
 
-		/*if(activeWindow.isClose()){
+		/*if(activeWindow.isClose()) {
 
-			if(windows.size()>0){
+			if(windows.size()>0) {
 				windows.remove(activeWindow);
 				activeWindow = windows.get(windows.size()-1);
 			}else{
@@ -233,7 +245,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private void updateMouse(List<View> components){
+	private void updateMouse(List<View> components) {
 		
 		//Solving ConcurrentModification
 		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
@@ -241,7 +253,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 		//System.out.println(mouseEvents.size());
 
 		//Update components with events
-		for(PointerEvent event: events){
+		for(PointerEvent event: events) {
 
 			updateMouseEvent(event);
 
@@ -250,18 +262,18 @@ public class InnerCore implements Core, InputListener, Updatable{
 			//Update components in reverse order
 			//Collections.reverse(components);
 
-			for(View component: components){
+			for(View component: components) {
 
 				GUIEvent nextEvent = updateMouse(component, event);
 
-				if(nextEvent!=GUIEvent.NONE){
+				if(nextEvent!=GUIEvent.NONE) {
 
-					if(nextEvent==GUIEvent.NEXT_COMPONENT){
+					if(nextEvent==GUIEvent.NEXT_COMPONENT) {
 						//Its necessary in NEXT_COMPONENT Events
 
 						View next = component.findNext();
 
-						if(next!=null){
+						if(next!=null) {
 							updateEvent(component.findNext(), nextEvent);	
 						}
 
@@ -269,7 +281,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 						View next = component.findNext();
 						
-						if(next!=null){
+						if(next!=null) {
 							//if overMouse
 							updateEvent(component.findNext(), nextEvent);
 						}
@@ -285,12 +297,12 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 			GUIEvent windowEvent = activeWindow.updateMouse(event);
 
-			if(windowEvent!=GUIEvent.NONE){
+			if(windowEvent!=GUIEvent.NONE) {
 				updateEvent(activeWindow, windowEvent);
 			}
 
 			GUIEvent frameEvent = updateFrameEvents(event); 
-			if(frameEvent!=GUIEvent.NONE){
+			if(frameEvent!=GUIEvent.NONE) {
 				superEvent = frameEvent;
 			}
 			
@@ -302,11 +314,11 @@ public class InnerCore implements Core, InputListener, Updatable{
 		mouse.clearEvents();
 	}
 
-	private void updateGui(List<View> components){
+	private void updateGui(List<View> components) {
 
-		for(GUIEvent event: guiEvents){
+		for(GUIEvent event: guiEvents) {
 
-			for(View component: components){
+			for(View component: components) {
 
 				updateGuiComponent(component, event);
 
@@ -317,28 +329,28 @@ public class InnerCore implements Core, InputListener, Updatable{
 		guiEvents.clear();
 	}
 
-	private void updateGuiComponent(View component, GUIEvent event){
+	private void updateGuiComponent(View component, GUIEvent event) {
 
 		component.update(event);
 
 		//Update Childs
-		for(View child: component.getViews()){
+		for(View child: component.getViews()) {
 
 			updateGuiComponent(child, event);
 
 		}
 	}
 
-	private GUIEvent updateMouse(View component, PointerEvent event){
+	private GUIEvent updateMouse(View component, PointerEvent event) {
 
-		if(!component.isVisible()){
+		if(!component.isVisible()) {
 			return GUIEvent.NONE;
 		}
 
 		//Verify onMouse
-		if(component.onMouse(event)){
+		if(component.onMouse(event)) {
 
-			if(!component.isMouseOver()){
+			if(!component.isMouseOver()) {
 				component.setMouseOver(true);
 				
 				setMouseOver(component);
@@ -346,7 +358,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		}else{
 
-			if(component.isMouseOver()){
+			if(component.isMouseOver()) {
 				component.setMouseOver(false);
 				
 				resetMouseOver();
@@ -357,7 +369,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 		//Update Component
 		GUIEvent result = component.updateMouse(event);
 
-		if(result!=GUIEvent.NONE&&result!=null){
+		if(result!=GUIEvent.NONE&&result!=null) {
 
 			updateEvent(component, result);
 
@@ -365,7 +377,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 		}
 
 		//Update Childs
-		for(View child: component.getViews()){
+		for(View child: component.getViews()) {
 
 			child.setOffset(component.getX(), component.getY());
 
@@ -379,14 +391,14 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private void updateEvent(View componente, GUIEvent lastEvent){
+	private void updateEvent(View componente, GUIEvent lastEvent) {
 
 		//switch (event.action) {
 		switch (lastEvent) {
 
 		case GAIN_FOCUS:
 
-			if(focus!=null){
+			if(focus!=null) {
 				focus.update(GUIEvent.LOST_FOCUS);
 			}
 
@@ -396,7 +408,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		case LOST_FOCUS:
 
-			if(componente==focus){
+			if(componente==focus) {
 				//TODO Mouse.loseFocus()
 				//events.add(new Event(Tecla.NONE, KeyState.LOSE_FOCUS));
 				//events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.LOSE_FOCUS));
@@ -408,7 +420,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 			break;
 
 			/*case MOUSE_OVER:
-			if(!mouseOver){
+			if(!mouseOver) {
 				mouseOver = true;
 				mouseOverClickable = true;
 				//TODO componente.setMouseOver(true);
@@ -417,7 +429,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 			break;*/
 
 			/*case MOUSE_OVER_UNCLICKABLE:
-			if(!mouseOver){
+			if(!mouseOver) {
 				mouseOver = true;
 				mouseOverClickable = false;
 			}			
@@ -465,7 +477,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		default:
 
-			if(componente.isMouseOver()){
+			if(componente.isMouseOver()) {
 				componente.update(GUIEvent.MOUSE_OUT);
 			}
 
@@ -480,23 +492,23 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 
 		drawWindow(g, activeWindow);
 
 		drawEffects(g);
 
-		if(drawCursor){
+		if(drawCursor) {
 			mouse.draw(g);
 		}
 
 	}
 
-	private void drawWindow(Graphic g, Window window){
+	private void drawWindow(Graphic g, Window window) {
 				
 		boolean offset = window.getX()!=0||window.getY()!=0;
 
-		if(offset){
+		if(offset) {
 			g.translate(window.getX(), window.getY());
 		}
 	
@@ -507,9 +519,9 @@ public class InnerCore implements Core, InputListener, Updatable{
 		
 		List<View> components = new CopyOnWriteArrayList<View>(window.getViews());
 
-		for(View view: components){
+		for(View view: components) {
 
-			if(view!=null){
+			if(view!=null) {
 				drawView(view, g);
 			}else{
 				System.out.println(this.getClass().getSimpleName()+" - Draw Null Component");
@@ -517,35 +529,35 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		}
 
-		if(offset){
+		if(offset) {
 			g.translate(-window.getX(), -window.getY());
 		}
 			
 	}
 	
-	private void drawContext(Context context, Graphic g){
+	private void drawContext(Context context, Graphic g) {
 
 		context.drawScene(g);
 
-		for(View view: context.getViews()){
+		for(View view: context.getViews()) {
 			drawView(view, g);
 		}
 
 	}
 
-	private void updateEffects(long now){
-		for(Updatable updatable: updatables){
+	private void updateEffects(long now) {
+		for(Updatable updatable: updatables) {
 			updatable.update(now);	
 		}
 	}
 	
-	private void drawEffects(Graphic g){
+	private void drawEffects(Graphic g) {
 
 		List<AnimationScript> remove = new ArrayList<AnimationScript>();
 
-		for(AnimationScript script: globalScripts){
+		for(AnimationScript script: globalScripts) {
 
-			if(!script.isStopped()){
+			if(!script.isStopped()) {
 				script.getTarget().draw(g);
 			}else{
 				remove.add(script);
@@ -553,23 +565,23 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		}
 
-		for(AnimationScript script: remove){
+		for(AnimationScript script: remove) {
 			globalScripts.remove(script);
 		}
 
 	}
 
 	//TODO Some kind of Subimage to textfields for example
-	private void drawView(View component, Graphic g){
+	private void drawView(View component, Graphic g) {
 
-		if(component.isVisible()){
+		if(component.isVisible()) {
 
 			//Draw Component
 			component.draw(g);
 
 			List<View> components = new CopyOnWriteArrayList<View>(component.getViews());
 
-			for(View child: components){
+			for(View child: components) {
 				child.setOffset(component.getX(), component.getY());
 				//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
 				drawView(child,g);
@@ -581,17 +593,17 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	public void translateComponents(int x, int y){
-		for(View component: activeWindow.getViews()){
+	public void translateComponents(int x, int y) {
+		for(View component: activeWindow.getViews()) {
 			translateComponent(x, y, component);
 		}
 	}
 
-	private void translateComponent(int x, int y, View component){
+	private void translateComponent(int x, int y, View component) {
 
 		component.setOffset(x, y);
 
-		for(View child: component.getViews()){
+		for(View child: component.getViews()) {
 			translateComponent(x, y, child);
 		}
 
@@ -601,7 +613,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 		return mouseOver!=null;
 	}
 
-	public void addEffect(GlobalEffect effect){
+	public void addEffect(GlobalEffect effect) {
 
 		animation.add(effect.getScript());
 		globalScripts.add(effect.getScript());
@@ -611,62 +623,62 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private void updateKeyboardEvents(KeyEvent event){
+	private void updateKeyboardEvents(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_ALT_DIREITA)||event.isKeyDown(KeyEvent.TSK_ALT_ESQUERDA)){
+		if(event.isKeyDown(KeyEvent.TSK_ALT_DIREITA)||event.isKeyDown(KeyEvent.TSK_ALT_ESQUERDA)) {
 
 			alt = true;
 		}
-		else if(event.isKeyUp(KeyEvent.TSK_ALT_DIREITA)||event.isKeyUp(KeyEvent.TSK_ALT_ESQUERDA)){
+		else if(event.isKeyUp(KeyEvent.TSK_ALT_DIREITA)||event.isKeyUp(KeyEvent.TSK_ALT_ESQUERDA)) {
 
 			alt = false;
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_ENTER)){
+		if(event.isKeyDown(KeyEvent.TSK_ENTER)) {
 			enter = true;
 		}
-		else if(event.isKeyUp(KeyEvent.TSK_ENTER)){
+		else if(event.isKeyUp(KeyEvent.TSK_ENTER)) {
 			enter = false;
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_ESC)){
+		if(event.isKeyDown(KeyEvent.TSK_ESC)) {
 			esc = true;
 		}
-		else if(event.isKeyUp(KeyEvent.TSK_ESC)){
+		else if(event.isKeyUp(KeyEvent.TSK_ESC)) {
 			esc = false;
 		}
 
-		if(alt&&enter){
+		if(alt&&enter) {
 			alt = false;
 			enter = false;
-			if(!fullScreenEnable){
+			if(!fullScreenEnable) {
 				enableFullScreen = true;
 			}
 		}
 
-		if(esc){
+		if(esc) {
 
 			esc = false;
-			if(fullScreenEnable){
+			if(fullScreenEnable) {
 				disableFullScreen = true;
 			}
 		}
 
 	}
 
-	private void updateNumpadMouse(KeyEvent event){
+	private void updateNumpadMouse(KeyEvent event) {
 
-		if(Configuration.getInstance().isNumpadMouse()){
+		if(Configuration.getInstance().isNumpadMouse()) {
 
 			int velocidade = 1;
 
 			//Move Left/Right
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_ESQUERDA)){
+			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_ESQUERDA)) {
 
 				mouse.setX(mouse.getX()-velocidade);
 				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
-			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_DIREITA)){
+			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_DIREITA)) {
 
 				mouse.setX(mouse.getX()+velocidade);
 				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
@@ -674,12 +686,12 @@ public class InnerCore implements Core, InputListener, Updatable{
 			}
 
 			//Move Up/Down
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_CIMA)){
+			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_CIMA)) {
 
 				mouse.setX(mouse.getY()-velocidade);
 				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
-			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_BAIXO)){
+			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_BAIXO)) {
 
 				mouse.setX(mouse.getY()+velocidade);
 				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
@@ -687,35 +699,35 @@ public class InnerCore implements Core, InputListener, Updatable{
 			}
 
 			//Mouse Left Button
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_INS)){
+			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_INS)) {
 				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
-			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_INS)){
+			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_INS)) {
 				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
-			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_INS)){
+			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_INS)) {
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_LEFT, KeyState.CLICK));
 			}*/
 
 			//Mouse Right Button
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_DEL)){
+			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_DEL)) {
 				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
-			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_DEL)){
+			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_DEL)) {
 				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
-			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_DEL)){
+			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_DEL)) {
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
 			}*/
 
 		}
 	}
 
-	private GUIEvent updateFrameEvents(PointerEvent event){
+	private GUIEvent updateFrameEvents(PointerEvent event) {
 
-		if(event.getState()==PointerState.CLICK){
+		if(event.getState()==PointerState.CLICK) {
 			return GUIEvent.REQUEST_FOCUS;
 		}
 
-		if(event.getState()==PointerState.DRAGGED){
+		if(event.getState()==PointerState.DRAGGED) {
 
-			if(mouse.getY()<=50){
+			if(mouse.getY()<=50) {
 				/*Logger.log("Evento Mouse dragged");
 
 				Logger.log("Mx = "+mouse.getDragX());
@@ -726,7 +738,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 			}
 
 
-			/*if(event.getMouseButtonDragged(Tecla.MOUSE_BUTTON_LEFT)){
+			/*if(event.getMouseButtonDragged(Tecla.MOUSE_BUTTON_LEFT)) {
 
 				if(mouse.getY()<20)
 				Logger.log("Evento Move Janela");
@@ -738,11 +750,11 @@ public class InnerCore implements Core, InputListener, Updatable{
 		return GUIEvent.NONE;
 	}
 
-	public void addWindow(Window window){
+	public void addWindow(Window window) {
 
 		//Change to wID system or
 		//Set<Windows>...
-		if(activeWindow!=window){
+		if(activeWindow!=window) {
 
 			window.setClose(false);
 
@@ -757,13 +769,13 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	public void setMainApplication(Application application){
+	public void setMainApplication(Application application) {
 
 		reload(application);		
 
 	}
 
-	protected void changeApplication(){
+	protected void changeApplication() {
 
 		//Lock old application
 		//Context application = activeWindow.getApplication();
@@ -772,7 +784,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private void reload(Context application){
+	private void reload(Context application) {
 
 		if(application==null) {
 			System.err.println("Application cannot be null.");
@@ -786,17 +798,17 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 
-	private void updateTimerClick(){
+	private void updateTimerClick() {
 
 		int speed = 3;
 
-		if(mouseOver!=null){
+		if(mouseOver!=null) {
 
-			if(configuration.isTimerClick()){
+			if(configuration.isTimerClick()) {
 
 				//TODO Ativar timer do mouse que incrementa sozinho
 				int arc = control.getMouse().getArc();
-				if(arc<360){
+				if(arc<360) {
 					mouse.setArc(arc+speed);
 				}else{
 					
@@ -810,7 +822,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		}else{
 			
-			if(configuration.isTimerClick()){
+			if(configuration.isTimerClick()) {
 				mouse.setArc(0);
 			}
 			
@@ -826,19 +838,19 @@ public class InnerCore implements Core, InputListener, Updatable{
 		activeWindow.getApplication().updateKeyboard(event);
 
 		//Apenas o componente quem tem foco eh gerenciado pelo teclado
-		if(focus!=null){
+		if(focus!=null) {
 
 			GUIEvent focusEvent = focus.updateKeyboard(event);
 
-			if(focusEvent!=GUIEvent.NONE&&focusEvent!=null){
+			if(focusEvent!=GUIEvent.NONE&&focusEvent!=null) {
 				//TODO Update NExtComponent
 				Logger.log(focusEvent);
 
 				View next = focus.findNext();
 
-				if(next!=null){
+				if(next!=null) {
 
-					if(focusEvent==GUIEvent.NEXT_COMPONENT){
+					if(focusEvent==GUIEvent.NEXT_COMPONENT) {
 
 						updateEvent(focus, focusEvent);
 						updateEvent(next, GUIEvent.GAIN_FOCUS);
@@ -866,21 +878,21 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 	}
 	
-	private void setMouseOver(View component){
+	private void setMouseOver(View component) {
 		mouseOver = component;
 		mouse.setOverClickable(true);		
 	}
 	
-	private void resetMouseOver(){
+	private void resetMouseOver() {
 		mouseOver = null;
 		mouse.setOverClickable(false);
 	}
 
-	public HIDController getControl(){
+	public HIDController getControl() {
 		return control;
 	}
 
-	public GUIEvent getSuperEvent(){
+	public GUIEvent getSuperEvent() {
 		return superEvent;
 	}
 

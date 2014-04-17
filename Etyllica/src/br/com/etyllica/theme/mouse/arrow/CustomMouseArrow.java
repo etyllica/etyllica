@@ -1,7 +1,7 @@
-package br.com.etyllica.gui.mouse.arrow;
+package br.com.etyllica.theme.mouse.arrow;
 
-import br.com.etyllica.gui.mouse.arrow.MouseArrow;
 import br.com.etyllica.layer.ImageLayer;
+import br.com.etyllica.theme.mouse.arrow.MouseArrow;
 
 /**
  * 
@@ -18,8 +18,7 @@ public class CustomMouseArrow extends ImageLayer implements MouseArrow{
 	
 	@Override
 	public void move(int x, int y) {
-		this.x = x;
-		this.y = y;		
+		setCoordinates(x, y);		
 	}
 
 }

@@ -1,4 +1,4 @@
-package br.com.etyllica.gui.mouse.arrow;
+package br.com.etyllica.theme.mouse.arrow;
 
 import br.com.etyllica.core.Drawable;
 
@@ -10,7 +10,7 @@ import br.com.etyllica.core.Drawable;
  *
  */
 
-public interface MouseArrow extends Drawable{
+public interface MouseArrow extends Drawable {
 	
 	public void move(int mx, int my);
 	

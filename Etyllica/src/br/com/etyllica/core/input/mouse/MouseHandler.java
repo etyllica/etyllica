@@ -12,14 +12,15 @@ import java.util.List;
 
 import javax.swing.event.MouseInputListener;
 
+import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
-import br.com.etyllica.gui.mouse.arrow.MouseArrow;
-import br.com.etyllica.gui.mouse.theme.ArrowTheme;
 import br.com.etyllica.layer.AnimatedLayer;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.linear.Poligono;
-import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.theme.mouse.ArrowTheme;
+import br.com.etyllica.theme.mouse.ArrowThemeListener;
+import br.com.etyllica.theme.mouse.arrow.MouseArrow;
 
 /**
  * 
@@ -28,7 +29,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class MouseHandler implements MouseMotionListener,MouseInputListener, MouseWheelListener{
+public class MouseHandler implements MouseMotionListener, MouseInputListener, MouseWheelListener, ArrowThemeListener{
 
 	private List<PointerEvent> events = new ArrayList<PointerEvent>();
 	
@@ -58,8 +59,8 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 		moveEvent = new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
 	}
 	
-	public void updateArrowTheme(){
-		arrowTheme = ThemeManager.getInstance().getArrowTheme();
+	public void updateArrowTheme(ArrowTheme arrowTheme){
+		this.arrowTheme = arrowTheme;
 		setEstadoNormal();
 	}
 
@@ -392,7 +393,7 @@ public class MouseHandler implements MouseMotionListener,MouseInputListener, Mou
 		return overText;
 	}
 
-	public MouseArrow getArrow() {
+	public Drawable getArrow() {
 		return arrow;
 	}
 	

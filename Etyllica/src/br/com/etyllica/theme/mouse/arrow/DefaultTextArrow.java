@@ -1,4 +1,4 @@
-package br.com.etyllica.gui.mouse.arrow;
+package br.com.etyllica.theme.mouse.arrow;
 
 /**
  * 

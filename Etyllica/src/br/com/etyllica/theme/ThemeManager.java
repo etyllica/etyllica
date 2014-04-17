@@ -1,7 +1,8 @@
 package br.com.etyllica.theme;
 
-import br.com.etyllica.gui.mouse.theme.ArrowTheme;
 import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.theme.mouse.ArrowTheme;
+import br.com.etyllica.theme.mouse.ArrowThemeListener;
 
 
 public class ThemeManager {
@@ -18,7 +19,9 @@ public class ThemeManager {
 	
 	private Theme theme = new EtyllicTheme();
 	
-	private ArrowTheme arrowTheme = new ArrowTheme();
+	private ArrowTheme arrowTheme;
+	
+	private ArrowThemeListener arrowThemeListener = null;
 	
 	public Theme getTheme() {
 		return theme;
@@ -38,6 +41,22 @@ public class ThemeManager {
 	 */
 	public void setArrowTheme(ArrowTheme arrowTheme) {
 		this.arrowTheme = arrowTheme;
+		
+		notifyListener();
 	}
 	
+	private void notifyListener() {
+		
+		if(arrowThemeListener != null){
+			
+			arrowThemeListener.updateArrowTheme(arrowTheme);
+			
+		}
+		
+	}
+
+	public void setArrowThemeListener(ArrowThemeListener arrowThemeListener) {
+		this.arrowThemeListener = arrowThemeListener;
+	}
+		
 }

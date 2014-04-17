@@ -23,8 +23,7 @@ public class HIDController{
 			
 	public HIDController(InputListener listener){
 		
-		mouse = new Mouse(0,0);
-		mouse.updateArrowTheme();
+		mouse = new Mouse(0,0);		
 		
 		keyboard = new Keyboard(listener);
 		keyboard.reset();
