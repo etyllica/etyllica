@@ -46,6 +46,8 @@ public class SharedCore implements Runnable{
 
 	private FullScreenWindow telaCheia = null;
 
+	private Engine engine;
+	
 	private InnerCore innerCore;
 
 	private List<Monitor> monitors = new ArrayList<Monitor>();
@@ -281,8 +283,6 @@ public class SharedCore implements Runnable{
 	public void hideCursor(){
 		innerCore.hideCursor();
 	}
-
-	private Engine engine;
 
 	public void setEngine(Engine engine){
 		this.engine = engine;

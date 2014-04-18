@@ -23,7 +23,7 @@ public class Mouse extends MouseHandler implements Drawable{
 
 		g.getGraphics().setStroke(strokeOne);
 
-		arrow.move(x, y);
+		arrow.setCoordinates(x, y);
 
 		arrow.draw(g);
 
@@ -37,16 +37,16 @@ public class Mouse extends MouseHandler implements Drawable{
 		g.setColor(Color.WHITE);
 		g.getGraphics().setStroke(strokeFive);  // set stroke width of 5
 
-		int raio = 26;
+		int radius = 26;
 
-		g.drawArc(x-raio+2, y-raio+2, raio*2, raio*2, 0, 360);
+		g.drawArc(x-radius+2, y-radius+2, radius*2, radius*2, 0, 360);
 
 		g.setColor(Color.BLUE);
 
 		//Only if component was Clickable
 		//if(overClickable){
 		g.getGraphics().setStroke(strokeThree);  // set stroke width of 3
-		g.drawArc(x-raio+2, y-raio+2, raio*2, raio*2, 0, arc);
+		g.drawArc(x-radius+2, y-radius+2, radius*2, radius*2, 0, arc);
 		g.getGraphics().setStroke(strokeOne);  // set stroke width of 1
 		//}
 

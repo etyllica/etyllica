@@ -1,11 +1,12 @@
 package br.com.tide.input.controller;
 
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.tide.input.ControllerListener;
 
 public class FirstPlayerController extends Controller {
 		
-	public FirstPlayerController() {
-		super();
+	public FirstPlayerController(ControllerListener listener) {
+		super(listener);
 		
 		upButton = KeyEvent.TSK_W;
 		

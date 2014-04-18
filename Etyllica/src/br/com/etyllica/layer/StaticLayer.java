@@ -9,7 +9,7 @@ import br.com.etyllica.core.loader.image.ImageLoader;
  *
  */
 
-public class StaticLayer extends Layer{
+public class StaticLayer extends Layer {
 	
 	protected String path = "";
 	

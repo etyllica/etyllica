@@ -10,15 +10,10 @@ import br.com.etyllica.theme.mouse.arrow.MouseArrow;
  *
  */
 
-public class CustomMouseArrow extends ImageLayer implements MouseArrow{
+public class ImageMouseArrow extends ImageLayer implements MouseArrow {
 
-	public CustomMouseArrow(String path){
+	public ImageMouseArrow(String path){
 		super(path);
 	}
 	
-	@Override
-	public void move(int x, int y) {
-		setCoordinates(x, y);		
-	}
-
 }

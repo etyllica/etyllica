@@ -38,7 +38,7 @@ public class AnimatedLayer extends ImageLayer {
 	
 	protected int currentFrame = 0;
 
-	protected int speed;
+	protected int speed = 500;
 	
 	protected long startedAt = 0;
 	

@@ -14,7 +14,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class DefaultArrow extends Polygon implements MouseArrow{
+public class DefaultArrow extends Polygon implements MouseArrow {
 	private static final long serialVersionUID = -5503086611953227299L;
 
 	private int tx = 0;
@@ -44,7 +44,7 @@ public class DefaultArrow extends Polygon implements MouseArrow{
 		addPoint((int)(size*0.49),(int)(size*0.57));
 	}
 
-	public void move(int mx, int my){
+	public void setCoordinates(int mx, int my){
 
 		int difx = mx;
 		int dify = my;

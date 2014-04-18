@@ -1,6 +1,8 @@
 package br.com.etyllica.layer;
 
-public class GeometricLayer {
+import br.com.etyllica.core.Movable;
+
+public class GeometricLayer implements Movable {
 
 	/**
      * x position of a Layer
