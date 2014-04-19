@@ -44,7 +44,7 @@ import org.dyn4j.geometry.Vertex;
  * A {@link NarrowphaseDetector} should return a penetration normal and depth when two {@link Convex} {@link Shape}s are
  * intersecting.  The penetration normal should always point from the first {@link Shape} to the second.
  * <p>
- * Uses Sutherland–Hodgman clipping to clip the closest features of the two {@link Convex} {@link Shape}s to obtain
+ * Uses Sutherland-Hodgman clipping to clip the closest features of the two {@link Convex} {@link Shape}s to obtain
  * a contact {@link Manifold}.
  * @see <a href="http://www.box2d.org">Box2d</a>
  * @author William Bittle
