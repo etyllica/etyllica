@@ -25,6 +25,7 @@
 
 ##Related Projects
 
+- [Akigawa Training](https://github.com/yuripourre/akigawa) - A Ninja Game
 - [Etyllic Pong](http://yuripourre.github.com/etyllic-pong) - Pong Clone
 - [Etyllic Mario](http://yuripourre.github.com/etyllic-mario) - Mario Clone
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - Paint Clone
