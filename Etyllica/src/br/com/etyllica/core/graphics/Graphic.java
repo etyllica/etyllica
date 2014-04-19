@@ -1,4 +1,4 @@
-package br.com.etyllica.core.video;
+package br.com.etyllica.core.graphics;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -37,7 +37,7 @@ public class Graphic {
 
 	private int width;
 	private int height;
-	
+		
 	public Graphic(int width, int height) {
 		super();
 		

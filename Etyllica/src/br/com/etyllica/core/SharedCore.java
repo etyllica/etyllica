@@ -17,10 +17,10 @@ import java.util.Set;
 
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.graphics.FullScreenWindow;
+import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.loader.Loader;
-import br.com.etyllica.core.video.FullScreenWindow;
-import br.com.etyllica.core.video.Graphic;
-import br.com.etyllica.core.video.Monitor;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 

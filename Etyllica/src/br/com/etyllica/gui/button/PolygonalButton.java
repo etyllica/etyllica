@@ -3,7 +3,7 @@ package br.com.etyllica.gui.button;
 import java.awt.Polygon;
 
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.theme.Theme;
 
 /**

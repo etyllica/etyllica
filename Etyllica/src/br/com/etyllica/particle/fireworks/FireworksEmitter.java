@@ -2,7 +2,7 @@ package br.com.etyllica.particle.fireworks;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.particle.BasicParticle;
 import br.com.etyllica.particle.Emitter;
 import br.com.etyllica.particle.Particle;

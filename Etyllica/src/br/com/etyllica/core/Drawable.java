@@ -1,6 +1,6 @@
 package br.com.etyllica.core;
 
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 
 /**
  * 

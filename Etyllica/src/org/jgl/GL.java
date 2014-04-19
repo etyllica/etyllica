@@ -28,7 +28,7 @@ import org.jgl.context.GL_Util;
 import org.jgl.context.attrib.GL_Viewport;
 
 import br.com.etyllica.context.Application;
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 
 /**
  * GL is the main class of jGL 2.4.

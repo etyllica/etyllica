@@ -5,7 +5,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.Drawable;
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 
 public class Mouse extends MouseHandler implements Drawable{
 

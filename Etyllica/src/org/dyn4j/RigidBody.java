@@ -5,7 +5,7 @@ import java.awt.geom.AffineTransform;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.Layer;
 
 /**

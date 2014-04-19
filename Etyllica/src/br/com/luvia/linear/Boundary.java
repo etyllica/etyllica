@@ -3,7 +3,7 @@ package br.com.luvia.linear;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 
 /**
  * 

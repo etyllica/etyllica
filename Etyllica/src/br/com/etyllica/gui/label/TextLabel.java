@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.layer.Layer;

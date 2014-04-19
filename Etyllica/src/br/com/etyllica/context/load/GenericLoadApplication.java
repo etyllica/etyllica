@@ -3,7 +3,7 @@ package br.com.etyllica.context.load;
 import java.awt.Color;
 import java.awt.Font;
 
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 

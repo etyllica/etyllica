@@ -1,4 +1,4 @@
-package br.com.etyllica.core.video;
+package br.com.etyllica.core.graphics;
 
 public class Monitor extends br.com.etyllica.layer.GeometricLayer{
 

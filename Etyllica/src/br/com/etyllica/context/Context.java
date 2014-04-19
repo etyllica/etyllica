@@ -6,7 +6,7 @@ import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.load.LoadListener;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.layer.Layer;

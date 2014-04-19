@@ -5,8 +5,8 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.loader.image.ImageLoader;
-import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.PivotImageLayer;
 
 public class Part extends PivotImageLayer{

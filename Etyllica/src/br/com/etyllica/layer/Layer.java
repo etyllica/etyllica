@@ -6,7 +6,7 @@ import java.util.List;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 
 /**
  * 

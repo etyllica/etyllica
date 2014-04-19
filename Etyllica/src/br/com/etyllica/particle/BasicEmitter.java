@@ -2,7 +2,7 @@ package br.com.etyllica.particle;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 
 public class BasicEmitter extends Emitter{
 

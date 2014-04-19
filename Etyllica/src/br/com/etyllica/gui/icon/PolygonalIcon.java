@@ -3,7 +3,7 @@ package br.com.etyllica.gui.icon;
 import java.awt.Color;
 import java.awt.Polygon;
 
-import br.com.etyllica.core.video.Graphic;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.label.Icon;
 
 public abstract class PolygonalIcon extends Icon{
