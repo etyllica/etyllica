@@ -18,7 +18,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public abstract class View extends Layer implements GUIComponent{
+public abstract class View extends Layer implements GUIComponent {
 	
 	protected GUIEvent lastEvent = GUIEvent.NONE;
 	

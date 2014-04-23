@@ -38,15 +38,7 @@ public class RoundCornerButton extends DefaultButton{
 			}
 		}
 		
-		g.fillArc(x, y, roundness*2, roundness*2, 90, 90);
-		g.fillRect(x+roundness, y, w-roundness*2, roundness);
-		g.fillArc(x+w-roundness*2, y, roundness*2, roundness*2, 0, 90);
-		
-		g.fillRect(x, y+roundness, w, h-roundness*2);
-		
-		g.fillArc(x, y+h-roundness*2, roundness*2, roundness*2, 180, 90);
-		g.fillRect(x+roundness, y+h-roundness, w-roundness*2, roundness);
-		g.fillArc(x+w-roundness*2, y+h-roundness*2, roundness*2, roundness*2, 270, 90);
+		g.fillRoundRect(x, y, w, h, roundness, roundness);
 		
 		drawLabel(g);
 	}

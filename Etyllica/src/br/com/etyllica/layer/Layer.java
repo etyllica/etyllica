@@ -39,7 +39,7 @@ public class Layer extends GeometricLayer implements Drawable {
 	
 	protected List<Layer> children;
 
-	public Layer(){
+	public Layer() {
 		super();
 	}
 	
