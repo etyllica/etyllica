@@ -101,10 +101,12 @@ public class StaticLayer extends Layer {
 		h = layer.getH();
 	}
 
-	public void load(){
-		StaticLayer cam = ImageLoader.getInstance().loadImage(path);
-		this.w = cam.getW();
-		this.h = cam.getH();
+	public StaticLayer load() {
+		StaticLayer layer = ImageLoader.getInstance().loadImage(path);
+		this.w = layer.getW();
+		this.h = layer.getH();
+		
+		return layer;
 	}
 
 }
