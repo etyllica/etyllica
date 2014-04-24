@@ -34,7 +34,7 @@ import br.com.etyllica.theme.mouse.DefaultArrowTheme;
  *
  */
 
-public class InnerCore implements Core, InputListener, Updatable{
+public class InnerCore implements Core, InputListener, Updatable {
 
 	//External Windows
 	private Window activeWindow = null;
@@ -67,9 +67,9 @@ public class InnerCore implements Core, InputListener, Updatable{
 	protected boolean fullScreenEnable = false;
 
 	private Configuration configuration = Configuration.getInstance();
-	
+
 	private int fps = 0;
-	
+
 	public InnerCore() {
 		super();
 
@@ -78,21 +78,21 @@ public class InnerCore implements Core, InputListener, Updatable{
 		control = new HIDController(this);
 
 		mouse = control.getMouse();
-				
+
 		keyboard = control.getKeyboard();
 
 		initTheme();
 
 		updatables.add(animation);
-		
+
 	}
-	
+
 	private void initTheme() {
 
 		ThemeManager.getInstance().setArrowThemeListener(mouse);
-		
+
 		ThemeManager.getInstance().setArrowTheme(new DefaultArrowTheme());
-		
+
 	}
 
 	public MainWindow getDesktopWindow() {
@@ -109,11 +109,11 @@ public class InnerCore implements Core, InputListener, Updatable{
 	private GUIEvent superEvent = GUIEvent.NONE;
 
 	public void update(long now) {
-				
+
 		if(!activeWindow.isLoaded()) {
 			return;
 		}
-		
+
 		if(Configuration.getInstance().isLanguageChanged()) {
 			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
 			Configuration.getInstance().setLanguageChanged(false);
@@ -133,7 +133,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 		components.add(application);
 
 		updateEffects(now);
-		
+
 		updateApplication(application, now);		
 
 		updateActiveWindow(now);
@@ -161,31 +161,28 @@ public class InnerCore implements Core, InputListener, Updatable{
 		}
 
 	}
-	
+
 	public void updateApplication(Context context, long now) {
-				
+
 		if(!context.isLocked()) {
-						
+
 			if(context.getUpdateInterval()==0) {
-							
+
 				context.update(now);
+
+				context.setLastUpdate(now);
+
+				context.getScene().update(now);
+
+			}else if(now-context.getLastUpdate()>=context.getUpdateInterval()) {
+
+				context.timeUpdate(now);
 				
 				context.setLastUpdate(now);
-				
-			}else{
-				
-				if(now-context.getLastUpdate()>=context.getUpdateInterval()) {
-										
-					context.timeUpdate(now);
-					context.setLastUpdate(now);
-					
-					context.getScene().update(now);
-					
-				}
+
+				context.getScene().update(now);
 
 			}
-
-			context.getScene().update(now);
 
 			//if activeWindow, receive command to change application
 			if(context.getReturnApplication()!=context) {
@@ -237,7 +234,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 		//activeWindow.getApplication().updateKeyboard(event);
 		//updateKeyEvent(event);
-		
+
 		activeWindow.updateKeyboard(event);
 
 		//Application sempre eh gerenciada pelo teclado
@@ -246,7 +243,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 	}
 
 	private void updateMouse(List<View> components) {
-		
+
 		//Solving ConcurrentModification
 		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
 
@@ -280,7 +277,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 					}else{
 
 						View next = component.findNext();
-						
+
 						if(next!=null) {
 							//if overMouse
 							updateEvent(component.findNext(), nextEvent);
@@ -305,7 +302,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 			if(frameEvent!=GUIEvent.NONE) {
 				superEvent = frameEvent;
 			}
-			
+
 			//Helper UI Methods
 			updateTimerClick();
 
@@ -352,7 +349,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 			if(!component.isMouseOver()) {
 				component.setMouseOver(true);
-				
+
 				setMouseOver(component);
 			}
 
@@ -360,7 +357,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 
 			if(component.isMouseOver()) {
 				component.setMouseOver(false);
-				
+
 				resetMouseOver();
 			}
 
@@ -505,18 +502,18 @@ public class InnerCore implements Core, InputListener, Updatable{
 	}
 
 	private void drawWindow(Graphic g, Window window) {
-				
+
 		boolean offset = window.getX()!=0||window.getY()!=0;
 
 		if(offset) {
 			g.translate(window.getX(), window.getY());
 		}
-	
+
 		window.draw(g);
 
 		drawContext(window.getApplication(), g);
 
-		
+
 		List<View> components = new CopyOnWriteArrayList<View>(window.getViews());
 
 		for(View view: components) {
@@ -532,9 +529,9 @@ public class InnerCore implements Core, InputListener, Updatable{
 		if(offset) {
 			g.translate(-window.getX(), -window.getY());
 		}
-			
+
 	}
-	
+
 	private void drawContext(Context context, Graphic g) {
 
 		context.drawScene(g);
@@ -550,7 +547,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 			updatable.update(now);	
 		}
 	}
-	
+
 	private void drawEffects(Graphic g) {
 
 		List<AnimationScript> remove = new ArrayList<AnimationScript>();
@@ -789,11 +786,11 @@ public class InnerCore implements Core, InputListener, Updatable{
 		if(application==null) {
 			System.err.println("Application cannot be null.");
 		}
-		
+
 		activeWindow.reload(application);
-		
+
 		application.setSessionMap(activeWindow.getSessionMap());
-		
+
 		application.setCamera(activeWindow.getCamera());
 
 	}
@@ -811,7 +808,7 @@ public class InnerCore implements Core, InputListener, Updatable{
 				if(arc<360) {
 					mouse.setArc(arc+speed);
 				}else{
-					
+
 					updateEvent(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
 					updateEvent(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_UP);
 
@@ -821,14 +818,14 @@ public class InnerCore implements Core, InputListener, Updatable{
 			}
 
 		}else{
-			
+
 			if(configuration.isTimerClick()) {
 				mouse.setArc(0);
 			}
-			
+
 		}
 	}
-	
+
 	@Override
 	public void updateKeyEvent(KeyEvent event) {
 
@@ -877,12 +874,12 @@ public class InnerCore implements Core, InputListener, Updatable{
 		event.setY(event.getY()-activeWindow.getY());
 
 	}
-	
+
 	private void setMouseOver(View component) {
 		mouseOver = component;
 		mouse.setOverClickable(true);		
 	}
-	
+
 	private void resetMouseOver() {
 		mouseOver = null;
 		mouse.setOverClickable(false);
@@ -912,5 +909,5 @@ public class InnerCore implements Core, InputListener, Updatable{
 		this.fps = fps;
 		this.activeWindow.getApplication().setFps(fps);
 	}
-	
+
 }

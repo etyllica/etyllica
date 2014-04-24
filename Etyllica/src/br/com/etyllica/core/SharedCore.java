@@ -52,7 +52,7 @@ public class SharedCore implements Runnable{
 
 	private List<Monitor> monitors = new ArrayList<Monitor>();
 	
-	private boolean quit = false;
+	private boolean running = true;
 	
 	private long start = 0;
 
@@ -299,8 +299,6 @@ public class SharedCore implements Runnable{
 	@Override
 	public void run() {
 
-		boolean quit = false;
-
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D / 60D; //~60fps
 
@@ -310,7 +308,7 @@ public class SharedCore implements Runnable{
 		long lastTimer = System.currentTimeMillis();
 		double delta = 0;
 
-		while(!quit) {
+		while(running) {
 
 			long now = System.nanoTime();
 			delta += (now - lastTime) / nsPerTick;
