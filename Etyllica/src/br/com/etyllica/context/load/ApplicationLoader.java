@@ -19,9 +19,9 @@ import br.com.etyllica.gui.Window;
 public class ApplicationLoader implements LoadListener {
 
 	private Loader loader;
-	
+
 	private Updater updater;
-	
+
 	private Window window;
 
 	private Context application;
@@ -30,65 +30,72 @@ public class ApplicationLoader implements LoadListener {
 
 	private boolean called = false;
 	
-	public ApplicationLoader(){
+	private ScheduledExecutorService loadExecutor;
+
+	private Future<?> future;
+	
+	private static final int UPDATE_INTERVAL = 10;
+	
+	public ApplicationLoader() {
 		super();
 	}
 
-	final ScheduledExecutorService loadExecutor = Executors.newScheduledThreadPool(2);
-	
-	public void loadApplication(){
+	public void loadApplication() {
 
-		window.setLoaded(false);
+		loadExecutor = Executors.newScheduledThreadPool(2);
 		
+		window.setLoaded(false);
+
 		loader = new Loader();
 		updater = new Updater();
-		
-		Future<?> future = loadExecutor.submit(loader);
-		
-		try {
-		    future.get();
-		} catch (ExecutionException e) {
-		    Throwable cause = e.getCause();
-		    cause.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		loadExecutor.scheduleAtFixedRate(updater, 0, 10, TimeUnit.MILLISECONDS);
 
+		future = loadExecutor.submit(loader);
+		
+		loadExecutor.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
+		
 	}
-	
+
 	private class Loader implements Runnable {
 
 		public void run() {
 			called = false;
-						
+
 			application.setLoadListener(ApplicationLoader.this);
 			application.startLoad();
-			
+
 		}
 
 	}
-	
+
 	private class Updater implements Runnable {
 
 		public void run() {
-			
-			//while(application.isLocked()){
-			if(!called){
-				
-				if(!window.isLoaded()){
+
+			if(!called) {
+
+				if(!window.isLoaded()) {
 					loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
 				}
 
-			}else{
+			} else {
+				
+				try {
+					future.get();
+				} catch (ExecutionException e) {
+					Throwable cause = e.getCause();
+					cause.printStackTrace();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				window.setApplication(application);
 
 				window.setLoaded(true);
-			}
-			
+				
+				loadExecutor.shutdownNow();
+			}			
+
 		}
 
 	}
