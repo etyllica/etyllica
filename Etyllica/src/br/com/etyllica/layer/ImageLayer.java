@@ -230,48 +230,49 @@ public class ImageLayer extends StaticLayer {
 	}
 
 	public void draw(Graphic g) {
-		
-		if(visible) {
 
-			if(opacity<0xff) {
-				g.setOpacity(opacity);
-			}
-			
-			this.draw(g, getTransform());
-			
-			g.resetTransform();
-
-			if(opacity<0xff) {
-				g.resetOpacity();
-			}		
-
+		if(!visible) {
+			return;
 		}
 
+
+		if(opacity<0xff) {
+			g.setOpacity(opacity);
+		}
+
+		this.draw(g, getTransform());
+
+		g.resetTransform();
+
+		if(opacity<0xff) {
+			g.resetOpacity();
+		}		
+
 	}
-	
+
 	@Override
 	public void draw(Graphic g, AffineTransform transform) {
 		g.transform(transform);
 
 		simpleDraw(g);
 	}
-	
+
 	public void simpleDraw(Graphic g) {
 		simpleDraw(g, x, y);
 	}
-	
+
 	public void simpleDraw(Graphic g, int x, int y) {
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, (y+h),
 				xImage,yImage,xImage+w,yImage+h, null );
 	}
-	
+
 	protected AffineTransform getTransform() {
 		AffineTransform transform = new AffineTransform();
 
 		if(angle!=0) {
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
 		}
-		
+
 		if(scale!=1) {
 
 			double sw = w*scale;
@@ -291,10 +292,10 @@ public class ImageLayer extends StaticLayer {
 			transform.concatenate(scaleTransform);
 
 		}
-		
+
 		return transform;
 	}
-	
+
 
 	public boolean onMouse(Mouse mouse) {
 
@@ -308,7 +309,7 @@ public class ImageLayer extends StaticLayer {
 
 		return colision;
 	}
-	
+
 	public void clone(ImageLayer b) {
 		this.w = b.w;
 		this.h = b.h;
@@ -318,5 +319,5 @@ public class ImageLayer extends StaticLayer {
 
 		this.path = b.path;
 	}
-	
+
 }
