@@ -99,7 +99,8 @@ public class Window extends View{
 
 	public void setLoadApplication(DefaultLoadApplication loadApplication) {
 		clearComponents();
-		this.application = loadApplication;
+		this.loadApplication = loadApplication;
+		this.application = loadApplication;		
 	}
 
 	public void reload(Context context){
