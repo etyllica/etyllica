@@ -123,61 +123,64 @@ public class SVGColor{
 	public static Color SLATE_GRAY = new Color(0x70, 0x80, 0x90);
 	public static Color LIGHT_SLATE_GRAY = new Color(0x77, 0x88, 0x99);
 	
-	/* TODO
+	public static Color DARK_RED = new Color(0x8B, 0x00, 0x00);
 	
-blueviolet #8A2BE2	
- 	darkred #8B0000		darkmagenta #8B008B	
-saddlebrown #8B4513	
- 	darkseagreen #8FBC8F		lightgreen #90EE90	
-mediumpurple #9370DB	
- 	darkviolet #9400D3		palegreen #98FB98	
-darkorchid #9932CC	
- 	yellowgreen #9ACD32		sienna #A0522D	
-brown #A52A2A	
- 	darkgray #A9A9A9		darkgrey #A9A9A9	
-lightblue #ADD8E6	
- 	greenyellow #ADFF2F		paleturquoise #AFEEEE	
-lightsteelblue #B0C4DE	
- 	powderblue #B0E0E6		firebrick #B22222	
-darkgoldenrod #B8860B	
- 	mediumorchid #BA55D3		rosybrown #BC8F8F	
-darkkhaki #BDB76B	
- 	silver(16) #C0C0C0		mediumvioletred #C71585	
-indianred #CD5C5C	
- 	peru #CD853F		chocolate #D2691E	
-tan #D2B48C	
- 	lightgray #D3D3D3		lightgrey #D3D3D3	
-thistle #D8BFD8	
- 	orchid #DA70D6		goldenrod #DAA520	
-palevioletred #DB7093	
- 	crimson #DC143C		gainsboro #DCDCDC	
-plum #DDA0DD	
- 	burlywood #DEB887		lightcyan #E0FFFF	
-lavender #E6E6FA	
- 	darksalmon #E9967A		violet #EE82EE	
-palegoldenrod #EEE8AA	
- 	lightcoral #F08080		khaki #F0E68C	
-aliceblue #F0F8FF	
- 	honeydew #F0FFF0		azure #F0FFFF	
-sandybrown #F4A460	
- 	wheat #F5DEB3		beige #F5F5DC	
-whitesmoke #F5F5F5	
- 	mintcream #F5FFFA		ghostwhite #F8F8FF	
-salmon #FA8072	
- 	antiquewhite #FAEBD7		linen #FAF0E6	
-lightgoldenrodyellow #FAFAD2	
- 	oldlace #FDF5E6		red(Safe 16 Hex3) #FF0000	
-fuchsia(Safe 16 Hex3) #FF00FF	
- 	magenta(Safe 16=fuchsia Hex3) #FF00FF		deeppink #FF1493	
-orangered #FF4500	
- 	tomato #FF6347		hotpink #FF69B4	
+	public static Color SADDLE_BROWN = new Color(0x8B, 0x45, 0x13);
+	public static Color DARK_SEA_GREEN = new Color(0x8F, 0xBC, 0x8F);
+	public static Color LIGHT_GREEN = new Color(0x90, 0xEE, 0x90);
+	public static Color MEDIUM_PURPLE = new Color(0x93, 0x70, 0xDB);
+	public static Color DARK_VIOLET = new Color(0x94, 0x00, 0xD3);
+	public static Color PALE_GREEN = new Color(0x98, 0xFB, 0x98);
+	public static Color YELLOW_GREEN = new Color(0x9A, 0xCD, 0x32);
+	public static Color SIENNA = new Color(0xA0, 0x52, 0x2D);
+	public static Color DARK_GRAY = new Color(0xA9, 0xA9, 0xA9);
+	public static Color LIGHT_BLUE = new Color(0xAD, 0xD8, 0xE6);
+	public static Color GREEN_YELLOW = new Color(0xAD, 0xFF, 0x2F);
+	public static Color PALE_TURQUOISE = new Color(0xAF, 0xEE, 0xEE);
+	public static Color LIGHT_STEEL_BLUE = new Color(0xB0, 0xC4, 0xDE);
+	public static Color POWDER_BLUE = new Color(0xB0, 0xE0, 0xE6);
+	public static Color FIREBRICK = new Color(0xB2, 0x22, 0x22);
 	
-blanchedalmond #FFEBCD	
- 	papayawhip #FFEFD5		lavenderblush #FFF0F5	
-seashell #FFF5EE	
- 	cornsilk #FFF8DC		lemonchiffon #FFFACD	
-floralwhite #FFFAF0	
- 	
- 	ivory #FFFFF0
-	*/
+	public static Color GOLDENROD = new Color(0xDA, 0xA5, 0x20);
+	public static Color DARK_GOLDENROD = new Color(0xB8, 0x86, 0x0B);
+	
+	public static Color ROSY_BROWN = new Color(0xBC, 0x8F, 0x8F);
+	public static Color DARK_KHAKI = new Color(0xBD, 0xB7, 0x6B);
+	public static Color SILVER = new Color(0xC0, 0xC0, 0xC0);
+	public static Color INDIAN_RED = new Color(0xCD, 0x5C, 0x5C);
+	public static Color PERU = new Color(0xCD, 0x85, 0x3F);
+	public static Color CHOCOLATE = new Color(0xD2, 0x69, 0x1E);
+	public static Color TAN = new Color(0xD2, 0xB4, 0x8C);
+	public static Color LIGHT_GRAY = new Color(0xD3, 0xD3, 0xD3);
+	public static Color GAINSBORO = new Color(0xDC, 0xDC, 0xDC);
+	public static Color BURLYWOOD = new Color(0xDE, 0xB8, 0x87);
+	public static Color LAVENDER = new Color(0xE6, 0xE6, 0xFA);
+	public static Color DARK_SALMON = new Color(0xE9, 0x96, 0x7A);
+	public static Color PALE_GOLDENROD = new Color(0xEE, 0xE8, 0xAA);
+	
+	public static Color LIGHT_CORAL = new Color(0xF0, 0x80, 0x80);
+	public static Color KHAKI = new Color(0xF0, 0xE6, 0x8C);
+	public static Color AZURE = new Color(0xF0, 0xFF, 0xFF);
+	public static Color HONEYDEW = new Color(0xF0, 0xFF, 0xF0);
+	
+	public static Color SANDY_BROWN = new Color(0xF4, 0xA4, 0x60);
+	public static Color WHEAT = new Color(0xF5, 0xDE, 0xB3);
+	public static Color BEIGE = new Color(0xF5, 0xF5, 0xDC);
+	public static Color WHITE_SMOKE = new Color(0xF5, 0xF5, 0xF5);
+	public static Color MINT_CREAM = new Color(0xF5, 0xFF, 0xFA);
+	public static Color SALMON = new Color(0xFA, 0x80, 0x72);
+	
+	public static Color ANTIQUE_WHITE = new Color(0xFA, 0xEB, 0xD7);
+	public static Color LINEN = new Color(0xFA, 0xF0, 0xE6);
+	public static Color LIGHT_GOLDENROD_YELLOW = new Color(0xFA, 0xFA, 0xD2);
+	public static Color OLD_LACE = new Color(0xFD, 0xF5, 0xE6);
+	public static Color TOMATO = new Color(0xFF, 0x63, 0x47);
+	public static Color BLANCHED_ALMOND = new Color(0xFF, 0xEB, 0xCD);
+	public static Color PAPAYA_WHIP = new Color(0xFF, 0xEF, 0xD5);
+	public static Color SEA_SHELL = new Color(0xFF, 0xF5, 0xEE);
+	public static Color CORN_SILK = new Color(0xFF, 0xF8, 0xDC);
+	public static Color LEMON_CHIFFON = new Color(0xFF, 0xFA, 0xCD);
+	public static Color FLORAL_WHITE = new Color(0xFF, 0xFA, 0xF0);
+	public static Color IVORY = new Color(0xFF, 0xFF, 0xF0);
+	
 }
