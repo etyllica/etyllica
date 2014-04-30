@@ -55,8 +55,12 @@ public class SharedCore implements Runnable{
 	private boolean running = true;
 	
 	private long start = 0;
+	
+	private final int MAX_FPS = 60;
+	
+	private final double FRAME_PERIOD = 1000000000D / MAX_FPS;
 
-	public SharedCore(java.awt.Component component, int width, int height){
+	public SharedCore(java.awt.Component component, int width, int height) {
 		super();
 
 		this.component = component;
@@ -80,12 +84,12 @@ public class SharedCore implements Runnable{
 
 	}
 
-	private void initMonitors(){
+	private void initMonitors() {
 
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] devices = ge.getScreenDevices();
 
-		if(devices.length>0){
+		if(devices.length>0) {
 
 			for (int i = 0; i < devices.length; i++) {
 
@@ -123,30 +127,30 @@ public class SharedCore implements Runnable{
 		this.path = s;
 	}
 
-	public void initDefault(){
+	public void initDefault() {
 
-		for(Loader loader:loaders){
+		for(Loader loader:loaders) {
 			loader.setUrl(path);
 			loader.start();
 		}
 
 	}
 
-	public void enableFullScreen(){
+	public void enableFullScreen() {
 
 		Monitor selectedMonitor = monitors.get(0);
 
 		Point p = this.component.getLocation();
 
-		for(Monitor monitor: monitors){
+		for(Monitor monitor: monitors) {
 
-			if(monitor.colideRectPoint(p.x, p.y)){
+			if(monitor.colideRectPoint(p.x, p.y)) {
 				selectedMonitor = monitor;
 			}
 
 		}
 
-		if(!innerCore.fullScreenEnable){
+		if(!innerCore.fullScreenEnable) {
 			telaCheia = new FullScreenWindow(innerCore, selectedMonitor);
 			innerCore.fullScreenEnable = true;
 		}
@@ -155,7 +159,7 @@ public class SharedCore implements Runnable{
 
 	}
 
-	public void disableFullScreen(){
+	public void disableFullScreen() {
 		telaCheia.dispose();
 
 		innerCore.fullScreenEnable = false;
@@ -181,22 +185,22 @@ public class SharedCore implements Runnable{
 	}
 
 	//Component Methods
-	private VolatileImage createBackBuffer(int width, int height){
+	private VolatileImage createBackBuffer(int width, int height) {
 		return createBackBuffer(width, height, Transparency.OPAQUE);
 	}
 
-	private VolatileImage createBackBuffer(int width, int height, int transparency){
+	private VolatileImage createBackBuffer(int width, int height, int transparency) {
 
 		return configuration.createCompatibleVolatileImage(width, height, transparency);
 	}
 
-	public void defineSize(int width, int height){
+	public void defineSize(int width, int height) {
 
 		component.setSize(width, height);
 
 		volatileImage = createBackBuffer(width, height);
 
-		if(volatileImage!=null){
+		if(volatileImage!=null) {
 			//graphic.setBufferedImage(volatileImage.getSnapshot());
 			graphic.setVolatileImage(volatileImage);
 		}
@@ -208,14 +212,14 @@ public class SharedCore implements Runnable{
 		int valCode = volatileImage.validate(configuration);
 
 		// This means the device doesn't match up to this hardware accelerated image.
-		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE){
+		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE) {
 			volatileImage = createBackBuffer(width,height); // recreate the hardware accelerated image.
 			graphic.setVolatileImage(volatileImage);
 		}
 
 	}
 
-	public void hideDefaultCursor(){
+	public void hideDefaultCursor() {
 		int[] pixels = new int[16 * 16];
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
@@ -236,7 +240,7 @@ public class SharedCore implements Runnable{
 		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
-		if(!innerCore.fullScreenEnable){
+		if(!innerCore.fullScreenEnable) {
 			g.drawImage(graphic.getVimg(), (int)desktop.getApplication().getX(), (int)desktop.getApplication().getY(), component);
 		}
 		else{
@@ -267,24 +271,24 @@ public class SharedCore implements Runnable{
 		this.loaders = loaders;
 	}
 
-	public void update(){
+	public void update(double delta) {
 		
-		long delta = System.currentTimeMillis()-start;
+		long now = System.currentTimeMillis()-start;
 				
-		//if(!drawing){
-			innerCore.update(delta);
+		//if(!drawing) {
+			innerCore.update(now);
 		//}
 	}
 
-	public GUIEvent getSuperEvent(){
+	public GUIEvent getSuperEvent() {
 		return innerCore.getSuperEvent();
 	}
 
-	public void hideCursor(){
+	public void hideCursor() {
 		innerCore.hideCursor();
 	}
 
-	public void setEngine(Engine engine){
+	public void setEngine(Engine engine) {
 		this.engine = engine;
 	}
 
@@ -295,13 +299,12 @@ public class SharedCore implements Runnable{
 		new Thread(this).start();
 		
 	}
-	
+		
 	@Override
 	public void run() {
 
 		long lastTime = System.nanoTime();
-		double nsPerTick = 1000000000D / 60D; //~60fps
-
+		
 		int ups = 0;
 		int fps = 0;
 
@@ -311,14 +314,14 @@ public class SharedCore implements Runnable{
 		while(running) {
 
 			long now = System.nanoTime();
-			delta += (now - lastTime) / nsPerTick;
+			delta += (now - lastTime) / FRAME_PERIOD;
 			lastTime = now;
 
 			boolean renderOK = false;
 
 			while(delta >= 1) {
 				ups++;
-				updateEngine((long)delta);
+				updateEngine(delta);
 				delta -= 1;
 				renderOK = true;
 			}
@@ -342,29 +345,29 @@ public class SharedCore implements Runnable{
 
 	}
 	
-	private void updateEngine(long delta){
+	private void updateEngine(double delta) {
 				
 		GUIEvent event = GUIEvent.NONE;
 
-		this.update();
+		this.update(delta);
 
 		event = this.getSuperEvent();
 
 		listen(event);
 	}
 	
-	private void listen(GUIEvent event){
+	private void listen(GUIEvent event) {
 
-		if(event==GUIEvent.ENABLE_FULL_SCREEN){
+		if(event==GUIEvent.ENABLE_FULL_SCREEN) {
 			enableFullScreen();
-		}else if(event==GUIEvent.DISABLE_FULL_SCREEN){
+		}else if(event==GUIEvent.DISABLE_FULL_SCREEN) {
 			disableFullScreen();
 
 			//TODO When Frame
-			//}else if(event==GUIEvent.WINDOW_MOVE){
+			//}else if(event==GUIEvent.WINDOW_MOVE) {
 			//	setLocation(this.getX()+(mouse.getX()-mouse.getDragX()), this.getY()+(mouse.getY()-mouse.getDragY()));
 		}
-		else if(event==GUIEvent.REQUEST_FOCUS){
+		else if(event==GUIEvent.REQUEST_FOCUS) {
 
 			if ( !component.hasFocus() ) {
 				component.requestFocus();
