@@ -10,19 +10,20 @@ public class Tutorial1 extends Etyllica {
 	public Tutorial1() {
 		super(800, 600);
 	}
-	
+
 	@Override
 	public Application startApplication() {
-				
-		//Etyllica tries to find the resources as your Application should be
-		//To avoid this you should put your /assets/images in /Project/bin/examples/etyllica/tutorial1/
-		
-		//Upping three directories we have /Project/bin/assets/images
+
+		//Etyllica tries to find the resources as your Application folder assets/
+
+		//"Upping" three directories we have /Project/bin/assets/images
 		String s = getClass().getResource("").toString();
 		setPath(s+"../../../");
-		
+
+		//To avoid this, you should put your /assets/images in /Project/bin/examples/etyllica/tutorial1/
+
 		return new HelloWorld(w,h);
-		
+
 	}
-	
+
 }

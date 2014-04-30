@@ -22,7 +22,7 @@ public class Tutorial8 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-			
+				
 		return new CustomLoadApplication(w,h);
 	}
 	
