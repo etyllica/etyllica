@@ -18,6 +18,10 @@ public class Point2D extends java.awt.geom.Point2D {
 	
 	protected int color = 0x000000;//Black Hex Value
 
+	public Point2D() {
+		super();
+	}
+	
 	public Point2D(double x, double y, int color) {
 		this(x,y);
 		this.color = color;
