@@ -1,6 +1,6 @@
 package br.com.etyllica.linear.graph;
 
-public abstract class Edge {
+public class Edge {
 
 	protected Node origin;
 	
