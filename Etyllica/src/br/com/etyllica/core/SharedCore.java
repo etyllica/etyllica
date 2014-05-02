@@ -58,7 +58,7 @@ public class SharedCore implements Runnable{
 	
 	private final int MAX_FPS = 60;
 	
-	private final double FRAME_PERIOD = 1000000000D / MAX_FPS;
+	private final double FRAME_PERIOD = 1000D / MAX_FPS;
 
 	public SharedCore(java.awt.Component component, int width, int height) {
 		super();
@@ -303,7 +303,7 @@ public class SharedCore implements Runnable{
 	@Override
 	public void run() {
 
-		long lastTime = System.nanoTime();
+		long lastTime = System.currentTimeMillis();
 		
 		int ups = 0;
 		int fps = 0;
@@ -313,7 +313,7 @@ public class SharedCore implements Runnable{
 
 		while(running) {
 
-			long now = System.nanoTime();
+			long now = System.currentTimeMillis();
 			delta += (now - lastTime) / FRAME_PERIOD;
 			lastTime = now;
 
@@ -331,7 +331,7 @@ public class SharedCore implements Runnable{
 				engine.draw();
 			}
 
-			if(System.currentTimeMillis() - lastTimer >= 1000) {
+			if(now - lastTimer >= 1000) {
 				lastTimer += 1000;
 
 				//System.out.println("frames: " + fps + " | updates: " + ups);
