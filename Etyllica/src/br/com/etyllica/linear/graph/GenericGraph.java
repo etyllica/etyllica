@@ -5,12 +5,16 @@ import java.util.List;
 
 public abstract class GenericGraph<E extends Edge> {
 
-	protected List<Node> nodes = new ArrayList<Node>();
+	protected List<Node> nodes;
 	
-	protected List<E> edges = new ArrayList<E>();
+	protected List<E> edges;
 	
 	public GenericGraph() {
 		super();
+		
+		nodes = new ArrayList<Node>();
+		
+		edges = new ArrayList<E>();
 	}
 
 	public List<Node> getNodes() {
