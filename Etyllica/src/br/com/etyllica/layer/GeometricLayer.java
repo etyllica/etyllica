@@ -37,7 +37,10 @@ public class GeometricLayer implements Movable {
 	public GeometricLayer(int x, int y, int w, int h) {
 		super();
 		
-		setBounds(x, y, w, h);
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;		
 	}
 
 	public int getX() {
