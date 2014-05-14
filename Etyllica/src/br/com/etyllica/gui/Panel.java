@@ -14,7 +14,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class Panel extends RoundGUIComponent{
+public class Panel extends RoundGUIComponent {
 	
 	public Panel(int x, int y, int w, int h){
 		super(x,y,w,h);

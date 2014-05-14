@@ -9,7 +9,7 @@ public class Selection extends Panel {
 
 	private Color baseColor = new Color(0xF8, 0x1A, 0x27);
 	
-	private final int arrowSize = 8;
+	private final int size = 8;
 
 	private final int negativeOffset = 3;
 	
@@ -43,64 +43,64 @@ public class Selection extends Panel {
 	private void drawUpperLeftCorner(int x, int y, int w, int h, Graphic g) {
 
 		//Flipped Diagonal
-		g.drawLine(x-negativeOffset, y-negativeOffset, x-negativeOffset+arrowSize, y-negativeOffset+arrowSize);
+		g.drawLine(x-negativeOffset, y-negativeOffset, x-negativeOffset+size, y-negativeOffset+size);
 
 		//Diagonal
-		g.drawLine(x+arrowSize+negativeOffset, y, x, y+arrowSize+negativeOffset);
+		g.drawLine(x+size+negativeOffset, y, x, y+size+negativeOffset);
 
 		//Horizontal
-		g.drawLine(x+arrowSize+negativeOffset, y, x+arrowSize*3, y);
+		g.drawLine(x+size+negativeOffset, y, x+size*3, y);
 
 		//Vertical
-		g.drawLine(x, y+arrowSize+negativeOffset, x, y+arrowSize*3);
+		g.drawLine(x, y+size+negativeOffset, x, y+size*3);
 
 	}
 	
 	private void drawUpperRightCorner(int x, int y, int w, int h, Graphic g) {
 
 		//Flipped Diagonal
-		g.drawLine(x+w+negativeOffset, y-negativeOffset, x+w+negativeOffset-arrowSize, y-negativeOffset+arrowSize);
+		g.drawLine(x+w+negativeOffset, y-negativeOffset, x+w+negativeOffset-size, y-negativeOffset+size);
 
 		//Diagonal
-		g.drawLine(x+w-arrowSize-negativeOffset, y, x+w, y+arrowSize+negativeOffset);
+		g.drawLine(x+w-size-negativeOffset, y, x+w, y+size+negativeOffset);
 
 		//Horizontal
-		g.drawLine(x+w-arrowSize-negativeOffset, y, x+w-arrowSize*3, y);
+		g.drawLine(x+w-size-negativeOffset, y, x+w-size*3, y);
 
 		//Vertical
-		g.drawLine(x+w, y+arrowSize+negativeOffset, x+w, y+arrowSize*3);
+		g.drawLine(x+w, y+size+negativeOffset, x+w, y+size*3);
 
 	}
 	
 	private void drawLowerLeftCorner(int x, int y, int w, int h, Graphic g) {
 
 		//Flipped Diagonal
-		g.drawLine(x-negativeOffset, y+h+negativeOffset, x-negativeOffset+arrowSize, y+h+negativeOffset-arrowSize);
+		g.drawLine(x-negativeOffset, y+h+negativeOffset, x-negativeOffset+size, y+h+negativeOffset-size);
 
 		//Diagonal
-		g.drawLine(x+arrowSize+negativeOffset, y+h, x, y+h-arrowSize-negativeOffset);
+		g.drawLine(x+size+negativeOffset, y+h, x, y+h-size-negativeOffset);
 
 		//Horizontal
-		g.drawLine(x+arrowSize+negativeOffset, y+h, x+arrowSize*3, y+h);
+		g.drawLine(x+size+negativeOffset, y+h, x+size*3, y+h);
 
 		//Vertical
-		g.drawLine(x, y+h-arrowSize-negativeOffset, x, y+h-arrowSize*3);
+		g.drawLine(x, y+h-size-negativeOffset, x, y+h-size*3);
 
 	}
 	
 	private void drawLowerRightCorner(int x, int y, int w, int h, Graphic g) {
 
 		//Flipped Diagonal
-		g.drawLine(x+w+negativeOffset, y+h+negativeOffset, x+w+negativeOffset-arrowSize, y+h+negativeOffset-arrowSize);
+		g.drawLine(x+w+negativeOffset, y+h+negativeOffset, x+w+negativeOffset-size, y+h+negativeOffset-size);
 
 		//Diagonal
-		g.drawLine(x+w-arrowSize-negativeOffset, y+h, x+w, y+h-arrowSize-negativeOffset);
+		g.drawLine(x+w-size-negativeOffset, y+h, x+w, y+h-size-negativeOffset);
 
 		//Horizontal
-		g.drawLine(x+w-arrowSize-negativeOffset, y+h, x+w-arrowSize*3, y+h);
+		g.drawLine(x+w-size-negativeOffset, y+h, x+w-size*3, y+h);
 
 		//Vertical
-		g.drawLine(x+w, y+h-arrowSize-negativeOffset, x+w, y+h-arrowSize*3);
+		g.drawLine(x+w, y+h-size-negativeOffset, x+w, y+h-size*3);
 
 	}
 		
