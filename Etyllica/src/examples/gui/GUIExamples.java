@@ -1,10 +1,8 @@
-package examples.etyllica.gui;
+package examples.gui;
 
-import examples.etyllica.gui.applications.DarknessUI;
-import examples.etyllica.gui.applications.ThemeApplication;
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.context.Application;
-import br.com.etyllica.core.Configuration;
+import examples.gui.hud.DarknessUI;
 
 public class GUIExamples extends EtyllicaFrame {
 
@@ -23,7 +21,6 @@ public class GUIExamples extends EtyllicaFrame {
 		
 		gui.init();
 		
-		Configuration.getInstance().setTimerClick(true);
 	}
 
 	@Override

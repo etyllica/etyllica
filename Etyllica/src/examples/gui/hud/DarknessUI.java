@@ -1,4 +1,4 @@
-package examples.etyllica.gui.applications;
+package examples.gui.hud;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -13,11 +13,22 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.util.SVGColor;
 
+/**
+ * Concept based on Star Trek: Into Darkness - Surveillance UI
+ *  
+ * http://www.rudyvessup.com/work/star-trek-into-darkness-survellience-ui/
+ * 
+ */
+
 public class DarknessUI extends Application {
 
 	public DarknessUI(int w, int h) {
 		super(w, h);
 	}
+	
+	private int mx = 0;
+	
+	private int my = 0;
 
 	private Shape centerCircle;
 	
@@ -33,11 +44,31 @@ public class DarknessUI extends Application {
 	
 	private double markAngle = 0;
 	
+	public void timeUpdate(long now) {
+		
+		createUI(mx, my);
+		
+		markAngle+=2;
+		
+		int circularSpacing = 12;
+		
+		centerLeftArc.setAngleStart(90+circularSpacing+markAngle);
+		
+		centerRightArc.setAngleStart(270+circularSpacing+markAngle);
+		
+	}
+	
 	@Override
 	public void load() {
-
-		int cx = 280;
-		int cy = 160;
+		
+		createUI(mx, my);
+		
+		updateAtFixedRate(50);
+		
+		loading = 100;
+	}
+	
+	private void createUI(int mx, int my) {
 		
 		BasicStroke basicStroke = new BasicStroke(10f);
 
@@ -49,7 +80,7 @@ public class DarknessUI extends Application {
 		double centerRadius = radius-20;
 
 		//Center Circle
-		centerCircle = new Ellipse2D.Double(cx-centerRadius, cy-centerRadius, centerRadius*2, centerRadius*2);
+		centerCircle = new Ellipse2D.Double(mx-centerRadius, my-centerRadius, centerRadius*2, centerRadius*2);
 		
 		int circularSpacing = 5;
 		
@@ -58,7 +89,7 @@ public class DarknessUI extends Application {
 		double rightExtent = 180-circularSpacing*2;
 		
 		//Right Arc
-		rightArc = new Arc2D.Double(cx-radius, cy-radius, aw*2, ah*2, rightStart, rightExtent, Arc2D.OPEN);
+		rightArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, rightStart, rightExtent, Arc2D.OPEN);
 
 		rightLine = basicStroke.createStrokedShape(rightArc);
 		
@@ -67,24 +98,9 @@ public class DarknessUI extends Application {
 		
 		double leftExtent = 180-circularSpacing*2;
 		
-		leftArc = new Arc2D.Double(cx-radius, cy-radius, aw*2, ah*2, leftArcStart, leftExtent, Arc2D.OPEN);
+		leftArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, leftArcStart, leftExtent, Arc2D.OPEN);
 
-		buildCenterPart(cx, cy, radius-50);
-		
-		updateAtFixedRate(50);
-		
-		loading = 100;
-	}
-	
-	public void timeUpdate(long now) {
-		
-		markAngle+=2;
-		
-		int circularSpacing = 12;
-		
-		centerLeftArc.setAngleStart(90+circularSpacing+markAngle);
-		
-		centerRightArc.setAngleStart(270+circularSpacing+markAngle);
+		buildCenterPart(mx, my, radius-50);
 		
 	}
 	
@@ -137,7 +153,11 @@ public class DarknessUI extends Application {
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
+		
+		mx = event.getX();
+		
+		my = event.getY();
+		
 		return null;
 	}
 
