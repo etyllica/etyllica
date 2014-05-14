@@ -8,6 +8,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.theme.plurality.Selection;
+import br.com.etyllica.theme.plurality.TitleArrow;
 
 /**
  * Concept based on Plurality (Movie)
@@ -18,6 +19,10 @@ import br.com.etyllica.theme.plurality.Selection;
 
 public class PluralityUI extends Application {
 
+	private final static String THEME_NAME = "PLURALITY";
+	
+	private final static String AUTHOR_NAME = "BY JAMIE MARTIN";
+	
 	private int mx = 0;
 
 	private int my = 0;
@@ -28,8 +33,10 @@ public class PluralityUI extends Application {
 
 	private Color backgroundColor = new Color(0x23, 0x27, 0x28);
 	
+	private TitleArrow title;
+	
 	private Selection selection;
-
+	
 	public PluralityUI(int w, int h) {
 		super(w, h);
 	}
@@ -37,6 +44,11 @@ public class PluralityUI extends Application {
 	@Override
 	public void load() {
 
+		int tw = 300;
+		int th = 70;
+		
+		title = new TitleArrow(w/2-tw/2, 80, tw, th);
+		
 		selection = new Selection(mx-rectW/2, my-rectH/2, rectW, rectH);
 		
 		loading = 100;
@@ -51,8 +63,24 @@ public class PluralityUI extends Application {
 
 		g.drawRect(mx-rectW/2, my-rectH/2, rectW, rectH);
 		
+		title.draw(g);
+		
 		selection.draw(g);
 		
+		g.setColor(Color.WHITE);
+		
+		int offset = -10;
+		
+		g.setFontSize(40f);
+		
+		g.drawStringShadow(title.getX(), title.getY()+offset, title.getW(), title.getH()+offset, THEME_NAME, Color.BLACK);
+		
+		offset = 14;
+		
+		g.setFontSize(20f);
+		
+		g.drawStringShadow(title.getX(), title.getY()+offset, title.getW(), title.getH()+offset, AUTHOR_NAME, Color.BLACK);
+				
 	}
 
 	@Override
