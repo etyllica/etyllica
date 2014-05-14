@@ -22,14 +22,13 @@ public class Panel extends RoundGUIComponent{
 	
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-		
-		//Usado principalmente quando houver uma janela sobre as outras
-		/*Mouse mouse = controle.getMouse();
-		if(onMouse(mouse)){
-			return GUIEvent.BLOCK_CLICK;
-		}
-		*/
-		
+		// TODO Auto-generated method stub		
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyEvent event) {
+		// TODO Auto-generated method stub
 		return GUIEvent.NONE;
 	}
 
@@ -55,12 +54,6 @@ public class Panel extends RoundGUIComponent{
 		g.fillRect(x+roundness, y+h-roundness, w-roundness*2, roundness);
 		g.fillArc(x+w-roundness*2, y+h-roundness*2, roundness*2, roundness*2, 270, 90);
 	
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent	.NONE;
 	}
 
 }

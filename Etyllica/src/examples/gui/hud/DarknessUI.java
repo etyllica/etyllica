@@ -22,13 +22,13 @@ import br.com.etyllica.util.SVGColor;
 
 public class DarknessUI extends Application {
 
-	public DarknessUI(int w, int h) {
-		super(w, h);
-	}
-	
 	private int mx = 0;
 	
 	private int my = 0;
+	
+	public DarknessUI(int w, int h) {
+		super(w, h);
+	}	
 
 	private Shape centerCircle;
 	
@@ -130,7 +130,7 @@ public class DarknessUI extends Application {
 		
 		g.fillRect(0, 0, w, h);
 		
-		g.setAlpha(90);
+		g.setAlpha(80);
 		
 		g.setColor(SVGColor.GHOST_WHITE);
 
