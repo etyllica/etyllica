@@ -3,8 +3,8 @@ package br.com.luvia;
 import org.jgl.GL;
 import org.jgl.GLAUX;
 
+import br.com.etyllica.linear.Point3D;
 import br.com.luvia.linear.Box3D;
-import br.com.luvia.linear.Point3D;
 import br.com.luvia.linear.Polygon3D;
 import br.com.luvia.material.Texture;
 import br.com.luvia.util.Camera;

@@ -43,5 +43,11 @@ public class Point3D {
 	public void setZ(double z) {
 		this.z = z;
 	}
+
+	public void setCoordinates(double x, double y, double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
 		
 }
