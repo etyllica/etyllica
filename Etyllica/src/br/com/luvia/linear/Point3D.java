@@ -9,78 +9,42 @@ import java.awt.Color;
  *
  */
 
-public class Point3D {
+public class Point3D extends br.com.etyllica.linear.Point3D {
 	
 	protected Color color;
 	
-	protected double x;
-	protected double y;
-	protected double z;
-
-	public Point3D(){
-		this(0,0,0);
+	public Point3D() {
+		super();
 	}
 	
-	public Point3D(double x, double y){
-		this(x,y,0);
+	public Point3D(double x, double y) {
+		super(x, y, 0);
 	}
-	public Point3D(double x, double y, double z){
-		
-		this.x = x;
-		this.y = y;
-		this.z = z;
-				
+	public Point3D(double x, double y, double z) {
+		super(x, y, z);
+						
 		color = new Color(0,0,0);
 	}
 
-	public void setCoordenadas(double x, double y){
+	public void setCoordinates(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
-	public void setCoordenadas(double x, double y, double z){
-		setCoordenadas(x, y);
+	public void setCoordinates(double x, double y, double z){
+		setCoordinates(x, y);
 		this.z = z;
 	}
 
-	public double getX(){
-		return x;
-	}
-	public double getY(){
-		return y;
-	}
-	public double getZ(){
-		return z;
-	}
-
-	public void setX(double x){
-		this.x = x;
-	}
-	public void setOffsetX(double x){
+	public void setOffsetX(double x) {
 		this.x += x;
 	}
-	public void setY(double y){
-		this.y = y;
-	}
-	public void setOffsetY(double y){
+
+	public void setOffsetY(double y) {
 		this.y += y;
 	}
-	public void setZ(double z){
-		this.z = z;
-	}
-	public void setOffsetZ(double z){
+	
+	public void setOffsetZ(double z) {
 		this.z += z;
-	}
-
-	public void girar(double angulo){
-
-		//http://ca.answers.yahoo.com/question/index?qid=20100403151916AAbJHxV
-
-		double cos = Math.cos(angulo);
-		double sen = Math.sin(angulo);
-
-		x = (x*cos+y*sen);
-		y = (-x*sen+y*cos);
-
 	}
 		
 	public Color getColor() {
@@ -91,10 +55,9 @@ public class Point3D {
 		this.color = color;
 	}
 
+	@Override
 	public String toString(){
 		return x+" , "+y+" , "+z;
 	}
-	
-	
 
 }

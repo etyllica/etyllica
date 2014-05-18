@@ -1,6 +1,6 @@
 package br.com.luvia.util;
 
-import br.com.luvia.linear.Point3D;
+import br.com.etyllica.linear.Point3D;
 
 /**
  * 
@@ -9,7 +9,7 @@ import br.com.luvia.linear.Point3D;
  *
  */
 
-public class Camera extends Point3D{
+public class Camera extends Point3D {
 
 	private Point3D alvo;
 	
@@ -22,7 +22,7 @@ public class Camera extends Point3D{
 		return alvo;
 	}
 	public void setTarget(double x, double y, double z){
-		alvo.setCoordenadas(x, y, z);
+		alvo.setCoordinates(x, y, z);
 	}
 	
 }
