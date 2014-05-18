@@ -1,6 +1,8 @@
 package br.com.etyllica.theme.plurality;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Paint;
 import java.awt.Polygon;
 
 import br.com.etyllica.core.graphics.Graphic;
@@ -9,6 +11,10 @@ import br.com.etyllica.gui.Panel;
 public class TitleArrow extends Panel {
 
 	private Color baseColor = new Color(0xF8, 0x1A, 0x27);
+	
+	private Paint leftPaint;
+	
+	private Paint rightPaint;
 	
 	private final int size = 28;
 	
@@ -33,6 +39,10 @@ public class TitleArrow extends Panel {
 		
 		createArrows();
 		
+		leftPaint = new GradientPaint(x, y, baseColor, x+size*3, y,Color.BLACK);
+		
+		rightPaint = new GradientPaint(x+w, y, baseColor, x+w-size*3, y, Color.BLACK);
+		
 	}
 	
 	private void createArrows() {
@@ -51,12 +61,16 @@ public class TitleArrow extends Panel {
 	public void draw(Graphic g) {
 		
 		g.setColor(baseColor);
-
+		
 		g.setBasicStroke(1);
 
+		g.setPaint(leftPaint);
+		
 		g.fillPolygon(upperLeftArrow);
 		
 		g.fillPolygon(lowerLeftArrow);
+		
+		g.setPaint(rightPaint);
 		
 		g.fillPolygon(upperRightArrow);
 		
