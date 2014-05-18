@@ -5,9 +5,11 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -949,6 +951,14 @@ public class Graphic {
 	
 	public void clearRect(int x, int y, int width, int height) {
 		screen.clearRect(x, y, width, height);
+	}
+
+	public void setPaint(Paint paint) {
+		screen.setPaint(paint);
+	}
+	
+	public void resetPaint() {
+		screen.setPaint(screen.getColor());
 	}
 
 }
