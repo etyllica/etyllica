@@ -47,6 +47,8 @@ public class Selection extends Panel {
 
 		//Diagonal
 		g.drawLine(x+size+negativeOffset, y, x, y+size+negativeOffset);
+		
+		g.drawLine(x+size+negativeOffset+3, y, x, y+size+negativeOffset+3);
 
 		//Horizontal
 		g.drawLine(x+size+negativeOffset, y, x+size*3, y);
@@ -63,6 +65,8 @@ public class Selection extends Panel {
 
 		//Diagonal
 		g.drawLine(x+w-size-negativeOffset, y, x+w, y+size+negativeOffset);
+		
+		g.drawLine(x+w-size-negativeOffset-3, y, x+w, y+size+negativeOffset+3);
 
 		//Horizontal
 		g.drawLine(x+w-size-negativeOffset, y, x+w-size*3, y);
@@ -79,6 +83,8 @@ public class Selection extends Panel {
 
 		//Diagonal
 		g.drawLine(x+size+negativeOffset, y+h, x, y+h-size-negativeOffset);
+		
+		g.drawLine(x+size+negativeOffset+3, y+h, x, y+h-size-negativeOffset-3);
 
 		//Horizontal
 		g.drawLine(x+size+negativeOffset, y+h, x+size*3, y+h);
@@ -95,6 +101,8 @@ public class Selection extends Panel {
 
 		//Diagonal
 		g.drawLine(x+w-size-negativeOffset, y+h, x+w, y+h-size-negativeOffset);
+		
+		g.drawLine(x+w-size-negativeOffset-3, y+h, x+w, y+h-size-negativeOffset-3);
 
 		//Horizontal
 		g.drawLine(x+w-size-negativeOffset, y+h, x+w-size*3, y+h);
