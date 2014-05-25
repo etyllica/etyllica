@@ -39,9 +39,11 @@ public class TextureSurf extends GLU{
 
 	private static final int imageWidth = 64;
 	private static final int imageHeight = 64;
-	private byte image [][][] = new byte [imageHeight][imageWidth][3];
-
-	private void loadImage () {
+	
+	private byte[][][] loadImage () {
+		
+		byte image [][][] = new byte [imageHeight][imageWidth][3];
+		
 		int i, j;
 		float ti, tj;
 
@@ -54,18 +56,25 @@ public class TextureSurf extends GLU{
 				image [j][i][2] = (byte)(127 * (1.0 + Math.cos (ti + tj)));
 			}
 		}
+		
+		return image;
 	}
 	
 	@Override
 	public void load() {
+		
 		glMap2f (GL_MAP2_VERTEX_3, 0.0f, 1.0f, 3, 4,
 				0.0f, 1.0f, 12, 4, ctrlpoints);
+		
 		glMap2f (GL_MAP2_TEXTURE_COORD_2, 0.0f, 1.0f, 2, 2,
 				0.0f, 1.0f, 4, 2, texpts);
+		
 		glEnable (GL_MAP2_TEXTURE_COORD_2);
 		glEnable (GL_MAP2_VERTEX_3);
 		glMapGrid2f (20, 0.0f, 1.0f, 20, 0.0f, 1.0f);
-		loadImage ();
+		
+		byte[][][] image = loadImage();
+		
 		glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
 		glTexParameterf (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameterf (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -73,6 +82,7 @@ public class TextureSurf extends GLU{
 		glTexParameterf (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexImage2D (GL_TEXTURE_2D, 0, 3, imageWidth, imageHeight,
 				0, GL_RGB, GL_UNSIGNED_BYTE, image);
+		
 		glEnable (GL_TEXTURE_2D);
 		glEnable (GL_DEPTH_TEST);
 		glEnable (GL_NORMALIZE);
@@ -96,6 +106,7 @@ public class TextureSurf extends GLU{
 		glViewport (0, 0, w, h);
 		glMatrixMode (GL_PROJECTION);
 		glLoadIdentity ();
+		
 		if (w <= h) {
 			glOrtho (-4.0f, 4.0f,
 					-4.0f *(float)h/(float)w,
@@ -107,6 +118,7 @@ public class TextureSurf extends GLU{
 					-4.0f, 4.0f,
 					-4.0f, 4.0f);
 		}
+		
 		glMatrixMode (GL_MODELVIEW);
 		glLoadIdentity ();
 		glRotatef (85.0f, 1.0f, 1.0f, 1.0f);

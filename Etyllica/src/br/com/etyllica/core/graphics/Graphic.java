@@ -5,7 +5,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -22,7 +21,7 @@ import java.awt.image.ImageObserver;
 import java.awt.image.VolatileImage;
 
 import br.com.etyllica.layer.GeometricLayer;
-import br.com.etyllica.layer.ImageLayer;
+//import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.linear.Point2D;
 
 /**
@@ -75,21 +74,7 @@ public class Graphic {
 		this.screen.setColor(Color.BLACK);
 		
 	}*/
-	
-	public void escreveCamada(String texto, ImageLayer destino) {
-		FontMetrics fm = screen.getFontMetrics();
-
-		int msg_width = fm.stringWidth(texto);
-
-		int ascent = fm.getMaxAscent();
-		int descent= fm.getMaxDescent();
-
-		float x = destino.getX()+destino.getW()/2 - msg_width/2;
-		float y = destino.getY()+destino.getH()/2 - descent/2 + ascent/2;
-
-		screen.drawString(texto, x, y);
-	}
-	
+		
 	/**
 	 * 
 	 * @param x
@@ -205,39 +190,39 @@ public class Graphic {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param frase
+	 * @param text
 	 */
-	public void drawShadow(int x, int y, String frase) {
-		drawShadow(x, y, frase,Color.BLACK);
+	public void drawShadow(int x, int y, String text) {
+		drawShadow(x, y, text,Color.BLACK);
 	}
 	
 	/**
 	 * 
 	 * @param x
 	 * @param y
-	 * @param frase
+	 * @param text
 	 */
-	public void drawShadow(float x, float y, String frase) {
-		this.drawShadow(x, y, frase, Color.BLACK);
+	public void drawShadow(float x, float y, String text) {
+		this.drawShadow(x, y, text, Color.BLACK);
 	}
 	
 	/**
 	 * 
 	 * @param x
 	 * @param y
-	 * @param frase
+	 * @param text
 	 * @param shadowColor
 	 */
-	public void drawShadow(int x, int y, String frase, Color shadowColor) {
+	public void drawShadow(int x, int y, String text, Color shadowColor) {
 		
-		if((frase!=null)&&(!frase.isEmpty())) {
+		if((text!=null)&&(!text.isEmpty())) {
 			
 			Color lastColor = screen.getColor();
 			
 			screen.setColor(shadowColor);
-			screen.drawString(frase,x+1,y+1);
+			screen.drawString(text,x+1,y+1);
 			screen.setColor(lastColor);
-			screen.drawString(frase,x,y);
+			screen.drawString(text,x,y);
 		}
 	}
 	
@@ -245,11 +230,11 @@ public class Graphic {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param frase
+	 * @param text
 	 * @param shadowColor
 	 */
-	public void drawShadow(float x, float y, String frase, Color shadowColor) {
-		this.drawShadow((int)x, (int)y, frase, shadowColor);
+	public void drawShadow(float x, float y, String text, Color shadowColor) {
+		this.drawShadow((int)x, (int)y, text, shadowColor);
 	}
 	
 	/**
@@ -283,47 +268,55 @@ public class Graphic {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param frase
+	 * @param text
 	 */
-	public void write(float x, float y, String frase) {
-		if((frase!=null)&&(!frase.isEmpty())) {
-			screen.drawString(frase,x,y);
+	public void write(float x, float y, String text) {
+		if((text!=null)&&(!text.isEmpty())) {
+			screen.drawString(text,x,y);
 		}
 	}
+	
+	public void write(String text, GeometricLayer layer) {
+		if((text!=null)&&(!text.isEmpty())) {
+			drawString(layer.getX(), layer.getY(), layer.getW(), layer.getH(), text);
+		}
+	}
+	
+	
 
 	/**
 	 * 
 	 * @param y
-	 * @param frase
+	 * @param text
 	 */
-	public void escreveX(int y, String frase) {
+	public void escreveX(int y, String text) {
 
-		writeX(0,y,frase, false);
+		writeX(0,y,text, false);
 	}
 	
 	/**
 	 * 
 	 * @param offsetX
 	 * @param y
-	 * @param frase
+	 * @param text
 	 */
-	public void escreveX(int offsetX, int y, String frase) {
+	public void escreveX(int offsetX, int y, String text) {
 
-		writeX(offsetX, y,frase, false);
+		writeX(offsetX, y,text, false);
 	}
 	
 	/**
 	 * 
 	 * @param y
-	 * @param frase
+	 * @param text
 	 * @param borda
 	 */
-	public void writeX(float y, String frase, boolean borda) {
-		writeX(0,y,frase, borda);
+	public void writeX(float y, String text, boolean borda) {
+		writeX(0,y,text, borda);
 	}
 	
-	public void writeX(float y, String frase) {
-		writeX(0,y,frase, false);
+	public void writeX(float y, String text) {
+		writeX(0,y,text, false);
 	}
 	
 	/*
@@ -334,17 +327,14 @@ public class Graphic {
 	 * 
 	 * @param offsetX
 	 * @param y
-	 * @param frase
+	 * @param text
 	 */
-	public void escreveXCustom(int offsetX, int y, String frase) {
-
+	public void escreveXCustom(int offsetX, int y, String text) {
 
 		//Font f = carregaFonte("exocet.ttf");
 		//getGraphics().setFont(f);
 
-		screen.drawString(frase, 200, y);
-
-
+		screen.drawString(text, 200, y);
 
 		/*
 		FontRenderContext frc = screen.getFontRenderContext();
@@ -352,12 +342,12 @@ public class Graphic {
 
 		FontMetrics fm = screen.getFontMetrics (f);
 
-		int msg_width = fm.stringWidth(frase);
+		int msg_width = fm.stringWidth(text);
 
 		int x = largura/2 - msg_width/2;
 		x += offsetX;
 
-		TextLayout tl = new TextLayout(frase, f, frc);
+		TextLayout tl = new TextLayout(text, f, frc);
 
 		Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
 

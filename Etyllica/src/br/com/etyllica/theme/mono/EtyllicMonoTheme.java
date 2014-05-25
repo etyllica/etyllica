@@ -5,7 +5,7 @@ import java.awt.Color;
 import br.com.etyllica.gui.button.DefaultButton;
 import br.com.etyllica.gui.theme.Theme;
 
-public class EtyllicMonoTheme extends Theme{
+public class EtyllicMonoTheme extends Theme {
 	
 	public EtyllicMonoTheme(){
 		super();

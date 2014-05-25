@@ -17,11 +17,14 @@ public class Checker extends GLU{
 	@Override
 	public void load() {
 		myinit();
+		
 		loading = 100;
 	}
 
     private static final int checkImageWidth = 64;
+    
     private static final int checkImageHeight = 64;
+    
     private byte checkImage [][][] =
     		   new byte [checkImageWidth][checkImageHeight][3];
 
@@ -41,7 +44,9 @@ public class Checker extends GLU{
 	}
 
 	private void myinit () {
+		
 		glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
+		
 		glEnable (GL_DEPTH_TEST);
 		glDepthFunc (GL_LEQUAL);
 		makeCheckImage ();
@@ -84,6 +89,7 @@ public class Checker extends GLU{
 	}
 
 	private void myReshape (float w, float h) {
+		
 		glViewport (0, 0, w, h);
 		glMatrixMode (GL_PROJECTION);
 		glLoadIdentity ();
@@ -91,6 +97,7 @@ public class Checker extends GLU{
 		glMatrixMode (GL_MODELVIEW);
 		glLoadIdentity ();
 		glTranslatef (0.0f, 0.0f, -3.6f);
+		
 	}
 
 

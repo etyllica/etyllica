@@ -45,7 +45,7 @@ public class PluralityUI extends Application {
 	public void load() {
 
 		int tw = 300;
-		int th = 70;
+		int th = 60;
 		
 		title = new TitleArrow(w/2-tw/2, 80, tw, th);
 		
@@ -80,13 +80,14 @@ public class PluralityUI extends Application {
 		g.setFontSize(20f);
 		
 		g.drawStringShadow(title.getX(), title.getY()+offset, title.getW(), title.getH()+offset, AUTHOR_NAME, Color.BLACK);
+		
 				
 	}
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
 
-		mx = event.getX();
+		mx = event.getX(); 
 
 		my = event.getY();
 		
