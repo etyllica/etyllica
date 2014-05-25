@@ -110,6 +110,31 @@ public class Graphic {
 	}
 	
 	/**
+	 * @param x
+	 * @param y
+	 * @param text
+	 * @param exponent
+	 */
+	
+	public void drawStringExponent(String text, String exponent, int x, int y) {
+		this.drawString(text, x, y);
+		
+		FontMetrics fm = screen.getFontMetrics();
+		
+		float lastSize = fm.getFont().getSize2D();
+		
+		float h = lastSize*0.7f;
+				
+		int w = fm.stringWidth(text);
+
+		this.setFontSize(h);
+		this.drawString(exponent, x+w, (int)(y-h*0.5f));
+		
+		this.setFontSize(lastSize);
+		
+	}
+	
+	/**
 	 * 
 	 * @param x
 	 * @param y
@@ -331,15 +356,9 @@ public class Graphic {
 	 */
 	public void escreveXCustom(int offsetX, int y, String text) {
 
-		//Font f = carregaFonte("exocet.ttf");
-		//getGraphics().setFont(f);
-
 		screen.drawString(text, 200, y);
 
 		/*
-		FontRenderContext frc = screen.getFontRenderContext();
-		Font f = carregaFonte("font/exocet.ttf");
-
 		FontMetrics fm = screen.getFontMetrics (f);
 
 		int msg_width = fm.stringWidth(text);
@@ -876,7 +895,11 @@ public class Graphic {
 	public void fill(Shape shape) {
 		screen.fill(shape);
 	}
-
+	
+	public FontMetrics getFontMetrics() {
+		return screen.getFontMetrics();
+	}
+	
 	/*public void setGraphics(GLGraphics2D graphics) {		
 		this.screen = graphics;
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
