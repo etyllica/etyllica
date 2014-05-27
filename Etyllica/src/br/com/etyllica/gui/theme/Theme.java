@@ -39,8 +39,11 @@ public abstract class Theme implements ThemeFactory{
 		//font = new Font("SansSerif", fontStyle, fontSize);
 		//font = new Font("Monospaced", fontStyle, fontSize);
 	}
-		
+	
+	protected Color baseColor = new Color(0xF8, 0x1A, 0x27, 0xF0);
+	
 	protected boolean shadow = true;
+	
 	protected Color shadowColor = Color.BLACK;
 	
 	protected String wallpaper = "mystic/sunset.jpg";
@@ -300,4 +303,12 @@ public abstract class Theme implements ThemeFactory{
 		this.buttonFont = buttonFont;
 	}
 
+	public Color getBaseColor() {
+		return baseColor;
+	}
+
+	public void setBaseColor(Color baseColor) {
+		this.baseColor = baseColor;
+	}
+		
 }

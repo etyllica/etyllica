@@ -7,6 +7,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.theme.plurality.LeftPanel;
 import br.com.etyllica.theme.plurality.Selection;
 import br.com.etyllica.theme.plurality.TitleArrow;
 
@@ -37,6 +38,8 @@ public class PluralityUI extends Application {
 	
 	private Selection selection;
 	
+	private LeftPanel leftPanel;
+	
 	public PluralityUI(int w, int h) {
 		super(w, h);
 	}
@@ -50,6 +53,8 @@ public class PluralityUI extends Application {
 		title = new TitleArrow(w/2-tw/2, 80, tw, th);
 		
 		selection = new Selection(mx-rectW/2, my-rectH/2, rectW, rectH);
+		
+		leftPanel = new LeftPanel(80, 160, 180, 300);
 		
 		loading = 100;
 	}
@@ -66,6 +71,8 @@ public class PluralityUI extends Application {
 		title.draw(g);
 		
 		selection.draw(g);
+		
+		leftPanel.draw(g);
 		
 		g.setColor(Color.WHITE);
 		
