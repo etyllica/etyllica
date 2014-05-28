@@ -7,7 +7,7 @@ import br.com.etyllica.linear.Point3D;
 import br.com.luvia.linear.Box3D;
 import br.com.luvia.linear.Polygon3D;
 import br.com.luvia.material.Texture;
-import br.com.luvia.util.Camera;
+import br.com.luvia.util.CameraGL;
 import br.com.luvia.util.Lamp;
 
 /**
@@ -74,7 +74,7 @@ public abstract class Application3D extends GLAUX {
 		glEnable (GL_COLOR_MATERIAL);
 	}
 
-	protected void lookatCamera(Camera cam){
+	protected void lookatCamera(CameraGL cam){
 		Point3D target = cam.getTarget();
 
 		gluLookAt(cam.getX(), cam.getY(), cam.getZ(),target.getX(),target.getY(),target.getZ(),0,0,1);
