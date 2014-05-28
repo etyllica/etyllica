@@ -166,7 +166,7 @@ public class InnerCore implements Core, InputListener, Updatable {
 
 		if(!context.isLocked()) {
 
-			if(context.getUpdateInterval()==0) {
+			if(context.getUpdateInterval() == 0) {
 
 				context.update(now);
 
@@ -174,7 +174,7 @@ public class InnerCore implements Core, InputListener, Updatable {
 
 				context.getScene().update(now);
 
-			}else if(now-context.getLastUpdate()>=context.getUpdateInterval()) {
+			}else if(now-context.getLastUpdate() >= context.getUpdateInterval()) {
 
 				context.timeUpdate(now);
 				

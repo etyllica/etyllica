@@ -15,27 +15,27 @@ import br.com.luvia.linear.Model3D;
  *
  */
 
-public class MeshLoader extends LoaderImpl{
+public class MeshLoader extends LoaderImpl {
 
-	private static MeshLoader instancia = null;
+	private static MeshLoader instance = null;
 
 	public static MeshLoader getInstance() {
-		if(instancia==null){
-			instancia = new MeshLoader();
+		if(instance==null){
+			instance = new MeshLoader();
 		}
 
-		return instancia;
+		return instance;
 	}
 	
-	private MeshLoader(){
+	private MeshLoader() {
 		super();
 		
 		folder = "assets/models/";
 	}
 	
-	public Model3D loadModel(String caminho){
+	public Model3D loadModel(String path) {
 		
-		String diretorio = folder+caminho;
+		String diretorio = folder+path;
 		
 		URL dir = null;
 		try {
