@@ -26,7 +26,7 @@ public class DarknessMedUI extends Application {
 	
 	private float angle = 0;
 	
-	private float extent = 270;
+	private float extent = 360;
 	
 	private ConicalGradientPaint rgp;
 			
@@ -67,8 +67,10 @@ public class DarknessMedUI extends Application {
 		if (angle > 360) {
 			angle = 0;
 		}
+				
+		extent = angle+180;		
 		
-		rgp = new ConicalGradientPaint(true, new Point(mx, my), 0.5f, new float[]{angle, angle+extent}, colors);
+		rgp = new ConicalGradientPaint(true, new Point(mx, my), 0.5f, new float[]{angle, extent}, colors);
 		
 	}
 	
@@ -84,13 +86,15 @@ public class DarknessMedUI extends Application {
 		double aw = radius;
 		double ah = radius;
 		
-		Arc2D rightArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, angle, -extent, Arc2D.OPEN);
-				
+		Arc2D rightArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, angle, 360, Arc2D.OPEN);
+		
+		//g.fill(rightArc);
+		
 		g.draw(rightArc);
 		
 		g.setFontSize(30);
 		g.setColor(startColor);
-		g.drawString(mx-radius, my-radius, (float)aw*2, (float)ah*2, Float.toString(extent));
+		g.drawString(mx-radius, my-radius, (float)aw*2, (float)ah*2, Float.toString(angle));
 						
 	}
 
@@ -106,6 +110,20 @@ public class DarknessMedUI extends Application {
 
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
+		
+		if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)) {
+			
+			angle+=5;
+			
+			if(angle>360){
+				angle = 0;
+			}
+			
+			System.out.println(angle);
+			
+			rgp = new ConicalGradientPaint(true, new Point(mx, my), 0.0f, new float[]{angle, extent}, colors);
+		}
+		
 		// TODO Auto-generated method stub
 		return null;
 	}

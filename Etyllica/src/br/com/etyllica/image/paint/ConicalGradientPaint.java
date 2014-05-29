@@ -4,25 +4,43 @@ import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * Found at: http://stackoverflow.com/questions/14422025/draw-an-arc-and-gradient-it
+ * Found at: https://svn.kenai.com/svn/steelseries~v2/SteelSeries2/src/eu/hansolo/steelseries/tools/ConicalGradientPaint.java
  * 
- * MadProgrammer's answer
- * 
+ * A paint class that creates conical gradients around a given center point
+ * It could be used in the same way as LinearGradientPaint and RadialGradientPaint
+ * and follows the same syntax.
+ * You could use floats from 0.0 to 1.0 for the fractions which is standard but it's
+ * also possible to use angles from 0.0 to 360 degrees which is most of the times
+ * much easier to handle.
+ * Gradients always start at the top with a clockwise direction and you could
+ * rotate the gradient around the center by given offset.
+ * The offset could also be defined from -0.5 to +0.5 or -180 to +180 degrees.
+ * If you would like to use degrees instead of values from 0 to 1 you have to use
+ * the full constructor and set the USE_DEGREES variable to true
+ * @version 1.0
+ * @author hansolo
  */
 public final class ConicalGradientPaint implements java.awt.Paint {
 
-    private final Point2D CENTER;
+    private final Point2D center;
     
     private final double[] FRACTION_ANGLES;
     
     private final double[] RED_STEP_LOOKUP;
+    
     private final double[] GREEN_STEP_LOOKUP;
+    
     private final double[] BLUE_STEP_LOOKUP;
+    
     private final double[] ALPHA_STEP_LOOKUP;
+    
     private final Color[] COLORS;
     
     private static final float INT_TO_FLOAT_CONST = 1f / 255f;
@@ -60,7 +78,9 @@ public final class ConicalGradientPaint implements java.awt.Paint {
       final java.util.ArrayList<Float> FRACTION_LIST = new java.util.ArrayList<Float>(GIVEN_FRACTIONS.length);
       final float OFFSET;
       if (USE_DEGREES) {
+    	  
         final double DEG_FRACTION = 1f / 360f;
+        
         if (Double.compare((GIVEN_OFFSET * DEG_FRACTION), -0.5) == 0) {
           OFFSET = -0.5f;
         } else if (Double.compare((GIVEN_OFFSET * DEG_FRACTION), 0.5) == 0) {
@@ -68,9 +88,11 @@ public final class ConicalGradientPaint implements java.awt.Paint {
         } else {
           OFFSET = (float) (GIVEN_OFFSET * DEG_FRACTION);
         }
+        
         for (float fraction : GIVEN_FRACTIONS) {
           FRACTION_LIST.add((float) (fraction * DEG_FRACTION));
         }
+        
       } else {
         // Now it seems to work with rotation of 0.5f, below is the old code to correct the problem
 //            if (GIVEN_OFFSET == -0.5)
@@ -133,7 +155,7 @@ public final class ConicalGradientPaint implements java.awt.Paint {
       }
 
       // Set the values
-      this.CENTER = CENTER;
+      this.center = CENTER;
       COLORS = colorList.toArray(new Color[]{});
 
       // Prepare lookup table for the angles of each fraction
@@ -271,7 +293,7 @@ public final class ConicalGradientPaint implements java.awt.Paint {
 
     @Override
     public java.awt.PaintContext createContext(final java.awt.image.ColorModel COLOR_MODEL, final java.awt.Rectangle DEVICE_BOUNDS, final Rectangle2D USER_BOUNDS, final AffineTransform TRANSFORM, final java.awt.RenderingHints HINTS) {
-      final Point2D TRANSFORMED_CENTER = TRANSFORM.transform(CENTER, null);
+      final Point2D TRANSFORMED_CENTER = TRANSFORM.transform(center, null);
       return new ConicalGradientPaintContext(TRANSFORMED_CENTER);
     }
 
@@ -282,10 +304,10 @@ public final class ConicalGradientPaint implements java.awt.Paint {
 
     private final class ConicalGradientPaintContext implements java.awt.PaintContext {
 
-      final private Point2D CENTER;
+      final private Point2D center;
 
       public ConicalGradientPaintContext(final Point2D CENTER) {
-        this.CENTER = new Point2D.Double(CENTER.getX(), CENTER.getY());
+        this.center = new Point2D.Double(CENTER.getX(), CENTER.getY());
       }
 
       @Override
@@ -298,14 +320,15 @@ public final class ConicalGradientPaint implements java.awt.Paint {
       }
 
       @Override
-      public java.awt.image.Raster getRaster(final int X, final int Y, final int TILE_WIDTH, final int TILE_HEIGHT) {
-        final double ROTATION_CENTER_X = -X + CENTER.getX();
-        final double ROTATION_CENTER_Y = -Y + CENTER.getY();
+      public Raster getRaster(final int X, final int Y, final int TILE_WIDTH, final int TILE_HEIGHT) {
+    	  
+        final double ROTATION_CENTER_X = -X + center.getX();
+        final double ROTATION_CENTER_Y = -Y + center.getY();
 
         final int MAX = FRACTION_ANGLES.length;
 
         // Create raster for given colormodel
-        final java.awt.image.WritableRaster RASTER = getColorModel().createCompatibleWritableRaster(TILE_WIDTH, TILE_HEIGHT);
+        final WritableRaster raster = getColorModel().createCompatibleWritableRaster(TILE_WIDTH, TILE_HEIGHT);
 
         // Create data array with place for red, green, blue and alpha values
         int[] data = new int[(TILE_WIDTH * TILE_HEIGHT * 4)];
@@ -366,9 +389,9 @@ public final class ConicalGradientPaint implements java.awt.Paint {
         }
 
         // Fill the raster with the data
-        RASTER.setPixels(0, 0, TILE_WIDTH, TILE_HEIGHT, data);
+        raster.setPixels(0, 0, TILE_WIDTH, TILE_HEIGHT, data);
 
-        return RASTER;
+        return raster;
       }
       
     }
