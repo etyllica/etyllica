@@ -36,7 +36,7 @@
 - [EtyllicTTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
 - [Etyllic GameBoy](https://github.com/yuripourre/etyllic-gameboy) - A [Javaboy](http://www.millstone.demon.co.uk/download/javaboy/) fork with faster rendering.
 - [E-Motion](https://github.com/yuripourre/e-motion) - An Image Processing Library with focus in Augmented Reality
-- [Rubik Solver](https://github.com/yuripourre/rubik-solver) - A Simple Rubik Cube Application.
+- [Rubik Solver](https://github.com/UNIRIO-SI/rubik-solver) - A Simple Rubik Cube Application.
 - [Veete](https://github.com/yuripourre/veete) - A Tiled Map Editor
 - [Luvia](https://github.com/yuripourre/luvia) - An Etyllica fork using [JoGL](http://jogamp.org/jogl/www/) and [glg2d](https://github.com/brandonborkholder/glg2d) for GPU rendering.
 
