@@ -44,6 +44,18 @@ public class DarknessUI extends Application {
 	
 	private double markAngle = 0;
 	
+	private final int radius = 80;
+	
+	private final int circularSpacing = 5;
+	
+	private final double rightStart = 270+circularSpacing;
+
+	private final double rightExtent = 180-circularSpacing*2;
+	
+	private final double leftArcStart = 90+circularSpacing;
+	
+	private final double leftExtent = 180-circularSpacing*2;
+	
 	public void timeUpdate(long now) {
 		
 		createUI(mx, my);
@@ -61,6 +73,13 @@ public class DarknessUI extends Application {
 	@Override
 	public void load() {
 		
+		double aw = radius;//Arc Width
+		double ah = radius;//Arc Height
+		
+		leftArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, leftArcStart, leftExtent, Arc2D.OPEN);
+		
+		rightArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, rightStart, rightExtent, Arc2D.OPEN);
+		
 		createUI(mx, my);
 		
 		updateAtFixedRate(50);
@@ -71,8 +90,6 @@ public class DarknessUI extends Application {
 	private void createUI(int mx, int my) {
 		
 		BasicStroke basicStroke = new BasicStroke(10f);
-
-		int radius = 80;
 		
 		double aw = radius;
 		double ah = radius;
@@ -82,23 +99,13 @@ public class DarknessUI extends Application {
 		//Center Circle
 		centerCircle = new Ellipse2D.Double(mx-centerRadius, my-centerRadius, centerRadius*2, centerRadius*2);
 		
-		int circularSpacing = 5;
-		
-		double rightStart = 270+circularSpacing;
-
-		double rightExtent = 180-circularSpacing*2;
-		
 		//Right Arc
-		rightArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, rightStart, rightExtent, Arc2D.OPEN);
-
-		rightLine = basicStroke.createStrokedShape(rightArc);
+		rightArc.setArc(mx-radius, my-radius, aw*2, ah*2, rightStart, rightExtent, Arc2D.OPEN);
+		
+		rightLine = basicStroke.createStrokedShape(rightArc);//Contour Line
 		
 		//Left Arc
-		double leftArcStart = 90+circularSpacing;
-		
-		double leftExtent = 180-circularSpacing*2;
-		
-		leftArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, leftArcStart, leftExtent, Arc2D.OPEN);
+		leftArc.setArc(mx-radius, my-radius, aw*2, ah*2, leftArcStart, leftExtent, Arc2D.OPEN);
 
 		buildCenterPart(mx, my, radius-50);
 		

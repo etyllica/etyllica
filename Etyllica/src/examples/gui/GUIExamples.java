@@ -2,6 +2,7 @@ package examples.gui;
 
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.context.Application;
+import examples.gui.hud.DarknessMedUI;
 import examples.gui.hud.DarknessUI;
 import examples.gui.hud.PluralityUI;
 
@@ -29,7 +30,8 @@ public class GUIExamples extends EtyllicaFrame {
 		
 		//return new ThemeApplication(w, h);
 		//return new DarknessUI(w, h);
-		return new PluralityUI(w, h);
+		return new DarknessMedUI(w, h);
+		//return new PluralityUI(w, h);
 	}
 	
 }
