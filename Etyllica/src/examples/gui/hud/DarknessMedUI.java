@@ -24,7 +24,7 @@ public class DarknessMedUI extends Application {
 	
 	private int my = 0;
 	
-	private float angle = 0;
+	private float angle = 90;
 	
 	private float extent = 360;
 	
@@ -40,9 +40,7 @@ public class DarknessMedUI extends Application {
 	
 	@Override
 	public void load() {
-				
-		float startAngle = 0;
-		
+
 		startColor = new Color(0, 128, 0, 128);
 		Color end = new Color(0, 128, 0, 0);
 		
@@ -53,24 +51,26 @@ public class DarknessMedUI extends Application {
 		rgp = new ConicalGradientPaint(
 				true,
 				new Point(w / 2, h / 2),
-				0.5f, new float[]{startAngle, extent}, colors);
+				0.5f, new float[]{angle, extent}, colors);
 		
 		updateAtFixedRate(50);
 		
 		loading = 100;
 	}
 	
+	float value = 0;
+		
 	public void timeUpdate(long now) {
 
-		angle += 5;
-		
-		if (angle > 360) {
-			angle = 0;
-		}
+		value += 5;
 				
-		extent = angle+180;		
+		if (value > 360) {
+			value = 0;
+		}
 		
-		rgp = new ConicalGradientPaint(true, new Point(mx, my), 0.5f, new float[]{angle, extent}, colors);
+		float offset = -0.5f;
+		
+		rgp = new ConicalGradientPaint(true, new Point(mx, my), offset, new float[]{angle, extent}, colors);
 		
 	}
 	
@@ -81,20 +81,18 @@ public class DarknessMedUI extends Application {
 		
 		g.setBasicStroke(10f);
 				
-		float radius = 80;
+		float radius = 70;
 		
 		double aw = radius;
 		double ah = radius;
 		
-		Arc2D rightArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, angle, 360, Arc2D.OPEN);
-		
-		//g.fill(rightArc);
-		
+		Arc2D rightArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, angle, -value, Arc2D.OPEN);
+				
 		g.draw(rightArc);
 		
 		g.setFontSize(30);
 		g.setColor(startColor);
-		g.drawString(mx-radius, my-radius, (float)aw*2, (float)ah*2, Float.toString(angle));
+		g.drawString(mx-radius, my-radius, (float)aw*2, (float)ah*2, Float.toString(value));
 						
 	}
 
