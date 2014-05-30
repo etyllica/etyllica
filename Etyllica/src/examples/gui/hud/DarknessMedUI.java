@@ -10,6 +10,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.image.paint.ConicalGradientPaint;
+import br.com.etyllica.theme.darkness.RoundSlider;
 
 /**
  * Concept based on Star Trek: Into Darkness - Med Bay UI
@@ -34,12 +35,22 @@ public class DarknessMedUI extends Application {
 	
 	private Color startColor;
 	
+	private RoundSlider slider;
+	
+	private RoundSlider anotherSlider;
+	
 	public DarknessMedUI(int w, int h) {
 		super(w, h);
 	}	
 	
 	@Override
 	public void load() {
+		
+		slider = new RoundSlider(100, 100, 60);
+		slider.setValue(50);
+		
+		anotherSlider = new RoundSlider(100, 300, 60);
+		anotherSlider.setValue(180);
 
 		startColor = new Color(0, 128, 0, 128);
 		Color end = new Color(0, 128, 0, 0);
@@ -68,24 +79,26 @@ public class DarknessMedUI extends Application {
 			value = 0;
 		}
 		
-		float offset = -0.5f;
-		
-		rgp = new ConicalGradientPaint(true, new Point(mx, my), offset, new float[]{angle, extent}, colors);
+		//slider.setValue((int)value);
 		
 	}
 	
 	@Override
 	public void draw(Graphic g) {
-				
-		g.setPaint(rgp);
 		
-		g.setBasicStroke(10f);
-				
 		float radius = 70;
 		
 		double aw = radius;
 		double ah = radius;
 		
+		slider.draw(g);
+		
+		anotherSlider.draw(g);
+		
+		g.setPaint(rgp);
+		
+		g.setBasicStroke(10f);
+				
 		Arc2D rightArc = new Arc2D.Double(mx-radius, my-radius, aw*2, ah*2, angle, -value, Arc2D.OPEN);
 				
 		g.draw(rightArc);
