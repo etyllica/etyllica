@@ -12,7 +12,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import br.com.luvia.linear.Model3D;
-import br.com.luvia.material.Material;
+import br.com.luvia.material.DiffuseMaterial;
 import br.com.luvia.vbo.Face;
 import br.com.luvia.vbo.Group;
 
@@ -188,9 +188,9 @@ public class OBJLoader {
             	
             	String filename = line.split(" ")[1];
             	
-            	List<Material> materials = MaterialLoader.loadMaterial(folder,filename);
+            	List<DiffuseMaterial> materials = MaterialLoader.loadMaterial(folder,filename);
             	
-            	for(Material material: materials){
+            	for(DiffuseMaterial material: materials){
             		m.getMaterials().put(material.getName(), material);
             	}
             	

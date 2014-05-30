@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.luvia.material.Material;
+import br.com.luvia.material.DiffuseMaterial;
 
 /**
  * 
@@ -20,15 +20,15 @@ import br.com.luvia.material.Material;
 
 public class MaterialLoader {
 
-	public static List<Material> loadMaterial(String folder, String filename) throws IOException{
+	public static List<DiffuseMaterial> loadMaterial(String folder, String filename) throws IOException{
 		
 		File f = new File(folder+filename);
 		
 		BufferedReader reader = new BufferedReader(new FileReader(f));
 		
-		List<Material> materials = new ArrayList<Material>();
+		List<DiffuseMaterial> materials = new ArrayList<DiffuseMaterial>();
 		
-		Material mat = new Material();
+		DiffuseMaterial mat = new DiffuseMaterial();
 
 		String line;
 		
@@ -42,7 +42,7 @@ public class MaterialLoader {
 				
 				if(mat!=null){
 					materials.add(mat);
-					mat = new Material();
+					mat = new DiffuseMaterial();
 				}
 				
 				mat.setName(splitLine[1]);
@@ -70,7 +70,7 @@ public class MaterialLoader {
             }else if (line.startsWith("map_d ")) {
             	
             	//Image has full path
-            	mat.setMap_d(folder+splitLine[1]);
+            	mat.setMapD(folder+splitLine[1]);
             	
             }
 			

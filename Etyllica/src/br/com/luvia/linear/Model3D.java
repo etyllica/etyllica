@@ -15,7 +15,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import br.com.etyllica.core.loader.image.ImageLoader;
 import br.com.luvia.GLDrawable;
-import br.com.luvia.material.Material;
+import br.com.luvia.material.DiffuseMaterial;
 import br.com.luvia.material.Texture;
 import br.com.luvia.vbo.Face;
 import br.com.luvia.vbo.Group;
@@ -39,7 +39,7 @@ public class Model3D extends Polygon3D implements GLDrawable{
 
 	private List<Group> groups = new ArrayList<Group>();
 
-	private Map<String, Material> materials = new HashMap<String, Material>();
+	private Map<String, DiffuseMaterial> materials = new HashMap<String, DiffuseMaterial>();
 
 	private boolean drawTexture = true;
 	private boolean drawFaces = true;
@@ -54,11 +54,11 @@ public class Model3D extends Polygon3D implements GLDrawable{
 		super(0,0,0);
 	}
 
-	public Map<String, Material> getMaterials() {
+	public Map<String, DiffuseMaterial> getMaterials() {
 		return materials;
 	}
 
-	public void setMaterials(Map<String, Material> materials) {
+	public void setMaterials(Map<String, DiffuseMaterial> materials) {
 		this.materials = materials;
 	}
 
@@ -101,7 +101,7 @@ public class Model3D extends Polygon3D implements GLDrawable{
 		
 		for(Group group: groups){
 
-			String map = group.getMaterial().getMap_d();
+			String map = group.getMaterial().getMapD();
 			//map = "";
 
 			if(!map.isEmpty()){
