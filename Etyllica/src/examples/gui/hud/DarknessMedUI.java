@@ -10,7 +10,9 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.image.paint.ConicalGradientPaint;
+import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.darkness.RoundSlider;
+import br.com.etyllica.util.SVGColor;
 
 /**
  * Concept based on Star Trek: Into Darkness - Med Bay UI
@@ -39,6 +41,8 @@ public class DarknessMedUI extends Application {
 	
 	private RoundSlider anotherSlider;
 	
+	private Color backgroundColor = SVGColor.WHITE;
+	
 	public DarknessMedUI(int w, int h) {
 		super(w, h);
 	}	
@@ -47,13 +51,17 @@ public class DarknessMedUI extends Application {
 	public void load() {
 		
 		slider = new RoundSlider(100, 100, 60);
-		slider.setValue(50);
+		slider.setValue(120);
 		
 		anotherSlider = new RoundSlider(100, 300, 60);
-		anotherSlider.setValue(180);
+		anotherSlider.setValue(360);
 
-		startColor = new Color(0, 128, 0, 128);
+		startColor = new Color(0, 128, 0, 200);
+				
 		Color end = new Color(0, 128, 0, 0);
+		//Color end = ThemeManager.getInstance().getTheme().getBaseColor();
+		
+		//ThemeManager.getInstance().getTheme().getBaseColor();
 		
 		colors = new Color[2];
 		colors[0] = startColor;
@@ -85,6 +93,10 @@ public class DarknessMedUI extends Application {
 	
 	@Override
 	public void draw(Graphic g) {
+		
+		g.setColor(backgroundColor);
+
+		g.fillRect(0, 0, w, h);
 		
 		float radius = 70;
 		
