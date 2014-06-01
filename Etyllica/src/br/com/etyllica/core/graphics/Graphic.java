@@ -973,5 +973,9 @@ public class Graphic {
 	public void resetPaint() {
 		screen.setPaint(screen.getColor());
 	}
+	
+	public void dispose() {
+		screen.dispose();
+	}
 
 }
