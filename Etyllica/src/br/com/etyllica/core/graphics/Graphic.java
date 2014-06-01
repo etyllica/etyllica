@@ -38,6 +38,8 @@ public class Graphic {
 
 	private int width;
 	private int height;
+	
+	private Color shadowColor = Color.BLACK;
 		
 	public Graphic(int width, int height) {
 		super();
@@ -132,6 +134,10 @@ public class Graphic {
 		
 		this.setFontSize(lastSize);
 		
+	}
+	
+	public void drawStringShadow(int x, int y, int w, int h, String text) {
+		drawStringShadow(x, y, w, h, text, shadowColor);
 	}
 	
 	/**
