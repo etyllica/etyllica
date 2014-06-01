@@ -3,7 +3,7 @@ package br.com.luvia.vbo;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.luvia.material.Material;
+import br.com.luvia.material.DiffuseMaterial;
 
 /**
  * 
@@ -18,7 +18,7 @@ public class Group {
 	
 	private List<Face> faces = new ArrayList<Face>();
 	
-	private Material material;
+	private DiffuseMaterial material;
 	
 	public Group(String name){
 		super();
@@ -42,11 +42,11 @@ public class Group {
 		this.name = name;
 	}
 
-	public Material getMaterial() {
+	public DiffuseMaterial getMaterial() {
 		return material;
 	}
 
-	public void setMaterial(Material material) {
+	public void setMaterial(DiffuseMaterial material) {
 		this.material = material;
 	}
 		

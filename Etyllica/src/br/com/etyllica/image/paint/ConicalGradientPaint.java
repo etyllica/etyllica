@@ -76,7 +76,9 @@ public final class ConicalGradientPaint implements java.awt.Paint {
       }
 
       final java.util.ArrayList<Float> FRACTION_LIST = new java.util.ArrayList<Float>(GIVEN_FRACTIONS.length);
+      
       final float OFFSET;
+      
       if (USE_DEGREES) {
     	  
         final double DEG_FRACTION = 1f / 360f;

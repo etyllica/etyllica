@@ -18,9 +18,11 @@ import br.com.etyllica.theme.ThemeManager;
 
 public class Slider extends View{
 
-	private int minValue = 0;
-	private int maxValue = 255;
-	private int value = 0;
+	protected int minValue = 0;
+	
+	protected int maxValue = 255;
+	
+	protected int value = 0;
 	
 	protected DefaultButton button;
 
@@ -103,7 +105,6 @@ public class Slider extends View{
 		int bx = x+((value*w)/interval);
 		
 		button.setX(bx-button.getW()/2);
-		
 		
 	}
 
