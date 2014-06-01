@@ -36,9 +36,8 @@ public class ImageLabel extends Icon{
 		
 	@Override
 	public void draw(Graphic g) {
-		//camada.setOffset(x, y);
-		layer.draw(g);
-		//camada.setOffset(-x, -y);
+		//layer.draw(g);
+		layer.simpleDraw(g);
 	}
 	
 	//Useful methods to centralize label
