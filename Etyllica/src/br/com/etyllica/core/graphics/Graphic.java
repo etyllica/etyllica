@@ -39,7 +39,7 @@ public class Graphic {
 	private int width;
 	private int height;
 	
-	private Color shadowColor = Color.BLACK;
+	private final Color shadowColor = Color.BLACK;
 		
 	public Graphic(int width, int height) {
 		super();
@@ -62,7 +62,7 @@ public class Graphic {
 		
 		this.screen = (Graphics2D)vimg.createGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		this.screen.setColor(Color.BLACK);
+		this.screen.setColor(shadowColor);
 		
 	}
 	
@@ -117,7 +117,6 @@ public class Graphic {
 	 * @param text
 	 * @param exponent
 	 */
-	
 	public void drawStringExponent(String text, String exponent, int x, int y) {
 		this.drawString(text, x, y);
 		
@@ -131,6 +130,24 @@ public class Graphic {
 
 		this.setFontSize(h);
 		this.drawString(exponent, x+w, (int)(y-h*0.5f));
+		
+		this.setFontSize(lastSize);
+		
+	}
+	
+	public void drawStringExponentShadow(String text, String exponent, int x, int y) {
+		this.drawShadow(x, y, text);
+		
+		FontMetrics fm = screen.getFontMetrics();
+		
+		float lastSize = fm.getFont().getSize2D();
+		
+		float h = lastSize*0.7f;
+				
+		int w = fm.stringWidth(text);
+
+		this.setFontSize(h);
+		this.drawShadow(x+w, (int)(y-h*0.5f), exponent);
 		
 		this.setFontSize(lastSize);
 		
@@ -206,7 +223,7 @@ public class Graphic {
 				Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
 
 				screen.setStroke(new BasicStroke(2.666f));
-				screen.setColor(Color.BLACK);
+				screen.setColor(shadowColor);
 				screen.draw(sha);
 				
 				screen.setColor(Color.WHITE);
@@ -224,7 +241,7 @@ public class Graphic {
 	 * @param text
 	 */
 	public void drawShadow(int x, int y, String text) {
-		drawShadow(x, y, text,Color.BLACK);
+		drawShadow(x, y, text, shadowColor);
 	}
 	
 	/**
@@ -234,7 +251,7 @@ public class Graphic {
 	 * @param text
 	 */
 	public void drawShadow(float x, float y, String text) {
-		this.drawShadow(x, y, text, Color.BLACK);
+		this.drawShadow(x, y, text, shadowColor);
 	}
 	
 	/**
@@ -310,6 +327,12 @@ public class Graphic {
 	public void write(String text, GeometricLayer layer) {
 		if((text!=null)&&(!text.isEmpty())) {
 			drawString(layer.getX(), layer.getY(), layer.getW(), layer.getH(), text);
+		}
+	}
+	
+	public void writeShadow(String text, GeometricLayer layer) {
+		if((text!=null)&&(!text.isEmpty())) {
+			drawStringShadow(layer.getX(), layer.getY(), layer.getW(), layer.getH(), text);
 		}
 	}
 	
