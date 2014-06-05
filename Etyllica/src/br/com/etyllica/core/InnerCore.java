@@ -43,8 +43,6 @@ public class InnerCore implements Core, InputListener, Updatable {
 
 	private List<Updatable> updatables = new ArrayList<Updatable>();
 
-	private AnimationHandler animation = new AnimationHandler();
-
 	private View focus;
 
 	protected HIDController control;
@@ -83,7 +81,7 @@ public class InnerCore implements Core, InputListener, Updatable {
 
 		initTheme();
 
-		updatables.add(animation);
+		updatables.add(AnimationHandler.getInstance());
 
 	}
 
@@ -612,7 +610,7 @@ public class InnerCore implements Core, InputListener, Updatable {
 
 	public void addEffect(GlobalEffect effect) {
 
-		animation.add(effect.getScript());
+		AnimationHandler.getInstance().add(effect.getScript());
 		globalScripts.add(effect.getScript());
 
 		//TODO add animation

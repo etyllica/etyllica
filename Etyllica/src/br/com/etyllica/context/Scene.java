@@ -10,11 +10,6 @@ import br.com.etyllica.layer.Layer;
 import br.com.etyllica.particle.Emitter;
 
 public class Scene implements Updatable {
-
-	/**
-	 * Animation
-	 */
-	protected AnimationHandler animationHandler = new AnimationHandler();
 	
 	protected List<Updatable> updatables = new ArrayList<Updatable>();
 	
@@ -22,12 +17,10 @@ public class Scene implements Updatable {
 
 	public Scene(){
 		super();
-		
-		updatables.add(animationHandler);		
 	}
 	
 	public void addAnimation(AnimationScript animation){
-		animationHandler.add(animation);
+		AnimationHandler.getInstance().add(animation);
 	}
 	
 	public void addEmitter(Emitter emitter){
