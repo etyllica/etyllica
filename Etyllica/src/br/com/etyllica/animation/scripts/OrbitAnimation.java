@@ -1,33 +1,32 @@
 package br.com.etyllica.animation.scripts;
 
-import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.layer.Layer;
 
 
-public class OrbitAnimation extends AnimationScript{
+public class OrbitAnimation extends SingleIntervalAnimation {
 
 	private float centerX = 0, centerY = 0;
 	private float tx, ty, tw, th;
 	
-	public OrbitAnimation(long time){
+	public OrbitAnimation(long time) {
 		super(time);
 	}
 
-	public OrbitAnimation(long delay, long time){
+	public OrbitAnimation(long delay, long time) {
 		super(delay, time);
 	}
 
-	public OrbitAnimation(Layer target, long time){
+	public OrbitAnimation(Layer target, long time) {
 		super(target, time);
 	}
 		
-	public void setCenter(float centerX, float centerY){
+	public void setCenter(float centerX, float centerY) {
 		this.centerX = centerX;
 		this.centerY = centerY;
 	}
 				
 	@Override
-	public void setTarget(Layer target){
+	public void setTarget(Layer target) {
 		super.setTarget(target);
 		
 		tx = target.getX();
@@ -38,7 +37,7 @@ public class OrbitAnimation extends AnimationScript{
 	}
 	
 	@Override
-	public void update(double value){
+	public void update(double value) {
 
 		double angle = value*Math.PI/180;
 
