@@ -14,7 +14,7 @@ import br.com.etyllica.i18n.DefaultDictionary;
  *
  */
 
-public class GenericFullScreenEffect extends GlobalEffect{
+public class GenericFullScreenEffect extends GlobalEffect {
 	
 	private DefaultDictionary dictionary;
 		

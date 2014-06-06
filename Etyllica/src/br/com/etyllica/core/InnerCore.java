@@ -6,6 +6,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.AnimationScript;
+import br.com.etyllica.animation.scripts.SingleIntervalAnimation;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Context;
 import br.com.etyllica.core.event.GUIEvent;
@@ -39,7 +40,7 @@ public class InnerCore implements Core, InputListener, Updatable {
 	//External Windows
 	private Window activeWindow = null;
 
-	private List<AnimationScript> globalScripts = new ArrayList<AnimationScript>();
+	private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
 
 	private List<Updatable> updatables = new ArrayList<Updatable>();
 
@@ -550,7 +551,7 @@ public class InnerCore implements Core, InputListener, Updatable {
 
 		List<AnimationScript> remove = new ArrayList<AnimationScript>();
 
-		for(AnimationScript script: globalScripts) {
+		for(SingleIntervalAnimation script: globalScripts) {
 
 			if(!script.isStopped()) {
 				script.getTarget().draw(g);

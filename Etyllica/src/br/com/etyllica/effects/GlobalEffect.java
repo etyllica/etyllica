@@ -1,6 +1,6 @@
 package br.com.etyllica.effects;
 
-import br.com.etyllica.animation.AnimationScript;
+import br.com.etyllica.animation.scripts.SingleIntervalAnimation;
 import br.com.etyllica.layer.Layer;
 
 /**
@@ -12,13 +12,13 @@ import br.com.etyllica.layer.Layer;
 
 public abstract class GlobalEffect extends Layer {
 
-	protected AnimationScript script;
+	protected SingleIntervalAnimation script;
 	
 	public GlobalEffect(int x, int y, int w, int h){
 		super(x,y,w,h);
 	}
 	
-	public AnimationScript getScript() {
+	public SingleIntervalAnimation getScript() {
 		return script;
 	}
 
