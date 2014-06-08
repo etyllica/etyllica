@@ -44,6 +44,8 @@ public abstract class SingleIntervalAnimation extends AnimationScript {
 	public void setInterval(double startValue, double endValue) {
 		this.startValue = startValue;
 		this.endValue = endValue;
+		
+		calculate(0);
 	}
 
 	public Layer getTarget() {
