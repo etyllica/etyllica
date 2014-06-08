@@ -265,6 +265,22 @@ public class DefaultButton extends RoundGUIComponent {
 		label.setContentBounds(x, y, w, h);
 
 	}
+	
+	@Override
+	public void setX(int x) {
+		
+		super.setX(x);
+		
+		label.setContentBounds(x, y, w, h);
+	}
+	
+	@Override
+	public void setY(int y) {
+		
+		super.setY(y);
+		
+		label.setContentBounds(x, y, w, h);
+	}
 
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
