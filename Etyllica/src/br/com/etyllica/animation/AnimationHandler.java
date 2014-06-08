@@ -11,7 +11,7 @@ import br.com.etyllica.core.Updatable;
 
 public class AnimationHandler implements Updatable {
 
-	public static AnimationHandler instance;
+	private static AnimationHandler instance;
 	
 	private List<AnimationScript> scripts = new ArrayList<AnimationScript>();
 
