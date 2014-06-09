@@ -8,11 +8,11 @@ public class Point3D {
 	
 	protected double z;
 	
-	public Point3D(){
+	public Point3D() {
 		this(0,0,0);
 	}
 	
-	public Point3D(double x, double y, double z){
+	public Point3D(double x, double y, double z) {
 		super();
 		
 		this.x = x;
@@ -50,4 +50,21 @@ public class Point3D {
 		this.z = z;
 	}
 		
+	public double angle(Point2D point) {
+
+		return angle(point.getX(), point.getY());
+		
+	}
+	
+	public double angle(double px, double py) {
+				
+		double deltaX = px - x;
+		double deltaY = py - y;
+
+		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+		
+		return angleInDegrees;
+		
+	}
+	
 }
