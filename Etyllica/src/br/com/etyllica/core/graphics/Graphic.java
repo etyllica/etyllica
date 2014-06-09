@@ -841,6 +841,16 @@ public class Graphic {
 	
 	/**
 	 * 
+	 * @param cx
+	 * @param cy
+	 * @param radius
+	 */
+	public void drawCircle(double cx, double cy, double radius ) {
+		this.drawCircle((int)cx, (int)cy, (int)radius);
+	}
+	
+	/**
+	 * 
 	 * @param point
 	 * @param radius
 	 */
@@ -865,6 +875,16 @@ public class Graphic {
 	 * @param radius
 	 */
 	public void fillCircle(float cx, float cy, float radius ) {
+		screen.fillOval((int)(cx-radius), (int)(cy-radius), (int)(radius*2), (int)(radius*2));
+	}
+	
+	/**
+	 * 
+	 * @param cx
+	 * @param cy
+	 * @param radius
+	 */
+	public void fillCircle(double cx, double cy, double radius ) {
 		screen.fillOval((int)(cx-radius), (int)(cy-radius), (int)(radius*2), (int)(radius*2));
 	}
 	
