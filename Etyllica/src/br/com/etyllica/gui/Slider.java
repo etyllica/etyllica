@@ -37,8 +37,9 @@ public class Slider extends View{
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
 
-		if(mouseOver){
-			if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
+		if(mouseOver) {
+			
+			if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 				
 				int interval = maxValue-minValue;
 				
@@ -50,6 +51,7 @@ public class Slider extends View{
 				
 				return GUIEvent.COMPONENT_CHANGED;
 			}
+			
 		}
 
 		return GUIEvent.NONE;

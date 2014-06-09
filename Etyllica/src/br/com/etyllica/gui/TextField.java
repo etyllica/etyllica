@@ -19,7 +19,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class TextField extends View{
+public class TextField extends View {
 
 	private final int TEXT_BACKSPACE = 8;
 	private final int TEXT_TAB = 9;
@@ -39,7 +39,7 @@ public class TextField extends View{
 
 	private TextFieldValidator validator;
 
-	public TextField(int x, int y, int w, int h){
+	public TextField(int x, int y, int w, int h) {
 		super(x,y,w,h);
 
 		//TODO Altura H relativa ao theme
@@ -48,7 +48,7 @@ public class TextField extends View{
 		clearField();
 	}
 	
-	public void clearField(){
+	public void clearField() {
 		cursor = 0;
 		fixMark = -1;
 
@@ -59,12 +59,12 @@ public class TextField extends View{
 	}
 
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event){
+	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		//if(onFocus){
+		//if(onFocus) {
 			
 			//Update component with typed events
-			if(event.getChar()!='\0'){
+			if(event.getChar()!='\0') {
 				updateChar(event.getChar());
 			}
 			
@@ -80,11 +80,11 @@ public class TextField extends View{
 			minMark = getMinMark();
 			maxMark = getMaxMark();
 			
-			if(pressedEvent!=GUIEvent.NONE){
+			if(pressedEvent!=GUIEvent.NONE) {
 				return pressedEvent;		
 			}
 			
-			if(releasedEvent!=GUIEvent.NONE){
+			if(releasedEvent!=GUIEvent.NONE) {
 				return releasedEvent;		
 			}
 			
@@ -93,11 +93,11 @@ public class TextField extends View{
 		return GUIEvent.NONE;
 	}
 
-	public GUIEvent updateMouse(PointerEvent event){
+	public GUIEvent updateMouse(PointerEvent event) {
 
-		if((event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT))){
+		if((event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT))) {
 
-			if(mouseOver){
+			if(mouseOver) {
 
 				//TODO posiciona cursor onMouse
 
@@ -108,9 +108,9 @@ public class TextField extends View{
 				return GUIEvent.LOST_FOCUS;
 			}
 
-		}else if(mouseOver){
+		}else if(mouseOver) {
 
-			if(!onFocus){
+			if(!onFocus) {
 				
 				return GUIEvent.MOUSE_OVER;
 				
@@ -120,7 +120,7 @@ public class TextField extends View{
 			}
 
 		//TODO Melhorar
-		}else if(!mouseOver){
+		}else if(!mouseOver) {
 			return GUIEvent.MOUSE_OUT;
 		}
 
@@ -130,50 +130,50 @@ public class TextField extends View{
 	private boolean shift = false;
 	private boolean control = false;
 
-	private GUIEvent updatePressed(KeyEvent event){
+	private GUIEvent updatePressed(KeyEvent event) {
 
-		if(!shift){
+		if(!shift) {
 
-			if((event.isKeyDown(KeyEvent.TSK_SHIFT_DIREITA))||(event.isKeyDown(KeyEvent.TSK_SHIFT_ESQUERDA))){
+			if((event.isKeyDown(KeyEvent.TSK_SHIFT_DIREITA))||(event.isKeyDown(KeyEvent.TSK_SHIFT_ESQUERDA))) {
 				shift = true;
 				fixMark = cursor;
 			}
-			else if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)||(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA))){
+			else if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)||(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA))) {
 				fixMark = -1;
 			}
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_END)){
+		if(event.isKeyDown(KeyEvent.TSK_END)) {
 			cursor = text.length();
 		}
-		else if(event.isKeyDown(KeyEvent.TSK_HOME)){
+		else if(event.isKeyDown(KeyEvent.TSK_HOME)) {
 			cursor = 0;
 		}
 
-		if(!control){
-			if(event.isKeyDown(KeyEvent.TSK_CTRL_DIREITA)||event.isKeyDown(KeyEvent.TSK_CTRL_ESQUERDA)){
+		if(!control) {
+			if(event.isKeyDown(KeyEvent.TSK_CTRL_DIREITA)||event.isKeyDown(KeyEvent.TSK_CTRL_ESQUERDA)) {
 				control = true;
 			}
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)){
-			if(control){
+		if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)) {
+			if(control) {
 				esquerdaControl();
 			}
 			else{
 				esquerdaNormal();
 			}
 		}
-		else if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)){
+		else if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)) {
 
-			if(control){
+			if(control) {
 				direitaControl();
 			}else{
 				direitaNormal();
 			}
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_TAB)){
+		if(event.isKeyDown(KeyEvent.TSK_TAB)) {
 
 			return GUIEvent.NEXT_COMPONENT;
 		}
@@ -181,15 +181,15 @@ public class TextField extends View{
 		return GUIEvent.NONE;
 	}
 
-	private GUIEvent updateReleased(KeyEvent event){
-		if(control){
-			if(event.isKeyDown(KeyEvent.TSK_CTRL_DIREITA)||event.isKeyDown(KeyEvent.TSK_CTRL_ESQUERDA)){
+	private GUIEvent updateReleased(KeyEvent event) {
+		if(control) {
+			if(event.isKeyDown(KeyEvent.TSK_CTRL_DIREITA)||event.isKeyDown(KeyEvent.TSK_CTRL_ESQUERDA)) {
 				control = false;
 			}
 		}
 
-		if(shift){
-			if(event.isKeyDown(KeyEvent.TSK_SHIFT_DIREITA)||event.isKeyDown(KeyEvent.TSK_SHIFT_ESQUERDA)){
+		if(shift) {
+			if(event.isKeyDown(KeyEvent.TSK_SHIFT_DIREITA)||event.isKeyDown(KeyEvent.TSK_SHIFT_ESQUERDA)) {
 				shift = false;
 			}
 		}
@@ -199,7 +199,7 @@ public class TextField extends View{
 
 	//TODO escreve texto.sub(0,minMark);
 	//Para não sair da caixa
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 
@@ -216,13 +216,13 @@ public class TextField extends View{
 		float dif = w-metrics.stringWidth(text);
 
 		//Remover
-		if(onFocus){
+		if(onFocus) {
 			g.setColor(theme.getTextFieldColor());
 		}else{
 			g.setColor(theme.getTextFieldWithoutFocusColor());
 		}
 
-		if(mouseOver){
+		if(mouseOver) {
 			g.setColor(theme.getTextFieldOnMouseColor());	
 		}
 
@@ -230,9 +230,9 @@ public class TextField extends View{
 
 		g.setColor(theme.getTextColor());
 
-		if(minMark==0&&maxMark==0){
+		if(minMark==0&&maxMark==0) {
 
-			if(dif>0){
+			if(dif>0) {
 				g.drawShadow(x, y+h/2+fontSize/2, text);
 			}else{
 				g.drawShadow(x+dif, y+h/2+fontSize/2, text);
@@ -270,13 +270,13 @@ public class TextField extends View{
 		}
 
 
-		if(onFocus){
+		if(onFocus) {
 			//Desenha Cursor
 
 			int cx = metrics.stringWidth(text.substring(0,cursor));
 			cx+=x+1;
 
-			if(dif>0){
+			if(dif>0) {
 				g.drawLine(cx+1, y+2, cx+1, y+h-2);
 			}else{
 				g.drawLine(dif+cx, y+2, dif+cx, y+h-2);
@@ -333,22 +333,22 @@ public class TextField extends View{
 	}
 
 	//Text Methods
-	private void esquerdaNormal(){
+	private void esquerdaNormal() {
 
-		if(cursor>0){
+		if(cursor>0) {
 			cursor--;
 		}
 
 	}
 
-	private void esquerdaControl(){
+	private void esquerdaControl() {
 
-		if(cursor>0){
+		if(cursor>0) {
 			
 			int i=cursor-2;
 
-			for(;i>0;i--){
-				if(text.charAt(i)==' '){
+			for(;i>0;i--) {
+				if(text.charAt(i)==' ') {
 					i++;
 					break;
 				}
@@ -358,35 +358,35 @@ public class TextField extends View{
 		}
 	}
 
-	private void direitaControl(){
+	private void direitaControl() {
 
 		int i=cursor+1;
 
-		for(;i<text.length();i++){
-			if(text.charAt(i)==' '){
+		for(;i<text.length();i++) {
+			if(text.charAt(i)==' ') {
 				break;
 			}
 		}
 		cursor = i;
 	}
 
-	private void direitaNormal(){
-		if(cursor<text.length()){
+	private void direitaNormal() {
+		if(cursor<text.length()) {
 			cursor++;
 		}
 	}
 
-	private void apagaBackSpace(){
+	private void apagaBackSpace() {
 
-		if(fixMark==-1&&cursor>0){
+		if(fixMark==-1&&cursor>0) {
 
-			if(cursor<text.length()){
+			if(cursor<text.length()) {
 				String t1 = text.substring(0,cursor-1);
 				String t2 = text.substring(cursor,text.length());
 
 				text = t1+t2;
 			}
-			else if(cursor>0){
+			else if(cursor>0) {
 				text = text.substring(0,cursor-1);
 			}
 
@@ -399,11 +399,11 @@ public class TextField extends View{
 
 	}
 
-	private void apagaDelete(){
+	private void apagaDelete() {
 
-		if(fixMark==-1){
+		if(fixMark==-1) {
 
-			if(cursor<text.length()){
+			if(cursor<text.length()) {
 				String t1 = text.substring(0,cursor);
 				String t2 = text.substring(cursor+1,text.length());
 
@@ -417,7 +417,7 @@ public class TextField extends View{
 		}
 	}
 
-	private void deleteMark(){
+	private void deleteMark() {
 		
 		//System.out.println("deleteMark "+text.length());
 
@@ -431,22 +431,22 @@ public class TextField extends View{
 		fixMark = -1;
 	}
 
-	private void updateChar(char c){
+	private void updateChar(char c) {
 
-		if((int)c==TEXT_BACKSPACE){
+		if((int)c==TEXT_BACKSPACE) {
 			
 			apagaBackSpace();
 			
-		}else if((int)c==TEXT_DELETE){
+		}else if((int)c==TEXT_DELETE) {
 			
 			apagaDelete();
 			
-		}else if((int)c==TEXT_ENTER||(int)c==TEXT_TAB||(int)c==TEXT_ESC){
+		}else if((int)c==TEXT_ENTER||(int)c==TEXT_TAB||(int)c==TEXT_ESC) {
 
 		}
 		else{
-			if(maxLength>0){
-				if(text.length()<maxLength){
+			if(maxLength>0) {
+				if(text.length()<maxLength) {
 					addChar(c);
 				}
 			}else{
@@ -458,9 +458,9 @@ public class TextField extends View{
 
 	}
 
-	private void addChar(char c){
+	private void addChar(char c) {
 
-		if(cursor<text.length()){
+		if(cursor<text.length()) {
 			String t1 = text.substring(0,cursor);
 			t1+=c;
 			String t2 = text.substring(cursor,text.length());
@@ -475,13 +475,13 @@ public class TextField extends View{
 		cursor++;
 	}
 
-	private int getMinMark(){
+	private int getMinMark() {
 
-		if(fixMark<0){
+		if(fixMark<0) {
 			return 0;
 		}
 
-		if(cursor<fixMark){
+		if(cursor<fixMark) {
 			return cursor;
 		}
 		else{
@@ -490,13 +490,13 @@ public class TextField extends View{
 
 	}
 
-	private int getMaxMark(){
+	private int getMaxMark() {
 
-		if(fixMark<0){
+		if(fixMark<0) {
 			return 0;
 		}
 
-		if(cursor<fixMark){
+		if(cursor<fixMark) {
 
 			return fixMark;
 		}

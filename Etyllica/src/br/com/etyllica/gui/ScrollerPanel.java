@@ -21,7 +21,7 @@ import br.com.etyllica.gui.panel.ScrollBackground;
  *
  */
 
-public class ScrollerPanel extends View{
+public class ScrollerPanel extends View {
 
 	private float lastComponentH = 0;
 	private View component;
@@ -60,7 +60,7 @@ public class ScrollerPanel extends View{
 	}
 
 	@Override
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 
 		g.setColor(Color.WHITE);
 
@@ -70,9 +70,9 @@ public class ScrollerPanel extends View{
 		BufferedImage back = g.getBimg();
 		//g.setBufferedImage(back.getSubimage(x, y, w, h));
 		
-		if(component!=null){
+		if(component!=null) {
 			
-			if(lastComponentH!=component.getH()){
+			if(lastComponentH!=component.getH()) {
 				resetScroll();
 				lastComponentH = component.getH();
 			}
@@ -89,33 +89,33 @@ public class ScrollerPanel extends View{
 	}
 
 	@Override
-	public void update(GUIEvent event){
+	public void update(GUIEvent event) {
 
 	}
 
 	@Override
-	public GUIEvent updateMouse(PointerEvent event){
+	public GUIEvent updateMouse(PointerEvent event) {
 
-		if(mouseOver){
+		if(mouseOver) {
 
-			if(event.onButtonDown(MouseButton.MOUSE_WHEEL_DOWN)){
+			if(event.isButtonDown(MouseButton.MOUSE_WHEEL_DOWN)) {
 
-				for(int i=0;i<event.getAmount();i++){
+				for(int i=0;i<event.getAmount();i++) {
 					scrollDown();
 				}
 			}
 
-			if(event.onButtonDown(MouseButton.MOUSE_WHEEL_UP)){
+			if(event.isButtonDown(MouseButton.MOUSE_WHEEL_UP)) {
 
-				for(int i=event.getAmount();i<0;i++){
+				for(int i=event.getAmount();i<0;i++) {
 					scrollUp();
 				}
 			}
 
 
-			if(knob.isMouseOver()){
+			if(knob.isMouseOver()) {
 
-				if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
+				if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 					//TODO Mouse dragged with knob move scroll
 				}
 
@@ -130,7 +130,7 @@ public class ScrollerPanel extends View{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_TAB)){
+		if(event.isKeyDown(KeyEvent.TSK_TAB)) {
 
 			return GUIEvent.NEXT_COMPONENT;
 
@@ -139,7 +139,7 @@ public class ScrollerPanel extends View{
 		return GUIEvent.NONE;
 	}
 
-	public void setComponent(View component){
+	public void setComponent(View component) {
 		this.component = component;
 		lastComponentH = component.getH();
 
@@ -148,11 +148,11 @@ public class ScrollerPanel extends View{
 		resetScroll();
 	}
 
-	private void resetScroll(){
+	private void resetScroll() {
 		
 		boolean needScroll = false; 
 		
-		if(component.getH()>h){
+		if(component.getH()>h) {
 			scrollFactor = (float)((float)h/(float)component.getH());
 			needScroll = true;
 		}
@@ -166,25 +166,25 @@ public class ScrollerPanel extends View{
 		
 		
 		
-		if(needScroll){
+		if(needScroll) {
 			showButtons();
 		}
 			
 		
 	}
 	
-	private void showButtons(){
+	private void showButtons() {
 		track.setVisible(true);
 		upButton.setVisible(true);
 		downButton.setVisible(true);
 		knob.setVisible(true);
 	}
 
-	public void scrollDown(){
+	public void scrollDown() {
 
 		float panelDif = h-component.getH();
 
-		if(component.getY()-panelDif>0){
+		if(component.getY()-panelDif>0) {
 
 			component.setOffsetY(-scrollAmount);
 
@@ -196,9 +196,9 @@ public class ScrollerPanel extends View{
 
 	}
 
-	public void scrollUp(){
+	public void scrollUp() {
 
-		if(component.getY()<0){
+		if(component.getY()<0) {
 
 			component.setOffsetY(+scrollAmount);
 

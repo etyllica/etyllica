@@ -29,7 +29,7 @@ public class MoveLight extends GLAUX{
 	@Override
 	public GUIEvent updateMouse(PointerEvent event){
 
-		if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
+		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
 			movelight();
 		}
 
