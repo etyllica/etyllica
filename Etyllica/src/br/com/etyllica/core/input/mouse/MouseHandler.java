@@ -59,9 +59,9 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		moveEvent = new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
 	}
 	
-	public void updateArrowTheme(ArrowTheme arrowTheme){
+	public void updateArrowTheme(ArrowTheme arrowTheme) {
 		this.arrowTheme = arrowTheme;
-		setEstadoNormal();
+		setStateNormal();
 	}
 
 	public int getX() {
@@ -88,7 +88,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		this.z = z;
 	}
 
-	public void setCoordenadas(int x, int y){
+	public void setCoordenadas(int x, int y) {
 		setX(x);
 		setY(y);
 		
@@ -97,15 +97,15 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 	}
 
 	public void click(int botao) {
-		setEstadoClicado();		
+		setStateClick();		
 	}
 
 	public void pressiona(int botao) {
-		setEstadoClicado();
+		setStateClick();
 	}
 
 	public void solta(int botao) {
-		setEstadoNormal();
+		setStateNormal();
 	}
 
 	protected int clicks = 0;
@@ -113,31 +113,24 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 	protected boolean doubleClick = false;
 
 	protected boolean dragged = false;
+	
 	protected int dragButton = 0;
 	protected int dragX = 0;
 	protected int dragY = 0;
 
-	private void addEvent(int button, PointerState state){
+	private void addEvent(int button, PointerState state) {
 
-		MouseButton key = MouseButton.MOUSE_NONE;
-
-		switch (button) {
-		case MouseEvent.BUTTON1:
-			key = MouseButton.MOUSE_BUTTON_LEFT;
-			break;
-		case MouseEvent.BUTTON2:
-			key = MouseButton.MOUSE_BUTTON_MIDDLE;
-			break;
-		case MouseEvent.BUTTON3:
-			key = MouseButton.MOUSE_BUTTON_RIGHT;
-			break;
-		}
-
-		events.add(new PointerEvent(key, state, x, y));
+		addEvent(button, state, 0);
 
 	}
 	
-	private void addEvent(int button, PointerState state, int amount){
+	private void addEvent(int button, PointerState state, int amount) {
+
+		addEvent(button, state, 0, amount);
+
+	}
+	
+	private void addEvent(int button, PointerState state, int amountX, int amountY) {
 
 		MouseButton key = MouseButton.MOUSE_NONE;
 
@@ -153,7 +146,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 			break;
 		}
 
-		events.add(new PointerEvent(key, state, x, y, amount));
+		events.add(new PointerEvent(key, state, x, y, amountX, amountY));
 
 	}
 
@@ -221,7 +214,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 	@Override
 	public void mouseDragged( MouseEvent me ) {
 		
-		if(!dragged){
+		if(!dragged) {
 			dragX = me.getX();
 			dragY = me.getY();
 
@@ -242,7 +235,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		
 		MouseButton key = MouseButton.MOUSE_WHEEL_DOWN;		
 		
-		if(mwe.getWheelRotation()<0){
+		if(mwe.getWheelRotation()<0) {
 			key = MouseButton.MOUSE_WHEEL_UP;
 		}
 		
@@ -252,18 +245,19 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 	//TODO Remover colisoes e incluir em layer
 
 	//Colisao
-	public boolean sobMouseCircular(ImageLayer b)
-	{
-		float raio = b.getW()/2;
-		return sobMouseCircular(b.getX()+raio,b.getY()+raio, raio);
+	public boolean sobMouseCircular(ImageLayer b) {
+		
+		final float radius = b.getW()/2;
+		
+		return sobMouseCircular(b.getX()+radius,b.getY()+radius, radius);
 	}
 
-	public boolean sobMouseCircular(float cx, float cy, float raio)
-	{
+	public boolean sobMouseCircular(float cx, float cy, float radius) {
+		
 		float dx = cx - x;
 		float dy = cy - y;
 
-		if ( ( dx * dx )  + ( dy * dy ) < raio * raio )	{
+		if ( ( dx * dx )  + ( dy * dy ) < radius * radius )	{
 			return true;
 		}
 
@@ -271,7 +265,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 
 	}
 
-	public boolean sobMouseIso(ImageLayer cam){
+	public boolean sobMouseIso(ImageLayer cam) {
 
 		float my = cam.getH()/2;
 		float mx = cam.getW()/2;
@@ -289,29 +283,31 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 
 	}
 
-	public boolean sobMouse(float x, float y, float w, float h)
-	{
-		if((this.x<x)||(this.x>x + w))
-		{
+	public boolean sobMouse(float x, float y, float w, float h)	{
+		
+		if((this.x<x)||(this.x>x + w)) {
+			
 			return false;
 		}
-		if((this.y<y)||(this.y>y + h))
-		{
+		
+		if((this.y<y)||(this.y>y + h)) {
+			
 			return false;
 		}
 
 		return true;	
 	}
 
-	public boolean sobMouse(ImageLayer cam)
-	{
-		if(cam.getAngle()==0){
+	public boolean sobMouse(ImageLayer cam) {
+		
+		if(cam.getAngle()==0) {
+			
 			float cx = cam.getX();
 			float cy = cam.getY();
 
 			return sobMouse(cx, cy, cam.getW(), cam.getH());
 
-		}else{
+		} else {
 
 			AffineTransform transformer = AffineTransform.getRotateInstance(cam.getAngle(),cam.getX(),cam.getY());
 
@@ -336,56 +332,59 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		}
 	}
 
-	public boolean sobMouse(AnimatedLayer cam)
-	{
+	public boolean sobMouse(AnimatedLayer cam) {
+		
 		return sobMouse(cam.getX(), cam.getY(), cam.getTileW(), cam.getTileH());
 	}
 
-	public boolean sobMouse(Polygon poligono){
+	public boolean sobMouse(Polygon poligono) {
 		return poligono.contains(x, y);
 	}
 
-	public void setEstadoClicado(){
+	public void setStateClick() {
 		arrow = arrowTheme.getClickArrow();
 	}
-	public void setEstadoCarregando(){
+	
+	public void setStateLoading() {
 		arrow = arrowTheme.getLoadingArrow();
 	}
-	public void setEstadoNormal(){
+	
+	public void setStateNormal() {
 		arrow = arrowTheme.getNormalArrow();
 	}
-	public void setEstadoTexto(){
+	
+	public void setStateText() {
 		arrow = arrowTheme.getTextArrow();
 	}
 
-	public void resetCursor(){
+	public void resetCursor() {
 		arrow = arrowTheme.getNormalArrow();
 	}
 
-	public int getDragX(){
+	public int getDragX() {
 		return dragX;
 	}
-	public int getDragY(){
+	public int getDragY() {
 		return dragY;
 	}
 
-	public void setArc(int arc){
+	public void setArc(int arc) {
 		this.arc = arc;
 	}
 
-	public int getArc(){
+	public int getArc() {
 		return arc;
 	}
 
-	public void setTextMode(boolean textMode){
+	public void setTextMode(boolean textMode) {
 
 		this.overText = textMode;
 
-		if(textMode){
-			setEstadoTexto();
+		if(textMode) {
+			setStateText();
 		}
 		else{
-			setEstadoNormal();
+			setStateNormal();
 		}
 	}
 
@@ -397,25 +396,24 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		return arrow;
 	}
 	
-	public List<PointerEvent> getEvents(){
+	public List<PointerEvent> getEvents() {
 		
 		events.add(moveEvent);
 		
 		return events;
 	}
 	
-	public void addMouseMoveEvent(int x, int y){
+	public void addMouseMoveEvent(int x, int y) {
 
 		moveEvent.setX(x);
-		moveEvent.setY(y);
-		
+		moveEvent.setY(y);		
 	}
 	
-	public void clearEvents(){
+	public void clearEvents() {
 		events.clear();
 	}
 	
-	public void addEvent(PointerEvent event){
+	public void addEvent(PointerEvent event) {
 		events.add(event);
 	}
 

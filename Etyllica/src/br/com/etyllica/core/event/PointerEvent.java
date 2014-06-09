@@ -16,47 +16,62 @@ public class PointerEvent {
 	
 	private PointerState state;
 	
-	private int x;
+	private int x = 0;
 	
-	private int y;
+	private int y = 0;
 	
-	private int amount;
+	private int amountX = 0;
+	
+	private int amountY = 0;
 	
 	private long timestamp = System.currentTimeMillis();
 	
-	public PointerEvent(MouseButton key, PointerState state){
+	public PointerEvent(MouseButton key, PointerState state) {
+		super();
+		
 		this.key = key;
 		this.state = state;
 		
 		this.x = 0;
 		this.y = 0;
-		this.amount = 0;
-		
-		//Ex: (Teclado, TSK_A, PRESSED);
-		//Ex: (Mouse, BUTTON_LEFT, DRAGGED)//Pressed with x or y = dragged
-		
-		//EX: (VOICE_SPELL, TSK_A, PRESSED);
-		//EX: (JOYSTICK, TSK_SETA_DIRTEITA, PRESSED, speed, 0);
-		//EX: (HEAD, TSK_SETA_DIREITA, PRESSED, speed, 0);
+		this.amountY = 0;
+		this.amountX = 0;
 		
 	}
 	
-	public PointerEvent(MouseButton key, PointerState state, int x, int y){
+	public PointerEvent(MouseButton key, PointerState state, int x, int y) {
+		super();
+		
 		this.key = key;
 		this.state = state;
 		
 		this.x = x;
 		this.y = y;
-		this.amount = 0;
+		this.amountY = 0;
 	}
 	
-	public PointerEvent(MouseButton key, PointerState state, int x, int y, int amount){
+	public PointerEvent(MouseButton key, PointerState state, int x, int y, int amount) {
+		super();
+		
 		this.key = key;
 		this.state = state;
 		
 		this.x = x;
 		this.y = y;
-		this.amount = amount;
+		this.amountY = amount;
+	}
+	
+	public PointerEvent(MouseButton key, PointerState state, int x, int y, int amountX, int amountY) {
+		super();
+		
+		this.key = key;
+		this.state = state;
+		
+		this.x = x;
+		this.y = y;
+
+		this.amountX = amountX;
+		this.amountY = amountY;
 	}
 
 	public PointerState getState() {
@@ -82,35 +97,47 @@ public class PointerEvent {
 	public void setY(int y) {
 		this.y = y;
 	}
-
+	
 	public int getAmount() {
-		return amount;
+		return amountY;
+	}
+	
+	public int getAmountX() {
+		return amountX;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setAmountX(int amountX) {
+		this.amountX = amountX;
+	}
+
+	public int getAmountY() {
+		return amountY;
+	}
+
+	public void setAmountY(int amountY) {
+		this.amountY = amountY;
 	}
 
 	public long getTimestamp() {
 		return timestamp;
 	}
 	
-	public boolean isKey(MouseButton key){
+	public boolean isKey(MouseButton key) {
 		return this.key==key;
 	}
 		
-	public boolean onDragButton(MouseButton key){
-		return((state==PointerState.DRAGGED)&&this.key==key);
+	public boolean onDragButton(MouseButton key) {
+		return((state == PointerState.DRAGGED) && this.key == key);
 	}
 	
-	public boolean onButtonDown(MouseButton key){
+	public boolean onButtonDown(MouseButton key) {
 		//TODO Make sense?
-		return((state==PointerState.PRESSED||(state==PointerState.DRAGGED))&&this.key==key);
+		return((state == PointerState.PRESSED || (state == PointerState.DRAGGED)) && this.key == key);
 	}
 	
-	public boolean onButtonUp(MouseButton key){
-		return((state==PointerState.RELEASED)&&this.key==key);
+	public boolean onButtonUp(MouseButton key) {
+		return((state == PointerState.RELEASED) && this.key == key);
 	}
-		
+
 }
 
