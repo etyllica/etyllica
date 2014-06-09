@@ -106,16 +106,8 @@ public class PointerEvent {
 		return amountX;
 	}
 
-	public void setAmountX(int amountX) {
-		this.amountX = amountX;
-	}
-
 	public int getAmountY() {
 		return amountY;
-	}
-
-	public void setAmountY(int amountY) {
-		this.amountY = amountY;
 	}
 
 	public long getTimestamp() {
@@ -123,19 +115,18 @@ public class PointerEvent {
 	}
 	
 	public boolean isKey(MouseButton key) {
-		return this.key==key;
+		return this.key == key;
 	}
 		
-	public boolean onDragButton(MouseButton key) {
+	public boolean isDraggedButton(MouseButton key) {
 		return((state == PointerState.DRAGGED) && this.key == key);
 	}
 	
-	public boolean onButtonDown(MouseButton key) {
-		//TODO Make sense?
+	public boolean isButtonDown(MouseButton key) {
 		return((state == PointerState.PRESSED || (state == PointerState.DRAGGED)) && this.key == key);
 	}
 	
-	public boolean onButtonUp(MouseButton key) {
+	public boolean isButtonUp(MouseButton key) {
 		return((state == PointerState.RELEASED) && this.key == key);
 	}
 
