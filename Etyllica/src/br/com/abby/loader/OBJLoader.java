@@ -176,7 +176,7 @@ public class OBJLoader {
             	}
             	
             	Face face = new Face(vIndexes, texIndexes, nIndexes);
-            	face.setQuad(quad);
+            	face.setCount(quad);
             	
             	
             	group.getFaces().add(face);

@@ -10,14 +10,14 @@ import org.lwjgl.util.vector.Vector3f;
 public class Face {
 	
 	//TODO ALL Private
-	private int quad = 4;
+	private int count = 4;
 	
     public Vector3f[] vertex; // three indices, not vertices or normals!
     public Vector3f[] normal;
     public Vector2f[] texture;
 
     public Face(int quad) {
-    	this.quad = quad;
+    	this.count = quad;
     }
     
     public Face(Vector3f[] vertex, Vector2f[] texture, Vector3f[] normal) {
@@ -26,12 +26,12 @@ public class Face {
     	this.normal = normal;
     }
 
-	public int getQuad() {
-		return quad;
+	public int getCount() {
+		return count;
 	}
 
-	public void setQuad(int quad) {
-		this.quad = quad;
+	public void setCount(int count) {
+		this.count = count;
 	}
          
 }

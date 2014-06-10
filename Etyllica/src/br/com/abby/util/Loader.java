@@ -22,15 +22,15 @@ public class Loader {
 		super();
 	}
 
-	public static Vector<Face3D> carregaOBJ(String caminho){
+	public static Vector<Face3D> carregaOBJ(String path) {
 		
-		caminho = caminho.substring(6);
+		path = path.substring(6);
 		
 		Vector<Point3D> vertices = new Vector<Point3D>();
 		Vector<Face3D> faces = new Vector<Face3D>();
 
 		try {
-			FileReader fr = new FileReader(caminho);
+			FileReader fr = new FileReader(path);
 			BufferedReader br = new BufferedReader(fr);
 
 			String eachLine = br.readLine();

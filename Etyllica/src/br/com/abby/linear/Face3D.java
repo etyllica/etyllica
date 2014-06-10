@@ -11,100 +11,103 @@ import java.util.Vector;
  */
 
 public class Face3D {
+	
+	protected Color color;
+	
+	protected Vector<Point3D> points;
 
-	protected Vector<Point3D> pontos;
-	protected Color cor;
-
-	public Face3D(){
-		cor = new Color(0,0,0);
-		pontos = new Vector<Point3D>();
+	public Face3D() {
+		
+		color = Color.BLACK;
+		
+		points = new Vector<Point3D>();
 	}
 
-	public void novoPonto(int x, int y){
-		pontos.add(new Point3D(x,y,0));
+	public void novoPonto(int x, int y) {
+		points.add(new Point3D(x,y,0));
 	}
-	public void novoPonto(int x, int y, int z){
-		pontos.add(new Point3D(x,y,z));
+	public void novoPonto(int x, int y, int z) {
+		points.add(new Point3D(x,y,z));
 	}
-	public void novoPonto(Point3D p){
-		pontos.add(p);
+	public void novoPonto(Point3D p) {
+		points.add(p);
 	}
 
-	public double[] getPontosX(){
+	public double[] getPontosX() {
 
-		int tamanho = pontos.size();
+		int tamanho = points.size();
 
 		double[] px = new double[tamanho];
 
-		for(int i=0;i<tamanho;i++){
+		for(int i=0;i<tamanho;i++) {
 
-			px[i] = pontos.get(i).getX();
+			px[i] = points.get(i).getX();
 		}
 
 		return px;
 	}
 
-	public double[] getPontosY(){
+	public double[] getPontosY() {
 
-		int tamanho = pontos.size();
+		int tamanho = points.size();
 
 		double[] py = new double[tamanho];
 
-		for(int i=0;i<tamanho;i++){
+		for(int i=0;i<tamanho;i++) {
 
-			py[i] = pontos.get(i).getY();
+			py[i] = points.get(i).getY();
 		}
 
 		return py;
 	}
-	public int numPontos(){
-		return pontos.size();
+	public int numPontos() {
+		return points.size();
 	}
-	public Color getCor(){
-		return cor;
+	public Color getCor() {
+		return color;
 	}
-	public void setCor(int r, int g, int b){
-		cor = new Color(r,g,b);		
+	public void setCor(int r, int g, int b) {
+		color = new Color(r,g,b);		
 	}
 	
-	public void offset(int offsetX, int offsetY){
-		for(int i=0;i<pontos.size();i++){
-			pontos.get(i).setX(pontos.get(i).getX()+offsetX);
-			pontos.get(i).setY(pontos.get(i).getY()+offsetY);
+	public void offset(int offsetX, int offsetY) {
+		for(int i=0;i<points.size();i++) {
+			points.get(i).setX(points.get(i).getX()+offsetX);
+			points.get(i).setY(points.get(i).getY()+offsetY);
 		}
 	}
 
-	public void girar(int angulo){
+	public void girar(int angulo) {
 
 		//http://ca.answers.yahoo.com/question/index?qid=20100403151916AAbJHxV
 		
 		double cos = Math.cos(angulo);
 		double sen = Math.sin(angulo);
 	
-		for(int i=0;i<pontos.size();i++){
+		for(int i=0;i<points.size();i++) {
 			
-			double rx = pontos.get(i).getX();
-			double ry = pontos.get(i).getY();	
+			double rx = points.get(i).getX();
+			double ry = points.get(i).getY();	
 			
-			pontos.get(i).setX((int) Math.round(rx*cos+ry*sen));
-			pontos.get(i).setY((int) Math.round(-rx*sen+ry*cos));
+			points.get(i).setX((int) Math.round(rx*cos+ry*sen));
+			points.get(i).setY((int) Math.round(-rx*sen+ry*cos));
 			
 		}
 		
 	}
 	
-	public Vector<Point3D> getPontos(){
-		return pontos;
+	public Vector<Point3D> getPontos() {
+		return points;
 	}
 	
-	public String toString(){
+	public String toString() {
 		Point3D ponto;
 		
 		String retorno = "";
 		
-		for(int p = 0;p<pontos.size();p++){
+		for(int p = 0;p<points.size();p++) {
 			
-			ponto = pontos.get(p);
+			ponto = points.get(p);
 			retorno +="Ponto "+Integer.toString(p)+" = "+ponto;
 			retorno += "\n";
 		}
