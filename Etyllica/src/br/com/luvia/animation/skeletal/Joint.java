@@ -1,12 +1,12 @@
 package br.com.luvia.animation.skeletal;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jgl.GLAUX;
 
 import br.com.luvia.GLDrawable;
+import br.com.luvia.linear.Point3D;
 
 /**
  * 
@@ -15,21 +15,12 @@ import br.com.luvia.GLDrawable;
  *
  */
 
-public class Joint implements GLDrawable{
-	
-	private Color color = Color.WHITE;
-
-	protected double x;
-	protected double y;
-	protected double z;
+public class Joint extends Point3D implements GLDrawable{
 
 	private List<Bone> bones = new ArrayList<Bone>();
 
 	public Joint(double x, double y, double z){
-		super();
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		super(x, y, z);		
 	}
 	
 	public void addBone(Bone bone){
@@ -106,30 +97,5 @@ public class Joint implements GLDrawable{
 		}
 
 	}
-
-	public double getX() {
-		return x;
-	}
-
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	public double getZ() {
-		return z;
-	}
-
-	public void setZ(double z) {
-		this.z = z;
-	}
-
 
 }

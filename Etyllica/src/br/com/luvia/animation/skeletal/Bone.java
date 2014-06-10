@@ -378,8 +378,8 @@ public class Bone implements GLDrawable{
 		gl.glColor3i(color.getRed(), color.getGreen(), color.getBlue());
 
 		gl.glBegin(GL.GL_LINES);
-		gl.glVertex3d(orign.x, orign.y, orign.z);
-		gl.glVertex3d(end.x, end.y, end.z);
+		gl.glVertex3d(orign.getX(), orign.getY(), orign.getZ());
+		gl.glVertex3d(end.getX(), end.getY(), end.getZ());
 		gl.glEnd();
 
 		//gl.glPopMatrix();

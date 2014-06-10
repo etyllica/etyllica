@@ -56,6 +56,12 @@ public class Point3D {
 		
 	}
 	
+	public double angle2D(Point3D point) {
+
+		return angle(point.getX(), point.getY());
+		
+	}
+	
 	public double angle(double px, double py) {
 				
 		double deltaX = px - x;
