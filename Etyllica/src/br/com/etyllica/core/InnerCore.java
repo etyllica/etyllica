@@ -24,9 +24,11 @@ import br.com.etyllica.debug.Logger;
 import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
+import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.gui.window.MainWindow;
 import br.com.etyllica.theme.ThemeManager;
-import br.com.etyllica.theme.mouse.DefaultArrowTheme;
+import br.com.etyllica.theme.dalt.DaltArrowTheme;
+import br.com.etyllica.theme.mouse.ThemeListener;
 
 /**
  * 
@@ -35,7 +37,7 @@ import br.com.etyllica.theme.mouse.DefaultArrowTheme;
  *
  */
 
-public class InnerCore implements Core, InputListener, Updatable {
+public class InnerCore implements Core, InputListener, Updatable, ThemeListener {
 
 	//External Windows
 	private Window activeWindow = null;
@@ -64,6 +66,10 @@ public class InnerCore implements Core, InputListener, Updatable {
 	protected boolean drawCursor = false;
 
 	protected boolean fullScreenEnable = false;
+	
+	private boolean needReload = false;
+	
+	private boolean locked = false;
 
 	private Configuration configuration = Configuration.getInstance();
 
@@ -88,9 +94,11 @@ public class InnerCore implements Core, InputListener, Updatable {
 
 	private void initTheme() {
 
+		ThemeManager.getInstance().setThemeListener(this);
+		
 		ThemeManager.getInstance().setArrowThemeListener(mouse);
 
-		ThemeManager.getInstance().setArrowTheme(new DefaultArrowTheme());
+		ThemeManager.getInstance().setArrowTheme(new DaltArrowTheme());
 
 	}
 
@@ -111,6 +119,11 @@ public class InnerCore implements Core, InputListener, Updatable {
 
 		if(!activeWindow.isLoaded()) {
 			return;
+			
+		} else if (needReload) {
+			
+			fastReload();
+						
 		}
 
 		if(Configuration.getInstance().isLanguageChanged()) {
@@ -490,6 +503,9 @@ public class InnerCore implements Core, InputListener, Updatable {
 
 	public void draw(Graphic g) {
 
+		if(locked||needReload)
+			return;
+		
 		drawWindow(g, activeWindow);
 
 		drawEffects(g);
@@ -793,6 +809,19 @@ public class InnerCore implements Core, InputListener, Updatable {
 		application.setCamera(activeWindow.getCamera());
 
 	}
+	
+	private void fastReload() {
+		
+		locked = true;
+		
+		activeWindow.getApplication().clearComponents();
+		
+		activeWindow.getApplication().load();
+					
+		needReload = false;
+		
+		locked = false;
+	}
 
 	private void updateTimerClick() {
 
@@ -907,6 +936,13 @@ public class InnerCore implements Core, InputListener, Updatable {
 	public void setFps(int fps) {
 		this.fps = fps;
 		this.activeWindow.getApplication().setFps(fps);
+	}
+	
+	@Override
+	public void updateTheme(Theme theme) {
+				
+		needReload = true;
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-package br.com.etyllica.theme.mouse.arrow;
+package br.com.etyllica.theme.mouse;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.Movable;

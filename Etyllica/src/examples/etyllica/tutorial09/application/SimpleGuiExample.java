@@ -8,12 +8,9 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.TextLabel;
-import br.com.etyllica.theme.EtyllicTheme;
-import br.com.etyllica.theme.ThemeManager;
-import br.com.etyllica.theme.mono.EtyllicMonoTheme;
-import br.com.etyllica.util.SVGColor;
 
 public class SimpleGuiExample extends Application{
 
@@ -105,17 +102,7 @@ public class SimpleGuiExample extends Application{
 
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
-		
-		if(event.isKeyDown(KeyEvent.TSK_0)){
-			ThemeManager.getInstance().setTheme(new EtyllicTheme());
-			load();
-		}
-		
-		if(event.isKeyDown(KeyEvent.TSK_1)){
-			ThemeManager.getInstance().setTheme(new EtyllicMonoTheme());
-			load();
-		}
-		
+				
 		// TODO Auto-generated method stub
 		return GUIEvent	.NONE;
 	}

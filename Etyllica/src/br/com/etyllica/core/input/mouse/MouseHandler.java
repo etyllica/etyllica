@@ -20,7 +20,7 @@ import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.linear.Poligono;
 import br.com.etyllica.theme.mouse.ArrowTheme;
 import br.com.etyllica.theme.mouse.ArrowThemeListener;
-import br.com.etyllica.theme.mouse.arrow.MouseArrow;
+import br.com.etyllica.theme.mouse.MouseArrow;
 
 /**
  * 
@@ -29,7 +29,7 @@ import br.com.etyllica.theme.mouse.arrow.MouseArrow;
  *
  */
 
-public class MouseHandler implements MouseMotionListener, MouseInputListener, MouseWheelListener, ArrowThemeListener{
+public class MouseHandler implements MouseMotionListener, MouseInputListener, MouseWheelListener, ArrowThemeListener {
 
 	private List<PointerEvent> events = new ArrayList<PointerEvent>();
 	

@@ -1,4 +1,4 @@
-package br.com.etyllica.theme.mouse.arrow;
+package br.com.etyllica.theme.dalt.arrow;
 
 import java.awt.Color;
 import java.awt.Polygon;
@@ -6,6 +6,7 @@ import java.awt.Polygon;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.theme.mouse.MouseArrow;
 
 /**
  * 

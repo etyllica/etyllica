@@ -5,7 +5,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.util.SVGColor;
+import br.com.etyllica.core.graphics.SVGColor;
 
 public class ByeWorld extends Application{
 

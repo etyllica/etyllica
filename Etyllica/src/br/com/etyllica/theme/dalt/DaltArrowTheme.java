@@ -1,8 +1,9 @@
-package br.com.etyllica.theme.mouse;
+package br.com.etyllica.theme.dalt;
 
-import br.com.etyllica.theme.mouse.arrow.DefaultArrow;
-import br.com.etyllica.theme.mouse.arrow.DefaultTextArrow;
-import br.com.etyllica.theme.mouse.arrow.MouseArrow;
+import br.com.etyllica.theme.dalt.arrow.DefaultArrow;
+import br.com.etyllica.theme.dalt.arrow.DefaultTextArrow;
+import br.com.etyllica.theme.mouse.ArrowTheme;
+import br.com.etyllica.theme.mouse.MouseArrow;
 
 /**
  * 
@@ -11,7 +12,7 @@ import br.com.etyllica.theme.mouse.arrow.MouseArrow;
  *
  */
 
-public class DefaultArrowTheme implements ArrowTheme {
+public class DaltArrowTheme implements ArrowTheme {
 
 	protected int arrowSize = 22;
 	
@@ -20,7 +21,7 @@ public class DefaultArrowTheme implements ArrowTheme {
 	protected MouseArrow textArrow;
 	protected MouseArrow loadingArrow;
 	
-	public DefaultArrowTheme(){
+	public DaltArrowTheme(){
 		
 		normalArrow = new DefaultArrow(arrowSize);
 		clickArrow = new DefaultArrow(arrowSize);
