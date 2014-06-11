@@ -220,12 +220,14 @@ public class SharedCore implements Runnable{
 	}
 
 	public void hideDefaultCursor() {
+		
 		int[] pixels = new int[16 * 16];
+		
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
 				, new Point(0, 0), "invisibleCursor");
 		component.setCursor( transparentCursor );
-		innerCore.drawCursor = true;
+		
 	}
 
 	public void paint( Graphics g ) {

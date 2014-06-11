@@ -63,7 +63,7 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 
 	private MainWindow mainWindow;
 
-	protected boolean drawCursor = false;
+	private boolean drawCursor = true;
 
 	protected boolean fullScreenEnable = false;
 	
