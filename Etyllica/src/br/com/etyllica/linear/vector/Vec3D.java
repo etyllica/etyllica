@@ -10,6 +10,12 @@ public class Vec3D {
 
 	public double[] v;
 	
+	private static final int X = 0;
+	
+	private static final int Y = 1;
+	
+	private static final int Z = 2;
+	
 	public Vec3D() {
 		this(0,0,0);
 	}
@@ -19,37 +25,37 @@ public class Vec3D {
 		
 		this.v = new double[3];
 		
-		v[0] = x;
-		v[1] = y;
-		v[2] = z;
+		v[X] = x;
+		v[Y] = y;
+		v[Z] = z;
 		
 	}
-
+	
 	public void copy(Vec3D a) {
 		
-		this.v[0] = a.v[0];
+		this.v[X] = a.v[X];
 		
-		this.v[1] = a.v[1];
+		this.v[Y] = a.v[Y];
 		
-		this.v[2] = a.v[2];
+		this.v[Z] = a.v[Z];
 				
 	}
 	
 	public void copy(double x, double y, double z) {
 		
-		this.v[0] = x;
+		this.v[X] = x;
 		
-		this.v[1] = y;
+		this.v[Y] = y;
 		
-		this.v[2] = z;
+		this.v[Z] = z;
 				
 	}
 
 	public static Vec3D add(Vec3D a, Vec3D b) {
 		
-		double x = a.v[0] + b.v[0];
-		double y = a.v[1] + b.v[1];
-		double z = a.v[2] + b.v[2];
+		double x = a.v[X] + b.v[X];
+		double y = a.v[Y] + b.v[Y];
+		double z = a.v[Z] + b.v[Z];
 		
 		Vec3D v = new Vec3D(x, y, z);
 
@@ -58,9 +64,9 @@ public class Vec3D {
 
 	public static Vec3D sub(Vec3D a, Vec3D b) {
 		
-		double x = a.v[0] - b.v[0];
-		double y = a.v[1] - b.v[1];
-		double z = a.v[2] - b.v[2];
+		double x = a.v[X] - b.v[X];
+		double y = a.v[Y] - b.v[Y];
+		double z = a.v[Z] - b.v[Z];
 		
 		Vec3D v = new Vec3D(x, y, z);
 
@@ -69,9 +75,9 @@ public class Vec3D {
 
 	public static Vec3D mult(Vec3D a, Vec3D b) {
 		
-		double x = a.v[0] * b.v[0];
-		double y = a.v[1] * b.v[1];
-		double z = a.v[2] * b.v[2];
+		double x = a.v[X] * b.v[X];
+		double y = a.v[Y] * b.v[Y];
+		double z = a.v[Z] * b.v[Z];
 		
 		Vec3D v = new Vec3D(x, y, z);
 
@@ -80,9 +86,9 @@ public class Vec3D {
 
 	public static Vec3D addScalar(Vec3D a, double b) {
 		
-		double x = a.v[0] + b;
-		double y = a.v[1] + b;
-		double z = a.v[2] + b;
+		double x = a.v[X] + b;
+		double y = a.v[Y] + b;
+		double z = a.v[Z] + b;
 		
 		Vec3D v = new Vec3D(x, y, z);
 
@@ -91,9 +97,9 @@ public class Vec3D {
 
 	public static Vec3D multScalar(Vec3D a, double b) {
 		
-		double x = a.v[0] * b;
-		double y = a.v[1] * b;
-		double z = a.v[2] * b;
+		double x = a.v[X] * b;
+		double y = a.v[Y] * b;
+		double z = a.v[Z] * b;
 		
 		Vec3D v = new Vec3D(x, y, z);
 
@@ -102,30 +108,37 @@ public class Vec3D {
 
 	public static double dot(Vec3D a, Vec3D b) {
 		
-		return a.v[0] * b.v[0] + a.v[1] * b.v[1] + a.v[2] * b.v[2];
+		return a.v[X] * b.v[X] + a.v[Y] * b.v[Y] + a.v[Z] * b.v[Z];
 	}
 
 	public static Vec3D cross(Vec3D a, Vec3D b) {
 
 		return new Vec3D(
-				a.v[1] * b.v[2] - a.v[2] * b.v[1],
-				a.v[2] * b.v[0] - a.v[0] * b.v[2],
-				a.v[0] * b.v[1] - a.v[1] * b.v[0]);
+				a.v[Y] * b.v[Z] - a.v[Z] * b.v[Y],
+				a.v[Z] * b.v[X] - a.v[X] * b.v[Z],
+				a.v[X] * b.v[Y] - a.v[Y] * b.v[X]);
 	}
+	
+	public static void cross(Vec3D a, Vec3D b, Vec3D c) {
 
+		c.v[X] = a.v[Y] * b.v[Z] - a.v[Z] * b.v[Y];
+		c.v[Y] = a.v[Z] * b.v[X] - a.v[X] * b.v[Z];
+		c.v[Z] = a.v[X] * b.v[Y] - a.v[Y] * b.v[X];		
+	}
+		
 	public double normalize() {
 		
 		double len = Math.sqrt(this.square());
 
 		if (len > 0.0) {
-			v[0] /= len;
-			v[1] /= len;
-			v[2] /= len;
+			v[X] /= len;
+			v[Y] /= len;
+			v[Z] /= len;
 		}
 
 		return len;
 	}
-	
+		
 	public double length() {
 		return Math.sqrt(this.square());
 	}
@@ -136,14 +149,14 @@ public class Vec3D {
 		double y = 0;
 		double z = 0;
 		
-		if (a.v[0] != 0.0) {
-			x = 1.0 / a.v[0];
+		if (a.v[X] != 0.0) {
+			x = 1.0 / a.v[X];
 		}
-		if (a.v[1] != 0.0) {
-			y = 1.0 / a.v[1];
+		if (a.v[Y] != 0.0) {
+			y = 1.0 / a.v[Y];
 		}
-		if (a.v[2] != 0.0) {
-			z = 1.0 / a.v[2];
+		if (a.v[Z] != 0.0) {
+			z = 1.0 / a.v[Z];
 		}
 
 		return new Vec3D(x, y, z);
@@ -151,12 +164,36 @@ public class Vec3D {
 
 	public double square() {
 		
-		return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+		return v[X] * v[X] + v[Y] * v[Y] + v[Z] * v[Z];
 	}
 
 	public int minIndex() {
 		
-		return v[0] < v[1]? (v[0] < v[2]? 0: 2): (v[1] < v[2]? 1: 2);
+		return v[X] < v[Y]? (v[X] < v[Z]? 0: 2): (v[Y] < v[Z]? 1: 2);
 	}
 
+	public void setX(double x) {
+		v[X] = x;
+	}
+	
+	public void setY(double y) {
+		v[Y] = y;
+	}
+	
+	public void setZ(double z) {
+		v[Z] = z;
+	}
+	
+	public double getX() {
+		return v[X];
+	}
+
+	public double getY() {
+		return v[Y];
+	}
+	
+	public double getZ() {
+		return v[Z];
+	}
+	
 }
