@@ -27,7 +27,9 @@ import br.com.etyllica.core.loader.image.ImageLoader;
  *
  */
 
-public class Model3D extends Polygon3D implements GLDrawable{
+public class Model3D extends Polygon3D implements GLDrawable {
+	
+	private double scale = 1;
 
 	private Set<Integer> vertexSelection = new HashSet<Integer>();
 
@@ -76,8 +78,11 @@ public class Model3D extends Polygon3D implements GLDrawable{
 		gl.glPushMatrix();
 
 		gl.glColor3i(color.getRed(), color.getGreen(), color.getBlue());
-		//gl.glScaled(2, 2, 2);
-
+		
+		if(scale!=1) {
+			gl.glScaled(2, 2, 2);	
+		}
+		
 		//gl.glTranslated(x, y, z);
 		gl.glRotated(anguloY, 0, 1, 0);
 		gl.glRotated(anguloZ, 0, 0, 1);
@@ -276,5 +281,13 @@ public class Model3D extends Polygon3D implements GLDrawable{
 	public void setDrawVertices(boolean drawVertices) {
 		this.drawVertices = drawVertices;
 	}
-	
+
+	public double getScale() {
+		return scale;
+	}
+
+	public void setScale(double scale) {
+		this.scale = scale;
+	}
+		
 }
