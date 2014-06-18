@@ -21,10 +21,11 @@ import br.com.abby.linear.AimPoint;
 public class Bone implements GLDrawable{
 
 	private String name;
-	
+
 	protected Color color = Color.WHITE;
 
 	private double size;
+
 	private double angleX = 0;
 	private double angleY = 0;
 	private double angleZ = 0;
@@ -32,15 +33,15 @@ public class Bone implements GLDrawable{
 	private List<Vector3f> vectors = new ArrayList<Vector3f>();
 
 	private Joint orign = null;
-	
+
 	protected Joint end = null;
 
 	public Bone(double size) {
 		this.size = size;
 
-		end = new Joint(0,0,0);
+		end = new Joint(size,0,0);
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -51,9 +52,8 @@ public class Bone implements GLDrawable{
 
 	public void setOrign(Joint orign) {
 		this.orign = orign;
-		this.end.setX(orign.getX()+size);
-		this.end.setY(orign.getY());
-		this.end.setZ(orign.getZ());
+		
+		this.end.translate(orign.getX(), orign.getY(), orign.getZ());
 	}
 
 	public void translate(double tx, double ty, double tz) {
@@ -88,88 +88,122 @@ public class Bone implements GLDrawable{
 
 	public void rotateXOver(double angle) {
 
-		if(orign!=null) {
+		double px = 0;
+		double py = 0;
+		double pz = 0;
 
-			double px = orign.getX();
-			double py = orign.getY();
-			double pz = orign.getZ();
+		if(orign != null) {
 
-			rotateXOver(angle, px, py, pz);
+			px = orign.getX();
+			py = orign.getY();
+			pz = orign.getZ();
+
 		}
+		
+		rotateXOver(angle, px, py, pz);
+		
 	}
-	
+
 	public void rotateXUnsigned(double angle) {
 
-		if(orign!=null) {
+		double px = 0;
+		double py = 0;
+		double pz = 0;
 
-			double px = orign.getX();
-			double py = orign.getY();
-			double pz = orign.getZ();
+		if(orign != null) {
 
-			rotateXUnsigned(angle, px, py, pz);
+			px = orign.getX();
+			py = orign.getY();
+			pz = orign.getZ();
+
 		}
+		
+		rotateXUnsigned(angle, px, py, pz);
 	}
 
 	public void rotateYOver(double angle) {
 
+		double px = 0;
+		double py = 0;
+		double pz = 0;
+
 		if(orign != null) {
 
-			double px = orign.getX();
-			double py = orign.getY();
-			double pz = orign.getZ();
+			px = orign.getX();
+			py = orign.getY();
+			pz = orign.getZ();
 
-			rotateYOver(angle, px, py, pz);
 		}
+
+		rotateYOver(angle, px, py, pz);
+
 	}
-	
+
 	public void rotateYUnsigned(double angle) {
 
+		double px = 0;
+		double py = 0;
+		double pz = 0;
+
 		if(orign != null) {
 
-			double px = orign.getX();
-			double py = orign.getY();
-			double pz = orign.getZ();
+			px = orign.getX();
+			py = orign.getY();
+			pz = orign.getZ();
 
-			rotateYUnsigned(angle, px, py, pz);
 		}
+
+		rotateYUnsigned(angle, px, py, pz);
+
 	}
 
 	public void rotateZOver(double angle) {
 
+		double px = 0;
+		double py = 0;
+		double pz = 0;
+
 		if(orign != null) {
 
-			double px = orign.getX();
-			double py = orign.getY();
-			double pz = orign.getZ();
+			px = orign.getX();
+			py = orign.getY();
+			pz = orign.getZ();
 
-			rotateZOver(angle, px, py, pz);
 		}
+
+		rotateZOver(angle, px, py, pz);
+
 	}
-	
+
 	public void rotateZUnsigned(double angle) {
 
+		double px = 0;
+		double py = 0;
+		double pz = 0;
+
 		if(orign != null) {
 
-			double px = orign.getX();
-			double py = orign.getY();
-			double pz = orign.getZ();
+			px = orign.getX();
+			py = orign.getY();
+			pz = orign.getZ();
 
-			rotateZUnsigned(angle, px, py, pz);
 		}
+
+		rotateZUnsigned(angle, px, py, pz);
 	}
 
-	
+
 
 	public void rotateXOver(double angle, double px, double py, double pz) {
 
 		this.angleX += angle;
-		
+
 		rotateOver(angle, px, py, pz, AimPoint.rotationMatrixX(angle, px, py, pz));
 
 		end.rotateXOver(angle,px,py,pz);
 
 	}
-	
+
 	public void rotateXUnsigned(double angle, double px, double py, double pz) {
 
 		this.angleX += angle;
@@ -189,7 +223,7 @@ public class Bone implements GLDrawable{
 		end.rotateYOver(angle,px,py,pz);
 
 	}
-	
+
 	public void rotateYUnsigned(double angle, double px, double py, double pz) {
 
 		this.angleY += angle;
@@ -209,7 +243,7 @@ public class Bone implements GLDrawable{
 		end.rotateZOver(angle,px,py,pz);
 
 	}
-	
+
 	public void rotateZUnsigned(double angle, double px, double py, double pz) {
 
 		this.angleZ += angle;
@@ -252,7 +286,7 @@ public class Bone implements GLDrawable{
 		if(end == null) {
 			return;
 		}
-		
+
 		double ix = end.getX();
 		double iy = end.getY();
 		double iz = end.getZ();
@@ -293,20 +327,20 @@ public class Bone implements GLDrawable{
 		end.draw(gl);
 
 	}
-	
+
 	public void drawVertexes(GLAUX gl) {
-		
+
 		double vsize = 0.005;
-		
+
 		for(Vector3f vector: vectors) {
 
 			gl.glPushMatrix();
 			gl.glTranslated(vector.getX(), vector.getY(), vector.getZ());
 			gl.auxSolidCube(vsize);
 			gl.glPopMatrix();
-			
+
 		}
-		
+
 	}
 
 	public Joint getEnd() {
@@ -340,5 +374,5 @@ public class Bone implements GLDrawable{
 	public double getSize() {
 		return size;
 	}
-	
+
 }
