@@ -131,9 +131,9 @@ public class Animation {
 			//Rotate by KeyFrame angles
 			List<KeyFrame> list = frames.get(bone);
 
-			bone.rotateXOver(list.get(nextFrame).getX()-list.get(0).getX());
-			bone.rotateYOver(list.get(nextFrame).getY()-list.get(0).getY());
-			bone.rotateZOver(list.get(nextFrame).getZ()-list.get(0).getZ());
+			bone.rotateX(list.get(nextFrame).getX()-list.get(0).getX());
+			bone.rotateY(list.get(nextFrame).getY()-list.get(0).getY());
+			bone.rotateZ(list.get(nextFrame).getZ()-list.get(0).getZ());
 
 		}
 
@@ -155,13 +155,13 @@ public class Animation {
 
 			//Undo rotations in reverse order			
 			double difZ = currentFrame.getZ()-firstFrame.getZ();
-			bone.rotateZOver(-difZ);
+			bone.rotateZ(-difZ);
 
 			double difY = currentFrame.getY()-firstFrame.getY();	
-			bone.rotateYOver(-difY);
+			bone.rotateY(-difY);
 
 			double difX = currentFrame.getX()-firstFrame.getX();
-			bone.rotateXOver(-difX);
+			bone.rotateX(-difX);
 
 		}
 

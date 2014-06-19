@@ -18,7 +18,7 @@ import br.com.abby.linear.AimPoint;
  *
  */
 
-public class Bone implements GLDrawable{
+public class Bone implements GLDrawable {
 
 	private String name;
 
@@ -36,10 +36,14 @@ public class Bone implements GLDrawable{
 
 	protected Joint end = null;
 
+	public Bone(String name) {
+		super();
+	}
+	
 	public Bone(double size) {
-		this.size = size;
-
-		end = new Joint(size,0,0);
+		super();
+		
+		setSize(size);
 	}
 
 	public String getName() {
@@ -86,7 +90,7 @@ public class Bone implements GLDrawable{
 		}
 	}
 
-	public void rotateXOver(double angle) {
+	public void rotateX(double angle) {
 
 		double px = 0;
 		double py = 0;
@@ -100,28 +104,11 @@ public class Bone implements GLDrawable{
 
 		}
 		
-		rotateXOver(angle, px, py, pz);
+		rotateX(angle, px, py, pz);
 		
 	}
 
-	public void rotateXUnsigned(double angle) {
-
-		double px = 0;
-		double py = 0;
-		double pz = 0;
-
-		if(orign != null) {
-
-			px = orign.getX();
-			py = orign.getY();
-			pz = orign.getZ();
-
-		}
-		
-		rotateXUnsigned(angle, px, py, pz);
-	}
-
-	public void rotateYOver(double angle) {
+	public void rotateY(double angle) {
 
 		double px = 0;
 		double py = 0;
@@ -135,11 +122,11 @@ public class Bone implements GLDrawable{
 
 		}
 
-		rotateYOver(angle, px, py, pz);
+		rotateY(angle, px, py, pz);
 
 	}
 
-	public void rotateYUnsigned(double angle) {
+	public void rotateZ(double angle) {
 
 		double px = 0;
 		double py = 0;
@@ -153,48 +140,11 @@ public class Bone implements GLDrawable{
 
 		}
 
-		rotateYUnsigned(angle, px, py, pz);
+		rotateZ(angle, px, py, pz);
 
 	}
 
-	public void rotateZOver(double angle) {
-
-		double px = 0;
-		double py = 0;
-		double pz = 0;
-
-		if(orign != null) {
-
-			px = orign.getX();
-			py = orign.getY();
-			pz = orign.getZ();
-
-		}
-
-		rotateZOver(angle, px, py, pz);
-
-	}
-
-	public void rotateZUnsigned(double angle) {
-
-		double px = 0;
-		double py = 0;
-		double pz = 0;
-
-		if(orign != null) {
-
-			px = orign.getX();
-			py = orign.getY();
-			pz = orign.getZ();
-
-		}
-
-		rotateZUnsigned(angle, px, py, pz);
-	}
-
-
-
-	public void rotateXOver(double angle, double px, double py, double pz) {
+	public void rotateX(double angle, double px, double py, double pz) {
 
 		this.angleX += angle;
 
@@ -204,17 +154,7 @@ public class Bone implements GLDrawable{
 
 	}
 
-	public void rotateXUnsigned(double angle, double px, double py, double pz) {
-
-		this.angleX += angle;
-
-		rotateEndJoint(angle, px, py, pz, AimPoint.rotationMatrixX(angle, px, py, pz));
-
-		end.rotateXUnsigned(angle,px,py,pz);
-
-	}
-
-	public void rotateYOver(double angle, double px, double py, double pz) {
+	public void rotateY(double angle, double px, double py, double pz) {
 
 		this.angleY += angle;
 
@@ -224,17 +164,7 @@ public class Bone implements GLDrawable{
 
 	}
 
-	public void rotateYUnsigned(double angle, double px, double py, double pz) {
-
-		this.angleY += angle;
-
-		rotateEndJoint(angle, px, py, pz, AimPoint.rotationMatrixY(angle, px, py, pz));
-
-		end.rotateYUnsigned(angle,px,py,pz);
-
-	}
-
-	public void rotateZOver(double angle, double px, double py, double pz) {
+	public void rotateZ(double angle, double px, double py, double pz) {
 
 		this.angleZ += angle;
 
@@ -244,17 +174,7 @@ public class Bone implements GLDrawable{
 
 	}
 
-	public void rotateZUnsigned(double angle, double px, double py, double pz) {
-
-		this.angleZ += angle;
-
-		rotateEndJoint(angle, px, py, pz, AimPoint.rotationMatrixZ(angle, px, py, pz));
-
-		end.rotateZUnsigned(angle,px,py,pz);
-
-	}
-
-	public void rotateOver(double angle, double px, double py, double pz, double m[][]) {
+	private void rotateOver(double angle, double px, double py, double pz, double m[][]) {
 
 		if(vectors!=null) {
 
@@ -371,8 +291,18 @@ public class Bone implements GLDrawable{
 		return angleZ;
 	}
 
+	public void setSize(double size) {
+		this.size = size;
+		
+		end = new Joint(size, 0, 0);
+	}
+	
 	public double getSize() {
 		return size;
+	}
+	
+	public void append(Bone bone) {
+		end.addBone(bone);
 	}
 
 }

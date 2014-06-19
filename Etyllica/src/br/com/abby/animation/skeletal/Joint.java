@@ -42,42 +42,21 @@ public class Joint extends Point3D implements GLDrawable{
 	public void rotateXOver(double angle, double px, double py, double pz){
 
 		for(Bone bone: bones){
-			bone.rotateXOver(angle, px, py, pz);
-		}
-	}
-	
-	public void rotateXUnsigned(double angle, double px, double py, double pz){
-
-		for(Bone bone: bones){
-			bone.rotateXUnsigned(angle, px, py, pz);
+			bone.rotateX(angle, px, py, pz);
 		}
 	}
 	
 	public void rotateYOver(double angle, double px, double py, double pz){
 
 		for(Bone bone: bones){
-			bone.rotateYOver(angle, px, py, pz);
-		}
-	}
-	
-	public void rotateYUnsigned(double angle, double px, double py, double pz){
-
-		for(Bone bone: bones){
-			bone.rotateYUnsigned(angle, px, py, pz);
+			bone.rotateY(angle, px, py, pz);
 		}
 	}
 	
 	public void rotateZOver(double angle, double px, double py, double pz){
 
 		for(Bone bone: bones){
-			bone.rotateZOver(angle, px, py, pz);
-		}
-	}
-	
-	public void rotateZUnsigned(double angle, double px, double py, double pz){
-
-		for(Bone bone: bones){
-			bone.rotateZUnsigned(angle, px, py, pz);
+			bone.rotateZ(angle, px, py, pz);
 		}
 	}
 
