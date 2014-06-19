@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import br.com.abby.linear.Model3D;
+import br.com.abby.vbo.VBO;
 import br.com.etyllica.core.loader.LoaderImpl;
 
 /**
@@ -33,7 +33,7 @@ public class MeshLoader extends LoaderImpl {
 		folder = "assets/models/";
 	}
 	
-	public Model3D loadModel(String path) {
+	public VBO loadModel(String path) {
 		
 		String diretorio = folder+path;
 		

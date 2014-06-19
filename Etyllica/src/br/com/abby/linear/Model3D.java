@@ -1,7 +1,6 @@
 package br.com.abby.linear;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,14 +9,14 @@ import java.util.Set;
 
 import org.jgl.GL;
 import org.jgl.GLAUX;
-import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import br.com.abby.GLDrawable;
-import br.com.abby.material.DiffuseMaterial;
+import br.com.abby.loader.MeshLoader;
 import br.com.abby.material.Texture;
 import br.com.abby.vbo.Face;
 import br.com.abby.vbo.Group;
+import br.com.abby.vbo.VBO;
 import br.com.etyllica.core.loader.image.ImageLoader;
 
 /**
@@ -27,21 +26,13 @@ import br.com.etyllica.core.loader.image.ImageLoader;
  *
  */
 
-public class Model3D extends Polygon3D implements GLDrawable {
+public class Model3D extends AimPoint implements GLDrawable {
+	
+	private VBO vbo;
 	
 	private double scale = 1;
 
 	private Set<Integer> vertexSelection = new HashSet<Integer>();
-
-	public List<Vector3f> vertexes = new ArrayList<Vector3f>();
-	public List<Vector3f> normals = new ArrayList<Vector3f>();
-	public List<Vector2f> textures = new ArrayList<Vector2f>();
-
-	public List<Face> faces = new ArrayList<Face>();
-
-	private List<Group> groups = new ArrayList<Group>();
-
-	private Map<String, DiffuseMaterial> materials = new HashMap<String, DiffuseMaterial>();
 
 	private boolean drawTexture = true;
 	private boolean drawFaces = true;
@@ -52,24 +43,11 @@ public class Model3D extends Polygon3D implements GLDrawable {
 	
 	private Map<String, Texture> textureMap = new HashMap<String, Texture>();
 
-	public Model3D() {
+	public Model3D(String path) {
 		super(0,0,0);
-	}
-
-	public Map<String, DiffuseMaterial> getMaterials() {
-		return materials;
-	}
-
-	public void setMaterials(Map<String, DiffuseMaterial> materials) {
-		this.materials = materials;
-	}
-
-	public List<Vector3f> getVertexes() {
-		return vertexes;
-	}
-
-	public void setVertexes(List<Vector3f> vertexes) {
-		this.vertexes = vertexes;
+		
+		this.vbo = MeshLoader.getInstance().loadModel(path);
+		
 	}
 
 	@Override
@@ -84,8 +62,8 @@ public class Model3D extends Polygon3D implements GLDrawable {
 		}
 		
 		//gl.glTranslated(x, y, z);
-		gl.glRotated(anguloY, 0, 1, 0);
-		gl.glRotated(anguloZ, 0, 0, 1);
+		gl.glRotated(angleY, 0, 1, 0);
+		gl.glRotated(angleZ, 0, 0, 1);
 		//gl.glBegin(GL.GL_QUADS);
 
 		drawFaces(gl);
@@ -104,7 +82,7 @@ public class Model3D extends Polygon3D implements GLDrawable {
 			return;
 		}
 		
-		for(Group group: groups){
+		for(Group group: vbo.getGroups()) {
 
 			String map = group.getMaterial().getMapD();
 			//map = "";
@@ -192,7 +170,9 @@ public class Model3D extends Polygon3D implements GLDrawable {
 		
 		double vsize = 0.015;
 		
-		for(int i=0;i<vertexes.size(); i++){
+		List<Vector3f> vertices = vbo.getVertices();
+		
+		for(int i=0;i<vertices.size(); i++){
 
 			if(vertexSelection.contains(i)){
 				gl.glColor3i(0xff,0xff,0xff);
@@ -208,7 +188,7 @@ public class Model3D extends Polygon3D implements GLDrawable {
 			}
 
 			gl.glPushMatrix();
-			gl.glTranslated(vertexes.get(i).getX(), vertexes.get(i).getY(), vertexes.get(i).getZ());
+			gl.glTranslated(vertices.get(i).getX(), vertices.get(i).getY(), vertices.get(i).getZ());
 			gl.auxSolidCube(vsize);
 			gl.glPopMatrix();
 		}
@@ -249,15 +229,6 @@ public class Model3D extends Polygon3D implements GLDrawable {
 		this.vertexSelection = vertexSelection;
 	}
 
-	public List<Group> getGroups() {
-		return groups;
-	}
-
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
-	}
-
-
 	public boolean isDrawTexture() {
 		return drawTexture;
 	}
@@ -289,5 +260,13 @@ public class Model3D extends Polygon3D implements GLDrawable {
 	public void setScale(double scale) {
 		this.scale = scale;
 	}
-		
+
+	public VBO getVbo() {
+		return vbo;
+	}
+
+	public void setVbo(VBO vbo) {
+		this.vbo = vbo;
+	}
+			
 }

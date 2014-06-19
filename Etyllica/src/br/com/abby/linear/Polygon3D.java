@@ -9,12 +9,8 @@ import java.util.Vector;
  *
  */
 
-public class Polygon3D extends Point3D{
-	
-	protected float anguloX;
-	protected float anguloY;
-	protected float anguloZ;
-		
+public class Polygon3D extends AimPoint {
+			
 	protected Vector<Point3D> vertices;
 	
 	public Polygon3D(){
@@ -56,39 +52,6 @@ public class Polygon3D extends Point3D{
 		
 	}
 		
-	public float getAnguloX(){
-		return anguloX;
-	}
-	public void setAnguloX(float anguloX){
-		this.anguloX = anguloX;
-	}
-	public void setOffsetAnguloX(float offset){
-		anguloX = (anguloX+offset)%360;
-	}
-	public float getAnguloY(){
-		return anguloY;
-	}
-	public void setAnguloY(float anguloY){
-		this.anguloY = anguloY;
-	}
-	public void setOffsetAnguloY(float offset){
-		anguloY = (anguloY+offset)%360;
-	}
-	public float getAnguloZ(){
-		return anguloZ;
-	}
-	public void setAnguloZ(float anguloZ){
-		this.anguloZ = anguloZ;
-	}
-	public void setOffsetAnguloZ(float offset){
-		anguloZ = (anguloZ+offset)%360;
-	}
-	public void offsetAngulos(float offset){
-		setOffsetAnguloX(offset);
-		setOffsetAnguloY(offset);
-		setOffsetAnguloZ(offset);
-	}
-	
 	public void novoVertice(double x, double y, double z){
 		vertices.add(new Point3D(x,y,z));
 	}

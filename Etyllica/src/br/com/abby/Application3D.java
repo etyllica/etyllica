@@ -24,15 +24,16 @@ public abstract class Application3D extends GLAUX {
 	}
 
 	protected void desenhaPoligono(Polygon3D polygon) {
+		
 		glPushMatrix();
 		glLoadIdentity();
 		glColor3d(polygon.getColor().getRed()/0xff,polygon.getColor().getGreen()/0xff,polygon.getColor().getBlue()/0xff);
 		glTranslated(polygon.getX(), polygon.getY(), polygon.getZ());
 
 		//Consertar!
-		glRotated(polygon.getAnguloX(), 1,0,0);
-		glRotated(polygon.getAnguloY(), 0,1,0);		
-		glRotated(polygon.getAnguloZ(), 0,0,1);
+		glRotated(polygon.getAngleX(), 1,0,0);
+		glRotated(polygon.getAngleY(), 0,1,0);		
+		glRotated(polygon.getAngleZ(), 0,0,1);
 
 		glBegin(GL_QUADS);
 
@@ -55,8 +56,8 @@ public abstract class Application3D extends GLAUX {
 		//glLoadIdentity();
 		glColor3d(box.getColor().getRed()/0xff,box.getColor().getGreen()/0xff,box.getColor().getBlue()/0xff);
 		glTranslated(box.getX(), box.getY(), box.getZ());
-		glRotated(box.getAnguloZ(), 0.0, 0.0, 1.0);
-		glRotated(box.getAnguloY(), 0.0, 1.0, 0.0);
+		glRotated(box.getAngleZ(), 0.0, 0.0, 1.0);
+		glRotated(box.getAngleY(), 0.0, 1.0, 0.0);
 		auxSolidBox(box.getAltura(), box.getLargura(), box.getProfundidade());
 		glPopMatrix();
 	}

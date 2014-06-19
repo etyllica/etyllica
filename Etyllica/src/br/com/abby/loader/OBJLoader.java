@@ -11,10 +11,10 @@ import java.util.List;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.linear.Model3D;
 import br.com.abby.material.DiffuseMaterial;
 import br.com.abby.vbo.Face;
 import br.com.abby.vbo.Group;
+import br.com.abby.vbo.VBO;
 
 
 /**
@@ -89,7 +89,7 @@ public class OBJLoader {
         return new int[]{vboVertexHandle, vboNormalHandle};
     }*/
 
-    public static Model3D loadModel(URL url) throws FileNotFoundException, IOException {
+    public static VBO loadModel(URL url) throws FileNotFoundException, IOException {
     	
     	String fpath = url.getPath();
     	String separator = "/";
@@ -102,7 +102,7 @@ public class OBJLoader {
     	
     	
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-        Model3D m = new Model3D();
+        VBO m = new VBO();
                 
         List<Group> groups = new ArrayList<Group>();
         
@@ -133,18 +133,18 @@ public class OBJLoader {
                 float x = Float.valueOf(line.split(" ")[1]);
                 float y = Float.valueOf(line.split(" ")[2]);
                 float z = Float.valueOf(line.split(" ")[3]);
-                m.vertexes.add(new Vector3f(x, y, z));
+                m.getVertices().add(new Vector3f(x, y, z));
                 
             } else if (line.startsWith("vn ")) {
                 float x = Float.valueOf(line.split(" ")[1]);
                 float y = Float.valueOf(line.split(" ")[2]);
                 float z = Float.valueOf(line.split(" ")[3]);
-                m.normals.add(new Vector3f(x, y, z));
+                m.getNormals().add(new Vector3f(x, y, z));
                 
             } else if (line.startsWith("vt ")) {
             	float x = Float.valueOf(line.split(" ")[1]);
                 float y = Float.valueOf(line.split(" ")[2]);
-                m.textures.add(new Vector2f(x, y));     
+                m.getTextures().add(new Vector2f(x, y));     
                 
             } else if (line.startsWith("f ")) {
             	
@@ -163,15 +163,15 @@ public class OBJLoader {
             		if(face.length>1){
             		
             		//-1 is very important
-                    vIndexes[i] = m.vertexes.get(Integer.parseInt(face[0])-1);
+                    vIndexes[i] = m.getVertices().get(Integer.parseInt(face[0])-1);
             		
                     if(!splitLine[i].split("/")[1].isEmpty())
-                    texIndexes[i] = m.textures.get(Integer.parseInt(face[1])-1);
+                    texIndexes[i] = m.getTextures().get(Integer.parseInt(face[1])-1);
                     
-                    nIndexes[i] = m.normals.get(Integer.parseInt(face[2])-1);
+                    nIndexes[i] = m.getNormals().get(Integer.parseInt(face[2])-1);
                     
             		}else{
-            			vIndexes[i] = m.vertexes.get(Integer.parseInt(splitLine[i])-1);
+            			vIndexes[i] = m.getVertices().get(Integer.parseInt(splitLine[i])-1);
             		}
             	}
             	
@@ -181,7 +181,7 @@ public class OBJLoader {
             	
             	group.getFaces().add(face);
             	//TODO Remove face from model
-            	m.faces.add(face);
+            	m.getFaces().add(face);
             	
             }
             else if (line.startsWith("mtllib")) {
