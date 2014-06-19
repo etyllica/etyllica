@@ -26,19 +26,17 @@ public class PointerEvent {
 	
 	private long timestamp = System.currentTimeMillis();
 	
+	public PointerEvent() {
+		super();
+	}
+	
 	public PointerEvent(MouseButton key, PointerState state) {
 		super();
 		
-		this.key = key;
-		this.state = state;
-		
-		this.x = 0;
-		this.y = 0;
-		this.amountY = 0;
-		this.amountX = 0;
+		set(key, state);
 		
 	}
-	
+		
 	public PointerEvent(MouseButton key, PointerState state, int x, int y) {
 		super();
 		
@@ -53,25 +51,51 @@ public class PointerEvent {
 	public PointerEvent(MouseButton key, PointerState state, int x, int y, int amount) {
 		super();
 		
-		this.key = key;
-		this.state = state;
-		
-		this.x = x;
-		this.y = y;
-		this.amountY = amount;
+		this.set(key, state, x, y, 0, amount);
 	}
 	
 	public PointerEvent(MouseButton key, PointerState state, int x, int y, int amountX, int amountY) {
 		super();
+
+		this.set(key, state, x, y, amountX, amountY);
+	}
+	
+	public void set(MouseButton key, PointerState state) {
 		
+		this.set(key, state, 0, 0);
+	}
+	
+	public void set(MouseButton key, PointerState state, int x, int y) {
+
+		this.set(key, state, x, y, 0, 0);
+		
+	}
+	
+	public void set(MouseButton key, PointerState state, int x, int y, int amount) {
+		this.set(key, state, x, y, 0, amount);
+	}
+	
+	public void set(MouseButton key, PointerState state, int x, int y, int amountX, int amountY) {
+
 		this.key = key;
 		this.state = state;
-		
+
 		this.x = x;
 		this.y = y;
-
+		
 		this.amountX = amountX;
 		this.amountY = amountY;
+		
+	}
+	
+	public void copy(PointerEvent event) {
+		
+		this.set(event.key, event.state, event.x, event.y, event.amountX, event.amountY);
+		
+	}
+	
+	public MouseButton getKey() {
+		return key;
 	}
 
 	public PointerState getState() {

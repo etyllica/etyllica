@@ -5,9 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.event.MouseInputListener;
@@ -17,10 +14,10 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.layer.AnimatedLayer;
 import br.com.etyllica.layer.ImageLayer;
-import br.com.etyllica.linear.Poligono;
 import br.com.etyllica.theme.mouse.ArrowTheme;
 import br.com.etyllica.theme.mouse.ArrowThemeListener;
 import br.com.etyllica.theme.mouse.MouseArrow;
+import br.com.etyllica.util.SlotList;
 
 /**
  * 
@@ -31,7 +28,7 @@ import br.com.etyllica.theme.mouse.MouseArrow;
 
 public class MouseHandler implements MouseMotionListener, MouseInputListener, MouseWheelListener, ArrowThemeListener {
 
-	private List<PointerEvent> events = new ArrayList<PointerEvent>();
+	private SlotList<PointerEvent> events = new SlotList<PointerEvent>(PointerEvent.class);
 	
 	protected int x = 0;
 	protected int y = 0;
@@ -48,7 +45,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 
 	protected MouseArrow arrow;
 
-	private PointerEvent moveEvent;
+	//private PointerEvent moveEvent;
 	
 	public MouseHandler(int x, int y) {
 		super();
@@ -56,7 +53,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		this.x = x;
 		this.y = y;
 		
-		moveEvent = new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
+		//moveEvent = new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
 	}
 	
 	public void updateArrowTheme(ArrowTheme arrowTheme) {
@@ -90,10 +87,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 
 	public void setCoordenadas(int x, int y) {
 		setX(x);
-		setY(y);
-		
-		moveEvent.setX(x);
-		moveEvent.setY(y);
+		setY(y);		
 	}
 
 	public void click(int botao) {
@@ -146,7 +140,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 			break;
 		}
 
-		events.add(new PointerEvent(key, state, x, y, amountX, amountY));
+		events.getSlot().set(key, state, x, y, amountX, amountY);
 
 	}
 
@@ -239,7 +233,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 			key = MouseButton.MOUSE_WHEEL_UP;
 		}
 		
-		events.add(new PointerEvent(key, PointerState.PRESSED, x, y, mwe.getWheelRotation()));
+		events.getSlot().set(key, PointerState.PRESSED, x, y, mwe.getWheelRotation());
 	}
 
 	//TODO Remover colisoes e incluir em layer
@@ -296,40 +290,6 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		}
 
 		return true;	
-	}
-
-	public boolean sobMouse(ImageLayer cam) {
-		
-		if(cam.getAngle()==0) {
-			
-			float cx = cam.getX();
-			float cy = cam.getY();
-
-			return sobMouse(cx, cy, cam.getW(), cam.getH());
-
-		} else {
-
-			AffineTransform transformer = AffineTransform.getRotateInstance(cam.getAngle(),cam.getX(),cam.getY());
-
-			Point2D a = new Point2D.Double(cam.getX(),cam.getY());
-			Point2D b = new Point2D.Double(cam.getX()+cam.getW(),cam.getY());
-			Point2D c = new Point2D.Double(cam.getX()+cam.getW(),cam.getY()+cam.getH());
-			Point2D d = new Point2D.Double(cam.getX(),cam.getY()+cam.getH());
-
-			transformer.transform(a,a);
-			transformer.transform(b,b);
-			transformer.transform(c,c);
-			transformer.transform(d,d);
-
-			Poligono p = new Poligono();
-			p.addPoint((int)a.getX(),(int)a.getY());
-			p.addPoint((int)b.getX(),(int)b.getY());
-			p.addPoint((int)c.getX(),(int)c.getY());
-			p.addPoint((int)d.getX(),(int)d.getY());
-
-			return p.contains(x, y);
-
-		}
 	}
 
 	public boolean sobMouse(AnimatedLayer cam) {
@@ -397,24 +357,21 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 	}
 	
 	public List<PointerEvent> getEvents() {
-		
-		events.add(moveEvent);
-		
-		return events;
+				
+		return events.getList();
 	}
 	
 	public void addMouseMoveEvent(int x, int y) {
 
-		moveEvent.setX(x);
-		moveEvent.setY(y);		
+		events.getSlot().set(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
 	}
 	
 	public void clearEvents() {
-		events.clear();
+		events.pack();
 	}
 	
 	public void addEvent(PointerEvent event) {
-		events.add(event);
+		events.getSlot().copy(event);
 	}
 
 	public boolean isOverClickable() {
