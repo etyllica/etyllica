@@ -30,6 +30,7 @@ public class Point3D extends br.com.etyllica.linear.Point3D {
 		this.x = x;
 		this.y = y;
 	}
+	
 	public void setCoordinates(double x, double y, double z){
 		setCoordinates(x, y);
 		this.z = z;

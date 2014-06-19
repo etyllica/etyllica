@@ -9,7 +9,7 @@ public class LayerTest {
 	private Layer layer;
 	
 	@Before
-	public void setUp(){
+	public void setUp() {
 		
 		layer = new Layer(0, 0, 32, 32);
 		
@@ -18,7 +18,7 @@ public class LayerTest {
 	}
 	
 	@Test
-	public void testSwapVisible(){
+	public void testSwapVisible() {
 		
 		layer.setVisible(false);
 		layer.swapVisible();
@@ -32,7 +32,7 @@ public class LayerTest {
 		
 		int children = 3; 
 		
-		for(int i=0;i<children;i++){
+		for(int i=0;i<children;i++) {
 			layer.addChild(new Layer());	
 		}
 				
