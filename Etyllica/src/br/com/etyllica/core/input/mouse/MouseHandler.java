@@ -44,8 +44,6 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 	protected ArrowTheme arrowTheme;
 
 	protected MouseArrow arrow;
-
-	//private PointerEvent moveEvent;
 	
 	public MouseHandler(int x, int y) {
 		super();
@@ -53,7 +51,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		this.x = x;
 		this.y = y;
 		
-		//moveEvent = new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
+		events.setMinimumSlots(4);
 	}
 	
 	public void updateArrowTheme(ArrowTheme arrowTheme) {

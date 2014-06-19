@@ -11,6 +11,8 @@ public class SlotList<T> {
 
 	private int usedSlot = 0;
 	
+    private int minimumSlots = 0;
+	
 	public SlotList(Class<T> cls) {
 		super();
 
@@ -47,7 +49,7 @@ public class SlotList<T> {
 
 		int lastPack = usedSlot+1;
 
-		if(list.size() > lastPack) {
+		if(list.size() > lastPack && list.size() > minimumSlots ) {
 
 			removeLast(list.size() - usedSlot);
 		}
@@ -80,6 +82,14 @@ public class SlotList<T> {
 	
 	public List<T> getList() {
 		return list.subList(0, usedSlot);
+	}
+	
+	public int getMinimumSlots() {
+		return minimumSlots;
+	}
+
+	public void setMinimumSlots(int minimumSlots) {
+		this.minimumSlots = minimumSlots;
 	}
 
 	public int size() {
