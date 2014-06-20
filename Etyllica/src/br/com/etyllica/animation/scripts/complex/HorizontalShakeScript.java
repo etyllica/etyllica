@@ -21,17 +21,23 @@ public class HorizontalShakeScript extends RepeatedScript {
 		double division = 1/(double)repeatTimes;
 				
 		int interval = (int)(factor/division);
-		
+				
 		double part = interval+1 - (factor/division);
 		
-		double offset = (part)*strength;
+		double slice = part;
 		
-		if(interval%2 == 1) {
-		
-			offset = -offset;
+		if(interval%2 == 0) {
+			
+			slice = 1-slice;
 		}
 		
-		target.setX(initialX+(int)offset);
+		double startValue = initialX-strength;
+		
+		double endValue = initialX+strength;
+		
+		double value = startValue+(endValue-startValue)*slice;		
+		
+		target.setX((int)value);
 		
 	}
 
