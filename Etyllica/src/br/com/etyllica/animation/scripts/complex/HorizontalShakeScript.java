@@ -24,9 +24,9 @@ public class HorizontalShakeScript extends RepeatedScript {
 				
 		double part = interval+1 - (factor/division);
 		
-		double slice = 1-part;
+		double slice = part;
 		
-		if(interval%2 == 1) {
+		if(interval%2 == 0) {
 			
 			slice = 1-slice;
 		}
