@@ -235,7 +235,6 @@ public class ImageLayer extends StaticLayer {
 			return;
 		}
 
-
 		if(opacity<0xff) {
 			g.setOpacity(opacity);
 		}
@@ -267,8 +266,9 @@ public class ImageLayer extends StaticLayer {
 	}
 
 	protected AffineTransform getTransform() {
+		
 		AffineTransform transform = new AffineTransform();
-
+		
 		if(angle!=0) {
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
 		}
