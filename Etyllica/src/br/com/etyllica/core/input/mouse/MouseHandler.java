@@ -17,7 +17,7 @@ import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.theme.mouse.ArrowTheme;
 import br.com.etyllica.theme.mouse.ArrowThemeListener;
 import br.com.etyllica.theme.mouse.MouseArrow;
-import br.com.etyllica.util.SlotList;
+import br.com.etyllica.util.RingBuffer;
 
 /**
  * 
@@ -28,7 +28,7 @@ import br.com.etyllica.util.SlotList;
 
 public class MouseHandler implements MouseMotionListener, MouseInputListener, MouseWheelListener, ArrowThemeListener {
 
-	private SlotList<PointerEvent> events = new SlotList<PointerEvent>(PointerEvent.class);
+	private RingBuffer<PointerEvent> events = new RingBuffer<PointerEvent>(PointerEvent.class);
 	
 	protected int x = 0;
 	protected int y = 0;
