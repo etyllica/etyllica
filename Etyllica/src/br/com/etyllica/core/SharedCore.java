@@ -21,10 +21,12 @@ import br.com.etyllica.core.graphics.FullScreenWindow;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.core.loop.FrameSkippingLoop;
+import br.com.etyllica.core.loop.GameLoop;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 
-public class SharedCore implements Runnable{
+public class SharedCore implements Runnable, GameCore {
 
 	private int width;
 
@@ -54,12 +56,8 @@ public class SharedCore implements Runnable{
 	
 	private boolean running = true;
 	
-	private long start = 0;
+	private GameLoop gameLoop;
 	
-	private final int MAX_FPS = 60;
-	
-	private final double FRAME_PERIOD = 1000D / MAX_FPS;
-
 	public SharedCore(java.awt.Component component, int width, int height) {
 		super();
 
@@ -80,8 +78,8 @@ public class SharedCore implements Runnable{
 
 		initMonitors();
 		
-		start = System.currentTimeMillis();
-
+		gameLoop = new FrameSkippingLoop(this);
+		
 	}
 
 	private void initMonitors() {
@@ -274,14 +272,19 @@ public class SharedCore implements Runnable{
 	}
 
 	public void update(double delta) {
-		
-		long now = System.currentTimeMillis()-start;
 				
-		//if(!drawing) {
-			innerCore.update(now);
-		//}
-	}
+		long now = System.currentTimeMillis();
 
+		innerCore.update(now);
+			
+		updateEngine(delta);
+		
+	}
+	
+	public void render() {
+		engine.draw();	
+	}
+	
 	public GUIEvent getSuperEvent() {
 		return innerCore.getSuperEvent();
 	}
@@ -305,55 +308,13 @@ public class SharedCore implements Runnable{
 	@Override
 	public void run() {
 
-		long lastTime = System.currentTimeMillis();
-		
-		int ups = 0;
-		int fps = 0;
-
-		long lastTimer = System.currentTimeMillis();
-		double delta = 0;
-
-		while(running) {
-
-			long now = System.currentTimeMillis();
-			delta += (now - lastTime) / FRAME_PERIOD;
-			lastTime = now;
-
-			boolean renderOK = false;
-
-			while(delta >= 1) {
-				ups++;
-				updateEngine(delta);
-				delta -= 1;
-				renderOK = true;
-			}
-
-			if(renderOK) {
-				fps++;
-				engine.draw();
-			}
-
-			if(now - lastTimer >= 1000) {
-				lastTimer += 1000;
-
-				//System.out.println("frames: " + fps + " | updates: " + ups);
-				innerCore.setFps(fps);
-
-				fps = 0;
-				ups = 0;
-			}
-
-		}
+		gameLoop.loop();
 
 	}
-	
+		
 	private void updateEngine(double delta) {
-				
-		GUIEvent event = GUIEvent.NONE;
 
-		this.update(delta);
-
-		event = this.getSuperEvent();
+		GUIEvent event = this.getSuperEvent();
 
 		listen(event);
 	}
@@ -375,6 +336,19 @@ public class SharedCore implements Runnable{
 				component.requestFocus();
 			}
 		}
+	}
+
+	@Override
+	public boolean isRunning() {
+		
+		return running;
+	}
+
+	@Override
+	public void setFps(int fps) {
+
+		//System.out.println("frames: " + fps);
+		innerCore.setFps(fps);
 	}
 
 }
