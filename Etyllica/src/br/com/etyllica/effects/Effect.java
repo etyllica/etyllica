@@ -1,5 +1,7 @@
 package br.com.etyllica.effects;
 
+import br.com.etyllica.animation.AnimationHandler;
+import br.com.etyllica.animation.scripts.FrameAnimation;
 import br.com.etyllica.layer.AnimatedLayer;
 
 /**
@@ -11,23 +13,40 @@ import br.com.etyllica.layer.AnimatedLayer;
 
 public class Effect extends AnimatedLayer {
 
+	private FrameAnimation script = new FrameAnimation(this);
+	
 	public Effect(int x, int y, int xTile, int yTile) {
 		super(x,y,xTile,yTile);
 		
 		setVisible(false);
+		
+		script.setEndless(false);
 	}
 	
-	public Effect(int x, int y, int xTile, int yTile, String caminho) {
-		super(x,y,xTile,yTile,caminho);
+	public Effect(int x, int y, int xTile, int yTile, String path) {
+		super(x, y, xTile, yTile, path);
+		
+		setVisible(false);
+		script.setEndless(false);
+	}
+	
+	@Override
+	protected void notifyAnimationFinishListener() {
+		super.notifyAnimationFinishListener();
 		
 		setVisible(false);
 	}
 	
-	@Override
-	public void animate(int frame) {
+	public void startEffect() {
+
+		script.setTarget(this);
 				
-		setFrame(frame);
-				
+		setVisible(true);
+		
+		resetAnimation();		
+		
+		AnimationHandler.getInstance().add(script);
+		
 	}
 	
 }

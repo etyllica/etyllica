@@ -13,12 +13,20 @@ public class FrameAnimation extends SingleIntervalAnimation {
 	public FrameAnimation(AnimatedLayer target) {
 		super(target.getSpeed()*target.getFrames());
 		
+		setTarget(target);
+		this.endless = true;
+		
+	}
+	
+	public void setTarget(AnimatedLayer target) {
+		
+		this.target = target;
+		
 		this.startValue = 0;
 		this.endValue = target.getFrames();
 		
-		this.target = target;
-		this.endless = true;
-	}
+		this.restart();
+	}	
 		
 	@Override
 	protected void update(double value) {

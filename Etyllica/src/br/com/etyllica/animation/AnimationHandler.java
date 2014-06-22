@@ -1,9 +1,7 @@
 package br.com.etyllica.animation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,7 +11,7 @@ public class AnimationHandler implements Updatable {
 
 	private static AnimationHandler instance;
 	
-	private List<AnimationScript> scripts = new ArrayList<AnimationScript>();
+	private Set<AnimationScript> scripts = new HashSet<AnimationScript>();
 
 	private Set<AnimationScript> removeScripts = new HashSet<AnimationScript>();
 
