@@ -80,7 +80,7 @@ public class RingBuffer<T> {
 
 	}
 	
-	public List<T> getList() {
+	public synchronized List<T> getList() {
 		return list.subList(0, usedSlot);
 	}
 	
