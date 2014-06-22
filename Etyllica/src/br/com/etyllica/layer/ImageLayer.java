@@ -235,7 +235,6 @@ public class ImageLayer extends StaticLayer {
 			return;
 		}
 
-
 		if(opacity<0xff) {
 			g.setOpacity(opacity);
 		}
@@ -252,8 +251,11 @@ public class ImageLayer extends StaticLayer {
 
 	@Override
 	public void draw(Graphic g, AffineTransform transform) {
-		g.transform(transform);
-
+		
+		if(transform!=null) {
+			g.transform(transform);	
+		}
+		
 		simpleDraw(g);
 	}
 
@@ -267,14 +269,22 @@ public class ImageLayer extends StaticLayer {
 	}
 
 	protected AffineTransform getTransform() {
-		AffineTransform transform = new AffineTransform();
-
+				
+		AffineTransform transform = null;
+		
 		if(angle!=0) {
+			
+			transform = new AffineTransform();
+			
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
 		}
 
 		if(scale!=1) {
 
+			if(transform == null) {
+				transform = new AffineTransform();
+			}
+			
 			double sw = w*scale;
 			double sh = h*scale;
 
