@@ -28,8 +28,10 @@ public class DefaultButton extends RoundGUIComponent {
 
 	private String alt = "";
 
-	private boolean disabled = false;
-
+	protected boolean clicked = false;
+	
+	protected boolean disabled = false;
+	
 	public DefaultButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
@@ -48,13 +50,13 @@ public class DefaultButton extends RoundGUIComponent {
 
 				g.setColor(theme.getButtonColor());
 
-			}else{
+			}else {
 
-				if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN) {
+				if(clicked) {
 
 					g.setColor(theme.getButtonOnClick());
 
-				}else{
+				} else {
 
 					g.setColor(theme.getButtonOnMouse());
 
@@ -62,7 +64,7 @@ public class DefaultButton extends RoundGUIComponent {
 
 			}
 
-		}else{
+		} else {
 
 			g.setColor(theme.getButtonDisabledColor());
 
@@ -83,7 +85,7 @@ public class DefaultButton extends RoundGUIComponent {
 	}
 
 	public void update(GUIEvent event) {
-
+		executeAction(event);		
 	}
 
 	protected void leftClick() {
@@ -131,6 +133,8 @@ public class DefaultButton extends RoundGUIComponent {
 				if(event.getState() == PointerState.PRESSED) {
 
 					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
+						
+						clicked = true;
 
 						leftClick();
 
@@ -154,6 +158,8 @@ public class DefaultButton extends RoundGUIComponent {
 
 					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
 
+						clicked = false;
+						
 						leftUp();
 
 						retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
@@ -208,6 +214,8 @@ public class DefaultButton extends RoundGUIComponent {
 
 			}
 		}
+		
+		update(retorno);
 
 		return retorno;
 
@@ -309,6 +317,10 @@ public class DefaultButton extends RoundGUIComponent {
 
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
+	}
+	
+	public boolean isClicked() {
+		return clicked;
 	}
 
 }

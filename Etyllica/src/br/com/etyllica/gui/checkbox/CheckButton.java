@@ -1,6 +1,5 @@
 package br.com.etyllica.gui.checkbox;
 
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.CheckBox;
 import br.com.etyllica.gui.theme.Theme;
@@ -13,7 +12,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class CheckButton extends CheckBox{
+public class CheckButton extends CheckBox {
 
 	public CheckButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -30,7 +29,7 @@ public class CheckButton extends CheckBox{
 
 		}else{
 
-			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
+			if(clicked){
 
 				g.setColor(theme.getButtonOnClick());
 

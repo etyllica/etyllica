@@ -165,9 +165,9 @@ public abstract class View extends Layer implements GUIComponent {
 	 * 
 	 * @param event
 	 */	
-	public void executeAction(GUIEvent event){
+	public void executeAction(GUIEvent event) {
 
-		if(map.containsKey(event)){
+		if(map.containsKey(event)) {
 			map.get(event).executeAction();
 		}
 		
