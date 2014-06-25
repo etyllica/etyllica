@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.animation.AnimationHandler;
-import br.com.etyllica.animation.AnimationScript;
+import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.animation.scripts.SingleIntervalAnimation;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Context;

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.core.Updatable;
 
 public class AnimationHandler implements Updatable {

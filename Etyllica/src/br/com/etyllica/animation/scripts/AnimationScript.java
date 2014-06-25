@@ -1,4 +1,4 @@
-package br.com.etyllica.animation;
+package br.com.etyllica.animation.scripts;
 
 
 public abstract class AnimationScript {

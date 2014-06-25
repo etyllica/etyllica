@@ -1,6 +1,6 @@
 package br.com.etyllica.animation.scripts.text;
 
-import br.com.etyllica.animation.AnimationScript;
+import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.layer.TextLayer;
 
 public class DialogScript extends AnimationScript {
