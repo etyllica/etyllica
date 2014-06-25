@@ -15,7 +15,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.HIDController;
-import br.com.etyllica.core.input.InputListener;
+import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
@@ -37,7 +37,7 @@ import br.com.etyllica.theme.mouse.ThemeListener;
  *
  */
 
-public class InnerCore implements Core, InputListener, Updatable, ThemeListener {
+public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener {
 
 	//External Windows
 	private Window activeWindow = null;
@@ -66,9 +66,9 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 	private boolean drawCursor = true;
 
 	protected boolean fullScreenEnable = false;
-	
+
 	private boolean needReload = false;
-	
+
 	private boolean locked = false;
 
 	private Configuration configuration = Configuration.getInstance();
@@ -95,7 +95,7 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 	private void initTheme() {
 
 		ThemeManager.getInstance().setThemeListener(this);
-		
+
 		ThemeManager.getInstance().setArrowThemeListener(mouse);
 
 		ThemeManager.getInstance().setArrowTheme(new DaltArrowTheme());
@@ -119,11 +119,11 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 
 		if(!activeWindow.isLoaded()) {
 			return;
-			
+
 		} else if (needReload) {
-			
+
 			fastReload();
-						
+
 		}
 
 		if(Configuration.getInstance().isLanguageChanged()) {
@@ -150,7 +150,7 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 
 		updateActiveWindow(now);
 
-		updateGui(components);
+		updateGui(components, guiEvents);
 
 		updateMouse(components);
 
@@ -189,7 +189,7 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 			}else if(now-context.getLastUpdate() >= context.getUpdateInterval()) {
 
 				context.timeUpdate(now);
-				
+
 				context.setLastUpdate(now);
 
 				context.getScene().update(now);
@@ -264,7 +264,7 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 		//Update components with events
 		for(PointerEvent event: events) {
 
-			updateMouseEvent(event);
+			fixEventPosition(event);
 
 			//Avoid concurrency problems
 			//
@@ -323,7 +323,7 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 		mouse.clearEvents();
 	}
 
-	private void updateGui(List<View> components) {
+	private void updateGui(List<View> components, List<GUIEvent> guiEvents) {
 
 		for(GUIEvent event: guiEvents) {
 
@@ -357,21 +357,15 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 		}
 
 		//Verify onMouse
-		if(component.onMouse(event)) {
+		if(component.isMouseOver()) {
 
-			if(!component.isMouseOver()) {
-				component.setMouseOver(true);
+			if(component != mouseOver) {
+				setMouseOver(component);	
+			}			
 
-				setMouseOver(component);
-			}
+		} else if (component == mouseOver) {
 
-		}else{
-
-			if(component.isMouseOver()) {
-				component.setMouseOver(false);
-
-				resetMouseOver();
-			}
+			resetMouseOver();
 
 		}
 
@@ -505,10 +499,10 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 
 		if(locked||needReload)
 			return;
-		
+
 		drawWindow(g, activeWindow);
 
-		drawEffects(g);
+		drawGlobalEffects(g);
 
 		if(drawCursor) {
 			mouse.draw(g);
@@ -558,12 +552,15 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 	}
 
 	private void updateEffects(long now) {
+
 		for(Updatable updatable: updatables) {
+
 			updatable.update(now);	
 		}
+
 	}
 
-	private void drawEffects(Graphic g) {
+	private void drawGlobalEffects(Graphic g) {
 
 		List<AnimationScript> remove = new ArrayList<AnimationScript>();
 
@@ -571,7 +568,7 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 
 			if(!script.isStopped()) {
 				script.getTarget().draw(g);
-			}else{
+			} else {
 				remove.add(script);
 			}
 
@@ -586,10 +583,10 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 	//TODO Some kind of Subimage to textfields for example
 	private void drawView(View component, Graphic g) {
 
-		if(component.isVisible()) {
+		//Draw Component
+		component.draw(g);
 
-			//Draw Component
-			component.draw(g);
+		if(!component.getViews().isEmpty()) {
 
 			List<View> components = new CopyOnWriteArrayList<View>(component.getViews());
 
@@ -597,11 +594,11 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 				child.setOffset(component.getX(), component.getY());
 				//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
 				drawView(child,g);
+				
 				child.setOffset(-component.getX(), -component.getY());
 			}
 
 		}
-
 
 	}
 
@@ -809,17 +806,17 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 		application.setCamera(activeWindow.getCamera());
 
 	}
-	
+
 	private void fastReload() {
-		
+
 		locked = true;
-		
+
 		activeWindow.getApplication().clearComponents();
-		
+
 		activeWindow.getApplication().load();
-					
+
 		needReload = false;
-		
+
 		locked = false;
 	}
 
@@ -895,8 +892,7 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 		updateNumpadMouse(event);
 	}
 
-	@Override
-	public void updateMouseEvent(PointerEvent event) {
+	public void fixEventPosition(PointerEvent event) {
 
 		event.setX(event.getX()-activeWindow.getX());
 		event.setY(event.getY()-activeWindow.getY());
@@ -904,12 +900,16 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 	}
 
 	private void setMouseOver(View component) {
+
 		mouseOver = component;
+
 		mouse.setOverClickable(true);		
 	}
 
 	private void resetMouseOver() {
+
 		mouseOver = null;
+
 		mouse.setOverClickable(false);
 	}
 
@@ -937,12 +937,12 @@ public class InnerCore implements Core, InputListener, Updatable, ThemeListener 
 		this.fps = fps;
 		this.activeWindow.getApplication().setFps(fps);
 	}
-	
+
 	@Override
 	public void updateTheme(Theme theme) {
-				
+
 		needReload = true;
-		
+
 	}
 
 }

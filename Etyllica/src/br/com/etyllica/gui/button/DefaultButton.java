@@ -35,19 +35,22 @@ public class DefaultButton extends RoundGUIComponent {
 	}
 
 	@Override
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
+		
+		if(!visible)
+			return;
 
 		Theme theme = getTheme();		
 
-		if(!disabled){
+		if(!disabled) {
 
-			if(!mouseOver){
+			if(!mouseOver) {
 
 				g.setColor(theme.getButtonColor());
 
 			}else{
 
-				if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
+				if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN) {
 
 					g.setColor(theme.getButtonOnClick());
 
@@ -71,147 +74,119 @@ public class DefaultButton extends RoundGUIComponent {
 
 	}
 
-	protected void drawLabel(Graphic g){
+	protected void drawLabel(Graphic g) {
 
-		if(label!=null){
+		if(label!=null) {
 			label.draw(g);
 		}
 
 	}
 
-	public void update(GUIEvent event){
-
-		switch (event) {
-		case MOUSE_LEFT_BUTTON_DOWN:
-			leftClick();
-			break;
-
-		case MOUSE_LEFT_BUTTON_UP:
-			leftUp();
-			break;
-
-		case MOUSE_RIGHT_BUTTON_DOWN:
-			rightClick();
-			break;
-
-		case MOUSE_MIDDLE_BUTTON_DOWN:
-			middleClick();
-			break;
-
-		case MOUSE_OVER:
-			if(!disabled){
-				justOnMouse();
-			}
-			break;
-
-		case MOUSE_OUT:
-			mouseOut();
-			break;
-
-		case GAIN_FOCUS:
-			onFocus = true;
-			break;
-
-		case LOST_FOCUS:
-			onFocus = false;
-			break;
-
-		case NONE:
-			break;
-
-		default:
-
-			//Labels is button responsability
-			if(label!=null){
-				label.update(event);
-			}
-
-			break;
-		}
-
+	public void update(GUIEvent event) {
 
 	}
 
-	protected void leftClick(){
+	protected void leftClick() {
 		//igualaImagem(click);
 	}
 
-	protected void leftUp(){
+	protected void leftUp() {
 
 	}
 
-	protected void middleClick(){
+	protected void middleClick() {
 		//new Voicer().say(rotulo);
 	}
 
-	protected void rightClick(){
+	protected void rightClick() {
 
 	}
 
-	protected void justOnMouse(){
+	protected void justOnMouse() {
 		//igualaImagem(sobMouse);
 	}
 
-	protected void mouseOut(){
+	protected void mouseOut() {
 		//igualaImagem(sobMouse);
 	}
 
-	public GUIEvent updateMouse(PointerEvent event){
+	public GUIEvent updateMouse(PointerEvent event) {
 
 		GUIEvent retorno = GUIEvent.NONE;
 
-		if(!disabled){
+		if(!mouseOver) {
+			
+			if(onMouse(event)) {
+				mouseOver = true;
+			}
+			
+		}else if(!onMouse(event)) {
+			mouseOver = false;
+		}
 
-			if(mouseOver){
+		if(!disabled) {
 
-				if(event.getState()==PointerState.PRESSED){
+			if(mouseOver) {
 
-					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
+				if(event.getState() == PointerState.PRESSED) {
+
+					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
+
+						leftClick();
 
 						retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
+
+						rightClick();
 
 						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
+
+						middleClick();
 
 						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
 					}
 				}
-				else if(event.getState()==PointerState.RELEASED){
 
-					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
+				else if(event.getState() == PointerState.RELEASED) {
+
+					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
+
+						leftUp();
 
 						retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
 
 						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
 
 						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
 
 					}
 
-				}else if(event.getState()==PointerState.DOUBLE_CLICK){
+				}else if(event.getState()==PointerState.DOUBLE_CLICK) {
 
-					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
+					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
 
 						retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
 
 						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
+					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
 
 						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
 
 					}
 
-				}else if(event.getState()==PointerState.MOVE){
+				}else if(event.getState() == PointerState.MOVE) {
+
+					justOnMouse();
 
 					retorno = GUIEvent.MOUSE_OVER;
 
@@ -219,11 +194,13 @@ public class DefaultButton extends RoundGUIComponent {
 
 			}else{
 
-				if(event.getState()==PointerState.MOVE){
+				if(event.getState() == PointerState.MOVE) {
+
+					mouseOut();
 
 					retorno = GUIEvent.MOUSE_OUT;
 
-				}else if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
+				}else if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 
 					onFocus = false;
 
@@ -265,37 +242,37 @@ public class DefaultButton extends RoundGUIComponent {
 		label.setContentBounds(x, y, w, h);
 
 	}
-	
+
 	@Override
 	public void setX(int x) {
-		
+
 		super.setX(x);
-		
+
 		label.setContentBounds(x, y, w, h);
 	}
-	
+
 	@Override
 	public void setY(int y) {
-		
+
 		super.setY(y);
-		
+
 		label.setContentBounds(x, y, w, h);
 	}
 
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_TAB)){
+		if(event.isKeyDown(KeyEvent.TSK_TAB)) {
 
 			return GUIEvent.NEXT_COMPONENT;
 
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_ENTER)){
+		if(event.isKeyDown(KeyEvent.TSK_ENTER)) {
 
 			this.update(GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
 
-		}/*else if(event.getReleased(Tecla.TSK_ENTER)){
+		}/*else if(event.getReleased(Tecla.TSK_ENTER)) {
 
 			return GUIEvent.MOUSE_LEFT_BUTTON_UP;
 
@@ -306,7 +283,7 @@ public class DefaultButton extends RoundGUIComponent {
 
 	public Theme getTheme() {
 
-		if(theme==null){
+		if(theme==null) {
 			return ThemeManager.getInstance().getTheme();
 		}else{
 			return this.theme;

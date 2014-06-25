@@ -14,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyState;
-import br.com.etyllica.core.input.InputListener;
+import br.com.etyllica.core.input.InputKeyListener;
 
 /**
  *
@@ -34,9 +34,9 @@ public class Keyboard implements KeyListener, Updatable {
 
 	private Set<Integer> changedCopy = new HashSet<Integer>(5);
 
-	private InputListener listener;
+	private InputKeyListener listener;
 
-	public Keyboard(InputListener listener){
+	public Keyboard(InputKeyListener listener){
 		super();
 		this.listener = listener;
 	}
