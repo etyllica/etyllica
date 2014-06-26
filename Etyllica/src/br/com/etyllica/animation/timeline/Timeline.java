@@ -35,6 +35,14 @@ public abstract class Timeline<T> {
 		return frames.get(cursor);
 	}
 	
+	public int frameCount() {
+		return frames.size();
+	}
+		
+	public int getCursor() {
+		return cursor;
+	}
+
 	public abstract void reloadFrame(KeyFrame<T> frame);
 	
 }
