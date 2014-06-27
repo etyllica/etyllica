@@ -87,8 +87,8 @@ public class AnimatedLayer extends ImageLayer {
 	}
 
 	protected void resetAnimation() {
-		xImage = 0;
-		yImage = 0;
+		xImage = needleX;
+		yImage = needleY;
 		currentFrame = 0;
 	}
 
@@ -131,13 +131,14 @@ public class AnimatedLayer extends ImageLayer {
 	}
 
 	public void animate(long now) {
-
+		
 		if(stopped) {
 			
 			startedAt = now;
 			changedAt = now;
 		
 			stopped = false;
+			resetAnimation();
 		}
 	
 		if(now>=changedAt+speed) {
@@ -146,32 +147,32 @@ public class AnimatedLayer extends ImageLayer {
 			
 			boolean hasNextFrame = nextFrame(); 
 			
-			notifyFrameChangeListener(now);
+			notifyFrameChangeListener();
 			
 			if(!hasNextFrame) {
 
-				notifyAnimationFinishListener(now);
+				notifyAnimationFinishListener();
 				
 			}
 						
 		}
 		
 	}
-	
+		
 	//Notify Listener about the end of animation
-	private void notifyAnimationFinishListener(long now) {
+	protected void notifyAnimationFinishListener() {
 		
 		if(onAnimationFinishListener != null) {
-			onAnimationFinishListener.onAnimationFinish(now);
+			onAnimationFinishListener.onAnimationFinish();
 		}
 		
 	}
 	
 	//Notify Listener about the frame change
-	private void notifyFrameChangeListener(long now) {
+	private void notifyFrameChangeListener() {
 		
 		if(onFrameChangeListener != null) {
-			onFrameChangeListener.onFrameChange(now);
+			onFrameChangeListener.onFrameChange();
 		}
 		
 	}
@@ -242,12 +243,16 @@ public class AnimatedLayer extends ImageLayer {
 	
 	public void animate(int frame) {
 
+		if(frame == frames-1) {
+			notifyAnimationFinishListener();
+		}
+		
 		setFrame(frame);
 		
 	}
 
 	protected void setFrame(int frame) {
-		
+				
 		if(animaEmX) {
 			setXImage(needleX+tileW*frame);
 		} else {

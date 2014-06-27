@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.input.InputListener;
+import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.joystick.Joystick;
 
 /**
@@ -31,7 +31,7 @@ public class JoystickLoader extends LoaderImpl implements Updatable{
 		return instance;
 	}
 	
-	private InputListener listener;
+	private InputKeyListener listener;
 	
 	private int joysticks = 10;
 
@@ -100,11 +100,11 @@ public class JoystickLoader extends LoaderImpl implements Updatable{
 		
 	}
 
-	public InputListener getListener() {
+	public InputKeyListener getListener() {
 		return listener;
 	}
 
-	public void setListener(InputListener listener) {
+	public void setListener(InputKeyListener listener) {
 		this.listener = listener;
 	}
 	

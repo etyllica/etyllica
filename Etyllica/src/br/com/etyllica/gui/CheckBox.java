@@ -16,7 +16,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class CheckBox extends DefaultButton{
+public class CheckBox extends DefaultButton {
 
 	protected boolean checked = false;
 
@@ -27,98 +27,30 @@ public class CheckBox extends DefaultButton{
 	public CheckBox(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent event){
-
-		GUIEvent retorno = GUIEvent.NONE;
-
-		if(mouseOver){
-
-			if(event.getState()==PointerState.PRESSED){
-
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
-
-					swapChecked();
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
-
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
-
-					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
-
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
-
-					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
-				}
-				
-			}else if(event.getState()==PointerState.RELEASED){
-
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
-					
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
-
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)){
-					
-					retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
-
-				}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)){
-					
-					retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
-					
-				}else{
-					
-					retorno = GUIEvent.MOUSE_OVER;
-					
-				}
-
-			}
-			
-		}else{
-
-			retorno = GUIEvent.NONE;
-
-		}
-
-		return retorno;
-
-	}
 	
-	private void swapChecked(){
+	protected void leftClick() {
+		super.leftClick();
+		
+		swapChecked();
+	}
+		
+	private void swapChecked() {
 		
 		checked = !checked;
 		
 	}
 	
 	@Override
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 
-		if(!mouseOver){
+		super.draw(g);
 
-			g.setColor(theme.getButtonColor());
-
-		}else{
-
-			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
-
-				g.setColor(theme.getButtonOnClick());
-
-			}else{
-
-				g.setColor(theme.getButtonOnMouse());
-
-			}
-		}
-
-		g.fillRect(x,y,w,h);
-
-
-
-		if(checked){
+		if(checked) {
 
 			//DrawShadow
-			if(theme.isShadow()){
+			if(theme.isShadow()) {
 
 				g.setColor(theme.getShadowColor());
 				

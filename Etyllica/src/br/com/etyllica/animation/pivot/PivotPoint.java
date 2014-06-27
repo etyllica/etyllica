@@ -6,31 +6,22 @@ import java.util.List;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.linear.vector.Vector2D;
 
-public class PivotPoint extends Vector2D{
+public class PivotPoint extends Vector2D {
 	
-	private List<Part> partes = new ArrayList<Part>();
+	private List<Part> parts = new ArrayList<Part>();
 	
-	public PivotPoint(int x, int y){
+	public PivotPoint(int x, int y) {
 		super(x,y);
 	}
-
-	public List<Part> getPartes() {
-		return partes;
-	}
-
-	public void setPartes(List<Part> partes) {
-		this.partes = partes;
-
-	}
 	
-	public void addParte(Part parte){
+	public void addPart(Part part) {
 		
-		linkPart(parte);
+		linkPart(part);
 
-		this.partes.add(parte);
+		this.parts.add(part);
 	}
 	
-	private void linkPart(Part part){
+	private void linkPart(Part part) {
 		float px = part.getX()+part.getXPivot();
 		float py = part.getY()+part.getYPivot();
 
@@ -41,11 +32,11 @@ public class PivotPoint extends Vector2D{
 	}
 
 	@Override
-	public void setX(double x){
+	public void setX(double x) {
 		
 		this.x = x;
 		
-		for(Part parte: partes){
+		for(Part parte: parts) {
 			
 			float px = parte.getX()+parte.getXPivot();
 
@@ -56,11 +47,11 @@ public class PivotPoint extends Vector2D{
 	}
 	
 	@Override
-	public void setY(double y){
+	public void setY(double y) {
 		
 		this.y = y;
 		
-		for(Part parte: partes){
+		for(Part parte: parts) {
 			
 			float py = parte.getY()+parte.getYPivot();
 
@@ -71,12 +62,12 @@ public class PivotPoint extends Vector2D{
 	}
 	
 	public void drawPart(Graphic g) {
-		for(Part part: partes){
+		for(Part part: parts) {
 			part.draw(g);
 		}
 	}
 	
-	public void rotate(double cx, double cy, double angle){
+	public void rotate(double cx, double cy, double angle) {
 				
 		double px = x-cx;
 		double py = y-cy;
@@ -87,7 +78,7 @@ public class PivotPoint extends Vector2D{
 		double rotatedX = px * c - py * s + cx;
 		double rotatedY = px * s + py * c + cy;
 
-		for(Part part: partes){
+		for(Part part: parts) {
 			//Avoid bad approximations 
 			linkPart(part);
 			part.setOffset((int)(rotatedX-x),(int)(rotatedY-y));
@@ -98,5 +89,9 @@ public class PivotPoint extends Vector2D{
 		x = rotatedX;
 		y = rotatedY;
 	}
-	
+
+	public List<Part> getParts() {
+		return parts;
+	}
+		
 }

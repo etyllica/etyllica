@@ -147,11 +147,11 @@ public class Layer extends GeometricLayer implements Drawable {
 	 * @param my
 	 * @return
 	 */
-	public boolean onMouse(int mx, int my) {
+	public boolean onMouse(int px, int py) {
 		
 		if(angle == 0) {
 
-			return colideRect(x, y, w, h);
+			return colideRectPoint(px, py);
 
 		} else {
 
@@ -173,7 +173,7 @@ public class Layer extends GeometricLayer implements Drawable {
 			p.addPoint((int)c.getX(),(int)c.getY());
 			p.addPoint((int)d.getX(),(int)d.getY());
 
-			return p.contains(x, y);
+			return p.contains(px, py);
 
 		}
 	}

@@ -3,7 +3,7 @@ package br.com.etyllica.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SlotList<T> {
+public class RingBuffer<T> {
 	
 	private List<T> list;
 
@@ -13,7 +13,7 @@ public class SlotList<T> {
 	
     private int minimumSlots = 0;
 	
-	public SlotList(Class<T> cls) {
+	public RingBuffer(Class<T> cls) {
 		super();
 
 		this.cls = cls;
@@ -80,7 +80,7 @@ public class SlotList<T> {
 
 	}
 	
-	public List<T> getList() {
+	public synchronized List<T> getList() {
 		return list.subList(0, usedSlot);
 	}
 	

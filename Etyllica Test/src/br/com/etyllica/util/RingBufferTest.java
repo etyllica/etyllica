@@ -6,14 +6,14 @@ import org.junit.Test;
 
 import br.com.etyllica.core.event.PointerEvent;
 
-public class SlotTest {
+public class RingBufferTest {
 
-	private SlotList<PointerEvent> events;
+	private RingBuffer<PointerEvent> events;
 	
 	@Before
 	public void setUp() {
 		
-		events = new SlotList<PointerEvent>(PointerEvent.class);
+		events = new RingBuffer<PointerEvent>(PointerEvent.class);
 		
 	}
 	

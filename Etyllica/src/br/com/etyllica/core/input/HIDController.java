@@ -21,7 +21,7 @@ public class HIDController{
 	
 	private JoystickLoader joystick;
 			
-	public HIDController(InputListener listener){
+	public HIDController(InputKeyListener listener){
 		
 		mouse = new Mouse(0,0);		
 		

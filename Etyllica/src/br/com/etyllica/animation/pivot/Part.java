@@ -9,37 +9,37 @@ import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.loader.image.ImageLoader;
 import br.com.etyllica.layer.PivotImageLayer;
 
-public class Part extends PivotImageLayer{
+public class Part extends PivotImageLayer {
 
 	protected List<PivotPoint> points = new ArrayList<PivotPoint>();
 
 	private Color borderColor = Color.BLUE;
 
-	public Part(int x, int y){
+	public Part(int x, int y) {
 		super(x,y);
 	}
 
-	public Part(int x, int y, String caminho){
+	public Part(int x, int y, String caminho) {
 		super(x,y,caminho);
 	}
 	
-	public Part(String caminho){
+	public Part(String caminho) {
 		super(0,0,caminho);
 	}
 
-	public void addPoint(PivotPoint p){
+	public void addPoint(PivotPoint p) {
 		this.addPoint((int)p.getX(),(int)p.getY());
 	}
 
-	public void addPoint(int px, int py){
+	public void addPoint(int px, int py) {
 		points.add(new PivotPoint(x+px,y+py));
 	}
 	
-	public void rotate(double angle){
+	public void rotate(double angle) {
 				
 		double varyAngle = angle-this.angle;		
 		
-		for(PivotPoint point: points){
+		for(PivotPoint point: points) {
 						
 			double cx = x+xPivot;
 			double cy = y+yPivot;
@@ -52,9 +52,9 @@ public class Part extends PivotImageLayer{
 		
 	}
 	
-	public void rotateByParent(double angle){
+	public void rotateByParent(double angle) {
 				
-		for(PivotPoint point: points){
+		for(PivotPoint point: points) {
 			
 			double cx = x+xPivot;
 			double cy = y+yPivot;
@@ -67,13 +67,13 @@ public class Part extends PivotImageLayer{
 		
 	}
 
-	public AffineTransform getTransform(){
+	public AffineTransform getTransform() {
 		return AffineTransform.getRotateInstance(Math.toRadians(angle),x+xPivot, y+yPivot);
 	}
 	
 	@Override
-	public void draw(Graphic g){
-		if(visible){
+	public void draw(Graphic g) {
+		if(visible) {
 
 			AffineTransform reset = g.getTransform();
 
@@ -87,35 +87,35 @@ public class Part extends PivotImageLayer{
 	}	
 	
 	@Override
-	public void setOffsetX(int x){
+	public void setOffsetX(int x) {
 		
 		this.x += x;
 
-		for(PivotPoint point: points){
+		for(PivotPoint point: points) {
 			point.setX(point.getX()+x);
 		}
 		
 	}
 	
 	@Override
-	public void setOffsetY(int y){
+	public void setOffsetY(int y) {
 		
 		this.y += y;
 
-		for(PivotPoint point: points){
+		for(PivotPoint point: points) {
 			point.setY(point.getY()+y);
 		}
 		
 	}
 	
 	/*@Override
-	public void setOffset(int x, int y){
+	public void setOffset(int x, int y) {
 		
 		
 		this.x += x;
 		this.y += y;
 
-		for(PivotPoint point: points){
+		for(PivotPoint point: points) {
 			point.setX(point.getX()+x);
 			point.setY(point.getY()+y);
 		}
@@ -130,7 +130,7 @@ public class Part extends PivotImageLayer{
 		this.borderColor = borderColor;
 	}
 
-	public List<PivotPoint> getPontos() {
+	public List<PivotPoint> getPoints() {
 		return points;
 	}
 

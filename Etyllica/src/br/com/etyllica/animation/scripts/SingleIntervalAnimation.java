@@ -1,6 +1,5 @@
 package br.com.etyllica.animation.scripts;
 
-import br.com.etyllica.animation.AnimationScript;
 import br.com.etyllica.layer.Layer;
 
 public abstract class SingleIntervalAnimation extends AnimationScript {
