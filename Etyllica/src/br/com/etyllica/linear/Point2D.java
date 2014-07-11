@@ -8,7 +8,7 @@ package br.com.etyllica.linear;
  *
  */
 
-public class Point2D extends java.awt.geom.Point2D {
+public class Point2D {
 
 	protected String name = "";
 	
@@ -20,6 +20,7 @@ public class Point2D extends java.awt.geom.Point2D {
 
 	public Point2D() {
 		super();
+		setLocation(0, 0);
 	}
 	
 	public Point2D(double x, double y, int color) {
@@ -34,21 +35,17 @@ public class Point2D extends java.awt.geom.Point2D {
 
 	public Point2D(double x, double y) {
 		super();
-		this.x = x;
-		this.y = y;
+		setLocation(x, y);
 	}
 
-	@Override
 	public double getX() {
 		return x;
 	}
 
-	@Override
 	public double getY() {
 		return y;
 	}
 
-	@Override
 	public void setLocation(double x, double y) {
 		this.x = x;
 		this.y = y;
@@ -61,7 +58,15 @@ public class Point2D extends java.awt.geom.Point2D {
 	public void setOffsetY(double y) {
 		this.y += y;
 	}
-	
+		
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public double angle(Point2D point) {
 
 		return angle(point.getX(), point.getY());
@@ -82,5 +87,5 @@ public class Point2D extends java.awt.geom.Point2D {
 	public static boolean isRightTurn(Point2D a, Point2D b, Point2D c) {
 		return (b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x) > 0;
 	}
-	
+		
 }
