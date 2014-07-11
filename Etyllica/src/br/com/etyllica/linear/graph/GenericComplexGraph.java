@@ -1,22 +1,26 @@
 package br.com.etyllica.linear.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import br.com.etyllica.linear.Point2D;
 
-public class GenericGraph<E extends Edge> {
+public class GenericComplexGraph<E extends Edge> {
 
 	protected List<Node> nodes;
 	
-	protected List<E> edges;
+	protected Map<Node, Set<E>> edges;
 	
-	public GenericGraph() {
+	public GenericComplexGraph() {
 		super();
 		
 		nodes = new ArrayList<Node>();
 		
-		edges = new ArrayList<E>();
+		edges = new HashMap<Node, Set<E>>();
 	}
 
 	public List<Node> getNodes() {
@@ -35,16 +39,28 @@ public class GenericGraph<E extends Edge> {
 		this.nodes.add(new Node(point.getX(), point.getY()));
 	}
 
-	public List<E> getEdges() {
+	public Map<Node, Set<E>> getAllEdges() {
 		return edges;
 	}
-
-	public void setEdges(List<E> edges) {
-		this.edges = edges;
+	
+	public Set<E> getEdges(Node node) {
+		
+		if(edges.containsKey(node)) {
+			return edges.get(node);
+		}
+		
+		return null;
 	}
 	
 	public void addEdge(E edge) {
-		this.edges.add(edge);
+		
+		Node origin = edge.getOrigin();
+		
+		if(!edges.containsKey(origin)) {
+			edges.put(origin, new HashSet<E>());
+		}
+		
+		edges.get(origin).add(edge);		
 	}
 			
 	public void clear() {
