@@ -87,5 +87,20 @@ public class Point2D {
 	public static boolean isRightTurn(Point2D a, Point2D b, Point2D c) {
 		return (b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x) > 0;
 	}
+
+	public double distance(Point2D point) {
+		
+		return distance(point.getX(), point.getY());
+	}
+	
+	public double distance(double px, double py) {
+		
+		double difX = px - this.x;
+		double difY = py - this.y;
+		
+		double dist = Math.sqrt(Math.pow(difX, 2) + Math.pow(difY, 2));
+				
+		return dist;
+	}
 		
 }
