@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.etyllica.linear.Point2D;
 
-public abstract class GenericGraph<E extends Edge> {
+public class GenericGraph<E extends Edge> {
 
 	protected List<Node> nodes;
 	
