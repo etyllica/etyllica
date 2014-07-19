@@ -31,8 +31,22 @@ public class GenericGraph<E extends Edge> {
 		this.nodes.add(node);
 	}
 	
-	public void addNode(Point2D point) {
-		this.nodes.add(new Node(point.getX(), point.getY()));
+	public Node addNode(int index, Point2D point) {
+		
+		Node node = new Node(point.getX(), point.getY());
+		
+		this.nodes.add(index, node);
+		
+		return node;
+	}
+	
+	public Node addNode(Point2D point) {
+		
+		Node node = new Node(point.getX(), point.getY());
+		
+		this.nodes.add(node);
+		
+		return node;
 	}
 
 	public List<E> getEdges() {
