@@ -107,6 +107,10 @@ public class Point2D {
 				
 		return dist;
 	}
+	
+	public static Point2D clone(Point2D point) {
+		return new Point2D(point.getX(), point.getY());
+	}
 
 	@Override
 	public int hashCode() {
