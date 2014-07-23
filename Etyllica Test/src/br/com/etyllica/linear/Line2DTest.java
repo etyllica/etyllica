@@ -30,4 +30,20 @@ public class Line2DTest {
 		
 	}
 	
+	@Test
+	public void testIntersection() {
+		
+		Point2D p1 = new Point2D(0, 0);
+		Point2D p2 = new Point2D(4, 4);
+		
+		Point2D p3 = new Point2D(4, 0);
+		Point2D p4 = new Point2D(0, 4);
+		
+		Point2D point = Line2D.intersection(p1, p2, p3, p4);
+				
+		Assert.assertEquals(2, point.getX(), 0);
+		Assert.assertEquals(2, point.getY(), 0);
+		
+	}
+	
 }
