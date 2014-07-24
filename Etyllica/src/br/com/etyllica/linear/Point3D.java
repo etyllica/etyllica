@@ -27,6 +27,10 @@ public class Point3D {
 	public void setX(double x) {
 		this.x = x;
 	}
+	
+	public void offsetX(double offset) {
+		this.x += x;
+	}
 
 	public double getY() {
 		return y;
@@ -35,6 +39,10 @@ public class Point3D {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+	public void offsetY(double offset) {
+		this.y += y;
+	}
 
 	public double getZ() {
 		return z;
@@ -42,6 +50,10 @@ public class Point3D {
 
 	public void setZ(double z) {
 		this.z = z;
+	}
+	
+	public void offsetZ(double offset) {
+		this.z += z;
 	}
 
 	public void setCoordinates(double x, double y, double z) {
@@ -69,8 +81,7 @@ public class Point3D {
 
 		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
 		
-		return angleInDegrees;
-		
+		return angleInDegrees;		
 	}
 	
 }
