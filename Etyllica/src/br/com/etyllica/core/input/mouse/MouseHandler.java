@@ -107,6 +107,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 	protected boolean dragged = false;
 	
 	protected int dragButton = 0;
+	
 	protected int dragX = 0;
 	protected int dragY = 0;
 
@@ -137,7 +138,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 			key = MouseButton.MOUSE_BUTTON_RIGHT;
 			break;
 		}
-
+		
 		events.getSlot().set(key, state, x, y, amountX, amountY);
 
 	}
@@ -166,8 +167,27 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		setCoordenadas(me.getX(),me.getY());
 		
 		addEvent(me.getButton(),PointerState.PRESSED);
-
+		
+		pressDragButton(me.getButton());
+		
 		me.consume();
+	}
+	
+	private void pressDragButton(int button) {
+				
+		if(dragButton == 0) {
+			dragButton = button;			
+		}
+		
+	}
+	
+	private void releaseDragButton(int button) {
+		
+		if(dragButton == button) {
+			dragged = false;
+			dragButton = 0;
+		}
+		
 	}
 
 	@Override
@@ -177,7 +197,7 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 		
 		addEvent(me.getButton(),PointerState.RELEASED);
 
-		dragged = false;
+		releaseDragButton(me.getButton());
 
 		me.consume();
 	}
@@ -213,13 +233,15 @@ public class MouseHandler implements MouseMotionListener, MouseInputListener, Mo
 			dragged = true;
 		}
 		
-		setCoordenadas(me.getX(),me.getY());
-
-		dragButton = me.getButton();
+		int deltaX = me.getX()-dragX;
+		int deltaY = me.getY()-dragY;
 		
-		addEvent(dragButton, PointerState.DRAGGED);
-
+		setCoordenadas(me.getX(), me.getY());
+				
+		addEvent(dragButton, PointerState.DRAGGED, deltaX, deltaY);
+		
 		me.consume();
+		
 	}
 
 	@Override
