@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.core.Updatable;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.particle.Emitter;
 
@@ -44,5 +45,35 @@ public class Scene implements Updatable {
 		}
 		
 	}
+	
+	/**
+	 * Draw Scene method with recurrency
+	 */
+	public void draw(Graphic g) {
 		
+		for(Layer layer: graph) {
+			drawLayer(layer, g);
+		}
+	}
+
+	private void drawLayer(Layer layer, Graphic g) {
+
+		layer.draw(g);
+		
+		List<Layer> children = layer.getChildren();
+
+		if(children==null||children.isEmpty()){
+			
+			return;
+			
+		}else{
+			
+			for(Layer child: layer.getChildren()){
+				drawLayer(child,g);
+			}
+			
+		}
+		
+	}
+	
 }

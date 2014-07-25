@@ -2,7 +2,7 @@ package br.com.etyllica.context;
 
 
 
-public abstract class Application extends Context{
+public abstract class Application extends Context {
 		
 	public Application(int w, int h) {
 		super(w, h);
