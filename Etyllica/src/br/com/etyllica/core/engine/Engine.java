@@ -1,6 +1,7 @@
-package br.com.etyllica.core;
+package br.com.etyllica.core.engine;
 
 import br.com.etyllica.context.Application;
+import br.com.etyllica.core.event.GUIEvent;
 
 
 public interface Engine {
@@ -10,5 +11,7 @@ public interface Engine {
 	public void draw();
 	
 	public abstract Application startApplication();
+	
+	public void updateSuperEvent(GUIEvent event);
 	
 }
