@@ -74,6 +74,16 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	private Configuration configuration = Configuration.getInstance();
 
 	private int fps = 0;
+	
+	//FullScreen Stuff
+	private boolean enableFullScreen = false;
+	private boolean disableFullScreen = false;
+
+	private boolean alt = false;
+	private boolean enter = false;
+	private boolean esc = false;
+
+	protected GUIEvent superEvent = GUIEvent.NONE;
 
 	public InnerCore() {
 		super();
@@ -105,15 +115,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	public MainWindow getDesktopWindow() {
 		return mainWindow;
 	}
-
-	private boolean enableFullScreen = false;
-	private boolean disableFullScreen = false;
-
-	private boolean alt = false;
-	private boolean enter = false;
-	private boolean esc = false;
-
-	private GUIEvent superEvent = GUIEvent.NONE;
 
 	public void update(long now) {
 
