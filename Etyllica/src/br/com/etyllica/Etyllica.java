@@ -2,15 +2,13 @@ package br.com.etyllica;
 
 import java.applet.Applet;
 import java.awt.Graphics;
-import java.util.HashSet;
-import java.util.Set;
 
 import br.com.etyllica.context.Application;
-import br.com.etyllica.core.Engine;
 import br.com.etyllica.core.SharedCore;
-import br.com.etyllica.core.loader.FontLoader;
+import br.com.etyllica.core.engine.Engine;
+import br.com.etyllica.core.engine.SharedEngine;
+import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.Loader;
-import br.com.etyllica.core.loader.image.ImageLoader;
 
 /**
  * 
@@ -19,30 +17,33 @@ import br.com.etyllica.core.loader.image.ImageLoader;
  *
  */
 
-public abstract class Etyllica extends Applet implements Engine{
+public abstract class Etyllica extends Applet implements Engine {
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
 	private SharedCore core;
 
+	private SharedEngine engine;
+	
 	protected int w = 640;
 	protected int h = 480;
 
 	private Application application;
-
-	private Set<Loader> loaders = new HashSet<Loader>();
-
-	public Etyllica(int largura, int altura){
-
-		this.w = largura;
-		this.h = altura;
-
+	
+	public Etyllica(int width, int height) {
+		super();
+		
+		this.w = width;
+		this.h = height;
 	}
 
 	@Override
 	public void init() {
-
-		core = new SharedCore(this, w, h);
+				
+		engine = new SharedEngine(this, w, h);
+		
+		core = engine.getCore();
+		
 		core.setEngine(this);
 
 		initialSetup();
@@ -64,35 +65,15 @@ public abstract class Etyllica extends Applet implements Engine{
 		String s = getClass().getResource("").toString();
 
 		setPath(s);
-
+		
 	}
 
 	protected void setPath(String path){
 
 		core.setPath(path);
-
-		initLoaders();
-
-	}
-
-	private void initLoaders(){
-
-		addLoader(ImageLoader.getInstance());
-		addLoader(FontLoader.getInstance());
-
-		core.setLoaders(loaders);
-
-		//initSound
-		//addLoader(MultimediaLoader.getInstance());
-		//init3D
-		//addLoader(MeshLoader.getInstance());
-		//initSystemFonts
-		//addLoader(SystemFontLoader.getInstance());
-		//initJoystick
-		//addLoader(JoystickLoader.getInstance());
-
-		core.initDefault();
-
+		
+		//Reload Loaders
+		engine.initDefault();
 	}
 
 	@Override
@@ -105,16 +86,21 @@ public abstract class Etyllica extends Applet implements Engine{
 		paint(g);
 	}
 
-	public void draw(){
+	public void draw() {
 		repaint();
 	}
-		
-	protected void addLoader(Loader loader) {
-		loaders.add(loader);
+	
+	protected void hideCursor() {
+		engine.hideCursor();
 	}
 
-	protected void hideCursor() {
-		core.hideCursor();
+	@Override
+	public void updateSuperEvent(GUIEvent event) {
+		engine.updateSuperEvent(event);
+	}
+	
+	public void addLoader(Loader loader) {
+		engine.addLoader(loader);
 	}
 
 }

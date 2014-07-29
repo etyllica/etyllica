@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import br.com.etyllica.context.Application;
+import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.FullScreenWindow;
 import br.com.etyllica.core.graphics.Graphic;
@@ -285,10 +286,6 @@ public class SharedCore implements Runnable, GameCore {
 		engine.draw();	
 	}
 	
-	public GUIEvent getSuperEvent() {
-		return innerCore.getSuperEvent();
-	}
-
 	public void hideCursor() {
 		innerCore.hideCursor();
 	}
@@ -314,30 +311,12 @@ public class SharedCore implements Runnable, GameCore {
 		
 	private void updateEngine(double delta) {
 
-		GUIEvent event = this.getSuperEvent();
+		GUIEvent event = innerCore.getSuperEvent();
 
-		listen(event);
+		engine.updateSuperEvent(event);
+				
 	}
 	
-	private void listen(GUIEvent event) {
-
-		if(event==GUIEvent.ENABLE_FULL_SCREEN) {
-			enableFullScreen();
-		}else if(event==GUIEvent.DISABLE_FULL_SCREEN) {
-			disableFullScreen();
-
-			//TODO When Frame
-			//}else if(event==GUIEvent.WINDOW_MOVE) {
-			//	setLocation(this.getX()+(mouse.getX()-mouse.getDragX()), this.getY()+(mouse.getY()-mouse.getDragY()));
-		}
-		else if(event==GUIEvent.REQUEST_FOCUS) {
-
-			if ( !component.hasFocus() ) {
-				component.requestFocus();
-			}
-		}
-	}
-
 	@Override
 	public boolean isRunning() {
 		

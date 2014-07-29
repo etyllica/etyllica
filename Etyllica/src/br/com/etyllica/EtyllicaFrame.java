@@ -1,18 +1,16 @@
 package br.com.etyllica;
 
 import java.awt.Graphics;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.JFrame;
 
 import br.com.etyllica.context.Application;
-import br.com.etyllica.core.Engine;
 import br.com.etyllica.core.SharedCore;
+import br.com.etyllica.core.engine.Engine;
+import br.com.etyllica.core.engine.SharedEngine;
+import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.core.loader.FontLoader;
 import br.com.etyllica.core.loader.Loader;
-import br.com.etyllica.core.loader.image.ImageLoader;
 
 /**
  * 
@@ -26,13 +24,13 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	private static final long serialVersionUID = 4588303747276461888L;
 
 	private SharedCore core;
+	
+	private SharedEngine engine;
 
 	protected int w = 640;
 	protected int h = 480;
 
 	private Application application;
-
-	private Set<Loader> loaders = new HashSet<Loader>();
 
 	protected Mouse mouse;
 
@@ -46,9 +44,13 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 
 	}
 	
+	@Override
 	public void init() {
-
-		core = new SharedCore(this, w, h);
+				
+		engine = new SharedEngine(this, w, h);
+		
+		core = engine.getCore();
+		
 		core.setEngine(this);
 
 		initialSetup();
@@ -56,49 +58,31 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 		this.application = startApplication();
 
 		core.startCore(application);
-		
+
 		core.startEngine();
 		
 	}
-	
-	private void initialSetup() {
 
+	private void initialSetup(){
+
+		//Load Monitors
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
 		String s = getClass().getResource("").toString();
 
 		setPath(s);
-
+				
 	}
 
-	protected void setPath(String path) {
+	protected void setPath(String path){
 
 		core.setPath(path);
 
-		initLoaders();
-
+		engine.initDefault();
+		
 	}
 	
-	private void initLoaders() {
-
-		addLoader(ImageLoader.getInstance());
-		addLoader(FontLoader.getInstance());
-
-		core.setLoaders(loaders);
-		//initSound
-		//addLoader(MultimediaLoader.getInstance());
-		//init3D
-		//addLoader(MeshLoader.getInstance());
-		//initSystemFonts
-		//addLoader(SystemFontLoader.getInstance());
-
-		//addLoader(JoystickLoader.getInstance());
-
-		core.initDefault();
-
-	}
-
 	@Override
 	public void paint( Graphics g ) {
 		core.paint(g);
@@ -113,16 +97,21 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 		repaint();
 	}
 
-	protected void addLoader(Loader loader) {
-		loaders.add(loader);
+	public void addLoader(Loader loader) {
+		engine.addLoader(loader);
 	}
 
 	protected void hideCursor() {
-		core.hideCursor();
+		engine.hideCursor();
 	}
 
 	public void setMainApplication(Application application) {
 		this.application = application;
-	}	
+	}
+	
+	@Override
+	public void updateSuperEvent(GUIEvent event) {
+		engine.updateSuperEvent(event);
+	}
 
 }

@@ -1,7 +1,5 @@
 package br.com.etyllica.context;
 
-import java.util.List;
-
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.load.LoadListener;
 import br.com.etyllica.core.Updatable;
@@ -9,7 +7,6 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.View;
-import br.com.etyllica.layer.Layer;
 
 /**
  * Class to represent sessions of the Main Application like Mini-Applications.  
@@ -99,7 +96,7 @@ public abstract class Context extends View implements Updatable{
 	 * @param w Application width
 	 * @param h Application height
 	 */
-	public Context(int x, int y, int w, int h){
+	public Context(int x, int y, int w, int h) {
 		super(x,y,w,h);
 
 		this.loading = 0;
@@ -115,11 +112,11 @@ public abstract class Context extends View implements Updatable{
 	 * @param w Application width
 	 * @param h Application height
 	 */
-	public Context(int w, int h){
+	public Context(int w, int h) {
 		this(0,0,w,h);
 	}
 
-	public void startLoad(){
+	public void startLoad() {
 
 		locked = true;
 		this.loading = 0;
@@ -129,9 +126,9 @@ public abstract class Context extends View implements Updatable{
 
 	}
 
-	private void notifyListeners(){
+	private void notifyListeners() {
 
-		//for(LoadListener listener: loadListeners){
+		//for(LoadListener listener: loadListeners) {
 		loadListener.loaded();
 		//}
 
@@ -143,38 +140,14 @@ public abstract class Context extends View implements Updatable{
 	 */
 	public abstract void load();
 
-	/**
-	 * Draw Scene method with recurrency
-	 */
-	public void drawScene(Graphic g){
+	public void drawScene(Graphic g) {
 
 		this.draw(g);
 		
-		for(Layer layer: scene.getGraph()){
-			drawLayer(layer, g);
-		}
-
-	}
-
-	private void drawLayer(Layer layer, Graphic g){
-
-		layer.draw(g);
+		scene.draw(g);
 		
-		List<Layer> children = layer.getChildren();
-
-		if(children==null||children.isEmpty()){
-			
-			return;
-			
-		}else{
-			
-			for(Layer child: layer.getChildren()){
-				drawLayer(child,g);
-			}
-			
-		}
 	}
-
+	
 	/**
 	 * Draw method
 	 */
@@ -183,7 +156,7 @@ public abstract class Context extends View implements Updatable{
 	/**
 	 * Unload is not implemented yet but is useful when Applications needs free memory before change to next Application
 	 */
-	public void unload(){
+	public void unload() {
 
 	}
 
@@ -194,7 +167,7 @@ public abstract class Context extends View implements Updatable{
 		// TODO Auto-generated method stub
 	}
 	
-	public void update(long now){
+	public void update(long now) {
 		
 	}
 
@@ -204,29 +177,29 @@ public abstract class Context extends View implements Updatable{
 	}
 
 
-	public float getLoading(){
+	public float getLoading() {
 		return loading;
 	}
 
-	public String getLoadingPhrase(){
+	public String getLoadingPhrase() {
 		return loadingPhrase;
 	}
 
-	public void setSessionMap(SessionMap sessionMap){
+	public void setSessionMap(SessionMap sessionMap) {
 		this.sessionMap = sessionMap;
 	}
 
-	public SessionMap getSessionMap(){
+	public SessionMap getSessionMap() {
 		return sessionMap;
 	}
 
-	public void setVariavelSessao(String nomeVariavel,Object objeto){
+	public void setVariavelSessao(String nomeVariavel,Object objeto) {
 		sessionMap.put(nomeVariavel, objeto);
 	}
 
-	public Object getVariavelSessao(String nomeVariaviel){
+	public Object getVariavelSessao(String nomeVariaviel) {
 
-		if(sessionMap.containsKey(nomeVariaviel)){
+		if(sessionMap.containsKey(nomeVariaviel)) {
 			return sessionMap.get(nomeVariaviel);
 		}
 
@@ -249,15 +222,15 @@ public abstract class Context extends View implements Updatable{
 		this.title = title;
 	}
 
-	protected  void updateAtFixedRate(int interval){
+	protected  void updateAtFixedRate(int interval) {
 		updateInterval = interval;
 	}
 
-	protected  void stopTimeUpdate(){
+	protected  void stopTimeUpdate() {
 		updateInterval = 0;
 	}
 
-	public void timeUpdate(long now){
+	public void timeUpdate(long now) {
 
 	}
 
@@ -285,7 +258,7 @@ public abstract class Context extends View implements Updatable{
 		return locked;
 	}
 
-	public void setLoadListener(LoadListener listener){
+	public void setLoadListener(LoadListener listener) {
 		this.loadListener = listener;
 	}
 	
