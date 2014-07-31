@@ -9,13 +9,8 @@ import br.com.etyllica.theme.dalt.arrow.ImageMouseArrow;
  *
  */
 
-public class CustomArrowTheme implements ArrowTheme {
+public class CustomArrowTheme extends ArrowThemeImpl {
 
-	protected ImageMouseArrow normalArrow;
-	protected ImageMouseArrow clickArrow;
-	protected ImageMouseArrow textArrow;
-	protected ImageMouseArrow loadingArrow;
-	
 	public CustomArrowTheme(String normalArrowPath) {
 		
 		normalArrow = new ImageMouseArrow(normalArrowPath);
@@ -24,22 +19,11 @@ public class CustomArrowTheme implements ArrowTheme {
 		
 		loadingArrow = normalArrow;
 		
-	}
-
-	public MouseArrow getNormalArrow() {
-		return normalArrow;
-	}
-
-	public MouseArrow getClickArrow() {
-		return clickArrow;
-	}
-
-	public MouseArrow getTextArrow() {
-		return textArrow;
-	}
-
-	public MouseArrow getLoadingArrow() {
-		return loadingArrow;
+		horizontalArrow = normalArrow;
+		verticalArrow = normalArrow;
+		diagonalArrow = normalArrow;
+		invertedDiagonalArrow = normalArrow;
+		
 	}
 
 	public void setNormalArrow(ImageMouseArrow normalArrow) {
@@ -57,5 +41,21 @@ public class CustomArrowTheme implements ArrowTheme {
 	public void setLoadingArrow(ImageMouseArrow loadingArrow) {
 		this.loadingArrow = loadingArrow;
 	}
-		
+
+	public void setHorizontalArrow(ImageMouseArrow horizontalArrow) {
+		this.horizontalArrow = horizontalArrow;
+	}
+
+	public void setVerticalArrow(ImageMouseArrow verticalArrow) {
+		this.verticalArrow = verticalArrow;
+	}
+
+	public void setDiagonalArrow(ImageMouseArrow diagonalArrow) {
+		this.diagonalArrow = diagonalArrow;
+	}
+
+	public void setInvertedDiagonalArrow(ImageMouseArrow invertedDiagonalArrow) {
+		this.invertedDiagonalArrow = invertedDiagonalArrow;
+	}
+			
 }

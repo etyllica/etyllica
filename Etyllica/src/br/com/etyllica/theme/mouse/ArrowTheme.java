@@ -11,4 +11,12 @@ public interface ArrowTheme {
 	
 	public MouseArrow getTextArrow();
 	
+	public MouseArrow getHorizontalArrow();
+	
+	public MouseArrow getVerticalArrow();
+	
+	public MouseArrow getDiagonalArrow();
+	
+	public MouseArrow getInvertedDiagonalArrow();
+	
 }

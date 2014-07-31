@@ -2,7 +2,7 @@ package br.com.etyllica.theme.dalt;
 
 import br.com.etyllica.theme.dalt.arrow.DefaultArrow;
 import br.com.etyllica.theme.dalt.arrow.DefaultTextArrow;
-import br.com.etyllica.theme.mouse.ArrowTheme;
+import br.com.etyllica.theme.mouse.ArrowThemeImpl;
 import br.com.etyllica.theme.mouse.MouseArrow;
 
 /**
@@ -12,14 +12,9 @@ import br.com.etyllica.theme.mouse.MouseArrow;
  *
  */
 
-public class DaltArrowTheme implements ArrowTheme {
+public class DaltArrowTheme extends ArrowThemeImpl {
 
 	protected int arrowSize = 22;
-	
-	protected MouseArrow normalArrow;
-	protected MouseArrow clickArrow;
-	protected MouseArrow textArrow;
-	protected MouseArrow loadingArrow;
 	
 	public DaltArrowTheme(){
 		
@@ -28,6 +23,11 @@ public class DaltArrowTheme implements ArrowTheme {
 		textArrow = new DefaultTextArrow(arrowSize);
 		
 		loadingArrow = new DefaultArrow(arrowSize);
+		
+		horizontalArrow = new DefaultArrow(arrowSize);
+		verticalArrow = new DefaultArrow(arrowSize);
+		diagonalArrow = new DefaultArrow(arrowSize);
+		invertedDiagonalArrow = new DefaultArrow(arrowSize);
 		
 	}
 
@@ -39,32 +39,16 @@ public class DaltArrowTheme implements ArrowTheme {
 		this.arrowSize = arrowSize;
 	}
 
-	public MouseArrow getNormalArrow() {
-		return normalArrow;
-	}
-
 	public void setNormalArrow(MouseArrow normalArrow) {
 		this.normalArrow = normalArrow;
-	}
-
-	public MouseArrow getClickArrow() {
-		return clickArrow;
 	}
 
 	public void setClickArrow(MouseArrow clickArrow) {
 		this.clickArrow = clickArrow;
 	}
 
-	public MouseArrow getTextArrow() {
-		return textArrow;
-	}
-
 	public void setTextArrow(MouseArrow textArrow) {
 		this.textArrow = textArrow;
-	}
-
-	public MouseArrow getLoadingArrow() {
-		return loadingArrow;
 	}
 
 	public void setLoadingArrow(MouseArrow loadingArrow) {
