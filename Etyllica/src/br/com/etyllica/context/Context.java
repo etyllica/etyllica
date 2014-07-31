@@ -5,6 +5,8 @@ import br.com.etyllica.context.load.LoadListener;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.input.mouse.MouseState;
+import br.com.etyllica.core.input.mouse.MouseStateListener;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.View;
 
@@ -80,6 +82,8 @@ public abstract class Context extends View implements Updatable{
 	protected boolean paused = false;
 
 	private LoadListener loadListener;
+	
+	private MouseStateListener mouseStateListener;
 
 	/**
 	 * Returned Application (next Application to show up)
@@ -233,14 +237,19 @@ public abstract class Context extends View implements Updatable{
 	public void timeUpdate(long now) {
 
 	}
-
-	/*public AnimationHandler getAnimation() {
-		return animation;
+	
+	public void changeMouseState(MouseState state) {
+		if(mouseStateListener != null)
+			mouseStateListener.changeState(state);
+	}
+	
+	public MouseStateListener getMouseStateListener() {
+		return mouseStateListener;
 	}
 
-	public void setAnimation(AnimationHandler animation) {
-		this.animation = animation;
-	}*/
+	public void setMouseStateListener(MouseStateListener mouseStateListener) {
+		this.mouseStateListener = mouseStateListener;
+	}
 
 	public int getUpdateInterval() {
 		return updateInterval;
