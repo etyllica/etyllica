@@ -2,6 +2,7 @@ package br.com.etyllica.theme.dalt;
 
 import br.com.etyllica.theme.dalt.arrow.DefaultArrow;
 import br.com.etyllica.theme.dalt.arrow.DefaultTextArrow;
+import br.com.etyllica.theme.dalt.arrow.WaitingArrow;
 import br.com.etyllica.theme.mouse.ArrowThemeImpl;
 import br.com.etyllica.theme.mouse.MouseArrow;
 
@@ -20,9 +21,11 @@ public class DaltArrowTheme extends ArrowThemeImpl {
 		
 		normalArrow = new DefaultArrow(arrowSize);
 		clickArrow = new DefaultArrow(arrowSize);
+		linkArrow = new DefaultArrow(arrowSize);
+		helpArrow = new DefaultArrow(arrowSize);
 		textArrow = new DefaultTextArrow(arrowSize);
 		
-		loadingArrow = new DefaultArrow(arrowSize);
+		waitArrow = new WaitingArrow(arrowSize);
 		
 		horizontalArrow = new DefaultArrow(arrowSize);
 		verticalArrow = new DefaultArrow(arrowSize);
@@ -51,8 +54,8 @@ public class DaltArrowTheme extends ArrowThemeImpl {
 		this.textArrow = textArrow;
 	}
 
-	public void setLoadingArrow(MouseArrow loadingArrow) {
-		this.loadingArrow = loadingArrow;
+	public void setWaitArrow(MouseArrow waitArrow) {
+		this.waitArrow = waitArrow;
 	}
 	
 	

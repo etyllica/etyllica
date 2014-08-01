@@ -1,7 +1,6 @@
-package br.com.etyllica.theme.dalt.arrow;
+package br.com.etyllica.theme.mouse;
 
 import br.com.etyllica.layer.ImageLayer;
-import br.com.etyllica.theme.mouse.MouseArrow;
 
 /**
  * 

@@ -1,6 +1,5 @@
 package br.com.etyllica.theme.mouse;
 
-import br.com.etyllica.theme.dalt.arrow.ImageMouseArrow;
 
 /**
  * 
@@ -15,9 +14,11 @@ public class CustomArrowTheme extends ArrowThemeImpl {
 		
 		normalArrow = new ImageMouseArrow(normalArrowPath);
 		clickArrow = normalArrow;
+		linkArrow = normalArrow;
+		helpArrow = normalArrow;
 		textArrow = normalArrow;
 		
-		loadingArrow = normalArrow;
+		waitArrow = normalArrow;
 		
 		horizontalArrow = normalArrow;
 		verticalArrow = normalArrow;
@@ -33,13 +34,21 @@ public class CustomArrowTheme extends ArrowThemeImpl {
 	public void setClickArrow(ImageMouseArrow clickArrow) {
 		this.clickArrow = clickArrow;
 	}
+	
+	public void setLinkArrow(ImageMouseArrow linkArrow) {
+		this.linkArrow = linkArrow;
+	}
+	
+	public void setHelpArrow(ImageMouseArrow helpArrow) {
+		this.helpArrow = helpArrow;
+	}
 
 	public void setTextArrow(ImageMouseArrow textArrow) {
 		this.textArrow = textArrow;
 	}
 
-	public void setLoadingArrow(ImageMouseArrow loadingArrow) {
-		this.loadingArrow = loadingArrow;
+	public void setWaitArrow(ImageMouseArrow waitArrow) {
+		this.waitArrow = waitArrow;
 	}
 
 	public void setHorizontalArrow(ImageMouseArrow horizontalArrow) {

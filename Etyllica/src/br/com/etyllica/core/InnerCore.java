@@ -9,6 +9,7 @@ import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.animation.scripts.SingleIntervalAnimation;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Context;
+import br.com.etyllica.core.drawer.ArrowDrawer;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -19,8 +20,6 @@ import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.core.input.mouse.MouseState;
-import br.com.etyllica.core.input.mouse.MouseStateListener;
 import br.com.etyllica.core.loader.JoystickLoader;
 import br.com.etyllica.debug.Logger;
 import br.com.etyllica.effects.GlobalEffect;
@@ -39,7 +38,7 @@ import br.com.etyllica.theme.mouse.ThemeListener;
  *
  */
 
-public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener, MouseStateListener {
+public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener {
 
 	//External Windows
 	private Window activeWindow = null;
@@ -86,6 +85,9 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	private boolean esc = false;
 
 	protected GUIEvent superEvent = GUIEvent.NONE;
+	
+	//Create an Arrow Drawer 
+	private ArrowDrawer arrowDrawer;
 
 	public InnerCore() {
 		super();
@@ -98,6 +100,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		keyboard = control.getKeyboard();
 
+		arrowDrawer = new ArrowDrawer();
+		
 		initTheme();
 
 		updatables.add(AnimationHandler.getInstance());
@@ -108,7 +112,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		ThemeManager.getInstance().setThemeListener(this);
 
-		ThemeManager.getInstance().setArrowThemeListener(mouse);
+		ThemeManager.getInstance().setArrowThemeListener(arrowDrawer);
 
 		ThemeManager.getInstance().setArrowTheme(new DaltArrowTheme());
 
@@ -508,7 +512,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		drawGlobalEffects(g);
 
 		if(drawCursor) {
-			mouse.draw(g);
+			arrowDrawer.setCoordinates(mouse.getX(), mouse.getY());
+			arrowDrawer.draw(g);
 		}
 
 	}
@@ -808,7 +813,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		
 		application.setCamera(activeWindow.getCamera());
 		
-		application.setMouseStateListener(this);
+		application.setMouseStateListener(arrowDrawer);
 
 	}
 
@@ -834,9 +839,9 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			if(configuration.isTimerClick()) {
 
 				//TODO Ativar timer do mouse que incrementa sozinho
-				int arc = control.getMouse().getArc();
+				int arc = arrowDrawer.getArc();
 				if(arc<360) {
-					mouse.setArc(arc+speed);
+					arrowDrawer.setArc(arc+speed);
 				}else{
 
 					updateEvent(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
@@ -850,7 +855,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		}else{
 
 			if(configuration.isTimerClick()) {
-				mouse.setArc(0);
+				arrowDrawer.setArc(0);
 			}
 
 		}
@@ -908,14 +913,14 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		mouseOver = component;
 
-		mouse.setOverClickable(true);		
+		arrowDrawer.setOverClickable(true);		
 	}
 
 	private void resetMouseOver() {
 
 		mouseOver = null;
 
-		mouse.setOverClickable(false);
+		arrowDrawer.setOverClickable(false);
 	}
 
 	public HIDController getControl() {
@@ -947,12 +952,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	public void updateTheme(Theme theme) {
 
 		needReload = true;
-
-	}
-
-	@Override
-	public void changeState(MouseState state) {
-		// TODO Auto-generated method stub		
 	}
 
 }

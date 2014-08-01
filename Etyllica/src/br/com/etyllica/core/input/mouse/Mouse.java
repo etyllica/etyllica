@@ -1,57 +1,312 @@
 package br.com.etyllica.core.input.mouse;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
+import java.awt.Polygon;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.util.List;
 
-import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.Drawable;
-import br.com.etyllica.core.graphics.Graphic;
+import javax.swing.event.MouseInputListener;
 
-public class Mouse extends MouseHandler implements Drawable{
+import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.event.PointerState;
+import br.com.etyllica.layer.AnimatedLayer;
+import br.com.etyllica.layer.ImageLayer;
+import br.com.etyllica.util.RingBuffer;
 
+/**
+ * 
+ * @author yuripourre
+ * @license LGPLv3
+ *
+ */
+
+public class Mouse implements MouseMotionListener, MouseInputListener, MouseWheelListener {
+
+	private RingBuffer<PointerEvent> events = new RingBuffer<PointerEvent>(PointerEvent.class);
+	
+	protected int x = 0;
+	
+	protected int y = 0;
+	
+	protected int z = 0;
+	
 	public Mouse(int x, int y) {
-		super(x, y);
+		super();
+		
+		this.x = x;
+		this.y = y;
+		
+		events.setMinimumSlots(4);
+	}
+	
+	public int getX() {
+		return x;
 	}
 
-	private final BasicStroke strokeOne = new BasicStroke(1F);
+	public void setX(int x) {
+		this.x = x;
+	}
 
-	private final BasicStroke strokeThree = new BasicStroke(3F);
+	public int getY() {
+		return y;
+	}
 
-	private final BasicStroke strokeFive = new BasicStroke(5F);
+	public void setY(int y) {
+		this.y = y;
+	}
 
-	public void draw(Graphic g){
+	public int getZ() {
+		return z;
+	}
 
-		g.getGraphics().setStroke(strokeOne);
+	public void setZ(int z) {
+		this.z = z;
+	}
 
-		arrow.setCoordinates(x, y);
+	public void setCoordenadas(int x, int y) {
+		setX(x);
+		setY(y);		
+	}
 
-		arrow.draw(g);
+	protected int clicks = 0;
+	//TODO doubleClick[]
+	protected boolean doubleClick = false;
 
-		if(Configuration.getInstance().isTimerClick()&&overClickable){
-			drawTimerArc(g);
+	protected boolean dragged = false;
+	
+	protected int dragButton = 0;
+	
+	protected int dragX = 0;
+	protected int dragY = 0;
+
+	private void addEvent(int button, PointerState state) {
+
+		addEvent(button, state, 0);
+
+	}
+	
+	private void addEvent(int button, PointerState state, int amount) {
+
+		addEvent(button, state, 0, amount);
+
+	}
+	
+	private void addEvent(int button, PointerState state, int amountX, int amountY) {
+
+		MouseButton key = MouseButton.MOUSE_NONE;
+
+		switch (button) {
+		case MouseEvent.BUTTON1:
+			key = MouseButton.MOUSE_BUTTON_LEFT;
+			break;
+		case MouseEvent.BUTTON2:
+			key = MouseButton.MOUSE_BUTTON_MIDDLE;
+			break;
+		case MouseEvent.BUTTON3:
+			key = MouseButton.MOUSE_BUTTON_RIGHT;
+			break;
 		}
-	}	
+		
+		events.getSlot().set(key, state, x, y, amountX, amountY);
 
-	private void drawTimerArc(Graphic g){
+	}
 
-		g.setColor(Color.WHITE);
-		g.getGraphics().setStroke(strokeFive);  // set stroke width of 5
+	@Override
+	public void mouseClicked( MouseEvent me ) {
 
-		int radius = 26;
+		PointerState state = PointerState.CLICK;
 
-		g.drawArc(x-radius+2, y-radius+2, radius*2, radius*2, 0, 360);
+		if (me.getClickCount() == 2) {
+			state = PointerState.DOUBLE_CLICK;
+		}else if (me.getClickCount() > 2) {
+			state = PointerState.MULTIPLE_CLICK;
+		}
 
-		g.setColor(Color.BLUE);
+		setCoordenadas(me.getX(),me.getY());
+		
+		addEvent(me.getButton(),state, me.getClickCount());
+		
+		me.consume();
+	}
 
-		//Only if component was Clickable
-		//if(overClickable){
-		g.getGraphics().setStroke(strokeThree);  // set stroke width of 3
-		g.drawArc(x-radius+2, y-radius+2, radius*2, radius*2, 0, arc);
-		g.getGraphics().setStroke(strokeOne);  // set stroke width of 1
-		//}
+	@Override
+	public void mousePressed( MouseEvent me ) {
 
-		g.getGraphics().setStroke(strokeOne);
+		setCoordenadas(me.getX(),me.getY());
+		
+		addEvent(me.getButton(),PointerState.PRESSED);
+		
+		pressDragButton(me.getButton());
+		
+		me.consume();
+	}
+	
+	private void pressDragButton(int button) {
+				
+		if(dragButton == 0) {
+			dragButton = button;			
+		}
+		
+	}
+	
+	private void releaseDragButton(int button) {
+		
+		if(dragButton == button) {
+			dragged = false;
+			dragButton = 0;
+		}
+		
+	}
 
+	@Override
+	public void mouseReleased( MouseEvent me ) {
+
+		setCoordenadas(me.getX(),me.getY());
+		
+		addEvent(me.getButton(),PointerState.RELEASED);
+
+		releaseDragButton(me.getButton());
+
+		me.consume();
+	}
+
+	@Override
+	public void mouseMoved( MouseEvent me ) {
+		
+		setCoordenadas(me.getX(),me.getY());
+		
+		addMouseMoveEvent(x, y);
+
+		me.consume();
+	}
+
+	@Override
+	public void mouseEntered( MouseEvent me ) {
+		//mouseMoved( me );
+		me.consume();
+	}
+
+	@Override
+	public void mouseExited( MouseEvent me ) {
+		me.consume();
+	}
+
+	@Override
+	public void mouseDragged( MouseEvent me ) {
+		
+		if(!dragged) {
+			dragX = me.getX();
+			dragY = me.getY();
+
+			dragged = true;
+		}
+		
+		int deltaX = me.getX()-dragX;
+		int deltaY = me.getY()-dragY;
+		
+		setCoordenadas(me.getX(), me.getY());
+				
+		addEvent(dragButton, PointerState.DRAGGED, deltaX, deltaY);
+		
+		me.consume();
+		
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent mwe) {
+		
+		MouseButton key = MouseButton.MOUSE_WHEEL_DOWN;		
+		
+		if(mwe.getWheelRotation()<0) {
+			key = MouseButton.MOUSE_WHEEL_UP;
+		}
+		
+		events.getSlot().set(key, PointerState.PRESSED, x, y, mwe.getWheelRotation());
+	}
+
+	//TODO Remover colisoes e incluir em layer
+
+	//Colisao
+	public boolean sobMouseCircular(ImageLayer b) {
+		
+		final float radius = b.getW()/2;
+		
+		return sobMouseCircular(b.getX()+radius,b.getY()+radius, radius);
+	}
+
+	public boolean sobMouseCircular(float cx, float cy, float radius) {
+		
+		float dx = cx - x;
+		float dy = cy - y;
+
+		if ( ( dx * dx )  + ( dy * dy ) < radius * radius )	{
+			return true;
+		}
+
+		return false;
+
+	}
+
+	public boolean sobMouseIso(ImageLayer cam) {
+
+		float my = cam.getH()/2;
+		float mx = cam.getW()/2;
+
+		float x = this.x-cam.getX();
+		float y = this.y-cam.getY();
+
+		if(y>+my)
+			y=my-(y-my);
+
+		if((x>mx+1+(2*y))||(x<mx-1-(2*y)))
+			return false;
+		else
+			return true;
+
+	}
+
+	public boolean sobMouse(float x, float y, float w, float h)	{
+		
+		if((this.x<x)||(this.x>x + w)) {
+			
+			return false;
+		}
+		
+		if((this.y<y)||(this.y>y + h)) {
+			
+			return false;
+		}
+
+		return true;	
+	}
+
+	public boolean sobMouse(AnimatedLayer cam) {
+		
+		return sobMouse(cam.getX(), cam.getY(), cam.getTileW(), cam.getTileH());
+	}
+
+	public boolean sobMouse(Polygon poligono) {
+		return poligono.contains(x, y);
+	}
+
+	public List<PointerEvent> getEvents() {
+				
+		return events.getList();
+	}
+	
+	public void addMouseMoveEvent(int x, int y) {
+
+		events.getSlot().set(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
+	}
+	
+	public void clearEvents() {
+		events.pack();
+	}
+	
+	public void addEvent(PointerEvent event) {
+		events.getSlot().copy(event);
 	}
 
 }

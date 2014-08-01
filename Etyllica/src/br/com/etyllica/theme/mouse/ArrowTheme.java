@@ -7,10 +7,14 @@ public interface ArrowTheme {
 	
 	public MouseArrow getClickArrow();
 	
-	public MouseArrow getLoadingArrow();
+	public MouseArrow getLinkArrow();
 	
+	public MouseArrow getHelpArrow();
+		
 	public MouseArrow getTextArrow();
 	
+	public MouseArrow getWaitArrow();
+			
 	public MouseArrow getHorizontalArrow();
 	
 	public MouseArrow getVerticalArrow();
