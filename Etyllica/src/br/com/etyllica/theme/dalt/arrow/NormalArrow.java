@@ -15,7 +15,7 @@ import br.com.etyllica.theme.mouse.MouseArrow;
  *
  */
 
-public class DefaultArrow extends Polygon implements MouseArrow {
+public class NormalArrow extends Polygon implements MouseArrow {
 	private static final long serialVersionUID = -5503086611953227299L;
 
 	private int tx = 0;
@@ -26,14 +26,14 @@ public class DefaultArrow extends Polygon implements MouseArrow {
 	protected Color color = null;
 	protected Color borderColor = null;
 
-	public DefaultArrow(int size){
+	public NormalArrow(int size) {
 
 		this.size = size;
 
 		defPoints();
 	}
 
-	protected void defPoints(){
+	protected void defPoints() {
 		addPoint(0, 0);
 		addPoint(0, (int)(size*0.8));
 		addPoint((int)(size*0.18),(int)(size*0.62));
@@ -45,7 +45,7 @@ public class DefaultArrow extends Polygon implements MouseArrow {
 		addPoint((int)(size*0.49),(int)(size*0.57));
 	}
 
-	public void setCoordinates(int mx, int my){
+	public void setCoordinates(int mx, int my) {
 
 		int difx = mx;
 		int dify = my;
@@ -57,7 +57,7 @@ public class DefaultArrow extends Polygon implements MouseArrow {
 
 	}
 
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 

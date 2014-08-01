@@ -1,7 +1,8 @@
 package br.com.etyllica.theme.dalt;
 
-import br.com.etyllica.theme.dalt.arrow.DefaultArrow;
-import br.com.etyllica.theme.dalt.arrow.DefaultTextArrow;
+import br.com.etyllica.theme.dalt.arrow.InvertedDiagonalArrow;
+import br.com.etyllica.theme.dalt.arrow.NormalArrow;
+import br.com.etyllica.theme.dalt.arrow.TextArrow;
 import br.com.etyllica.theme.dalt.arrow.WaitingArrow;
 import br.com.etyllica.theme.mouse.ArrowThemeImpl;
 import br.com.etyllica.theme.mouse.MouseArrow;
@@ -19,18 +20,18 @@ public class DaltArrowTheme extends ArrowThemeImpl {
 	
 	public DaltArrowTheme(){
 		
-		normalArrow = new DefaultArrow(arrowSize);
-		clickArrow = new DefaultArrow(arrowSize);
-		linkArrow = new DefaultArrow(arrowSize);
-		helpArrow = new DefaultArrow(arrowSize);
-		textArrow = new DefaultTextArrow(arrowSize);
+		normalArrow = new InvertedDiagonalArrow(arrowSize);
+		clickArrow = new NormalArrow(arrowSize);
+		linkArrow = new NormalArrow(arrowSize);
+		helpArrow = new NormalArrow(arrowSize);
+		textArrow = new TextArrow(arrowSize);
 		
 		waitArrow = new WaitingArrow(arrowSize);
 		
-		horizontalArrow = new DefaultArrow(arrowSize);
-		verticalArrow = new DefaultArrow(arrowSize);
-		diagonalArrow = new DefaultArrow(arrowSize);
-		invertedDiagonalArrow = new DefaultArrow(arrowSize);
+		horizontalArrow = new NormalArrow(arrowSize);
+		verticalArrow = new NormalArrow(arrowSize);
+		diagonalArrow = new NormalArrow(arrowSize);
+		invertedDiagonalArrow = new InvertedDiagonalArrow(arrowSize);
 		
 	}
 

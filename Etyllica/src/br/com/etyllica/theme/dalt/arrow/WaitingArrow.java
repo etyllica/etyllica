@@ -7,7 +7,7 @@ package br.com.etyllica.theme.dalt.arrow;
  *
  */
 
-public class WaitingArrow extends DefaultArrow{
+public class WaitingArrow extends NormalArrow {
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,7 @@ public class WaitingArrow extends DefaultArrow{
 	}
 
 	@Override
-	protected void defPoints(){
+	protected void defPoints() {
 		addPoint(0, 0);
 		addPoint(size, 0);
 		addPoint((int)(size*0.65),(int)(size*0.5));

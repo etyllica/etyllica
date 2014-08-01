@@ -7,16 +7,16 @@ package br.com.etyllica.theme.dalt.arrow;
  *
  */
 
-public class DefaultTextArrow extends DefaultArrow{
+public class TextArrow extends NormalArrow {
 
 	private static final long serialVersionUID = 1L;
 
-	public DefaultTextArrow(int size) {
+	public TextArrow(int size) {
 		super(size);
 	}
 	
 	@Override
-	protected void defPoints(){
+	protected void defPoints() {
 		
 		addPoint((int)(size*0.4),0);
 		addPoint(0, 0);
