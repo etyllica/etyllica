@@ -85,15 +85,33 @@ public class ArrowDrawer implements MouseStateListener, ArrowThemeListener {
 	@Override
 	public void changeState(MouseState state) {
 		switch(state) {
-							
+			
+			case ARROW_HORIZONTAL:
+				arrow = arrowTheme.getHorizontalArrow();
+				break;
+			case ARROW_VERTICAL:
+				arrow = arrowTheme.getVerticalArrow();
+				break;
+			case ARROW_NE_SW:
+				arrow = arrowTheme.getDiagonalArrow();
+				break;
+			case ARROW_NW_SE:
+				arrow = arrowTheme.getInvertedDiagonalArrow();
+				break;
 			case CLICK:
 				arrow = arrowTheme.getClickArrow();
 				break;
-			case WAIT:
-				arrow = arrowTheme.getWaitArrow();
+			case LINK:
+				arrow = arrowTheme.getLinkArrow();
+				break;	
+			case HELP:
+				arrow = arrowTheme.getHelpArrow();
 				break;
 			case TEXT:
 				arrow = arrowTheme.getTextArrow();
+				break;
+			case WAIT:
+				arrow = arrowTheme.getWaitArrow();
 				break;
 				
 			default:

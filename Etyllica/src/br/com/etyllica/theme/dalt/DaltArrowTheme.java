@@ -21,7 +21,7 @@ public class DaltArrowTheme extends ArrowThemeImpl {
 	
 	public DaltArrowTheme(){
 		
-		normalArrow = new DiagonalArrow(arrowSize);
+		normalArrow = new NormalArrow(arrowSize);
 		clickArrow = new NormalArrow(arrowSize);
 		linkArrow = new NormalArrow(arrowSize);
 		helpArrow = new NormalArrow(arrowSize);
