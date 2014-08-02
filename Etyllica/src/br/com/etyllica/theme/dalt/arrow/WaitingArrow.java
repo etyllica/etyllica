@@ -9,10 +9,11 @@ package br.com.etyllica.theme.dalt.arrow;
 
 public class WaitingArrow extends NormalArrow {
 
-	private static final long serialVersionUID = 1L;
-
 	public WaitingArrow(int size) {
 		super(size);
+		
+		cursorX = size/2;
+		cursorY = size/2;
 	}
 
 	@Override

@@ -1,12 +1,12 @@
 package br.com.etyllica.theme.dalt.arrow;
 
 import java.awt.Color;
-import java.awt.Polygon;
 
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.mouse.MouseArrow;
+import br.com.etyllica.theme.mouse.PolygonalArrow;
 
 /**
  * 
@@ -15,16 +15,15 @@ import br.com.etyllica.theme.mouse.MouseArrow;
  *
  */
 
-public class NormalArrow extends Polygon implements MouseArrow {
-	private static final long serialVersionUID = -5503086611953227299L;
-
-	private int tx = 0;
-	private int ty = 0;
+public class NormalArrow extends PolygonalArrow implements MouseArrow {
+		
+	protected int cursorX = 0;
+	protected int cursorY = 0;
 
 	protected int size = 24;
 
-	protected Color color = null;
-	protected Color borderColor = null;
+	private Color color = null;
+	private Color borderColor = null;
 
 	public NormalArrow(int size) {
 
@@ -44,16 +43,16 @@ public class NormalArrow extends Polygon implements MouseArrow {
 		addPoint((int)(size*0.30),(int)(size*0.55));
 		addPoint((int)(size*0.49),(int)(size*0.57));
 	}
-
+	
 	public void setCoordinates(int mx, int my) {
 
 		int difx = mx;
 		int dify = my;
 
-		this.translate(difx-tx, dify-ty);
+		polygon.translate(difx-cursorX, dify-cursorY);
 
-		tx = difx;
-		ty = dify;
+		cursorX = difx;
+		cursorY = dify;
 
 	}
 
@@ -61,19 +60,21 @@ public class NormalArrow extends Polygon implements MouseArrow {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 
-		if(color==null){
+		if(color == null) {
 			g.setColor(theme.getMouseArrowColor());
-		}else{
+		} else {
 			g.setColor(color);
 		}
-		g.fillPolygon(this);
+		
+		g.fillPolygon(polygon);
 
-		if(borderColor==null){
+		if(borderColor == null) {
 			g.setColor(theme.getMouseArrowBorderColor());	
-		}else{
+		} else {
 			g.setColor(borderColor);
 		}
-		g.drawPolygon(this);
+		
+		g.drawPolygon(polygon);
 	}
 
 	public Color getColor() {

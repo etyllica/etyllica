@@ -1,5 +1,6 @@
 package br.com.etyllica.theme.dalt;
 
+import br.com.etyllica.theme.dalt.arrow.DiagonalArrow;
 import br.com.etyllica.theme.dalt.arrow.InvertedDiagonalArrow;
 import br.com.etyllica.theme.dalt.arrow.NormalArrow;
 import br.com.etyllica.theme.dalt.arrow.TextArrow;
@@ -20,7 +21,7 @@ public class DaltArrowTheme extends ArrowThemeImpl {
 	
 	public DaltArrowTheme(){
 		
-		normalArrow = new InvertedDiagonalArrow(arrowSize);
+		normalArrow = new DiagonalArrow(arrowSize);
 		clickArrow = new NormalArrow(arrowSize);
 		linkArrow = new NormalArrow(arrowSize);
 		helpArrow = new NormalArrow(arrowSize);
@@ -30,7 +31,7 @@ public class DaltArrowTheme extends ArrowThemeImpl {
 		
 		horizontalArrow = new NormalArrow(arrowSize);
 		verticalArrow = new NormalArrow(arrowSize);
-		diagonalArrow = new NormalArrow(arrowSize);
+		diagonalArrow = new DiagonalArrow(arrowSize);
 		invertedDiagonalArrow = new InvertedDiagonalArrow(arrowSize);
 		
 	}
