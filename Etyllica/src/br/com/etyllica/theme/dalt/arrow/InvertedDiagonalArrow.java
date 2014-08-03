@@ -12,7 +12,7 @@ public class InvertedDiagonalArrow extends NormalArrow {
 	@Override
 	protected void defPoints() {
 		
-		final int d = size/10;
+		final int d = size/20;
 		final int s = (int) size;
 		
 		addPoint(0, 0);

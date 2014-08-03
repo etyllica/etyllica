@@ -1,9 +1,12 @@
 package br.com.etyllica.theme.dalt;
 
 import br.com.etyllica.theme.dalt.arrow.DiagonalArrow;
+import br.com.etyllica.theme.dalt.arrow.HorizontalArrow;
 import br.com.etyllica.theme.dalt.arrow.InvertedDiagonalArrow;
+import br.com.etyllica.theme.dalt.arrow.MoveArrow;
 import br.com.etyllica.theme.dalt.arrow.NormalArrow;
 import br.com.etyllica.theme.dalt.arrow.TextArrow;
+import br.com.etyllica.theme.dalt.arrow.VerticalArrow;
 import br.com.etyllica.theme.dalt.arrow.WaitingArrow;
 import br.com.etyllica.theme.mouse.ArrowThemeImpl;
 import br.com.etyllica.theme.mouse.MouseArrow;
@@ -29,8 +32,10 @@ public class DaltArrowTheme extends ArrowThemeImpl {
 		
 		waitArrow = new WaitingArrow(arrowSize);
 		
-		horizontalArrow = new NormalArrow(arrowSize);
-		verticalArrow = new NormalArrow(arrowSize);
+		moveArrow = new MoveArrow(arrowSize);
+		
+		horizontalArrow = new HorizontalArrow(arrowSize);
+		verticalArrow = new VerticalArrow(arrowSize);		
 		diagonalArrow = new DiagonalArrow(arrowSize);
 		invertedDiagonalArrow = new InvertedDiagonalArrow(arrowSize);
 		

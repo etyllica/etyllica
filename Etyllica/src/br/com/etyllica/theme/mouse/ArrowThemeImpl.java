@@ -9,6 +9,7 @@ public class ArrowThemeImpl implements ArrowTheme {
 	protected MouseArrow helpArrow;
 	protected MouseArrow textArrow;
 	protected MouseArrow waitArrow;
+	protected MouseArrow moveArrow;
 	protected MouseArrow horizontalArrow;
 	protected MouseArrow verticalArrow;
 	protected MouseArrow diagonalArrow;
@@ -40,6 +41,10 @@ public class ArrowThemeImpl implements ArrowTheme {
 
 	public MouseArrow getWaitArrow() {
 		return waitArrow;
+	}
+	
+	public MouseArrow getMoveArrow() {
+		return moveArrow;
 	}
 	
 	public MouseArrow getHorizontalArrow() {

@@ -107,6 +107,9 @@ public class ArrowDrawer implements MouseStateListener, ArrowThemeListener {
 			case HELP:
 				arrow = arrowTheme.getHelpArrow();
 				break;
+			case MOVE:
+				arrow = arrowTheme.getMoveArrow();
+				break;
 			case TEXT:
 				arrow = arrowTheme.getTextArrow();
 				break;

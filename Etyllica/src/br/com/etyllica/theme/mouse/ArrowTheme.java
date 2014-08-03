@@ -14,6 +14,8 @@ public interface ArrowTheme {
 	public MouseArrow getTextArrow();
 	
 	public MouseArrow getWaitArrow();
+	
+	public MouseArrow getMoveArrow();
 			
 	public MouseArrow getHorizontalArrow();
 	
