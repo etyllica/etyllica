@@ -130,7 +130,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		} else if (needReload) {
 
 			fastReload();
-
 		}
 
 		if(Configuration.getInstance().isLanguageChanged()) {
@@ -160,6 +159,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		updateGui(components, guiEvents);
 
 		updateMouse(components);
+		
+		updateHelperUI();
 
 		//updateKeyboard();
 
@@ -265,7 +266,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		//Solving ConcurrentModification
 		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
-
+		
 		//System.out.println(mouseEvents.size());
 
 		//Update components with events
@@ -321,9 +322,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			if(frameEvent!=GUIEvent.NONE) {
 				superEvent = frameEvent;
 			}
-
-			//Helper UI Methods
-			updateTimerClick();
 
 		}
 
@@ -829,7 +827,11 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		locked = false;
 	}
-
+	
+	private void updateHelperUI() {
+		updateTimerClick();
+	}
+	
 	private void updateTimerClick() {
 
 		int speed = 3;

@@ -118,6 +118,16 @@ public class GeometricLayer implements Movable {
 		setOffsetY(offsetY);
 	}
 	
+	/**
+	 * 
+	 * @param w
+	 * @param h
+	 */
+	public void setSize(int w, int h) {
+		setX(w);
+		setY(h);
+	}
+	
 	/*
 	 * Centralization Methods
 	 */
@@ -185,6 +195,13 @@ public class GeometricLayer implements Movable {
 		setY(y);
 		
 		return y;
+	}
+	
+	public void copy(GeometricLayer layer) {
+		setX(layer.getX());
+		setY(layer.getY());
+		setW(layer.getW());
+		setH(layer.getH());
 	}
 	
 	/*
