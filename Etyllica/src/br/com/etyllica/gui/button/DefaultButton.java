@@ -78,16 +78,18 @@ public class DefaultButton extends RoundGUIComponent {
 
 	protected void drawLabel(Graphic g) {
 
-		if(label!=null) {
-			label.draw(g);
-		}
+		if(hasLabel())
+			label.draw(g);		
 
 	}
 
 	public void update(GUIEvent event) {
-		executeAction(event);		
+		executeAction(event);
+		
+		if(hasLabel())
+			label.update(event);
 	}
-
+	
 	protected void leftClick() {
 		//igualaImagem(click);
 	}
@@ -255,7 +257,7 @@ public class DefaultButton extends RoundGUIComponent {
 	public void setX(int x) {
 		super.setX(x);
 
-		if(label != null)
+		if(hasLabel())
 			label.setContentBounds(x, y, w, h);
 	}
 
@@ -263,7 +265,7 @@ public class DefaultButton extends RoundGUIComponent {
 	public void setY(int y) {
 		super.setY(y);
 
-		if(label != null)
+		if(hasLabel())
 			label.setContentBounds(x, y, w, h);
 	}
 
@@ -287,6 +289,10 @@ public class DefaultButton extends RoundGUIComponent {
 		}*/
 
 		return GUIEvent.NONE;
+	}
+
+	protected boolean hasLabel() {
+		return label != null; 
 	}
 
 	public Theme getTheme() {

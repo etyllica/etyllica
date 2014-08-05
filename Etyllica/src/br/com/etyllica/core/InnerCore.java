@@ -27,6 +27,9 @@ import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.gui.window.MainWindow;
+import br.com.etyllica.i18n.Language;
+import br.com.etyllica.i18n.LanguageChangerListener;
+import br.com.etyllica.i18n.LanguageHandler;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.dalt.DaltArrowTheme;
 import br.com.etyllica.theme.mouse.ThemeListener;
@@ -38,7 +41,7 @@ import br.com.etyllica.theme.mouse.ThemeListener;
  *
  */
 
-public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener {
+public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener, LanguageChangerListener {
 
 	//External Windows
 	private Window activeWindow = null;
@@ -88,6 +91,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	
 	//Create an Arrow Drawer 
 	private ArrowDrawer arrowDrawer;
+	
+	private LanguageHandler languageHandler;
 
 	public InnerCore() {
 		super();
@@ -101,6 +106,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		keyboard = control.getKeyboard();
 
 		arrowDrawer = new ArrowDrawer();
+		
+		languageHandler = new LanguageHandler();
 		
 		initTheme();
 
@@ -132,35 +139,26 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			fastReload();
 		}
 
-		if(Configuration.getInstance().isLanguageChanged()) {
-			guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
-			Configuration.getInstance().setLanguageChanged(false);
-		}
-
-		if(Configuration.getInstance().isThemeChanged()) {
-			guiEvents.add(GUIEvent.THEME_CHANGED);
-			Configuration.getInstance().setThemeChanged(false);
-		}
-
 		superEvent = GUIEvent.NONE;
 
+		updateActiveWindow(now);
+		
+		updateEffects(now);
+		
+		//Update All components
 		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getViews());
 
+		updateGui(components, guiEvents);
+		
 		Context application = activeWindow.getApplication();
-
+		
 		components.add(application);
 
-		updateEffects(now);
-
-		updateApplication(application, now);		
-
-		updateActiveWindow(now);
-
-		updateGui(components, guiEvents);
+		updateApplication(application, now);
 
 		updateMouse(components);
 		
-		updateHelperUI();
+		updateHelperUI(now);
 
 		//updateKeyboard();
 
@@ -332,16 +330,20 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		for(GUIEvent event: guiEvents) {
 
-			for(View component: components) {
-
-				updateGuiComponent(component, event);
-
-			}
-
+			updateGuiEvent(components, event);
 		}
 
 		guiEvents.clear();
 	}
+	
+	private void updateGuiEvent(List<View> components, GUIEvent event) {
+		
+		for(View component: components) {
+
+			updateGuiComponent(component, event);
+		}		
+	}	
+	
 
 	private void updateGuiComponent(View component, GUIEvent event) {
 
@@ -812,6 +814,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		application.setCamera(activeWindow.getCamera());
 		
 		application.setMouseStateListener(arrowDrawer);
+		
+		application.setLanguageChangerListener(this);
 
 	}
 
@@ -828,19 +832,20 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		locked = false;
 	}
 	
-	private void updateHelperUI() {
-		updateTimerClick();
+	private void updateHelperUI(long now) {
+		updateTimerClick(now);
 	}
 	
-	private void updateTimerClick() {
+	//Move to ArrowDrawer
+	private void updateTimerClick(long now) {
 
-		int speed = 3;
+		final int speed = 3;
 
 		if(mouseOver!=null) {
 
 			if(configuration.isTimerClick()) {
 
-				//TODO Ativar timer do mouse que incrementa sozinho
+				//TODO Implement automatic increment
 				int arc = arrowDrawer.getArc();
 				if(arc<360) {
 					arrowDrawer.setArc(arc+speed);
@@ -866,12 +871,13 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	@Override
 	public void updateKeyEvent(KeyEvent event) {
 
+		//Handle window commands
 		activeWindow.updateKeyboard(event);
 
-		//Application sempre eh gerenciada pelo teclado
+		//Handle Application commands
 		activeWindow.getApplication().updateKeyboard(event);
 
-		//Apenas o componente quem tem foco eh gerenciado pelo teclado
+		//Only the focused component handles the keyboard
 		if(focus!=null) {
 
 			GUIEvent focusEvent = focus.updateKeyboard(event);
@@ -905,10 +911,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	}
 
 	public void fixEventPosition(PointerEvent event) {
-
 		event.setX(event.getX()-activeWindow.getX());
 		event.setY(event.getY()-activeWindow.getY());
-
 	}
 
 	private void setMouseOver(View component) {
@@ -954,6 +958,17 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	public void updateTheme(Theme theme) {
 
 		needReload = true;
+	}
+
+	@Override
+	public void changeLanguage(Language language) {
+		
+		languageHandler.changeLanguage(language);
+				
+		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getApplication().getViews());
+
+		updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
+		
 	}
 
 }

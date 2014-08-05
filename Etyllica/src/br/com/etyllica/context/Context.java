@@ -10,6 +10,9 @@ import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.View;
+import br.com.etyllica.i18n.Language;
+import br.com.etyllica.i18n.LanguageChanger;
+import br.com.etyllica.i18n.LanguageChangerListener;
 
 /**
  * Class to represent sessions of the Main Application like Mini-Applications.  
@@ -19,7 +22,7 @@ import br.com.etyllica.gui.View;
  *
  */
 
-public abstract class Context extends View implements Updatable, MouseStateChanger {
+public abstract class Context extends View implements Updatable, MouseStateChanger, LanguageChanger {
 
 	/**
 	 * The updateInterval between executions
@@ -85,6 +88,8 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	private LoadListener loadListener;
 	
 	private MouseStateListener mouseStateListener;
+	
+	private LanguageChangerListener languageChangerListener;
 
 	/**
 	 * Returned Application (next Application to show up)
@@ -250,6 +255,20 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 	public void setMouseStateListener(MouseStateListener mouseStateListener) {
 		this.mouseStateListener = mouseStateListener;
+	}
+
+	public void changeLanguage(Language language) {
+		if(languageChangerListener != null)
+			languageChangerListener.changeLanguage(language);
+	}
+	
+	public LanguageChangerListener getLanguageChangerListener() {
+		return languageChangerListener;
+	}
+
+	public void setLanguageChangerListener(
+			LanguageChangerListener languageChangerListener) {
+		this.languageChangerListener = languageChangerListener;
 	}
 
 	public int getUpdateInterval() {

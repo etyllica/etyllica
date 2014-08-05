@@ -11,7 +11,8 @@ public enum Language {
 	
 	PORTUGUESE_BRAZIL("pt_BR","UTF-8"),
 	ENGLISH_USA("en_US","UTF-8"),
-	JAPANESE("ja_JP","UTF-8");
+	JAPANESE("ja_JP","UTF-8"),
+	FRENCH("fr_FR","UTF-8");
 	
 	private final String charsetName;
 	private final String charsetEncode;
