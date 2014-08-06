@@ -43,7 +43,7 @@ public class AnimationHandler implements Updatable {
 				//if stopped, use child (next script)
 				if(script.getNext()!=null) {
 
-					if(script.isEndless()) {
+					if(script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
 						endlessScripts.put(lastScript(script),script);
 					}
 
@@ -63,7 +63,7 @@ public class AnimationHandler implements Updatable {
 					}else{
 
 						//If script is endless and don't have next
-						if(script.isEndless()) {
+						if(script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
 							script.restart();
 							nextScripts.add(script);
 						}

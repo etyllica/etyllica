@@ -6,12 +6,14 @@ public abstract class AnimationScript {
 	protected long startedAt = 0;
 	protected long time = 0;
 	protected long delay = 0;
+	protected int repeat = 0;
 
 	private boolean started = false;
-	private boolean stopped = false;
-	protected boolean endless = false;
+	private boolean stopped = false;	
 
 	private AnimationScript next;
+	
+	public static final int REPEAT_FOREVER = -1;
 
 	public AnimationScript(long time) {
 		super();
@@ -76,12 +78,12 @@ public abstract class AnimationScript {
 		return stopped;
 	}
 
-	public boolean isEndless() {
-		return endless;
+	public int getRepeat() {
+		return repeat;
 	}
 
-	public void setEndless(boolean endless) {
-		this.endless = endless;
+	public void setRepeat(int repeat) {
+		this.repeat = repeat;
 	}
 
 	public AnimationScript getNext() {

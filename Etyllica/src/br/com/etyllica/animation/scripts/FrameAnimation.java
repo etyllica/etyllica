@@ -14,8 +14,7 @@ public class FrameAnimation extends SingleIntervalAnimation {
 		super(target.getSpeed()*target.getFrames());
 		
 		setTarget(target);
-		this.endless = true;
-		
+		this.repeat = REPEAT_FOREVER;
 	}
 	
 	public void setTarget(AnimatedLayer target) {
