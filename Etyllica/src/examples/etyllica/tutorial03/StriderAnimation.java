@@ -1,5 +1,6 @@
 package examples.etyllica.tutorial03;
 
+import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.animation.scripts.OrbitAnimation;
 import br.com.etyllica.animation.scripts.RotateAnimation;
 import br.com.etyllica.context.Application;
@@ -45,13 +46,13 @@ public class StriderAnimation extends Application{
 		orbitAnimation.setTarget(machine);
 		orbitAnimation.setCenter(machine.getX(), machine.getY()+70);
 		orbitAnimation.setInterval(offsetAngle, 360+offsetAngle);
-		orbitAnimation.setEndless(true);
+		orbitAnimation.setRepeat(AnimationScript.REPEAT_FOREVER);
 		this.scene.addAnimation(orbitAnimation);
 		
 		RotateAnimation rotateAnimation = new RotateAnimation(0,5000);
 		rotateAnimation.setTarget(machine);
 		rotateAnimation.setInterval(offsetAngle, 360+offsetAngle);
-		rotateAnimation.setEndless(true);
+		rotateAnimation.setRepeat(AnimationScript.REPEAT_FOREVER);
 		this.scene.addAnimation(rotateAnimation);
 		
 	}

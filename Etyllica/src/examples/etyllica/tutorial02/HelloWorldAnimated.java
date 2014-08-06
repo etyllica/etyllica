@@ -46,9 +46,10 @@ public class HelloWorldAnimated extends Application{
 		scaleAnimation.setInterval(0.1, 1);
 		scene.addAnimation(scaleAnimation);
 		
-		RotateAnimation rotateAnimation = new RotateAnimation(0,10000);
+		RotateAnimation rotateAnimation = new RotateAnimation(0,5000);
 		rotateAnimation.setTarget(hello);
 		rotateAnimation.setInterval(0, 360);
+		rotateAnimation.setRepeat(2);
 		scene.addAnimation(rotateAnimation);
 		
 	}

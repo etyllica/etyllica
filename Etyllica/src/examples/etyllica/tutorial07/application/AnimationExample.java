@@ -2,6 +2,7 @@ package examples.etyllica.tutorial07.application;
 
 import java.awt.Color;
 
+import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.animation.scripts.HorizontalMovement;
 import br.com.etyllica.animation.scripts.OpacityAnimation;
 import br.com.etyllica.animation.scripts.OrbitAnimation;
@@ -64,7 +65,7 @@ public class AnimationExample extends Application{
 		
 		VerticalMovementScript vscript = new VerticalMovementScript(text2, 600);
 		vscript.setInterval(100, 200);
-		vscript.setEndless(true);
+		vscript.setRepeat(AnimationScript.REPEAT_FOREVER);
 		
 		VerticalMovementScript invVscript = new VerticalMovementScript(600);
 		invVscript.setTarget(text2);
@@ -96,7 +97,7 @@ public class AnimationExample extends Application{
 		orbit.setInterval(0, 1080);
 		orbit.setCenter(cx, cy);
 		
-		orbit.setEndless(true);
+		orbit.setRepeat(AnimationScript.REPEAT_FOREVER);
 				
 		this.scene.addAnimation(orbit);
 		
