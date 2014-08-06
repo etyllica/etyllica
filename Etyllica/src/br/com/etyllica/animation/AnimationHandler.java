@@ -11,7 +11,7 @@ import br.com.etyllica.core.Updatable;
 public class AnimationHandler implements Updatable {
 
 	private static AnimationHandler instance;
-	
+
 	private Set<AnimationScript> scripts = new HashSet<AnimationScript>();
 
 	private Set<AnimationScript> removeScripts = new HashSet<AnimationScript>();
@@ -19,6 +19,8 @@ public class AnimationHandler implements Updatable {
 	private Set<AnimationScript> nextScripts = new HashSet<AnimationScript>();
 
 	private Map<AnimationScript, AnimationScript> endlessScripts = new HashMap<AnimationScript, AnimationScript>();
+
+	private int repeated = 0;
 
 	private AnimationHandler() {
 		super();
@@ -32,46 +34,19 @@ public class AnimationHandler implements Updatable {
 
 		return instance;
 	}
-	
+
 	public void update(long now) {
 
 		for(AnimationScript script: scripts) {
 
 			if(!script.isStopped()) {
+
 				script.preAnimate(now);
-			}else{
-				//if stopped, use child (next script)
-				if(script.getNext()!=null) {
 
-					if(script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
-						endlessScripts.put(lastScript(script),script);
-					}
+			} else {
 
-					nextScripts.add(script.getNext());
-
-
-				}else{
-
-					//If this script has some associated endless script
-					if(endlessScripts.containsKey(script)) {
-						//Find and restart the endless script
-						AnimationScript endless = endlessScripts.get(script);
-						restartEndless(endless);
-
-						nextScripts.add(endless);
-
-					}else{
-
-						//If script is endless and don't have next
-						if(script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
-							script.restart();
-							nextScripts.add(script);
-						}
-					}
-				}
-				removeScripts.add(script);
+				repeatLogic(script);
 			}
-
 		}
 
 		//Remove marked Scripts
@@ -90,6 +65,49 @@ public class AnimationHandler implements Updatable {
 
 	}
 
+	private void repeatLogic(AnimationScript script) {
+
+		if(script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
+
+			endlessScripts.put(lastScript(script),script);
+
+		} else if(script.getRepeat() < repeated) {
+
+			repeated++;
+
+			script.restart();
+
+			return;
+		}
+
+		if(script.getNext()!=null) {
+
+			nextScripts.add(script.getNext());
+
+			//Else If this script has some associated endless script
+		} else if(endlessScripts.containsKey(script)) {
+
+			//Find and restart the endless script
+			AnimationScript endless = script;
+			restartEndless(endless);
+
+			nextScripts.add(endless);
+
+		} else {
+
+			//If script is endless and don't have next
+			if(script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
+				script.restart();
+				nextScripts.add(script);
+			}
+		}
+
+		repeated = 0;
+		
+		removeScripts.add(script);	
+
+	}
+
 	public void add(AnimationScript script) {
 		scripts.add(script);
 	}
@@ -100,7 +118,7 @@ public class AnimationHandler implements Updatable {
 
 		AnimationScript last = script;
 
-		if(script.getNext()!=null) {
+		if(script.getNext() != null) {
 			last = restartEndless(script.getNext()); 
 		}
 
