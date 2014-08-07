@@ -150,6 +150,10 @@ public class PointerEvent {
 		return((state == PointerState.PRESSED || (state == PointerState.DRAGGED)) && this.key == key);
 	}
 	
+	public boolean isClicked(MouseButton key) {
+		return(state == PointerState.CLICK && this.key == key);
+	}
+	
 	public boolean isButtonUp(MouseButton key) {
 		return((state == PointerState.RELEASED) && this.key == key);
 	}
