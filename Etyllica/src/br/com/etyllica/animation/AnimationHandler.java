@@ -38,7 +38,7 @@ public class AnimationHandler implements Updatable {
 			AnimationExecution execution = scripts.get(i);
 			
 			if(!execution.execute(now)) {
-				repeatLogic(execution);
+				repeatLogic(execution, now);				
 			}			
 		}
 
@@ -51,7 +51,7 @@ public class AnimationHandler implements Updatable {
 
 	}
 
-	private void repeatLogic(AnimationExecution execution) {
+	private void repeatLogic(AnimationExecution execution, long now) {
 
 		AnimationScript script = execution.getScript();
 		
@@ -61,9 +61,15 @@ public class AnimationHandler implements Updatable {
 
 		} else if(script.getRepeat()-1 > execution.getRepeated()) {
 			
+			script.calculate(1);
 			execution.repeat();
+			script.preAnimate(now);
 			
 			return;
+			
+		} else {
+			
+			script.calculate(1);	
 		}
 
 		if(script.getNext()!=null) {

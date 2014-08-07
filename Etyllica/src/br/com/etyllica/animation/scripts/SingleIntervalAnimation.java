@@ -30,7 +30,7 @@ public abstract class SingleIntervalAnimation extends AnimationScript {
 		setTarget(target);
 	}
 	
-	protected void calculate(double factor) {
+	public void calculate(double factor) {
 		
 		double value = startValue+(endValue-startValue)*factor;
 

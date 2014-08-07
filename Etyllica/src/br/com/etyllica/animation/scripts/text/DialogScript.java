@@ -18,7 +18,7 @@ public class DialogScript extends AnimationScript {
 	}
 	
 	@Override
-	protected void calculate(double factor) {
+	public void calculate(double factor) {
 		
 		int lastChar = (int)(fullText.length()*factor);
 		

@@ -48,9 +48,9 @@ public abstract class AnimationScript {
 		if(started&&!stopped) {
 
 			if(now-startedAt-delay>=time) {
-				//Last Update
-				calculate(1);
+				
 				stopped = true;
+				
 			} else {
 				
 				if(now-startedAt>=delay) {
@@ -72,7 +72,7 @@ public abstract class AnimationScript {
 		
 	}
 	
-	protected abstract void calculate(double factor);
+	public abstract void calculate(double factor);
 
 	public boolean isStopped() {
 		return stopped;

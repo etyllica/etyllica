@@ -16,7 +16,7 @@ public class HorizontalShakeScript extends RepeatedScript {
 	}
 	
 	@Override
-	protected void calculate(double factor) {
+	public void calculate(double factor) {
 		
 		double division = 1/(double)repeatTimes;
 				
