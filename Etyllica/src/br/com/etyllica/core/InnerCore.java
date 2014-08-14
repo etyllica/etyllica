@@ -259,23 +259,16 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		activeWindow.getApplication().updateKeyboard(event);
 
 	}
-
+	
 	private void updateMouse(List<View> components) {
-
-		//Solving ConcurrentModification
-		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
 		
-		//System.out.println(mouseEvents.size());
+		int eventSize = mouse.getEvents().size(); 
+		
+		for(int i=0; i<eventSize; i++) {
 
-		//Update components with events
-		for(PointerEvent event: events) {
-
+			PointerEvent event = mouse.getEvents().get(i);
+			
 			fixEventPosition(event);
-
-			//Avoid concurrency problems
-			//
-			//Update components in reverse order
-			//Collections.reverse(components);
 
 			for(View component: components) {
 
@@ -323,7 +316,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		}
 
-		mouse.clearEvents();
+		mouse.clearEvents();		
 	}
 
 	private void updateGui(List<View> components, List<GUIEvent> guiEvents) {
