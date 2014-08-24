@@ -202,8 +202,8 @@ public class GeometricLayer implements Movable {
 		setY(layer.getY());
 		setW(layer.getW());
 		setH(layer.getH());
-	}
-	
+	}	
+		
 	/*
 	 * Colision Methods
 	 */
