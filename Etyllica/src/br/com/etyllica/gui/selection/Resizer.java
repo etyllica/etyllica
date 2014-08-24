@@ -21,6 +21,8 @@ public class Resizer {
 	private ResizerPoint[] points;
 
 	private MouseStateChanger changer;
+	
+	private ResizerListener listener;
 
 	private int buttonSize = 30;
 
@@ -159,6 +161,7 @@ public class Resizer {
 			dragged = false;
 		} else if(dragged && event.isDraggedButton(MouseButton.MOUSE_BUTTON_LEFT)) {
 			resizeEvent(lastIndex, event);
+			notifyListener();
 			reselect();		
 		}
 		
@@ -213,7 +216,7 @@ public class Resizer {
 		default:
 			moveSelected(event);
 			break;
-		}		
+		}
 	}
 
 	private void handleDragEvent(PointerEvent event) {
@@ -277,20 +280,41 @@ public class Resizer {
 
 		if(event.isKeyDown(KeyEvent.TSK_UP_ARROW)) {
 			selected.setOffsetY(-keyboardSpeed);
+			notifyListener();
 			reselect();
 		} else if(event.isKeyDown(KeyEvent.TSK_DOWN_ARROW)) {
 			selected.setOffsetY(+keyboardSpeed);
+			notifyListener();
 			reselect();
 		}
 
 		if(event.isKeyDown(KeyEvent.TSK_LEFT_ARROW)) {
 			selected.setOffsetX(-keyboardSpeed);
+			notifyListener();
 			reselect();
 		} else if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)) {
 			selected.setOffsetX(+keyboardSpeed);
+			notifyListener();
 			reselect();
 		}
 
 	}
+	
+
+	private void notifyListener() {
+		
+		if(listener == null)
+			return;
+		
+		listener.onResize(selected.getX(), selected.getY(), selected.getW(), selected.getH());		
+	}
+
+	public ResizerListener getListener() {
+		return listener;
+	}
+
+	public void setListener(ResizerListener listener) {
+		this.listener = listener;
+	}	
 
 }
