@@ -11,6 +11,8 @@ import java.awt.Color;
 
 public class SVGColor{
 	
+	public static Color TRANSPARENT = new Color(0x00, 0x00, 0x00, 0x00);//#00000000
+	
 	public static Color BLACK = new Color(0x00, 0x00, 0x00);//#000000
 	public static Color BLUE_VIOLET = new Color(0x8A, 0x2B, 0xE2);//#8A2BE2
 	public static Color DARK_BLUE =  new Color(0x00, 0x00, 0x8B);//#00008B
