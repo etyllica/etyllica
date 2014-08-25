@@ -26,6 +26,7 @@ import br.com.etyllica.core.loop.FrameSkippingLoop;
 import br.com.etyllica.core.loop.GameLoop;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
+import br.com.etyllica.util.io.IOHandler;
 
 public class SharedCore implements Runnable, GameCore {
 
@@ -121,7 +122,7 @@ public class SharedCore implements Runnable, GameCore {
 	public void setPath(String path) {
 
 		//For Windows
-		String s = path.replaceAll("%20"," ");
+		String s = IOHandler.fixPath(path);
 
 		this.path = s;
 	}
