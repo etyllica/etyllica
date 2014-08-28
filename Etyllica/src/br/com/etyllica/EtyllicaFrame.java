@@ -46,21 +46,20 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	
 	@Override
 	public void init() {
-				
+
 		engine = new SharedEngine(this, w, h);
-		
+
 		core = engine.getCore();
-		
+
 		core.setEngine(this);
 
 		initialSetup();
 
 		this.application = startApplication();
-
-		core.startCore(application);
-
-		core.startEngine();
 		
+		core.startCore(application);
+		
+		core.startEngine();		
 	}
 
 	private void initialSetup(){
@@ -69,8 +68,9 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
-		String s = getClass().getResource("").toString();
-
+		String s = Etyllica.class.getResource("../../../").toString();
+		//String s = getClass().getResource("").toString();
+		
 		setPath(s);
 				
 	}
@@ -79,8 +79,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 
 		core.setPath(path);
 
-		engine.initDefault();
-		
+		engine.initDefault();		
 	}
 	
 	@Override
