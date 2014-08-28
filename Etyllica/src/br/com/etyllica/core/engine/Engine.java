@@ -10,7 +10,7 @@ public interface Engine {
 	
 	public void draw();
 	
-	public abstract Application startApplication();
+	public Application startApplication();
 	
 	public void updateSuperEvent(GUIEvent event);
 	

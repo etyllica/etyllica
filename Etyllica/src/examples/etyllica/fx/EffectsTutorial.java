@@ -8,7 +8,7 @@ public class EffectsTutorial extends Etyllica {
 	private static final long serialVersionUID = 1L;
 
 	public EffectsTutorial() {
-		super(800, 600);
+		super(800, 600);		
 	}
 
 	@Override

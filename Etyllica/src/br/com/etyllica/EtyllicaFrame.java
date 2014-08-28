@@ -104,10 +104,6 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	protected void hideCursor() {
 		engine.hideCursor();
 	}
-
-	public void setMainApplication(Application application) {
-		this.application = application;
-	}
 	
 	@Override
 	public void updateSuperEvent(GUIEvent event) {
