@@ -10,9 +10,6 @@ import br.com.etyllica.animation.scripts.RotateAnimation;
 import br.com.etyllica.animation.scripts.ScaleAnimation;
 import br.com.etyllica.animation.scripts.VerticalMovementScript;
 import br.com.etyllica.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
@@ -25,7 +22,7 @@ import br.com.etyllica.layer.TextLayer;
  *
  */
 
-public class AnimationExample extends Application{
+public class AnimationExample extends Application {
 
 	public AnimationExample(int w, int h) {
 		super(w, h);
@@ -117,19 +114,7 @@ public class AnimationExample extends Application{
 		
 		
 		loading = 100;
-	}
-	
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-
-		return GUIEvent.NONE;
-	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-						
-		return GUIEvent.NONE;
-	}
+	}	
 	
 	@Override
 	public void draw(Graphic g) {
