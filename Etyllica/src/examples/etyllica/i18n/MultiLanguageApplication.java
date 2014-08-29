@@ -11,9 +11,9 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Button;
+import br.com.etyllica.gui.label.MultiLangLabel;
 import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.i18n.Language;
-import br.com.etyllica.i18n.gui.label.MultiLangLabel;
 
 public class MultiLanguageApplication extends Application {
 

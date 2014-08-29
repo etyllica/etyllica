@@ -1,10 +1,9 @@
-package br.com.etyllica.i18n.gui.label;
+package br.com.etyllica.gui.label;
 
 import java.util.Map;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.i18n.Language;
 
 /**
@@ -14,7 +13,7 @@ import br.com.etyllica.i18n.Language;
  *
  */
 
-public class MultiLangLabel extends TextLabel{
+public class MultiLangLabel extends TextLabel {
 	
 	private Map<Language,String> texts;
 	
@@ -68,8 +67,7 @@ public class MultiLangLabel extends TextLabel{
 			setText(texts.get(lang));
 		}else{
 			setText(texts.get(Language.ENGLISH_USA));
-		}
-		
+		}		
 	}
 		
 }
