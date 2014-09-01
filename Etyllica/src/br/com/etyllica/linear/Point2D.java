@@ -74,8 +74,7 @@ public class Point2D {
 
 	public double angle(Point2D point) {
 
-		return angle(point.getX(), point.getY());
-		
+		return angle(point.getX(), point.getY());		
 	}
 	
 	public double angle(double px, double py) {
@@ -85,8 +84,19 @@ public class Point2D {
 
 		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
 		
-		return angleInDegrees;
+		return angleInDegrees;		
+	}
+	
+	public void rotate(double cx, double cy, double degreeAngle) {
 		
+		double angle = Math.toRadians(degreeAngle);
+		
+		double nx = cx + (x-cx)*Math.cos(angle) - (y-cy)*Math.sin(angle);
+		
+		double ny = cy + (x-cx)*Math.sin(angle) + (y-cy)*Math.cos(angle);
+		
+		x = nx;
+		y = ny;
 	}
 	
 	public static boolean isRightTurn(Point2D a, Point2D b, Point2D c) {
