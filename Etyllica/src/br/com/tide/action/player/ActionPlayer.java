@@ -2,18 +2,23 @@ package br.com.tide.action.player;
 
 import br.com.tide.ActivePlayer;
 import br.com.tide.PlayerState;
+import br.com.tide.input.ControllerListener;
 
-public class ActionPlayer extends ActivePlayer {
+public class ActionPlayer extends ActivePlayer implements ControllerListener {
 
-	private double startAngle = 90;
+	protected double angle = 0;
 	
-	private double angle = 0;
-	
-	private double turnSpeed = 5;
+	protected double startAngle = 90;
 		
-	private double backWalkSpeed = -1.5;
+	protected double turnSpeed = 5;
+		
+	protected double backWalkSpeed = -1.5;
 	
 	protected ActionPlayerListener listener;
+	
+	public ActionPlayer() {
+		super();
+	}
 	
 	public ActionPlayer(ActionPlayerListener listener) {
 		super();
@@ -21,22 +26,38 @@ public class ActionPlayer extends ActivePlayer {
 		this.listener = listener;
 	}
 	
-	public void turnLeft() {
-		angle -= turnSpeed;
+	public void update(long now) {
+		super.update(now);
 		
+		if(hasState(PlayerState.TURN_LEFT)) {
+			angle-=turnSpeed;
+		}
+		
+		if(hasState(PlayerState.TURN_RIGHT)) {
+			angle+=turnSpeed;
+		}
+		
+		if(hasState(PlayerState.WALK_FORWARD)) {
+			walk(walkSpeed);
+		}
+		
+		if(hasState(PlayerState.WALK_BACKWARD)) {
+			walk(backWalkSpeed);
+		}
+		
+	}
+	
+	public void turnLeft() {
 		listener.onTurnLeft();
-		states.add(PlayerState.WALK_LEFT);
+		states.add(PlayerState.TURN_LEFT);
 	}
 
 	public void stopTurnLeft() {
-		states.remove(PlayerState.WALK_LEFT);
+		states.remove(PlayerState.TURN_LEFT);
 		listener.onStopTurnLeft();
 	}
 
 	public void turnRight() {
-		
-		angle += turnSpeed;
-		
 		listener.onTurnRight();
 		states.add(PlayerState.TURN_RIGHT);
 	}
@@ -47,9 +68,6 @@ public class ActionPlayer extends ActivePlayer {
 	}
 
 	public void walkForward() {
-		
-		walk(walkSpeed);
-		
 		listener.onWalkForward();
 		states.add(PlayerState.WALK_FORWARD);
 	}
@@ -59,10 +77,7 @@ public class ActionPlayer extends ActivePlayer {
 		listener.onStopWalkForward();
 	}
 
-	public void walkBackward() {
-		
-		walk(backWalkSpeed);
-				
+	public void walkBackward() {						
 		listener.onStopWalkBackward();
 		states.add(PlayerState.WALK_BACKWARD);
 	}
@@ -78,14 +93,92 @@ public class ActionPlayer extends ActivePlayer {
 	}
 	
 	public void stopWalk() {
-		states.remove(PlayerState.WALK_UP);
-		states.remove(PlayerState.WALK_DOWN);
-		states.remove(PlayerState.WALK_LEFT);
-		states.remove(PlayerState.WALK_RIGHT);		
+		states.remove(PlayerState.WALK_FORWARD);
+		states.remove(PlayerState.WALK_BACKWARD);
 	}
 	
 	public boolean isWalking() {
-		return states.contains(PlayerState.WALK_RIGHT)||states.contains(PlayerState.WALK_LEFT)||states.contains(PlayerState.WALK_UP)||states.contains(PlayerState.WALK_DOWN);
+		return states.contains(PlayerState.WALK_FORWARD)||states.contains(PlayerState.WALK_BACKWARD);
+	}
+	
+	public boolean isTurning() {
+		return states.contains(PlayerState.TURN_LEFT)||states.contains(PlayerState.TURN_RIGHT);
+	}
+
+	@Override
+	public void onUpButtonPressed() {
+		walkForward();
+	}
+
+	@Override
+	public void onUpButtonReleased() {
+		stopWalkForward();
+	}
+
+	@Override
+	public void onDownButtonPressed() {
+		walkBackward();
+	}
+
+	@Override
+	public void onDownButtonReleased() {
+		stopWalkBackward();
+	}
+
+	@Override
+	public void onRightButtonPressed() {
+		turnRight();
+	}
+
+	@Override
+	public void onRightButtonReleased() {
+		stopTurnRight();
+	}
+
+	@Override
+	public void onLeftButtonPressed() {
+		turnLeft();
+	}
+
+	@Override
+	public void onLeftButtonReleased() {
+		stopTurnLeft();
+	}
+
+	@Override
+	public void onAButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onAButtonReleased() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onBButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onBButtonReleased() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCButtonReleased() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

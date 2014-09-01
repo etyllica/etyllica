@@ -10,7 +10,7 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	protected PlatformPlayerListener listener;
 	
 	public PlatformPlayer() {
-		super();		
+		super();
 	}
 	
 	public PlatformPlayer(PlatformPlayerListener listener) {
