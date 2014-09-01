@@ -2,9 +2,6 @@ package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
 
-import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.loader.image.ImageLoader;
-
 /**
  * 
  * @author yuripourre
@@ -65,54 +62,42 @@ public class PivotImageLayer extends ImageLayer{
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
 
-	@Override	
-	public void draw(Graphic g){
+	@Override
+	protected AffineTransform getTransform() {
 		
-		if(visible){
+		AffineTransform transform = null;
+		
+		if(angle!=0) {
 			
-			if(opacity<255){
-				g.setOpacity(opacity);
-			}
-
-			AffineTransform transform = new AffineTransform();
-
-			if(angle!=0){
-
-				transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+xPivot, y+yPivot);
-
-			}
+			transform = new AffineTransform();
 			
-			if(scale!=1){
-
-				double sw = w*scale;
-				double sh = h*scale;
-
-				double dx = sw/2-w/2;
-				double dy = sh/2-h/2;
-
-				transform.translate(x-w/2-dx, y-h/2-dy);
-
-				AffineTransform scaleTransform = new AffineTransform();
-
-				scaleTransform.translate(w/2, h/2);
-				scaleTransform.scale(scale,scale);
-				scaleTransform.translate(-x, -y);
-
-				transform.concatenate(scaleTransform);
-
-			}
-
-			g.setTransform(transform);
-			
-			g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, y+h,
-					xImage,yImage,xImage+w,yImage+h, null );
-
-			g.resetTransform();
-
-			if(opacity<255){
-				g.resetOpacity();
-			}
-			
+			transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+xPivot, y+yPivot);			
 		}
+
+		if(scale!=1) {
+
+			if(transform == null) {
+				transform = new AffineTransform();
+			}
+			
+			double sw = w*scale;
+			double sh = h*scale;
+
+			double dx = sw/2-w/2;
+			double dy = sh/2-h/2;
+
+			transform.translate(x-w/2-dx, y-h/2-dy);
+
+			AffineTransform scaleTransform = new AffineTransform();
+
+			scaleTransform.translate(w/2, h/2);
+			scaleTransform.scale(scale,scale);
+			scaleTransform.translate(-x, -y);
+
+			transform.concatenate(scaleTransform);
+
+		}
+
+		return transform;
 	}
 }

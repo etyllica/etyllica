@@ -18,7 +18,7 @@ import br.com.etyllica.core.loader.image.ImageLoader;
  *
  */
 
-public class BufferedLayer extends ImageLayer{
+public class BufferedLayer extends ImageLayer {
 
 	private BufferedImage buffer;
 	
@@ -372,9 +372,7 @@ public class BufferedLayer extends ImageLayer{
 	}
 	
 	@Override
-	public void draw(Graphic g, AffineTransform transform) {
-		g.transform(transform);
-
+	public void simpleDraw(Graphic g) {
 		g.drawImage( modifiedBuffer, x, y, x+w,y+h,
 				xImage,yImage,xImage+w,yImage+h, null );		
 	}

@@ -239,10 +239,14 @@ public class ImageLayer extends StaticLayer {
 			g.setOpacity(opacity);
 		}
 
-		this.draw(g, getTransform());
-
-		g.resetTransform();
-
+		AffineTransform transform = getTransform();
+		
+		if(transform!=null) {
+			this.draw(g, getTransform());
+			g.resetTransform();
+		}else 
+			simpleDraw(g);
+		
 		if(opacity<0xff) {
 			g.resetOpacity();
 		}		
@@ -251,11 +255,7 @@ public class ImageLayer extends StaticLayer {
 
 	@Override
 	public void draw(Graphic g, AffineTransform transform) {
-		
-		if(transform!=null) {
-			g.transform(transform);	
-		}
-		
+				
 		simpleDraw(g);
 	}
 
@@ -267,7 +267,7 @@ public class ImageLayer extends StaticLayer {
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, (y+h),
 				xImage,yImage,xImage+w,yImage+h, null );
 	}
-
+	
 	protected AffineTransform getTransform() {
 				
 		AffineTransform transform = null;
@@ -305,7 +305,6 @@ public class ImageLayer extends StaticLayer {
 
 		return transform;
 	}
-
 
 	public boolean onMouse(Mouse mouse) {
 

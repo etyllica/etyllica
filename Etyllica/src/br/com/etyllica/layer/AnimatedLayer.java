@@ -147,11 +147,11 @@ public class AnimatedLayer extends ImageLayer {
 			
 			boolean hasNextFrame = nextFrame(); 
 			
-			notifyFrameChangeListener();
+			notifyFrameChangeListener(now);
 			
 			if(!hasNextFrame) {
 
-				notifyAnimationFinishListener();
+				notifyAnimationFinishListener(now);
 				
 			}
 						
@@ -160,19 +160,18 @@ public class AnimatedLayer extends ImageLayer {
 	}
 		
 	//Notify Listener about the end of animation
-	protected void notifyAnimationFinishListener() {
+	protected void notifyAnimationFinishListener(long now) {
 		
 		if(onAnimationFinishListener != null) {
-			onAnimationFinishListener.onAnimationFinish();
-		}
-		
+			onAnimationFinishListener.onAnimationFinish(now);
+		}		
 	}
 	
 	//Notify Listener about the frame change
-	private void notifyFrameChangeListener() {
+	private void notifyFrameChangeListener(long now) {
 		
 		if(onFrameChangeListener != null) {
-			onFrameChangeListener.onFrameChange();
+			onFrameChangeListener.onFrameChange(now);
 		}
 		
 	}
@@ -240,18 +239,8 @@ public class AnimatedLayer extends ImageLayer {
 		
 		return hasNextFrame;
 	}
-	
-	public void animate(int frame) {
 
-		if(frame == frames-1) {
-			notifyAnimationFinishListener();
-		}
-		
-		setFrame(frame);
-		
-	}
-
-	protected void setFrame(int frame) {
+	public void setFrame(int frame) {
 				
 		if(animaEmX) {
 			setXImage(needleX+tileW*frame);
@@ -323,11 +312,9 @@ public class AnimatedLayer extends ImageLayer {
 	}
 
 	@Override
-	public void draw(Graphic g, AffineTransform transform) {
-		g.setTransform(transform);
-
+	public void simpleDraw(Graphic g) {
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+tileW,y+tileH,
-				xImage,yImage,xImage+tileW,yImage+tileH, null );		
+				xImage,yImage,xImage+tileW,yImage+tileH, null );
 	}
 	
 	@Override
@@ -338,7 +325,7 @@ public class AnimatedLayer extends ImageLayer {
 		if(angle!=0) {
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+tileW/2, y+tileH/2));
 		}
-					
+		
 		if(scale!=1) {
 
 			double sw = tileW*scale;
