@@ -13,7 +13,7 @@
 - FullScreen Support (Even in Applets)
 - GUI System
 - Theme Manager
-- Multilanguage Support (GUI change on the fly)
+- Multilanguage Support (GUI changes on the fly)
 - Sound Loader that supports (MP3, OGG, WAV)
 - Background Music
 - Audio Capture
