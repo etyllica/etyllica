@@ -183,10 +183,6 @@ public class Layer extends GeometricLayer implements Drawable {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void draw(Graphic g, AffineTransform transform) {
-		// TODO Auto-generated method stub
-	}
 		
 	public List<Layer> getChildren() {
 		return children;

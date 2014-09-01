@@ -229,6 +229,7 @@ public class ImageLayer extends StaticLayer {
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
 
+	@Override
 	public void draw(Graphic g) {
 
 		if(!visible) {
@@ -241,22 +242,18 @@ public class ImageLayer extends StaticLayer {
 
 		AffineTransform transform = getTransform();
 		
-		if(transform!=null) {
-			this.draw(g, getTransform());
-			g.resetTransform();
-		}else 
+		if(transform != null) {
+			g.setTransform(transform); 
 			simpleDraw(g);
+			g.resetTransform();
+		} else { 
+			simpleDraw(g);
+		}
 		
 		if(opacity<0xff) {
 			g.resetOpacity();
 		}		
 
-	}
-
-	@Override
-	public void draw(Graphic g, AffineTransform transform) {
-				
-		simpleDraw(g);
 	}
 
 	public void simpleDraw(Graphic g) {
