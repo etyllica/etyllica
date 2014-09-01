@@ -30,7 +30,7 @@ public class FrameAnimation extends SingleIntervalAnimation {
 	@Override
 	protected void update(double value) {
 				
-		target.animate((int)(value%target.getFrames()));
+		target.animateWithFrame((int)(value%target.getFrames()));
 	}
 
 }

@@ -130,6 +130,14 @@ public class AnimatedLayer extends ImageLayer {
 		setTileH(tileH);
 	}
 
+	public void animateWithFrame(int frame) {
+		setFrame(frame);
+		
+		if(frame == frames-1) {
+			notifyAnimationFinishListener(0);
+		}
+	}	
+	
 	public void animate(long now) {
 		
 		if(stopped) {
@@ -240,7 +248,7 @@ public class AnimatedLayer extends ImageLayer {
 		return hasNextFrame;
 	}
 
-	public void setFrame(int frame) {
+	private void setFrame(int frame) {
 				
 		if(animaEmX) {
 			setXImage(needleX+tileW*frame);
