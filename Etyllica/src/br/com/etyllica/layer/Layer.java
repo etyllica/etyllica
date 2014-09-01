@@ -1,14 +1,13 @@
 package br.com.etyllica.layer;
 
-import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.layer.colision.ColisionDetector;
 
 /**
  * 
@@ -148,34 +147,8 @@ public class Layer extends GeometricLayer implements Drawable {
 	 * @return
 	 */
 	public boolean onMouse(int px, int py) {
-		
-		if(angle == 0) {
 
-			return colideRectPoint(px, py);
-
-		} else {
-
-			AffineTransform transformer = AffineTransform.getRotateInstance(angle, x, y);
-
-			Point2D a = new Point2D.Double(x, y);
-			Point2D b = new Point2D.Double(x+w,y);
-			Point2D c = new Point2D.Double(x+w,y+h);
-			Point2D d = new Point2D.Double(x,y+h);
-
-			transformer.transform(a,a);
-			transformer.transform(b,b);
-			transformer.transform(c,c);
-			transformer.transform(d,d);
-
-			Polygon p = new Polygon();
-			p.addPoint((int)a.getX(),(int)a.getY());
-			p.addPoint((int)b.getX(),(int)b.getY());
-			p.addPoint((int)c.getX(),(int)c.getY());
-			p.addPoint((int)d.getX(),(int)d.getY());
-
-			return p.contains(px, py);
-
-		}
+		return ColisionDetector.colideRectPoint(this, px, py);
 	}
 	
 	public AffineTransform getTransform() {
