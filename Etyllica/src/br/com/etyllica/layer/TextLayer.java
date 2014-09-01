@@ -116,7 +116,7 @@ public class TextLayer extends ImageLayer {
 	}
 
 	@Override
-	protected AffineTransform getTransform() {
+	public AffineTransform getTransform() {
 		
 		if(font == null)
 			return AffineTransform.getScaleInstance(1, 1);

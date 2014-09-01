@@ -318,7 +318,7 @@ public class AnimatedLayer extends ImageLayer {
 	}
 	
 	@Override
-	protected AffineTransform getTransform() {
+	public AffineTransform getTransform() {
 		
 		AffineTransform transform = new AffineTransform();
 

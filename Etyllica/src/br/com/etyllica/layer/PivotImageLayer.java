@@ -63,7 +63,7 @@ public class PivotImageLayer extends ImageLayer{
 	}
 
 	@Override
-	protected AffineTransform getTransform() {
+	public AffineTransform getTransform() {
 		
 		AffineTransform transform = null;
 		

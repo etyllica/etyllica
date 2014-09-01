@@ -266,44 +266,6 @@ public class ImageLayer extends StaticLayer {
 				xImage,yImage,xImage+w,yImage+h, null );
 	}
 	
-	protected AffineTransform getTransform() {
-				
-		AffineTransform transform = null;
-		
-		if(angle!=0) {
-			
-			transform = new AffineTransform();
-			
-			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
-		}
-
-		if(scale!=1) {
-
-			if(transform == null) {
-				transform = new AffineTransform();
-			}
-			
-			double sw = w*scale;
-			double sh = h*scale;
-
-			double dx = sw/2-w/2;
-			double dy = sh/2-h/2;
-
-			transform.translate(x-w/2-dx, y-h/2-dy);
-
-			AffineTransform scaleTransform = new AffineTransform();
-
-			scaleTransform.translate(w/2, h/2);
-			scaleTransform.scale(scale,scale);
-			scaleTransform.translate(-x, -y);
-
-			transform.concatenate(scaleTransform);
-
-		}
-
-		return transform;
-	}
-
 	public boolean onMouse(Mouse mouse) {
 
 		boolean colision = false;
