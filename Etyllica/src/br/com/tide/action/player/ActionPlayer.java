@@ -13,7 +13,7 @@ public class ActionPlayer extends ActivePlayer {
 		
 	private double backWalkSpeed = -1.5;
 	
-	private ActionPlayerListener listener;
+	protected ActionPlayerListener listener;
 	
 	public ActionPlayer(ActionPlayerListener listener) {
 		super();

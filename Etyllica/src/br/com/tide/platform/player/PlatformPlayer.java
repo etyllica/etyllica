@@ -7,7 +7,11 @@ import br.com.tide.input.ControllerListener;
 
 public class PlatformPlayer extends ActivePlayer implements Updatable, ControllerListener {
 
-	private PlatformPlayerListener listener;
+	protected PlatformPlayerListener listener;
+	
+	public PlatformPlayer() {
+		super();		
+	}
 	
 	public PlatformPlayer(PlatformPlayerListener listener) {
 		super();

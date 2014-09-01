@@ -31,8 +31,8 @@ public class Effect extends AnimatedLayer {
 	}
 	
 	@Override
-	protected void notifyAnimationFinishListener() {
-		super.notifyAnimationFinishListener();
+	protected void notifyAnimationFinishListener(long now) {
+		super.notifyAnimationFinishListener(now);
 		
 		setVisible(false);
 	}

@@ -1,4 +1,4 @@
-#Etyllica (v 3.9)
+#Etyllica (v 4.0)
 
 
 [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games fast. It can render 3D (by software) using [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) in unsigned applets and streams audio with [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) Library.
@@ -11,17 +11,16 @@
 - Animation Tween System
 - Animation Pivot System (Used in [Etyllic Animator](http://yuripourre.github.com/etyllic-animator/))
 - FullScreen Support (Even in Applets)
-- Multilanguage Support
 - GUI System
 - Theme Manager
+- Multilanguage Support (GUI change on the fly)
 - Sound Loader that supports (MP3, OGG, WAV)
 - Background Music
-- Audio Capture 
+- Audio Capture
 - WaveForm Drawing
 - OpenGL simulation with software Rendering (Even in Unsigned Applets)
 - Basic Particle System
 - Physics (2D)
-
 
 ##Related Projects
 
@@ -35,14 +34,14 @@
 - [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android.
 - [EtyllicTTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
 - [Etyllic GameBoy](https://github.com/yuripourre/etyllic-gameboy) - A [Javaboy](http://www.millstone.demon.co.uk/download/javaboy/) fork with faster rendering.
-- [E-Motion](https://github.com/yuripourre/e-motion) - An Image Processing Library with focus in Augmented Reality
+- [E-Motion](https://github.com/yuripourre/e-motion) - An Image Processing Library made in pure Java.
 - [Rubik Solver](https://github.com/UNIRIO-SI/rubik-solver) - A Simple Rubik Cube Application.
-- [Veete](https://github.com/yuripourre/veete) - A Tiled Map Editor
+- [Veete](https://github.com/yuripourre/veete) - A VEry Easy Tilemap Editor
 - [Luvia](https://github.com/yuripourre/luvia) - An Etyllica fork using [JoGL](http://jogamp.org/jogl/www/) and [glg2d](https://github.com/brandonborkholder/glg2d) for GPU rendering.
 
 ##Dependencies (optional)
 
-If you don't need 3D Graphics, Sound nor Physics, you just have to include the [etyllica-3.8.jar](https://github.com/yuripourre/etyllica/blob/master/Etyllica/libs/etyllica-3.8.jar) (193Kb)
+If you don't need 3D Graphics, Sound nor Physics, you just have to include the [etyllica-4.0.jar](https://github.com/yuripourre/etyllica/blob/master/Etyllica/libs/etyllica-4.0.jar) (220Kb)
 
 - [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) (An OpenGL simulator)
 - [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library)
