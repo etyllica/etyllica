@@ -181,7 +181,10 @@ public class Layer extends GeometricLayer implements Drawable {
 	@Override
 	public void draw(Graphic g) {
 		// TODO Auto-generated method stub
-		
+	}
+	
+	public void simpleDraw(Graphic g) {
+		// TODO Auto-generated method stub
 	}
 		
 	public List<Layer> getChildren() {

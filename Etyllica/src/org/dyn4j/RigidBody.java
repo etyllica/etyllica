@@ -31,7 +31,7 @@ public class RigidBody extends Body{
 		
 	}
 	
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 		
 		AffineTransform transform = new AffineTransform();
 		
@@ -41,14 +41,13 @@ public class RigidBody extends Body{
 		transform.translate(this.transform.getTranslationX()-initialX, this.transform.getTranslationY()-initialY);
 		transform.concatenate(AffineTransform.getRotateInstance(this.transform.getRotation(),layer.getX()+layer.getW()/2, layer.getY()+layer.getH()/2));
 		
-		this.layer.draw(g, transform);
+		g.setTransform(transform);
+		
+		this.layer.simpleDraw(g);
 		
 		g.resetTransform();
-	}
+	}	
 	
-	
-	
-
 	public Layer getLayer() {
 		return layer;
 	}

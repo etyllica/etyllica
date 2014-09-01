@@ -256,6 +256,7 @@ public class ImageLayer extends StaticLayer {
 
 	}
 
+	@Override
 	public void simpleDraw(Graphic g) {
 		simpleDraw(g, x, y);
 	}
