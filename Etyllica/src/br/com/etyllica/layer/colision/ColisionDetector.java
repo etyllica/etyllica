@@ -20,6 +20,7 @@ public class ColisionDetector {
 	}
 	
 	public static boolean colideRectPoint(Layer layer, Point2D point) {
+		
 		int rectCenterX = layer.getX()+layer.getW()/2;
 		int rectCenterY = layer.getY()+layer.getH()/2;
 		int rectWidth = layer.getW();
@@ -32,14 +33,18 @@ public class ColisionDetector {
 	
 	/** Rectangle To Point. */
 	private static boolean testRectangleToPoint(double rectWidth, double rectHeight, double rectRotation, double rectCenterX, double rectCenterY, double pointX, double pointY) {
-	    if(rectRotation == 0)   // Higher Efficiency for Rectangles with 0 rotation.
+	    
+		if(rectRotation == 0)   // Higher Efficiency for Rectangles with 0 rotation.
 	        return Math.abs(rectCenterX-pointX) < rectWidth/2 && Math.abs(rectCenterY-pointY) < rectHeight/2;
 
-	    double tx = Math.cos(rectRotation)*pointX - Math.sin(rectRotation)*pointY;
-	    double ty = Math.cos(rectRotation)*pointY + Math.sin(rectRotation)*pointX;
+		final double cos = Math.cos(rectRotation);
+		final double sin = Math.cos(rectRotation);
+		
+	    double tx = cos*pointX - sin*pointY; 
+	    double ty = cos*pointY + sin*pointX;
 
-	    double cx = Math.cos(rectRotation)*rectCenterX - Math.sin(rectRotation)*rectCenterY;
-	    double cy = Math.cos(rectRotation)*rectCenterY + Math.sin(rectRotation)*rectCenterX;
+	    double cx = cos*rectCenterX - sin*rectCenterY;
+	    double cy = cos*rectCenterY + sin*rectCenterX;
 
 	    return Math.abs(cx-tx) < rectWidth/2 && Math.abs(cy-ty) < rectHeight/2;
 	}
@@ -95,94 +100,69 @@ public class ColisionDetector {
 	}
 	
 	/**
-	 * Code found at http://forums.coronalabs.com/topic/39094-code-for-rotated-rectangle-collision-detection/
+	 * Code found at: http://stackoverflow.com/a/21647567
 	 */
-	public static boolean colideRectRect(Layer obj, Layer obj2) {
+	public static boolean colidePolygon(Layer a, Layer b) {
+		    
+	    Point2D[] pointsA = getBounds(a);
+	    
+		Point2D[] pointsB = getBounds(b);
 
-		int x10 = obj.getX();
-		int y10 = obj.getY();
+		return colidePoints(pointsA, pointsB);
 
-		int height1 = obj.getH()/2;
-		int width1 = obj.getW()/2;
-
-		double radrot1 = Math.toRadians(obj.getAngle());
-
-		int x20 = obj2.getX();
-		int y20 = obj2.getY();
-
-		int height2 = obj2.getH()/2;
-		int width2 = obj2.getW()/2;
-
-		double radrot2 = Math.toRadians(obj2.getAngle());
-
-		double radius1 = Math.sqrt( height1*height1 + width1*width1 );
-		double radius2 = Math.sqrt( height2*height2 + width2*width2 );
-
-		double angle1 = Math.asin( height1 / radius1 );
-		double angle2 = Math.asin( height2 / radius2 );
-
-		double[] x1 = new double[4];
-		double[] y1 = new double[4];
-		double[] x2 = new double[4]; 
-		double[] y2 = new double[4];
-
-		x1[0] = x10 + radius1 * Math.cos(radrot1 - angle1); y1[0] = y10 + radius1 * Math.sin(radrot1 - angle1);
-		x1[1] = x10 + radius1 * Math.cos(radrot1 + angle1); y1[1] = y10 + radius1 * Math.sin(radrot1 + angle1);
-		x1[2] = x10 + radius1 * Math.cos(radrot1 + Math.PI - angle1); y1[2] = y10 + radius1 * Math.sin(radrot1 + Math.PI - angle1);
-		x1[3] = x10 + radius1 * Math.cos(radrot1 + Math.PI + angle1); y1[3] = y10 + radius1 * Math.sin(radrot1 + Math.PI + angle1);
-
-		x2[0] = x20 + radius2 * Math.cos(radrot2 - angle2); y2[0] = y20 + radius2 * Math.sin(radrot2 - angle2);
-		x2[1] = x20 + radius2 * Math.cos(radrot2 + angle2); y2[1] = y20 + radius2 * Math.sin(radrot2 + angle2);
-		x2[2] = x20 + radius2 * Math.cos(radrot2 + Math.PI - angle2); y2[2] = y20 + radius2 * Math.sin(radrot2 + Math.PI - angle2);
-		x2[3] = x20 + radius2 * Math.cos(radrot2 + Math.PI + angle2); y2[3] = y20 + radius2 * Math.sin(radrot2 + Math.PI + angle2);
-
-		double[] axisx = new double[4];
-		double[] axisy = new double[4];
-
-		axisx[0] = x1[0] - x1[1]; axisy[0] = y1[0] - y1[1];
-		axisx[1] = x1[2] - x1[1]; axisy[1] = y1[2] - y1[1];
-
-		axisx[2] = x2[0] - x2[1]; axisy[2] = y2[0] - y2[1];
-		axisx[3] = x2[2] - x2[1]; axisy[3] = y2[2] - y2[1];
-
-		for(int k = 0; k<4; k++) {
-
-			double proj = x1[0] * axisx[k] + y1[0] * axisy[k];
-
-			double minProj1 = proj;
-			double maxProj1 = proj;
-
-			for(int i = 1; i < 4; i++) {
-				proj = x1[i] * axisx[k] + y1[i] * axisy[k];
-
-				if(proj < minProj1) {
-					minProj1 = proj;
-				}else if(proj > maxProj1) {
-					maxProj1 = proj;
-				}
-			}
-
-			proj = x2[0] * axisx[k] + y2[0] * axisy[k];
-
-			double minProj2 = proj;
-			double maxProj2 = proj;
-
-			for(int j = 1; j < 4; j++) {
-				proj = x2[j] * axisx[k] + y2[j] * axisy[k];
-
-				if(proj < minProj2){
-					minProj2 = proj;
-				}else if(proj > maxProj2) {
-					maxProj2 = proj;
-				}
-
-				if(maxProj2 < minProj1 || maxProj1 < minProj2) {
-					return false;
-				}
-			}
+	}
+	
+	public static Point2D[] getBounds(Layer layer) {
+		
+		Point2D[] points = new Point2D[4];
+	    
+		points[0] = new Point2D(layer.getX(), layer.getY());
+		points[1] = new Point2D(layer.getX()+layer.getW(), layer.getY());
+		points[2] = new Point2D(layer.getX()+layer.getW(), layer.getY()+layer.getH());
+		points[3] = new Point2D(layer.getX(), layer.getY()+layer.getH());
+		
+		for(Point2D point: points) {
+			point.rotate(layer.getX()+layer.getW()/2, layer.getY()+layer.getH()/2, layer.getAngle());
 		}
 		
-		return true;
+		return points;
+	}
+		
+	private static  double[] e2p(double x, double y) {
+	    return new double[] { x, y, 1 };
 	}
 
+	// standard vector maths
+	private static double[] getCrossProduct(double[] u, double[] v) {
+	    return new double[] { u[1] * v[2] - u[2] * v[1],
+	            u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0] };
+	}
+
+	private static double getDotProduct(double[] u, double[] v) {
+	    return u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
+	}
+
+	// collision check
+	public static boolean colidePoints(Point2D[] pointsA, Point2D[] pointsB) {
+	    return !(isSeparate(pointsA, pointsB) || isSeparate(pointsB, pointsA));
+	}
+
+	// the following implementation expects the convex polygon's vertices to be in counter clockwise order
+	private static boolean isSeparate(Point2D[] coordsA, Point2D[] coordsB) {
+	    edges: for (int i = 0; i < coordsA.length; i++) {
+	        double[] u = e2p(coordsA[i].getX(), coordsA[i].getY());
+	        int ni = i + 1 < coordsA.length ? i + 1 : 0;
+	        double[] v = e2p(coordsA[ni].getX(), coordsA[ni].getY());
+	        double[] pedge = getCrossProduct(u, v);
+	        for (Point2D p : coordsB) {
+	            double d = getDotProduct(pedge, e2p(p.getX(), p.getY()));
+	            if (d > -0.001) {
+	                continue edges;
+	            }
+	        }
+	        return true;
+	    }
+	    return false;
+	}
+	
 }
