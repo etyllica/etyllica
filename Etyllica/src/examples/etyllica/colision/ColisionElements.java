@@ -2,12 +2,13 @@ package examples.etyllica.colision;
 
 import java.awt.Color;
 
+import br.com.etyllica.collision.ColisionDetector;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.layer.Layer;
-import br.com.etyllica.linear.Point2D;
 
 public class ColisionElements extends Application {
 
@@ -28,7 +29,7 @@ public class ColisionElements extends Application {
 	@Override
 	public void load() {
 
-		rectangle1 = new Layer(20, 100, 200, 50);
+		rectangle1 = new Layer(80, 100, 200, 50);
 		rectangle1.setAngle(20);
 
 		rectangle2 = new Layer(200, 200, 200, 50);
@@ -40,25 +41,17 @@ public class ColisionElements extends Application {
 
 	public void timeUpdate(long now) {
 
-		/*if(!ColisionDetector.colideRectRect(rectangle1, rectangle2)) {
+		if(!ColisionDetector.colidePolygon(rectangle1, rectangle2)) {
 			color = Color.BLUE;
 		} else {			
 			color = Color.YELLOW;
-		}*/
-		
-		if(rectangle1.onMouse(mx, my)) {
-			color = Color.YELLOW;
-		} else {
-			color = Color.BLUE;
 		}
-
+		
 		rectangle2.setOffsetAngle(10);
 	}
 
 	@Override
 	public void draw(Graphic g) {
-
-		drawGhost(rectangle2, g);
 		
 		if(rectangle2.getTransform()!=null)
 			g.setTransform(rectangle2.getTransform());
@@ -77,34 +70,14 @@ public class ColisionElements extends Application {
 		g.resetTransform();				
 	}
 	
-	private void drawGhost(Layer layer, Graphic g) {
-		
-		int centerX = layer.getX()+layer.getW()/2;
-		int centerY = layer.getY()+layer.getH()/2;
-				
-		Point2D a = new Point2D(layer.getX(), layer.getY());
-		a.rotate(centerX, centerY, layer.getAngle());
-		
-		Point2D b = new Point2D(layer.getX()+layer.getW(), layer.getY());
-		b.rotate(centerX, centerY, layer.getAngle());
-		
-		Point2D c = new Point2D(layer.getX(), layer.getY()+layer.getH());
-		c.rotate(centerX, centerY, layer.getAngle());
-		
-		Point2D d = new Point2D(layer.getX()+layer.getW(), layer.getY()+layer.getH());
-		d.rotate(centerX, centerY, layer.getAngle());
-		
-		g.setColor(Color.GREEN);
-		g.drawLine(a, b);
-		g.drawLine(a, c);
-		g.drawLine(b, d);
-		g.drawLine(c, d);
-	}
-
 	public GUIEvent updateMouse(PointerEvent event) {
 
 		mx = event.getX();
-		my = event.getY();		
+		my = event.getY();
+		
+		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+			rectangle1.setCoordinates(mx, my);
+		}
 		
 		return GUIEvent.NONE;
 	}
