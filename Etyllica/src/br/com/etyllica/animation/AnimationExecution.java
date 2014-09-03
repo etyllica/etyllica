@@ -24,7 +24,6 @@ public class AnimationExecution {
 		}
 
 		return false;		
-		
 	}
 	
 	public void repeat() {

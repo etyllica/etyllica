@@ -68,8 +68,7 @@ public abstract class AnimationScript {
 
 		float factor = (float)timeElapsed/time;
 
-		calculate(factor);
-		
+		calculate(factor);		
 	}
 	
 	public abstract void calculate(double factor);

@@ -1,9 +1,7 @@
 package br.com.etyllica.animation;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.core.Updatable;
@@ -15,8 +13,6 @@ public class AnimationHandler implements Updatable {
 	private List<AnimationExecution> scripts = new ArrayList<AnimationExecution>();
 
 	private List<AnimationScript> nextScripts = new ArrayList<AnimationScript>();
-
-	private Map<AnimationScript, AnimationScript> endlessScripts = new HashMap<AnimationScript, AnimationScript>();
 
 	private AnimationHandler() {
 		super();
@@ -36,10 +32,12 @@ public class AnimationHandler implements Updatable {
 		for(int i = scripts.size()-1; i>=0; i--) {
 
 			AnimationExecution execution = scripts.get(i);
-			
+
 			if(!execution.execute(now)) {
-				repeatLogic(execution, now);				
-			}			
+				if(repeatLogic(execution, now)) {
+					scripts.remove(execution);
+				}
+			}
 		}
 
 		//Add next Scripts
@@ -48,84 +46,43 @@ public class AnimationHandler implements Updatable {
 		}
 
 		nextScripts.clear();
-
 	}
 
-	private void repeatLogic(AnimationExecution execution, long now) {
+	private boolean repeatLogic(AnimationExecution execution, long now) {
 
 		AnimationScript script = execution.getScript();
-		
+
 		if(script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
-
-			endlessScripts.put(lastScript(script),script);
-
-		} else if(script.getRepeat()-1 > execution.getRepeated()) {
 			
+			//Repeat Forever
+			script.restart();
+			nextScripts.add(script);
+			
+		} else if(script.getRepeat()-1 > execution.getRepeated()) {
+
+			//Repeat cycle
 			script.calculate(1);
 			execution.repeat();
 			script.preAnimate(now);
 			
-			return;
-			
-		} else {
-			
-			script.calculate(1);	
-		}
-
-		if(script.getNext()!=null) {
-
-			nextScripts.add(script.getNext());
-
-			//Else If this script has some associated endless script
-		} else if(endlessScripts.containsKey(script)) {
-
-			//Find and restart the endless script
-			AnimationScript endless = script;
-			restartEndless(endless);
-
-			nextScripts.add(endless);
+			return false;
 
 		} else {
 
-			//If script is endless and don't have next
-			if(script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
-				script.restart();
-				nextScripts.add(script);
+			//Next Script
+			AnimationScript nextScript = script.getNext();
+
+			if(nextScript != null) {
+				nextScripts.add(nextScript);
+				nextScript.restart();
 			}
 		}
-		
-		scripts.remove(script);
 
+		return true;
 	}
 
 	public void add(AnimationScript script) {
 		scripts.add(new AnimationExecution(script));
-	}
-
-	private AnimationScript restartEndless(AnimationScript script) {
-
-		script.restart();
-
-		AnimationScript last = script;
-
-		if(script.getNext() != null) {
-			last = restartEndless(script.getNext()); 
-		}
-
-		return last;
-
-	}
-	
-	private AnimationScript lastScript(AnimationScript script) {
-
-		AnimationScript last = script;
-
-		if(script.getNext()!=null) {
-			last = lastScript(script.getNext()); 
-		}
-
-		return last;
-
 	}
 
 }
