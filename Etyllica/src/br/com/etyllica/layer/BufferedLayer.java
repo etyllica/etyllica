@@ -20,12 +20,14 @@ import br.com.etyllica.core.loader.image.ImageLoader;
 
 public class BufferedLayer extends ImageLayer {
 
+	private Graphic g;
+	
 	private BufferedImage buffer;
 	
 	protected BufferedImage modifiedBuffer;
 	
-	private Graphic g;
-
+	private static int MAX_INT = 0xff;
+	
 	/**
 	 * 
 	 * @param x
@@ -86,7 +88,7 @@ public class BufferedLayer extends ImageLayer {
 		
 		modifiedBuffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 				
-		clearGraphics();		
+		clearGraphics();
 		
 		resetImage();
 	}
@@ -103,7 +105,7 @@ public class BufferedLayer extends ImageLayer {
 	 * 
 	 * @param buffer
 	 */
-	public void igualaImagem(Image buffer){
+	public void igualaImagem(Image buffer) {
 
 		if(buffer==null)
 			return;
@@ -125,7 +127,7 @@ public class BufferedLayer extends ImageLayer {
 	 * 
 	 * @param buffer
 	 */
-	public void igualaImagem(BufferedImage buffer){
+	public void copy(BufferedImage buffer) {
 
 		this.buffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
 		this.buffer.getGraphics().drawImage(buffer,0,0,null);
@@ -134,7 +136,6 @@ public class BufferedLayer extends ImageLayer {
 		h = buffer.getHeight();
 		
 		resetImage();
-
 	}
 
 	/**
@@ -150,11 +151,11 @@ public class BufferedLayer extends ImageLayer {
 	public void clearGraphics() {
 		
 		g = new Graphic(buffer.createGraphics());
-        g.setBackground(new Color(255, 255, 255, 0));
+        g.setBackground(new Color(MAX_INT, MAX_INT, MAX_INT, 0));
         g.clearRect(0, 0, w, h);
         
         Graphics2D modifiedGraphic = modifiedBuffer.createGraphics();
-        modifiedGraphic.setBackground(new Color(255, 255, 255, 0));
+        modifiedGraphic.setBackground(new Color(MAX_INT, MAX_INT, MAX_INT, 0));
         modifiedGraphic.clearRect(0, 0, w, h); 
 		
 	}
@@ -171,19 +172,36 @@ public class BufferedLayer extends ImageLayer {
 	 * @param green
 	 * @param blue
 	 */
-	public void offsetRGB(int red, int green, int blue){
+	public void offsetRGB(int red, int green, int blue) {
 
 		resetImage();
 
 		offsetPixels(red,green,blue);
-
 	}
+	
+	public void offsetNegativeRed(int red) {
 
-	private void offsetPixels(int offsetRed, int offsetGreen, int offsetBlue){
+		resetImage();
+		offsetPixels(0, -red, -red);
+	}
+	
+	public void offsetNegativeGreen(int green) {
 
-		for(int j=0;j<h;j++){
+		resetImage();
+		offsetPixels(-green, 0, -green);
+	}
+	
+	public void offsetNegativeBlue(int blue) {
 
-			for(int i=0;i<w;i++){
+		resetImage();
+		offsetPixels(-blue, -blue, 0);
+	}
+	
+	private void offsetPixels(int offsetRed, int offsetGreen, int offsetBlue) {
+
+		for(int j=0;j<h;j++) {
+
+			for(int i=0;i<w;i++) {
 
 				//Pego o rgb do pixel selecionado
 				int rgb = buffer.getRGB(i,j);
@@ -201,42 +219,35 @@ public class BufferedLayer extends ImageLayer {
 				g += offsetGreen;
 				b += offsetBlue;
 
-				//Verifico se os valores de vermelho ainda estao no range 0~255
-				if(r>255){
-					r = 255;
-				}else if(r<0){
+				//Verify pixel range 0~255
+				if(r>MAX_INT) {
+					r = MAX_INT;
+				}else if(r<0) {
 					r = 0;
 				}
 
-				//Verifico se os valores de verde ainda estao no range 0~255
-				if(g>255){
-					g = 255;
-				}else if(g<0){
+				//Verify pixel range 0~255
+				if(g>MAX_INT) {
+					g = MAX_INT;
+				}else if(g<0) {
 					g = 0;
 				}
 
-				//Verifico se os valores de azul ainda estao no range 0~255
-				if(b>255){
-					b = 255;
-				}else if(b<0){
+				//Verify pixel range 0~255
+				if(b>MAX_INT) {
+					b = MAX_INT;
+				}else if(b<0) {
 					b = 0;
 				}
 
-				//Nao sei porque isso ocorre mas as vezes alpha eh negativo e 
-				//me parece que este eh o jeito certo de consertar
-				//if(a<0){
-				//	a += 255;
-				//}
-
 				modifiedBuffer.setRGB(i, j, new Color(r,g,b,a).getRGB());
-
 			}
 		}
 
 	}
 
 	//Image Manipulation
-	public void flipVertical(){
+	public void flipVertical() {
 		AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
 		
 		tx.translate(0, -h);
@@ -247,7 +258,7 @@ public class BufferedLayer extends ImageLayer {
 		
 	}
 	
-	public void flipHorizontal(){
+	public void flipHorizontal() {
 		
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
 		
@@ -259,7 +270,7 @@ public class BufferedLayer extends ImageLayer {
 		
 	}
 	
-	public void resize(int width, int height){
+	public void resize(int width, int height) {
 				
 		double scaleW = (double)width/(double)buffer.getWidth();
 		
@@ -277,14 +288,14 @@ public class BufferedLayer extends ImageLayer {
 		
 	}
 
-	public void girar180(){
+	public void girar180() {
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, -1);
 		tx.translate(-w, -h);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		modifiedBuffer = op.filter(modifiedBuffer, null);
 	}
 
-	public byte[][][] getBytes(){
+	public byte[][][] getBytes() {
 
 		DataBufferInt db = (DataBufferInt)modifiedBuffer.getRaster().getDataBuffer();
 
@@ -295,8 +306,8 @@ public class BufferedLayer extends ImageLayer {
 
 		byte imagem2D[][][] = new byte[width][height][3];
 
-		for(int j=0;j<h;j++){
-			for(int i=0;i<width;i++){
+		for(int j=0;j<h;j++) {
+			for(int i=0;i<width;i++) {
 
 				int rgb = by[i+j*width];
 
@@ -315,7 +326,7 @@ public class BufferedLayer extends ImageLayer {
 
 	}
 
-	public void setBuffer(BufferedImage buffer){
+	public void setBuffer(BufferedImage buffer) {
 		this.buffer = buffer;
 		
 		this.w = buffer.getWidth();
@@ -325,40 +336,40 @@ public class BufferedLayer extends ImageLayer {
 		
 	}
 	
-	public BufferedImage getModifiedBuffer(){
+	public BufferedImage getModifiedBuffer() {
 		return modifiedBuffer;
 	}
 	
-	public boolean colideAlphaPoint(int px, int py){
+	public boolean colideAlphaPoint(int px, int py) {
 		
-		if(colideRectPoint(px, py)){
+		if(colideRectPoint(px, py)) {
 			
 			int mx = px-x;
 			
 			int my = py-y;
 			
-			if(mx>=modifiedBuffer.getWidth()||my>=modifiedBuffer.getHeight()){
+			if(mx>=modifiedBuffer.getWidth()||my>=modifiedBuffer.getHeight()) {
 				return false;
 			}
 			
 			Color color = new Color(modifiedBuffer.getRGB(mx, my), true);	
 			
-			return color.getAlpha()==255;
+			return color.getAlpha() == MAX_INT;
 		}
 		
 		return false;
 		
 	}	
 	
-	public Color getColorPoint(int px, int py){
+	public Color getColorPoint(int px, int py) {
 		
-		if(colideRectPoint(px, py)){
+		if(colideRectPoint(px, py)) {
 			
 			int mx = px-x;
 			
 			int my = py-y;
 			
-			if(mx>=modifiedBuffer.getWidth()||my>=modifiedBuffer.getHeight()){
+			if(mx>=modifiedBuffer.getWidth()||my>=modifiedBuffer.getHeight()) {
 				return null;
 			}
 			
