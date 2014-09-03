@@ -20,10 +20,6 @@ public class Tutorial4 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-
-		//Three file levels up
-		String s = getClass().getResource("").toString();
-		setPath(s+"../../../");
 		
 		hideCursor();
 		

@@ -30,7 +30,7 @@ public class AnimationExample extends Application {
 	
 	private TextLayer text = new TextLayer("Text!");
 	
-	private TextLayer text2 = new TextLayer(0,400,"Text2!");
+	private TextLayer bouncingText = new TextLayer(0,400,"Text2!");
 	
 	private TextLayer text3 = new TextLayer(300,400,"Text3!");
 	
@@ -47,33 +47,34 @@ public class AnimationExample extends Application {
 		text.setBorderColor(Color.BLACK);
 		text.setBorderWidth(3f);
 		
-		text2.setSize(26);
-		text2.setBorder(true);
-		text2.setBorderColor(Color.BLACK);
-		text2.setBorderWidth(3f);
+		bouncingText.setSize(26);
+		bouncingText.setBorder(true);
+		bouncingText.setBorderColor(Color.BLACK);
+		bouncingText.setBorderWidth(3f);
 		
-		HorizontalMovement hscript = new HorizontalMovement(text2, 10000);
+		HorizontalMovement hscript = new HorizontalMovement(bouncingText, 10000);
 		hscript.setInterval(400, 10);
 		
-		HorizontalMovement invscript = new HorizontalMovement(text2, 10000);
+		HorizontalMovement invscript = new HorizontalMovement(bouncingText, 10000);
 		invscript.setInterval(10, 400);
 		//After the hscript, execute invscript
+		invscript.setNext(hscript);
 		hscript.setNext(invscript);
 		
-		VerticalMovementScript vscript = new VerticalMovementScript(text2, 600);
+		VerticalMovementScript vscript = new VerticalMovementScript(bouncingText, 600);
 		vscript.setInterval(100, 200);
-		vscript.setRepeat(AnimationScript.REPEAT_FOREVER);
 		
 		VerticalMovementScript invVscript = new VerticalMovementScript(600);
-		invVscript.setTarget(text2);
+		invVscript.setTarget(bouncingText);
 		invVscript.setInterval(200, 100);
+		invscript.setNext(vscript);
 		vscript.setNext(invVscript);
 				
 		this.scene.addAnimation(hscript);
 		this.scene.addAnimation(vscript);
 		
 		RotateAnimation rotate = new RotateAnimation(1000,6000);
-		rotate.setTarget(text2);
+		rotate.setTarget(bouncingText);
 		rotate.setInterval(0, 360);
 		this.scene.addAnimation(rotate);
 		
@@ -125,7 +126,7 @@ public class AnimationExample extends Application {
 		
 		text.draw(g);
 		
-		text2.draw(g);
+		bouncingText.draw(g);
 		
 		text3.draw(g);
 		

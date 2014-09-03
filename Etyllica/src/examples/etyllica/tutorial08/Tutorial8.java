@@ -2,7 +2,6 @@ package examples.etyllica.tutorial08;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.context.Application;
-import examples.etyllica.tutorial06.application.SubWindowExample;
 import examples.etyllica.tutorial08.application.CustomLoadApplication;
 
 /**

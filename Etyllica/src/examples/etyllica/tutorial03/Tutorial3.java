@@ -21,14 +21,6 @@ public class Tutorial3 extends Etyllica{
 	@Override
 	public Application startApplication() {
 		
-		//Etyllica tries to find the resources as your Application folder assets/
-				
-		//"Upping" three directories we have /Project/bin/assets/images
-		String s = getClass().getResource("").toString();
-		setPath(s+"../../../");
-		
-		//To avoid this, you should put your /assets/images in /Project/bin/examples/etyllica/tutorial3/
-		
 		return new StriderAnimation(w,h);
 	}
 	

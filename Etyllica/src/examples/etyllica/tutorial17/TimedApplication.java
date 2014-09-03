@@ -10,6 +10,8 @@ import br.com.etyllica.layer.ImageLayer;
 public class TimedApplication extends Application{
 	
 	private ImageLayer layer;
+
+	private boolean press = false;
 	
 	public TimedApplication(int w, int h) {
 		super(w, h);
@@ -51,16 +53,11 @@ public class TimedApplication extends Application{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	private long pressTime = 0;
-	
-	private boolean press = false;
 	
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)){
-			pressTime = event.getTimestamp();
 			press = true;
 		}
 		

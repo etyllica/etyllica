@@ -17,13 +17,6 @@ public class Tutorial12 extends Etyllica {
 	@Override
 	public Application startApplication() {
 				
-		//Etyllica tries to find the resources as your Application should be
-		//To avoid this you should put your /res/images in /Project/bin/examples/etyllica/tutorial1/
-		
-		//Upping three directories we have /Project/bin/res/images
-		String s = getClass().getResource("").toString();
-		setPath(s+"../../../");
-		
 		return new JoystickExample(w,h);
 	}
 	

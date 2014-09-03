@@ -22,7 +22,8 @@ public class AlphaCollision extends Application{
 	@Override
 	public void load() {
 		
-		layer = new BufferedLayer(w/2,h/2, "machine.png");
+		layer = new BufferedLayer("machine.png");
+		layer.setCoordinates(w/2-layer.getW()/2, h/2-layer.getH()/2);
 		
 		loading = 100;
 	}

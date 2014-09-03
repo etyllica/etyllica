@@ -8,16 +8,13 @@ public class Tutorial14 extends Etyllica {
 	private static final long serialVersionUID = 1L;
 
 	public Tutorial14() {
-		super(800, 600);
+		super(80, 60);
 	}
 	
 	@Override
 	public Application startApplication() {
-		
-		String s = getClass().getResource("").toString();
-		setPath(s+"../../../");
-		
-		return new AnimationTutorial(w,h);
+				
+		return new SpriteAnimationTutorial(w,h);
 	}
 	
 }

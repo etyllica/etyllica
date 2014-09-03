@@ -68,11 +68,9 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
-		String s = Etyllica.class.getResource("../../../").toString();
-		//String s = getClass().getResource("").toString();
+		String s = Etyllica.class.getResource("").toString();
 		
-		setPath(s);
-				
+		setPath(s+"../../../../");
 	}
 
 	protected void setPath(String path){

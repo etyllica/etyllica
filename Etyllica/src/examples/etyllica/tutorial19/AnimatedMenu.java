@@ -1,7 +1,6 @@
 package examples.etyllica.tutorial19;
 
 import br.com.etyllica.animation.AnimationHandler;
-import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.animation.scripts.HorizontalMovement;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;

@@ -9,9 +9,9 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.AnimatedLayer;
 
-public class AnimationTutorial extends Application{
+public class SpriteAnimationTutorial extends Application{
 
-	public AnimationTutorial(int w, int h){
+	public SpriteAnimationTutorial(int w, int h){
 		super(w,h);
 	}
 	

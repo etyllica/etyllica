@@ -7,11 +7,14 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.layer.TextLayer;
 
 public class AnimatedDialog extends Application{
 	
 	private TextLayer layer;
+	
+	private DialogScript script;
 		
 	public AnimatedDialog(int w, int h) {
 		super(w, h);
@@ -22,7 +25,7 @@ public class AnimatedDialog extends Application{
 				
 		layer = new TextLayer(200, 140, "Hello my friend, stay awhile and listen.");
 						
-		DialogScript script = new DialogScript(layer, 2000);
+		script = new DialogScript(layer, 2000);
 		
 		AnimationHandler.getInstance().add(script);
 				
@@ -42,7 +45,12 @@ public class AnimatedDialog extends Application{
 	
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-						
+		
+		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+			AnimationHandler.getInstance().add(script);
+			script.restart();
+		}
+		
 		return GUIEvent.NONE;
 	}
 	
