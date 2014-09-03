@@ -2,14 +2,14 @@ package br.com.etyllica.animation.scripts.complex;
 
 import br.com.etyllica.layer.Layer;
 
-public class HorizontalShakeScript extends ShakeScript {
+public class VerticalShakeScript extends ShakeScript {
 	
-	private int initialX = 0;
+	private int initialY = 0;
 		
-	public HorizontalShakeScript(Layer target, long time) {
+	public VerticalShakeScript(Layer target, long time) {
 		super(target, time);
 		
-		initialX = target.getX();
+		initialY = target.getY();
 	}
 	
 	@Override
@@ -28,13 +28,13 @@ public class HorizontalShakeScript extends ShakeScript {
 			slice = 1-slice;
 		}
 		
-		double startValue = initialX-strength;
+		double startValue = initialY-strength;
 		
-		double endValue = initialX+strength;
+		double endValue = initialY+strength;
 		
 		double value = startValue+(endValue-startValue)*slice;		
 		
-		target.setX((int)value);		
+		target.setY((int)value);		
 	}
 	
 }
