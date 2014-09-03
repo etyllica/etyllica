@@ -443,6 +443,24 @@ public class Graphic {
 	public void drawRect(GeometricLayer layer) {
 		drawRect(layer.getX(), layer.getY(), layer.getW(), layer.getH());
 	}
+	
+	/**
+	 * 
+	 * @param layer
+	 */
+	public void drawRect(Layer layer) {
+		
+		AffineTransform transform = layer.getTransform();
+		
+		if(transform == null)
+			drawRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
+		else {
+			setTransform(transform);
+			drawRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
+			resetTransform();
+		}
+	}
+	
 	/**
 	 * 
 	 * @param layer
@@ -480,7 +498,7 @@ public class Graphic {
 	 */
 	public void setTransform(AffineTransform tx) {
 		//Avoid Java Bug
-		if(screen!=null) {
+		if(screen != null) {
 			screen.setTransform(tx);
 		}
 	}
@@ -498,10 +516,8 @@ public class Graphic {
 	
 	public void resetTransform() {
 	
-		if(screen!=null) {
-			//Identity matrix
-			screen.setTransform(AffineTransform.getScaleInstance(1, 1));
-		}
+		//Identity matrix
+		setTransform(AffineTransform.getScaleInstance(1, 1));	
 	}
 	
 	/**
@@ -684,7 +700,7 @@ public class Graphic {
 		if(transform == null)
 			fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 		else {
-			screen.setTransform(transform);
+			setTransform(transform);
 			fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 			resetTransform();
 		}
