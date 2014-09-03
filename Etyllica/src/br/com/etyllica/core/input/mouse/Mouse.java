@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.event.MouseInputListener;
 
+import br.com.etyllica.collision.ColisionDetector;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.layer.AnimatedLayer;
@@ -226,9 +227,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		events.getSlot().set(key, PointerState.PRESSED, x, y, mwe.getWheelRotation());
 	}
 
-	//TODO Remover colisoes e incluir em layer
-
-	//Colisao
+	//Collision
 	public boolean sobMouseCircular(ImageLayer b) {
 		
 		final float radius = b.getW()/2;
@@ -237,34 +236,13 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	public boolean sobMouseCircular(float cx, float cy, float radius) {
-		
-		float dx = cx - x;
-		float dy = cy - y;
 
-		if ( ( dx * dx )  + ( dy * dy ) < radius * radius )	{
-			return true;
-		}
-
-		return false;
-
+		return ColisionDetector.colideCirclePoint(cx, cy, radius, x, y);
 	}
 
 	public boolean sobMouseIso(ImageLayer cam) {
 
-		float my = cam.getH()/2;
-		float mx = cam.getW()/2;
-
-		float x = this.x-cam.getX();
-		float y = this.y-cam.getY();
-
-		if(y>+my)
-			y=my-(y-my);
-
-		if((x>mx+1+(2*y))||(x<mx-1-(2*y)))
-			return false;
-		else
-			return true;
-
+		return ColisionDetector.colideIsometricPoint(cam, x, y);
 	}
 
 	public boolean sobMouse(float x, float y, float w, float h)	{

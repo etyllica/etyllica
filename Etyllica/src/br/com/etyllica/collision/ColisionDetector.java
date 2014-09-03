@@ -1,10 +1,59 @@
-package br.com.etyllica.layer.colision;
+package br.com.etyllica.collision;
 
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.linear.Point2D;
 
 public class ColisionDetector {
 
+	public static boolean colideCirclePoint(float cx, float cy, float radius, int px, int py) {
+		
+		float dx = cx - px;
+		float dy = cy - py;
+
+		if ( ( dx * dx )  + ( dy * dy ) < radius * radius )	{
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean colideIsometricPoint(Layer cam, int px, int py) {
+
+		float my = cam.getH()/2;
+		float mx = cam.getW()/2;
+
+		float x = px-cam.getX();
+		float y = py-cam.getY();
+
+		if(y>+my)
+			y=my-(y-my);
+
+		if((x>mx+1+(2*y))||(x<mx-1-(2*y)))
+			return false;
+		
+		return true;
+	}
+	
+	public static boolean colideHexagonPoint(Layer cam, int px, int py) {
+
+		float my = cam.getH()/2;
+		float mx = cam.getW()/4;
+
+		float x = px-cam.getX();
+		float y = py-cam.getY();
+
+		if(x > mx*3) {
+			x = mx-(x-mx*3);
+		} else if(x > mx) {
+			return py >= cam.getY() && py <= cam.getY()+cam.getH();
+		}
+		
+		if((y > my + 1 + (2*x))||(y<my - 1 - (2*x)))
+			return false;
+		
+		return true;
+	}
+		
 	/**
 	 * Code found at: http://stackoverflow.com/questions/5650032/collision-detection-with-rotated-rectangles
 	 */	

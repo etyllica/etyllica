@@ -2,10 +2,10 @@ package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
 
+import br.com.etyllica.collision.HitBox;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.image.ImageLoader;
-import br.com.etyllica.layer.colision.HitBox;
 import br.com.etyllica.linear.Rectangle;
 
 /**

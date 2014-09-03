@@ -4,10 +4,10 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.etyllica.collision.ColisionDetector;
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.layer.colision.ColisionDetector;
 
 /**
  * 
