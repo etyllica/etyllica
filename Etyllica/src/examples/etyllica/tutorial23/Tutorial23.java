@@ -8,7 +8,7 @@ public class Tutorial23 extends Etyllica {
 	private static final long serialVersionUID = 1L;
 
 	public Tutorial23() {
-		super(800, 200);
+		super(800, 300);
 	}
 	
 	@Override

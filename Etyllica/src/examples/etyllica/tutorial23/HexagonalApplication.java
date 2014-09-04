@@ -22,7 +22,8 @@ public class HexagonalApplication extends Application {
 	@Override
 	public void load() {
 
-		hexagon = new BufferedLayer(150, 10, "tiles/hexagon.png");
+		hexagon = new BufferedLayer("tiles/hexagon.png");
+		hexagon.setCoordinates(w/2-hexagon.getW()/2, h/2-hexagon.getH()/2);
 		
 		updateAtFixedRate(10);
 	}
