@@ -38,7 +38,7 @@ public class KeyEvent{
 		this.state = state;
 	}
 
-	public boolean isKeyDown(int keyCode){
+	public boolean isKeyDown(int keyCode) {
 		
 		if(this.key == keyCode){
 			return state==KeyState.PRESSED;
@@ -47,6 +47,17 @@ public class KeyEvent{
 		return false;
 	}
 	
+	public boolean anyKeyDown(int ... keyCodes) {
+		
+		for(int keyCode : keyCodes) {
+			if(this.key == keyCode) {
+				return state == KeyState.PRESSED;
+			}	
+		}
+				
+		return false;
+	}
+		
 	public boolean isKeyUp(int keyCode){
 		
 		if(this.key == keyCode){
