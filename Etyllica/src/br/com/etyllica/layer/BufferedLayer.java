@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.core.loader.image.ImageLoader;
 
 /**
@@ -20,8 +21,6 @@ import br.com.etyllica.core.loader.image.ImageLoader;
 
 public class BufferedLayer extends ImageLayer {
 
-	private Graphic g;
-	
 	private BufferedImage buffer;
 	
 	protected BufferedImage modifiedBuffer;
@@ -120,7 +119,6 @@ public class BufferedLayer extends ImageLayer {
 		this.buffer.getGraphics().drawImage(buffer,0,0,null);
 
 		resetImage();
-
 	}
 
 	/**
@@ -150,9 +148,9 @@ public class BufferedLayer extends ImageLayer {
 	
 	public void clearGraphics() {
 		
-		g = new Graphic(buffer);
-        g.setBackground(new Color(MAX_INT, MAX_INT, MAX_INT, 0));
-        g.clearRect(0, 0, w, h);
+		Graphics2D graphics = buffer.createGraphics();
+		graphics.setColor(SVGColor.TRANSPARENT);
+        graphics.clearRect(x, y, w, h);
         
         Graphics2D modifiedGraphic = modifiedBuffer.createGraphics();
         modifiedGraphic.setBackground(new Color(MAX_INT, MAX_INT, MAX_INT, 0));
@@ -253,8 +251,7 @@ public class BufferedLayer extends ImageLayer {
 		
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		
-		modifiedBuffer = op.filter(modifiedBuffer, null);
-		
+		modifiedBuffer = op.filter(modifiedBuffer, null);		
 	}
 	
 	public void flipHorizontal() {
@@ -265,8 +262,7 @@ public class BufferedLayer extends ImageLayer {
 		
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		
-		modifiedBuffer = op.filter(modifiedBuffer, null);
-		
+		modifiedBuffer = op.filter(modifiedBuffer, null);		
 	}
 	
 	public void resize(int width, int height) {
@@ -283,8 +279,7 @@ public class BufferedLayer extends ImageLayer {
 		
 		this.w = width;
 		
-		this.h = height;
-		
+		this.h = height;		
 	}
 
 	public void girar180() {
@@ -300,28 +295,25 @@ public class BufferedLayer extends ImageLayer {
 
 		int[] by = db.getData(); 
 		
-		int width = (int) w;
-		int height = (int) h;
-
-		byte imagem2D[][][] = new byte[width][height][3];
+		byte pixels[][][] = new byte[w][h][3];
 
 		for(int j=0;j<h;j++) {
-			for(int i=0;i<width;i++) {
+			for(int i=0;i<w;i++) {
 
-				int rgb = by[i+j*width];
+				int rgb = by[i+j*w];
 
 				byte r = (byte) ((rgb & 0x00ff0000) >> 16);
 				byte g = (byte) ((rgb & 0x0000ff00) >> 8);
 				byte b = (byte) (rgb & 0x000000ff);
 
-				imagem2D[i][j][0] = r;
-				imagem2D[i][j][1] = g;
-				imagem2D[i][j][2] = b;
+				pixels[i][j][0] = r;
+				pixels[i][j][1] = g;
+				pixels[i][j][2] = b;
 
 			}
 		}
 
-		return imagem2D;
+		return pixels;
 
 	}
 
@@ -368,7 +360,7 @@ public class BufferedLayer extends ImageLayer {
 			
 			int my = py-y;
 			
-			if(mx>=modifiedBuffer.getWidth()||my>=modifiedBuffer.getHeight()) {
+			if(mx>=modifiedBuffer.getWidth() || my>=modifiedBuffer.getHeight()) {
 				return null;
 			}
 			
@@ -384,11 +376,7 @@ public class BufferedLayer extends ImageLayer {
 	@Override
 	public void simpleDraw(Graphic g) {
 		g.drawImage( modifiedBuffer, x, y, x+w,y+h,
-				xImage,yImage,xImage+w,yImage+h, null );		
+				xImage,yImage,xImage+w,yImage+h, null );
 	}
 	
-	public Graphic getGraphics() {
-		return g;
-	}
-
 }
