@@ -67,7 +67,8 @@ public class Graphic {
 	public void setImage(BufferedImage image) {
 		setFastImage(image);
 		
-		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);		
+		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		this.screen.setColor(shadowColor);
 	}
 	
 	public void setVolatileImage(VolatileImage vimg) {
@@ -599,15 +600,18 @@ public class Graphic {
 	 * @param percent
 	 */
 	public void setAlpha(int percent) {
-
-		float a = (float)percent/100;
-
-		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, a));
+		float alpha = (float)percent/100;
+		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 	}
 	
 	public void setComposite(AlphaComposite composite) {
 		screen.setComposite(composite);
 	}
+	
+	public void setClearAlpha(int percent) {
+		float alpha = (float)percent/100;
+		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, alpha));
+	}	
 	
 	/**
 	 * 
