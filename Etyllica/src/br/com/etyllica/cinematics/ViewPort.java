@@ -11,7 +11,7 @@ public class ViewPort extends BufferedLayer {
 	protected int aimY = 0;
 	
 	public ViewPort(int x, int y, int w, int h) {
-		super(x, y, w, h);
+		super(x, y, w, h);		
 	}
 	
 	public int getAimX() {

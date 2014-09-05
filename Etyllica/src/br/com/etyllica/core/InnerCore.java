@@ -544,7 +544,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	private void drawContext(Context context, Graphic g) {
 
-		context.drawScene(g);
+		context.drawContext(g);
 
 		for(View view: context.getViews()) {
 			drawView(view, g);
