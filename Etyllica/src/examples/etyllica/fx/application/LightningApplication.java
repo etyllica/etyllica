@@ -1,4 +1,4 @@
-package examples.etyllica.fx;
+package examples.etyllica.fx.application;
 
 import java.awt.Color;
 

@@ -2,19 +2,20 @@ package examples.etyllica.fx;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.context.Application;
+import examples.etyllica.fx.application.LightSourceApplication;
 
-public class EffectsTutorial extends Etyllica {
+public class LightSourceTutorial extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 
-	public EffectsTutorial() {
-		super(800, 600);		
+	public LightSourceTutorial() {
+		super(768, 417);//Don't ask
 	}
 
 	@Override
 	public Application startApplication() {
 
-		return new LightningApplication(w,h);
+		return new LightSourceApplication(w,h);
 	}
 
 }
