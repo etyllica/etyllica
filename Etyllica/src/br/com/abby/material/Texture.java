@@ -33,7 +33,7 @@ public class Texture extends BufferedLayer{
 		for(int i=0;i<h;i++){
 			for(int j=0;j<w;j++){
 
-				c = new Color(modifiedBuffer.getRGB(j,i));
+				c = new Color(buffer.getRGB(j,i));
 
 				imagem2D[j][i][0] = (byte)c.getRed();
 				imagem2D[j][i][1] = (byte)c.getGreen();

@@ -21,9 +21,11 @@ import br.com.etyllica.core.loader.image.ImageLoader;
 
 public class BufferedLayer extends ImageLayer {
 
-	private BufferedImage buffer;
+	protected Graphics2D graphics;
 	
-	protected BufferedImage modifiedBuffer;
+	protected BufferedImage originalBuffer;
+	
+	protected BufferedImage buffer;
 	
 	private static int MAX_INT = 0xff;
 	
@@ -83,9 +85,9 @@ public class BufferedLayer extends ImageLayer {
 		this.w = w;
 		this.h = h;
 
-		buffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		originalBuffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		
-		modifiedBuffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		buffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 				
 		clearGraphics();
 		
@@ -115,8 +117,9 @@ public class BufferedLayer extends ImageLayer {
 		this.w = w;
 		this.h = h;
 
-		this.buffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		this.buffer.getGraphics().drawImage(buffer,0,0,null);
+		this.originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		this.graphics = originalBuffer.createGraphics();
+		graphics.drawImage(buffer,0,0,null);
 
 		resetImage();
 	}
@@ -127,8 +130,8 @@ public class BufferedLayer extends ImageLayer {
 	 */
 	public void copy(BufferedImage buffer) {
 
-		this.buffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
-		this.buffer.getGraphics().drawImage(buffer,0,0,null);
+		this.originalBuffer = new BufferedImage((int)w, (int)h,BufferedImage.TYPE_INT_ARGB);
+		this.originalBuffer.getGraphics().drawImage(buffer,0,0,null);
 
 		w = buffer.getWidth();
 		h = buffer.getHeight();
@@ -141,24 +144,24 @@ public class BufferedLayer extends ImageLayer {
 	 */
 	public void resetImage() {
 		
-		modifiedBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		modifiedBuffer.getGraphics().drawImage(buffer, 0, 0, null);
+		buffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		buffer.getGraphics().drawImage(originalBuffer, 0, 0, null);
 		
 	}
 	
 	public void clearGraphics() {
 		
-		Graphics2D graphics = buffer.createGraphics();
+		graphics = originalBuffer.createGraphics();
 		graphics.setColor(SVGColor.TRANSPARENT);
         graphics.clearRect(x, y, w, h);
         
-        Graphics2D modifiedGraphic = modifiedBuffer.createGraphics();
+        Graphics2D modifiedGraphic = buffer.createGraphics();
         modifiedGraphic.setBackground(new Color(MAX_INT, MAX_INT, MAX_INT, 0));
         modifiedGraphic.clearRect(0, 0, w, h);
 	}
 	
 	public void refresh() {
-		modifiedBuffer.getGraphics().drawImage(buffer, 0, 0, null);
+		buffer.getGraphics().drawImage(originalBuffer, 0, 0, null);
 	}
 
 	/**
@@ -201,7 +204,7 @@ public class BufferedLayer extends ImageLayer {
 			for(int i=0;i<w;i++) {
 
 				//Pego o rgb do pixel selecionado
-				int rgb = buffer.getRGB(i,j);
+				int rgb = originalBuffer.getRGB(i,j);
 
 				int a = (rgb>>24) & 0xff;
 
@@ -237,7 +240,7 @@ public class BufferedLayer extends ImageLayer {
 					b = 0;
 				}
 
-				modifiedBuffer.setRGB(i, j, new Color(r,g,b,a).getRGB());
+				buffer.setRGB(i, j, new Color(r,g,b,a).getRGB());
 			}
 		}
 
@@ -251,7 +254,7 @@ public class BufferedLayer extends ImageLayer {
 		
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		
-		modifiedBuffer = op.filter(modifiedBuffer, null);		
+		buffer = op.filter(buffer, null);		
 	}
 	
 	public void flipHorizontal() {
@@ -262,20 +265,20 @@ public class BufferedLayer extends ImageLayer {
 		
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		
-		modifiedBuffer = op.filter(modifiedBuffer, null);		
+		buffer = op.filter(buffer, null);		
 	}
 	
 	public void resize(int width, int height) {
 				
-		double scaleW = (double)width/(double)buffer.getWidth();
+		double scaleW = (double)width/(double)originalBuffer.getWidth();
 		
-		double scaleH = (double)height/(double)buffer.getHeight();		
+		double scaleH = (double)height/(double)originalBuffer.getHeight();		
 		
 		AffineTransform transform = AffineTransform.getScaleInstance(scaleW, scaleH);
 		
 		AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 				
-		modifiedBuffer = op.filter(modifiedBuffer, null);
+		buffer = op.filter(buffer, null);
 		
 		this.w = width;
 		
@@ -286,12 +289,12 @@ public class BufferedLayer extends ImageLayer {
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, -1);
 		tx.translate(-w, -h);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		modifiedBuffer = op.filter(modifiedBuffer, null);
+		buffer = op.filter(buffer, null);
 	}
 
 	public byte[][][] getBytes() {
 
-		DataBufferInt db = (DataBufferInt)modifiedBuffer.getRaster().getDataBuffer();
+		DataBufferInt db = (DataBufferInt)buffer.getRaster().getDataBuffer();
 
 		int[] by = db.getData(); 
 		
@@ -317,18 +320,18 @@ public class BufferedLayer extends ImageLayer {
 
 	}
 
-	public void setBuffer(BufferedImage buffer) {
-		this.buffer = buffer;
+	public void setBuffer(BufferedImage image) {
+		this.originalBuffer = image;
 		
-		this.w = buffer.getWidth();
-		this.h = buffer.getHeight();
+		this.w = image.getWidth();
+		this.h = image.getHeight();
 		
 		resetImage();
 		
 	}
 	
-	public BufferedImage getModifiedBuffer() {
-		return modifiedBuffer;
+	public BufferedImage getBuffer() {
+		return buffer;
 	}
 	
 	public boolean colideAlphaPoint(int px, int py) {
@@ -339,11 +342,11 @@ public class BufferedLayer extends ImageLayer {
 			
 			int my = py-y;
 			
-			if(mx>=modifiedBuffer.getWidth()||my>=modifiedBuffer.getHeight()) {
+			if(mx>=buffer.getWidth()||my>=buffer.getHeight()) {
 				return false;
 			}
 			
-			Color color = new Color(modifiedBuffer.getRGB(mx, my), true);	
+			Color color = new Color(buffer.getRGB(mx, my), true);	
 			
 			return color.getAlpha() == MAX_INT;
 		}
@@ -360,11 +363,11 @@ public class BufferedLayer extends ImageLayer {
 			
 			int my = py-y;
 			
-			if(mx>=modifiedBuffer.getWidth() || my>=modifiedBuffer.getHeight()) {
+			if(mx>=buffer.getWidth() || my>=buffer.getHeight()) {
 				return null;
 			}
 			
-			Color color = new Color(modifiedBuffer.getRGB(mx, my), true);	
+			Color color = new Color(buffer.getRGB(mx, my), true);	
 			
 			return color;
 		}
@@ -375,7 +378,7 @@ public class BufferedLayer extends ImageLayer {
 	
 	@Override
 	public void simpleDraw(Graphic g) {
-		g.drawImage( modifiedBuffer, x, y, x+w,y+h,
+		g.drawImage( buffer, x, y, x+w,y+h,
 				xImage,yImage,xImage+w,yImage+h, null );
 	}
 	
