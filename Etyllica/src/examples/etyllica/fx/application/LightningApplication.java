@@ -11,18 +11,18 @@ import br.com.etyllica.effects.Effect;
 
 public class LightningApplication extends Application{
 
+	private Effect lightning;
+	
 	public LightningApplication(int w, int h) {
 		super(w, h);
 	}
-
-	private Effect lightning;
 
 	@Override
 	public void load() {
 		
 		loading = 10;
 		
-		lightning = new Effect(300, 110, 148, 403, "lightning.png");
+		lightning = new Effect(300, 110, 120, 370, "lightning.png");
 		lightning.setFrames(10);
 		lightning.setSpeed(100);
 				
