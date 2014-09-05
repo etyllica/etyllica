@@ -2,12 +2,10 @@ package br.com.etyllica.cinematics;
 
 import java.awt.geom.AffineTransform;
 
-import br.com.etyllica.layer.GeometricLayer;
-
-public class Camera extends GeometricLayer {
-	
-	private float zoomX = 1;
-	private float zoomY = 1;
+public class Camera extends ViewPort {
+		
+	protected float zoomX = 1;
+	protected float zoomY = 1;
 		
 	private float skewX = 0;
 	private float skewY = 0;
@@ -19,12 +17,17 @@ public class Camera extends GeometricLayer {
 	public AffineTransform getTransform() {
 		
 		AffineTransform transform = AffineTransform.getScaleInstance(zoomX, zoomY);
-				
-		if(x != 0 || y != 0) {
-			transform.concatenate(AffineTransform.getTranslateInstance(-x, -y));
+
+		if(aimX != 0 || aimY != 0) {
+			transform.concatenate(AffineTransform.getTranslateInstance(-aimX/zoomX, -aimY/zoomY));
 		}
 
 		return transform;
+	}
+	
+	public void setZoom(float zoom) {
+		this.zoomX = zoom;
+		this.zoomY = zoom;
 	}
 	
 }
