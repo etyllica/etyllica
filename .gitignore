@@ -1,6 +1,5 @@
 # Pre-Compiled Files #
 *.class
-!/bin/assets/*
 /bin
 
 # SDK Projects
