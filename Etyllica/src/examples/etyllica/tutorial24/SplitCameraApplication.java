@@ -1,19 +1,22 @@
 package examples.etyllica.tutorial24;
 
-import java.awt.Color;
-
 import br.com.etyllica.cinematics.Camera;
-import br.com.etyllica.cinematics.ViewPort;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.SVGColor;
+import br.com.etyllica.layer.GeometricLayer;
 
 public class SplitCameraApplication extends Application {
 	
 	private Camera camera1;
 	
 	private Camera camera2;
+	
+	private GeometricLayer square;
+	
+	private GeometricLayer rectangle;
 		
 	public SplitCameraApplication(int w, int h) {
 		super(w, h);
@@ -26,6 +29,10 @@ public class SplitCameraApplication extends Application {
 		camera2 = new Camera(x+w/2, y, w/2, h);
 		camera2.setZoom(1.5f);
 		
+		square = new GeometricLayer(20, 20, 40, 40);
+		
+		rectangle = new GeometricLayer(20, 220, 100, 40);
+		
 		updateAtFixedRate(10);
 	}
 	
@@ -37,7 +44,7 @@ public class SplitCameraApplication extends Application {
 		if(pressed) {
 			aimY--;
 			camera1.setAimY(aimY);
-			camera2.setAimY(aimY);			
+			camera2.setAimY(aimY);
 		}
 	}
 		
@@ -57,21 +64,21 @@ public class SplitCameraApplication extends Application {
 	@Override
 	public void draw(Graphic g) {
 		
-		drawCamera(g, camera1);
-				
-		drawCamera(g, camera2);		
+		g.setCamera(camera1);		
+		drawScene(g);
+		g.resetCamera(camera1);
+
+		g.setCamera(camera2);
+		drawScene(g);
+		g.resetCamera(camera2);
 	}
 	
-	private void drawCamera(Graphic g, ViewPort camera) {
-		camera.resetImage();
-		g.setImage(camera.getBuffer());
-		g.setTransform(camera.getTransform());
+	private void drawScene(Graphic g) {
+		g.setColor(SVGColor.PURPLE);
+		g.drawRect(square);
 		
-		g.setColor(Color.PINK);
-		g.drawRect(20, 20, 100, 20);
-		g.resetImage();
-		
-		g.drawImage(camera.getBuffer(), camera.getX(), camera.getY());
+		g.setColor(SVGColor.ORANGE);
+		g.drawRect(rectangle);
 	}
 
 }
