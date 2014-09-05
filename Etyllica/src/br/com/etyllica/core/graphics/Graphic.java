@@ -5,7 +5,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Paint;
@@ -35,6 +34,7 @@ import br.com.etyllica.linear.Point2D;
 public class Graphic {
 
 	private VolatileImage vimg;
+	
 	protected Graphics2D screen;
 
 	private int width;
@@ -49,10 +49,25 @@ public class Graphic {
 		this.height = height;
 	}
 	
-	public Graphic(Graphics graphics) {
+	public Graphic(BufferedImage image) {
 		super();
+		setImage(image);
+	}
+	
+	public void setFastImage(BufferedImage image) {
+		this.screen = (Graphics2D) image.getGraphics();
 		
-		this.screen = (Graphics2D) graphics;
+		if(screen == null)
+			screen = image.createGraphics();
+
+		this.width = image.getWidth();
+		this.height = image.getHeight();
+	}
+	
+	public void setImage(BufferedImage image) {
+		setFastImage(image);
+		
+		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);		
 	}
 	
 	public void setVolatileImage(VolatileImage vimg) {
@@ -61,10 +76,18 @@ public class Graphic {
 		this.width = vimg.getWidth();
 		this.height = vimg.getHeight();
 		
-		this.screen = (Graphics2D)vimg.createGraphics();
+		this.screen = vimg.createGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.screen.setColor(shadowColor);
+	}
+	
+	public void resetImage() {
+		if(vimg == null)
+			return;
 		
+		this.screen = vimg.createGraphics();
+		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		this.screen.setColor(shadowColor);
 	}
 	
 	/*public void setBufferedImage(BufferedImage bimg) {
@@ -580,6 +603,10 @@ public class Graphic {
 		float a = (float)percent/100;
 
 		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, a));
+	}
+	
+	public void setComposite(AlphaComposite composite) {
+		screen.setComposite(composite);
 	}
 	
 	/**
