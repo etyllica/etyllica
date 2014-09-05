@@ -47,7 +47,7 @@ public class KeyEvent{
 		return false;
 	}
 	
-	public boolean anyKeyDown(int ... keyCodes) {
+	public boolean isAnyKeyDown(int ... keyCodes) {
 		
 		for(int keyCode : keyCodes) {
 			if(this.key == keyCode) {
