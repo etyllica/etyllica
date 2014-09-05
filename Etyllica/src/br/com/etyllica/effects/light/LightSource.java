@@ -7,7 +7,7 @@ import java.awt.RadialGradientPaint;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.GeometricLayer;
 
-public class LightSource extends GeometricLayer {
+public class LightSource extends GeometricLayer implements LightSpot {
 		
 	private float[] fractions = {.2f,.8f};
 	
