@@ -262,11 +262,14 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	
 	private void updateMouse(List<View> components) {
 		
-		int eventSize = mouse.getEvents().size(); 
+		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
+		mouse.clearEvents();
 		
+		int eventSize = events.size(); 
+				
 		for(int i=0; i<eventSize; i++) {
 
-			PointerEvent event = mouse.getEvents().get(i);
+			PointerEvent event = events.get(i);
 			
 			fixEventPosition(event);
 
@@ -301,22 +304,19 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 			}
 
-			//TODO Melhorar isso para fechar janela com ctrl+F4 ou algo assim
-
 			GUIEvent windowEvent = activeWindow.updateMouse(event);
 
-			if(windowEvent!=GUIEvent.NONE) {
+			if(windowEvent != GUIEvent.NONE) {
 				updateEvent(activeWindow, windowEvent);
 			}
 
 			GUIEvent frameEvent = updateFrameEvents(event); 
-			if(frameEvent!=GUIEvent.NONE) {
+			if(frameEvent != GUIEvent.NONE) {
 				superEvent = frameEvent;
 			}
 
 		}
 
-		mouse.clearEvents();		
 	}
 
 	private void updateGui(List<View> components, List<GUIEvent> guiEvents) {
