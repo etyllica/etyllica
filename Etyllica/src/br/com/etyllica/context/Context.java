@@ -317,9 +317,5 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	public void setFps(int fps) {
 		this.fps = fps;
 	}
-
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-	}
 		
 }

@@ -183,11 +183,11 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	public void resizeApplication(int w, int h) {
 		
 		Context application = activeWindow.getApplication();
-				
-		application.setW(w);
-		application.setH(h);
 		
 		application.resize(w, h);
+
+		application.setW(w);
+		application.setH(h);
 	}
 	
 	public void updateApplication(Context context, long now) {

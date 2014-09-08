@@ -41,5 +41,12 @@ public interface GUIComponent extends Drawable{
 	 * @return
 	 */
 	public boolean onMouse(int mx, int my);
+	
+	/**
+	 * 
+	 * @param new window width 
+	 * @param new window height
+	 */
+	public void resize(int width, int height);	
 
 }

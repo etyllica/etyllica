@@ -209,4 +209,8 @@ public abstract class View extends Layer implements GUIComponent {
 		
 	}
 	
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+	}
+	
 }
