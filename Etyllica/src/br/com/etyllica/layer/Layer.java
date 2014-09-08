@@ -29,9 +29,11 @@ public class Layer extends GeometricLayer implements Drawable {
 	protected double angle = 0;
 	
 	/**
-	 * Scale factor
+	 * Scale factors
 	 */
-	protected double scale = 1;
+	protected double scaleX = 1;
+	
+	protected double scaleY = 1;
 		
 	/**
      * if layer is visible
@@ -87,16 +89,33 @@ public class Layer extends GeometricLayer implements Drawable {
 		setAngle(angle+offset);
 	}
 	
-	public double getScale() {
-		return scale;
+	public double getScaleX() {
+		return scaleX;
+	}
+	
+	public double getScaleY() {
+		return scaleY;
 	}
 
 	/**
 	 * 
-	 * @param scale
+	 * @param scaleX
 	 */
+	public void setScaleX(double scaleX) {
+		this.scaleX = scaleX;
+	}
+	
+	/**
+	 * 
+	 * @param scaleY
+	 */
+	public void setScaleY(double scaleY) {
+		this.scaleY = scaleY;
+	}
+	
 	public void setScale(double scale) {
-		this.scale = scale;
+		this.scaleX = scale;
+		this.scaleY = scale;
 	}
 
 	/**
@@ -155,21 +174,21 @@ public class Layer extends GeometricLayer implements Drawable {
 		
 		AffineTransform transform = null;
 		
-		if(angle!=0) {
+		if(angle != 0) {
 			
 			transform = new AffineTransform();
 			
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
 		}
 
-		if(scale!=1) {
+		if(scaleX != 1 || scaleY != 1) {
 
 			if(transform == null) {
 				transform = new AffineTransform();
 			}
 			
-			double sw = w*scale;
-			double sh = h*scale;
+			double sw = w*scaleX;
+			double sh = h*scaleY;
 
 			double dx = sw/2-w/2;
 			double dy = sh/2-h/2;
@@ -179,7 +198,7 @@ public class Layer extends GeometricLayer implements Drawable {
 			AffineTransform scaleTransform = new AffineTransform();
 
 			scaleTransform.translate(w/2, h/2);
-			scaleTransform.scale(scale,scale);
+			scaleTransform.scale(scaleX,scaleY);
 			scaleTransform.translate(-x, -y);
 
 			transform.concatenate(scaleTransform);

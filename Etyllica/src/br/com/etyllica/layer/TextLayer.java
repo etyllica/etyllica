@@ -137,10 +137,10 @@ public class TextLayer extends ImageLayer {
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
 		}
 
-		if(scale!=1) {
+		if(scaleX != 1 || scaleY != 1) {
 
-			double sw = width*scale;
-			double sh = height*scale;
+			double sw = width*scaleX;
+			double sh = height*scaleY;
 
 			double dx = sw/2-width/2;
 			double dy = sh/2-height/2;
@@ -150,7 +150,7 @@ public class TextLayer extends ImageLayer {
 			AffineTransform tr2 = new AffineTransform();
 
 			tr2.translate(width/2, height/2);
-			tr2.scale(scale,scale);
+			tr2.scale(scaleX, scaleY);
 			tr2.translate(-x, -y);
 
 			transform.concatenate(tr2);

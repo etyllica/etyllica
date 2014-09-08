@@ -17,16 +17,16 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public class RigidBody extends Body{
+public class RigidBody extends Body {
 	
 	private Layer layer;
 	
-	public RigidBody(Layer layer){
+	public RigidBody(Layer layer) {
 		super();
 		this.layer = layer;
 		
-		addFixture(new BodyFixture(new org.dyn4j.geometry.Rectangle(layer.getW()*layer.getScale(), layer.getH()*layer.getScale())));
-		translate(layer.getX()+(layer.getW()*layer.getScale())/2, layer.getY()+(layer.getH()*layer.getScale())/2);
+		addFixture(new BodyFixture(new org.dyn4j.geometry.Rectangle(layer.getW()*layer.getScaleX(), layer.getH()*layer.getScaleY())));
+		translate(layer.getX()+(layer.getW()*layer.getScaleX())/2, layer.getY()+(layer.getH()*layer.getScaleY())/2);
 		setMass();
 		
 	}
@@ -46,7 +46,7 @@ public class RigidBody extends Body{
 		this.layer.simpleDraw(g);
 		
 		g.resetTransform();
-	}	
+	}
 	
 	public Layer getLayer() {
 		return layer;

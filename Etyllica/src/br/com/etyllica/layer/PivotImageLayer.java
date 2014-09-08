@@ -74,14 +74,14 @@ public class PivotImageLayer extends ImageLayer{
 			transform = AffineTransform.getRotateInstance(Math.toRadians(angle),x+xPivot, y+yPivot);			
 		}
 
-		if(scale!=1) {
+		if(scaleX != 1 || scaleY != 1) {
 
 			if(transform == null) {
 				transform = new AffineTransform();
 			}
 			
-			double sw = w*scale;
-			double sh = h*scale;
+			double sw = w*scaleX;
+			double sh = h*scaleY;
 
 			double dx = sw/2-w/2;
 			double dy = sh/2-h/2;
@@ -91,7 +91,7 @@ public class PivotImageLayer extends ImageLayer{
 			AffineTransform scaleTransform = new AffineTransform();
 
 			scaleTransform.translate(w/2, h/2);
-			scaleTransform.scale(scale,scale);
+			scaleTransform.scale(scaleX, scaleY);
 			scaleTransform.translate(-x, -y);
 
 			transform.concatenate(scaleTransform);

@@ -330,14 +330,14 @@ public class AnimatedLayer extends ImageLayer {
 		
 		AffineTransform transform = new AffineTransform();
 
-		if(angle!=0) {
+		if(angle != 0) {
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+tileW/2, y+tileH/2));
 		}
 		
-		if(scale!=1) {
+		if(scaleX != 1 || scaleY != 1) {
 
-			double sw = tileW*scale;
-			double sh = tileH*scale;
+			double sw = tileW*scaleX;
+			double sh = tileH*scaleY;
 
 			double dx = sw/2-tileW/2;
 			double dy = sh/2-tileH/2;
@@ -347,7 +347,7 @@ public class AnimatedLayer extends ImageLayer {
 			AffineTransform scaleTransform = new AffineTransform();
 
 			scaleTransform.translate(tileW/2, tileH/2);
-			scaleTransform.scale(scale,scale);
+			scaleTransform.scale(scaleX, scaleY);
 			scaleTransform.translate(-x, -y);
 
 			transform.concatenate(scaleTransform);

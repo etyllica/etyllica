@@ -7,7 +7,7 @@ import br.com.etyllica.animation.scripts.HorizontalMovement;
 import br.com.etyllica.animation.scripts.OpacityAnimation;
 import br.com.etyllica.animation.scripts.OrbitAnimation;
 import br.com.etyllica.animation.scripts.RotateAnimation;
-import br.com.etyllica.animation.scripts.ScaleAnimation;
+import br.com.etyllica.animation.scripts.ScaleUniformAnimation;
 import br.com.etyllica.animation.scripts.VerticalMovementScript;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
@@ -84,7 +84,7 @@ public class AnimationExample extends Application {
 		opacityAnimation.setInterval(0, 255);
 		this.scene.addAnimation(opacityAnimation);
 		
-		ScaleAnimation scaleAnimation = new ScaleAnimation(0,10000);
+		ScaleUniformAnimation scaleAnimation = new ScaleUniformAnimation(0,10000);
 		scaleAnimation.setTarget(text3);
 		scaleAnimation.setInterval(1, 5);
 		this.scene.addAnimation(scaleAnimation);
@@ -103,7 +103,7 @@ public class AnimationExample extends Application {
 		hello = new ImageLayer(200,100,"hello.png");
 		helloFix = new ImageLayer(200,100,"hello.png");
 		
-		ScaleAnimation scaleHello = new ScaleAnimation(0,10000);
+		ScaleUniformAnimation scaleHello = new ScaleUniformAnimation(0,10000);
 		scaleHello.setTarget(hello);
 		scaleHello.setInterval(1, 2);
 		this.scene.addAnimation(scaleHello);
