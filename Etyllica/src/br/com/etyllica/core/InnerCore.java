@@ -30,7 +30,6 @@ import br.com.etyllica.gui.window.MainWindow;
 import br.com.etyllica.i18n.Language;
 import br.com.etyllica.i18n.LanguageChangerListener;
 import br.com.etyllica.i18n.LanguageHandler;
-import br.com.etyllica.layer.BufferedLayer;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.dalt.DaltArrowTheme;
 import br.com.etyllica.theme.mouse.ThemeListener;

@@ -54,6 +54,7 @@ public abstract class Etyllica extends Applet implements Engine {
 
 		core.startEngine();
 		
+		addComponentListener(core);		
 	}
 
 	private void initialSetup(){

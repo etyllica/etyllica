@@ -62,6 +62,8 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 	
 	private GameLoop gameLoop;
 	
+	private boolean locked = false;
+	
 	public SharedCore(java.awt.Component component, int width, int height) {
 		super();
 
@@ -72,11 +74,9 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		this.width = width;
 		this.height = height;
 
-		this.graphic = new Graphic(width,height);
-
-		this.desktop = new MainWindow(0,0,width,height);
-
-		defineSize(width, height);
+		this.desktop = new MainWindow(0, 0, width, height);
+		
+		initGraphics(width, height);	
 
 		innerCore = new InnerCore();
 
@@ -85,13 +85,24 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		gameLoop = new FrameSkippingLoop(this);
 		
 	}
+	
+	private void initGraphics(int width, int height) {
+		
+		locked = true;
+		
+		this.graphic = new Graphic(width, height);
+
+		defineSize(width, height);
+		
+		locked = false;
+	}
 
 	private void initMonitors() {
 
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] devices = ge.getScreenDevices();
 
-		if(devices.length>0) {
+		if(devices.length > 0) {
 
 			for (int i = 0; i < devices.length; i++) {
 
@@ -105,13 +116,13 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 				int height = gcBounds.height;
 
-				monitors.add(new Monitor(x,y,width,height));
+				monitors.add(new Monitor(x, y, width, height));
 
 			}
 
 		}else{
 
-			monitors.add(new Monitor(0,0,width,height));
+			monitors.add(new Monitor(0, 0, width, height));
 
 		}
 
@@ -202,7 +213,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 		volatileImage = createBackBuffer(width, height);
 
-		if(volatileImage!=null) {
+		if(volatileImage != null) {
 			//graphic.setBufferedImage(volatileImage.getSnapshot());
 			graphic.setVolatileImage(volatileImage);
 		}
@@ -214,7 +225,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		int valCode = volatileImage.validate(configuration);
 
 		// This means the device doesn't match up to this hardware accelerated image.
-		if(valCode==VolatileImage.IMAGE_INCOMPATIBLE) {
+		if(valCode == VolatileImage.IMAGE_INCOMPATIBLE) {
 			volatileImage = createBackBuffer(width,height); // recreate the hardware accelerated image.
 			graphic.setVolatileImage(volatileImage);
 		}
@@ -234,6 +245,9 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 	public void paint( Graphics g ) {
 
+		if(locked)
+			return;
+		
 		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
 
@@ -244,6 +258,9 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		//volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 		//volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
+		if(graphic.getVimg() == null)
+			return;
+		
 		if(!innerCore.fullScreenEnable) {
 			g.drawImage(graphic.getVimg(), (int)desktop.getApplication().getX(), (int)desktop.getApplication().getY(), component);
 		}
@@ -349,8 +366,13 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		Component component = event.getComponent();
 		
 		Rectangle bounds = component.getBounds();
+		
+		int width = bounds.width;
+		int height = bounds.height;
+		
+		initGraphics(width, height);
 		//System.out.println("Resized: "+bounds.x+", "+bounds.y+", "+bounds.width+", "+bounds.height);
-		innerCore.resizeApplication(bounds.width, bounds.height);
+		innerCore.resizeApplication(width, height);
 	}
 
 	@Override

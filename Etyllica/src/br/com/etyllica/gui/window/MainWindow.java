@@ -12,21 +12,25 @@ import br.com.etyllica.gui.Window;
  *
  */
 
-public class MainWindow extends Window{
+public class MainWindow extends Window {
 
 	public MainWindow(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
 	
 	@Override
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 
-		if(application.isClearBeforeDraw()){
+		if(application.isClearBeforeDraw()) {
 			g.setColor(Color.WHITE);
 
-			g.fillRect(0,0,application.getW(),application.getH());
+			g.fillRect(0, 0, application.getW(), application.getH());
 		}
-		
+	}
+	
+	public void resize(int width, int height) {
+		this.w = width;
+		this.h = height;
 	}
 
 }
