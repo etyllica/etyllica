@@ -30,6 +30,7 @@ import br.com.etyllica.gui.window.MainWindow;
 import br.com.etyllica.i18n.Language;
 import br.com.etyllica.i18n.LanguageChangerListener;
 import br.com.etyllica.i18n.LanguageHandler;
+import br.com.etyllica.layer.BufferedLayer;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.dalt.DaltArrowTheme;
 import br.com.etyllica.theme.mouse.ThemeListener;
@@ -180,6 +181,16 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	}
 
+	public void resizeApplication(int w, int h) {
+		
+		Context application = activeWindow.getApplication();
+				
+		application.setW(w);
+		application.setH(h);
+		
+		application.resize(w, h);
+	}
+	
 	public void updateApplication(Context context, long now) {
 
 		if(!context.isLocked()) {
@@ -781,8 +792,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	public void setMainApplication(Application application) {
 
-		reload(application);		
-
+		reload(application);
 	}
 
 	protected void changeApplication() {

@@ -1,5 +1,6 @@
 package br.com.etyllica.core;
 
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
@@ -9,6 +10,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Transparency;
+import java.awt.event.ComponentEvent;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.window.MainWindow;
 import br.com.etyllica.util.io.IOHandler;
 
-public class SharedCore implements Runnable, GameCore {
+public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentListener {
 
 	private int width;
 
@@ -329,6 +331,31 @@ public class SharedCore implements Runnable, GameCore {
 
 		//System.out.println("frames: " + fps);
 		innerCore.setFps(fps);
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent event) {
+		// TODO Auto-generated method stub	
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent event) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void componentResized(ComponentEvent event) {
+		
+		Component component = event.getComponent();
+		
+		Rectangle bounds = component.getBounds();
+		//System.out.println("Resized: "+bounds.x+", "+bounds.y+", "+bounds.width+", "+bounds.height);
+		innerCore.resizeApplication(bounds.width, bounds.height);
+	}
+
+	@Override
+	public void componentShown(ComponentEvent event) {
+		// TODO Auto-generated method stub
 	}
 
 }

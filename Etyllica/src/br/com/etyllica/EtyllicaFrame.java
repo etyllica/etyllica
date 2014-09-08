@@ -59,7 +59,9 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 		
 		core.startCore(application);
 		
-		core.startEngine();		
+		core.startEngine();
+		
+		addComponentListener(core);
 	}
 
 	private void initialSetup(){

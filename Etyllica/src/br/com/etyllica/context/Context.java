@@ -107,7 +107,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	 * @param h Application height
 	 */
 	public Context(int x, int y, int w, int h) {
-		super(x,y,w,h);
+		super(x, y, w, h);
 
 		this.loading = 0;
 		//TODO Dictionary get "loading"+...
@@ -123,7 +123,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	 * @param h Application height
 	 */
 	public Context(int w, int h) {
-		this(0,0,w,h);
+		this(0, 0, w, h);
 	}
 
 	public void startLoad() {
@@ -141,7 +141,6 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 		//for(LoadListener listener: loadListeners) {
 		loadListener.loaded();
 		//}
-
 	}
 
 	/**
@@ -317,6 +316,10 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 	public void setFps(int fps) {
 		this.fps = fps;
+	}
+
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
 	}
 		
 }
