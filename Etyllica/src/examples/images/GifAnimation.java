@@ -23,7 +23,7 @@ public class GifAnimation extends Application{
 		
 		loading = 10;
 				
-		frames = ImageLoader.getInstance().getAnimation("test/shark.gif");
+		frames = ImageLoader.getInstance().getAnimation("shark.gif");
 
 		updateAtFixedRate(frames.get(0).getDelay());
 		

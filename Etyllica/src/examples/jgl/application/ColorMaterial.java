@@ -92,17 +92,17 @@ public class ColorMaterial extends GLAUX{
 	}
 
 	@Override
-	public GUIEvent updateMouse(PointerEvent event){
+	public GUIEvent updateMouse(PointerEvent event) {
 
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
+		if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
 			changeRedDiffuse();
 		}
 		
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_MIDDLE)){
+		if(event.isButtonUp(MouseButton.MOUSE_BUTTON_MIDDLE)) {
 			changeBlueDiffuse();
 		}
 		
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_RIGHT)){
+		if(event.isButtonUp(MouseButton.MOUSE_BUTTON_RIGHT)) {
 			changeGreenDiffuse();
 		}
 		

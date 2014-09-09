@@ -13,7 +13,7 @@ public class Tutorial17 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-				
+		initialSetup("../../../../");
 		return new TimedApplication(w,h);
 	}
 	

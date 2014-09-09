@@ -19,7 +19,8 @@ public class Tutorial11 extends Etyllica{
 
 	@Override
 	public Application startApplication() {
-		return new CaptureAudioApplication(640, 480);
+		initialSetup("../../../../");
+		return new CaptureAudioApplication(w, h);
 	}
 
 }

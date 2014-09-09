@@ -21,6 +21,7 @@ public class Tutorial10 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
+		initialSetup("../../../../");
 		return new SpinnerExample(w,h);
 	}
 	

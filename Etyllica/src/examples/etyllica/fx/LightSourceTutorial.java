@@ -14,6 +14,7 @@ public class LightSourceTutorial extends Etyllica {
 
 	@Override
 	public Application startApplication() {
+		initialSetup("../../../../");
 
 		return new LightSourceApplication(w,h);
 	}

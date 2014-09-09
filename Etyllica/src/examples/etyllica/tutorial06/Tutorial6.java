@@ -21,7 +21,7 @@ public class Tutorial6 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		
+		initialSetup("../../../../");
 		return new SubWindowExample(w,h);
 	}
 	

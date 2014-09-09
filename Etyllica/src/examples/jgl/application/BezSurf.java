@@ -2,12 +2,9 @@ package examples.jgl.application;
 
 import org.jgl.GL;
 
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 
-public class BezSurf extends GL{
+public class BezSurf extends GL {
 
 	public BezSurf(int w, int h) {
 		super(w,h);
@@ -20,9 +17,7 @@ public class BezSurf extends GL{
 		myinit ();
 
 		loading = 100;
-
 	}
-
 
 	private static final float ctrlpoints [][][] = {
 		{{-1.5f, -1.5f,  4.0f},
@@ -96,18 +91,6 @@ public class BezSurf extends GL{
 		}
 		glMatrixMode (GL_MODELVIEW);
 		glLoadIdentity ();
-	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent	.NONE;
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent	.NONE;
 	}
 
 }

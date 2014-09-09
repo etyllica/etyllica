@@ -13,7 +13,7 @@ public class Tutorial1 extends Etyllica {
 
 	@Override
 	public Application startApplication() {
-
+		initialSetup("../../../../");
 		return new HelloWorld(w,h);
 	}
 

@@ -20,6 +20,7 @@ public class Tutorial3 extends Etyllica{
 	
 	@Override
 	public Application startApplication() {
+		initialSetup("../../../../");
 		
 		return new StriderAnimation(w,h);
 	}

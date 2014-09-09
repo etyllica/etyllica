@@ -149,7 +149,7 @@ public class BufferedLayer extends ImageLayer {
 		
 	}
 	
-	public void clearGraphics() {
+	public Graphics2D clearGraphics() {
 		
 		graphics = originalBuffer.createGraphics();
 		graphics.setColor(SVGColor.TRANSPARENT);
@@ -158,6 +158,8 @@ public class BufferedLayer extends ImageLayer {
         Graphics2D modifiedGraphic = buffer.createGraphics();
         modifiedGraphic.setBackground(new Color(MAX_INT, MAX_INT, MAX_INT, 0));
         modifiedGraphic.clearRect(0, 0, w, h);
+        
+        return modifiedGraphic;
 	}
 	
 	public void refresh() {

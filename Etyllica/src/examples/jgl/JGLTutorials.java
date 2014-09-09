@@ -2,7 +2,17 @@ package examples.jgl;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.context.Application;
+import examples.jgl.application.BezSurf;
+import examples.jgl.application.Checker;
+import examples.jgl.application.Clip;
+import examples.jgl.application.ColorMaterial;
+import examples.jgl.application.Lines;
+import examples.jgl.application.Material;
+import examples.jgl.application.Surface;
 import examples.jgl.application.Teapots;
+import examples.jgl.application.TextureSurf;
+import examples.jgl.bezcurve.BezCurve;
+import examples.jgl.bezmesh.BezMesh;
 
 public class JGLTutorials extends Etyllica {
 
@@ -15,29 +25,30 @@ public class JGLTutorials extends Etyllica {
 	@Override
 	public Application startApplication() {
 		
-		//setMainApplication(new BezCurve(w,h));
-		//setMainApplication(new BezMesh(w,h));
-		//setMainApplication(new Checker(w,h));
-		//setMainApplication(new Clip(w,h));
-		//setMainApplication(new ColorMaterial(w,h));
-		//setMainApplication(new Light(w,h));
-		//setMainApplication(new Lines(w,h));
-		//setMainApplication(new List(w,h));
-		//setMainApplication(new Material(w,h));
-		//setMainApplication(new MipMap(w,h));
-		//setMainApplication(new Model(w,h));
-		//setMainApplication(new MoveLight(w,h));
-		//setMainApplication(new Planet(w,h));
-		//setMainApplication(new Robot(w,h));
-		//setMainApplication(new Smooth(w,h));
-		//setMainApplication(new Surface(w,h));
-		//setMainApplication(new Tea(w,h));
-		return new Teapots(w,h);
-		//setMainApplication(new TextureSurf(w,h));
+		//return new BezCurve(w, h);
+		//return new BezMesh(w, h);
+		//return new BezSurf(w, h);
+		//return new Checker(w, h);
+		//return new Clip(w, h);
+		//return new ColorMaterial(w, h);
+		//return new Light(w, h);
+		//return new Lines(w, h);
+		//return new List(w, h);
+		//return new Material(w, h);
+		//return new MipMap(w, h);
+		//return new Model(w, h);
+		//return new MoveLight(w, h);
+		//return new Planet(w, h);
+		//return new Robot(w, h);
+		//return new Smooth(w, h);
+		//return new Surface(w, h);
+		//return new Tea(w, h);
+		//return new Teapots(w, h);
+		return new TextureSurf(w, h);
 		
 		//Problem
-		//setMainApplication(new Simple(w,h));
-		//setMainApplication(new Stroke(w,h));
+		//return new Simple(w, h);
+		//return new Stroke(w, h);
 		
 		
 	}

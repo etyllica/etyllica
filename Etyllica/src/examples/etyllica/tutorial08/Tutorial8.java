@@ -21,7 +21,7 @@ public class Tutorial8 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-				
+		initialSetup("../../../../");
 		return new CustomLoadApplication(w,h);
 	}
 	

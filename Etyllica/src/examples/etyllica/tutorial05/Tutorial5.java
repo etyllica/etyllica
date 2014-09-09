@@ -20,7 +20,7 @@ public class Tutorial5 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		
+		initialSetup("../../../../");
 		return new FollowingText(w,h);
 	}
 	

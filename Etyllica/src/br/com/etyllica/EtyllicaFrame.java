@@ -1,6 +1,7 @@
 package br.com.etyllica;
 
 import java.awt.Graphics;
+import java.net.URL;
 
 import javax.swing.JFrame;
 
@@ -33,15 +34,14 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	private Application application;
 
 	protected Mouse mouse;
-
+	
 	public EtyllicaFrame(int width, int height) {
 		super();
 
 		this.w = width;
 		this.h = height;
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		setDefaultCloseOperation(EXIT_ON_CLOSE);		
 	}
 	
 	@Override
@@ -53,7 +53,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 
 		core.setEngine(this);
 
-		initialSetup();
+		initialSetup("");
 
 		this.application = startApplication();
 		
@@ -64,18 +64,23 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 		addComponentListener(core);
 	}
 
-	private void initialSetup(){
+	protected void initialSetup(String suffix) {
 
 		//Load Monitors
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
-		String s = Etyllica.class.getResource("").toString();
-		
-		setPath(s+"../../../../");
+		String defaultPath = this.getClass().getResource("").toString();
+					
+		setPath(defaultPath+suffix);
 	}
 
-	protected void setPath(String path){
+	protected void setPath(URL url) {
+
+		setPath(url.toString());
+	}
+	
+	protected void setPath(String path) {
 
 		core.setPath(path);
 

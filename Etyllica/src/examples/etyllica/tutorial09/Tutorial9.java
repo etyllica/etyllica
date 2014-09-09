@@ -24,7 +24,7 @@ public class Tutorial9 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		
+		initialSetup("../../../../");
 		Configuration.getInstance().setTimerClick(true);
 		
 		ThemeManager.getInstance().setTheme(new EtyllicTheme());

@@ -13,8 +13,8 @@ public class Tutorial23 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-				
-		return new HexagonalApplication(w,h);
+		initialSetup("../../../../");
+		return new HexagonalApplication(w, h);
 	}
 	
 }

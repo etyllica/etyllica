@@ -20,7 +20,7 @@ public class GraphViewer extends EtyllicaFrame {
 	
 	@Override
 	public Application startApplication() {
-
+		initialSetup("../../../../");
 		return new ViewerAppl(w,h);
 	}
 

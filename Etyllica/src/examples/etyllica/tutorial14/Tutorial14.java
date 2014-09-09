@@ -13,7 +13,7 @@ public class Tutorial14 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-				
+		initialSetup("../../../../");
 		return new SpriteAnimationTutorial(w,h);
 	}
 	

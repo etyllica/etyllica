@@ -17,9 +17,9 @@ public class GifViewer extends Etyllica {
 		//Etyllica tries to find the resources as your Application should be
 		//To avoid this you should put your /assets/images in /Project/bin/examples/etyllica/tutorial1/
 		
-		//Upping three directories we have /Project/bin/assets/images
-		String s = getClass().getResource("").toString();
-		setPath(s+"../../");
+		//Upping four directories we have /Project/bin/assets/images
+		
+		initialSetup("../../../");
 		
 		return new GifAnimation(w,h);
 		

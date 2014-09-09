@@ -2,6 +2,7 @@ package br.com.etyllica;
 
 import java.applet.Applet;
 import java.awt.Graphics;
+import java.net.URL;
 
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.SharedCore;
@@ -29,12 +30,12 @@ public abstract class Etyllica extends Applet implements Engine {
 	protected int h = 480;
 
 	private Application application;
-	
+		
 	public Etyllica(int width, int height) {
 		super();
 		
 		this.w = width;
-		this.h = height;
+		this.h = height;	
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public abstract class Etyllica extends Applet implements Engine {
 		
 		core.setEngine(this);
 
-		initialSetup();
+		initialSetup("");
 
 		this.application = startApplication();
 
@@ -57,15 +58,20 @@ public abstract class Etyllica extends Applet implements Engine {
 		addComponentListener(core);		
 	}
 
-	private void initialSetup(){
+	protected void initialSetup(String suffix) {
 
 		//Load Monitors
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
-		String s = Etyllica.class.getResource("").toString();
+		String defaultPath = this.getClass().getResource("").toString();
+					
+		setPath(defaultPath+suffix);
+	}
+	
+	protected void setPath(URL url) {
 
-		setPath(s+"../../../../");		
+		setPath(url.toString());
 	}
 
 	protected void setPath(String path){

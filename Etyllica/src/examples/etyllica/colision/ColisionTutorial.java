@@ -18,6 +18,8 @@ public class ColisionTutorial extends EtyllicaFrame {
 
 	@Override
 	public Application startApplication() {
+		initialSetup("../../../../");
+		
 		return new ColisionElements(w, h);
 	}
 

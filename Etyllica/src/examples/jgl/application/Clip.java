@@ -7,13 +7,13 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 
-public class Clip extends GLAUX{
+public class Clip extends GLAUX {
 
 	public Clip(int w, int h) {
 		super(w,h);
 	}
 	
-	public void load(){
+	public void load() {
 		myinit();
 		loading = 100;
 	}
