@@ -1,8 +1,6 @@
 package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.com.etyllica.collision.ColisionDetector;
 import br.com.etyllica.core.Drawable;
@@ -40,8 +38,6 @@ public class Layer extends GeometricLayer implements Drawable {
      */
 	protected boolean visible = true;
 	
-	protected List<Layer> children;
-
 	public Layer() {
 		super();
 	}
@@ -215,23 +211,6 @@ public class Layer extends GeometricLayer implements Drawable {
 	
 	public void simpleDraw(Graphic g) {
 		// TODO Auto-generated method stub
-	}
-		
-	public List<Layer> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<Layer> children) {
-		this.children = children;
-	}
-
-	public void addChild(Layer layer){
-		
-		if(children==null){
-			children = new ArrayList<Layer>();
-		}
-		
-		children.add(layer);
 	}
 
 }
