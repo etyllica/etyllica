@@ -148,7 +148,7 @@ public class GeometricLayer implements Movable {
 	 * 
 	 * @param layer
 	 */
-	public void centralize(Layer layer) {
+	public void centralize(GeometricLayer layer) {
 		centralizeX(layer);
 		centralizeY(layer);
 	}
@@ -157,7 +157,7 @@ public class GeometricLayer implements Movable {
 	 * 
 	 * @param layer
 	 */
-	public void centralizeX(Layer layer) {
+	public void centralizeX(GeometricLayer layer) {
 		centralizeX(layer.getX(),layer.getX()+layer.getW());
 	}
 	
@@ -179,7 +179,7 @@ public class GeometricLayer implements Movable {
 	 * 
 	 * @param layer
 	 */
-	public void centralizeY(Layer layer) {
+	public void centralizeY(GeometricLayer layer) {
 		centralizeY(layer.getY(),layer.getY()+layer.getH());
 	}
 	

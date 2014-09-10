@@ -7,7 +7,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.theme.Theme;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.TextLayer;
 import br.com.etyllica.theme.ThemeManager;
 
@@ -164,12 +164,12 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public void centralize(Layer layer) {
+	public void centralize(GeometricLayer layer) {
 		layer.centralize(layer);
 	}
 	
 	@Override
-	public void centralizeX(Layer layer) {
+	public void centralizeX(GeometricLayer layer) {
 		layer.centralizeX(layer);
 	}
 
@@ -179,7 +179,7 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public void centralizeY(Layer layer) {
+	public void centralizeY(GeometricLayer layer) {
 		layer.centralizeY(layer);
 	}
 
