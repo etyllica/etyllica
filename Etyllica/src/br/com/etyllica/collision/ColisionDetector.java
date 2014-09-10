@@ -1,12 +1,13 @@
 package br.com.etyllica.collision;
 
+import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.linear.Point2D;
 
 public class ColisionDetector {
 
 	public static boolean colideCirclePoint(float cx, float cy, float radius, int px, int py) {
-		
+
 		float dx = cx - px;
 		float dy = cy - py;
 
@@ -30,10 +31,10 @@ public class ColisionDetector {
 
 		if((x>mx+1+(2*y))||(x<mx-1-(2*y)))
 			return false;
-		
+
 		return true;
 	}
-	
+
 	public static boolean colideHexagonPoint(Layer cam, int px, int py) {
 
 		float my = cam.getH()/2;
@@ -47,16 +48,25 @@ public class ColisionDetector {
 		} else if(x > mx) {
 			return py >= cam.getY() && py <= cam.getY()+cam.getH();
 		}
-		
+
 		if((y > my + 1 + (2*x))||(y<my - 1 - (2*x)))
 			return false;
-		
+
 		return true;
 	}
-		
+
+	public static boolean colideRectPoint(GeometricLayer layer, double  px, double py) {
+		int rectCenterX = layer.getX()+layer.getW()/2;
+		int rectCenterY = layer.getY()+layer.getH()/2;
+		int rectWidth = layer.getW();
+		int rectHeight = layer.getH();
+
+		return Math.abs(rectCenterX-px) < rectWidth/2 && Math.abs(rectCenterY-py) < rectHeight/2;
+	}
+	
 	/**
 	 * Code found at: http://stackoverflow.com/questions/5650032/collision-detection-with-rotated-rectangles
-	 */	
+	 */
 	public static boolean colideRectPoint(Layer layer, double  px, double py) {
 		int rectCenterX = layer.getX()+layer.getW()/2;
 		int rectCenterY = layer.getY()+layer.getH()/2;
@@ -146,6 +156,23 @@ public class ColisionDetector {
 				testCircleToSegment(tx, ty, circleRadius, cx+rectWidth/2, cy+rectHeight/2, cx+rectWidth/2, cy-rectHeight/2) ||
 				testCircleToSegment(tx, ty, circleRadius, cx+rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy-rectHeight/2) ||
 				testCircleToSegment(tx, ty, circleRadius, cx-rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy+rectHeight/2);
+	}
+
+	public static boolean colideRectRect(Layer a, Layer b) {
+
+		if(a.getAngle() == 0 && b.getAngle() == 0) {
+
+			if(b.getX() + b.getW() < a.getX())	return false;
+			if(b.getX() > a.getX() + a.getW())		return false;
+
+			if(b.getY() + b.getH() < a.getY())	return false;
+			if(b.getY() > a.getY() + a.getH())		return false;
+
+			return true;
+
+		} else {
+			return colidePolygon(a, b);
+		}
 	}
 
 	/**

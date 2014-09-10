@@ -2,6 +2,7 @@ package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
 
+import br.com.etyllica.collision.ColisionDetector;
 import br.com.etyllica.collision.HitBox;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.Mouse;
@@ -268,15 +269,7 @@ public class ImageLayer extends StaticLayer {
 	
 	public boolean onMouse(Mouse mouse) {
 
-		boolean colision = false;
-
-		if(angle==0) {
-			colision = colideRetangular(mouse.getX(), mouse.getY(), 1, 1);
-		}else{
-			colision = colisionRotated(mouse.getX(), mouse.getY());
-		}
-
-		return colision;
+		return ColisionDetector.colideRectPoint(this, mouse.getX(), mouse.getY());
 	}
 
 	public void clone(ImageLayer b) {

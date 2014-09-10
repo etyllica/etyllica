@@ -42,14 +42,14 @@ public class Layer extends GeometricLayer implements Drawable {
 		super();
 	}
 	
-	public Layer(int x, int y){
+	public Layer(int x, int y) {
 		super();
 		
 		this.x = x;
 		this.y = y;
 	}
 	
-	public Layer(int x, int y, int w, int h){
+	public Layer(int x, int y, int w, int h) {
 		super(x,y,w,h);
 	}
 	
@@ -118,29 +118,29 @@ public class Layer extends GeometricLayer implements Drawable {
 	 * 
 	 * @param visible
 	 */
-	public void setVisible(boolean visible){
+	public void setVisible(boolean visible) {
 		this.visible = visible;	
 	}
 	
-	public boolean isVisible(){
+	public boolean isVisible() {
 		return visible;
 	}
 
 	/**
      * Method to turn a Layer visible
      */
-	public void show(){
+	public void show() {
 		visible = true;
 	}
 	
 	/**
      * Method to turn a Layer invisible
      */
-	public void hide(){
+	public void hide() {
 		visible = false;
 	}
 	
-	public void swapVisible(){
+	public void swapVisible() {
 		visible = !visible;
 	}
 		

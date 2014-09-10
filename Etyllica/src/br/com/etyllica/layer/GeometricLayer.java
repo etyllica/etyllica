@@ -227,26 +227,7 @@ public class GeometricLayer implements Movable {
 		return true;
 
 	}
-	
-	/**
-	 * 
-	 * @param px
-	 * @param py
-	 * @return
-	 */
-	public boolean colideRectPoint(int px, int py) {
 		
-		if((px<getX())||(px>getX() + getW())) {
-			return false;
-		}
-		
-		if((py<getY())||(py>getY() + getH())) {
-			return false;
-		}
-
-		return true;
-	}
-	
 	/**
 	 * 
 	 * @param bx
@@ -291,24 +272,6 @@ public class GeometricLayer implements Movable {
 		double distance = Math.sqrt((double)(dx + dy));
 
 		return (distance <= radius);
-	}
-	
-	public boolean colideIsometric(int px, int py) {
-
-		int my = this.getH()/2;
-		int mx = this.getW()/2;
-
-		int x = px-this.getX();
-		int y = py-this.getY();
-
-		if(y>+my)
-			y=my-(y-my);
-
-		if((x>mx+1+(2*y))||(x<mx-1-(2*y)))
-			return false;
-		else
-			return true;
-
-	}
+	}	
 	
 }

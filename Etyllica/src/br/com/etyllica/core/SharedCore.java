@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import br.com.etyllica.collision.ColisionDetector;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.event.GUIEvent;
@@ -117,13 +118,10 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 				int height = gcBounds.height;
 
 				monitors.add(new Monitor(x, y, width, height));
-
 			}
 
-		}else{
-
+		} else {
 			monitors.add(new Monitor(0, 0, width, height));
-
 		}
 
 	}
@@ -157,10 +155,9 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 		for(Monitor monitor: monitors) {
 
-			if(monitor.colideRectPoint(p.x, p.y)) {
+			if(ColisionDetector.colideRectPoint(monitor, p.x, p.y)) {
 				selectedMonitor = monitor;
 			}
-
 		}
 
 		if(!innerCore.fullScreenEnable) {
