@@ -47,7 +47,7 @@ public class BufferedLayer extends ImageLayer {
 	 */
 	public BufferedLayer(int x, int y, String path) {
 		super(x,y,path);
-		igualaImagem(ImageLoader.getInstance().getImage(path));
+		copy(ImageLoader.getInstance().getImage(path));
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class BufferedLayer extends ImageLayer {
 		this.w = buffer.getWidth();
 		this.h = buffer.getHeight();
 		
-		igualaImagem(buffer);
+		copy(buffer);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class BufferedLayer extends ImageLayer {
 	 * 
 	 * @param buffer
 	 */
-	public void igualaImagem(Image buffer) {
+	public void copy(Image buffer) {
 
 		if(buffer==null)
 			return;

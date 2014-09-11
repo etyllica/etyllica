@@ -46,8 +46,7 @@ public class Model3D extends AimPoint implements GLDrawable {
 	public Model3D(String path) {
 		super(0,0,0);
 		
-		this.vbo = MeshLoader.getInstance().loadModel(path);
-		
+		this.vbo = MeshLoader.getInstance().loadModel(path);		
 	}
 
 	@Override

@@ -29,7 +29,7 @@ public class Controller {
 		super();
 	}
 	
-	public Controller(ControllerListener listener){
+	public Controller(ControllerListener listener) {
 		super();
 		
 		this.listener = listener;
