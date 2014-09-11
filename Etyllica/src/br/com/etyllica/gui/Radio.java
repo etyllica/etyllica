@@ -35,7 +35,7 @@ public class Radio extends CheckBox{
 
 		GUIEvent retorno = GUIEvent.NONE;
 		
-		if(mouseOver){
+		if(mouseOver) {
 
 			if(event.getState()==PointerState.PRESSED){
 
@@ -73,11 +73,12 @@ public class Radio extends CheckBox{
 		g.setColor(Color.WHITE);
 		//g.fillOval(x, y, w, h);
 		
-		if(!mouseOver){
+		if(!mouseOver) {
 			g.setColor(ThemeManager.getInstance().getTheme().getTextFieldWithoutFocusColor());
 		}else{
 			g.setColor(ThemeManager.getInstance().getTheme().getTextFieldOnMouseColor());
 		}
+		
 		g.drawOval(x, y, w, h);
 		
 		g.setColor(ThemeManager.getInstance().getTheme().getTextFieldWithoutFocusColor());

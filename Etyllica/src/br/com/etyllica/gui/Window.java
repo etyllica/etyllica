@@ -5,13 +5,12 @@ import java.util.List;
 
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.Context;
+import br.com.etyllica.context.ContextContainer;
 import br.com.etyllica.context.SessionMap;
 import br.com.etyllica.context.load.ApplicationLoader;
 import br.com.etyllica.context.load.DefaultLoadApplication;
 import br.com.etyllica.context.load.GenericLoadApplication;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.layer.GeometricLayer;
 
 /**
  * 
@@ -20,7 +19,7 @@ import br.com.etyllica.core.event.PointerEvent;
  *
  */
 
-public class Window extends View{
+public class Window extends GeometricLayer implements ContextContainer {
 	
 	protected Context application;
 
@@ -63,42 +62,15 @@ public class Window extends View{
 		loadApplication.load();
 	}
 
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-
-		if(onMouse(event)){
-			//TODO Melhorar evento de colisao com janela
-			//return GUIEvent.MOUSE_OVER_UNCLICKABLE;	
-		}
-
-		return GUIEvent.NONE;
-	}
-
-	@Override
-	public void update(GUIEvent event) {
-
-		if(event == GUIEvent.APPLICATION_CHANGED){
-			//changeApplication();
-			System.err.println("WINDOW - Not here anymore");
-		}
-
-	}
-
-	public Context getApplication() {
-		return application;
-	}
-
 	public void restartWindow(){
 		
 	}
 
 	public void setApplication(Context application) {
-		clearComponents();
 		this.application = application;
 	}
 
 	public void setLoadApplication(DefaultLoadApplication loadApplication) {
-		clearComponents();
 		this.loadApplication = loadApplication;
 		this.application = loadApplication;		
 	}
@@ -121,18 +93,9 @@ public class Window extends View{
 			applicationLoader.setApplication(context);
 			applicationLoader.setLoadApplication(loadApplication);
 
-			applicationLoader.loadApplication();
-						
+			applicationLoader.loadApplication();						
 		}
 
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-
-		//TODO Ctrl+F4...
-
-		return GUIEvent	.NONE;
 	}
 
 	public void closeWindow(){
@@ -178,5 +141,10 @@ public class Window extends View{
 	public void setCamera(Camera camera) {
 		this.camera = camera;
 	}
+
+	@Override
+	public Context getContext() {
+		return application;
+	}	
 		
 }

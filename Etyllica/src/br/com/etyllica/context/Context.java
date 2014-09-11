@@ -153,8 +153,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 		this.draw(g);
 		
-		scene.draw(g);
-		
+		scene.draw(g);		
 	}
 	
 	/**

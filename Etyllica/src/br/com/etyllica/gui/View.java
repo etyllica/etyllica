@@ -32,7 +32,7 @@ public abstract class View extends Layer implements GUIComponent {
 	protected List<Action> actions = new ArrayList<Action>();
 	
 	//GUIAction's Map
-	protected Map<GUIEvent,Action> map = new HashMap<GUIEvent, Action>();
+	protected Map<GUIEvent,Action> actionMap = new HashMap<GUIEvent, Action>();
 		
 	public View(int x, int y) {
 		super(x,y,1,1);
@@ -167,8 +167,8 @@ public abstract class View extends Layer implements GUIComponent {
 	 */	
 	public void executeAction(GUIEvent event) {
 
-		if(map.containsKey(event)) {
-			map.get(event).executeAction();
+		if(actionMap.containsKey(event)) {
+			actionMap.get(event).executeAction();
 		}
 		
 	}
@@ -179,7 +179,7 @@ public abstract class View extends Layer implements GUIComponent {
 	 * @param action
 	 */
 	public void addAction(GUIEvent event, Action action){
-		map.put(event, action);
+		actionMap.put(event, action);
 	}
 	
 	protected void setRoot(View root){

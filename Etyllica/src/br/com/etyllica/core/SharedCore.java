@@ -28,7 +28,7 @@ import br.com.etyllica.core.loader.Loader;
 import br.com.etyllica.core.loop.FrameSkippingLoop;
 import br.com.etyllica.core.loop.GameLoop;
 import br.com.etyllica.effects.GenericFullScreenEffect;
-import br.com.etyllica.gui.window.MainWindow;
+import br.com.etyllica.gui.Window;
 import br.com.etyllica.util.io.IOHandler;
 
 public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentListener {
@@ -43,7 +43,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 	private java.awt.Component component;
 
-	private MainWindow desktop;
+	private Window window;
 
 	private VolatileImage volatileImage;
 
@@ -75,7 +75,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		this.width = width;
 		this.height = height;
 
-		this.desktop = new MainWindow(0, 0, width, height);
+		this.window = new Window(0, 0, width, height);
 		
 		initGraphics(width, height);	
 
@@ -177,8 +177,8 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 	public void startCore(Application application) {
 
-		this.desktop.setApplication(application);
-		innerCore.addWindow(desktop);
+		this.window.setApplication(application);
+		innerCore.replaceWindow(window);
 
 		component.setFocusTraversalKeysEnabled(false);
 		component.setFocusable(true);
@@ -259,7 +259,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 			return;
 		
 		if(!innerCore.fullScreenEnable) {
-			g.drawImage(graphic.getVimg(), (int)desktop.getApplication().getX(), (int)desktop.getApplication().getY(), component);
+			g.drawImage(graphic.getVimg(), (int)window.getContext().getX(), (int)window.getContext().getY(), component);
 		}
 		else{
 			telaCheia.draw(graphic.getVimg());
