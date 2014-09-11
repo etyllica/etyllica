@@ -1,6 +1,5 @@
 package br.com.etyllica.core.input.mouse;
 
-import java.awt.Polygon;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
@@ -24,14 +23,25 @@ import br.com.etyllica.util.RingBuffer;
  */
 
 public class Mouse implements MouseMotionListener, MouseInputListener, MouseWheelListener {
-
-	private RingBuffer<PointerEvent> events = new RingBuffer<PointerEvent>(PointerEvent.class);
 	
 	protected int x = 0;
 	
 	protected int y = 0;
 	
 	protected int z = 0;
+	
+	protected int clicks = 0;
+	//TODO doubleClick[]
+	protected boolean doubleClick = false;
+
+	protected boolean dragged = false;
+	
+	protected int dragButton = 0;
+	
+	protected int dragX = 0;
+	protected int dragY = 0;
+	
+	private RingBuffer<PointerEvent> events = new RingBuffer<PointerEvent>(PointerEvent.class);
 	
 	public Mouse(int x, int y) {
 		super();
@@ -66,32 +76,19 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		this.z = z;
 	}
 
-	public void setCoordenadas(int x, int y) {
+	public void setCoordinates(int x, int y) {
 		setX(x);
-		setY(y);		
+		setY(y);
 	}
-
-	protected int clicks = 0;
-	//TODO doubleClick[]
-	protected boolean doubleClick = false;
-
-	protected boolean dragged = false;
-	
-	protected int dragButton = 0;
-	
-	protected int dragX = 0;
-	protected int dragY = 0;
 
 	private void addEvent(int button, PointerState state) {
 
 		addEvent(button, state, 0);
-
 	}
 	
 	private void addEvent(int button, PointerState state, int amount) {
 
 		addEvent(button, state, 0, amount);
-
 	}
 	
 	private void addEvent(int button, PointerState state, int amountX, int amountY) {
@@ -125,20 +122,20 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 			state = PointerState.MULTIPLE_CLICK;
 		}
 
-		setCoordenadas(me.getX(),me.getY());
+		setCoordinates(me.getX(),me.getY());
 		
 		addEvent(me.getButton(),state, me.getClickCount());
-		
+
 		me.consume();
 	}
 
 	@Override
 	public void mousePressed( MouseEvent me ) {
 
-		setCoordenadas(me.getX(),me.getY());
+		setCoordinates(me.getX(),me.getY());
 		
 		addEvent(me.getButton(),PointerState.PRESSED);
-		
+
 		pressDragButton(me.getButton());
 		
 		me.consume();
@@ -148,8 +145,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 				
 		if(dragButton == 0) {
 			dragButton = button;			
-		}
-		
+		}		
 	}
 	
 	private void releaseDragButton(int button) {
@@ -157,14 +153,13 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		if(dragButton == button) {
 			dragged = false;
 			dragButton = 0;
-		}
-		
+		}		
 	}
 
 	@Override
 	public void mouseReleased( MouseEvent me ) {
 
-		setCoordenadas(me.getX(),me.getY());
+		setCoordinates(me.getX(),me.getY());
 		
 		addEvent(me.getButton(),PointerState.RELEASED);
 
@@ -176,7 +171,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	@Override
 	public void mouseMoved( MouseEvent me ) {
 		
-		setCoordenadas(me.getX(),me.getY());
+		setCoordinates(me.getX(),me.getY());
 		
 		addMouseMoveEvent(x, y);
 
@@ -207,12 +202,11 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		int deltaX = me.getX()-dragX;
 		int deltaY = me.getY()-dragY;
 		
-		setCoordenadas(me.getX(), me.getY());
+		setCoordinates(me.getX(), me.getY());
 				
 		addEvent(dragButton, PointerState.DRAGGED, deltaX, deltaY);
 		
-		me.consume();
-		
+		me.consume();		
 	}
 
 	@Override
@@ -265,11 +259,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		return sobMouse(cam.getX(), cam.getY(), cam.getTileW(), cam.getTileH());
 	}
 
-	public boolean sobMouse(Polygon poligono) {
-		return poligono.contains(x, y);
-	}
-
-	public List<PointerEvent> getEvents() {
+	public synchronized List<PointerEvent> getEvents() {
 				
 		return events.getList();
 	}
