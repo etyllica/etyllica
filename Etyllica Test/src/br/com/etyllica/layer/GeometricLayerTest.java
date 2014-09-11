@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.etyllica.collision.CollisionDetector;
+
 public class GeometricLayerTest {
 
 	private GeometricLayer layer;
@@ -18,12 +20,12 @@ public class GeometricLayerTest {
 	@Test
 	public void testRectPointColision() {
 		
-		Assert.assertTrue(layer.colideRectPoint(20, 20));
+		Assert.assertTrue(CollisionDetector.colideRectPoint(layer, 20, 20));
 		
-		Assert.assertTrue(layer.colideRectPoint(0, 31));
-		Assert.assertTrue(layer.colideRectPoint(0, 32));
+		Assert.assertTrue(CollisionDetector.colideRectPoint(layer, 0, 31));
+		Assert.assertTrue(CollisionDetector.colideRectPoint(layer, 0, 32));
 		
-		Assert.assertFalse(layer.colideRectPoint(0, 33));
+		Assert.assertFalse(CollisionDetector.colideRectPoint(layer, 0, 33));
 		
 	}
 	

@@ -1,6 +1,6 @@
 package examples.etyllica.tutorial23;
 
-import br.com.etyllica.collision.ColisionDetector;
+import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -31,7 +31,7 @@ public class HexagonalApplication extends Application {
 	@Override
 	public void timeUpdate(long now) {
 		
-		if(ColisionDetector.colideHexagonPoint(hexagon, mx, my)) {
+		if(CollisionDetector.colideHexagonPoint(hexagon, mx, my)) {
 			hexagon.offsetNegativeBlue(0x130);
 		} else {
 			hexagon.resetImage();

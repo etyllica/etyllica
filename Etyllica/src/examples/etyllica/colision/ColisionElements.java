@@ -2,7 +2,7 @@ package examples.etyllica.colision;
 
 import java.awt.Color;
 
-import br.com.etyllica.collision.ColisionDetector;
+import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -41,7 +41,7 @@ public class ColisionElements extends Application {
 
 	public void timeUpdate(long now) {
 
-		if(!ColisionDetector.colidePolygon(rectangle1, rectangle2)) {
+		if(!CollisionDetector.colidePolygon(rectangle1, rectangle2)) {
 			color = Color.BLUE;
 		} else {			
 			color = Color.YELLOW;

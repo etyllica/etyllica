@@ -3,7 +3,7 @@ package br.com.etyllica.gui.selection;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
-import br.com.etyllica.collision.ColisionDetector;
+import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
@@ -143,7 +143,7 @@ public class Resizer {
 
 			for(int b = 0; b < 9; b++) {
 
-				if(ColisionDetector.colideRectPoint(points[b], mx, my)) {
+				if(CollisionDetector.colideRectPoint(points[b], mx, my)) {
 
 					lastIndex = b;
 

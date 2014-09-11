@@ -4,7 +4,7 @@ import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.linear.Point2D;
 
-public class ColisionDetector {
+public class CollisionDetector {
 
 	public static boolean colideCirclePoint(float cx, float cy, float radius, int px, int py) {
 

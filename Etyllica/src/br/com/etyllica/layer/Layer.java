@@ -2,7 +2,7 @@ package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
 
-import br.com.etyllica.collision.ColisionDetector;
+import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
@@ -163,7 +163,7 @@ public class Layer extends GeometricLayer implements Drawable {
 	 */
 	public boolean onMouse(int px, int py) {
 
-		return ColisionDetector.colideRectPoint(this, px, py);
+		return CollisionDetector.colideRectPoint(this, px, py);
 	}
 	
 	public AffineTransform getTransform() {

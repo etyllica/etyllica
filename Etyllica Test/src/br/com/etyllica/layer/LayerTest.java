@@ -26,18 +26,5 @@ public class LayerTest {
 		Assert.assertTrue(layer.isVisible());
 		
 	}
-	
-	@Test
-	public void testAddChild() {
 		
-		int children = 3; 
-		
-		for(int i=0;i<children;i++) {
-			layer.addChild(new Layer());	
-		}
-				
-		Assert.assertEquals(children, layer.getChildren().size());
-		
-	}
-	
 }

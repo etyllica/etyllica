@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import br.com.etyllica.collision.ColisionDetector;
+import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.event.GUIEvent;
@@ -155,7 +155,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 		for(Monitor monitor: monitors) {
 
-			if(ColisionDetector.colideRectPoint(monitor, p.x, p.y)) {
+			if(CollisionDetector.colideRectPoint(monitor, p.x, p.y)) {
 				selectedMonitor = monitor;
 			}
 		}

@@ -8,7 +8,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-import br.com.etyllica.collision.ColisionDetector;
+import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.core.loader.image.ImageLoader;
@@ -339,7 +339,7 @@ public class BufferedLayer extends ImageLayer {
 	
 	public boolean colideAlphaPoint(int px, int py) {
 		
-		if(ColisionDetector.colideRectPoint(this, px, py)) {
+		if(CollisionDetector.colideRectPoint(this, px, py)) {
 			
 			int mx = px-x;
 			
@@ -360,7 +360,7 @@ public class BufferedLayer extends ImageLayer {
 	
 	public Color getColorPoint(int px, int py) {
 		
-		if(ColisionDetector.colideRectPoint(this, px, py)) {
+		if(CollisionDetector.colideRectPoint(this, px, py)) {
 			
 			int mx = px-x;
 			

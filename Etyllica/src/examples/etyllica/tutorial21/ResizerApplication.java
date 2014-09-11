@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.collision.ColisionDetector;
+import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -88,7 +88,7 @@ public class ResizerApplication extends Application {
 		if(!resizer.isSelected()) {
 			
 			for(GeometricLayer component: components) {
-				if(ColisionDetector.colideRectPoint(this, mx, my)) {
+				if(CollisionDetector.colideRectPoint(this, mx, my)) {
 					overlay = component;
 					break;
 				}	
@@ -100,7 +100,7 @@ public class ResizerApplication extends Application {
 			if(!resizer.isSelected()) {
 
 				for(GeometricLayer component: components) {
-					if(ColisionDetector.colideRectPoint(this, mx, my)) {
+					if(CollisionDetector.colideRectPoint(this, mx, my)) {
 						resizer.select(component);
 						overlay = null;	
 					}

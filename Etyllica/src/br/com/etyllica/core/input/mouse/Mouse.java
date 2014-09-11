@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.swing.event.MouseInputListener;
 
-import br.com.etyllica.collision.ColisionDetector;
+import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.layer.AnimatedLayer;
@@ -237,12 +237,12 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 
 	public boolean sobMouseCircular(float cx, float cy, float radius) {
 
-		return ColisionDetector.colideCirclePoint(cx, cy, radius, x, y);
+		return CollisionDetector.colideCirclePoint(cx, cy, radius, x, y);
 	}
 
 	public boolean sobMouseIso(ImageLayer cam) {
 
-		return ColisionDetector.colideIsometricPoint(cam, x, y);
+		return CollisionDetector.colideIsometricPoint(cam, x, y);
 	}
 
 	public boolean sobMouse(float x, float y, float w, float h)	{
