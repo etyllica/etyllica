@@ -90,9 +90,7 @@ public class BufferedLayer extends ImageLayer {
 		
 		buffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 				
-		clearGraphics();
-		
-		resetImage();
+		clearGraphics();		
 	}
 
 	/**
@@ -120,7 +118,7 @@ public class BufferedLayer extends ImageLayer {
 
 		this.originalBuffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
 		this.graphics = originalBuffer.createGraphics();
-		graphics.drawImage(buffer,0,0,null);
+		graphics.drawImage(buffer, 0, 0, null);
 
 		resetImage();
 	}
@@ -144,23 +142,23 @@ public class BufferedLayer extends ImageLayer {
 	 * ImagemBuffer back to original state
 	 */
 	public void resetImage() {
-		
 		buffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
-		buffer.getGraphics().drawImage(originalBuffer, 0, 0, null);
 		
+		graphics = buffer.createGraphics();
+		graphics.drawImage(originalBuffer, 0, 0, null);
 	}
 	
 	public Graphics2D clearGraphics() {
 		
-		graphics = originalBuffer.createGraphics();
-		graphics.setColor(SVGColor.TRANSPARENT);
-        graphics.clearRect(x, y, w, h);
+		Graphics2D g2 = originalBuffer.createGraphics();
+		g2.setColor(SVGColor.TRANSPARENT);
+        g2.clearRect(x, y, w, h);
         
-        Graphics2D modifiedGraphic = buffer.createGraphics();
-        modifiedGraphic.setBackground(new Color(MAX_INT, MAX_INT, MAX_INT, 0));
-        modifiedGraphic.clearRect(0, 0, w, h);
+        graphics = buffer.createGraphics();
+        graphics.setBackground(new Color(MAX_INT, MAX_INT, MAX_INT, 0));
+        graphics.clearRect(0, 0, w, h);
         
-        return modifiedGraphic;
+        return graphics;
 	}
 	
 	public void refresh() {
@@ -379,8 +377,12 @@ public class BufferedLayer extends ImageLayer {
 		
 	}
 	
+	public Graphics2D getGraphics() {
+		return graphics;
+	}
+	
 	@Override
-	public void simpleDraw(Graphic g) {
+	public void simpleDraw(Graphic g, int x, int y) {
 		g.drawImage( buffer, x, y, x+w,y+h,
 				xImage,yImage,xImage+w,yImage+h, null );
 	}
