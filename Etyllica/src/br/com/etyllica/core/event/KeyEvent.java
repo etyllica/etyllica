@@ -50,11 +50,11 @@ public class KeyEvent{
 	public boolean isAnyKeyDown(int ... keyCodes) {
 		
 		for(int keyCode : keyCodes) {
-			if(this.key == keyCode) {
-				return state == KeyState.PRESSED;
-			}	
+			if(isKeyDown(keyCode)) {
+				return true;
+			}
 		}
-				
+		
 		return false;
 	}
 		
@@ -64,6 +64,17 @@ public class KeyEvent{
 			return state==KeyState.RELEASED;
 		}
 		
+		return false;
+	}
+	
+	public boolean isAnyKeyUp(int ... keyCodes) {
+		
+		for(int keyCode : keyCodes) {
+			if(isKeyUp(keyCode)) {
+				return true;
+			}
+		}
+			
 		return false;
 	}
 		
