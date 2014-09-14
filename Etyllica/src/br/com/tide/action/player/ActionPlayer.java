@@ -6,24 +6,32 @@ import br.com.tide.input.ControllerListener;
 
 public class ActionPlayer extends ActivePlayer implements ControllerListener {
 
+	protected double dx = 0;
+	protected double dy = 0;
+	
 	protected double angle = 0;
 	
 	protected double startAngle = 90;
 		
 	protected double turnSpeed = 5;
 		
-	protected double backWalkSpeed = -1.5;
+	protected double backWalkSpeed = 1.5;
 	
 	protected ActionPlayerListener listener;
 	
-	public ActionPlayer() {
+	public ActionPlayer(int x, int y) {
 		super();
+
+		this.x = x;
+		this.y = y;
+		this.dx = x;
+		this.dy = y;		
 	}
 	
-	public ActionPlayer(ActionPlayerListener listener) {
-		super();
+	public ActionPlayer(int x, int y, ActionPlayerListener listener) {
+		this(x, y);
 		
-		this.listener = listener;
+		this.listener = listener;		
 	}
 	
 	public void update(long now) {
@@ -38,11 +46,11 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 		}
 		
 		if(hasState(PlayerState.WALK_FORWARD)) {
-			walk(walkSpeed);
+			moveForward(walkSpeed);
 		}
 		
 		if(hasState(PlayerState.WALK_BACKWARD)) {
-			walk(backWalkSpeed);
+			moveBackward(backWalkSpeed);
 		}
 		
 	}
@@ -77,7 +85,7 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 		listener.onStopWalkForward();
 	}
 
-	public void walkBackward() {						
+	public void walkBackward() {
 		listener.onStopWalkBackward();
 		states.add(PlayerState.WALK_BACKWARD);
 	}
@@ -87,9 +95,23 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 		listener.onStopWalkBackward();
 	}
 
-	private void walk(double speed) {
-		x = ((int)(x + Math.sin(Math.toRadians(angle+startAngle)) * speed));
-		y = ((int)(y - Math.cos(Math.toRadians(angle+startAngle)) * speed));
+	private void move(double ang, double speed) {
+		dx = ((int)(dx + Math.sin(Math.toRadians(ang)) * speed));
+		dy = ((int)(dy - Math.cos(Math.toRadians(ang)) * speed));
+		
+		x = (int)dx;
+		y = (int)dy;
+	}
+	
+	private void moveForward(double speed) {
+		move(angle+startAngle, walkSpeed);
+	}
+	
+	private void moveBackward(double speed) {
+		
+		double ang = 180+angle+startAngle;
+		
+		move(ang, backWalkSpeed);
 	}
 	
 	public void stopWalk() {
