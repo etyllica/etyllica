@@ -120,7 +120,7 @@ public class CustomLoadApplication extends Application{
 		}
 		
 		if(event.isKeyDown(KeyEvent.TSK_ESPACO)){
-			returnApplication = new ByeWorld(w,h);
+			nextApplication = new ByeWorld(w,h);
 		}
 
 		return GUIEvent.NONE;

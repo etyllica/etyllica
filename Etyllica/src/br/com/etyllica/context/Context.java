@@ -94,7 +94,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	/**
 	 * Returned Application (next Application to show up)
 	 */
-	protected Context returnApplication = this;
+	protected Context nextApplication = this;
 	
 	protected int fps = 0;
 	
@@ -289,8 +289,12 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 		this.loadListener = listener;
 	}
 	
-	public Context getReturnApplication() {
-		return returnApplication;
+	public Context getNextApplication() {
+		return nextApplication;
+	}
+	
+	protected void setNextApplication(Context nextApplication) {
+		this.nextApplication = nextApplication;
 	}
 
 	public Scene getScene() {

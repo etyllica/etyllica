@@ -75,7 +75,7 @@ public class ByeWorld extends Application{
 	public GUIEvent updateKeyboard( KeyEvent event) {
 
 		if(event.isKeyDown(KeyEvent.TSK_BACK_SPACE)){
-			returnApplication = new CustomLoadApplication(w,h);
+			nextApplication = new CustomLoadApplication(w,h);
 		}
 
 		return GUIEvent	.NONE;

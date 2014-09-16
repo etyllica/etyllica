@@ -216,7 +216,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			}
 
 			//if activeWindow, receive command to change application
-			if(context.getReturnApplication()!=context) {
+			if(context.getNextApplication()!=context) {
 
 				this.changeApplication();
 
@@ -751,7 +751,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		//Lock old application
 		//Context application = activeWindow.getApplication();
 
-		reload(activeWindow.getContext().getReturnApplication());
+		reload(activeWindow.getContext().getNextApplication());
 
 	}
 
