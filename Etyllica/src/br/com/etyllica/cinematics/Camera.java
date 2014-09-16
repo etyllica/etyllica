@@ -14,6 +14,7 @@ public class Camera extends ViewPort {
 		super(x, y, w, h);
 	}	
 	
+	@Override
 	public AffineTransform getTransform() {
 		
 		AffineTransform transform = AffineTransform.getScaleInstance(zoomX, zoomY);

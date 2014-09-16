@@ -13,7 +13,7 @@ import br.com.etyllica.theme.ThemeManager;
 
 /**
  *
- * Component Button
+ * Button Component
  * 
  * @author yuripourre
  * @license LGPLv3
@@ -50,7 +50,7 @@ public class DefaultButton extends RoundGUIComponent {
 
 				g.setColor(theme.getButtonColor());
 
-			}else {
+			} else {
 
 				if(clicked) {
 
@@ -118,16 +118,6 @@ public class DefaultButton extends RoundGUIComponent {
 
 		GUIEvent retorno = GUIEvent.NONE;
 
-		if(!mouseOver) {
-			
-			if(onMouse(event)) {
-				mouseOver = true;
-			}
-			
-		}else if(!onMouse(event)) {
-			mouseOver = false;
-		}
-
 		if(!disabled) {
 
 			if(mouseOver) {
@@ -142,13 +132,13 @@ public class DefaultButton extends RoundGUIComponent {
 
 						retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
+					} else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
 
 						rightClick();
 
 						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
+					} else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
 
 						middleClick();
 
@@ -166,33 +156,33 @@ public class DefaultButton extends RoundGUIComponent {
 
 						retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
+					} else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
 
 						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
+					} else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
 
 						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
 
 					}
 
-				}else if(event.getState()==PointerState.DOUBLE_CLICK) {
+				} else if(event.getState()==PointerState.DOUBLE_CLICK) {
 
 					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
 
 						retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
+					} else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
 
 						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
 
-					}else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
+					} else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
 
 						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
 
 					}
 
-				}else if(event.getState() == PointerState.MOVE) {
+				} else if(event.getState() == PointerState.MOVE) {
 
 					justOnMouse();
 
@@ -200,7 +190,7 @@ public class DefaultButton extends RoundGUIComponent {
 
 				}
 
-			}else{
+			} else {
 
 				if(event.getState() == PointerState.MOVE) {
 
@@ -208,7 +198,7 @@ public class DefaultButton extends RoundGUIComponent {
 
 					retorno = GUIEvent.MOUSE_OUT;
 
-				}else if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+				} else if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 
 					onFocus = false;
 
@@ -297,9 +287,9 @@ public class DefaultButton extends RoundGUIComponent {
 
 	public Theme getTheme() {
 
-		if(theme==null) {
+		if(theme == null) {
 			return ThemeManager.getInstance().getTheme();
-		}else{
+		} else {
 			return this.theme;
 		}		
 

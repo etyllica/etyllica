@@ -138,9 +138,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 	private void notifyListeners() {
 
-		//for(LoadListener listener: loadListeners) {
 		loadListener.loaded();
-		//}
 	}
 
 	/**

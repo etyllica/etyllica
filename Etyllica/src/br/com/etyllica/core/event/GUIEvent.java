@@ -22,6 +22,7 @@ public enum GUIEvent {
 	//Clickable Components
 	MOUSE_OVER_WITH_FOCUS,
 	MOUSE_OUT,
+	MOUSE_IN,
 	
 	MOUSE_LEFT_BUTTON_DOWN,
 	MOUSE_LEFT_BUTTON_UP,

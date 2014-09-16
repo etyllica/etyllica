@@ -46,6 +46,10 @@ public class Window extends GeometricLayer implements ContextContainer {
 	 */
 	protected DefaultLoadApplication loadApplication = null;
 
+	public Window(int w, int h) {
+		this(0,0,w,h);
+	}		
+	
 	public Window(int x, int y, int w, int h){
 		super(x,y,w,h);
 		
