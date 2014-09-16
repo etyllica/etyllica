@@ -10,7 +10,6 @@ import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.engine.SharedEngine;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.loader.Loader;
 
 /**
@@ -32,8 +31,6 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	protected int h = 480;
 
 	private Application application;
-
-	protected Mouse mouse;
 	
 	public EtyllicaFrame(int width, int height) {
 		super();
@@ -44,18 +41,39 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);		
 	}
 	
+	public void init(String path) {
+		
+		initCore();
+
+		setPath(path);
+
+		this.application = startApplication();
+		
+		startCore();
+	}
+	
 	@Override
 	public void init() {
 
+		initCore();
+
+		initialSetup("");
+
+		this.application = startApplication();
+		
+		startCore();
+	}
+	
+	private void initCore() {
+		
 		engine = new SharedEngine(this, w, h);
 
 		core = engine.getCore();
 
 		core.setEngine(this);
-
-		initialSetup("");
-
-		this.application = startApplication();
+	}
+	
+	private void startCore() {
 		
 		core.startCore(application);
 		

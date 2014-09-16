@@ -37,25 +37,46 @@ public abstract class Etyllica extends Applet implements Engine {
 		this.w = width;
 		this.h = height;	
 	}
+	
+	public void init(String path) {
+		
+		initCore();
 
+		setPath(path);
+
+		this.application = startApplication();
+		
+		startCore();
+	}
+	
 	@Override
 	public void init() {
-				
-		engine = new SharedEngine(this, w, h);
-		
-		core = engine.getCore();
-		
-		core.setEngine(this);
+
+		initCore();
 
 		initialSetup("");
 
 		this.application = startApplication();
+		
+		startCore();
+	}
+	
+	private void initCore() {
+		
+		engine = new SharedEngine(this, w, h);
 
+		core = engine.getCore();
+
+		core.setEngine(this);
+	}
+	
+	private void startCore() {
+		
 		core.startCore(application);
-
+		
 		core.startEngine();
 		
-		addComponentListener(core);		
+		addComponentListener(core);
 	}
 
 	protected void initialSetup(String suffix) {
