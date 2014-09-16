@@ -56,6 +56,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	//Mouse Over View
 	protected View mouseOver = null;
+	
+	protected View focusComponent = null;
 
 	private List<GUIEvent> guiEvents;
 
@@ -145,19 +147,18 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		Context application = activeWindow.getContext();
 
+		updateApplication(application, now);
+		//components.add(application);
+		
 		//Update All components
 		List<View> components = new CopyOnWriteArrayList<View>(application.getViews());
 
 		updateGui(components, guiEvents);
 
-		updateApplication(application, now);
-
-		components.add(application);
-
 		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
 		mouse.clearEvents();
-
-		updatePointerEvents(events, components);
+				
+		updatePointerEvents(events, application, components);
 
 		updateHelperUI(now);
 
@@ -269,7 +270,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		activeWindow.getContext().updateKeyboard(event);
 	}
 
-	public void updatePointerEvents(List<PointerEvent> events, List<View> components) {
+	public void updatePointerEvents(List<PointerEvent> events, Context context, List<View> components) {
 
 		int eventSize = events.size(); 
 
@@ -277,9 +278,10 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 			PointerEvent event = events.get(i);
 
+			context.updateMouse(event);
+			
 			updatePointerEvent(event, components);
 		}
-
 	}
 
 	public void updatePointerEvent(PointerEvent event, List<View> components) {
@@ -299,24 +301,19 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 			if(nextEvent != GUIEvent.NONE) {
 
-				if(nextEvent == GUIEvent.NEXT_COMPONENT) {
-					//Its necessary in NEXT_COMPONENT Events
-
-					View next = component.findNext();
-
-					if(next!=null) {
-						updateEvent(component.findNext(), nextEvent);	
+				View next = component.findNext();
+				
+				if(next!=null) {
+				
+					focusComponent = next;
+					
+					if(nextEvent == GUIEvent.NEXT_COMPONENT) {
+						
+						updateEvent(focusComponent, GUIEvent.GAIN_FOCUS);
+					} else {
+						
+						updateEvent(focusComponent, nextEvent);
 					}
-
-				}else{
-
-					View next = component.findNext();
-
-					if(next!=null) {
-						//if overMouse
-						updateEvent(component.findNext(), nextEvent);
-					}
-
 				}
 
 				break;
@@ -361,7 +358,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		for(View child: component.getViews()) {
 
 			updateGuiComponent(child, event);
-
 		}
 	}
 
@@ -941,7 +937,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getContext().getViews());
 
 		updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
-
 	}
 
 }

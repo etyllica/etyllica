@@ -65,7 +65,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 	
 	private boolean locked = false;
 	
-	public SharedCore(java.awt.Component component, int width, int height) {
+	public SharedCore(Component component, int width, int height) {
 		super();
 
 		this.component = component;

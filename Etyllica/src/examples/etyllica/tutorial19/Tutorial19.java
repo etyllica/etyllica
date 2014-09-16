@@ -13,7 +13,7 @@ public class Tutorial19 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../");
+		initialSetup("../../../../");		
 		return new AnimatedMenu(w, h);
 	}
 	

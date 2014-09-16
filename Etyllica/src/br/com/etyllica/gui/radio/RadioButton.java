@@ -23,26 +23,38 @@ public class RadioButton extends Radio {
 	@Override
 	public void draw(Graphic g) {
 
-		Theme theme = ThemeManager.getInstance().getTheme();
+		if(!visible)
+			return;
 
-		if(!mouseOver){
+		Theme theme = getTheme();		
 
-			g.setColor(theme.getButtonColor());
+		if(!disabled) {
 
-		}else{
+			if(!mouseOver) {
 
-			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
+				g.setColor(theme.getButtonColor());
 
-				g.setColor(theme.getButtonOnClick());
+			} else {
 
-			}else{
+				if(clicked) {
 
-				g.setColor(theme.getButtonOnMouse());
+					g.setColor(theme.getButtonOnClick());
+
+				} else {
+
+					g.setColor(theme.getButtonOnMouse());
+
+				}
 
 			}
+
+		} else {
+
+			g.setColor(theme.getButtonDisabledColor());
+
 		}
 
-		if(checked){
+		if(checked) {
 			g.setColor(theme.getButtonOnClick());
 		}
 		

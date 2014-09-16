@@ -1,10 +1,6 @@
 package br.com.etyllica.gui;
 
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.gui.button.DefaultButton;
 import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
@@ -28,16 +24,14 @@ public class CheckBox extends DefaultButton {
 		super(x, y, w, h);
 	}
 	
+	@Override
 	protected void leftClick() {
-		super.leftClick();
-		
 		swapChecked();
 	}
 		
 	private void swapChecked() {
 		
-		checked = !checked;
-		
+		checked = !checked;		
 	}
 	
 	@Override

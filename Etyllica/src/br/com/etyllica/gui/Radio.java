@@ -16,7 +16,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class Radio extends CheckBox{
+public class Radio extends CheckBox {
 
 	private RadioGroup group;
 	
@@ -31,36 +31,10 @@ public class Radio extends CheckBox{
 	}
 
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-
-		GUIEvent retorno = GUIEvent.NONE;
-		
-		if(mouseOver) {
-
-			if(event.getState()==PointerState.PRESSED){
-
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
-
-					mark();
-					
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
-				}
-
-			}else if(event.getState()==PointerState.RELEASED){
-				
-				if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)){
-					
-					retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
-					
-				}
-				
-			}
-			
-		}
-
-		return retorno;
+	protected void leftClick() {
+		mark();
 	}
-
+	
 	@Override
 	public void update(GUIEvent event) {
 		// TODO Auto-generated method stub
@@ -110,8 +84,9 @@ public class Radio extends CheckBox{
 	
 	public void mark() {
 		
-		if(!checked){
-			if(group!=null){
+		if(!checked) {
+			
+			if(group!=null) {
 				group.mark(this);
 			}
 
