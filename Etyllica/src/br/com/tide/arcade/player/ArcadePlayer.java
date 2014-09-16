@@ -1,19 +1,19 @@
-package br.com.tide.platform.player;
+package br.com.tide.arcade.player;
 
 import br.com.etyllica.core.Updatable;
 import br.com.tide.ActivePlayer;
 import br.com.tide.PlayerState;
 import br.com.tide.input.ControllerListener;
 
-public class PlatformPlayer extends ActivePlayer implements Updatable, ControllerListener {
+public class ArcadePlayer extends ActivePlayer implements Updatable, ControllerListener {
 
-	protected PlatformPlayerListener listener;
+	protected ArcadePlayerListener listener;
 	
-	public PlatformPlayer() {
+	public ArcadePlayer() {
 		super();
 	}
 	
-	public PlatformPlayer(PlatformPlayerListener listener) {
+	public ArcadePlayer(ArcadePlayerListener listener) {
 		super();
 		
 		this.listener = listener;
@@ -43,27 +43,33 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 		listener.onStopWalkRight();
 	}
 
-	public void lookUp() {
-		listener.onLookUp();
-		states.add(PlayerState.LOOK_UP);
+	public void walkUp() {
+		y -= walkSpeed;
+		
+		listener.onWalkUp();
+		states.add(PlayerState.WALK_UP);
 	}
 
 	public void stopWalkUp() {
 		states.remove(PlayerState.WALK_UP);
-		listener.onStopLookUp();
+		listener.onStopWalkUp();
 	}
 
-	public void standDown() {
-		listener.onStandDown();
-		states.add(PlayerState.STAND_DOWN);
+	public void walkDown() {
+		y += walkSpeed;
+		
+		listener.onWalkDown();
+		states.add(PlayerState.WALK_DOWN);
 	}
 
-	public void stopStandDown() {
-		states.remove(PlayerState.STAND_DOWN);
-		listener.onStopStandDown();
+	public void stopWalkDown() {
+		states.remove(PlayerState.WALK_DOWN);
+		listener.onStopWalkDown();
 	}
 	
 	public void stopWalk() {
+		states.remove(PlayerState.WALK_UP);
+		states.remove(PlayerState.WALK_DOWN);
 		states.remove(PlayerState.WALK_LEFT);
 		states.remove(PlayerState.WALK_RIGHT);		
 	}
@@ -73,7 +79,7 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	}
 	
 	public void onUpButtonPressed() {
-		lookUp();
+		walkUp();
 	}
 
 	@Override
@@ -83,12 +89,12 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 
 	@Override
 	public void onDownButtonPressed() {
-		standDown();
+		walkDown();
 	}
 
 	@Override
 	public void onDownButtonReleased() {
-		stopStandDown();
+		stopWalkDown();
 	}
 
 	@Override

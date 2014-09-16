@@ -1,7 +1,6 @@
 package br.com.tide;
 
 import br.com.etyllica.core.Updatable;
-import br.com.tide.platform.player.PlatformPlayer;
 
 public class ActivePlayer extends Player implements Updatable, ActivePlayerListener {
 	
@@ -42,7 +41,7 @@ public class ActivePlayer extends Player implements Updatable, ActivePlayerListe
 		onSpecialAttack();
 	}
 
-	public void beignHit(PlatformPlayer who, long when) {
+	public void beignHit(ActivePlayer who, long when) {
 		states.clear();
 		states.add(PlayerState.BEING_HIT);
 		onBeignHit(who);

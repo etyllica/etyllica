@@ -6,16 +6,16 @@ public interface PlatformPlayerListener {
 	
 	public void onWalkRight();
 	
-	public void onWalkUp();
+	public void onLookUp();
 	
-	public void onWalkDown();
+	public void onStandDown();
 	
 	public void onStopWalkLeft();
 	
 	public void onStopWalkRight();
 	
-	public void onStopWalkUp();
+	public void onStopLookUp();
 	
-	public void onStopWalkDown();
+	public void onStopStandDown();
 		
 }
