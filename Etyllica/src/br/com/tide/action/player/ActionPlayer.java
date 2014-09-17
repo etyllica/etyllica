@@ -46,11 +46,11 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 		}
 		
 		if(hasState(PlayerState.WALK_FORWARD)) {
-			moveForward(walkSpeed);
+			moveForward();
 		}
 		
 		if(hasState(PlayerState.WALK_BACKWARD)) {
-			moveBackward(backWalkSpeed);
+			moveBackward();
 		}
 		
 	}
@@ -96,22 +96,29 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 	}
 
 	private void move(double ang, double speed) {
-		dx = ((int)(dx + Math.sin(Math.toRadians(ang)) * speed));
-		dy = ((int)(dy - Math.cos(Math.toRadians(ang)) * speed));
+		dx = (dx + Math.sin(Math.toRadians(ang)) * speed);
+		dy = (dy - Math.cos(Math.toRadians(ang)) * speed);
 		
 		x = (int)dx;
 		y = (int)dy;
 	}
 	
-	private void moveForward(double speed) {
+	private void moveForward() {
 		move(angle+startAngle, walkSpeed);
 	}
 	
-	private void moveBackward(double speed) {
-		
+	public void undoMoveForward() {
+		move(angle+startAngle, -walkSpeed);
+	}
+	
+	private void moveBackward() {
 		double ang = 180+angle+startAngle;
-		
-		move(ang, backWalkSpeed);
+		move(ang, backWalkSpeed);		
+	}
+	
+	public void undoMoveBackward() {
+		double ang = 180+angle+startAngle;
+		move(ang, -backWalkSpeed);
 	}
 	
 	public void stopWalk() {

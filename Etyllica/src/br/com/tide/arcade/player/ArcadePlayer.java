@@ -1,11 +1,10 @@
 package br.com.tide.arcade.player;
 
-import br.com.etyllica.core.Updatable;
 import br.com.tide.ActivePlayer;
 import br.com.tide.PlayerState;
 import br.com.tide.input.ControllerListener;
 
-public class ArcadePlayer extends ActivePlayer implements Updatable, ControllerListener {
+public class ArcadePlayer extends ActivePlayer implements ControllerListener {
 
 	protected ArcadePlayerListener listener;
 	
