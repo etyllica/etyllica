@@ -21,6 +21,12 @@ public class Controller {
 	
 	protected int ButtonC = KeyEvent.TSK_C;
 	
+	protected int ButtonX = KeyEvent.TSK_V;
+	
+	protected int ButtonY = KeyEvent.TSK_B;
+	
+	protected int ButtonZ = KeyEvent.TSK_N;
+	
 	protected int startButton = KeyEvent.TSK_ENTER;
 	
 	protected int selectButton = KeyEvent.TSK_SPACE;

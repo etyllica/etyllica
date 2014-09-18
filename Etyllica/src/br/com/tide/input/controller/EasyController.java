@@ -21,6 +21,12 @@ public class EasyController extends Controller {
 		ButtonB = KeyEvent.TSK_X;
 
 		ButtonC = KeyEvent.TSK_C;
+		
+		ButtonX = KeyEvent.TSK_SHIFT_LEFT;
+
+		ButtonY = KeyEvent.TSK_CTRL_LEFT;
+
+		ButtonZ = KeyEvent.TSK_ALT_LEFT;
 
 		startButton = KeyEvent.TSK_ENTER;
 

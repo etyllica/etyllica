@@ -7,6 +7,11 @@ import br.com.tide.input.ControllerListener;
 
 public class PlatformPlayer extends ActivePlayer implements Updatable, ControllerListener {
 
+	protected int walkSpeed = 5;
+	protected int runSpeed = 5;
+	protected int jumpSpeed = 5;
+	protected int jumpSize = 32;
+	
 	protected PlatformPlayerListener listener;
 	
 	public PlatformPlayer() {
@@ -18,10 +23,26 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 		
 		this.listener = listener;
 	}
+	
+	@Override
+	public void update(long now) {
+		super.update(now);
+		
+		if(hasState(PlayerState.WALK_LEFT)) {
+			x -= currentSpeed;
+		} else if(hasState(PlayerState.WALK_RIGHT)) {
+			x += currentSpeed;
+		}
+	}
 
 	public void walkLeft() {
-		x -= walkSpeed;
 		
+		if(!states.contains(PlayerState.TURN_LEFT)) {
+			listener.onTurnLeft();
+			states.add(PlayerState.TURN_LEFT);
+			states.remove(PlayerState.TURN_RIGHT);
+		}
+				
 		listener.onWalkLeft();		
 		states.add(PlayerState.WALK_LEFT);
 	}
@@ -32,7 +53,12 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	}
 
 	public void walkRight() {
-		x += walkSpeed;
+		
+		if(!states.contains(PlayerState.TURN_RIGHT)) {
+			listener.onTurnRight();
+			states.add(PlayerState.TURN_RIGHT);
+			states.remove(PlayerState.TURN_LEFT);
+		}
 		
 		listener.onWalkRight();
 		states.add(PlayerState.WALK_RIGHT);
@@ -44,6 +70,10 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	}
 
 	public void lookUp() {
+		if(isWalking()) {
+			stopWalk();
+		}
+		
 		listener.onLookUp();
 		states.add(PlayerState.LOOK_UP);
 	}
@@ -65,7 +95,19 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	
 	public void stopWalk() {
 		states.remove(PlayerState.WALK_LEFT);
-		states.remove(PlayerState.WALK_RIGHT);		
+		states.remove(PlayerState.WALK_RIGHT);
+	}
+	
+	public void jump() {
+				
+	}
+	
+	public void run() {
+		currentSpeed = runSpeed;
+	}
+	
+	public void stopRun() {
+		currentSpeed = walkSpeed;
 	}
 	
 	public boolean isWalking() {
@@ -113,31 +155,59 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 
 	@Override
 	public void onAButtonPressed() {
-		attack();
+		run();
 	}
 
 	public void onAButtonReleased() {
-		stopAttack();
-		stand();	
+		stopRun();
 	}
-
+	
 	public void onBButtonPressed() {
-		specialAttack();
+		jump();
 	}
 
 	public void onBButtonReleased() {
-		onStopSpecialAttack();
-		stand();	
+
 	}
 
 	public void onCButtonPressed() {
-		// TODO Auto-generated method stub
-		
+		attack();
 	}
 
 	public void onCButtonReleased() {
+		stopAttack();
+		stand();
+	}
+
+	@Override
+	public void onXButtonPressed() {
+		specialAttack();		
+	}
+
+	@Override
+	public void onXButtonReleased() {
+		onStopSpecialAttack();
+		stand();
+	}
+
+	@Override
+	public void onYButtonPressed() {
+		run();
+	}
+
+	@Override
+	public void onYButtonReleased() {
+		stopRun();
+	}
+
+	@Override
+	public void onZButtonPressed() {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public void onZButtonReleased() {
+		// TODO Auto-generated method stub
 	}
 
 }

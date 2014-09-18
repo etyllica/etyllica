@@ -19,7 +19,7 @@ public class ArcadePlayer extends ActivePlayer implements ControllerListener {
 	}
 
 	public void walkLeft() {
-		x -= walkSpeed;
+		x -= currentSpeed;
 		
 		listener.onWalkLeft();		
 		states.add(PlayerState.WALK_LEFT);
@@ -31,7 +31,7 @@ public class ArcadePlayer extends ActivePlayer implements ControllerListener {
 	}
 
 	public void walkRight() {
-		x += walkSpeed;
+		x += currentSpeed;
 		
 		listener.onWalkRight();
 		states.add(PlayerState.WALK_RIGHT);
@@ -43,7 +43,7 @@ public class ArcadePlayer extends ActivePlayer implements ControllerListener {
 	}
 
 	public void walkUp() {
-		y -= walkSpeed;
+		y -= currentSpeed;
 		
 		listener.onWalkUp();
 		states.add(PlayerState.WALK_UP);
@@ -55,7 +55,7 @@ public class ArcadePlayer extends ActivePlayer implements ControllerListener {
 	}
 
 	public void walkDown() {
-		y += walkSpeed;
+		y += currentSpeed;
 		
 		listener.onWalkDown();
 		states.add(PlayerState.WALK_DOWN);
@@ -141,6 +141,42 @@ public class ArcadePlayer extends ActivePlayer implements ControllerListener {
 	}
 
 	public void onCButtonReleased() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onXButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onXButtonReleased() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onYButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onYButtonReleased() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onZButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onZButtonReleased() {
 		// TODO Auto-generated method stub
 		
 	}

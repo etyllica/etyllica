@@ -29,5 +29,17 @@ public interface ControllerListener {
 	public void onCButtonPressed();
 	
 	public void onCButtonReleased();
-		
+	
+	public void onXButtonPressed();
+	
+	public void onXButtonReleased();
+	
+	public void onYButtonPressed();
+	
+	public void onYButtonReleased();
+	
+	public void onZButtonPressed();
+	
+	public void onZButtonReleased();
+	
 }

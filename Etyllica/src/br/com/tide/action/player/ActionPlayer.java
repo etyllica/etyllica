@@ -34,6 +34,7 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 		this.listener = listener;		
 	}
 	
+	@Override
 	public void update(long now) {
 		super.update(now);
 		
@@ -104,11 +105,11 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 	}
 	
 	private void moveForward() {
-		move(angle+startAngle, walkSpeed);
+		move(angle+startAngle, currentSpeed);
 	}
 	
 	public void undoMoveForward() {
-		move(angle+startAngle, -walkSpeed);
+		move(angle+startAngle, -currentSpeed);
 	}
 	
 	private void moveBackward() {
@@ -206,6 +207,42 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 
 	@Override
 	public void onCButtonReleased() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onXButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onXButtonReleased() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onYButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onYButtonReleased() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onZButtonPressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onZButtonReleased() {
 		// TODO Auto-generated method stub
 		
 	}

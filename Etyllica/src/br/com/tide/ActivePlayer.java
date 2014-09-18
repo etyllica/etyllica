@@ -6,7 +6,7 @@ public class ActivePlayer extends Player implements Updatable, ActivePlayerListe
 	
 	protected float health = 100;
 
-	protected int walkSpeed = 5;	
+	protected int currentSpeed = 5;
 
 	protected long wasHit = 0;
 		
