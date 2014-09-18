@@ -14,6 +14,12 @@ public interface PlatformPlayerListener {
 	
 	public void onStandDown();
 	
+	public void onJump();
+	
+	public void onFall();
+	
+	public void onRun();
+	
 	public void onStopWalkLeft();
 	
 	public void onStopWalkRight();
@@ -21,5 +27,9 @@ public interface PlatformPlayerListener {
 	public void onStopLookUp();
 	
 	public void onStopStandDown();
-		
+	
+	public void onStopJump();
+	
+	public void onStopRun();
+	
 }

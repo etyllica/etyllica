@@ -10,7 +10,9 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	protected int walkSpeed = 5;
 	protected int runSpeed = 5;
 	protected int jumpSpeed = 5;
-	protected int jumpSize = 32;
+	protected int jumpHeight = 64;
+	
+	protected int jumpStart = 0;
 	
 	protected PlatformPlayerListener listener;
 	
@@ -32,6 +34,33 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 			x -= currentSpeed;
 		} else if(hasState(PlayerState.WALK_RIGHT)) {
 			x += currentSpeed;
+		}
+		
+		if(hasState(PlayerState.JUMP)) {
+			updateJump();
+		}
+	}
+	
+	protected void updateJump() {
+		
+		if(!hasState(PlayerState.FALL)) {
+			
+			if(y > jumpStart-jumpHeight) {
+				y -= jumpSpeed;
+			} else {
+				y = jumpStart-jumpHeight;
+				fall();
+			}
+
+		} else {
+
+			//TODO Change to collision methods
+			if(y < jumpStart) {
+				y += jumpSpeed;
+			} else {
+				y = jumpStart;
+				stopJump();
+			}
 		}
 	}
 
@@ -99,15 +128,28 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	}
 	
 	public void jump() {
-				
+		jumpStart = y;
+		listener.onJump();
+		states.add(PlayerState.JUMP);
 	}
+	
+	public void fall() {
+		states.add(PlayerState.FALL);
+	}
+	
+	public void stopJump() {
+		states.remove(PlayerState.FALL);
+		states.remove(PlayerState.JUMP);		
+	}	
 	
 	public void run() {
 		currentSpeed = runSpeed;
+		listener.onRun();
 	}
 	
 	public void stopRun() {
 		currentSpeed = walkSpeed;
+		listener.onStopRun();
 	}
 	
 	public boolean isWalking() {
