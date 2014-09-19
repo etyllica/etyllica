@@ -236,14 +236,29 @@ public class GeometricLayer implements Movable {
 	 * @param bh
 	 * @return
 	 */
-	public boolean colideCircleCircle(int bx, int by, int bw, int bh)
-	{
+	public boolean colideCircleCircle(int bx, int by, int bw, int bh) {
 		int xdiff = bx - x;
 		int ydiff = by - y;
 
 		int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
 
 		int r_sum_sq = bw/2 + w/2;
+		r_sum_sq *= r_sum_sq;
+
+		if(dcentre_sq - r_sum_sq<=0) {
+			return true;
+		}
+
+		return false;
+	}
+	
+	public boolean colideCircular(GeometricLayer layer) {
+		int xdiff = layer.getX() - x;
+		int ydiff = layer.getY() - y;
+
+		int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
+
+		int r_sum_sq = layer.getW()/2 + w/2;
 		r_sum_sq *= r_sum_sq;
 
 		if(dcentre_sq - r_sum_sq<=0) {
