@@ -30,7 +30,6 @@ public class RingBuffer<T> {
 
 			slot = list.get(usedSlot);
 
-
 		} else {
 
 			slot = create(); 
@@ -94,7 +93,8 @@ public class RingBuffer<T> {
 
 	public int size() {
 
-		return list.size();
+		//return list.size();
+		return usedSlot;
 	}
 
 }
