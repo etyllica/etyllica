@@ -166,7 +166,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		keyboard.update(now);
 
-		JoystickLoader.getInstance().update(now);
+		//Joystick locks the application
+		//JoystickLoader.getInstance().update(now);
 
 		handleFullScreen();
 
