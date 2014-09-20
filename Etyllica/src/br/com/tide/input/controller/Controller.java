@@ -5,7 +5,7 @@ import br.com.tide.input.ControllerListener;
 
 public class Controller {
 	
-	private ControllerListener listener;
+	protected ControllerListener listener;
 	
 	protected int upButton = KeyEvent.TSK_UP_ARROW;
 	
