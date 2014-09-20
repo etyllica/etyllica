@@ -25,6 +25,11 @@ public class LightSource extends GeometricLayer implements LightSpot {
 		return w;
 	}
 	
+	public void setIntensity(int intensity) {
+		w = intensity;
+		h = intensity;
+	}
+	
 	public void drawLight(Graphic g) {
 
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
