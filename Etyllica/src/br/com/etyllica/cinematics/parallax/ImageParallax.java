@@ -16,9 +16,9 @@ public class ImageParallax extends Parallax {
 	@Override
 	public void draw(Graphic g) {
 		
-		int mod = (offset%layer.getW())/proximity;
+		int mod = (offset/proximity)%layer.getW();
 		
-		if(mod==0) {
+		if(mod == 0) {
 			layer.simpleDraw(g, 0, 0);
 		} else {
 			layer.simpleDraw(g, -mod, 0);
