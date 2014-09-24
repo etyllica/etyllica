@@ -13,8 +13,7 @@ public class RingBufferTest {
 	@Before
 	public void setUp() {
 		
-		events = new RingBuffer<PointerEvent>(PointerEvent.class);
-		
+		events = new RingBuffer<PointerEvent>(PointerEvent.class);		
 	}
 	
 	@Test
@@ -26,14 +25,30 @@ public class RingBufferTest {
 		event.setY(80);
 		
 		Assert.assertEquals(1, events.size());
+	}
+	
+	@Test
+	public void testSlotPosition() {
 		
+		PointerEvent event = events.getSlot();
+		
+		event.setX(50);
+		
+		PointerEvent secondEvent = events.getSlot();
+		
+		secondEvent.setX(55);
+		
+		Assert.assertEquals(2, events.size());
+				
+		Assert.assertEquals(50, events.getList().get(0).getX());
+		Assert.assertEquals(55, events.getList().get(1).getX());
 	}
 	
 	@Test
 	public void testGetSlotAfterPack() {
 		
 		events.getSlot();
-				
+		
 		Assert.assertEquals(1, events.size());
 		
 		events.pack();
@@ -58,5 +73,5 @@ public class RingBufferTest {
 		Assert.assertEquals(2, events.size());
 		
 	}
-	
+		
 }

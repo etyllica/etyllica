@@ -5,6 +5,8 @@ import java.util.List;
 
 public class RingBuffer<T> {
 	
+	private List<T> copyList;
+	
 	private List<T> list;
 
 	private Class<T> cls;
@@ -19,6 +21,8 @@ public class RingBuffer<T> {
 		this.cls = cls;
 
 		list = new ArrayList<T>();
+		
+		copyList = new ArrayList<T>();
 
 	}
 
@@ -79,10 +83,12 @@ public class RingBuffer<T> {
 
 	}
 	
-	public synchronized List<T> getList() {
-		return list.subList(0, usedSlot);
+	public List<T> getList() {
+		copyList.clear();
+		copyList.addAll(list.subList(0, usedSlot));
+		return copyList;
 	}
-	
+		
 	public int getMinimumSlots() {
 		return minimumSlots;
 	}
@@ -93,8 +99,7 @@ public class RingBuffer<T> {
 
 	public int size() {
 
-		//return list.size();
-		return usedSlot;
+		return list.size();		
 	}
 
 }
