@@ -2,9 +2,9 @@ package br.com.etyllica.linear;
 
 public class PointInt2D {
 
-	private int x = 0;
+	protected int x = 0;
 	
-	private int y = 0;
+	protected int y = 0;
 	
 	public PointInt2D() {
 		super();

@@ -3,11 +3,9 @@ package br.com.tide;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Player {
-	
-	protected int x = 0;
-	
-	protected int y = 0;
+import br.com.etyllica.linear.PointInt2D;
+
+public class Player extends PointInt2D {	
 	
 	protected String name = "Player";
 
@@ -25,8 +23,7 @@ public class Player {
 			
 			if(states.contains(playerState)) {
 				return true;
-			}
-			
+			}			
 		}
 		
 		return false;
@@ -40,12 +37,4 @@ public class Player {
 		this.name = name;
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-	
 }
