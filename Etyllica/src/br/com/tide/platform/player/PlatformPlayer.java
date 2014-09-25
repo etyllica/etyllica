@@ -36,7 +36,7 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 			x += currentSpeed;
 		}
 		
-		if(hasState(PlayerState.JUMP)) {
+		if(hasState(PlayerState.JUMP, PlayerState.FALL)) {
 			updateJump();
 		}
 	}
@@ -48,21 +48,25 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 			if(y > jumpStart-jumpHeight) {
 				y -= jumpSpeed;
 			} else {
-				y = jumpStart-jumpHeight;
+				y = jumpStart-jumpHeight;				
 				fall();
 			}
 
 		} else {
-
-			//TODO Change to collision methods
-			if(y < jumpStart) {
-				y += jumpSpeed;
-			} else {
-				y = jumpStart;
-				stopJump();
-			}
+			y += jumpSpeed;
+			//finishJump();
 		}
 	}
+	
+	/*public void finishJump() {
+		//TODO Change to collision methods
+		if(y < jumpStart) {
+			y += jumpSpeed;
+		} else {
+			y = jumpStart;
+			stopJump();
+		}		
+	}*/
 
 	public void walkLeft() {
 		
@@ -137,6 +141,10 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 		states.add(PlayerState.FALL);
 	}
 	
+	public void fall(int groundPosition) {
+		states.add(PlayerState.FALL);
+	}
+	
 	public void stopJump() {
 		states.remove(PlayerState.FALL);
 		states.remove(PlayerState.JUMP);		
@@ -153,7 +161,15 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	}
 	
 	public boolean isWalking() {
-		return states.contains(PlayerState.WALK_RIGHT)||states.contains(PlayerState.WALK_LEFT)||states.contains(PlayerState.WALK_UP)||states.contains(PlayerState.WALK_DOWN);
+		return hasState(PlayerState.WALK_RIGHT, PlayerState.WALK_LEFT, PlayerState.WALK_UP, PlayerState.WALK_DOWN);
+	}
+	
+	public boolean isJumping() {
+		return states.contains(PlayerState.JUMP);
+	}
+	
+	public boolean isFalling() {
+		return states.contains(PlayerState.FALL);
 	}
 	
 	public void onUpButtonPressed() {
