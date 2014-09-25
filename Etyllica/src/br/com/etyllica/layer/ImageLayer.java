@@ -230,9 +230,14 @@ public class ImageLayer extends StaticLayer {
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
 
+
 	@Override
 	public void draw(Graphic g) {
-
+		draw(g, 0, 0);
+	}
+	
+	public void draw(Graphic g, int offsetX, int offsetY) {
+	
 		if(!visible) {
 			return;
 		}
@@ -245,15 +250,15 @@ public class ImageLayer extends StaticLayer {
 		
 		if(transform != null) {
 			g.setTransform(transform); 
-			simpleDraw(g);
+			simpleDraw(g, x+offsetX, y+offsetY);
 			g.resetTransform();
 		} else { 
-			simpleDraw(g);
+			simpleDraw(g, x+offsetX, y+offsetY);
 		}
 		
 		if(opacity<0xff) {
 			g.resetOpacity();
-		}		
+		}
 
 	}
 

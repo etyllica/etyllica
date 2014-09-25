@@ -40,7 +40,7 @@ public class GeometricLayer implements Movable {
 		this.x = x;
 		this.y = y;
 		this.w = w;
-		this.h = h;		
+		this.h = h;
 	}
 
 	public int getX() {
