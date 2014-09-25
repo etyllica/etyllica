@@ -30,5 +30,21 @@ public class Camera extends ViewPort {
 		this.zoomX = zoom;
 		this.zoomY = zoom;
 	}
-	
+
+	public float getZoomX() {
+		return zoomX;
+	}
+
+	public void setZoomX(float zoomX) {
+		this.zoomX = zoomX;
+	}
+
+	public float getZoomY() {
+		return zoomY;
+	}
+
+	public void setZoomY(float zoomY) {
+		this.zoomY = zoomY;
+	}
+		
 }

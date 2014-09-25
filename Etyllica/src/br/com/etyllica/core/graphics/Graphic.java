@@ -41,6 +41,9 @@ public class Graphic {
 	private int height;
 	
 	private final Color shadowColor = Color.BLACK;
+	
+	//Identity matrix
+	private static final AffineTransform RESET_TRANSFORM = AffineTransform.getScaleInstance(1, 1);
 		
 	public Graphic(int width, int height) {
 		super();
@@ -539,9 +542,7 @@ public class Graphic {
 	}
 	
 	public void resetTransform() {
-	
-		//Identity matrix
-		setTransform(AffineTransform.getScaleInstance(1, 1));	
+		setTransform(RESET_TRANSFORM);	
 	}
 	
 	/**
@@ -1091,12 +1092,10 @@ public class Graphic {
 	public void setCamera(Camera camera) {
 		camera.resetImage();
 		setImage(camera.getBuffer());
-		setTransform(camera.getTransform());
 	}
-	
+		
 	public void resetCamera(Camera camera) {
 		resetImage();
-		drawImage(camera.getBuffer(), camera.getX(), camera.getY());
 	}
 
 }
