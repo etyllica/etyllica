@@ -37,19 +37,17 @@ public class Part extends PivotImageLayer {
 	
 	public void rotate(double angle) {
 				
-		double varyAngle = angle-this.angle;		
+		double diffAngle = angle-this.angle;
 		
 		for(PivotPoint point: points) {
 						
 			double cx = x+xPivot;
 			double cy = y+yPivot;
 			
-			point.rotate(cx, cy, varyAngle);
-			
+			point.rotate(cx, cy, diffAngle);
 		}
 
 		setAngle(angle);
-		
 	}
 	
 	public void rotateByParent(double angle) {
@@ -63,8 +61,7 @@ public class Part extends PivotImageLayer {
 			
 		}
 		
-		setOffsetAngle(angle);
-		
+		setOffsetAngle(angle);		
 	}
 
 	public AffineTransform getTransform() {
