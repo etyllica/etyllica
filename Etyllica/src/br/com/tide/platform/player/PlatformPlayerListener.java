@@ -2,34 +2,34 @@ package br.com.tide.platform.player;
 
 public interface PlatformPlayerListener {
 
-	public void onTurnLeft();
+	public void onTurnLeft(PlatformPlayer player);
 	
-	public void onTurnRight();
+	public void onTurnRight(PlatformPlayer player);
 	
-	public void onWalkLeft();
+	public void onWalkLeft(PlatformPlayer player);
 		
-	public void onWalkRight();
+	public void onWalkRight(PlatformPlayer player);
 		
-	public void onLookUp();
+	public void onLookUp(PlatformPlayer player);
 	
-	public void onStandDown();
+	public void onStandDown(PlatformPlayer player);
 	
-	public void onJump();
+	public void onJump(PlatformPlayer player);
 	
-	public void onFall();
+	public void onFall(PlatformPlayer player);
 	
-	public void onRun();
+	public void onRun(PlatformPlayer player);
 	
-	public void onStopWalkLeft();
+	public void onStopWalkLeft(PlatformPlayer player);
 	
-	public void onStopWalkRight();
+	public void onStopWalkRight(PlatformPlayer player);
 	
-	public void onStopLookUp();
+	public void onStopLookUp(PlatformPlayer player);
 	
-	public void onStopStandDown();
+	public void onStopStandDown(PlatformPlayer player);
 	
-	public void onStopJump();
+	public void onStopJump(PlatformPlayer player);
 	
-	public void onStopRun();
+	public void onStopRun(PlatformPlayer player);
 	
 }

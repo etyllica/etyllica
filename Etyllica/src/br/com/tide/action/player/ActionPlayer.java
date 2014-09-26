@@ -57,43 +57,43 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 	}
 	
 	public void turnLeft() {
-		listener.onTurnLeft();
+		listener.onTurnLeft(this);
 		states.add(PlayerState.TURN_LEFT);
 	}
 
 	public void stopTurnLeft() {
 		states.remove(PlayerState.TURN_LEFT);
-		listener.onStopTurnLeft();
+		listener.onStopTurnLeft(this);
 	}
 
 	public void turnRight() {
-		listener.onTurnRight();
+		listener.onTurnRight(this);
 		states.add(PlayerState.TURN_RIGHT);
 	}
 
 	public void stopTurnRight() {
 		states.remove(PlayerState.TURN_RIGHT);
-		listener.onStopTurnRight();
+		listener.onStopTurnRight(this);
 	}
 
 	public void walkForward() {
-		listener.onWalkForward();
+		listener.onWalkForward(this);
 		states.add(PlayerState.WALK_FORWARD);
 	}
 
 	public void stopWalkForward() {
 		states.remove(PlayerState.WALK_FORWARD);
-		listener.onStopWalkForward();
+		listener.onStopWalkForward(this);
 	}
 
 	public void walkBackward() {
-		listener.onStopWalkBackward();
+		listener.onStopWalkBackward(this);
 		states.add(PlayerState.WALK_BACKWARD);
 	}
 	
 	public void stopWalkBackward() {
 		states.remove(PlayerState.WALK_BACKWARD);
-		listener.onStopWalkBackward();
+		listener.onStopWalkBackward(this);
 	}
 
 	private void move(double ang, double speed) {

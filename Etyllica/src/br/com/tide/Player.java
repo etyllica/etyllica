@@ -5,7 +5,7 @@ import java.util.Set;
 
 import br.com.etyllica.linear.PointInt2D;
 
-public class Player extends PointInt2D {	
+public class Player extends PointInt2D {
 	
 	protected String name = "Player";
 

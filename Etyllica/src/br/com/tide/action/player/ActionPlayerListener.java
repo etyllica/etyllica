@@ -2,20 +2,20 @@ package br.com.tide.action.player;
 
 public interface ActionPlayerListener {
 
-	public void onTurnLeft();
+	public void onTurnLeft(ActionPlayer player);
 	
-	public void onTurnRight();
+	public void onTurnRight(ActionPlayer player);
 	
-	public void onWalkForward();
+	public void onWalkForward(ActionPlayer player);
 	
-	public void onWalkBackward();
+	public void onWalkBackward(ActionPlayer player);
 	
-	public void onStopTurnLeft();
+	public void onStopTurnLeft(ActionPlayer player);
 	
-	public void onStopTurnRight();
+	public void onStopTurnRight(ActionPlayer player);
 	
-	public void onStopWalkForward();
+	public void onStopWalkForward(ActionPlayer player);
 	
-	public void onStopWalkBackward();
+	public void onStopWalkBackward(ActionPlayer player);
 		
 }

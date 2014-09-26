@@ -21,49 +21,49 @@ public class ArcadePlayer extends ActivePlayer implements ControllerListener {
 	public void walkLeft() {
 		x -= currentSpeed;
 		
-		listener.onWalkLeft();		
+		listener.onWalkLeft(this);		
 		states.add(PlayerState.WALK_LEFT);
 	}
 
 	public void stopWalkLeft() {
 		states.remove(PlayerState.WALK_LEFT);
-		listener.onStopWalkLeft();
+		listener.onStopWalkLeft(this);
 	}
 
 	public void walkRight() {
 		x += currentSpeed;
 		
-		listener.onWalkRight();
+		listener.onWalkRight(this);
 		states.add(PlayerState.WALK_RIGHT);
 	}
 
 	public void stopWalkRight() {
 		states.remove(PlayerState.WALK_RIGHT);
-		listener.onStopWalkRight();
+		listener.onStopWalkRight(this);
 	}
 
 	public void walkUp() {
 		y -= currentSpeed;
 		
-		listener.onWalkUp();
+		listener.onWalkUp(this);
 		states.add(PlayerState.WALK_UP);
 	}
 
 	public void stopWalkUp() {
 		states.remove(PlayerState.WALK_UP);
-		listener.onStopWalkUp();
+		listener.onStopWalkUp(this);
 	}
 
 	public void walkDown() {
 		y += currentSpeed;
 		
-		listener.onWalkDown();
+		listener.onWalkDown(this);
 		states.add(PlayerState.WALK_DOWN);
 	}
 
 	public void stopWalkDown() {
 		states.remove(PlayerState.WALK_DOWN);
-		listener.onStopWalkDown();
+		listener.onStopWalkDown(this);
 	}
 	
 	public void stopWalk() {

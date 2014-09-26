@@ -2,20 +2,20 @@ package br.com.tide.arcade.player;
 
 public interface ArcadePlayerListener {
 
-	public void onWalkLeft();
+	public void onWalkLeft(ArcadePlayer player);
 	
-	public void onWalkRight();
+	public void onWalkRight(ArcadePlayer player);
 	
-	public void onWalkUp();
+	public void onWalkUp(ArcadePlayer player);
 	
-	public void onWalkDown();
+	public void onWalkDown(ArcadePlayer player);
 	
-	public void onStopWalkLeft();
+	public void onStopWalkLeft(ArcadePlayer player);
 	
-	public void onStopWalkRight();
+	public void onStopWalkRight(ArcadePlayer player);
 	
-	public void onStopWalkUp();
+	public void onStopWalkUp(ArcadePlayer player);
 	
-	public void onStopWalkDown();
+	public void onStopWalkDown(ArcadePlayer player);
 		
 }

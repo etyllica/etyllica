@@ -71,35 +71,35 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	public void walkLeft() {
 		
 		if(!states.contains(PlayerState.TURN_LEFT)) {
-			listener.onTurnLeft();
+			listener.onTurnLeft(this);
 			states.add(PlayerState.TURN_LEFT);
 			states.remove(PlayerState.TURN_RIGHT);
 		}
 				
-		listener.onWalkLeft();		
+		listener.onWalkLeft(this);		
 		states.add(PlayerState.WALK_LEFT);
 	}
 
 	public void stopWalkLeft() {
 		states.remove(PlayerState.WALK_LEFT);
-		listener.onStopWalkLeft();
+		listener.onStopWalkLeft(this);
 	}
 
 	public void walkRight() {
 		
 		if(!states.contains(PlayerState.TURN_RIGHT)) {
-			listener.onTurnRight();
+			listener.onTurnRight(this);
 			states.add(PlayerState.TURN_RIGHT);
 			states.remove(PlayerState.TURN_LEFT);
 		}
 		
-		listener.onWalkRight();
+		listener.onWalkRight(this);
 		states.add(PlayerState.WALK_RIGHT);
 	}
 
 	public void stopWalkRight() {
 		states.remove(PlayerState.WALK_RIGHT);
-		listener.onStopWalkRight();
+		listener.onStopWalkRight(this);
 	}
 
 	public void lookUp() {
@@ -107,23 +107,31 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 			stopWalk();
 		}
 		
-		listener.onLookUp();
+		listener.onLookUp(this);
 		states.add(PlayerState.LOOK_UP);
+	}
+	
+	public void turnLeft() {
+		
+	}
+	
+	public void turnRight() {
+		
 	}
 
 	public void stopWalkUp() {
 		states.remove(PlayerState.WALK_UP);
-		listener.onStopLookUp();
+		listener.onStopLookUp(this);
 	}
 
 	public void standDown() {
-		listener.onStandDown();
+		listener.onStandDown(this);
 		states.add(PlayerState.STAND_DOWN);
 	}
 
 	public void stopStandDown() {
 		states.remove(PlayerState.STAND_DOWN);
-		listener.onStopStandDown();
+		listener.onStopStandDown(this);
 	}
 	
 	public void stopWalk() {
@@ -133,7 +141,7 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	
 	public void jump() {
 		jumpStart = y;
-		listener.onJump();
+		listener.onJump(this);
 		states.add(PlayerState.JUMP);
 	}
 	
@@ -152,12 +160,12 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 	
 	public void run() {
 		currentSpeed = runSpeed;
-		listener.onRun();
+		listener.onRun(this);
 	}
 	
 	public void stopRun() {
 		currentSpeed = walkSpeed;
-		listener.onStopRun();
+		listener.onStopRun(this);
 	}
 	
 	public boolean isWalking() {
@@ -172,6 +180,16 @@ public class PlatformPlayer extends ActivePlayer implements Updatable, Controlle
 		return states.contains(PlayerState.FALL);
 	}
 	
+	//Plataform specific actions
+	public void lookUpAction() {
+		
+	}
+	
+	public void standDownAction() {
+		
+	}
+	
+	//Controller Oriented Actions
 	public void onUpButtonPressed() {
 		lookUp();
 	}

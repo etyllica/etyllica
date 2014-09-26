@@ -105,4 +105,12 @@ public class ActivePlayer extends Player implements Updatable, ActivePlayerListe
 		// TODO Auto-generated method stub
 	}
 	
+	//Common Actions
+	public void walkAction() {
+		
+	}
+	
+	public void jumpAction() {
+		
+	}
 }
