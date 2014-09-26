@@ -82,7 +82,7 @@ public class AnimatedLayer extends ImageLayer {
 		this.tileH = yTile;		
 	}
 
-	protected void resetAnimation() {
+	public void restartAnimation() {
 		xImage = needleX;
 		yImage = needleY;
 		currentFrame = 0;
@@ -142,7 +142,7 @@ public class AnimatedLayer extends ImageLayer {
 			changedAt = now;
 		
 			stopped = false;
-			resetAnimation();
+			restartAnimation();
 		}
 	
 		if(now>=changedAt+speed) {

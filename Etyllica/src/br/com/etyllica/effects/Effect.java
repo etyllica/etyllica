@@ -43,7 +43,7 @@ public class Effect extends AnimatedLayer {
 				
 		setVisible(true);
 		
-		resetAnimation();		
+		restartAnimation();		
 		
 		AnimationHandler.getInstance().add(script);
 		
