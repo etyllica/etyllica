@@ -174,7 +174,8 @@ public class Layer extends GeometricLayer implements Drawable {
 			
 			transform = new AffineTransform();
 			
-			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
+			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
+					x+utilWidth()/2, y+utilHeight()/2));
 		}
 
 		if(scaleX != 1 || scaleY != 1) {
@@ -183,17 +184,17 @@ public class Layer extends GeometricLayer implements Drawable {
 				transform = new AffineTransform();
 			}
 			
-			double sw = w*scaleX;
-			double sh = h*scaleY;
+			double sw = utilWidth()*scaleX;
+			double sh = utilHeight()*scaleY;
 
-			double dx = sw/2-w/2;
-			double dy = sh/2-h/2;
+			double dx = sw/2-utilWidth()/2;
+			double dy = sh/2-utilHeight()/2;
 
-			transform.translate(x-w/2-dx, y-h/2-dy);
+			transform.translate(x-utilWidth()/2-dx, y-utilHeight()/2-dy);
 
 			AffineTransform scaleTransform = new AffineTransform();
 
-			scaleTransform.translate(w/2, h/2);
+			scaleTransform.translate(utilWidth()/2, utilHeight()/2);
 			scaleTransform.scale(scaleX,scaleY);
 			scaleTransform.translate(-x, -y);
 

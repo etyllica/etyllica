@@ -169,7 +169,7 @@ public class GeometricLayer implements Movable {
 	 */
 	public int centralizeX(int startX, int endX)
 	{
-		int x = (((startX+endX)/2)-(getW()/2));
+		int x = (((startX+endX)/2)-(utilWidth()/2));
 		setX(x);
 		
 		return x;
@@ -191,7 +191,7 @@ public class GeometricLayer implements Movable {
 	 */
 	public int centralizeY(int startY, int endY)
 	{
-		int y = (((startY+endY)/2)-(getH()/2));
+		int y = (((startY+endY)/2)-(utilHeight()/2));
 		setY(y);
 		
 		return y;
@@ -218,11 +218,11 @@ public class GeometricLayer implements Movable {
 	 */
 	public boolean colideRect(int bx, int by, int bw, int bh) {
 
-		if(bx + bw < getX())	return false;
-		if(bx > getX() + getW())		return false;
+		if(bx + bw < getX()) return false;
+		if(bx > getX() + utilWidth()) return false;
 
-		if(by + bh < getY())	return false;
-		if(by > getY() + getH())		return false;
+		if(by + bh < getY()) return false;
+		if(by > getY() + utilHeight()) return false;
 
 		return true;
 
@@ -258,7 +258,7 @@ public class GeometricLayer implements Movable {
 
 		int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
 
-		int r_sum_sq = layer.getW()/2 + w/2;
+		int r_sum_sq = layer.utilWidth()/2 + utilWidth()/2;
 		r_sum_sq *= r_sum_sq;
 
 		if(dcentre_sq - r_sum_sq<=0) {
@@ -287,6 +287,14 @@ public class GeometricLayer implements Movable {
 		double distance = Math.sqrt((double)(dx + dy));
 
 		return (distance <= radius);
-	}	
+	}
+
+	protected int utilWidth() {
+		return getW();
+	}
+	
+	protected int utilHeight() {
+		return getH();
+	}
 	
 }

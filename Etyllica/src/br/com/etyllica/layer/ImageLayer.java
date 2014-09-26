@@ -268,10 +268,10 @@ public class ImageLayer extends StaticLayer {
 	}
 
 	public void simpleDraw(Graphic g, int x, int y) {
-		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+w, (y+h),
-				xImage,yImage,xImage+w,yImage+h, null );
+		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+utilWidth(), y+utilHeight(),
+				xImage,yImage,xImage+utilWidth(),yImage+utilHeight(), null );
 	}
-	
+		
 	public boolean onMouse(Mouse mouse) {
 
 		return CollisionDetector.colideRectPoint(this, mouse.getX(), mouse.getY());
