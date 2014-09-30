@@ -1,11 +1,10 @@
 package br.com.tide.platform.player;
 
-import br.com.etyllica.core.Updatable;
 import br.com.tide.ActivePlayer;
 import br.com.tide.PlayerState;
 import br.com.tide.input.ControllerListener;
 
-public class PlatformPlayer extends ActivePlayer implements Updatable, ControllerListener {
+public class PlatformPlayer extends ActivePlayer implements ControllerListener {
 
 	protected int walkSpeed = 5;
 	protected int runSpeed = 5;

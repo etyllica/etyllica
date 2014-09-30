@@ -1,6 +1,8 @@
 package br.com.tide.input;
 
-public interface ControllerListener {
+import br.com.etyllica.core.Updatable;
+
+public interface ControllerListener extends Updatable {
 
 	public void onUpButtonPressed();
 	
