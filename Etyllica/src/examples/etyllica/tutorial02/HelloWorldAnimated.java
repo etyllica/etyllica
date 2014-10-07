@@ -32,13 +32,13 @@ public class HelloWorldAnimated extends Application{
 	@Override
 	public void load() {
 		
-		loadingPhrase = "Loading images...";
+		loadingInfo = "Loading images...";
 		
 		hello = new ImageLayer("hello.png");
 		hello.centralizeX(0,w);
 		hello.centralizeY(0,h);
 				
-		loadingPhrase = "Loading animations...";
+		loadingInfo = "Loading animations...";
 		loading = 50;
 		
 		ScaleUniformAnimation scaleAnimation = new ScaleUniformAnimation(0,10000);

@@ -74,7 +74,7 @@ public class ApplicationLoader implements LoadListener {
 			if(!called) {
 
 				if(!window.isLoaded()) {
-					loadApplication.setText(application.getLoadingPhrase(), application.getLoading());
+					loadApplication.setText(application.getLoadingInfo(), application.getLoading());
 				}
 
 			} else {

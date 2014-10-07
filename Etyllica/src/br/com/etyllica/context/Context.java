@@ -42,7 +42,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	/**
 	 * Loading phrase while loading Application 
 	 */
-	protected String loadingPhrase = "Loading...";
+	protected String loadingInfo = "Loading...";
 
 	/**
 	 * Application title (useful with windows) 
@@ -57,7 +57,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	/**
 	 * Map shared between Applications  
 	 */
-	protected SessionMap sessionMap;
+	protected Session session;
 
 	/**
 	 * Scene camera  
@@ -111,7 +111,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 		this.loading = 0;
 		//TODO Dictionary get "loading"+...
-		this.loadingPhrase = "Carregando...";
+		this.loadingInfo = "Carregando...";
 
 		//loadListeners = new ArrayList<LoadListener>();
 	}
@@ -187,29 +187,24 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 		return loading;
 	}
 
-	public String getLoadingPhrase() {
-		return loadingPhrase;
+	public String getLoadingInfo() {
+		return loadingInfo;
 	}
 
-	public void setSessionMap(SessionMap sessionMap) {
-		this.sessionMap = sessionMap;
+	public void setSession(Session session) {
+		this.session = session;
 	}
 
-	public SessionMap getSessionMap() {
-		return sessionMap;
+	public Session getSession() {
+		return session;
 	}
 
-	public void setVariavelSessao(String nomeVariavel,Object objeto) {
-		sessionMap.put(nomeVariavel, objeto);
+	public void setSessionValue(String key, Object value) {
+		session.put(key, value);
 	}
 
-	public Object getVariavelSessao(String nomeVariaviel) {
-
-		if(sessionMap.containsKey(nomeVariaviel)) {
-			return sessionMap.get(nomeVariaviel);
-		}
-
-		return null;
+	public Object getSessionValue(String key) {
+		return session.get(key);
 	}
 
 	public boolean isClearBeforeDraw() {

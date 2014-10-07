@@ -39,15 +39,15 @@ public class CustomLoadApplication extends Application{
 			
 			if(loading<30){
 				
-				loadingPhrase = "Loading Nothing...";
+				loadingInfo = "Loading Nothing...";
 				
 			}else if(loading<50){
 				
-				loadingPhrase = "Loading Something...";
+				loadingInfo = "Loading Something...";
 				
 			}else if(loading<90){
 				
-				loadingPhrase = "Almost Loaded...";
+				loadingInfo = "Almost Loaded...";
 				
 			}else if(loading>=100){
 				loading = 100;

@@ -25,7 +25,7 @@ public class StriderAnimation extends Application{
 	@Override
 	public void load() {
 		
-		loadingPhrase = "Loading images...";
+		loadingInfo = "Loading images...";
 		
 		background = new ImageLayer("scene.png");
 		machine = new ImageLayer(180,270,"machine.png");
@@ -36,7 +36,7 @@ public class StriderAnimation extends Application{
 		createAnimationScripts(anotherMachine, 180);
 				
 		loading = 50;
-		loadingPhrase = "Loading animations...";		
+		loadingInfo = "Loading animations...";		
 				
 	}
 	
