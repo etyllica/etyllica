@@ -15,44 +15,44 @@ import br.com.etyllica.core.graphics.Graphic;
  */
 
 public class Layer extends GeometricLayer implements Drawable {
-	
+
 	/**
 	 * Opacity
 	 */
 	protected int opacity = 255;
-	
+
 	/**
 	 * Angle in degrees
 	 */
 	protected double angle = 0;
-	
+
 	/**
 	 * Scale factors
 	 */
 	protected double scaleX = 1;
-	
+
 	protected double scaleY = 1;
-		
+
 	/**
-     * if layer is visible
-     */
+	 * if layer is visible
+	 */
 	protected boolean visible = true;
-	
+
 	public Layer() {
 		super();
 	}
-	
+
 	public Layer(int x, int y) {
 		super();
-		
+
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public Layer(int x, int y, int w, int h) {
 		super(x,y,w,h);
 	}
-	
+
 	public int getOpacity() {
 		return opacity;
 	}
@@ -76,7 +76,7 @@ public class Layer extends GeometricLayer implements Drawable {
 	public void setAngle(double angle) {
 		this.angle = angle;
 	}
-	
+
 	/**
 	 * 
 	 * @param offset
@@ -84,11 +84,11 @@ public class Layer extends GeometricLayer implements Drawable {
 	public void setOffsetAngle(double offset) {
 		setAngle(angle+offset);
 	}
-	
+
 	public double getScaleX() {
 		return scaleX;
 	}
-	
+
 	public double getScaleY() {
 		return scaleY;
 	}
@@ -100,7 +100,7 @@ public class Layer extends GeometricLayer implements Drawable {
 	public void setScaleX(double scaleX) {
 		this.scaleX = scaleX;
 	}
-	
+
 	/**
 	 * 
 	 * @param scaleY
@@ -108,7 +108,7 @@ public class Layer extends GeometricLayer implements Drawable {
 	public void setScaleY(double scaleY) {
 		this.scaleY = scaleY;
 	}
-	
+
 	public void setScale(double scale) {
 		this.scaleX = scale;
 		this.scaleY = scale;
@@ -121,40 +121,39 @@ public class Layer extends GeometricLayer implements Drawable {
 	public void setVisible(boolean visible) {
 		this.visible = visible;	
 	}
-	
+
 	public boolean isVisible() {
 		return visible;
 	}
 
 	/**
-     * Method to turn a Layer visible
-     */
+	 * Method to turn a Layer visible
+	 */
 	public void show() {
 		visible = true;
 	}
-	
+
 	/**
-     * Method to turn a Layer invisible
-     */
+	 * Method to turn a Layer invisible
+	 */
 	public void hide() {
 		visible = false;
 	}
-	
+
 	public void swapVisible() {
 		visible = !visible;
 	}
-		
+
 	/**
 	 * 
 	 * @param event
 	 * @return
 	 */
 	public boolean onMouse(PointerEvent event) {
-		
+
 		return onMouse(event.getX(), event.getY());
-		
 	}
-	
+
 	/**
 	 * 
 	 * @param mx
@@ -163,17 +162,20 @@ public class Layer extends GeometricLayer implements Drawable {
 	 */
 	public boolean onMouse(int px, int py) {
 
-		return CollisionDetector.colideRectPoint(this, px, py);
+		if(scaleX == 1 && scaleY == 1)
+			return CollisionDetector.colideRectPoint(this, px, py);
+		else
+			return CollisionDetector.colideRectPoint(this, px, py, scaleX, scaleY);
 	}
-	
+
 	public AffineTransform getTransform() {
-		
+
 		AffineTransform transform = null;
-		
+
 		if(angle != 0) {
-			
+
 			transform = new AffineTransform();
-			
+
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
 					x+utilWidth()/2, y+utilHeight()/2));
 		}
@@ -183,7 +185,7 @@ public class Layer extends GeometricLayer implements Drawable {
 			if(transform == null) {
 				transform = new AffineTransform();
 			}
-			
+
 			double sw = utilWidth()*scaleX;
 			double sh = utilHeight()*scaleY;
 
@@ -209,7 +211,7 @@ public class Layer extends GeometricLayer implements Drawable {
 	public void draw(Graphic g) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	public void simpleDraw(Graphic g) {
 		// TODO Auto-generated method stub
 	}

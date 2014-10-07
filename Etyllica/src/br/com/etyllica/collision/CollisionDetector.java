@@ -77,6 +77,21 @@ public class CollisionDetector {
 
 		return testRectangleToPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
 	}
+	
+	public static boolean colideRectPoint(Layer layer, double  px, double py, double scaleX, double scaleY) {
+		
+		int w = (int)(layer.getW()*scaleX);
+		int h = (int)(layer.getH()*scaleY);
+		
+		int rectCenterX = layer.getX()+w/2-(int)(layer.getW()/scaleX);
+		int rectCenterY = layer.getY()+h/2-(int)(layer.getH()/scaleY);
+		int rectWidth = w;
+		int rectHeight = h;
+
+		double rectRotation = Math.toRadians(-layer.getAngle());
+
+		return testRectangleToPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
+	}
 
 	public static boolean colideRectPoint(Layer layer, Point2D point) {
 
