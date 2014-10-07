@@ -6,7 +6,7 @@ import java.util.List;
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.Context;
 import br.com.etyllica.context.ContextContainer;
-import br.com.etyllica.context.SessionMap;
+import br.com.etyllica.context.Session;
 import br.com.etyllica.context.load.ApplicationLoader;
 import br.com.etyllica.context.load.DefaultLoadApplication;
 import br.com.etyllica.context.load.GenericLoadApplication;
@@ -28,7 +28,7 @@ public class Window extends GeometricLayer implements ContextContainer {
 
 	protected Camera camera;
 	
-	protected SessionMap sessionMap = new SessionMap();
+	protected Session sessionMap = new Session();
 
 	//protected DefaultLoadApplication load;
 
@@ -130,11 +130,11 @@ public class Window extends GeometricLayer implements ContextContainer {
 		this.windows = windows;
 	}
 	
-	public SessionMap getSessionMap() {
+	public Session getSessionMap() {
 		return sessionMap;
 	}
 
-	public void setSessionMap(SessionMap sessionMap) {
+	public void setSessionMap(Session sessionMap) {
 		this.sessionMap = sessionMap;
 	}
 

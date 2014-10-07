@@ -21,7 +21,6 @@ import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.core.loader.JoystickLoader;
 import br.com.etyllica.debug.Logger;
 import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.View;
@@ -770,7 +769,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		activeWindow.reload(application);
 
-		application.setSessionMap(activeWindow.getSessionMap());
+		application.setSession(activeWindow.getSessionMap());
 
 		application.setCamera(activeWindow.getCamera());
 
