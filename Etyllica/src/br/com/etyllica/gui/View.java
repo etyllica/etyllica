@@ -94,7 +94,7 @@ public abstract class View extends Layer implements GUIComponent {
 		this.actions = actions;
 	}
 
-	public List<View> getViews() {
+	public synchronized List<View> getViews() {
 		return views;
 	}
 

@@ -260,12 +260,10 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	public synchronized List<PointerEvent> getEvents() {
-				
 		return events.getList();
 	}
 	
 	public void addMouseMoveEvent(int x, int y) {
-
 		events.getSlot().set(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
 	}
 	
