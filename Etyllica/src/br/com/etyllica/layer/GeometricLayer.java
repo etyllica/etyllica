@@ -208,6 +208,18 @@ public class GeometricLayer implements Movable {
 	 * Colision Methods
 	 */
 	
+	public boolean colideRect(GeometricLayer b) {
+
+		if(b.getX() + b.utilWidth() < getX()) return false;
+		if(b.getX() > getX() + utilWidth()) return false;
+
+		if(b.getY() + b.utilHeight() < getY()) return false;
+		if(b.getY() > getY() + utilHeight()) return false;
+
+		return true;
+
+	}
+	
 	/**
 	 * 
 	 * @param bx

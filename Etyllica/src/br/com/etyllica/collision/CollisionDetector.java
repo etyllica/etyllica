@@ -172,7 +172,7 @@ public class CollisionDetector {
 				testCircleToSegment(tx, ty, circleRadius, cx+rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy-rectHeight/2) ||
 				testCircleToSegment(tx, ty, circleRadius, cx-rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy+rectHeight/2);
 	}
-
+	
 	public static boolean colideRectRect(Layer a, Layer b) {
 
 		if(a.getAngle() == 0 && b.getAngle() == 0) {
