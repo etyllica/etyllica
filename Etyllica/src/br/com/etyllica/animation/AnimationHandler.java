@@ -61,24 +61,38 @@ public class AnimationHandler implements Updatable {
 		} else if(script.getRepeat()-1 > execution.getRepeated()) {
 
 			//Repeat cycle
-			script.calculate(1);
+			//script.calculate(1);
 			execution.repeat();
 			script.preAnimate(now);
 			
 			return false;
 
 		} else {
-
+			//Animation is over
+			notifyFinish(script, now);
+			
 			//Next Script
-			AnimationScript nextScript = script.getNext();
-
-			if(nextScript != null) {
-				nextScripts.add(nextScript);
-				nextScript.restart();
-			}
+			appendNextScript(script);
 		}
 
 		return true;
+	}
+	
+	private void appendNextScript(AnimationScript script) {
+		//Next Script
+		AnimationScript nextScript = script.getNext();
+
+		if(nextScript != null) {
+			nextScripts.add(nextScript);
+			nextScript.restart();
+		}
+	}
+	
+	private void notifyFinish(AnimationScript script, long now) {
+		if(script.getListener()==null)
+			return;
+		
+		script.getListener().onAnimationFinish(now);		
 	}
 
 	public void add(AnimationScript script) {

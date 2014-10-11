@@ -1,5 +1,7 @@
 package br.com.etyllica.animation.scripts;
 
+import br.com.etyllica.animation.listener.OnAnimationFinishListener;
+
 
 public abstract class AnimationScript {
 
@@ -9,11 +11,13 @@ public abstract class AnimationScript {
 	protected int repeat = 0;
 
 	private boolean started = false;
-	private boolean stopped = false;	
+	private boolean stopped = false;
 
 	private AnimationScript next;
 	
 	public static final int REPEAT_FOREVER = -1;
+	
+	private OnAnimationFinishListener listener;
 
 	public AnimationScript(long time) {
 		super();
@@ -45,15 +49,15 @@ public abstract class AnimationScript {
 			startedAt = now;
 		}
 
-		if(started&&!stopped) {
+		if(started && !stopped) {
 
-			if(now-startedAt-delay>=time) {
+			if(now-startedAt-delay >= time) {
 				
 				stopped = true;
 				
 			} else {
 				
-				if(now-startedAt>=delay) {
+				if(now-startedAt >= delay) {
 					this.animate(now);
 				}
 			}
@@ -99,6 +103,14 @@ public abstract class AnimationScript {
 
 	public void setDelay(long delay) {
 		this.delay = delay;
+	}
+
+	public OnAnimationFinishListener getListener() {
+		return listener;
+	}
+
+	public void setListener(OnAnimationFinishListener listener) {
+		this.listener = listener;
 	}	
 
 }
