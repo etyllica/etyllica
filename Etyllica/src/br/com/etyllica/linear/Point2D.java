@@ -87,6 +87,16 @@ public class Point2D {
 		return angleInDegrees;		
 	}
 	
+	public static double angle(double px, double py, double qx, double qy) {
+		
+		double deltaX = qx - px;
+		double deltaY = qy - py;
+
+		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+		
+		return angleInDegrees;
+	}
+	
 	public void rotate(double cx, double cy, double degreeAngle) {
 		
 		double angle = Math.toRadians(degreeAngle);
