@@ -21,7 +21,7 @@ public class ArcadePlayer extends ActivePlayer implements ControllerListener {
 	public void walkLeft() {
 		x -= currentSpeed;
 		
-		listener.onWalkLeft(this);		
+		listener.onWalkLeft(this);	
 		states.add(PlayerState.WALK_LEFT);
 	}
 
@@ -71,6 +71,12 @@ public class ArcadePlayer extends ActivePlayer implements ControllerListener {
 		states.remove(PlayerState.WALK_DOWN);
 		states.remove(PlayerState.WALK_LEFT);
 		states.remove(PlayerState.WALK_RIGHT);		
+	}
+	
+	@Override
+	public void attack() {
+		super.attack();
+		listener.onAttack(this);
 	}
 	
 	public boolean isWalking() {

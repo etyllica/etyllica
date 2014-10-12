@@ -24,7 +24,7 @@ public class AnimatedLayer extends ImageLayer {
 	
 	protected boolean stopped = true;
 	
-	protected boolean animaEmX = true;
+	protected boolean animateHorizontally = true;
 
 	protected boolean lockOnce = false;
 
@@ -88,8 +88,8 @@ public class AnimatedLayer extends ImageLayer {
 		currentFrame = 0;
 	}
 
-	public void setAnimaEmX(boolean animaX) {
-		animaEmX = animaX;
+	public void setAnimateHorizontally(boolean animateHorizontally) {
+		this.animateHorizontally = animateHorizontally;
 	}
 
 	public int getTileW() {
@@ -203,7 +203,7 @@ public class AnimatedLayer extends ImageLayer {
 
 		currentFrame = 0;
 
-		if(animaEmX) {
+		if(animateHorizontally) {
 			xImage = 0;
 		}else{
 			yImage = 0;
@@ -246,7 +246,7 @@ public class AnimatedLayer extends ImageLayer {
 
 	private void setFrame(int frame) {
 				
-		if(animaEmX) {
+		if(animateHorizontally) {
 			setXImage(needleX+tileW*frame);
 		} else {
 			setYImage(needleY+tileH*frame);
@@ -294,8 +294,8 @@ public class AnimatedLayer extends ImageLayer {
 		return currentFrame;
 	}
 
-	public boolean getAnimaEmX() {
-		return animaEmX;
+	public boolean getAnimateHorizontally() {
+		return animateHorizontally;
 	}
 
 	public void setLockOnce(boolean lockOnce) {
