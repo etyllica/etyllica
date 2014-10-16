@@ -11,7 +11,11 @@ public class LightSource extends GeometricLayer implements LightSpot {
 		
 	private float[] fractions = {.2f,.8f};
 	
-	private Color[] colors = {new Color(0f, 0f, 0f, 0f), new Color(0f, 0f, 0f, 1f)};
+	private Color centerColor = new Color(0f, 0f, 0f, 0f);
+	
+	private Color borderColor = new Color(0f, 0f, 0f, 1f);
+	
+	private Color[] colors;
 	
 	private RadialGradientPaint rgp;
 	
@@ -19,6 +23,8 @@ public class LightSource extends GeometricLayer implements LightSpot {
 		super(x, y);
 		w = intensity;
 		h = intensity;
+		
+		resetColors();
 	}
 	
 	public int getIntensity() {
@@ -41,6 +47,30 @@ public class LightSource extends GeometricLayer implements LightSpot {
         g.setPaint(rgp);
         
         g.fillOval(x, y, w, h);
+	}
+	
+	private void resetColors() {
+		colors = new Color[2];
+		colors[0] = centerColor;
+		colors[1] = borderColor;
+	}
+
+	public Color getCenterColor() {
+		return centerColor;
+	}
+
+	public void setCenterColor(Color centerColor) {
+		this.centerColor = centerColor;
+		resetColors();
+	}
+
+	public Color getBorderColor() {
+		return borderColor;
+	}
+
+	public void setBorderColor(Color borderColor) {
+		this.borderColor = borderColor;
+		resetColors();
 	}
 	
 }
