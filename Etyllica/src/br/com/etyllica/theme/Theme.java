@@ -1,4 +1,4 @@
-package br.com.etyllica.gui.theme;
+package br.com.etyllica.theme;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,7 +10,7 @@ import java.awt.Font;
  *
  */
 
-public abstract class Theme implements ThemeFactory{
+public abstract class Theme implements ThemeFactory {
 	
 	public Theme(){
 		super();
@@ -45,9 +45,7 @@ public abstract class Theme implements ThemeFactory{
 	protected boolean shadow = true;
 	
 	protected Color shadowColor = Color.BLACK;
-	
-	protected String wallpaper = "mystic/sunset.jpg";
-	
+		
 	protected Color backGroundColor = new Color(0x66, 0x66, 0x66);
 	
 	protected Color barColor = new Color(0x00,0x00, 0x00, 0xa0);
@@ -66,7 +64,7 @@ public abstract class Theme implements ThemeFactory{
 	protected Color textSelectedColor = new Color(0x00, 0x00, 0x00);
 	protected Color textMarkColor = new Color(0x00, 0x00, 0x88,0xa0);
 	
-	protected Color textFieldColor = new Color(0xff, 0xff, 0xff);
+	protected Color textFieldColor = new Color(0x88, 0x88, 0x88);
 	protected Color textFieldWithoutFocusColor = new Color (0xaa, 0xaa, 0xaa,0xcc);
 	protected Color textFieldOnMouseColor = new Color(0x00, 0x00, 0x88,0xa0);
 	
@@ -79,14 +77,6 @@ public abstract class Theme implements ThemeFactory{
 	
 	protected Color windowBackgroundColor = new Color(0x55, 0x55, 0x55,0xdd);
 	
-	public String getWallpaper() {
-		return wallpaper;
-	}
-
-	public void setWallpaper(String wallpaper) {
-		this.wallpaper = wallpaper;
-	}
-
 	public int getFontSize() {
 		return fontSize;
 	}

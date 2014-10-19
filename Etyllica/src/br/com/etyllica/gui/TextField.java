@@ -8,8 +8,9 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.gui.textfield.TextFieldValidator;
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.gui.textfield.TextView;
+import br.com.etyllica.layer.BufferedLayer;
+import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 /**
@@ -19,45 +20,16 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class TextField extends View {
+public class TextField extends TextView {
 
-	private final int TEXT_BACKSPACE = 8;
-	private final int TEXT_TAB = 9;
-	private final int TEXT_ENTER = 10;
-	private final int TEXT_ESC = 27;
-	private final int TEXT_DELETE = 127;
-
-	protected String text = "";
-
-	private int cursor = 0;
-	private int fixMark = -1;
-
-	private int minMark = 0;
-	private int maxMark = 0;
-
-	private int maxLength = 0;
-
-	private TextFieldValidator validator;
-
+	private BufferedLayer layer;
+		
 	public TextField(int x, int y, int w, int h) {
 		super(x,y,w,h);
-
-		//TODO Altura H relativa ao theme
-		//Theme theme = Configuration.getInstance().getTheme().getFontSize();
 		
-		clearField();
+		layer = new BufferedLayer(x, y, w+1, h+1);
 	}
 	
-	public void clearField() {
-		cursor = 0;
-		fixMark = -1;
-
-		minMark = 0;
-		maxMark = 0;
-		
-		text = "";
-	}
-
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
@@ -67,15 +39,13 @@ public class TextField extends View {
 			if(event.getChar()!='\0') {
 				updateChar(event.getChar());
 			}
-			
-			
+						
 			//TODO Next Component
 			//Update component with Pressed Events
 			GUIEvent pressedEvent = updatePressed(event);
 			
 			//Update component with Released Events
 			GUIEvent releasedEvent = updateReleased(event);
-			
 
 			minMark = getMinMark();
 			maxMark = getMaxMark();
@@ -119,9 +89,6 @@ public class TextField extends View {
 				return GUIEvent.MOUSE_OVER_WITH_FOCUS;
 			}
 
-		//TODO Melhorar
-		}else if(!mouseOver) {
-			return GUIEvent.MOUSE_OUT;
 		}
 
 		return GUIEvent.NONE;
@@ -147,7 +114,8 @@ public class TextField extends View {
 			cursor = text.length();
 		}
 		else if(event.isKeyDown(KeyEvent.TSK_HOME)) {
-			cursor = 0;
+			moveCursorToStart();
+			//move cursor to start
 		}
 
 		if(!control) {
@@ -158,18 +126,17 @@ public class TextField extends View {
 
 		if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)) {
 			if(control) {
-				esquerdaControl();
-			}
-			else{
-				esquerdaNormal();
+				leftWithControl();
+			} else {
+				leftNormal();
 			}
 		}
 		else if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)) {
 
 			if(control) {
-				direitaControl();
+				rightWithControl();
 			}else{
-				direitaNormal();
+				rightNormal();
 			}
 		}
 
@@ -194,7 +161,7 @@ public class TextField extends View {
 			}
 		}
 		
-		return GUIEvent.NONE;				
+		return GUIEvent.NONE;	
 	}
 
 	//TODO escreve texto.sub(0,minMark);
@@ -202,6 +169,10 @@ public class TextField extends View {
 	public void draw(Graphic g) {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
+		
+		g.setImage(layer.getBuffer());
+		int x = 0;
+		int y = 0;
 
 		//TODO
 		//g.setFont(theme.getFont());
@@ -230,7 +201,7 @@ public class TextField extends View {
 
 		g.setColor(theme.getTextColor());
 
-		if(minMark==0&&maxMark==0) {
+		if(minMark == 0 && maxMark == 0) {
 
 			if(dif>0) {
 				g.drawShadow(x, y+h/2+fontSize/2, text);
@@ -269,21 +240,33 @@ public class TextField extends View {
 			g.drawShadow(x+cx+cxm, y+h/2+fontSize/2, text.substring(maxMark,text.length()),Color.WHITE);
 		}
 
-
 		if(onFocus) {
-			//Desenha Cursor
+			
+			g.setColor(theme.getTextFieldColor());
+			//Draw Cursor
 
 			int cx = metrics.stringWidth(text.substring(0,cursor));
 			cx+=x+1;
 
+			int padding = 3;
+			
 			if(dif>0) {
-				g.drawLine(cx+1, y+2, cx+1, y+h-2);
-			}else{
-				g.drawLine(dif+cx, y+2, dif+cx, y+h-2);
+				g.drawLine(cx+1, y+padding, cx+1, y+h-padding);
+			} else {
+				g.drawLine(dif+cx, y+padding, dif+cx, y+h-padding);
 			}
 			
 		}
+		
+		g.resetImage();
+		layer.draw(g);
+		layer.resetImage();
 
+	}
+	
+	@Override
+	protected void notifyTextChanged() {
+		super.notifyTextChanged();
 	}
 
 	@Override
@@ -322,126 +305,19 @@ public class TextField extends View {
 		}
 	}
 
-	public String getText() {
-		//Remove Tabs
-		text = text.replace("\n", "").replace("\r", "");
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	//Text Methods
-	private void esquerdaNormal() {
-
-		if(cursor>0) {
-			cursor--;
-		}
-
-	}
-
-	private void esquerdaControl() {
-
-		if(cursor>0) {
-			
-			int i=cursor-2;
-
-			for(;i>0;i--) {
-				if(text.charAt(i)==' ') {
-					i++;
-					break;
-				}
-			}
-
-			cursor = i;
-		}
-	}
-
-	private void direitaControl() {
-
-		int i=cursor+1;
-
-		for(;i<text.length();i++) {
-			if(text.charAt(i)==' ') {
-				break;
-			}
-		}
-		cursor = i;
-	}
-
-	private void direitaNormal() {
-		if(cursor<text.length()) {
-			cursor++;
-		}
-	}
-
-	private void apagaBackSpace() {
-
-		if(fixMark==-1&&cursor>0) {
-
-			if(cursor<text.length()) {
-				String t1 = text.substring(0,cursor-1);
-				String t2 = text.substring(cursor,text.length());
-
-				text = t1+t2;
-			}
-			else if(cursor>0) {
-				text = text.substring(0,cursor-1);
-			}
-
-			esquerdaNormal();
-
-		}else{
-
-			deleteMark();
-		}
-
-	}
-
-	private void apagaDelete() {
-
-		if(fixMark==-1) {
-
-			if(cursor<text.length()) {
-				String t1 = text.substring(0,cursor);
-				String t2 = text.substring(cursor+1,text.length());
-
-				text = t1+t2;
-			}
-
-		}else{
-
-			deleteMark();
-
-		}
-	}
-
-	private void deleteMark() {
-		
-		//System.out.println("deleteMark "+text.length());
-
-		String t1 = text.substring(0,getMinMark());
-
-		String t2 = text.substring(getMaxMark(),text.length());
-
-		text = t1+t2;
-
-		cursor = getMinMark();
-		fixMark = -1;
-	}
-
 	private void updateChar(char c) {
 
-		if((int)c==TEXT_BACKSPACE) {
+		if(TEXT_BACKSPACE == (int)c) {
 			
-			apagaBackSpace();
+			eraseAsBackSpace();
 			
-		}else if((int)c==TEXT_DELETE) {
+		}else if(TEXT_DELETE == (int)c) {
 			
-			apagaDelete();
+			eraseAsDelete();
 			
-		}else if((int)c==TEXT_ENTER||(int)c==TEXT_TAB||(int)c==TEXT_ESC) {
+		}else if(TEXT_ENTER == (int)c || 
+				TEXT_TAB == (int)c || 
+				TEXT_ESC == (int)c) {
 
 		}
 		else{
@@ -451,58 +327,20 @@ public class TextField extends View {
 				}
 			}else{
 				
-				addChar(c);
-				
+				addChar(c);				
 			}
 		}
 
 	}
-
-	private void addChar(char c) {
-
-		if(cursor<text.length()) {
-			String t1 = text.substring(0,cursor);
-			t1+=c;
-			String t2 = text.substring(cursor,text.length());
-
-			text = t1+t2;
-		}
-		else{
-			text+=c;
-		}
-
-		fixMark = -1;
-		cursor++;
+	
+	public String getText() {
+		//Remove Tabs
+		text = text.replace("\n", "").replace("\r", "");
+		return text;
 	}
 
-	private int getMinMark() {
-
-		if(fixMark<0) {
-			return 0;
-		}
-
-		if(cursor<fixMark) {
-			return cursor;
-		}
-		else{
-			return fixMark;
-		}
-
-	}
-
-	private int getMaxMark() {
-
-		if(fixMark<0) {
-			return 0;
-		}
-
-		if(cursor<fixMark) {
-
-			return fixMark;
-		}
-		else{
-			return cursor;
-		}
+	public void setText(String text) {
+		this.text = text;
 	}
 
 }

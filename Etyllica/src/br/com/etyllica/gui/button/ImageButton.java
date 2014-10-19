@@ -1,6 +1,7 @@
 package br.com.etyllica.gui.button;
 
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.gui.factory.DefaultButton;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.StaticLayer;
 

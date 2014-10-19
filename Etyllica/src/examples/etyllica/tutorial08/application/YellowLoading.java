@@ -5,7 +5,7 @@ import java.awt.Font;
 
 import br.com.etyllica.context.load.DefaultLoadApplication;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 public class YellowLoading extends DefaultLoadApplication{

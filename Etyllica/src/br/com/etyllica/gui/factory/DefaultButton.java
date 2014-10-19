@@ -1,4 +1,4 @@
-package br.com.etyllica.gui.button;
+package br.com.etyllica.gui.factory;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -8,7 +8,7 @@ import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.RoundGUIComponent;
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 /**
@@ -42,7 +42,7 @@ public class DefaultButton extends RoundGUIComponent {
 		if(!visible)
 			return;
 
-		Theme theme = getTheme();		
+		Theme theme = getTheme();
 
 		if(!disabled) {
 

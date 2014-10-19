@@ -3,7 +3,7 @@ package br.com.etyllica.theme.dalt.arrow;
 import java.awt.Color;
 
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.mouse.MouseArrow;
 import br.com.etyllica.theme.mouse.PolygonalArrow;

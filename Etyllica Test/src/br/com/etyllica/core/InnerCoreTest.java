@@ -14,7 +14,7 @@ import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
-import br.com.etyllica.gui.button.DefaultButton;
+import br.com.etyllica.gui.factory.DefaultButton;
 
 public class InnerCoreTest {
 

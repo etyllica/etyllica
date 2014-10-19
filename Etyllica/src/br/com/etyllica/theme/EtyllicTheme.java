@@ -1,11 +1,10 @@
 package br.com.etyllica.theme;
 
-import br.com.etyllica.gui.button.DefaultButton;
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.gui.factory.DefaultButton;
 
-public class EtyllicTheme extends Theme{
+public class EtyllicTheme extends Theme {
 	
-	public EtyllicTheme(){
+	public EtyllicTheme() {
 		super();
 	}
 	
@@ -17,5 +16,5 @@ public class EtyllicTheme extends Theme{
 		
 		return button;
 	}
-	
+		
 }

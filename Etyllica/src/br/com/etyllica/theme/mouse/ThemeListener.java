@@ -1,6 +1,6 @@
 package br.com.etyllica.theme.mouse;
 
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.theme.Theme;
 
 public interface ThemeListener {
 

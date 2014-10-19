@@ -5,8 +5,8 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.gui.button.DefaultButton;
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 /**

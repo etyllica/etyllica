@@ -5,7 +5,7 @@ import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.button.DefaultButton;
+import br.com.etyllica.gui.factory.DefaultButton;
 import br.com.etyllica.gui.label.TextLabel;
 
 /**

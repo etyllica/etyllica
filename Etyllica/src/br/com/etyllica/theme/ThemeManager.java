@@ -1,6 +1,5 @@
 package br.com.etyllica.theme;
 
-import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.mouse.ArrowTheme;
 import br.com.etyllica.theme.mouse.ArrowThemeListener;
 import br.com.etyllica.theme.mouse.ThemeListener;

@@ -6,9 +6,9 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Label;
-import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.TextLayer;
+import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 /**

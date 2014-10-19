@@ -2,7 +2,7 @@ package br.com.etyllica.gui.checkbox;
 
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.CheckBox;
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 /**

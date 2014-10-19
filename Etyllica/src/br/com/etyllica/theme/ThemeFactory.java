@@ -1,6 +1,6 @@
-package br.com.etyllica.gui.theme;
+package br.com.etyllica.theme;
 
-import br.com.etyllica.gui.button.DefaultButton;
+import br.com.etyllica.gui.factory.DefaultButton;
 
 public interface ThemeFactory {
 	
