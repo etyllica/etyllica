@@ -1091,11 +1091,11 @@ public class Graphic {
 
 	public void setCamera(Camera camera) {
 		camera.resetImage();
-		setImage(camera.getBuffer());
+		setImage(camera.getBuffer());		
 	}
-		
+			
 	public void resetCamera(Camera camera) {
 		resetImage();
 	}
-
+	
 }

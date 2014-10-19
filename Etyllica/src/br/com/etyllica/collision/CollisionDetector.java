@@ -56,12 +56,13 @@ public class CollisionDetector {
 	}
 
 	public static boolean colideRectPoint(GeometricLayer layer, double  px, double py) {
-		int rectCenterX = layer.getX()+layer.getW()/2;
-		int rectCenterY = layer.getY()+layer.getH()/2;
-		int rectWidth = layer.getW();
-		int rectHeight = layer.getH();
+		
+		int rectWidth = layer.utilWidth();
+		int rectHeight = layer.utilHeight();
+		int rectCenterX = layer.getX()+rectWidth/2;
+		int rectCenterY = layer.getY()+rectHeight/2;
 
-		return Math.abs(rectCenterX-px) < rectWidth/2 && Math.abs(rectCenterY-py) < rectHeight/2;
+		return Math.abs(rectCenterX-px) <= rectWidth/2 && Math.abs(rectCenterY-py) <= rectHeight/2;
 	}
 	
 	/**

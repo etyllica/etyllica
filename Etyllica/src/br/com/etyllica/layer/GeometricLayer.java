@@ -301,11 +301,11 @@ public class GeometricLayer implements Movable {
 		return (distance <= radius);
 	}
 
-	protected int utilWidth() {
+	public int utilWidth() {
 		return getW();
 	}
 	
-	protected int utilHeight() {
+	public int utilHeight() {
 		return getH();
 	}
 	

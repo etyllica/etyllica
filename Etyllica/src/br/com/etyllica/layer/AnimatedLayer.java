@@ -255,12 +255,12 @@ public class AnimatedLayer extends ImageLayer {
 	}
 	
 	@Override
-	protected int utilWidth() {
+	public int utilWidth() {
 		return tileW;
 	}
 	
 	@Override
-	protected int utilHeight() {
+	public int utilHeight() {
 		return tileH;
 	}
 	
