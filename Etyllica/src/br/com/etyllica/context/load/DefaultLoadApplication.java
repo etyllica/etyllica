@@ -9,7 +9,7 @@ import br.com.etyllica.context.Application;
  *
  */
 
-public abstract class DefaultLoadApplication extends Application implements LoadApplication{
+public abstract class DefaultLoadApplication extends Application implements LoadApplication {
 
 	protected String phrase = "Loading...";
 	

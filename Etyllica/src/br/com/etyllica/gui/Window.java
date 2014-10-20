@@ -28,9 +28,7 @@ public class Window extends GeometricLayer implements ContextContainer {
 
 	protected Camera camera;
 	
-	protected Session sessionMap = new Session();
-
-	//protected DefaultLoadApplication load;
+	protected Session session = new Session();
 
 	protected ApplicationLoader applicationLoader;
 
@@ -50,7 +48,7 @@ public class Window extends GeometricLayer implements ContextContainer {
 		this(0,0,w,h);
 	}		
 	
-	public Window(int x, int y, int w, int h){
+	public Window(int x, int y, int w, int h) {
 		super(x,y,w,h);
 		
 		camera = new Camera(0, 0, w, h);
@@ -66,7 +64,7 @@ public class Window extends GeometricLayer implements ContextContainer {
 		loadApplication.load();
 	}
 
-	public void restartWindow(){
+	public void restartWindow() {
 		
 	}
 
@@ -81,15 +79,15 @@ public class Window extends GeometricLayer implements ContextContainer {
 
 	public void reload(Context context) {
 		
-		if(loaded){
+		if(loaded) {
 			
 			loaded = false;
 			
-			applicationLoader.setWindow(this);
-			applicationLoader.setApplication(context);
-			
 			checkForLoadApplication(context);
 			
+			applicationLoader.setWindow(this);
+			applicationLoader.setApplication(context);
+						
 			reloadLoadApplication();
 		}
 	}
@@ -98,7 +96,6 @@ public class Window extends GeometricLayer implements ContextContainer {
 		DefaultLoadApplication loadApp = context.getLoadApplication();
 		
 		if(loadApp != null) {
-			
 			this.loadApplication = loadApp;	
 		}
 	}
@@ -111,7 +108,7 @@ public class Window extends GeometricLayer implements ContextContainer {
 		applicationLoader.loadApplication();
 	}
 
-	public void closeWindow(){
+	public void closeWindow() {
 		setClose(true);
 	}
 
@@ -139,12 +136,12 @@ public class Window extends GeometricLayer implements ContextContainer {
 		this.windows = windows;
 	}
 	
-	public Session getSessionMap() {
-		return sessionMap;
+	public Session getSession() {
+		return session;
 	}
 
 	public void setSessionMap(Session sessionMap) {
-		this.sessionMap = sessionMap;
+		this.session = sessionMap;
 	}
 
 	public Camera getCamera() {

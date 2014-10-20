@@ -769,7 +769,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		activeWindow.reload(application);
 
-		application.setSession(activeWindow.getSessionMap());
+		application.setSession(activeWindow.getSession());
 
 		application.setCamera(activeWindow.getCamera());
 

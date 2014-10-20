@@ -36,12 +36,20 @@ public class ApplicationLoader implements LoadListener {
 	
 	private static final int UPDATE_INTERVAL = 10;
 	
+	private String lastText = "";
+	
+	private float lastLoading = 0;
+	
+	
 	public ApplicationLoader() {
 		super();
 	}
 
 	public void loadApplication() {
 
+		lastText = "";
+		lastLoading = 0;
+		
 		loadExecutor = Executors.newScheduledThreadPool(2);
 		
 		window.setLoaded(false);
@@ -51,8 +59,7 @@ public class ApplicationLoader implements LoadListener {
 
 		future = loadExecutor.submit(loader);
 		
-		loadExecutor.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
-		
+		loadExecutor.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.MILLISECONDS);		
 	}
 
 	private class Loader implements Runnable {
@@ -74,7 +81,10 @@ public class ApplicationLoader implements LoadListener {
 			if(!called) {
 
 				if(!window.isLoaded()) {
-					loadApplication.setText(application.getLoadingInfo(), application.getLoading());
+					
+					notifyTextChanged();
+					
+					notifyLoadingChanged();
 				}
 				
 			} else {
@@ -85,7 +95,6 @@ public class ApplicationLoader implements LoadListener {
 					Throwable cause = e.getCause();
 					cause.printStackTrace();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -94,10 +103,28 @@ public class ApplicationLoader implements LoadListener {
 				window.setLoaded(true);
 				
 				loadExecutor.shutdownNow();
-			}			
-
+			}
 		}
-
+	}
+	
+	private void notifyTextChanged() {
+		
+		String info = application.getLoadingInfo();
+		
+		if(!lastText.equals(info)) {			
+			lastText = info;			
+			loadApplication.onChangeText(info);	
+		}
+	}
+	
+	private void notifyLoadingChanged() {
+		
+		float loading = application.getLoading();
+		
+		if(lastLoading != loading) {
+			lastLoading = loading;	
+			loadApplication.onChangeLoad(loading);	
+		}		
 	}
 
 	public Context getApplication() {

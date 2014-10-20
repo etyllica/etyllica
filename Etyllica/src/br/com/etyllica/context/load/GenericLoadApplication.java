@@ -14,7 +14,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class GenericLoadApplication extends DefaultLoadApplication{
+public class GenericLoadApplication extends DefaultLoadApplication {
 
 	private Font f;
 	private Font p;
@@ -23,11 +23,6 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 	
 	public GenericLoadApplication(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		
-		Theme theme = ThemeManager.getInstance().getTheme();
-		
-		f = new Font(theme.getFontName(), theme.getFontStyle(), 26);
-		p = new Font(theme.getFontName(), theme.getFontStyle(), 18);
 	}
 	
 	private float rectW = w*2/3;
@@ -36,6 +31,26 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 	private float rectH = 32;
 
 	private Color backgroundColor = new Color(0x00,0xcc,0xff);
+	
+	@Override
+	public void load() {
+
+		Theme theme = ThemeManager.getInstance().getTheme();
+		
+		f = new Font(theme.getFontName(), theme.getFontStyle(), 26);
+		p = new Font(theme.getFontName(), theme.getFontStyle(), 18);
+	}
+	
+	@Override
+	public void onChangeText(String phrase) {
+		this.phrase = phrase;
+	}
+
+	@Override
+	public void onChangeLoad(float load) {
+		this.percent = Integer.toString((int)load)+"%";
+		this.fill = load;
+	}
 	
 	@Override
 	public void draw(Graphic g) {
@@ -55,21 +70,5 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 		g.drawStringShadow(rectX, rectY, rectW, rectH, percent, Color.BLACK);
 		
 	}
-
-	@Override
-	public void load() {
-		
-	}
-
-	@Override
-	public void setText(String phrase, float load){
-		
-		this.phrase = phrase;
-		
-		//this.percent = Float.toString(load)+"%";
-		this.percent = Integer.toString((int)load)+"%";
-
-		this.fill = load;
-	}
-		
+	
 }

@@ -8,9 +8,11 @@ package br.com.etyllica.context.load;
  *
  */
 
-public interface LoadApplication{
+public interface LoadApplication {
 
-	public void setText(String phrase, float load);
+	public void onChangeText(String phrase);
+	
+	public void onChangeLoad(float load);
 	
 	public void load();
 
