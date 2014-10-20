@@ -18,7 +18,9 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 
 	private Font f;
 	private Font p;
-		
+	
+	protected float fill = 0;
+	
 	public GenericLoadApplication(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		
@@ -52,6 +54,22 @@ public class GenericLoadApplication extends DefaultLoadApplication{
 		g.setFont(p);
 		g.drawStringShadow(rectX, rectY, rectW, rectH, percent, Color.BLACK);
 		
-	}	
+	}
+
+	@Override
+	public void load() {
+		
+	}
+
+	@Override
+	public void setText(String phrase, float load){
+		
+		this.phrase = phrase;
+		
+		//this.percent = Float.toString(load)+"%";
+		this.percent = Integer.toString((int)load)+"%";
+
+		this.fill = load;
+	}
 		
 }

@@ -14,7 +14,6 @@ public class Configuration {
 	private static Configuration instance = null;
 	
 	private Language language = Language.PORTUGUESE_BRAZIL;
-		
 	
 	private boolean timerClick = false;
 	private boolean numpadMouse = false;

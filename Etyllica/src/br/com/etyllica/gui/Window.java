@@ -76,30 +76,39 @@ public class Window extends GeometricLayer implements ContextContainer {
 
 	public void setLoadApplication(DefaultLoadApplication loadApplication) {
 		this.loadApplication = loadApplication;
-		this.application = loadApplication;		
+		this.application = loadApplication;
 	}
 
-	public void reload(Context context){
+	public void reload(Context context) {
 		
 		if(loaded){
 			
 			loaded = false;
-
-			/*application.load();
-			this.application = context;
-			this.loaded = true;*/
 			
-			
-			loadApplication.load();
-			setLoadApplication(loadApplication);
-
 			applicationLoader.setWindow(this);
 			applicationLoader.setApplication(context);
-			applicationLoader.setLoadApplication(loadApplication);
-
-			applicationLoader.loadApplication();						
+			
+			checkForLoadApplication(context);
+			
+			reloadLoadApplication();
 		}
-
+	}
+	
+	private void checkForLoadApplication(Context context) {
+		DefaultLoadApplication loadApp = context.getLoadApplication();
+		
+		if(loadApp != null) {
+			
+			this.loadApplication = loadApp;	
+		}
+	}
+	
+	private void reloadLoadApplication() {
+		loadApplication.load();
+		setLoadApplication(loadApplication);
+		applicationLoader.setLoadApplication(loadApplication);
+		
+		applicationLoader.loadApplication();
 	}
 
 	public void closeWindow(){

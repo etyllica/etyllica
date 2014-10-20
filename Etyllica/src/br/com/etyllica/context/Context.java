@@ -1,6 +1,7 @@
 package br.com.etyllica.context;
 
 import br.com.etyllica.cinematics.Camera;
+import br.com.etyllica.context.load.DefaultLoadApplication;
 import br.com.etyllica.context.load.LoadListener;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.GUIEvent;
@@ -96,8 +97,10 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	 */
 	protected Context nextApplication = this;
 	
-	protected int fps = 0;
+	protected DefaultLoadApplication loadApplication;
 	
+	protected int fps = 0;
+		
 	/**
 	 * Constructor
 	 * 
@@ -312,6 +315,10 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 	public void setFps(int fps) {
 		this.fps = fps;
+	}
+
+	public DefaultLoadApplication getLoadApplication() {
+		return loadApplication;
 	}
 		
 }
