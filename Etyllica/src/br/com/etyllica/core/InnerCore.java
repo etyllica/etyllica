@@ -381,8 +381,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			if(result != GUIEvent.NONE && result != null) {
 
 				updateEvent(component, result);
-
-				return result;
 			}
 
 		} else if (component == mouseOver) {
@@ -407,14 +405,16 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	private void updateEvent(View componente, GUIEvent lastEvent) {
 
-		//switch (event.action) {
 		switch (lastEvent) {
 
 		case GAIN_FOCUS:
 
-			if(focus!=null) {
+			//Remove focus from last
+			if(focus != null) {
 				focus.update(GUIEvent.LOST_FOCUS);
 			}
+			
+			componente.setOnFocus(true);
 
 			focus = componente;
 
