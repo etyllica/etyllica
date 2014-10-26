@@ -244,7 +244,28 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 	@Override
 	public void onZButtonReleased() {
 		// TODO Auto-generated method stub
-		
+		setX(x);
 	}
 	
+	@Override
+	public void setX(int x) {
+		super.setX(x);
+		dx = x;
+	}
+
+	@Override
+	public void setY(int y) {
+		super.setY(y);
+		dy = y;
+	}
+	
+	public void setOffsetX(int offsetX) {
+		dx += offsetX;
+		x += offsetX;
+	}
+
+	public void setOffsetY(int offsetY) {
+		dy += offsetY;
+		y += offsetY;
+	}
 }
