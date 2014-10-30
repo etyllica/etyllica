@@ -24,6 +24,8 @@ public class PointerEvent {
 	
 	private int amountY = 0;
 	
+	private boolean consumed = false;
+	
 	private long timestamp = System.currentTimeMillis();
 	
 	public PointerEvent() {
@@ -86,6 +88,8 @@ public class PointerEvent {
 		this.amountX = amountX;
 		this.amountY = amountY;
 		
+		consumed = false;
+		
 	}
 	
 	public void copy(PointerEvent event) {
@@ -137,26 +141,46 @@ public class PointerEvent {
 	public long getTimestamp() {
 		return timestamp;
 	}
-	
+		
+	public void consume() {
+		this.consumed = true;
+	}
+
 	public boolean isKey(MouseButton key) {
 		return this.key == key;
 	}
 		
 	public boolean isDraggedButton(MouseButton key) {
+		
+		if(consumed)
+			return false;
+		
 		return((state == PointerState.DRAGGED) && this.key == key);
 	}
 	
 	public boolean isButtonDown(MouseButton key) {
+		
+		if(consumed)
+			return false;
+		
 		return((state == PointerState.PRESSED || (state == PointerState.DRAGGED)) && this.key == key);
 	}
 	
 	public boolean isClicked(MouseButton key) {
+		
+		if(consumed)
+			return false;
+		
 		return(state == PointerState.CLICK && this.key == key);
 	}
 	
 	public boolean isButtonUp(MouseButton key) {
-		return((state == PointerState.RELEASED) && this.key == key);
-	}
+		
+		if(consumed)
+			return false;
+			
+		return((state == PointerState.RELEASED) && this.key == key);		
+	}	
 
 }
 
