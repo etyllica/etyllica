@@ -87,7 +87,7 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 	}
 
 	public void walkBackward() {
-		listener.onStopWalkBackward(this);
+		listener.onWalkBackward(this);
 		states.add(PlayerState.WALK_BACKWARD);
 	}
 	
