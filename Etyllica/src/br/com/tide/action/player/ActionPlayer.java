@@ -17,7 +17,9 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 		
 	protected double backWalkSpeed = 1.5;
 	
-	protected ActionPlayerListener listener;
+	private boolean hasListener = false;
+	
+	private ActionPlayerListener listener;
 	
 	public ActionPlayer(int x, int y) {
 		super();
@@ -31,7 +33,9 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 	public ActionPlayer(int x, int y, ActionPlayerListener listener) {
 		this(x, y);
 		
-		this.listener = listener;		
+		hasListener = true;
+		
+		this.listener = listener;
 	}
 	
 	@Override
@@ -57,43 +61,67 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 	}
 	
 	public void turnLeft() {
-		listener.onTurnLeft(this);
+		if(hasListener) {
+			listener.onTurnLeft(this);
+		}
+		
 		states.add(PlayerState.TURN_LEFT);
 	}
 
 	public void stopTurnLeft() {
 		states.remove(PlayerState.TURN_LEFT);
-		listener.onStopTurnLeft(this);
+		
+		if(hasListener) {
+			listener.onStopTurnLeft(this);
+		}
 	}
 
 	public void turnRight() {
-		listener.onTurnRight(this);
+		if(hasListener) {
+			listener.onTurnRight(this);
+		}
+		
 		states.add(PlayerState.TURN_RIGHT);
 	}
 
 	public void stopTurnRight() {
 		states.remove(PlayerState.TURN_RIGHT);
-		listener.onStopTurnRight(this);
+		
+		if(hasListener) {
+			listener.onStopTurnRight(this);
+		}
 	}
 
 	public void walkForward() {
-		listener.onWalkForward(this);
+		if(hasListener) {
+			listener.onWalkForward(this);
+		}
+		
 		states.add(PlayerState.WALK_FORWARD);
 	}
 
 	public void stopWalkForward() {
 		states.remove(PlayerState.WALK_FORWARD);
-		listener.onStopWalkForward(this);
+		
+		if(hasListener) {
+			listener.onStopWalkForward(this);
+		}
 	}
 
 	public void walkBackward() {
-		listener.onWalkBackward(this);
+		if(hasListener) {
+			listener.onWalkBackward(this);
+		}
+		
 		states.add(PlayerState.WALK_BACKWARD);
 	}
 	
 	public void stopWalkBackward() {
 		states.remove(PlayerState.WALK_BACKWARD);
-		listener.onStopWalkBackward(this);
+		
+		if(hasListener) {
+			listener.onStopWalkBackward(this);
+		}
 	}
 
 	private void move(double ang, double speed) {
@@ -134,7 +162,7 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 	public boolean isTurning() {
 		return states.contains(PlayerState.TURN_LEFT)||states.contains(PlayerState.TURN_RIGHT);
 	}
-
+	
 	@Override
 	public void onUpButtonPressed() {
 		walkForward();
@@ -268,4 +296,11 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 		dy += offsetY;
 		y += offsetY;
 	}
+
+	public void setListener(ActionPlayerListener listener) {
+		this.listener = listener;
+		
+		hasListener = (null == listener);
+	}	
+	
 }
