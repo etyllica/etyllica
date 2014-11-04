@@ -7,9 +7,9 @@ import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseState;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
+import br.com.etyllica.theme.listener.ArrowThemeListener;
 import br.com.etyllica.theme.mouse.ArrowTheme;
-import br.com.etyllica.theme.mouse.ArrowThemeListener;
-import br.com.etyllica.theme.mouse.MouseArrow;
+import br.com.etyllica.theme.mouse.arrow.MouseArrow;
 
 public class ArrowDrawer implements MouseStateListener, ArrowThemeListener {
 

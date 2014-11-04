@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.util.HashSet;
 import java.util.Set;
 
+import br.com.etyllica.context.Session;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.FontLoader;
@@ -18,12 +19,13 @@ public class SharedEngine {
 
 	private Set<Loader> loaders = new HashSet<Loader>();
 
-	public SharedEngine(Component component, int w, int h) {
+	public SharedEngine(Component component, int w, int h, Session session) {
 		super();
 
 		this.component = component;
 
-		core = new SharedCore(component, w, h);
+		core = new SharedCore(component, w, h);		
+		core.setSession(session);
 				
 	}
 

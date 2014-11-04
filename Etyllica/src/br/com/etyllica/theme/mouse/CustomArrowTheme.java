@@ -1,5 +1,7 @@
 package br.com.etyllica.theme.mouse;
 
+import br.com.etyllica.theme.mouse.arrow.ImageMouseArrow;
+
 
 /**
  * 

@@ -24,5 +24,6 @@ public abstract class Application extends Context {
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
 		return GUIEvent.NONE;
-	}	
+	}
+	
 }

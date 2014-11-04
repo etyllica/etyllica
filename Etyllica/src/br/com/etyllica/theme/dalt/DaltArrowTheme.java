@@ -9,7 +9,7 @@ import br.com.etyllica.theme.dalt.arrow.TextArrow;
 import br.com.etyllica.theme.dalt.arrow.VerticalArrow;
 import br.com.etyllica.theme.dalt.arrow.WaitingArrow;
 import br.com.etyllica.theme.mouse.ArrowThemeImpl;
-import br.com.etyllica.theme.mouse.MouseArrow;
+import br.com.etyllica.theme.mouse.arrow.MouseArrow;
 
 /**
  * 

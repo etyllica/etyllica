@@ -1,9 +1,8 @@
 package br.com.etyllica.gui;
 
-import br.com.etyllica.core.Drawable;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.PointerEvent;
 
 /**
  * 
@@ -12,7 +11,7 @@ import br.com.etyllica.core.event.KeyEvent;
  *
  */
 
-public interface GUIComponent extends Drawable{
+public interface GUIComponent {
 	
 	/**
 	 * 

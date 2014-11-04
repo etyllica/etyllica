@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.layer.Layer;
@@ -18,7 +19,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public abstract class View extends Layer implements GUIComponent {
+public abstract class View extends Layer implements GUIComponent, Drawable {
 	
 	protected GUIEvent lastEvent = GUIEvent.NONE;
 	

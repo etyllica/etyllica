@@ -319,6 +319,6 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 	public DefaultLoadApplication getLoadApplication() {
 		return loadApplication;
-	}
+	}	
 		
 }

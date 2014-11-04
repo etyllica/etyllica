@@ -23,7 +23,7 @@ public class AnimatedLayer extends ImageLayer {
 	protected boolean once = false;
 	
 	protected boolean stopped = true;
-	
+		
 	protected boolean animateHorizontally = true;
 
 	protected boolean lockOnce = false;
@@ -57,32 +57,37 @@ public class AnimatedLayer extends ImageLayer {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param xTile
-	 * @param yTile
+	 * @param tileW
+	 * @param tileH
 	 * @param path
 	 */
-	public AnimatedLayer(int x, int y, int xTile, int yTile, String path) {
+	public AnimatedLayer(int x, int y, int tileW, int tileH, String path) {
 		super(x,y,path);
 		
-		this.tileW = xTile;
-		this.tileH = yTile;		
+		this.tileW = tileW;
+		this.tileH = tileH;		
 	}
 
 	/**
 	 * 
 	 * @param x
 	 * @param y
-	 * @param xTile
-	 * @param yTile
+	 * @param tileW
+	 * @param tileH
 	 */
-	public AnimatedLayer(int x, int y, int xTile, int yTile) {
+	public AnimatedLayer(int x, int y, int tileW, int tileH) {
 		super(x,y);
 		
-		this.tileW = xTile;
-		this.tileH = yTile;		
+		this.tileW = tileW;
+		this.tileH = tileH;		
 	}
 
 	public void restartAnimation() {
+		stopped = false;
+		resetAnimation();
+	}
+	
+	public void resetAnimation() {
 		xImage = needleX;
 		yImage = needleY;
 		currentFrame = 0;
@@ -118,8 +123,8 @@ public class AnimatedLayer extends ImageLayer {
 
 	/**
 	 * 
-	 * @param xTile
-	 * @param yTile
+	 * @param tileW
+	 * @param tileH
 	 */
 	public void setTileCoordinates(int tileW, int tileH) {
 		setTileW(tileW);
@@ -141,11 +146,10 @@ public class AnimatedLayer extends ImageLayer {
 			startedAt = now;
 			changedAt = now;
 		
-			stopped = false;
 			restartAnimation();
 		}
 	
-		if(now>=changedAt+speed) {
+		if(now >= changedAt+speed) {
 			
 			changedAt = now;
 			
@@ -168,11 +172,12 @@ public class AnimatedLayer extends ImageLayer {
 		
 		if(onAnimationFinishListener != null) {
 			onAnimationFinishListener.onAnimationFinish(now);
-		}		
+		}
+		
 	}
 	
 	//Notify Listener about the frame change
-	private void notifyFrameChangeListener(long now) {
+	protected void notifyFrameChangeListener(long now) {
 		
 		if(onFrameChangeListener != null) {
 			onFrameChangeListener.onFrameChange(now);

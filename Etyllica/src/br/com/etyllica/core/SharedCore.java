@@ -19,6 +19,7 @@ import java.util.Set;
 
 import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
+import br.com.etyllica.context.Session;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.FullScreenWindow;
@@ -85,6 +86,10 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		
 		gameLoop = new FrameSkippingLoop(this);
 		
+	}
+	
+	public void setSession(Session session) {
+		window.setSessionMap(session);
 	}
 	
 	private void initGraphics(int width, int height) {

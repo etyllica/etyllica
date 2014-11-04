@@ -31,7 +31,7 @@ import br.com.etyllica.i18n.LanguageHandler;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.dalt.DaltArrowTheme;
-import br.com.etyllica.theme.mouse.ThemeListener;
+import br.com.etyllica.theme.listener.ThemeListener;
 
 /**
  * 
@@ -767,15 +767,15 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			System.err.println("Application cannot be null.");
 		}
 
-		activeWindow.reload(application);
-
 		application.setSession(activeWindow.getSession());
 
 		application.setCamera(activeWindow.getCamera());
-
+		
 		application.setMouseStateListener(arrowDrawer);
 
 		application.setLanguageChangerListener(this);
+		
+		activeWindow.reload(application);
 
 	}
 

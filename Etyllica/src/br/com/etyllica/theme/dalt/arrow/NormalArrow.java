@@ -5,8 +5,8 @@ import java.awt.Color;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
-import br.com.etyllica.theme.mouse.MouseArrow;
-import br.com.etyllica.theme.mouse.PolygonalArrow;
+import br.com.etyllica.theme.mouse.arrow.MouseArrow;
+import br.com.etyllica.theme.mouse.arrow.PolygonalArrow;
 
 /**
  * 

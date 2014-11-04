@@ -167,8 +167,7 @@ public class GeometricLayer implements Movable {
 	 * @param endX
 	 * @return
 	 */
-	public int centralizeX(int startX, int endX)
-	{
+	public int centralizeX(int startX, int endX) {
 		int x = (((startX+endX)/2)-(utilWidth()/2));
 		setX(x);
 		
@@ -189,8 +188,7 @@ public class GeometricLayer implements Movable {
 	 * @param endY
 	 * @return
 	 */
-	public int centralizeY(int startY, int endY)
-	{
+	public int centralizeY(int startY, int endY) {
 		int y = (((startY+endY)/2)-(utilHeight()/2));
 		setY(y);
 		
@@ -202,7 +200,7 @@ public class GeometricLayer implements Movable {
 		setY(layer.getY());
 		setW(layer.getW());
 		setH(layer.getH());
-	}	
+	}
 		
 	/*
 	 * Colision Methods

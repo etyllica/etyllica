@@ -6,6 +6,7 @@ import java.net.URL;
 import javax.swing.JFrame;
 
 import br.com.etyllica.context.Application;
+import br.com.etyllica.context.Session;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.engine.SharedEngine;
@@ -26,6 +27,8 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	private SharedCore core;
 	
 	private SharedEngine engine;
+	
+	protected Session session = new Session();
 
 	protected int w = 640;
 	protected int h = 480;
@@ -66,7 +69,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	
 	private void initCore() {
 		
-		engine = new SharedEngine(this, w, h);
+		engine = new SharedEngine(this, w, h, session);
 
 		core = engine.getCore();
 

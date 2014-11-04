@@ -1,8 +1,8 @@
 package br.com.etyllica.theme;
 
+import br.com.etyllica.theme.listener.ArrowThemeListener;
+import br.com.etyllica.theme.listener.ThemeListener;
 import br.com.etyllica.theme.mouse.ArrowTheme;
-import br.com.etyllica.theme.mouse.ArrowThemeListener;
-import br.com.etyllica.theme.mouse.ThemeListener;
 
 
 public class ThemeManager {

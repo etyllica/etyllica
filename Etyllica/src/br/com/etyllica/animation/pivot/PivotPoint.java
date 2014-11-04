@@ -36,13 +36,13 @@ public class PivotPoint extends Vector2D {
 		
 		this.x = x;
 		
-		for(Part parte: parts) {
+		for(Part part: parts) {
 			
-			float px = parte.getX()+parte.getXPivot();
+			float px = part.getX()+part.getXPivot();
 
 			int ox = (int)(x-px);
 			
-			parte.setOffsetX(ox);
+			part.setOffsetX(ox);
 		}
 	}
 	
@@ -51,13 +51,13 @@ public class PivotPoint extends Vector2D {
 		
 		this.y = y;
 		
-		for(Part parte: parts) {
+		for(Part part: parts) {
 			
-			float py = parte.getY()+parte.getYPivot();
+			float py = part.getY()+part.getYPivot();
 
 			int oy = (int)(y-py);
 			
-			parte.setOffsetY(oy);
+			part.setOffsetY(oy);
 		}
 	}
 	
