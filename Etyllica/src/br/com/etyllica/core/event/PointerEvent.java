@@ -36,7 +36,6 @@ public class PointerEvent {
 		super();
 		
 		set(key, state);
-		
 	}
 		
 	public PointerEvent(MouseButton key, PointerState state, int x, int y) {
@@ -172,6 +171,13 @@ public class PointerEvent {
 			return false;
 		
 		return(state == PointerState.CLICK && this.key == key);
+	}
+	
+	public boolean isClicked() {
+		if(consumed)
+			return false;
+		
+		return(state == PointerState.CLICK);
 	}
 	
 	public boolean isButtonUp(MouseButton key) {
