@@ -9,9 +9,9 @@ import java.io.Writer;
 
 public class IOHandler {
 
-	private static final String FILE_PREFIX = "file:";
+	public static final String FILE_PREFIX = "file:";
 	
-	private static final String WINDOWS_SPACING = "%20";
+	public static final String WINDOWS_SPACING = "%20";
 	
 	public static final String ENCODING_UTF_8 = "UTF-8";
 
@@ -60,8 +60,7 @@ public class IOHandler {
 	}
 	
 	public static String fixPath(String path) {
-		
-		return path.replaceAll(WINDOWS_SPACING, " ");				
+		return path.replaceAll(WINDOWS_SPACING, " ");
 	}
 
 }
