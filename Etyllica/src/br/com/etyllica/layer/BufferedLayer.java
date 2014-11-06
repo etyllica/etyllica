@@ -137,6 +137,18 @@ public class BufferedLayer extends ImageLayer {
 		
 		resetImage();
 	}
+	
+	public void cropImage(int xImage, int yImage, int w, int h ) {
+				
+		buffer = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+		
+		graphics = buffer.createGraphics();
+		graphics.drawImage(originalBuffer, -xImage, -yImage, null);
+		
+		this.w = w;
+		this.h = h;		
+	}
+	
 
 	/**
 	 * ImagemBuffer back to original state
@@ -380,7 +392,7 @@ public class BufferedLayer extends ImageLayer {
 	public Graphics2D getGraphics() {
 		return graphics;
 	}
-	
+		
 	@Override
 	public void simpleDraw(Graphic g, int x, int y) {
 		g.drawImage( buffer, x, y, x+w,y+h,
