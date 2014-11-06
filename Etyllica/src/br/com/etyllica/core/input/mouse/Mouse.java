@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.event.MouseInputListener;
@@ -40,8 +41,11 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	
 	protected int dragX = 0;
 	protected int dragY = 0;
+
+    private boolean locked = false;
 	
 	private RingBuffer<PointerEvent> events = new RingBuffer<PointerEvent>(PointerEvent.class);
+	private List<PointerEvent> moreEvents = new ArrayList<PointerEvent>();
 	
 	public Mouse(int x, int y) {
 		super();
@@ -107,7 +111,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 			break;
 		}
 		
-		events.getSlot().set(key, state, x, y, amountX, amountY);
+		getSlot().set(key, state, x, y, amountX, amountY);
 
 	}
 
@@ -218,7 +222,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 			key = MouseButton.MOUSE_WHEEL_UP;
 		}
 		
-		events.getSlot().set(key, PointerState.PRESSED, x, y, mwe.getWheelRotation());
+		getSlot().set(key, PointerState.PRESSED, x, y, mwe.getWheelRotation());
 	}
 
 	//Collision
@@ -259,20 +263,59 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		return sobMouse(cam.getX(), cam.getY(), cam.getTileW(), cam.getTileH());
 	}
 
-	public synchronized List<PointerEvent> getEvents() {
+	public List<PointerEvent> getEvents() {
 		return events.getList();
 	}
 	
 	public void addMouseMoveEvent(int x, int y) {
-		events.getSlot().set(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
+		
+		getSlot().set(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
+				
 	}
-	
-	public void clearEvents() {
+		
+	public void packEvents() {
 		events.pack();
+		
+		for(PointerEvent event: moreEvents) {
+			events.getSlot().copy(event);
+		}
 	}
 	
 	public void addEvent(PointerEvent event) {
-		events.getSlot().copy(event);
+		getSlot().copy(event);
 	}
+	
+	private PointerEvent getSlot() {
+		
+		if(!locked) {		
+			
+			return events.getSlot();
+			
+		} else {
+			
+			PointerEvent event = new PointerEvent();
+			
+			moreEvents.add(event);
+			
+			return event;
+		}
+		
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void lock() {
+		this.locked = true;
+	}
+	
+	public void unlock() {
+		this.locked = false;
+	}
+	
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}	
 
 }

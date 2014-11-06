@@ -154,10 +154,11 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		updateGui(components, guiEvents);
 
-		List<PointerEvent> events = new CopyOnWriteArrayList<PointerEvent>(mouse.getEvents());
-		mouse.clearEvents();
-				
+		mouse.lock();
+		List<PointerEvent> events = mouse.getEvents();
 		updatePointerEvents(events, application, components);
+		mouse.packEvents();
+		mouse.unlock();
 
 		updateHelperUI(now);
 
@@ -683,18 +684,18 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 			//Mouse Left Button
 			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_INS)) {
-				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
+				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
 			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_INS)) {
-				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
+				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
 			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_INS)) {
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_LEFT, KeyState.CLICK));
 			}*/
 
 			//Mouse Right Button
 			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_DEL)) {
-				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
+				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
 			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_DEL)) {
-				mouse.getEvents().add(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
+				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
 			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_DEL)) {
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
 			}*/

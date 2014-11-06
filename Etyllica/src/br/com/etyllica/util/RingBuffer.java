@@ -14,7 +14,7 @@ public class RingBuffer<T> {
 	private int usedSlot = 0;
 	
     private int minimumSlots = 0;
-	
+	    
 	public RingBuffer(Class<T> cls) {
 		super();
 
@@ -101,5 +101,5 @@ public class RingBuffer<T> {
 
 		return list.size();		
 	}
-
+	
 }
