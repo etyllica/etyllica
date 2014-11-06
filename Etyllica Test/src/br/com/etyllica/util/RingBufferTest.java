@@ -12,7 +12,6 @@ public class RingBufferTest {
 	
 	@Before
 	public void setUp() {
-		
 		events = new RingBuffer<PointerEvent>(PointerEvent.class);		
 	}
 	
