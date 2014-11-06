@@ -24,38 +24,38 @@ import br.com.etyllica.util.RingBuffer;
  */
 
 public class Mouse implements MouseMotionListener, MouseInputListener, MouseWheelListener {
-	
+
 	protected int x = 0;
-	
+
 	protected int y = 0;
-	
+
 	protected int z = 0;
-	
+
 	protected int clicks = 0;
 	//TODO doubleClick[]
 	protected boolean doubleClick = false;
 
 	protected boolean dragged = false;
-	
+
 	protected int dragButton = 0;
-	
+
 	protected int dragX = 0;
 	protected int dragY = 0;
 
-    private boolean locked = false;
-	
+	private boolean locked = false;
+
 	private RingBuffer<PointerEvent> events = new RingBuffer<PointerEvent>(PointerEvent.class);
 	private List<PointerEvent> moreEvents = new ArrayList<PointerEvent>();
-	
+
 	public Mouse(int x, int y) {
 		super();
-		
+
 		this.x = x;
 		this.y = y;
-		
+
 		events.setMinimumSlots(4);
 	}
-	
+
 	public int getX() {
 		return x;
 	}
@@ -89,12 +89,12 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 
 		addEvent(button, state, 0);
 	}
-	
+
 	private void addEvent(int button, PointerState state, int amount) {
 
 		addEvent(button, state, 0, amount);
 	}
-	
+
 	private void addEvent(int button, PointerState state, int amountX, int amountY) {
 
 		MouseButton key = MouseButton.MOUSE_NONE;
@@ -110,7 +110,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 			key = MouseButton.MOUSE_BUTTON_RIGHT;
 			break;
 		}
-		
+
 		getSlot().set(key, state, x, y, amountX, amountY);
 
 	}
@@ -127,7 +127,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		}
 
 		setCoordinates(me.getX(),me.getY());
-		
+
 		addEvent(me.getButton(),state, me.getClickCount());
 
 		me.consume();
@@ -137,23 +137,23 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	public void mousePressed( MouseEvent me ) {
 
 		setCoordinates(me.getX(),me.getY());
-		
+
 		addEvent(me.getButton(),PointerState.PRESSED);
 
 		pressDragButton(me.getButton());
-		
+
 		me.consume();
 	}
-	
+
 	private void pressDragButton(int button) {
-				
+
 		if(dragButton == 0) {
 			dragButton = button;			
 		}		
 	}
-	
+
 	private void releaseDragButton(int button) {
-		
+
 		if(dragButton == button) {
 			dragged = false;
 			dragButton = 0;
@@ -164,7 +164,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	public void mouseReleased( MouseEvent me ) {
 
 		setCoordinates(me.getX(),me.getY());
-		
+
 		addEvent(me.getButton(),PointerState.RELEASED);
 
 		releaseDragButton(me.getButton());
@@ -174,9 +174,9 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 
 	@Override
 	public void mouseMoved( MouseEvent me ) {
-		
+
 		setCoordinates(me.getX(),me.getY());
-		
+
 		addMouseMoveEvent(x, y);
 
 		me.consume();
@@ -195,41 +195,41 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 
 	@Override
 	public void mouseDragged( MouseEvent me ) {
-		
+
 		if(!dragged) {
 			dragX = me.getX();
 			dragY = me.getY();
 
 			dragged = true;
 		}
-		
+
 		int deltaX = me.getX()-dragX;
 		int deltaY = me.getY()-dragY;
-		
+
 		setCoordinates(me.getX(), me.getY());
-				
+
 		addEvent(dragButton, PointerState.DRAGGED, deltaX, deltaY);
-		
+
 		me.consume();		
 	}
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent mwe) {
-		
+
 		MouseButton key = MouseButton.MOUSE_WHEEL_DOWN;		
-		
+
 		if(mwe.getWheelRotation()<0) {
 			key = MouseButton.MOUSE_WHEEL_UP;
 		}
-		
+
 		getSlot().set(key, PointerState.PRESSED, x, y, mwe.getWheelRotation());
 	}
 
 	//Collision
 	public boolean sobMouseCircular(ImageLayer b) {
-		
+
 		final float radius = b.getW()/2;
-		
+
 		return sobMouseCircular(b.getX()+radius,b.getY()+radius, radius);
 	}
 
@@ -244,14 +244,14 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	public boolean sobMouse(float x, float y, float w, float h)	{
-		
+
 		if((this.x<x)||(this.x>x + w)) {
-			
+
 			return false;
 		}
-		
+
 		if((this.y<y)||(this.y>y + h)) {
-			
+
 			return false;
 		}
 
@@ -259,47 +259,52 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	public boolean sobMouse(AnimatedLayer cam) {
-		
+
 		return sobMouse(cam.getX(), cam.getY(), cam.getTileW(), cam.getTileH());
 	}
 
 	public List<PointerEvent> getEvents() {
 		return events.getList();
 	}
-	
+
 	public void addMouseMoveEvent(int x, int y) {
-		
+
 		getSlot().set(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
-				
+
 	}
-		
+
 	public void packEvents() {
 		events.pack();
-		
-		for(PointerEvent event: moreEvents) {
-			events.getSlot().copy(event);
+
+		if(!moreEvents.isEmpty()) {
+
+			for(PointerEvent event: moreEvents) {
+				events.getSlot().copy(event);
+			}
+
+			moreEvents.clear();
 		}
 	}
-	
+
 	public void addEvent(PointerEvent event) {
 		getSlot().copy(event);
 	}
-	
+
 	private PointerEvent getSlot() {
-		
+
 		if(!locked) {		
-			
+
 			return events.getSlot();
-			
+
 		} else {
-			
+
 			PointerEvent event = new PointerEvent();
-			
+
 			moreEvents.add(event);
-			
+
 			return event;
 		}
-		
+
 	}
 
 	public boolean isLocked() {
@@ -309,11 +314,11 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	public void lock() {
 		this.locked = true;
 	}
-	
+
 	public void unlock() {
 		this.locked = false;
 	}
-	
+
 	public void setLocked(boolean locked) {
 		this.locked = locked;
 	}	
