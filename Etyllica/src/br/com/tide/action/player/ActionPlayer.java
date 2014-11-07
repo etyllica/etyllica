@@ -296,11 +296,15 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 		dy += offsetY;
 		y += offsetY;
 	}
+	
+	public double getAngle() {
+		return angle;
+	}
 
 	public void setListener(ActionPlayerListener listener) {
 		this.listener = listener;
 		
 		hasListener = (null == listener);
-	}	
+	}
 	
 }
