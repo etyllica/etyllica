@@ -215,7 +215,6 @@ public class GeometricLayer implements Movable {
 		if(b.getY() > getY() + utilHeight()) return false;
 
 		return true;
-
 	}
 	
 	/**
@@ -232,6 +231,18 @@ public class GeometricLayer implements Movable {
 		if(bx > getX() + utilWidth()) return false;
 
 		if(by + bh < getY()) return false;
+		if(by > getY() + utilHeight()) return false;
+
+		return true;
+
+	}
+	
+	public boolean colideRectPoint(int bx, int by) {
+
+		if(bx + 1 < getX()) return false;
+		if(bx > getX() + utilWidth()) return false;
+
+		if(by + 1 < getY()) return false;
 		if(by > getY() + utilHeight()) return false;
 
 		return true;
