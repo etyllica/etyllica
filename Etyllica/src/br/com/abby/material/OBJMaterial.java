@@ -9,7 +9,7 @@ import org.lwjgl.util.vector.Vector3f;
  *
  */
 
-public class DiffuseMaterial {
+public class OBJMaterial {
 
 	protected String name = "";
 	
@@ -34,7 +34,7 @@ public class DiffuseMaterial {
 	
 	protected int illum = 0;
 		
-	public DiffuseMaterial() {
+	public OBJMaterial() {
 		super();
 	}
 

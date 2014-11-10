@@ -8,7 +8,7 @@ import java.util.Map;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.material.DiffuseMaterial;
+import br.com.abby.material.OBJMaterial;
 
 public class VBO {
 	
@@ -20,7 +20,7 @@ public class VBO {
 
 	private List<Group> groups = new ArrayList<Group>();
 	
-	private Map<String, DiffuseMaterial> materials = new HashMap<String, DiffuseMaterial>();
+	private Map<String, OBJMaterial> materials = new HashMap<String, OBJMaterial>();
 
 	public VBO() {
 		super();
@@ -66,11 +66,11 @@ public class VBO {
 		this.groups = groups;
 	}
 
-	public Map<String, DiffuseMaterial> getMaterials() {
+	public Map<String, OBJMaterial> getMaterials() {
 		return materials;
 	}
 
-	public void setMaterials(Map<String, DiffuseMaterial> materials) {
+	public void setMaterials(Map<String, OBJMaterial> materials) {
 		this.materials = materials;
 	}
 			

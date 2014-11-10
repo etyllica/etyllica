@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.material.DiffuseMaterial;
+import br.com.abby.material.OBJMaterial;
 
 /**
  * 
@@ -20,15 +20,15 @@ import br.com.abby.material.DiffuseMaterial;
 
 public class MaterialLoader {
 
-	public static List<DiffuseMaterial> loadMaterial(String folder, String filename) throws IOException{
+	public static List<OBJMaterial> loadMaterial(String folder, String filename) throws IOException{
 		
 		File f = new File(folder+filename);
 		
 		BufferedReader reader = new BufferedReader(new FileReader(f));
 		
-		List<DiffuseMaterial> materials = new ArrayList<DiffuseMaterial>();
+		List<OBJMaterial> materials = new ArrayList<OBJMaterial>();
 		
-		DiffuseMaterial mat = new DiffuseMaterial();
+		OBJMaterial mat = new OBJMaterial();
 
 		String line;
 		
@@ -42,7 +42,7 @@ public class MaterialLoader {
 				
 				if(mat!=null){
 					materials.add(mat);
-					mat = new DiffuseMaterial();
+					mat = new OBJMaterial();
 				}
 				
 				mat.setName(splitLine[1]);

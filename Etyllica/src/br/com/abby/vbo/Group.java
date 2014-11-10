@@ -3,7 +3,7 @@ package br.com.abby.vbo;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.abby.material.DiffuseMaterial;
+import br.com.abby.material.OBJMaterial;
 
 /**
  * 
@@ -18,7 +18,7 @@ public class Group {
 	
 	private List<Face> faces = new ArrayList<Face>();
 	
-	private DiffuseMaterial material;
+	private OBJMaterial material;
 	
 	public Group(String name){
 		super();
@@ -42,11 +42,11 @@ public class Group {
 		this.name = name;
 	}
 
-	public DiffuseMaterial getMaterial() {
+	public OBJMaterial getMaterial() {
 		return material;
 	}
 
-	public void setMaterial(DiffuseMaterial material) {
+	public void setMaterial(OBJMaterial material) {
 		this.material = material;
 	}
 		

@@ -11,7 +11,7 @@ import java.util.List;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.material.DiffuseMaterial;
+import br.com.abby.material.OBJMaterial;
 import br.com.abby.vbo.Face;
 import br.com.abby.vbo.Group;
 import br.com.abby.vbo.VBO;
@@ -26,75 +26,13 @@ import br.com.abby.vbo.VBO;
  */
 
 public class OBJLoader {
-	/*
-    public static int createDisplayList(Model m) {
-        int displayList = glGenLists(1);
-        glNewList(displayList, GL_COMPILE);
-        {
-            glColor3f(0.4f, 0.27f, 0.17f);
-            glMaterialf(GL_FRONT, GL_SHININESS, 128.0f);
-            glBegin(GL_TRIANGLES);
-            for (Face face : m.faces) {
-                Vector3f n1 = m.normals.get((int) face.normal.x - 1);
-                glNormal3f(n1.x, n1.y, n1.z);
-                Vector3f v1 = m.vertices.get((int) face.vertex.x - 1);
-                glVertex3f(v1.x, v1.y, v1.z);
-                Vector3f n2 = m.normals.get((int) face.normal.y - 1);
-                glNormal3f(n2.x, n2.y, n2.z);
-                Vector3f v2 = m.vertices.get((int) face.vertex.y - 1);
-                glVertex3f(v2.x, v2.y, v2.z);
-                Vector3f n3 = m.normals.get((int) face.normal.z - 1);
-                glNormal3f(n3.x, n3.y, n3.z);
-                Vector3f v3 = m.vertices.get((int) face.vertex.z - 1);
-                glVertex3f(v3.x, v3.y, v3.z);
-            }
-            glEnd();
-        }
-        glEndList();
-        return displayList;
-    }
-    
-
-    private static FloatBuffer reserveData(int size) {
-        FloatBuffer data = BufferUtils.createFloatBuffer(size);
-        return data;
-    }
-
-    private static float[] asFloats(Vector3f v) {
-        return new float[]{v.x, v.y, v.z};
-    }
-
-    private static int[] createVBO(Model model) {
-        int vboVertexHandle = glGenBuffers();
-        int vboNormalHandle = glGenBuffers();
-        FloatBuffer vertices = reserveData(model.faces.size() * 9);
-        FloatBuffer normals = reserveData(model.faces.size() * 9);
-        for (Face face : model.faces) {
-            vertices.put(asFloats(model.vertices.get((int) face.vertex.x - 1)));
-            vertices.put(asFloats(model.vertices.get((int) face.vertex.y - 1)));
-            vertices.put(asFloats(model.vertices.get((int) face.vertex.z - 1)));
-            normals.put(asFloats(model.normals.get((int) face.normal.x - 1)));
-            normals.put(asFloats(model.normals.get((int) face.normal.y - 1)));
-            normals.put(asFloats(model.normals.get((int) face.normal.z - 1)));
-        }
-        vertices.flip();
-        normals.flip();
-        glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
-        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
-        glVertexPointer(3, GL_FLOAT, 0, 0L);
-        glBindBuffer(GL_ARRAY_BUFFER, vboNormalHandle);
-        glBufferData(GL_ARRAY_BUFFER, normals, GL_STATIC_DRAW);
-        glNormalPointer(GL_FLOAT, 0, 0L);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        return new int[]{vboVertexHandle, vboNormalHandle};
-    }*/
 
     public static VBO loadModel(URL url) throws FileNotFoundException, IOException {
     	
     	String fpath = url.getPath();
     	String separator = "/";
     	
-    	if(!fpath.contains(separator)){
+    	if(!fpath.contains(separator)) {
     		separator="\\";
     	}
     	
@@ -116,7 +54,7 @@ public class OBJLoader {
         	
         	if (line.startsWith("g ")) {
         		
-        		if(group!=null){
+        		if(group!=null) {
         			groups.add(group);
         		}
         		
@@ -130,21 +68,15 @@ public class OBJLoader {
         	}
         	
             if (line.startsWith("v ")) {
-                float x = Float.valueOf(line.split(" ")[1]);
-                float y = Float.valueOf(line.split(" ")[2]);
-                float z = Float.valueOf(line.split(" ")[3]);
-                m.getVertices().add(new Vector3f(x, y, z));
+            	
+            	parseVertex(line, m);                
                 
             } else if (line.startsWith("vn ")) {
-                float x = Float.valueOf(line.split(" ")[1]);
-                float y = Float.valueOf(line.split(" ")[2]);
-                float z = Float.valueOf(line.split(" ")[3]);
-                m.getNormals().add(new Vector3f(x, y, z));
+            	
+                parseVertexNormal(line, m);
                 
             } else if (line.startsWith("vt ")) {
-            	float x = Float.valueOf(line.split(" ")[1]);
-                float y = Float.valueOf(line.split(" ")[2]);
-                m.getTextures().add(new Vector2f(x, y));     
+            	parseVertexTexture(line, m);
                 
             } else if (line.startsWith("f ")) {
             	
@@ -156,11 +88,11 @@ public class OBJLoader {
             	Vector3f[] nIndexes = new Vector3f[quad];
             	Vector2f[] texIndexes = new Vector2f[quad];
             	
-            	for(int i=0;i<quad;i++){
+            	for(int i=0;i<quad;i++) {
             		            
             		String[] face = splitLine[i].split("/");
             		
-            		if(face.length>1){
+            		if(face.length > 1) {
             		
             		//-1 is very important
                     vIndexes[i] = m.getVertices().get(Integer.parseInt(face[0])-1);
@@ -186,11 +118,9 @@ public class OBJLoader {
             }
             else if (line.startsWith("mtllib")) {
             	
-            	String filename = line.split(" ")[1];
-            	
-            	List<DiffuseMaterial> materials = MaterialLoader.loadMaterial(folder,filename);
-            	
-            	for(DiffuseMaterial material: materials){
+            	List<OBJMaterial> materials = parseMaterial(folder, line);
+            	            	
+            	for(OBJMaterial material: materials) {
             		m.getMaterials().put(material.getName(), material);
             	}
             	
@@ -200,7 +130,7 @@ public class OBJLoader {
         reader.close();
         
         //Add group to Model
-        if(group!=null){
+        if(group!=null) {
 			groups.add(group);
 		}
         
@@ -208,4 +138,45 @@ public class OBJLoader {
         
         return m;
     }
+    
+    private static void parseVertex(String line, VBO vbo) {
+    	
+    	String[] parts = line.split(" ");
+    	
+    	float x = Float.valueOf(parts[1]);
+        float y = Float.valueOf(parts[2]);
+        float z = Float.valueOf(parts[3]);
+        vbo.getVertices().add(new Vector3f(x, y, z));
+    }
+    
+    private static void parseVertexNormal(String line, VBO vbo) {
+    	
+    	String[] parts = line.split(" ");
+    	
+    	float x = Float.valueOf(parts[1]);
+        float y = Float.valueOf(parts[2]);
+        float z = Float.valueOf(parts[3]);
+        
+        vbo.getNormals().add(new Vector3f(x, y, z));    	
+    }
+    
+    private static void parseVertexTexture(String line, VBO vbo) {
+    	
+    	String[] parts = line.split(" ");
+    	
+    	float x = Float.valueOf(parts[1]);
+        float y = Float.valueOf(parts[2]);
+        
+        vbo.getTextures().add(new Vector2f(x, y));     	
+    }
+    
+    private static List<OBJMaterial> parseMaterial(String folder, String line) throws IOException {
+    	
+    	String filename = line.split(" ")[1];
+    	
+    	List<OBJMaterial> materials = MaterialLoader.loadMaterial(folder,filename);
+    	
+    	return materials;    	
+    }
+    
 }
