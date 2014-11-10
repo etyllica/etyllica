@@ -173,7 +173,7 @@ public class OBJLoader {
     private static List<OBJMaterial> parseMaterial(String folder, String line) throws IOException {
     	
     	String filename = line.split(" ")[1];
-    	
+    	    	
     	List<OBJMaterial> materials = MaterialLoader.loadMaterial(folder,filename);
     	
     	return materials;    	
