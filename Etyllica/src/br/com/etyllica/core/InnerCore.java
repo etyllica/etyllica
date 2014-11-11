@@ -535,13 +535,13 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			g.fillRect(0, 0, context.getW(), context.getH());
 		}
 
-		context.drawContext(g);
-
-		for(View view: context.getViews()) {
-			drawView(view, g);
-		}
-
-	}
+		context.draw(g);
+		
+		context.getScene().draw(g);
+	
+		drawViewChildren(context, g);
+		
+	}	
 
 	private void updateEffects(long now) {
 
@@ -575,6 +575,11 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		//Draw Component
 		component.draw(g);
+
+		drawViewChildren(component, g);
+	}
+	
+	private void drawViewChildren(View component, Graphic g) {
 
 		if(!component.getViews().isEmpty()) {
 

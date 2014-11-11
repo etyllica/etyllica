@@ -149,13 +149,6 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	 * Application gets lock while load() and unlocks when loading = 100;     
 	 */
 	public abstract void load();
-
-	public void drawContext(Graphic g) {
-
-		this.draw(g);
-		
-		scene.draw(g);		
-	}
 	
 	/**
 	 * Draw method
