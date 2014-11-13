@@ -95,6 +95,8 @@
 			<batchtest>
 				<fileset dir="${test.dir}">
 					<include name="**/*Test*.java"/>
+					<exclude name="**/*CoreTest*.java"/>
+					<exclude name="**/*AWT*.java"/>
 				</fileset>
 			</batchtest>
 			<formatter type="brief" usefile="false"/>
