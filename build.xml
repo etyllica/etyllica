@@ -8,10 +8,11 @@
 	<property name="libsound"  value="etyllica-${version}-sound" />
 	<property name="libphysics"  value="etyllica-${version}-physics" />
 
-	<property name="src.dir"   value="src/main/java" />
-	<property name="test.dir"   value="src/test/java" />
-	<property name="build.dir" value="bin" />
-	<property name="lib.dir"   value="libs"/>
+	<property name="src.dir"     value="src/main/java" />
+	<property name="test.dir"    value="src/test/java" />
+	<property name="build.dir"   value="src/bin" />
+	<property name="lib.dir"     value="libs"/>
+	<property name="reports.dir" value="tests"/>
 	
 	<target name="dist" depends="clean, package"/>
 
@@ -71,6 +72,21 @@
 				<include name="**/org/dyn4j/**"/>
 			</fileset>
 		</jar>
+	</target>
+
+	<target name="test" depends="compile">
+		<junit printsummary="yes" haltonfailure="yes" showoutput="true">
+			<classpath>
+				<pathelement location="${build.dir}" />
+				<pathelement location="lib/junit-4.10.jar"/>
+			</classpath>
+			<batchtest>
+				<fileset dir="${test.dir}">
+					<include name="**/*Test*.java"/>
+				</fileset>
+			</batchtest>
+			<formatter type="brief" usefile="false"/>
+		</junit>
 	</target>
 	
 </project>
