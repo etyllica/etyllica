@@ -41,6 +41,16 @@
     		<javac srcdir="${src.dir}" destdir="${build.dir}" source="1.6" target="1.6" debug="off" />
 	</target>
 
+	<target name="compile-tests">
+    		<javac srcdir="${test.dir}" destdir="${build.dir}" includeantruntime="false" source="1.6" target="1.6" debug="off">
+			<classpath>
+				<fileset dir="${reports.dir}">
+					<include name="*.jar"/>
+	                	</fileset>
+			  </classpath>
+		</javac>
+	</target>
+
 	<target name="package" depends="init, compile, prepare">
 		<jar destfile="${lib.dir}/${libcore}.jar">
 			<fileset dir="${build.dir}">
@@ -74,11 +84,13 @@
 		</jar>
 	</target>
 
-	<target name="test" depends="compile">
+	<target name="test" depends="init, compile, compile-tests">
 		<junit printsummary="yes" haltonfailure="yes" showoutput="true">
 			<classpath>
-				<pathelement location="${build.dir}" />
-				<pathelement location="lib/junit-4.10.jar"/>
+				<pathelement location="${build.dir}"/>
+				<fileset dir="${reports.dir}">
+		                    <include name="*.jar"/>
+                		</fileset>
 			</classpath>
 			<batchtest>
 				<fileset dir="${test.dir}">
