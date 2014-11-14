@@ -14,6 +14,8 @@ import br.com.etyllica.layer.AnimatedLayer;
 
 public class Effect extends AnimatedLayer {
 
+	private boolean active = false;
+	
 	private FrameAnimation script = new FrameAnimation(this);
 	
 	public Effect(int x, int y, int xTile, int yTile) {
@@ -35,18 +37,28 @@ public class Effect extends AnimatedLayer {
 		super.notifyAnimationFinishListener(now);
 		
 		setVisible(false);
+		
+		active = false;
+	}
+	
+	public void animate(long now) {
+		if(!active)
+			return;
+		
+		super.animate(now);
 	}
 	
 	public void startEffect() {
 
 		script.setTarget(this);
+		
+		active = true;
 				
 		setVisible(true);
 		
 		restartAnimation();		
 		
-		AnimationHandler.getInstance().add(script);
-		
+		AnimationHandler.getInstance().add(script);		
 	}
 	
 }
