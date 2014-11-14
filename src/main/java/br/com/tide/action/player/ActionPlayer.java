@@ -297,8 +297,24 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 		y += offsetY;
 	}
 	
+	public double getDx() {
+		return dx;
+	}
+
+	public double getDy() {
+		return dy;
+	}
+	
 	public double getAngle() {
 		return angle;
+	}
+	
+	public double getStartAngle() {
+		return startAngle;
+	}
+
+	public void setStartAngle(double startAngle) {
+		this.startAngle = startAngle;
 	}
 
 	public void setListener(ActionPlayerListener listener) {
