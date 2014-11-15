@@ -119,13 +119,19 @@ public class Point2D {
 	}
 	
 	public double distance(double px, double py) {
+				
+		return distance(px, py, this.x, this.y);
+	}
+	
+	public static double distance(double px, double py, double qx, double qy) {
 		
-		double difX = px - this.x;
-		double difY = py - this.y;
+		double difX = px - qx;
+		double difY = py - qy;
 		
 		double dist = Math.sqrt(Math.pow(difX, 2) + Math.pow(difY, 2));
 				
 		return dist;
+		
 	}
 	
 	public static Point2D clone(Point2D point) {
