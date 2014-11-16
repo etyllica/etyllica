@@ -308,7 +308,11 @@ public class ActionPlayer extends ActivePlayer implements ControllerListener {
 	public double getAngle() {
 		return angle;
 	}
-	
+		
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+
 	public double getStartAngle() {
 		return startAngle;
 	}
