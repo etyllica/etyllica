@@ -12,6 +12,8 @@ public abstract class AnimationScript {
 
 	private boolean started = false;
 	private boolean stopped = false;
+	
+	protected long endDelay = 0;	
 
 	private AnimationScript next;
 	
@@ -51,9 +53,13 @@ public abstract class AnimationScript {
 
 		if(started && !stopped) {
 
-			if(now-startedAt-delay >= time) {
+			long elapsedTime = now-startedAt-delay;
+			
+			if(elapsedTime >= time) {
 				
-				stopped = true;
+				if(elapsedTime >= time+endDelay) {
+					stopped = true;
+				}
 				
 			} else {
 				
@@ -104,6 +110,10 @@ public abstract class AnimationScript {
 	public void setDelay(long delay) {
 		this.delay = delay;
 	}
+	
+	public void setEndDelay(long endDelay) {
+		this.endDelay = endDelay;
+	}
 
 	public OnAnimationFinishListener getListener() {
 		return listener;
@@ -111,6 +121,6 @@ public abstract class AnimationScript {
 
 	public void setListener(OnAnimationFinishListener listener) {
 		this.listener = listener;
-	}	
+	}
 
 }
