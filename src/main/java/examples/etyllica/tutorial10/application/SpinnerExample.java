@@ -21,7 +21,7 @@ public class SpinnerExample extends Application{
 		spinnerMaxPlayers.setMaxValue(4);
 		spinnerMaxPlayers.setMinValue(1);
 		add(spinnerMaxPlayers);
-		
+				
 		loading = 100;
 	}
 

@@ -367,13 +367,13 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		if(!component.isVisible()) {
 			return GUIEvent.NONE;
 		}
-
+		
 		//Verify onMouse
 		if(component.onMouse(event)) {
 
 			if(component != mouseOver) {
 				setMouseOver(component);
-								
+				
 				return GUIEvent.NONE;
 			}
 			

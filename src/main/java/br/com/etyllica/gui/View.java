@@ -10,6 +10,7 @@ import java.util.Map;
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.layer.Layer;
 
 /**
@@ -214,4 +215,26 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
 		// TODO Auto-generated method stub
 	}
 	
+	public GUIEvent safeUpdateMouse(PointerEvent event) {
+		if(!isMouseOver()) {
+			
+			if(onMouse(event)) {
+				setMouseOver(true);
+				update(GUIEvent.MOUSE_IN);
+				return GUIEvent.MOUSE_IN;
+			}
+			
+		} else {
+			
+			if(!onMouse(event)) {
+				setMouseOver(false);
+				update(GUIEvent.MOUSE_OUT);
+				return GUIEvent.MOUSE_OUT;
+			} else {
+				return updateMouse(event);
+			}
+		}
+		
+		return GUIEvent.NONE;
+	}	
 }

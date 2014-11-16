@@ -15,66 +15,71 @@ import br.com.etyllica.gui.label.TextLabel;
  *
  */
 
-public abstract class Spinner<T extends Number> extends View{
+public abstract class Spinner<T extends Number> extends View {
 
 	private DefaultButton plus;
 	private DefaultButton minus;
 	private TextLabel resultLabel;
-	private Panel resultPanel;
-	
+	private Panel panel;
+
 	protected T value;
 	protected T step;
 	protected T maxValue;
 	protected T minValue;
-	
+
 	public Spinner(int x, int y, int w, int h){
-		
-		resultPanel = new Panel(x, y, w, h);
-		add(resultPanel);
-		
-		//TODO levar em consideracao o fontSize
-		resultLabel = new TextLabel(x+10,y+2+h/2,"0");
-		add(resultLabel);
-		
+
+		panel = new Panel(x, y, w, h);
+
+		//TODO change size based on fontSize
+		resultLabel = new TextLabel(x+10,y+2+h/2,"0");		
+
 		int buttonWidth = w/6;
 		int miniBorder = 1;
-		
+
 		plus = new DefaultButton(x+w-buttonWidth-miniBorder, y+miniBorder, buttonWidth, h/2-miniBorder-1);
 		plus.setLabel(new TextLabel("+"));
 		plus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "addReload"));
-		add(plus);
-		
+
 		minus = new DefaultButton(x+w-buttonWidth-miniBorder, y+h/2+miniBorder, buttonWidth, h/2-miniBorder);
 		minus.setLabel(new TextLabel("-"));
 		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "subReload"));		
-		add(minus);
-				
+
 	}
-		
+
+	@Override
+	public boolean onMouse(PointerEvent event) {
+		return panel.onMouse(event);
+	}
+
 	//Should be private
 	public void addReload(){
 		add();		
 		reload();
 	}
-	
+
 	//Should be private
 	public void subReload(){
 		subtract();
 		reload();		
 	}
-	
+
 	private void reload(){
 		resultLabel.setText(value.toString());
 	}
-	
+
 	public abstract void add();
 	public abstract void subtract();
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
+
+		plus.safeUpdateMouse(event);
+		minus.safeUpdateMouse(event);			
+		
 		return GUIEvent.NONE;
 	}
-	
+
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		return GUIEvent.NONE;
@@ -87,15 +92,17 @@ public abstract class Spinner<T extends Number> extends View{
 
 	@Override
 	public void draw(Graphic g) {
-		// TODO Auto-generated method stub
-		
+		panel.draw(g);
+		resultLabel.draw(g);
+		plus.draw(g);
+		minus.draw(g);		
 	}
-	
+
 	public void setValue(T value){
 		this.value = value;
 		resultLabel.setText(value.toString());
 	}
-	
+
 	public T getValue() {
 		return this.value;
 	}
@@ -123,5 +130,5 @@ public abstract class Spinner<T extends Number> extends View{
 	public void setMinValue(T minValue) {
 		this.minValue = minValue;
 	}
-		
+
 }
