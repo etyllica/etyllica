@@ -276,10 +276,13 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	public void packEvents() {
 		events.pack();
 
+		if(locked)
+			return;
+		
 		if(!moreEvents.isEmpty()) {
 
 			for(PointerEvent event: moreEvents) {
-				events.getSlot().copy(event);
+				getSlot().copy(event);
 			}
 
 			moreEvents.clear();
@@ -292,7 +295,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 
 	private PointerEvent getSlot() {
 
-		if(!locked) {		
+		if(!locked) {
 
 			return events.getSlot();
 
