@@ -29,6 +29,7 @@
 - [Etyllic Mario](http://yuripourre.github.com/etyllic-mario) - Mario Clone
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme) - A Game developed at [GGJ 2013](http://globalgamejam.org/)
 - [House Defense](https://github.com/yuripourre/childage) - A Game developed at [GGJ 2014](http://globalgamejam.org/)
+- [Marvel Quest](https://github.com/yuripourre/marvel-quest) - A beat 'em up game
 - [Ninja Robot](https://github.com/yuripourre/ninja-robot) - A casual game
 - [Tomb Runaway](https://github.com/yuripourre/runaway) - A maze game
 
