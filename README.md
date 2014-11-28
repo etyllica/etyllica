@@ -19,18 +19,22 @@
 - WaveForm Drawing
 - OpenGL simulation with software Rendering (Even in Unsigned Applets)
 - Basic Particle System
+- Basic Light Map Logic
 - Physics (2D)
 
 ## Related Projects
-
+### Games
 - [Akigawa Training](https://github.com/yuripourre/akigawa) - A Ninja Game
 - [Etyllic Pong](http://yuripourre.github.com/etyllic-pong) - Pong Clone
 - [Etyllic Mario](http://yuripourre.github.com/etyllic-mario) - Mario Clone
-- [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - Paint Clone
-- [Etyllic Animator](http://yuripourre.github.com/etyllic-animator) - Pivot Animator (2D and 3D)
 - [Hard to Beat Me](http://yuripourre.github.com/hardtobeatme) - A Game developed at [GGJ 2013](http://globalgamejam.org/)
 - [House Defense](https://github.com/yuripourre/childage) - A Game developed at [GGJ 2014](http://globalgamejam.org/)
-- [Ninja Robot](https://github.com/yuripourre/ninja-robot) - A casual game developed during a college class.
+- [Ninja Robot](https://github.com/yuripourre/ninja-robot) - A casual game
+- [Tomb Runaway](https://github.com/yuripourre/runaway) - A maze game
+
+### Non-Games
+- [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - Paint Clone
+- [Etyllic Animator](http://yuripourre.github.com/etyllic-animator) - Pivot Animator (2D and 3D)
 - [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android.
 - [EtyllicTTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
 - [Etyllic GameBoy](https://github.com/yuripourre/etyllic-gameboy) - A [Javaboy](http://www.millstone.demon.co.uk/download/javaboy/) fork with faster rendering.
