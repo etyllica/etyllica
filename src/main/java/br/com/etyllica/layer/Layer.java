@@ -168,23 +168,16 @@ public class Layer extends GeometricLayer implements Drawable {
 			return CollisionDetector.colideRectPoint(this, px, py, scaleX, scaleY);
 	}
 
-	public AffineTransform getTransform() {
+	public AffineTransform getTransform(int offsetX, int offsetY) {
 
-		AffineTransform transform = null;
-
+		AffineTransform transform = AffineTransform.getTranslateInstance(offsetX, offsetY);
+		
 		if(angle != 0) {
-
-			transform = new AffineTransform();
-
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
 					x+utilWidth()/2, y+utilHeight()/2));
 		}
 
 		if(scaleX != 1 || scaleY != 1) {
-
-			if(transform == null) {
-				transform = new AffineTransform();
-			}
 
 			double sw = utilWidth()*scaleX;
 			double sh = utilHeight()*scaleY;

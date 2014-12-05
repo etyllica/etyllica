@@ -1,7 +1,5 @@
 package br.com.etyllica.layer;
 
-import java.awt.geom.AffineTransform;
-
 import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.collision.HitBox;
 import br.com.etyllica.core.graphics.Graphic;
@@ -242,20 +240,14 @@ public class ImageLayer extends StaticLayer {
 			return;
 		}
 
-		if(opacity<0xff) {
+		if(opacity < 0xff) {
 			g.setOpacity(opacity);
 		}
 
-		AffineTransform transform = getTransform();
-		
-		if(transform != null) {
-			g.setTransform(transform); 
-			simpleDraw(g, x+offsetX, y+offsetY);
-			g.resetTransform();
-		} else { 
-			simpleDraw(g, x+offsetX, y+offsetY);
-		}
-		
+		g.setTransform(getTransform(offsetX, offsetY));
+		simpleDraw(g);
+		g.resetTransform();
+				
 		if(opacity<0xff) {
 			g.resetOpacity();
 		}
