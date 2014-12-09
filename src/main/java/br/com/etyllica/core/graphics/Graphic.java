@@ -34,77 +34,77 @@ import br.com.etyllica.linear.Point2D;
 public class Graphic {
 
 	private VolatileImage vimg;
-	
+
 	protected Graphics2D screen;
 
 	private int width;
 	private int height;
-	
-	private final Color shadowColor = Color.BLACK;
-	
+
+	private Color shadowColor = Color.BLACK;
+
 	//Identity matrix
 	private static final AffineTransform RESET_TRANSFORM = AffineTransform.getScaleInstance(1, 1);
-		
+
 	public Graphic(int width, int height) {
 		super();
-		
+
 		this.width = width;
 		this.height = height;
 	}
-	
+
 	public Graphic(BufferedImage image) {
 		super();
 		setImage(image);
 	}
-	
+
 	public void setFastImage(BufferedImage image) {
 		this.screen = (Graphics2D) image.getGraphics();
-		
+
 		if(screen == null)
 			screen = image.createGraphics();
 
 		this.width = image.getWidth();
 		this.height = image.getHeight();
 	}
-	
+
 	public void setImage(BufferedImage image) {
 		setFastImage(image);
-		
+
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.screen.setColor(shadowColor);
 	}
-	
+
 	public void setVolatileImage(VolatileImage vimg) {
-	
+
 		this.vimg = vimg;
 		this.width = vimg.getWidth();
 		this.height = vimg.getHeight();
-		
+
 		this.screen = vimg.createGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.screen.setColor(shadowColor);
 	}
-	
+
 	public void resetImage() {
 		if(vimg == null)
 			return;
-		
+
 		this.screen = vimg.createGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.screen.setColor(shadowColor);
 	}
-	
+
 	/*public void setBufferedImage(BufferedImage bimg) {
 		this.width = bimg.getWidth();
 		this.height = bimg.getHeight();
-		
+
 		this.bimg = bimg;
 		this.screen = (Graphics2D)bimg.getGraphics();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.screen.setColor(Color.BLACK);
-		
+
 	}*/
-		
+
 	/**
 	 * 
 	 * @param x
@@ -126,7 +126,7 @@ public class Graphic {
 
 		screen.drawString(text, dx, dy);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -138,7 +138,7 @@ public class Graphic {
 	public void drawString(float x, float y, float w, float h, String text) {
 		this.drawString((int) x, (int) y, (int) w, (int) h, text);
 	}
-	
+
 	/**
 	 * @param x
 	 * @param y
@@ -147,44 +147,44 @@ public class Graphic {
 	 */
 	public void drawStringExponent(String text, String exponent, int x, int y) {
 		this.drawString(text, x, y);
-		
+
 		FontMetrics fm = screen.getFontMetrics();
-		
+
 		float lastSize = fm.getFont().getSize2D();
-		
+
 		float h = lastSize*0.7f;
-				
+
 		int w = fm.stringWidth(text);
 
 		this.setFontSize(h);
 		this.drawString(exponent, x+w, (int)(y-h*0.5f));
-		
+
 		this.setFontSize(lastSize);
-		
+
 	}
-	
+
 	public void drawStringExponentShadow(String text, String exponent, int x, int y) {
 		this.drawShadow(x, y, text);
-		
+
 		FontMetrics fm = screen.getFontMetrics();
-		
+
 		float lastSize = fm.getFont().getSize2D();
-		
+
 		float h = lastSize*0.7f;
-				
+
 		int w = fm.stringWidth(text);
 
 		this.setFontSize(h);
 		this.drawShadow(x+w, (int)(y-h*0.5f), exponent);
-		
+
 		this.setFontSize(lastSize);
-		
+
 	}
-	
+
 	public void drawStringShadow(int x, int y, int w, int h, String text) {
 		drawStringShadow(x, y, w, h, text, shadowColor);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -207,7 +207,7 @@ public class Graphic {
 
 		drawShadow(dx, dy, text, shadowColor);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -230,36 +230,66 @@ public class Graphic {
 	 */
 	public void writeX(float offsetX, float y, String text, boolean border) {
 
-		if((text!=null)&&(!text.isEmpty())) {
+		if((text==null)||(text.isEmpty())) {
+			return;
+		}
 
-			FontMetrics fm = screen.getFontMetrics();
-			Font f = getFont();
+		FontMetrics fm = screen.getFontMetrics();
+		Font f = getFont();
 
-			float x = (width/2)-(fm.stringWidth(text)/2)+offsetX;
-			float fy = y+fm.getHeight();
+		float x = (width/2)-(fm.stringWidth(text)/2)+offsetX;
+		float fy = y+fm.getHeight();
 
-			if(!border) {
-				screen.drawString(text,x,fy);
-			}
-			
-			else{
+		if(!border) {
+			screen.drawString(text,x,fy);
+		} else {
 
-				FontRenderContext frc = screen.getFontRenderContext();
+			FontRenderContext frc = screen.getFontRenderContext();
 
-				TextLayout tl = new TextLayout(text, f, frc);
+			TextLayout tl = new TextLayout(text, f, frc);
 
-				Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
+			Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
 
-				screen.setStroke(new BasicStroke(2.666f));
-				screen.setColor(shadowColor);
-				screen.draw(sha);
-				
-				screen.setColor(Color.WHITE);
-				screen.fill(sha);
-				
-			}
+			screen.setStroke(new BasicStroke(2.666f));
+			screen.setColor(shadowColor);
+			screen.draw(sha);
+
+			screen.setColor(Color.WHITE);
+			screen.fill(sha);
 
 		}
+	}
+
+	/**
+	 * 
+	 * @param offsetX
+	 * @param y
+	 * @param text
+	 * @param border
+	 */
+	public void drawStringBorder(String text, float x, float y) {
+
+		if((text==null)||(text.isEmpty())) {
+			return;
+		}
+
+		Font f = getFont();
+
+		FontRenderContext frc = screen.getFontRenderContext();
+
+		TextLayout tl = new TextLayout(text, f, frc);
+
+		Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
+
+		Color standardColor = screen.getColor();
+		
+		screen.setStroke(new BasicStroke(2.666f));
+		screen.setColor(shadowColor);
+		screen.draw(sha);
+
+		screen.setColor(standardColor);
+		screen.fill(sha);
+
 	}
 
 	/**
@@ -271,7 +301,7 @@ public class Graphic {
 	public void drawShadow(int x, int y, String text) {
 		drawShadow(x, y, text, shadowColor);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -281,7 +311,7 @@ public class Graphic {
 	public void drawShadow(float x, float y, String text) {
 		this.drawShadow(x, y, text, shadowColor);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -290,18 +320,18 @@ public class Graphic {
 	 * @param shadowColor
 	 */
 	public void drawShadow(int x, int y, String text, Color shadowColor) {
-		
+
 		if((text!=null)&&(!text.isEmpty())) {
-			
+
 			Color lastColor = screen.getColor();
-			
+
 			screen.setColor(shadowColor);
 			screen.drawString(text,x+1,y+1);
 			screen.setColor(lastColor);
 			screen.drawString(text,x,y);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -312,7 +342,7 @@ public class Graphic {
 	public void drawShadow(float x, float y, String text, Color shadowColor) {
 		this.drawShadow((int)x, (int)y, text, shadowColor);
 	}
-	
+
 	/**
 	 * 
 	 * @param y
@@ -327,10 +357,10 @@ public class Graphic {
 			int fy = y+fm.getHeight();
 
 			drawShadow(x, fy, text);
-				
+
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param y
@@ -339,7 +369,7 @@ public class Graphic {
 	public void drawStringShadowX(float y, String text) {
 		this.drawStringShadowX((int)y, text);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -351,20 +381,20 @@ public class Graphic {
 			screen.drawString(text,x,y);
 		}
 	}
-	
+
 	public void write(String text, GeometricLayer layer) {
 		if((text!=null)&&(!text.isEmpty())) {
 			drawString(layer.getX(), layer.getY(), layer.getW(), layer.getH(), text);
 		}
 	}
-	
+
 	public void writeShadow(String text, GeometricLayer layer) {
 		if((text!=null)&&(!text.isEmpty())) {
 			drawStringShadow(layer.getX(), layer.getY(), layer.getW(), layer.getH(), text);
 		}
 	}
-	
-	
+
+
 
 	/**
 	 * 
@@ -375,7 +405,7 @@ public class Graphic {
 
 		writeX(0,y,text, false);
 	}
-	
+
 	/**
 	 * 
 	 * @param offsetX
@@ -386,7 +416,7 @@ public class Graphic {
 
 		writeX(offsetX, y,text, false);
 	}
-	
+
 	/**
 	 * 
 	 * @param y
@@ -396,15 +426,15 @@ public class Graphic {
 	public void writeX(float y, String text, boolean borda) {
 		writeX(0,y,text, borda);
 	}
-	
+
 	public void writeX(float y, String text) {
 		writeX(0,y,text, false);
 	}
-	
+
 	/*
 	 * Write Methods
 	 */
-	
+
 	/**
 	 * 
 	 * @param offsetX
@@ -453,12 +483,12 @@ public class Graphic {
 	public void drawImage( Image img, int dx1, int dy1,int dx2, int dy2, int sx1 , int sy1, int sx2, int sy2, ImageObserver observer ) {
 		screen.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);
 	}
-	
+
 	public void drawImage( Image img, float dx1, float dy1, float dx2, float dy2, float sx1 , float sy1, float sx2, float sy2, ImageObserver observer ) {
 		drawImage(img, (int)dx1, (int)dy1, (int)dx2, (int)dy2, (int)sx1, (int)sy1, (int)sx2, (int)sy2, observer);
 	}
-	
-	
+
+
 	public Graphics2D getGraphics() {
 		return screen;
 	}
@@ -470,15 +500,15 @@ public class Graphic {
 	public void drawRect(GeometricLayer layer) {
 		drawRect(layer.getX(), layer.getY(), layer.getW(), layer.getH());
 	}
-	
+
 	/**
 	 * 
 	 * @param layer
 	 */
 	public void drawRect(Layer layer) {
-		
+
 		AffineTransform transform = layer.getTransform();
-		
+
 		if(transform == null)
 			drawRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 		else {
@@ -487,7 +517,7 @@ public class Graphic {
 			resetTransform();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param layer
@@ -495,7 +525,7 @@ public class Graphic {
 	public void fillOval(GeometricLayer layer) {
 		screen.fillOval((int)layer.getX(), (int)layer.getY(), (int)layer.getW(), (int)layer.getH());
 	}
-	
+
 	/**
 	 * 
 	 * @param layer
@@ -505,7 +535,7 @@ public class Graphic {
 	public void fillArc(GeometricLayer layer, int startAngle, int arcAngle) {
 		screen.fillArc((int)layer.getX(), (int)layer.getY(), (int)layer.getW(), (int)layer.getH(), startAngle, arcAngle);
 	}
-	
+
 	/** Funções Delegadas */
 	/**
 	 * 
@@ -514,11 +544,11 @@ public class Graphic {
 	public void setBasicStroke(float width) {
 		screen.setStroke(new BasicStroke(width));
 	}
-	
+
 	public AffineTransform getTransform() {
 		return screen.getTransform();
 	}
-	
+
 	/**
 	 * 
 	 * @param tx
@@ -529,7 +559,7 @@ public class Graphic {
 			screen.setTransform(tx);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param tx
@@ -540,18 +570,18 @@ public class Graphic {
 			screen.transform(tx);
 		}
 	}
-	
+
 	public void resetTransform() {
 		setTransform(RESET_TRANSFORM);	
 	}
-	
+
 	/**
 	 * Set basic stroke with width 1f 
 	 */
 	public void resetStroke() {
 		screen.setStroke(new BasicStroke(1f));
 	}
-	
+
 	/**
 	 * 
 	 * @param stroke
@@ -559,7 +589,7 @@ public class Graphic {
 	public void setStroke(Stroke stroke) {
 		screen.setStroke(stroke);
 	}
-	
+
 	/**
 	 * 
 	 * @param font
@@ -567,15 +597,15 @@ public class Graphic {
 	public void setFont(Font font) {
 		screen.setFont(font);
 	}
-	
+
 	public Font getFont() {
 		return screen.getFont();
 	}
-	
+
 	public FontRenderContext getFontRenderContext() {
 		return screen.getFontRenderContext();
 	}
-	
+
 	/**
 	 * 
 	 * @param color
@@ -583,7 +613,7 @@ public class Graphic {
 	public void setColor(int color) {
 		screen.setColor(new Color(color));
 	}
-	
+
 	/**
 	 * 
 	 * @param color
@@ -591,11 +621,11 @@ public class Graphic {
 	public void setColor(Color color) {
 		screen.setColor(color);
 	}
-	
+
 	public void setFontSize(float size) {
 		screen.setFont(screen.getFont().deriveFont(size));
 	}
-	
+
 	/**
 	 * 
 	 * @param percent
@@ -604,16 +634,16 @@ public class Graphic {
 		float alpha = (float)percent/100;
 		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 	}
-	
+
 	public void setComposite(AlphaComposite composite) {
 		screen.setComposite(composite);
 	}
-	
+
 	public void setClearAlpha(int percent) {
 		float alpha = (float)percent/100;
 		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, alpha));
 	}	
-	
+
 	/**
 	 * 
 	 * @param opacity
@@ -623,15 +653,15 @@ public class Graphic {
 		float a = (float)opacity/255;
 
 		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, a));
-		
+
 	}
-	
+
 	public void resetOpacity() {
 
 		float a = 1f;
 
 		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, a));
-		
+
 	}
 
 	/**
@@ -643,7 +673,7 @@ public class Graphic {
 	public void drawImage(Image img, int x, int y) {
 		screen.drawImage(img, x, y, null);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -656,7 +686,7 @@ public class Graphic {
 	public void drawArc(int x, int y, int w, int h, int startAngle, int arcAngle) {
 		screen.drawArc(x, y, w, h, startAngle, arcAngle);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -669,7 +699,7 @@ public class Graphic {
 	public void drawArc(float x, float y, float w, float h, int startAngle, int arcAngle) {
 		this.drawArc((int)x, (int)y, (int)w, (int)h, startAngle, arcAngle);
 	}
-	
+
 	/**
 	 * 
 	 * @param x1
@@ -680,7 +710,7 @@ public class Graphic {
 	public void drawLine(int x1,int y1,int x2,int y2) {
 		screen.drawLine(x1, y1, x2, y2);
 	}
-	
+
 	/**
 	 * 
 	 * @param x1
@@ -691,7 +721,7 @@ public class Graphic {
 	public void drawLine(float x1,float y1,float x2,float y2) {
 		this.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
 	}
-	
+
 	/**
 	 * 
 	 * @param p
@@ -700,7 +730,7 @@ public class Graphic {
 	public void drawLine(Point2D p, Point2D q) {
 		screen.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
 	}
-	
+
 	/**
 	 * 
 	 * @param polygon
@@ -708,7 +738,7 @@ public class Graphic {
 	public void drawPolygon(Polygon polygon) {
 		screen.drawPolygon(polygon);
 	}
-	
+
 	/**
 	 * 
 	 * @param polygon
@@ -716,7 +746,7 @@ public class Graphic {
 	public void fillPolygon(Polygon polygon) {
 		screen.fillPolygon(polygon);
 	}
-	
+
 	/**
 	 * 
 	 * @param layer
@@ -724,11 +754,11 @@ public class Graphic {
 	public void fillRect(GeometricLayer layer) {
 		fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 	}
-	
+
 	public void fillRect(Layer layer) {
-		
+
 		AffineTransform transform = layer.getTransform();
-		
+
 		if(transform == null)
 			fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 		else {
@@ -737,7 +767,7 @@ public class Graphic {
 			resetTransform();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -748,7 +778,7 @@ public class Graphic {
 	public void fillRect(int x, int y, int w, int h) {
 		screen.fillRect(x,y,w,h);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -759,8 +789,8 @@ public class Graphic {
 	public void fillRect(float x, float y, float w, float h) {
 		screen.fillRect((int)x,(int)y,(int)w,(int)h);
 	}
-	
-	
+
+
 	/**
 	 * 
 	 * @param x
@@ -772,7 +802,7 @@ public class Graphic {
 	public void fill3DRect(int x, int y, int w, int h, boolean raised) {
 		screen.fill3DRect(x, y, w, h, raised);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -784,7 +814,7 @@ public class Graphic {
 	public void fill3DRect(float x, float y, float w, float h, boolean raised) {
 		this.fill3DRect((int)x, (int)y, (int)w, (int)h, raised);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -797,7 +827,7 @@ public class Graphic {
 	public void fillArc(int x, int y, int w, int h, int startAngle, int arcAngle) {
 		screen.fillArc(x, y, w, h, startAngle, arcAngle);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -832,7 +862,7 @@ public class Graphic {
 	public void drawRect(double x, double y, double w, double h) {
 		screen.drawRect((int)x,(int)y,(int)w,(int)h);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -845,7 +875,7 @@ public class Graphic {
 	public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
 		screen.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -858,7 +888,7 @@ public class Graphic {
 	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
 		screen.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -869,7 +899,7 @@ public class Graphic {
 	public void drawOval(int x, int y, int w, int h ) {
 		screen.drawOval(x,y,w,h);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -880,7 +910,7 @@ public class Graphic {
 	public void drawOval(float x, float y, float w, float h ) {
 		this.drawOval((int)x,(int)y,(int)w,(int)h);
 	}
-	
+
 	/**
 	 * 
 	 * @param cx
@@ -890,7 +920,7 @@ public class Graphic {
 	public void drawCircle(int cx, int cy, int radius ) {
 		screen.drawOval(cx-radius, cy-radius, radius*2, radius*2);
 	}
-	
+
 	/**
 	 * 
 	 * @param cx
@@ -900,7 +930,7 @@ public class Graphic {
 	public void drawCircle(float cx, float cy, float radius ) {
 		this.drawCircle((int)cx, (int)cy, (int)radius);
 	}
-	
+
 	/**
 	 * 
 	 * @param cx
@@ -910,7 +940,7 @@ public class Graphic {
 	public void drawCircle(double cx, double cy, double radius ) {
 		this.drawCircle((int)cx, (int)cy, (int)radius);
 	}
-	
+
 	/**
 	 * 
 	 * @param point
@@ -929,7 +959,7 @@ public class Graphic {
 	public void fillCircle(int cx, int cy, int radius ) {
 		screen.fillOval(cx-radius, cy-radius, radius*2, radius*2);
 	}
-	
+
 	/**
 	 * 
 	 * @param cx
@@ -939,7 +969,7 @@ public class Graphic {
 	public void fillCircle(float cx, float cy, float radius ) {
 		screen.fillOval((int)(cx-radius), (int)(cy-radius), (int)(radius*2), (int)(radius*2));
 	}
-	
+
 	/**
 	 * 
 	 * @param cx
@@ -949,7 +979,7 @@ public class Graphic {
 	public void fillCircle(double cx, double cy, double radius ) {
 		screen.fillOval((int)(cx-radius), (int)(cy-radius), (int)(radius*2), (int)(radius*2));
 	}
-	
+
 	/**
 	 * 
 	 * @param point
@@ -958,7 +988,7 @@ public class Graphic {
 	public void fillCircle(Point2D point, int radius ) {
 		screen.fillOval((int)point.getX()-radius, (int)point.getY()-radius, radius*2, radius*2);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -969,7 +999,7 @@ public class Graphic {
 	public void fillOval(int x, int y, int w, int h ) {
 		screen.fillOval(x, y, w, h);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -980,7 +1010,7 @@ public class Graphic {
 	public void fillOval(float x, float y, float w, float h ) {
 		this.fillOval((int)x, (int)y, (int)w, (int)h);
 	}
-	
+
 	/**
 	 * 
 	 * @param text
@@ -990,7 +1020,7 @@ public class Graphic {
 	public void drawString(String text, int x, int y) {
 		screen.drawString(text, x, y);
 	}
-	
+
 	/**
 	 * 
 	 * @param shape
@@ -998,7 +1028,7 @@ public class Graphic {
 	public void draw(Shape shape) {
 		screen.draw(shape);
 	}
-	
+
 	/**
 	 * 
 	 * @param shape
@@ -1006,20 +1036,20 @@ public class Graphic {
 	public void fill(Shape shape) {
 		screen.fill(shape);
 	}
-	
+
 	public FontMetrics getFontMetrics() {
 		return screen.getFontMetrics();
 	}
-	
+
 	/*public void setGraphics(GLGraphics2D graphics) {		
 		this.screen = graphics;
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 	}*/
-	
+
 	public BufferedImage getBimg() {
 		return vimg.getSnapshot();
 	}
-	
+
 	public VolatileImage getVimg() {
 		return vimg;
 	}
@@ -1035,18 +1065,18 @@ public class Graphic {
 	 * @param scansize
 	 */
 	/*public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
-		
+
 		vimg..setRGB(startX, startY, w, h, rgbArray, offset, scansize);
 	}*/
-	
+
 	public void drawImage(BufferedImage image, int x, int y) {
 		screen.drawImage(image, x, y, null);
 	}
-	
+
 	public void drawImage(BufferedImage image, float x, float y) {
 		screen.drawImage(image, (int)x, (int)y, null);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -1055,7 +1085,7 @@ public class Graphic {
 	public void translate(int x, int y) {
 		screen.translate(x, y);
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -1068,11 +1098,11 @@ public class Graphic {
 	public void rotate(double angle) {
 		screen.rotate(angle);
 	}
-	
+
 	public void setBackground(Color color) {
 		screen.setBackground(color);
 	}
-	
+
 	public void clearRect(int x, int y, int width, int height) {
 		screen.clearRect(x, y, width, height);
 	}
@@ -1080,9 +1110,13 @@ public class Graphic {
 	public void setPaint(Paint paint) {
 		screen.setPaint(paint);
 	}
-	
+
 	public void resetPaint() {
 		screen.setPaint(screen.getColor());
+	}
+	
+	public void setShadowColor(Color shadowColor) {
+		this.shadowColor = shadowColor;
 	}
 	
 	public void dispose() {
@@ -1093,9 +1127,9 @@ public class Graphic {
 		camera.resetImage();
 		setImage(camera.getBuffer());		
 	}
-			
+
 	public void resetCamera(Camera camera) {
 		resetImage();
 	}
-	
+
 }
