@@ -19,7 +19,7 @@ import br.com.etyllica.core.input.joystick.Joystick;
  *
  */
 
-public class JoystickLoader extends LoaderImpl implements Updatable, Runnable{
+public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
 
 	private static JoystickLoader instance = null;
 
@@ -54,15 +54,18 @@ public class JoystickLoader extends LoaderImpl implements Updatable, Runnable{
 	private List<KeyEvent> joystickEvents = new ArrayList<KeyEvent>();
 
 	private Map<Integer, Joystick> inputStreams = new HashMap<Integer, Joystick>();
-	
-	public void start(int joysticks) {
+		
+	public void init(int joysticks) {
 		this.joysticks = joysticks;
 		start();
+		
+		new Thread(JoystickLoader.getInstance()).start();
 	}
 	
+	@Override
 	public void start() {
 
-		int j=0;
+		int j = 0;
 
 		for(;j<joysticks;j++){
 
