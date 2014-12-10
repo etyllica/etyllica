@@ -237,7 +237,7 @@ public class Graphic {
 		FontMetrics fm = screen.getFontMetrics();
 		Font f = getFont();
 
-		float x = (width/2)-(fm.stringWidth(text)/2)+offsetX;
+		float x = centralizeTextX(text)+offsetX;
 		float fy = y+fm.getHeight();
 
 		if(!border) {
@@ -284,6 +284,40 @@ public class Graphic {
 		Color standardColor = screen.getColor();
 		
 		screen.setStroke(new BasicStroke(2.666f));
+		screen.setColor(shadowColor);
+		screen.draw(sha);
+
+		screen.setColor(standardColor);
+		screen.fill(sha);
+
+	}
+	
+	/**
+	 * 
+	 * @param offsetX
+	 * @param y
+	 * @param text
+	 * @param border
+	 */
+	public void drawStringBorderX(String text, float y) {
+
+		if((text==null)||(text.isEmpty())) {
+			return;
+		}
+
+		Font f = getFont();
+
+		FontRenderContext frc = screen.getFontRenderContext();
+
+		TextLayout tl = new TextLayout(text, f, frc);
+		
+		int x = centralizeTextX(text);
+
+		Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
+
+		Color standardColor = screen.getColor();
+		
+		//screen.setStroke(new BasicStroke(2.666f));
 		screen.setColor(shadowColor);
 		screen.draw(sha);
 
@@ -353,12 +387,20 @@ public class Graphic {
 
 			FontMetrics fm = screen.getFontMetrics();
 
-			int x = (width/2)-(fm.stringWidth(text)/2);
+			int x = centralizeTextX(text);
 			int fy = y+fm.getHeight();
 
 			drawShadow(x, fy, text);
 
 		}
+	}
+	
+	private int centralizeTextX(String text) {
+		FontMetrics fm = screen.getFontMetrics();
+
+		int x = (width/2)-(fm.stringWidth(text)/2);
+		
+		return x;
 	}
 
 	/**
