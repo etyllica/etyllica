@@ -121,7 +121,7 @@ public class DefaultButton extends RoundGUIComponent {
 		if(!disabled) {
 
 			if(mouseOver) {
-
+				
 				if(event.getState() == PointerState.PRESSED) {
 
 					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {

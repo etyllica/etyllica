@@ -317,7 +317,6 @@ public class Graphic {
 
 		Color standardColor = screen.getColor();
 		
-		//screen.setStroke(new BasicStroke(2.666f));
 		screen.setColor(shadowColor);
 		screen.draw(sha);
 
