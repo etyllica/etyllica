@@ -114,16 +114,10 @@ public class Graphic {
 	 * @param text
 	 */
 	public void drawString(int x, int y, int w, int h, String text) {
-		FontMetrics fm = screen.getFontMetrics();
 
-		int msg_width = fm.stringWidth(text);
-
-		int ascent = fm.getMaxAscent();
-		int descent= fm.getMaxDescent();
-
-		int dx = x+w/2 - msg_width/2;
-		int dy = y+h/2 - descent/2 + ascent/2;
-
+		int dx = centralizeTextX(text, x, w);
+		int dy = centralizeTextY(text, y, h);
+		
 		screen.drawString(text, dx, dy);
 	}
 
@@ -195,19 +189,14 @@ public class Graphic {
 	 * @param shadowColor
 	 */
 	public void drawStringShadow(int x, int y, int w, int h, String text, Color shadowColor) {
-		FontMetrics fm = screen.getFontMetrics();
 
-		int msg_width = fm.stringWidth(text);
-
-		int ascent = fm.getMaxAscent();
-		int descent= fm.getMaxDescent();
-
-		int dx = x+w/2 - msg_width/2;
-		int dy = y+h/2 - descent/2 + ascent/2;
+		int dx = centralizeTextX(text, x, w);
+		
+		int dy = centralizeTextY(text, y, h);
 
 		drawShadow(dx, dy, text, shadowColor);
 	}
-
+	
 	/**
 	 * 
 	 * @param x
@@ -260,6 +249,14 @@ public class Graphic {
 		}
 	}
 
+	public void drawStringBorder(String text, int x, int y, int w, int h) {
+		
+		int dx = centralizeTextX(text, x, w);
+		int dy = centralizeTextY(text, y, h);
+		
+		drawStringBorder(text, dx, dy);		
+	}
+	
 	/**
 	 * 
 	 * @param offsetX
@@ -395,12 +392,36 @@ public class Graphic {
 	}
 	
 	private int centralizeTextX(String text) {
+		
+		return centralizeTextX(text, 0, width);
+	}
+	
+	private int centralizeTextX(String text, int x, int w) {
 		FontMetrics fm = screen.getFontMetrics();
 
-		int x = (width/2)-(fm.stringWidth(text)/2);
+		int textWidth = fm.stringWidth(text);
 		
-		return x;
+		int dx = x+w/2 - textWidth/2;
+		
+		return dx;
 	}
+	
+	private int centralizeTextY(String text) {
+		
+		return centralizeTextY(text, 0, height);
+	}
+	
+	private int centralizeTextY(String text, int y, int h) {
+		FontMetrics fm = screen.getFontMetrics();
+
+		int ascent = fm.getMaxAscent();
+		int descent= fm.getMaxDescent();
+		
+		int dy = y+h/2 - descent/2 + ascent/2;
+		
+		return dy;
+	}
+	
 
 	/**
 	 * 
