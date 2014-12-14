@@ -1,9 +1,9 @@
 package br.com.etyllica.gui;
 
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.factory.DefaultButton;
 import br.com.etyllica.gui.label.TextLabel;
@@ -17,22 +17,27 @@ import br.com.etyllica.gui.label.TextLabel;
 
 public abstract class Spinner<T extends Number> extends View {
 
-	private DefaultButton plus;
-	private DefaultButton minus;
-	private TextLabel resultLabel;
-	private Panel panel;
+	protected DefaultButton plus;
+	protected DefaultButton minus;
+	protected TextLabel resultLabel;
+	protected Panel panel;
 
 	protected T value;
 	protected T step;
 	protected T maxValue;
 	protected T minValue;
 
-	public Spinner(int x, int y, int w, int h){
-
+	public Spinner(int x, int y, int w, int h) {
+		super(x, y, w, h);
 		panel = new Panel(x, y, w, h);
 
 		//TODO change size based on fontSize
 		resultLabel = new TextLabel(x+10,y+2+h/2,"0");		
+
+		configureButtons();
+	}
+
+	protected void configureButtons() {
 
 		int buttonWidth = w/6;
 		int miniBorder = 1;
@@ -44,7 +49,6 @@ public abstract class Spinner<T extends Number> extends View {
 		minus = new DefaultButton(x+w-buttonWidth-miniBorder, y+h/2+miniBorder, buttonWidth, h/2-miniBorder);
 		minus.setLabel(new TextLabel("-"));
 		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "subReload"));		
-
 	}
 
 	@Override
@@ -61,10 +65,10 @@ public abstract class Spinner<T extends Number> extends View {
 	//Should be private
 	public void subReload(){
 		subtract();
-		reload();		
+		reload();
 	}
 
-	private void reload(){
+	protected void reload() {
 		resultLabel.setText(value.toString());
 	}
 
@@ -76,7 +80,7 @@ public abstract class Spinner<T extends Number> extends View {
 
 		plus.safeUpdateMouse(event);
 		minus.safeUpdateMouse(event);			
-		
+
 		return GUIEvent.NONE;
 	}
 
@@ -92,10 +96,22 @@ public abstract class Spinner<T extends Number> extends View {
 
 	@Override
 	public void draw(Graphic g) {
+		drawPanel(g);
+		drawResult(g);
+		drawButtons(g);
+	}
+
+	protected void drawPanel(Graphic g) {
 		panel.draw(g);
-		resultLabel.draw(g);
+	}
+
+	protected void drawResult(Graphic g) {
+		resultLabel.draw(g);		
+	}
+
+	protected void drawButtons(Graphic g) {
 		plus.draw(g);
-		minus.draw(g);		
+		minus.draw(g);
 	}
 
 	public void setValue(T value){

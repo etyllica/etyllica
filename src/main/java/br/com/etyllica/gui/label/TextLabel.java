@@ -187,5 +187,9 @@ public class TextLabel extends Label{
 	public int centralizeY(int startY, int endY) {
 		return layer.centralizeY(startY, endY);
 	}
+	
+	public TextLayer getLayer() {
+		return layer;
+	}
 		
 }
