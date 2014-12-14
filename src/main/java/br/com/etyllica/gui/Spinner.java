@@ -69,7 +69,8 @@ public abstract class Spinner<T extends Number> extends View {
 	}
 
 	protected void reload() {
-		resultLabel.setText(value.toString());
+		String result = value.toString();
+		resultLabel.setText(result);
 	}
 
 	public abstract void add();
