@@ -7,6 +7,8 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.factory.DefaultButton;
 import br.com.etyllica.gui.label.TextLabel;
+import br.com.etyllica.gui.spinner.SpinnerComposer;
+import br.com.etyllica.gui.spinner.VerticalComposer;
 
 /**
  * 
@@ -17,6 +19,8 @@ import br.com.etyllica.gui.label.TextLabel;
 
 public abstract class Spinner<T extends Number> extends View {
 
+	protected SpinnerComposer composer;
+	
 	protected DefaultButton plus;
 	protected DefaultButton minus;
 	protected TextLabel resultLabel;
@@ -29,41 +33,41 @@ public abstract class Spinner<T extends Number> extends View {
 
 	public Spinner(int x, int y, int w, int h) {
 		super(x, y, w, h);
+				
 		panel = new Panel(x, y, w, h);
 
 		//TODO change size based on fontSize
 		resultLabel = new TextLabel(x+10,y+2+h/2,"0");
 
+		composer = buildComposer();
+		
 		configureButtons();
 	}
-
-	protected void configureButtons() {
-
-		int buttonWidth = w/6;
-		int miniBorder = 1;
-
-		plus = new DefaultButton(x+w-buttonWidth-miniBorder, y+miniBorder, buttonWidth, h/2-miniBorder-1);
-		plus.setLabel(new TextLabel("+"));
+	
+	protected SpinnerComposer buildComposer() {
+		return new VerticalComposer(x, y, w, h);
+	}
+	
+	private void configureButtons() {
+		
+		composer.setBorder(1);
+		composer.setButtonWidth(w/6);
+		
+		plus = composer.buildPlusButton(x, y, w, h);
 		plus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "addReload"));
-
-		minus = new DefaultButton(x+w-buttonWidth-miniBorder, y+h/2+miniBorder, buttonWidth, h/2-miniBorder);
-		minus.setLabel(new TextLabel("-"));
+		
+		minus = composer.buildMinusButton(x, y, w, h);
 		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "subReload"));		
 	}
 
-	/*@Override
-	public boolean onMouse(PointerEvent event) {
-		return panel.onMouse(event);
-	}*/
-
 	//Should be private
-	public void addReload(){
+	public void addReload() {
 		add();		
 		reload();
 	}
 
 	//Should be private
-	public void subReload(){
+	public void subReload() {
 		subtract();
 		reload();
 	}
