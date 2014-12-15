@@ -583,7 +583,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		}
 	}
 
-	//TODO Some kind of Subimage to textfields for example
 	private void drawView(View component, Graphic g) {
 
 		//Draw Component
@@ -599,15 +598,23 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			List<View> components = new CopyOnWriteArrayList<View>(component.getViews());
 
 			for(View child: components) {
-				child.setOffset(component.getX(), component.getY());
-				//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
-				drawView(child,g);
-
-				child.setOffset(-component.getX(), -component.getY());
+				
+				if(isTranslated(component)) {
+					//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
+					child.setOffset(component.getX(), component.getY());
+					drawView(child,g);
+					child.setOffset(-component.getX(), -component.getY());
+				} else {
+					drawView(child,g);	
+				}				
 			}
 		}
 	}
-
+		
+	private boolean isTranslated(View view) {
+		return (view.getX() != 0 && view.getY() != 0);
+	}
+	
 	public boolean isMouseOver() {
 		return mouseOver != null;
 	}
@@ -622,7 +629,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		globalScripts.add(effect.getScript());
 
 		//TODO add animation
-		//globalEffects.add(effect);
+		//globalEffects.add(effect); 
 	}
 
 	private void updateKeyboardEvents(KeyEvent event) {

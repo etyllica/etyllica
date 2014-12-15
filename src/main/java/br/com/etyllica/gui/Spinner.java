@@ -32,7 +32,7 @@ public abstract class Spinner<T extends Number> extends View {
 		panel = new Panel(x, y, w, h);
 
 		//TODO change size based on fontSize
-		resultLabel = new TextLabel(x+10,y+2+h/2,"0");		
+		resultLabel = new TextLabel(x+10,y+2+h/2,"0");
 
 		configureButtons();
 	}
@@ -117,7 +117,7 @@ public abstract class Spinner<T extends Number> extends View {
 
 	public void setValue(T value){
 		this.value = value;
-		resultLabel.setText(value.toString());
+		reload();
 	}
 
 	public T getValue() {
