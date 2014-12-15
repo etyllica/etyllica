@@ -219,16 +219,14 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
 		if(!isMouseOver()) {
 			
 			if(onMouse(event)) {
-				setMouseOver(true);
-				update(GUIEvent.MOUSE_IN);
+				mouseIn();
 				return GUIEvent.MOUSE_IN;
 			}
 			
 		} else {
 			
 			if(!onMouse(event)) {
-				setMouseOver(false);
-				update(GUIEvent.MOUSE_OUT);
+				mouseOut();
 				return GUIEvent.MOUSE_OUT;
 			} else {
 				return updateMouse(event);
@@ -236,5 +234,15 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
 		}
 		
 		return GUIEvent.NONE;
+	}
+	
+	public void mouseIn() {
+		setMouseOver(true);
+		update(GUIEvent.MOUSE_IN);
 	}	
+	
+	public void mouseOut() {
+		setMouseOver(false);
+		update(GUIEvent.MOUSE_OUT);
+	}
 }

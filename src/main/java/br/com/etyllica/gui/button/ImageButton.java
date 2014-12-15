@@ -80,7 +80,8 @@ public class ImageButton extends DefaultButton{
 	}
 	
 	@Override
-	protected void mouseOut(){
+	public void mouseOut(){
+		super.mouseOut();
 		layer.cloneLayer(normal);
 	}
 

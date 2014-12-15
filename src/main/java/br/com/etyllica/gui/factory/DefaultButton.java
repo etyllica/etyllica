@@ -110,8 +110,9 @@ public class DefaultButton extends RoundGUIComponent {
 		//igualaImagem(sobMouse);
 	}
 
-	protected void mouseOut() {
-		//igualaImagem(sobMouse);
+	public void mouseOut() {
+		//igualaImagem(normal);
+		super.mouseOut();
 	}
 
 	public GUIEvent updateMouse(PointerEvent event) {

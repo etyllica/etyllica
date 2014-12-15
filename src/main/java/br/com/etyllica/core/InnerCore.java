@@ -381,40 +381,18 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			return GUIEvent.NONE;
 		}
 
-		//Verify onMouse
-		if(component.onMouse(event)) {
-
-			if(component != mouseOver) {
-				setMouseOver(component);
-
-				return GUIEvent.NONE;
-			}
-
-			GUIEvent result = component.updateMouse(event);
-
-			if(result != GUIEvent.NONE && result != null) {
-
-				updateEvent(component, result);
-			}
-
-		} else if (component == mouseOver) {
-
+		GUIEvent result = component.safeUpdateMouse(event);
+		
+		if(GUIEvent.MOUSE_IN == result) {
+			setMouseOver(component);			
+			return GUIEvent.NONE;
+		} else if (GUIEvent.MOUSE_OUT == result) {
 			resetMouseOver();
+		} else if(result != GUIEvent.NONE && result != null) {
+			updateEvent(component, result);
 		}
-
-
-		//Update Childs
-		/*for(View child: component.getViews()) {
-
-			child.setOffset(component.getX(), component.getY());
-
-			updateMouse(child, event);
-
-			child.setOffset(-component.getX(), -component.getY());
-		}*/
-
+				
 		return GUIEvent.NONE;
-
 	}
 
 	private void updateEvent(View componente, GUIEvent lastEvent) {
@@ -904,8 +882,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		}
 
 		mouseOver = view;
-		mouseOver.setMouseOver(true);
-		mouseOver.update(GUIEvent.MOUSE_IN);
+		mouseOver.mouseIn();
 
 		arrowDrawer.setOverClickable(true);
 	}

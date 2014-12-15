@@ -51,10 +51,10 @@ public abstract class Spinner<T extends Number> extends View {
 		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "subReload"));		
 	}
 
-	@Override
+	/*@Override
 	public boolean onMouse(PointerEvent event) {
 		return panel.onMouse(event);
-	}
+	}*/
 
 	//Should be private
 	public void addReload(){
@@ -78,8 +78,8 @@ public abstract class Spinner<T extends Number> extends View {
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-
 		plus.safeUpdateMouse(event);
+
 		minus.safeUpdateMouse(event);			
 
 		return GUIEvent.NONE;
@@ -88,6 +88,13 @@ public abstract class Spinner<T extends Number> extends View {
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		return GUIEvent.NONE;
+	}
+	
+	public void mouseOut() {
+		super.mouseOut();
+		
+		plus.setMouseOver(false);
+		minus.setMouseOver(false);
 	}
 
 	@Override
