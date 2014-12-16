@@ -1,6 +1,8 @@
 package br.com.etyllica.gui.spinner;
 
 import br.com.etyllica.gui.Spinner;
+import br.com.etyllica.gui.spinner.composer.HorizontalComposer;
+import br.com.etyllica.gui.spinner.composer.SpinnerComposer;
 
 public abstract class HorizontalSpinner<T extends Number> extends Spinner<T> {
 	

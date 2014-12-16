@@ -13,7 +13,7 @@ import br.com.etyllica.gui.factory.DefaultButton;
 import br.com.etyllica.gui.icon.DownArrow;
 import br.com.etyllica.gui.list.Option;
 
-public class Select extends View{
+public class Select extends View {
 		
 	private List<Option> options = new ArrayList<Option>();
 	

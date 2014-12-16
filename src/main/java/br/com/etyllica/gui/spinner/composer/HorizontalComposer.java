@@ -1,4 +1,4 @@
-package br.com.etyllica.gui.spinner;
+package br.com.etyllica.gui.spinner.composer;
 
 import br.com.etyllica.gui.factory.DefaultButton;
 

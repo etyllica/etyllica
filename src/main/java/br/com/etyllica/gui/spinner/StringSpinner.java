@@ -1,14 +1,19 @@
-package br.com.etyllica.gui;
+package br.com.etyllica.gui.spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.gui.Panel;
+import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.factory.DefaultButton;
 import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.gui.spinner.composer.SpinnerComposer;
-import br.com.etyllica.gui.spinner.composer.VerticalComposer;
+import br.com.etyllica.gui.spinner.composer.StringHorizontalComposer;
 
 /**
  * 
@@ -17,35 +22,37 @@ import br.com.etyllica.gui.spinner.composer.VerticalComposer;
  *
  */
 
-public abstract class Spinner<T extends Number> extends View {
+public class StringSpinner extends View {
 
 	protected SpinnerComposer composer;
 	
-	protected DefaultButton plus;
-	protected DefaultButton minus;
+	protected DefaultButton next;
+	protected DefaultButton previous;
 	protected TextLabel resultLabel;
 	protected Panel panel;
+	
+	protected List<String> options = new ArrayList<String>();
+	
+	private int currentItem = 0;
 
-	protected T value;
-	protected T step;
-	protected T maxValue;
-	protected T minValue;
-
-	public Spinner(int x, int y, int w, int h) {
+	public StringSpinner(int x, int y, int w, int h) {
 		super(x, y, w, h);
-				
+		
 		panel = new Panel(x, y, w, h);
 
 		//TODO change size based on fontSize
-		resultLabel = new TextLabel(x+10,y+2+h/2,"0");
+		resultLabel = new TextLabel(x,y+2+h/2,w);
+		
 
 		composer = buildComposer();
 		
 		configureButtons();
+		
+		//reload();
 	}
 	
 	protected SpinnerComposer buildComposer() {
-		return new VerticalComposer(x, y, w, h);
+		return new StringHorizontalComposer(x, y, w, h);
 	}
 	
 	private void configureButtons() {
@@ -53,38 +60,45 @@ public abstract class Spinner<T extends Number> extends View {
 		composer.setBorder(1);
 		composer.setButtonWidth(w/6);
 		
-		plus = composer.buildPlusButton(x, y, w, h);
-		plus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "addReload"));
+		next = composer.buildPlusButton(x, y, w, h);
+		next.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "nextItem"));
 		
-		minus = composer.buildMinusButton(x, y, w, h);
-		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "subReload"));		
+		previous = composer.buildMinusButton(x, y, w, h);
+		previous.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "previousItem"));		
 	}
-
-	//Should be private
-	public void addReload() {
-		add();		
+	
+	public void nextItem() {
+		if(options.isEmpty())
+			return;
+		
+		currentItem++;
+		currentItem%=options.size();
 		reload();
 	}
 
 	//Should be private
-	public void subReload() {
-		subtract();
+	public void previousItem() {
+		if(options.isEmpty())
+			return;
+		
+		currentItem+=options.size()-1;
+		currentItem%=options.size();
 		reload();
 	}
-
+	
 	protected void reload() {
-		String result = value.toString();
+		if(options.isEmpty())
+			return;
+		
+		String result = options.get(currentItem);
 		resultLabel.setText(result);
 	}
-
-	public abstract void add();
-	public abstract void subtract();
-
+	
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-		plus.safeUpdateMouse(event);
+		next.safeUpdateMouse(event);
 
-		minus.safeUpdateMouse(event);			
+		previous.safeUpdateMouse(event);	
 
 		return GUIEvent.NONE;
 	}
@@ -97,8 +111,8 @@ public abstract class Spinner<T extends Number> extends View {
 	public void mouseOut() {
 		super.mouseOut();
 		
-		plus.setMouseOver(false);
-		minus.setMouseOver(false);
+		next.setMouseOver(false);
+		previous.setMouseOver(false);
 	}
 
 	@Override
@@ -122,41 +136,18 @@ public abstract class Spinner<T extends Number> extends View {
 	}
 
 	protected void drawButtons(Graphic g) {
-		plus.draw(g);
-		minus.draw(g);
+		next.draw(g);
+		previous.draw(g);
 	}
 
-	public void setValue(T value){
-		this.value = value;
+	public List<String> getOptions() {
+		return options;
+	}
+
+	public void setOptions(List<String> options) {
+		this.options = options;
 		reload();
 	}
-
-	public T getValue() {
-		return this.value;
-	}
-
-	public T getStep() {
-		return step;
-	}
-
-	public void setStep(T step) {
-		this.step = step;
-	}
-
-	public T getMaxValue() {
-		return maxValue;
-	}
-
-	public void setMaxValue(T maxValue) {
-		this.maxValue = maxValue;
-	}
-
-	public T getMinValue() {
-		return minValue;
-	}
-
-	public void setMinValue(T minValue) {
-		this.minValue = minValue;
-	}
-
+	
 }
+
