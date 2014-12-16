@@ -12,9 +12,9 @@ import br.com.etyllica.layer.ImageLayer;
  *
  */
 
-public class ImageLabel extends Icon{
+public class ImageLabel extends Icon {
 
-	private ImageLayer layer; 
+	protected ImageLayer layer; 
 	
 	public ImageLabel(int x, int y, String path){
 		super(x, y);
