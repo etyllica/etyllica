@@ -61,6 +61,22 @@ public class KDTreeTest {
 			Assert.assertEquals("C", tree.nearest(T));
 		} catch (KeySizeException e) {
 			Assert.fail();
+		}		
+	}
+	
+	@Test
+	public void testSearchByRadius() {
+
+		insertValues();
+				
+		double [] T = {20, 10};
+		
+		float radius = 18;
+		
+		try {
+			Assert.assertEquals("C", tree.nearestEuclidean(T, radius).get(0));
+		} catch (KeySizeException e) {
+			Assert.fail();
 		}
 		
 	}
