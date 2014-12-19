@@ -280,7 +280,6 @@ public class Graphic {
 
 		Color standardColor = screen.getColor();
 		
-		screen.setStroke(new BasicStroke(2.666f));
 		screen.setColor(shadowColor);
 		screen.draw(sha);
 
@@ -298,27 +297,9 @@ public class Graphic {
 	 */
 	public void drawStringBorderX(String text, float y) {
 
-		if((text==null)||(text.isEmpty())) {
-			return;
-		}
-
-		Font f = getFont();
-
-		FontRenderContext frc = screen.getFontRenderContext();
-
-		TextLayout tl = new TextLayout(text, f, frc);
-		
 		int x = centralizeTextX(text);
-
-		Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
-
-		Color standardColor = screen.getColor();
 		
-		screen.setColor(shadowColor);
-		screen.draw(sha);
-
-		screen.setColor(standardColor);
-		screen.fill(sha);
+		drawStringBorder(text, x, y);		
 
 	}
 

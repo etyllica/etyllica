@@ -22,6 +22,10 @@ public class FadeInAnimation extends OpacityAnimation{
 		super(target, time);
 	}
 	
+	public FadeInAnimation(Layer target, long delay, long time){
+		super(target, delay, time);
+	}
+	
 	@Override
 	public void setTarget(Layer target) {
 		super.setTarget(target);
