@@ -43,6 +43,7 @@
 - [Rubik Solver](https://github.com/UNIRIO-SI/rubik-solver) - A Simple Rubik Cube Application.
 - [Veete](https://github.com/yuripourre/veete) - A VEry Easy Tilemap Editor
 - [Luvia](https://github.com/yuripourre/luvia) - An Etyllica fork using [JoGL](http://jogamp.org/jogl/www/) and [glg2d](https://github.com/brandonborkholder/glg2d) for GPU rendering.
+- [IP-Fun](https://github.com/yuripourre/ip-fun) - An Application to help children to remember IP Addresses.
 
 ## Dependencies (optional)
 
