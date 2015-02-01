@@ -30,7 +30,7 @@ import br.com.etyllica.core.loop.FrameSkippingLoop;
 import br.com.etyllica.core.loop.GameLoop;
 import br.com.etyllica.effects.GenericFullScreenEffect;
 import br.com.etyllica.gui.Window;
-import br.com.etyllica.util.io.IOHandler;
+import br.com.etyllica.util.io.IOHelper;
 
 public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentListener {
 
@@ -138,7 +138,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 	public void setPath(String path) {
 
 		//For Windows
-		String s = IOHandler.fixPath(path);
+		String s = IOHelper.fixPath(path);
 
 		this.path = s;
 	}

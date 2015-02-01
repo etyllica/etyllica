@@ -4,6 +4,7 @@
 	<property name="version"  value="4.5" />
 
 	<property name="libcore"  value="etyllica-${version}" />
+	<property name="libutil"  value="etyllica-util-${version}" />
 	<property name="lib3d"  value="etyllica-${version}-3D" />
 	<property name="libsound"  value="etyllica-${version}-sound" />
 	<property name="libphysics"  value="etyllica-${version}-physics" />
@@ -58,6 +59,12 @@
 				<include name="**/br/com/etyllica/**"/>
 				<include name="**/br/com/tide/*"/>
 				<include name="**/br/com/tide/**"/>
+			</fileset>
+		</jar>
+		<jar destfile="${lib.dir}/${libutil}.jar">
+			<fileset dir="${build.dir}">
+				<include name="**/br/com/etyllica/util*"/>
+				<include name="**/br/com/etyllica/util**"/>
 			</fileset>
 		</jar>
 		<jar destfile="${lib.dir}/${lib3d}.jar">
