@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +14,7 @@ import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.input.InputKeyListener;
+import br.com.etyllica.util.concurrency.ConcurrentSet;
 
 /**
  *
@@ -25,40 +25,37 @@ import br.com.etyllica.core.input.InputKeyListener;
 
 public class Keyboard implements KeyListener, Updatable {
 
+	private InputKeyListener listener;
+	
 	private List<KeyEvent> keyEvents = new ArrayList<KeyEvent>();
 
-	private Map<Integer,KeyState> keyStates = new HashMap<Integer,KeyState>();
 	private Map<Integer,Boolean> keys = new HashMap<Integer,Boolean>();
+	private Map<Integer,KeyState> keyStates = new HashMap<Integer,KeyState>();
 
-	private Set<Integer> changed = new HashSet<Integer>();
+	private ConcurrentSet<Integer> changed = new ConcurrentSet<Integer>();
 
-	private Set<Integer> changedCopy = new HashSet<Integer>(5);
-
-	private InputKeyListener listener;
-
-	public Keyboard(InputKeyListener listener){
+	public Keyboard(InputKeyListener listener) {
 		super();
 		this.listener = listener;
 	}
 
-	public void update(long now){
+	public void update(long now) {
+		
+		Set<Integer> changedCopy = changed.lock();
 
-		changedCopy.clear();
-		changedCopy.addAll(changed);
-
-		for(Integer key: changedCopy){
+		for(Integer key: changedCopy) {
 
 			KeyState keyState = keyStates.get(key);
 
 			if( keys.get(key) ) {
 
-				if( keyState == KeyState.RELEASED ){
+				if( keyState == KeyState.RELEASED ) {
 
 					keyStates.put(key,KeyState.ONCE);
 
 					keyEvents.add(new KeyEvent(key, KeyState.PRESSED));
 
-				}else if(keyState != KeyState.PRESSED){
+				}else if(keyState != KeyState.PRESSED) {
 
 					keyStates.put(key,KeyState.PRESSED);
 
@@ -66,11 +63,11 @@ public class Keyboard implements KeyListener, Updatable {
 
 			}else{
 
-				if(( keyState == KeyState.ONCE )||( keyState == KeyState.PRESSED )){
+				if(( keyState == KeyState.ONCE )||( keyState == KeyState.PRESSED )) {
 
 					keyStates.put(key,KeyState.FIRST_RELEASED);
 
-				}else if(keyState==KeyState.FIRST_RELEASED){
+				}else if(keyState==KeyState.FIRST_RELEASED) {
 
 					keyStates.put(key,KeyState.RELEASED);
 
@@ -78,7 +75,7 @@ public class Keyboard implements KeyListener, Updatable {
 
 					changed.remove(key);
 
-				}else if(keyState!=KeyState.RELEASED){
+				}else if(keyState!=KeyState.RELEASED) {
 
 					keyStates.put(key,KeyState.RELEASED);
 
@@ -89,14 +86,16 @@ public class Keyboard implements KeyListener, Updatable {
 		}
 
 		notifyListener();
+		
+		changed.unlock();
 
 	}
 
-	private void notifyListener(){
+	private void notifyListener() {
 
 		List<KeyEvent> events = new CopyOnWriteArrayList<KeyEvent>(keyEvents);
 		
-		for(KeyEvent event: events){
+		for(KeyEvent event: events) {
 			listener.updateKeyEvent(event);
 		}
 
@@ -124,7 +123,6 @@ public class Keyboard implements KeyListener, Updatable {
 		changed.add(code);
 
 		ke.consume();
-
 	}
 
 	@Override
@@ -143,23 +141,22 @@ public class Keyboard implements KeyListener, Updatable {
 
 	}
 
-	private int getKeyFromEvent(java.awt.event.KeyEvent ke){
+	private int getKeyFromEvent(java.awt.event.KeyEvent ke) {
 		int code = ke.getKeyCode();
 
-		if(ke.getKeyLocation()!=java.awt.event.KeyEvent.KEY_LOCATION_STANDARD){
+		if(ke.getKeyLocation()!=java.awt.event.KeyEvent.KEY_LOCATION_STANDARD) {
 			code+=ke.getKeyLocation()*100;
 		}
 
 		return code;
-
 	}
 
-	/*public List<KeyEvent> getEvents(){
+	/*public List<KeyEvent> getEvents() {
 		return keyEvents;
 	}
 	 */
 
-	public void reset(){
+	public void reset() {
 
 		Field[] fields = KeyEvent.class.getDeclaredFields();
 

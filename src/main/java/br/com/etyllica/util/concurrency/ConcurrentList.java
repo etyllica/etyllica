@@ -1,4 +1,4 @@
-package br.com.etyllica.util;
+package br.com.etyllica.util.concurrency;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +33,9 @@ public class ConcurrentList<T> {
 	}
 	
 	public void unlock() {
-		locked = false;
-		
 		list.clear();
+		
+		locked = false;
 		
 		if(!alternativeList.isEmpty()) {
 			list.addAll(alternativeList);
