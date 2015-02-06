@@ -12,3 +12,9 @@ sdk/
 # Package Files #
 *.war
 *.ear
+
+# Javadoc Files #
+/javadoc
+
+# Maven GPG Settings File #
+settings.xml
