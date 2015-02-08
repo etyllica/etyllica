@@ -19,5 +19,7 @@
 settings.xml
 
 # Maven Artifact Files #
+maven-ant-tasks*
 *sources.jar
 *javadoc.jar
+*.asc
