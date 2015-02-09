@@ -5,7 +5,8 @@
            uri="antlib:org.apache.maven.artifact.ant"
            classpathref="maven-ant-tasks.classpath" />
         
-  <property name="version"  value="4.5" />
+  <property name="version"  value="4.6" />
+  <property name="maven-version"  value="${version}-SNAPSHOT" />
 
   <property name="libcore"     value="etyllica-${version}" />
   <property name="libutil"     value="etyllica-util-${version}" />
@@ -23,9 +24,9 @@
   <property name="groupId" value="br.com.etyllica" />
   <property name="artifactId" value="etyllica" />
   <!-- define artifacts' name, which follows the convention of Maven -->
-  <property name="jar" value="${lib.dir}/${artifactId}-${version}.jar" />
-  <property name="javadoc-jar" value="${lib.dir}/${artifactId}-${version}-javadoc.jar" />
-  <property name="sources-jar" value="${lib.dir}/${artifactId}-${version}-sources.jar" />
+  <property name="jar" value="${lib.dir}/${artifactId}-${maven-version}.jar" />
+  <property name="javadoc-jar" value="${lib.dir}/${artifactId}-${maven-version}-javadoc.jar" />
+  <property name="sources-jar" value="${lib.dir}/${artifactId}-${maven-version}-sources.jar" />
   <!-- defined maven snapshots and staging repository id and url -->
   <property name="ossrh-snapshots-repository-url" 
             value="https://oss.sonatype.org/content/repositories/snapshots/" />
@@ -125,6 +126,14 @@
 
   <target name="package" depends="init, compile, prepare">
     <jar destfile="${lib.dir}/${libcore}.jar">
+      <fileset dir="${build.dir}">
+	<include name="**/br/com/etyllica/*"/>
+	<include name="**/br/com/etyllica/**"/>
+	<include name="**/br/com/tide/*"/>
+	<include name="**/br/com/tide/**"/>
+      </fileset>
+    </jar>
+    <jar destfile="${jar}">
       <fileset dir="${build.dir}">
 	<include name="**/br/com/etyllica/*"/>
 	<include name="**/br/com/etyllica/**"/>
