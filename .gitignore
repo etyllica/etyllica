@@ -3,8 +3,7 @@
 /bin
 
 # SDK Projects
-
-sdk/
+/sdk
 
 # Automatic Generated Files #
 *.applet
@@ -12,3 +11,16 @@ sdk/
 # Package Files #
 *.war
 *.ear
+
+# Javadoc Files #
+/maven/javadoc
+
+# Maven GPG Settings File #
+settings.xml
+
+# Maven Artifact Files #
+maven-ant-tasks*
+*sources.jar
+*javadoc.jar
+*.asc
+*SNAPSHOT*

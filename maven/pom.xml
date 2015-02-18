@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>br.com.etyllica</groupId>
+  <artifactId>etyllica</artifactId>
+  <version>4.5-SNAPSHOT</version>
+  <name>Etyllica</name>
+  <description>A game engine made in pure java.</description>
+  <url>http://github.com/yuripourre/etyllica</url>
+  <licenses>
+    <license>
+      <name>The GNU Lesser General Public License, Version 3.0</name>
+      <url>http://opensource.org/licenses/lgpl-3.0.html</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Yuri Pourre</name>
+      <email>yuripourre@gmail.com</email>
+      <organization>None</organization>
+      <organizationUrl>http://github.com/yuripourre</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git@github.com:yuripourre/etyllica.git</connection>
+    <developerConnection>scm:git:git@github.com:yuripourre/etyllica.git</developerConnection>
+    <url>git@github.com:yuripourre/etyllica.git</url>
+  </scm>
+</project>

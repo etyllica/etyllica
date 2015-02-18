@@ -54,5 +54,13 @@ public class ConcurrentList<T> {
 	public boolean isEmpty() {
 		return list.isEmpty() && alternativeList.isEmpty();
 	}
+
+	public void removeAll(List<T> removeList) {
+		if(!locked) {
+			for(T t: removeList) {
+				list.remove(t);
+			}
+		}		
+	}
 		
 }
