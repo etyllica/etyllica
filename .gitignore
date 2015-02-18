@@ -13,7 +13,7 @@
 *.ear
 
 # Javadoc Files #
-/javadoc
+/maven/javadoc
 
 # Maven GPG Settings File #
 settings.xml
