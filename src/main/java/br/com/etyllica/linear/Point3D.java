@@ -64,17 +64,15 @@ public class Point3D {
 		
 	public double angle(Point2D point) {
 
-		return angle(point.getX(), point.getY());
+		return angle(x, point.getX(), y, point.getY());
 		
 	}
 	
 	public double angle2D(Point3D point) {
-
-		return angle(point.getX(), point.getY());
-		
+		return angle(x, point.getX(), y, point.getY());
 	}
-	
-	public double angle(double px, double py) {
+		
+	protected double angle(double x, double px, double y, double py) {
 				
 		double deltaX = px - x;
 		double deltaY = py - y;

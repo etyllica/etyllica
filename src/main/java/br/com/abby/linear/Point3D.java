@@ -23,7 +23,7 @@ public class Point3D extends br.com.etyllica.linear.Point3D {
 	public Point3D(double x, double y, double z) {
 		super(x, y, z);
 						
-		color = Color.WHITE;
+		color = Color.BLACK;
 	}
 
 	public void setCoordinates(double x, double y) {

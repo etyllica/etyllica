@@ -30,4 +30,15 @@ public class CameraGL extends Point3D {
 		target.setCoordinates(x, y, z);
 	}	
 	
+	public double angleXY() {
+		return angle(x, target.getX(), y, target.getY());
+	}
+	
+	public double angleXZ() {
+		return angle(x, target.getX(), z, target.getZ());
+	}
+	
+	public double angleYZ() {
+		return angle(y, target.getY(), z, target.getZ());
+	}
 }
