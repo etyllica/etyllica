@@ -12,9 +12,9 @@ import br.com.etyllica.linear.graph.Edge;
 import br.com.etyllica.linear.graph.Node;
 import examples.etyllica.graph.model.ComplexGraph;
 
-public class ViewerAppl extends Application{
+public class SimpleGraphExample extends Application{
 
-	public ViewerAppl(int w, int h) {
+	public SimpleGraphExample(int w, int h) {
 		super(w, h);
 	}
 

@@ -4,6 +4,8 @@ import br.com.etyllica.linear.Point2D;
 
 public class Node {
 	
+	private Node parent;
+	
 	private Point2D point;
 	
 	public Node() {
@@ -12,8 +14,8 @@ public class Node {
 	
 	public Node(double x, double y) {
 		super();
-		
 		point = new Point2D(x, y);
+		parent = this;
 	}
 	
 	public Node(Point2D point) {
@@ -33,5 +35,13 @@ public class Node {
 	public void setLocation(double x, double y) {
 		point.setLocation(x, y);
 	}
-	
+
+	public Node getParent() {
+		return parent;
+	}
+
+	public void setParent(Node parent) {
+		this.parent = parent;
+	}
+		
 }

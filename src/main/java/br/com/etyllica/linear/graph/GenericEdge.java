@@ -9,8 +9,8 @@ public class GenericEdge <N extends Node> {
 	public GenericEdge(N origin, N destination) {
 		super();
 		
-		this.origin = origin;
-		this.destination = destination;
+		setOrigin(origin);
+		setDestination(destination);		
 	}
 
 	public N getOrigin() {
@@ -27,6 +27,10 @@ public class GenericEdge <N extends Node> {
 
 	public void setDestination(N destination) {
 		this.destination = destination;
+		
+		if(destination != destination.getParent()) {
+			destination.setParent(origin);
+		}
 	}
 		
 }

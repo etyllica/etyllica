@@ -79,7 +79,32 @@ public abstract class GenericComplexGraph<N extends Node, E extends GenericEdge<
 		}
 		
 	}
-			
+	
+	public boolean hasDiretionalEdge(N origin, N destination) {
+		for(List<E> list: edges.values()) {
+			for(E edge: list) {
+				if(edge.getOrigin() == origin && edge.getDestination() == destination) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean hasEdge(N origin, N destination) {
+		for(List<E> list: edges.values()) {
+			for(E edge: list) {
+				if(edge.getOrigin() == origin && edge.getDestination() == destination) {
+					return true;
+				}
+				if(edge.getDestination() == origin && edge.getOrigin() == destination) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public void clear() {
 		nodes.clear();
 		edges.clear();
