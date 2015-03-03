@@ -12,7 +12,7 @@ public class ComplexGraphTest {
 	
 	private Node firstChild;
 	
-	private GenericComplexGraph<Edge> graph;
+	private GenericComplexGraph<Node, Edge> graph;
 	
 	@Before
 	public void setUp() {

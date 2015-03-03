@@ -8,44 +8,40 @@ import java.util.Map;
 import java.util.Set;
 
 import br.com.etyllica.linear.Point2D;
-import br.com.etyllica.linear.graph.Edge;
-import br.com.etyllica.linear.graph.Node;
 
-public class GenericComplexGraph<E extends Edge> {
+public abstract class GenericComplexGraph<N extends Node, E extends GenericEdge<N>> {
 
-	protected Set<Node> nodes;
+	protected Set<N> nodes;
 	
-	protected Map<Node, List<E>> edges;
+	protected Map<N, List<E>> edges;
 	
 	public GenericComplexGraph() {
 		super();
 		
-		nodes = new LinkedHashSet<Node>();
+		nodes = new LinkedHashSet<N>();
 		
-		edges = new HashMap<Node, List<E>>();
+		edges = new HashMap<N, List<E>>();
 	}
 
-	public Set<Node> getNodes() {
+	public Set<N> getNodes() {
 		return nodes;
 	}
 
-	public void setNodes(Set<Node> nodes) {
+	public void setNodes(Set<N> nodes) {
 		this.nodes = nodes;
 	}
 
-	public void addNode(Node node) {
+	public void addNode(N node) {
 		this.nodes.add(node);
 	}
 	
-	public void addNode(Point2D point) {
-		this.nodes.add(new Node(point.getX(), point.getY()));
-	}
+	public abstract void addNode(Point2D point);
 
-	public Map<Node, List<E>> getAllEdges() {
+	public Map<N, List<E>> getAllEdges() {
 		return edges;
 	}
 	
-	public List<E> getEdges(Node node) {
+	public List<E> getEdges(N node) {
 		
 		if(edges.containsKey(node)) {
 			return edges.get(node);
@@ -58,7 +54,7 @@ public class GenericComplexGraph<E extends Edge> {
 		
 		addNodesFromEdge(edge);
 		
-		Node origin = edge.getOrigin();		
+		N origin = edge.getOrigin();		
 		
 		if(!edges.containsKey(origin)) {
 			edges.put(origin, new ArrayList<E>());
@@ -68,15 +64,15 @@ public class GenericComplexGraph<E extends Edge> {
 				
 	}
 	
-	private void addNodesFromEdge(Edge edge) {
+	private void addNodesFromEdge(GenericEdge<N> edge) {
 		
-		Node origin = edge.getOrigin();
+		N origin = edge.getOrigin();
 
 		if(!nodes.contains(origin)) {
 			nodes.add(origin);
 		}
 		
-		Node destination = edge.getDestination();
+		N destination = edge.getDestination();
 		
 		if(!nodes.contains(destination)) {
 			nodes.add(destination);
