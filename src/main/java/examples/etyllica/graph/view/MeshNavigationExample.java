@@ -9,8 +9,9 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.linear.graph.GenericEdge;
+import br.com.etyllica.linear.graph.Node;
 import br.com.tide.ai.pathfind.NavigationMesh;
-import br.com.tide.ai.pathfind.PolygonalNode;
+import br.com.tide.ai.pathfind.PolygonalData;
 
 public class MeshNavigationExample extends Application {
 
@@ -18,11 +19,11 @@ public class MeshNavigationExample extends Application {
 		super(w, h);
 	}
 	
-	private PolygonalNode root;
+	private Node<PolygonalData> root;
 	
-	private PolygonalNode firstChild;
+	private Node<PolygonalData> firstChild;
 	
-	private NavigationMesh graph;
+	private NavigationMesh<PolygonalData> graph;
 	
 	private final double nodeDistance = 40;
 	
@@ -31,32 +32,32 @@ public class MeshNavigationExample extends Application {
 		
 		loading = 10;
 		
-		graph = new NavigationMesh();
+		graph = new NavigationMesh<PolygonalData>();
 		
-		root = new PolygonalNode();
-		root.setLocation(80, 80);
-		root.addPoint(60, 45);
-		root.addPoint(90, 55);
-		root.addPoint(100, 90);
-		root.addPoint(70, 110);
+		root = new Node<PolygonalData>(new PolygonalData("Root"));
+		root.setLocation(280, 80);
 		
-		firstChild = new PolygonalNode();
-		PolygonalNode secondChild = new PolygonalNode();
+		root.getData().addPoint(260, 45);
+		root.getData().addPoint(290, 55);
+		root.getData().addPoint(300, 90);
+		root.getData().addPoint(270, 110);
 		
-		PolygonalNode firstChildSon = new PolygonalNode();
+		firstChild = new Node<PolygonalData>(new PolygonalData("1st Child"));
+		Node<PolygonalData> secondChild = new Node<PolygonalData>(new PolygonalData("2nd Child"));
+		Node<PolygonalData> firstChildSon = new Node<PolygonalData>(new PolygonalData("1st, First Child"));
 		
 		//Add three child nodes
 		graph.addNode(root);
 		graph.addNode(firstChild);
 		graph.addNode(secondChild);
 				
-		graph.addEdge(new GenericEdge<PolygonalNode>(root, firstChild));
-		graph.addEdge(new GenericEdge<PolygonalNode>(root, secondChild));
-		graph.addEdge(new GenericEdge<PolygonalNode>(firstChild, secondChild));
+		graph.addEdge(new GenericEdge<PolygonalData>(root, firstChild));
+		graph.addEdge(new GenericEdge<PolygonalData>(root, secondChild));
+		graph.addEdge(new GenericEdge<PolygonalData>(firstChild, secondChild));
 		graph.hasEdge(firstChild, secondChild);
 				
-		graph.addEdge(new GenericEdge<PolygonalNode>(firstChild, firstChildSon));
-		graph.addEdge(new GenericEdge<PolygonalNode>(firstChild, new PolygonalNode()));
+		graph.addEdge(new GenericEdge<PolygonalData>(firstChild, firstChildSon));
+		graph.addEdge(new GenericEdge<PolygonalData>(firstChild, new Node<PolygonalData>(new PolygonalData(("Another Node")))));
 						
 		moveNodes(root);
 		
@@ -65,17 +66,14 @@ public class MeshNavigationExample extends Application {
 	
 	@Override
 	public void draw(Graphic g) {
-		
 		drawNode(g, root);
 	}
 	
-	private void drawLeaf(Graphic g, PolygonalNode node) {
-				
+	private void drawLeaf(Graphic g, Node<PolygonalData> node) {
 		g.fillCircle(node.getPoint(), 5);
-		
 	}
 	
-	private void drawNode(Graphic g, PolygonalNode node) {
+	private void drawNode(Graphic g, Node<PolygonalData> node) {
 						
 		//Draw Children
 		drawEdges(g, node);
@@ -84,47 +82,55 @@ public class MeshNavigationExample extends Application {
 		g.setColor(SVGColor.BLACK);
 		drawLeaf(g, node);
 		
-		node.getPolygon().draw(g);
+		node.getData().getPolygon().draw(g);
 	}
 		
-	private void drawEdges(Graphic g, PolygonalNode node) {
+	private void drawEdges(Graphic g, Node<PolygonalData> node) {
 		
-		List<GenericEdge<PolygonalNode>> edges = graph.getEdges(node);
+		List<GenericEdge<PolygonalData>> edges = graph.getEdges(node);
 		
 		g.setColor(SVGColor.RED);
 		
-		for(GenericEdge<PolygonalNode> edge: edges) {
+		for(GenericEdge<PolygonalData> edge: edges) {
 			
 			g.drawLine(edge.getOrigin().getPoint(), edge.getDestination().getPoint());
 			
 			drawNode(g, edge.getDestination());
 		}
-				
+
 	}
 	
-	public void moveNodes(PolygonalNode root) {
+	public void moveNodes(Node<PolygonalData> root) {
 		moveChildrenNodes(root, 0);
 	}
 	
-	private void moveChildrenNodes(PolygonalNode node, double initialAngle) {
+	private void moveChildrenNodes(Node<PolygonalData> node, double initialAngle) {
 		
-		List<GenericEdge<PolygonalNode>> edges = graph.getEdges(node);
+		List<GenericEdge<PolygonalData>> edges = graph.getEdges(node);
 						
 		int size = edges.size()+1;
 		
 		double theta = 180 / size;
 				
 		int i = 0;
-				
-		for(GenericEdge<PolygonalNode> edge: edges) {
+					
+		for(GenericEdge<PolygonalData> edge: edges) {
 			
 			i++;
 			
-			PolygonalNode destination = edge.getDestination();
+			Node<PolygonalData> destination = edge.getDestination();
+			
+			System.out.println(edge.getOrigin().getData().getName()+" -- "+edge.getDestination().getData().getName());
+			System.out.println("Parent: "+edge.getOrigin().getParent().getData().getName());
 			
 			//Avoid rotate brother nodes
 			if(edge.getOrigin().getParent() == destination.getParent()) {
-				continue;
+				
+				//if(edge.getOrigin().equals())
+								
+				System.out.println("Avoid !!");
+				System.out.println(edge.getOrigin().getData().getName()+" -- "+edge.getDestination().getData().getName());
+				//continue;
 			}
 			
 			double angle = (theta * i);

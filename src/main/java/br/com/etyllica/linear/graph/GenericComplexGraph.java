@@ -9,39 +9,44 @@ import java.util.Set;
 
 import br.com.etyllica.linear.Point2D;
 
-public abstract class GenericComplexGraph<N extends Node, E extends GenericEdge<N>> {
+public abstract class GenericComplexGraph<N, E extends GenericEdge<N>> {
 
-	protected Set<N> nodes;
+	protected Set<Node<N>> nodes;
 	
-	protected Map<N, List<E>> edges;
+	protected Map<Node<N>, List<E>> edges;
 	
 	public GenericComplexGraph() {
 		super();
 		
-		nodes = new LinkedHashSet<N>();
+		nodes = new LinkedHashSet<Node<N>>();
 		
-		edges = new HashMap<N, List<E>>();
+		edges = new HashMap<Node<N>, List<E>>();
 	}
 
-	public Set<N> getNodes() {
+	public Set<Node<N>> getNodes() {
 		return nodes;
 	}
 
-	public void setNodes(Set<N> nodes) {
+	public void setNodes(Set<Node<N>> nodes) {
 		this.nodes = nodes;
 	}
 
-	public void addNode(N node) {
+	public void addNode(Node<N> node) {
 		this.nodes.add(node);
 	}
 	
-	public abstract void addNode(Point2D point);
+	public void addNode(Point2D point) {
+		Node<N> node = new Node<N>();
+		node.setLocation(point.getX(), point.getY());
+		
+		nodes.add(node);		
+	}
 
-	public Map<N, List<E>> getAllEdges() {
+	public Map<Node<N>, List<E>> getAllEdges() {
 		return edges;
 	}
 	
-	public List<E> getEdges(N node) {
+	public List<E> getEdges(Node<N> node) {
 		
 		if(edges.containsKey(node)) {
 			return edges.get(node);
@@ -54,7 +59,7 @@ public abstract class GenericComplexGraph<N extends Node, E extends GenericEdge<
 		
 		addNodesFromEdge(edge);
 		
-		N origin = edge.getOrigin();		
+		Node<N> origin = edge.getOrigin();		
 		
 		if(!edges.containsKey(origin)) {
 			edges.put(origin, new ArrayList<E>());
@@ -66,13 +71,13 @@ public abstract class GenericComplexGraph<N extends Node, E extends GenericEdge<
 	
 	private void addNodesFromEdge(GenericEdge<N> edge) {
 		
-		N origin = edge.getOrigin();
+		Node<N> origin = edge.getOrigin();
 
 		if(!nodes.contains(origin)) {
 			nodes.add(origin);
 		}
 		
-		N destination = edge.getDestination();
+		Node<N> destination = edge.getDestination();
 		
 		if(!nodes.contains(destination)) {
 			nodes.add(destination);
@@ -80,7 +85,7 @@ public abstract class GenericComplexGraph<N extends Node, E extends GenericEdge<
 		
 	}
 	
-	public boolean hasDiretionalEdge(N origin, N destination) {
+	public boolean hasDiretionalEdge(Node<N> origin, Node<N> destination) {
 		for(List<E> list: edges.values()) {
 			for(E edge: list) {
 				if(edge.getOrigin() == origin && edge.getDestination() == destination) {
@@ -91,7 +96,7 @@ public abstract class GenericComplexGraph<N extends Node, E extends GenericEdge<
 		return false;
 	}
 	
-	public boolean hasEdge(N origin, N destination) {
+	public boolean hasEdge(Node<N> origin, Node<N> destination) {
 		for(List<E> list: edges.values()) {
 			for(E edge: list) {
 				if(edge.getOrigin() == origin && edge.getDestination() == destination) {

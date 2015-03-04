@@ -22,7 +22,7 @@ public class GraphViewer extends EtyllicaFrame {
 	@Override
 	public Application startApplication() {
 		initialSetup("../../../../../");
-		//return new SimpleGraph(w,h);
+		//return new SimpleGraphExample(w,h);
 		return new MeshNavigationExample(w,h);
 	}
 

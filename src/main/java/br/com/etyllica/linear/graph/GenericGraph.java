@@ -3,46 +3,47 @@ package br.com.etyllica.linear.graph;
 import java.util.ArrayList;
 import java.util.List;
 
+import examples.etyllica.graph.model.IntegerEdge;
 import br.com.etyllica.linear.Point2D;
 
-public class GenericGraph<E extends Edge> {
+public class GenericGraph<T, E extends IntegerEdge> {
 
-	protected List<Node> nodes;
+	protected List<Node<T>> nodes;
 	
 	protected List<E> edges;
 	
 	public GenericGraph() {
 		super();
 		
-		nodes = new ArrayList<Node>();
+		nodes = new ArrayList<Node<T>>();
 		
 		edges = new ArrayList<E>();
 	}
 
-	public List<Node> getNodes() {
+	public List<Node<T>> getNodes() {
 		return nodes;
 	}
 
-	public void setNodes(List<Node> nodes) {
+	public void setNodes(List<Node<T>> nodes) {
 		this.nodes = nodes;
 	}
 
-	public void addNode(Node node) {
+	public void addNode(Node<T> node) {
 		this.nodes.add(node);
 	}
 	
-	public Node addNode(int index, Point2D point) {
+	public Node<T> addNode(int index, Point2D point) {
 		
-		Node node = new Node(point.getX(), point.getY());
+		Node<T> node = new Node<T>(point.getX(), point.getY());
 		
 		this.nodes.add(index, node);
 		
 		return node;
 	}
 	
-	public Node addNode(Point2D point) {
+	public Node<T> addNode(Point2D point) {
 		
-		Node node = new Node(point.getX(), point.getY());
+		Node<T> node = new Node<T>(point.getX(), point.getY());
 		
 		this.nodes.add(node);
 		

@@ -4,29 +4,30 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import examples.etyllica.graph.model.ComplexGraph;
+import examples.etyllica.graph.model.IntegerEdge;
+import examples.etyllica.graph.model.IntegerGraph;
 
 public class ComplexGraphTest {
 
-	private Node root;
+	private Node<Integer> root;
 	
-	private Node firstChild;
+	private Node<Integer> firstChild;
 	
-	private GenericComplexGraph<Node, Edge> graph;
+	private GenericComplexGraph<Integer, IntegerEdge> graph;
 	
 	@Before
 	public void setUp() {
 	
-		graph = new ComplexGraph();
+		graph = new IntegerGraph();
 		
-		root = new Node();
+		root = new Node<Integer>();
 		root.setLocation(80, 190);
 		
-		firstChild = new Node();
-		Node secondChild = new Node();
-		Node thirdChild = new Node();
+		firstChild = new Node<Integer>();
+		Node<Integer> secondChild = new Node<Integer>();
+		Node<Integer> thirdChild = new Node<Integer>();
 		
-		Node firstChildSon = new Node();
+		Node<Integer> firstChildSon = new Node<Integer>();
 		
 		//Add three child nodes
 		graph.addNode(root);
@@ -34,12 +35,12 @@ public class ComplexGraphTest {
 		graph.addNode(secondChild);
 		graph.addNode(thirdChild);
 		
-		graph.addEdge(new Edge(root, firstChild));
-		graph.addEdge(new Edge(root, secondChild));
-		graph.addEdge(new Edge(root, thirdChild));
+		graph.addEdge(new IntegerEdge(root, firstChild));
+		graph.addEdge(new IntegerEdge(root, secondChild));
+		graph.addEdge(new IntegerEdge(root, thirdChild));
 		
-		graph.addEdge(new Edge(firstChild, firstChildSon));
-		graph.addEdge(new Edge(firstChild, new Node()));
+		graph.addEdge(new IntegerEdge(firstChild, firstChildSon));
+		graph.addEdge(new IntegerEdge(firstChild, new Node<Integer>()));
 				
 	}	
 	

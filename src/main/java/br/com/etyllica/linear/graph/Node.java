@@ -2,14 +2,21 @@ package br.com.etyllica.linear.graph;
 
 import br.com.etyllica.linear.Point2D;
 
-public class Node {
+public class Node<T> {
 	
-	private Node parent;
+	private T data;
+	
+	private Node<T> parent;
 	
 	private Point2D point;
 	
 	public Node() {
 		this(0, 0);		
+	}
+	
+	public Node(T data) {
+		this(0, 0);
+		setData(data);
 	}
 	
 	public Node(double x, double y) {
@@ -36,12 +43,20 @@ public class Node {
 		point.setLocation(x, y);
 	}
 
-	public Node getParent() {
+	public Node<T> getParent() {
 		return parent;
 	}
 
-	public void setParent(Node parent) {
+	public void setParent(Node<T> parent) {
 		this.parent = parent;
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
 	}
 		
 }

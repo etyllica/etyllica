@@ -8,9 +8,10 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.SVGColor;
-import br.com.etyllica.linear.graph.Edge;
+import br.com.etyllica.linear.Point2D;
 import br.com.etyllica.linear.graph.Node;
-import examples.etyllica.graph.model.ComplexGraph;
+import examples.etyllica.graph.model.IntegerEdge;
+import examples.etyllica.graph.model.IntegerGraph;
 
 public class SimpleGraphExample extends Application{
 
@@ -18,11 +19,11 @@ public class SimpleGraphExample extends Application{
 		super(w, h);
 	}
 
-	private Node root;
+	private Node<Integer> root;
 	
-	private Node firstChild;
+	private Node<Integer> firstChild;
 	
-	private ComplexGraph graph;
+	private IntegerGraph graph;
 	
 	private final double nodeDistance = 40;
 	
@@ -31,16 +32,16 @@ public class SimpleGraphExample extends Application{
 		
 		loading = 10;
 		
-		graph = new ComplexGraph();
+		graph = new IntegerGraph();
 		
-		root = new Node();
+		root = new Node<Integer>(0);
 		root.setLocation(80, 190);
 		
-		firstChild = new Node();		
-		Node secondChild = new Node();
-		Node thirdChild = new Node();
+		firstChild = new Node<Integer>(1);		
+		Node<Integer> secondChild = new Node<Integer>(2);
+		Node<Integer> thirdChild = new Node<Integer>(3);
 		
-		Node firstChildSon = new Node();
+		Node<Integer> firstChildSon = new Node<Integer>(4);
 		
 		//Add three child nodes
 		graph.addNode(root);
@@ -48,12 +49,12 @@ public class SimpleGraphExample extends Application{
 		graph.addNode(secondChild);
 		graph.addNode(thirdChild);
 		
-		graph.addEdge(new Edge(root, firstChild));
-		graph.addEdge(new Edge(root, secondChild));
-		graph.addEdge(new Edge(root, thirdChild));
+		graph.addEdge(new IntegerEdge(root, firstChild));
+		graph.addEdge(new IntegerEdge(root, secondChild));
+		graph.addEdge(new IntegerEdge(root, thirdChild));
 		
-		graph.addEdge(new Edge(firstChild, firstChildSon));
-		graph.addEdge(new Edge(firstChild, new Node()));		
+		graph.addEdge(new IntegerEdge(firstChild, firstChildSon));
+		graph.addEdge(new IntegerEdge(firstChild, new Node<Integer>(84)));		
 		
 		
 		moveNodes(root);
@@ -67,29 +68,40 @@ public class SimpleGraphExample extends Application{
 		drawNode(g, root);
 	}
 	
-	private void drawLeaf(Graphic g, Node node) {
-				
-		g.fillCircle(node.getPoint(), 5);
+	private void drawLeaf(Graphic g, Node<Integer> node) {
+		Point2D point = node.getPoint();
 		
+		int radius = 12;
+		
+		g.setColor(SVGColor.BLACK);
+		g.fillCircle(point, radius);
+		g.setColor(SVGColor.WHITE);
+		
+		int x = (int)point.getX()-radius;
+		int y = (int)point.getY()-radius;
+		int w = radius*2;
+		int h = radius*2;
+		
+		g.drawStringBorder(Integer.toString(node.getData()), x, y, w, h);
+		g.setColor(SVGColor.BLACK);
 	}
 	
-	private void drawNode(Graphic g, Node node) {
+	private void drawNode(Graphic g, Node<Integer> node) {
 						
 		//Draw Children
 		drawEdges(g, node);
 		
 		//Draw Node itself
-		g.setColor(SVGColor.BLACK);
 		drawLeaf(g, node);
 	}
 		
-	private void drawEdges(Graphic g, Node node) {
+	private void drawEdges(Graphic g, Node<Integer> node) {
 		
-		List<Edge> edges = graph.getEdges(node);
+		List<IntegerEdge> edges = graph.getEdges(node);
 		
 		g.setColor(SVGColor.RED);
 		
-		for(Edge edge: edges) {
+		for(IntegerEdge edge: edges) {
 			
 			g.drawLine(edge.getOrigin().getPoint(), edge.getDestination().getPoint());
 			
@@ -98,13 +110,13 @@ public class SimpleGraphExample extends Application{
 				
 	}
 	
-	public void moveNodes(Node root) {
+	public void moveNodes(Node<Integer> root) {
 		moveChildrenNodes(root, 0);
 	}
 	
-	private void moveChildrenNodes(Node node, double initialAngle) {
+	private void moveChildrenNodes(Node<Integer> node, double initialAngle) {
 		
-		List<Edge> edges = graph.getEdges(node);
+		List<IntegerEdge> edges = graph.getEdges(node);
 						
 		int size = edges.size()+1;
 		
@@ -112,11 +124,11 @@ public class SimpleGraphExample extends Application{
 				
 		int i = 0;
 				
-		for(Edge edge: edges) {
+		for(IntegerEdge edge: edges) {
 			
 			i++;
 			
-			Node destination = edge.getDestination();
+			Node<Integer> destination = edge.getDestination();
 			
 			double angle = (theta * i);
 			
@@ -138,23 +150,15 @@ public class SimpleGraphExample extends Application{
 	}	
 		
 	@Override
-	public void update(long now) {
-		
-	}
-	
-	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-				
 		// TODO Auto-generated method stub
 		return null;
 	}
 		
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
-		
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }

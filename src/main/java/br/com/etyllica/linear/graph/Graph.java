@@ -1,5 +1,7 @@
 package br.com.etyllica.linear.graph;
 
-public class Graph extends GenericGraph<Edge> {
+import examples.etyllica.graph.model.IntegerEdge;
+
+public class Graph<T> extends GenericGraph<T, IntegerEdge> {
 
 }

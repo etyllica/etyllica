@@ -1,34 +1,34 @@
 package br.com.etyllica.linear.graph;
 
-public class GenericEdge <N extends Node> {
+public class GenericEdge <N> {
 
-	protected N origin;
+	protected Node<N> origin;
 	
-	protected N destination;
+	protected Node<N> destination;
 	
-	public GenericEdge(N origin, N destination) {
+	public GenericEdge(Node<N> origin, Node<N> destination) {
 		super();
 		
 		setOrigin(origin);
 		setDestination(destination);		
 	}
 
-	public N getOrigin() {
+	public Node<N> getOrigin() {
 		return origin;
 	}
 
-	public void setOrigin(N origin) {
+	public void setOrigin(Node<N> origin) {
 		this.origin = origin;
 	}
 
-	public N getDestination() {
+	public Node<N> getDestination() {
 		return destination;
 	}
 
-	public void setDestination(N destination) {
+	public void setDestination(Node<N> destination) {
 		this.destination = destination;
 		
-		if(destination != destination.getParent()) {
+		if(destination == destination.getParent()) {
 			destination.setParent(origin);
 		}
 	}
