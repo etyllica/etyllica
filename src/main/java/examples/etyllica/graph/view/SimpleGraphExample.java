@@ -10,8 +10,8 @@ import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.linear.Point2D;
 import br.com.etyllica.linear.graph.Node;
-import examples.etyllica.graph.model.IntegerEdge;
-import examples.etyllica.graph.model.IntegerGraph;
+import br.com.etyllica.linear.graph.common.IntegerEdge;
+import br.com.etyllica.linear.graph.common.IntegerGraph;
 
 public class SimpleGraphExample extends Application{
 

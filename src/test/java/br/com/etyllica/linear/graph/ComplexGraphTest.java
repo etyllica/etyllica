@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import examples.etyllica.graph.model.IntegerEdge;
-import examples.etyllica.graph.model.IntegerGraph;
+import br.com.etyllica.linear.graph.common.IntegerEdge;
+import br.com.etyllica.linear.graph.common.IntegerGraph;
 
 public class ComplexGraphTest {
 

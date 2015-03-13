@@ -1,4 +1,4 @@
-package examples.etyllica.graph.model;
+package br.com.etyllica.linear.graph.common;
 
 import br.com.etyllica.linear.graph.GenericComplexGraph;
 

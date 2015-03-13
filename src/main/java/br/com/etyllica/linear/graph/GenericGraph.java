@@ -3,8 +3,8 @@ package br.com.etyllica.linear.graph;
 import java.util.ArrayList;
 import java.util.List;
 
-import examples.etyllica.graph.model.IntegerEdge;
 import br.com.etyllica.linear.Point2D;
+import br.com.etyllica.linear.graph.common.IntegerEdge;
 
 public class GenericGraph<T, E extends IntegerEdge> {
 

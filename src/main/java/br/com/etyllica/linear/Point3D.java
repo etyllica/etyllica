@@ -61,13 +61,15 @@ public class Point3D {
 		this.y = y;
 		this.z = z;
 	}
-		
-	public double angle(Point2D point) {
 
-		return angle(x, point.getX(), y, point.getY());
-		
+	public double angle(int px, int py) {
+		return angle(x, px, y, py);		
 	}
 	
+	public double angle(Point2D point) {
+		return angle(x, point.getX(), y, point.getY());
+	}
+		
 	public double angle2D(Point3D point) {
 		return angle(x, point.getX(), y, point.getY());
 	}
