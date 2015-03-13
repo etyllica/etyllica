@@ -3,13 +3,13 @@ package br.com.etyllica.animation.scripts;
 import br.com.etyllica.layer.Layer;
 
 public abstract class SingleIntervalAnimation extends AnimationScript {
-
+	
 	protected Layer target;
 	
 	protected double startValue = 0;
 	
 	protected double endValue = 0;
-	
+		
 	public SingleIntervalAnimation(long time) {
 		super(time);
 	}
@@ -30,12 +30,9 @@ public abstract class SingleIntervalAnimation extends AnimationScript {
 		setTarget(target);
 	}
 	
-	public void calculate(double factor) {
-		
-		double value = startValue+(endValue-startValue)*factor;
-
+	public void calculate(double x) {
+		double value = interpolator.factor(startValue, endValue, x);
 		update(value);
-		
 	}
 	
 	protected abstract void update(double value);

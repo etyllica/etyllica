@@ -1,6 +1,8 @@
 package br.com.etyllica.animation.scripts;
 
 import br.com.etyllica.animation.listener.OnAnimationFinishListener;
+import br.com.etyllica.interpolation.Interpolator;
+import br.com.etyllica.interpolation.LinearInterpolator;
 
 
 public abstract class AnimationScript {
@@ -20,6 +22,8 @@ public abstract class AnimationScript {
 	public static final int REPEAT_FOREVER = -1;
 	
 	private OnAnimationFinishListener listener;
+	
+	protected Interpolator interpolator = new LinearInterpolator();
 
 	public AnimationScript(long time) {
 		super();
@@ -122,5 +126,13 @@ public abstract class AnimationScript {
 	public void setListener(OnAnimationFinishListener listener) {
 		this.listener = listener;
 	}
+
+	public Interpolator getInterpolator() {
+		return interpolator;
+	}
+
+	public void setInterpolator(Interpolator interpolator) {
+		this.interpolator = interpolator;
+	}	
 
 }

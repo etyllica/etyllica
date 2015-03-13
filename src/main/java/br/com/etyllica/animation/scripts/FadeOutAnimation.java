@@ -3,7 +3,7 @@ package br.com.etyllica.animation.scripts;
 import br.com.etyllica.layer.Layer;
 
 
-public class FadeOutAnimation extends OpacityAnimation{
+public class FadeOutAnimation extends OpacityAnimation {
 	
 	{
 		startValue = 255;
