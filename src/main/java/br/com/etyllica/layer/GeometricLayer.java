@@ -1,18 +1,9 @@
 package br.com.etyllica.layer;
 
 import br.com.etyllica.core.Movable;
+import br.com.etyllica.linear.PointInt2D;
 
-public class GeometricLayer implements Movable {
-
-	/**
-     * x position of a Layer
-     */
-	protected int x = 0;
-	
-	/**
-     * y position of a Layer
-     */
-	protected int y = 0;
+public class GeometricLayer extends PointInt2D implements Movable {
 	
 	/**
      * Layer's width
@@ -30,33 +21,12 @@ public class GeometricLayer implements Movable {
 	
 	public GeometricLayer(int x, int y) {
 		super();
-		this.x = x;
-		this.y = y;
+		setLocation(x, y);
 	}
 	
 	public GeometricLayer(int x, int y, int w, int h) {
 		super();
-		
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
+		setBounds(x, y, w, h);		
 	}
 
 	public int getW() {
@@ -76,10 +46,8 @@ public class GeometricLayer implements Movable {
 	}
 	
 	public void setBounds(int x, int y, int w, int h) {
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
+		setLocation(x, y);
+		setSize(w, h);
 	}
 	
 	/**
@@ -88,8 +56,7 @@ public class GeometricLayer implements Movable {
 	 * @param y
 	 */
 	public void setCoordinates(int x, int y) {
-		setX(x);
-		setY(y);
+		setLocation(x, y);
 	}
 	
 	/**
@@ -124,8 +91,8 @@ public class GeometricLayer implements Movable {
 	 * @param h
 	 */
 	public void setSize(int w, int h) {
-		setX(w);
-		setY(h);
+		setW(w);
+		setH(h);
 	}
 	
 	/*
