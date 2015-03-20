@@ -34,7 +34,7 @@ public class AimPoint extends Point3D {
 	}
 
 	public void setAngleY(double angleY) {
-		this.angleY += angleY;
+		this.angleY = angleY;
 	}
 	
 	public void setOffsetAngleY(double offsetAngleY) {
