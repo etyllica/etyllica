@@ -23,6 +23,7 @@ import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.linear.Point2D;
+import br.com.etyllica.linear.PointInt2D;
 
 /**
  * 
@@ -1031,6 +1032,15 @@ public class Graphic {
 	public void fillCircle(Point2D point, int radius ) {
 		screen.fillOval((int)point.getX()-radius, (int)point.getY()-radius, radius*2, radius*2);
 	}
+	
+	/**
+	 * 
+	 * @param point
+	 * @param radius
+	 */
+	public void fillCircle(PointInt2D point, int radius) {
+		screen.fillOval(point.getX()-radius, point.getY()-radius, radius*2, radius*2);
+	}
 
 	/**
 	 * 
@@ -1174,5 +1184,5 @@ public class Graphic {
 	public void resetCamera(Camera camera) {
 		resetImage();
 	}
-
+	
 }
