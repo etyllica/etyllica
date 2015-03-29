@@ -12,6 +12,9 @@ import br.com.abby.material.OBJMaterial;
 
 public class VBO {
 	
+	private String name;
+	
+	//Original vertices positions
 	private List<Vector3f> vertices = new ArrayList<Vector3f>();
 	private List<Vector3f> normals = new ArrayList<Vector3f>();
 	private List<Vector2f> textures = new ArrayList<Vector2f>();
@@ -73,5 +76,13 @@ public class VBO {
 	public void setMaterials(Map<String, OBJMaterial> materials) {
 		this.materials = materials;
 	}
-			
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+		
 }

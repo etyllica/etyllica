@@ -121,7 +121,7 @@ public class Model3D extends AimPoint implements GLDrawable {
 
 			for(Face face: group.getFaces()){
 
-				if(face.vertex.length==3){
+				if(face.vertexIndex.length==3){
 
 					gl.glBegin(GL.GL_TRIANGLES);
 
@@ -131,13 +131,18 @@ public class Model3D extends AimPoint implements GLDrawable {
 
 				}
 
-				for(int i=0;i<face.vertex.length;i++){
+				for(int i=0;i<face.vertexIndex.length;i++){
 
 					if(drawTexture){
 						gl.glNormal3d(face.normal[i].getX(), face.normal[i].getY(), face.normal[i].getZ());
 						gl.glTexCoord2d(face.texture[i].getX(), face.texture[i].getY());
 					}
-					gl.glVertex3d(face.vertex[i].getX(), face.vertex[i].getY(), face.vertex[i].getZ());
+					
+					int index = face.vertexIndex[i];
+					
+					Vector3f vertex = vbo.getVertices().get(index);
+					
+					gl.glVertex3d(vertex.getX(), vertex.getY(), vertex.getZ());
 				}
 
 				gl.glEnd();

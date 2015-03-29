@@ -42,7 +42,7 @@ public class ImageLoader extends LoaderImpl{
 		return instance;
 	}
 
-	public StaticLayer loadImage(String path){
+	public StaticLayer loadImage(String path) {
 
 		BufferedImage img = getImage(path);
 

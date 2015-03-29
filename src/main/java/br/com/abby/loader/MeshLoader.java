@@ -45,7 +45,7 @@ public class MeshLoader extends LoaderImpl {
 		}
 		
 		try {
-			return OBJLoader.loadModel(dir);
+			return new OBJLoader().loadModel(dir);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
