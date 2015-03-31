@@ -74,6 +74,19 @@ public class Point3D {
 		return angle(x, point.getX(), y, point.getY());
 	}
 
+	public double angleXY(Point3D point) {
+		return angleXY(point.getX(), point.getY());
+	}
+	
+	public double angleXY(double px, double py) {
+		double deltaX = px - x;
+		double deltaY = py - y;
+
+		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+
+		return angleInDegrees;
+	}
+	
 	public double angleXZ(Point3D point) {
 		return angleXZ(point.getX(), point.getZ());
 	}
@@ -110,21 +123,4 @@ public class Point3D {
 		return angleInDegrees;		
 	}
 	
-	public Point3D distantPoint(Point3D target, double distance) {
-		
-		double deltaX = x-target.getX();
-		double deltaY = y-target.getY();
-		double deltaZ = z-target.getZ();
-		
-		double dist = Math.sqrt(deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ);
-		
-		deltaX /= dist;
-		deltaY /= dist;
-		deltaZ /= dist;
-				
-		Point3D c = new Point3D(x-distance*deltaX, y-distance*deltaY, z-distance*deltaZ);
-
-		return c;
-	}
-
 }

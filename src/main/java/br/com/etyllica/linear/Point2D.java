@@ -89,7 +89,7 @@ public class Point2D {
 		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
 		
 		return angleInDegrees;
-	}	
+	}
 	
 	public static double angle(double px, double py, double qx, double qy) {
 		
