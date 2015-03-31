@@ -57,8 +57,8 @@ public class Point3D extends br.com.etyllica.linear.Point3D {
 	}
 
 	@Override
-	public String toString(){
+	public String toString() {
 		return x+" , "+y+" , "+z;
 	}
-
+	
 }

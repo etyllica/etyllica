@@ -78,14 +78,18 @@ public class Point2D {
 	}
 	
 	public double angle(double px, double py) {
-				
+		return angleXY(px, py);
+	}
+	
+	public double angleXY(double px, double py) {
+		
 		double deltaX = px - x;
 		double deltaY = py - y;
 
 		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
 		
-		return angleInDegrees;		
-	}
+		return angleInDegrees;
+	}	
 	
 	public static double angle(double px, double py, double qx, double qy) {
 		
@@ -132,6 +136,21 @@ public class Point2D {
 				
 		return dist;
 		
+	}
+	
+	public Point2D distantPoint(Point2D b, double distance) {
+		
+		double deltaX = x-b.getX();
+		double deltaY = y-b.getY();
+		
+		double dist = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+		
+		deltaX /= dist;
+		deltaY /= dist;
+				
+		Point2D c = new Point2D(x-distance*deltaX, y-distance*deltaY);
+
+		return c;
 	}
 	
 	public static Point2D clone(Point2D point) {
