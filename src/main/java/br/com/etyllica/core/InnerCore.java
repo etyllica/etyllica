@@ -10,6 +10,7 @@ import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.animation.scripts.SingleIntervalAnimation;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Context;
+import br.com.etyllica.context.IntervalUpdate;
 import br.com.etyllica.core.drawer.ArrowDrawer;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -234,7 +235,13 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		}else if(now-context.getLastUpdate() >= context.getUpdateInterval()) {
 
-			context.timeUpdate(now);
+			IntervalUpdate updated = context.getUpdated();
+			
+			if(updated==null) {
+				return false;
+			}
+			
+			updated.timeUpdate(now);
 
 			context.setLastUpdate(now);
 

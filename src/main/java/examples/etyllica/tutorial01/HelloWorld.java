@@ -20,7 +20,7 @@ public class HelloWorld extends Application {
 		loading = 10;
 		
 		hello = new ImageLayer(200,100,"hello.png");
-				
+		
 		loading = 100;
 
 	}

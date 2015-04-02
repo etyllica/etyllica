@@ -2,13 +2,14 @@ package examples.etyllica.tutorial22;
 
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.Application;
+import br.com.etyllica.context.IntervalUpdate;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.layer.GeometricLayer;
 
-public class SplitCameraApplication extends Application {
+public class SplitCameraApplication extends Application implements IntervalUpdate {
 	
 	private Camera camera1;
 	
@@ -17,6 +18,10 @@ public class SplitCameraApplication extends Application {
 	private GeometricLayer square;
 	
 	private GeometricLayer rectangle;
+
+	private boolean pressed = false;
+	private int aimY = 0;
+	
 		
 	public SplitCameraApplication(int w, int h) {
 		super(w, h);
@@ -33,11 +38,8 @@ public class SplitCameraApplication extends Application {
 		
 		rectangle = new GeometricLayer(20, 220, 100, 40);
 		
-		updateAtFixedRate(10);
+		updateAtFixedRate(10, this);
 	}
-	
-	private boolean pressed = false;
-	private int aimY = 0;
 	
 	public void timeUpdate(long now) {
 		

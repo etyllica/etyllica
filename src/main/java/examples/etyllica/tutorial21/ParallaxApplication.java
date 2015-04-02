@@ -2,10 +2,11 @@ package examples.etyllica.tutorial21;
 
 import br.com.etyllica.cinematics.parallax.ImageParallax;
 import br.com.etyllica.context.Application;
+import br.com.etyllica.context.IntervalUpdate;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.SVGColor;
 
-public class ParallaxApplication extends Application {
+public class ParallaxApplication extends Application implements IntervalUpdate {
 	
 	private ImageParallax parallax;
 
@@ -21,7 +22,7 @@ public class ParallaxApplication extends Application {
 		parallax = new ImageParallax("clouds.png");
 		parallax.setProximity(2);
 		
-		updateAtFixedRate(10);
+		updateAtFixedRate(10, this);
 	}
 	
 	@Override

@@ -2,13 +2,14 @@ package examples.etyllica.tutorial19;
 
 import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
+import br.com.etyllica.context.IntervalUpdate;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.layer.BufferedLayer;
 
-public class HexagonalApplication extends Application {
+public class HexagonalApplication extends Application implements IntervalUpdate {
 	
 	private BufferedLayer hexagon;
 
@@ -25,7 +26,7 @@ public class HexagonalApplication extends Application {
 		hexagon = new BufferedLayer("tiles/hexagon.png");
 		hexagon.setCoordinates(w/2-hexagon.getW()/2, h/2-hexagon.getH()/2);
 		
-		updateAtFixedRate(10);
+		updateAtFixedRate(10, this);
 	}
 	
 	@Override

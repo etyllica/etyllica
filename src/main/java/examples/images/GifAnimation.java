@@ -3,6 +3,7 @@ package examples.images;
 import java.util.List;
 
 import br.com.etyllica.context.Application;
+import br.com.etyllica.context.IntervalUpdate;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -10,7 +11,7 @@ import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.loader.image.ImageFrame;
 import br.com.etyllica.core.loader.image.ImageLoader;
 
-public class GifAnimation extends Application{
+public class GifAnimation extends Application implements IntervalUpdate {
 
 	public GifAnimation(int w, int h) {
 		super(w, h);
@@ -25,7 +26,7 @@ public class GifAnimation extends Application{
 				
 		frames = ImageLoader.getInstance().getAnimation("shark.gif");
 
-		updateAtFixedRate(frames.get(0).getDelay());
+		updateAtFixedRate(frames.get(0).getDelay(), this);
 		
 		loading = 100;
 

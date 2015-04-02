@@ -2,12 +2,13 @@ package examples.jgl.application;
 
 import org.jgl.GLAUX;
 
+import br.com.etyllica.context.IntervalUpdate;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 
-public class Planet extends GLAUX{
+public class Planet extends GLAUX implements IntervalUpdate {
 	
 	public Planet(int w, int h) {
 		super(w,h);
@@ -18,7 +19,7 @@ public class Planet extends GLAUX{
 		
 		myReshape(w, h);
 		
-		updateAtFixedRate(50);
+		updateAtFixedRate(50, this);
 		
 		loading = 100;
 		
