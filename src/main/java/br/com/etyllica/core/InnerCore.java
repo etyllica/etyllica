@@ -279,9 +279,11 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	@Override
 	public void updateJoystickEvent(KeyEvent event) {
 
+		Context context = activeWindow.getContext();
+		
 		System.out.println("UpdateJoystick "+event.getKey());
 
-		activeWindow.getContext().updateKeyboard(event);
+		handleApplicationKeyEvents(context, event);
 	}
 
 	public void updatePointerEvents(List<PointerEvent> events, Context context, List<View> components) {
@@ -834,8 +836,9 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	@Override
 	public void updateKeyEvent(KeyEvent event) {
 
-		//Handle Application commands
-		activeWindow.getContext().updateKeyboard(event);
+		Context context = activeWindow.getContext();
+		
+		handleApplicationKeyEvents(context, event);
 
 		//Only the focused component handles the keyboard
 		if(focus!=null) {
@@ -868,6 +871,12 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		updateKeyboardEvents(event);
 
 		updateNumpadMouse(event);
+	}
+
+	protected void handleApplicationKeyEvents(Context context, KeyEvent event) {
+						
+		//Handle Application commands
+		context.updateKeyboard(event);
 	}
 
 	private void fixEventPosition(PointerEvent event) {

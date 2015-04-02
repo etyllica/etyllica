@@ -19,7 +19,7 @@ public class FrameSkippingLoop extends GameLoopImpl {
 	}
 
 	@Override
-	public void loop() {
+	public boolean loop() {
 
 		long beginTime;		// the time when the cycle begun
 		long timeDiff;		// the time it took for the cycle to execute
@@ -61,6 +61,7 @@ public class FrameSkippingLoop extends GameLoopImpl {
 				framesSkipped++;
 			}
 		}
+		return true;
 	}
 
 }

@@ -11,7 +11,7 @@ public class SimpleGameLoop extends GameLoopImpl {
 	}
 
 	@Override
-	public void loop() {
+	public boolean loop() {
 		
 		long previous = System.currentTimeMillis();
 		
@@ -48,7 +48,7 @@ public class SimpleGameLoop extends GameLoopImpl {
 			}
 		  
 		}
-		
+		return true;		
 	}
 	
 }

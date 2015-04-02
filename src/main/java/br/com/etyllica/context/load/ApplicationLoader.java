@@ -85,26 +85,22 @@ public class ApplicationLoader implements LoadListener {
 					notifyTextChanged();
 					
 					notifyLoadingChanged();
+					
+					getError();
 				}
-				
+												
 			} else {
-				
-				try {
-					future.get();
-				} catch (ExecutionException e) {
-					Throwable cause = e.getCause();
-					cause.printStackTrace();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
+								
 				window.setApplication(application);
 
 				window.setLoaded(true);
+		
+				//getError();
 				
 				loadExecutor.shutdownNow();
 			}
 		}
+		
 	}
 	
 	private void notifyTextChanged() {
@@ -154,6 +150,17 @@ public class ApplicationLoader implements LoadListener {
 	@Override
 	public void loaded() {
 		called = true;
+	}
+
+	protected void getError() {
+		try {
+			future.get();
+		} catch (ExecutionException e) {
+			Throwable cause = e.getCause();
+			cause.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

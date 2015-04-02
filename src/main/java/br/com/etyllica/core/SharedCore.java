@@ -16,6 +16,10 @@ import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
@@ -52,12 +56,12 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 	private Graphic graphic;
 
-	private FullScreenWindow telaCheia = null;
+	private FullScreenWindow fullScreen = null;
 
 	private Engine engine;
 	
 	private InnerCore innerCore;
-
+		
 	private List<Monitor> monitors = new ArrayList<Monitor>();
 	
 	private boolean running = true;
@@ -65,6 +69,10 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 	private GameLoop gameLoop;
 	
 	private boolean locked = false;
+	
+	private Future<?> future;
+	
+	private ExecutorService executor = Executors.newSingleThreadExecutor();
 	
 	public SharedCore(Component component, int width, int height) {
 		super();
@@ -166,7 +174,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		}
 
 		if(!innerCore.fullScreenEnable) {
-			telaCheia = new FullScreenWindow(innerCore, selectedMonitor);
+			fullScreen = new FullScreenWindow(innerCore, selectedMonitor);
 			innerCore.fullScreenEnable = true;
 		}
 
@@ -175,7 +183,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 	}
 
 	public void disableFullScreen() {
-		telaCheia.dispose();
+		fullScreen.dispose();
 
 		innerCore.fullScreenEnable = false;
 	}
@@ -267,11 +275,10 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 			g.drawImage(graphic.getVimg(), (int)window.getContext().getX(), (int)window.getContext().getY(), component);
 		}
 		else{
-			telaCheia.draw(graphic.getVimg());
+			fullScreen.draw(graphic.getVimg());
 		}
 
 		g.dispose();
-
 	}
 
 	public int getW() {
@@ -301,7 +308,6 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		innerCore.update(now);
 			
 		updateEngine(delta);
-		
 	}
 	
 	public void render() {
@@ -320,15 +326,26 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		
 		component.setVisible(true);
 		
-		new Thread(this).start();
-		
+		future = executor.submit(this);
 	}
 		
 	@Override
 	public void run() {
 
-		gameLoop.loop();
+		if(!gameLoop.loop()) {
+			getError();
+		}
+	}
 
+	protected void getError() {
+		try {
+			future.get();
+		} catch (ExecutionException e) {
+			Throwable cause = e.getCause();
+			cause.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 		
 	private void updateEngine(double delta) {
