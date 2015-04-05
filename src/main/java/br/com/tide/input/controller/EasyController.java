@@ -30,7 +30,7 @@ public class EasyController extends Controller {
 
 		startButton = KeyEvent.TSK_ENTER;
 
-		startButton = KeyEvent.TSK_SPACE;
+		selectButton = KeyEvent.TSK_SPACE;
 
 	}
 
