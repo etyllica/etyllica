@@ -105,7 +105,9 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	protected DefaultLoadApplication loadApplication;
 	
 	protected int fps = 0;
-		
+	
+	private boolean drawCursor = true; 
+	
 	/**
 	 * Constructor
 	 * 
@@ -318,6 +320,22 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 	public IntervalUpdate getUpdated() {
 		return updated;
-	}	
+	}
+
+	public boolean isDrawCursor() {
+		return drawCursor;
+	}
+	
+	public void setDrawCursor(boolean drawCursor) {
+		this.drawCursor = drawCursor;
+	}
+
+	public void hideCursor() {
+		this.drawCursor = false;
+	}
+	
+	public void showCursor() {
+		this.drawCursor = true;
+	}
 	
 }

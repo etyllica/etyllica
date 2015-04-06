@@ -517,8 +517,10 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		drawGlobalEffects(g);
 
 		if(drawCursor) {
-			arrowDrawer.setCoordinates(mouse.getX(), mouse.getY());
-			arrowDrawer.draw(g);
+			if(activeWindow.getContext().isDrawCursor()) {
+				arrowDrawer.setCoordinates(mouse.getX(), mouse.getY());
+				arrowDrawer.draw(g);
+			}
 		}
 
 	}
@@ -783,13 +785,14 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		application.setSession(activeWindow.getSession());
 
 		application.setCamera(activeWindow.getCamera());
+		
+		application.setDrawCursor(drawCursor);
 
 		application.setMouseStateListener(arrowDrawer);
 
 		application.setLanguageChangerListener(this);
 
 		activeWindow.reload(application);
-
 	}
 
 	private void fastReload() {
