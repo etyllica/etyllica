@@ -21,11 +21,18 @@ public class FirstPersonController extends Controller {
 	protected int MAX_UP_ANGLE = 80;
 	protected int MIN_UP_ANGLE = -80;
 	
-	protected boolean inverted = false;
+	protected boolean invertedVertically = false;
 	
 	protected int sensitivity = 2;
 	
+	/**
+	 * Vertical Angle
+	 */
 	protected double angleX = 0;
+	
+	/**
+	 * Horizontal Angle
+	 */
 	protected double angleY = 0;
 	
 	/**
@@ -38,7 +45,7 @@ public class FirstPersonController extends Controller {
 		int mx = event.getX();
 		int my = event.getY();
 		
-		int invert = inverted ? -1: 1;
+		int invert = invertedVertically ? -1: 1;
 		
 		int dx = w/2-mx;
 		int dy = h/2-my;
@@ -47,7 +54,7 @@ public class FirstPersonController extends Controller {
 		angleY = dx*sensitivity;
 		angleX = dy*sensitivity * invert;
 				
-		angleX = clampAngle(angleX, 90);				
+		angleX = clampAngle(angleX, 90);		
 	}
 	
 	private double clampAngle(double angle, int limit) {
@@ -68,5 +75,21 @@ public class FirstPersonController extends Controller {
 	public double getAngleY() {
 		return angleY;
 	}
+
+	public boolean isInvertedVertically() {
+		return invertedVertically;
+	}
+
+	public void setInvertedVertically(boolean invertedVertically) {
+		this.invertedVertically = invertedVertically;
+	}
+
+	public int getSensitivity() {
+		return sensitivity;
+	}
+
+	public void setSensitivity(int sensitivity) {
+		this.sensitivity = sensitivity;
+	}	
 	
 }

@@ -10,7 +10,7 @@ import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.animation.scripts.SingleIntervalAnimation;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Context;
-import br.com.etyllica.context.IntervalUpdate;
+import br.com.etyllica.context.UpdateIntervalListener;
 import br.com.etyllica.core.drawer.ArrowDrawer;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -235,7 +235,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		}else if(now-context.getLastUpdate() >= context.getUpdateInterval()) {
 
-			IntervalUpdate updated = context.getUpdated();
+			UpdateIntervalListener updated = context.getUpdated();
 			
 			if(updated==null) {
 				return false;
@@ -778,8 +778,9 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	private void reload(Context application) {
 
-		if(application==null) {
+		if(application == null) {
 			System.err.println("Application cannot be null.");
+			return;
 		}
 
 		application.setSession(activeWindow.getSession());

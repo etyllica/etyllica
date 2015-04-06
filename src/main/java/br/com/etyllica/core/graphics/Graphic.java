@@ -800,7 +800,7 @@ public class Graphic {
 	}
 
 	public void fillRect(Layer layer) {
-
+		
 		AffineTransform transform = layer.getTransform();
 
 		if(transform == null)

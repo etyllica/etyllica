@@ -250,7 +250,6 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
 				, new Point(0, 0), "invisibleCursor");
 		component.setCursor( transparentCursor );
-		
 	}
 
 	public void paint( Graphics g ) {

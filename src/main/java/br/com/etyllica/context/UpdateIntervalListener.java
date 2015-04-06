@@ -1,5 +1,5 @@
 package br.com.etyllica.context;
 
-public interface IntervalUpdate {
+public interface UpdateIntervalListener {
 	public void timeUpdate(long now);
 }

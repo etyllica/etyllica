@@ -13,8 +13,7 @@ public class PointInt2D {
 	public PointInt2D(int x, int y) {
 		super();
 		
-		this.x = x;
-		this.y = y;
+		setLocation(x, y);
 	}
 
 	public int getX() {

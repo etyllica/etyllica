@@ -2,13 +2,13 @@ package examples.jgl.application;
 
 import org.jgl.GLAUX;
 
-import br.com.etyllica.context.IntervalUpdate;
+import br.com.etyllica.context.UpdateIntervalListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 
-public class Planet extends GLAUX implements IntervalUpdate {
+public class Planet extends GLAUX implements UpdateIntervalListener {
 	
 	public Planet(int w, int h) {
 		super(w,h);

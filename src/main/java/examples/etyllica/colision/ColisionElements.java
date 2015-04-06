@@ -4,14 +4,14 @@ import java.awt.Color;
 
 import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
-import br.com.etyllica.context.IntervalUpdate;
+import br.com.etyllica.context.UpdateIntervalListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.layer.Layer;
 
-public class ColisionElements extends Application implements IntervalUpdate {
+public class ColisionElements extends Application implements UpdateIntervalListener {
 
 	private Color color = Color.BLUE;
 

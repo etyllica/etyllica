@@ -2,14 +2,14 @@ package examples.etyllica.tutorial19;
 
 import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
-import br.com.etyllica.context.IntervalUpdate;
+import br.com.etyllica.context.UpdateIntervalListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.layer.BufferedLayer;
 
-public class HexagonalApplication extends Application implements IntervalUpdate {
+public class HexagonalApplication extends Application implements UpdateIntervalListener {
 	
 	private BufferedLayer hexagon;
 

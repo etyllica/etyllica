@@ -33,7 +33,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	/**
 	 * Listener to be updated
 	 */
-	private IntervalUpdate updated = null;
+	private UpdateIntervalListener updated = null;
 
 	/**
 	 * Transition effect while change to returned Application
@@ -226,7 +226,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 		this.title = title;
 	}
 
-	protected  void updateAtFixedRate(int interval, IntervalUpdate updated) {
+	protected  void updateAtFixedRate(int interval, UpdateIntervalListener updated) {
 		updateInterval = interval;
 		this.updated = updated;
 	}
@@ -318,7 +318,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 		return loadApplication;
 	}
 
-	public IntervalUpdate getUpdated() {
+	public UpdateIntervalListener getUpdated() {
 		return updated;
 	}
 
