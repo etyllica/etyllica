@@ -1,6 +1,9 @@
 package br.com.etyllica.core;
 
+import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -43,6 +46,8 @@ import br.com.etyllica.theme.listener.ThemeListener;
 
 public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener, LanguageChangerListener {
 
+	protected Rectangle componentBounds;
+	
 	//External Windows
 	private Window activeWindow = null;
 
@@ -91,14 +96,16 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	private ArrowDrawer arrowDrawer;
 
 	private LanguageHandler languageHandler;
+	
+	private Robot robot;
 
 	private List<Updatable> updatables = new ArrayList<Updatable>();
 
 	private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
-
+	
 	public InnerCore() {
 		super();
-
+		
 		guiEvents = new ArrayList<GUIEvent>();
 
 		control = new HIDController(this);
@@ -110,10 +117,25 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		arrowDrawer = new ArrowDrawer();
 
 		languageHandler = new LanguageHandler();
-
+		
 		initTheme();
 
 		updatables.add(AnimationHandler.getInstance());
+	}
+
+	public InnerCore(Rectangle componentBounds) {
+		this();
+
+		this.componentBounds = componentBounds;
+	}
+
+	private void initRobot() {
+		try {
+			robot = new Robot();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void initTheme() {
@@ -296,15 +318,38 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	public void updatePointerEvents(List<PointerEvent> events, Context context, List<View> components) {
 
 		int eventSize = events.size(); 
-
+		
+		int referenceX = 0;
+		int referenceY = 0;
+		
 		for(int i=0; i < eventSize; i++) {
 
 			PointerEvent event = events.get(i);
 
+			if(context.isActiveCenterMouse()) {
+				
+				if(robot == null) {
+					initRobot();
+				}
+				
+				event.setX(event.getX()-referenceX);
+				event.setY(event.getY()-referenceY);				
+			}
+			
 			context.updateMouse(event);
 
 			updatePointerEvent(event, components);
+			
+			if(context.isActiveCenterMouse()) {
+				int centerX = componentBounds.width/2;
+				int centerY = componentBounds.height/2;
+				robot.mouseMove(centerX, centerY);
+				
+				referenceX = event.getX()-centerX;
+				referenceY = event.getY()-centerY;
+			}
 		}
+		
 	}
 
 	public void updatePointerEvent(PointerEvent event, List<View> components) {
@@ -313,7 +358,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		updateMouseComponents(event, components);
 
-		updateWindowEvent(event, activeWindow);
+		updateWindowEvent(event, activeWindow);		
 	}
 
 	private void updateMouseComponents(PointerEvent event, List<View> components) {
@@ -379,7 +424,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		//Update Childs
 		for(View child: component.getViews()) {
-
 			updateGuiComponent(child, event);
 		}
 	}
@@ -393,7 +437,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		GUIEvent result = component.safeUpdateMouse(event);
 		
 		if(GUIEvent.MOUSE_IN == result) {
-			setMouseOver(component);			
+			setMouseOver(component);
 			return GUIEvent.NONE;
 		} else if (GUIEvent.MOUSE_OUT == result) {
 			resetMouseOver();
@@ -483,7 +527,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			 */
 
 		case UPDATE_MOUSE:
-			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));						
 			break;
 
 		case APPLICATION_CHANGED:

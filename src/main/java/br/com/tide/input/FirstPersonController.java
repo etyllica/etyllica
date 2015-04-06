@@ -51,6 +51,22 @@ public class FirstPersonController extends Controller {
 		int dy = h/2-my;
 
 		//The best to do is increment values (+=) and move mouse to center
+		angleY += dx*sensitivity;
+		angleX += dy*sensitivity * invert;
+				
+		angleX = clampAngle(angleX, 90);	
+	}
+	
+	public void updateMouseInactiveCenter(int w, int h, PointerEvent event) {
+		int mx = event.getX();
+		int my = event.getY();
+		
+		int invert = invertedVertically ? -1: 1;
+		
+		int dx = w/2-mx;
+		int dy = h/2-my;
+
+		//The best to do is increment values (+=) and move mouse to center
 		angleY = dx*sensitivity;
 		angleX = dy*sensitivity * invert;
 				

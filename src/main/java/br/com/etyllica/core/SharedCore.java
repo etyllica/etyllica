@@ -78,7 +78,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		super();
 
 		this.component = component;
-
+		
 		this.configuration = component.getGraphicsConfiguration();
 
 		this.width = width;
@@ -86,16 +86,26 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 		this.window = new Window(0, 0, width, height);
 		
-		initGraphics(width, height);	
-
-		innerCore = new InnerCore();
+		initGraphics(width, height);
+		
+		innerCore = new InnerCore(component.getBounds());
 
 		initMonitors();
+		moveToCenter(component);
 		
 		gameLoop = new FrameSkippingLoop(this);
 		
 	}
 	
+	private void moveToCenter(Component component) {
+		
+		Monitor firstMonitor = monitors.get(0);
+		int x = firstMonitor.getW()/2-component.getWidth()/2;
+		int y = firstMonitor.getH()/2-component.getHeight()/2;
+		
+		component.setLocation(x, y);
+	}
+
 	public void setSession(Session session) {
 		window.setSessionMap(session);
 	}

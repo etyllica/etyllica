@@ -90,6 +90,11 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	 * Pause
 	 */
 	protected boolean paused = false;
+	
+	/**
+	 * Active Center Mouse
+	 */
+	protected boolean activeCenterMouse = false;
 
 	private LoadListener loadListener;
 	
@@ -336,6 +341,10 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	
 	public void showCursor() {
 		this.drawCursor = true;
+	}
+
+	public boolean isActiveCenterMouse() {
+		return activeCenterMouse;
 	}
 	
 }

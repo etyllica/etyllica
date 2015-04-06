@@ -1,5 +1,6 @@
 package br.com.etyllica.gui;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,10 @@ public class Window extends GeometricLayer implements ContextContainer {
 		
 		loadApplication = new GenericLoadApplication(x,y,w,h);
 		loadApplication.load();
+	}
+	
+	public Rectangle getAsRectangle() {
+		return new Rectangle(x, y, w, h);
 	}
 
 	public void restartWindow() {
