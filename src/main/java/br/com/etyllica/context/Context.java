@@ -1,5 +1,7 @@
 package br.com.etyllica.context;
 
+import java.awt.Rectangle;
+
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.load.DefaultLoadApplication;
 import br.com.etyllica.context.load.LoadListener;
@@ -11,6 +13,7 @@ import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
 import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.View;
+import br.com.etyllica.gui.Window;
 import br.com.etyllica.i18n.Language;
 import br.com.etyllica.i18n.LanguageChanger;
 import br.com.etyllica.i18n.LanguageChangerListener;
@@ -101,6 +104,8 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	private MouseStateListener mouseStateListener;
 	
 	private LanguageChangerListener languageChangerListener;
+	
+	protected Window parent;
 		
 	/**
 	 * Returned Application (next Application to show up)
@@ -111,7 +116,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	
 	protected int fps = 0;
 	
-	private boolean drawCursor = true; 
+	private boolean drawCursor = true;
 	
 	/**
 	 * Constructor
@@ -345,6 +350,12 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 	public boolean isActiveCenterMouse() {
 		return activeCenterMouse;
+	}
+
+	public void setParent(Window window) {
+		this.parent = window;
+		setSession(window.getSession());
+		setCamera(window.getCamera());
 	}
 	
 }

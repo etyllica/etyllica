@@ -1,7 +1,14 @@
 package br.com.tide.input;
 
+import java.awt.AWTException;
+import java.awt.MouseInfo;
+import java.awt.Robot;
+
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.layer.GeometricLayer;
+import br.com.etyllica.layer.Layer;
+import br.com.etyllica.linear.PointInt2D;
 import br.com.tide.input.controller.Controller;
 
 /**
@@ -25,6 +32,8 @@ public class FirstPersonController extends Controller {
 	
 	protected int sensitivity = 2;
 	
+	private PointInt2D offset = new PointInt2D();
+	
 	/**
 	 * Vertical Angle
 	 */
@@ -40,50 +49,81 @@ public class FirstPersonController extends Controller {
 	 * @param w - Game window's width
 	 * @param h - Game window's height
 	 * @param event - The mouse event
+	 * @return mouse offset from center;
 	 */
-	public void updateMouse(int w, int h, PointerEvent event) {
+	public PointInt2D updateMouse(GeometricLayer layer, PointerEvent event) {
 		int mx = event.getX();
 		int my = event.getY();
 		
 		int invert = invertedVertically ? -1: 1;
 		
-		int dx = w/2-mx;
-		int dy = h/2-my;
+		double dx = (layer.getW()/2-mx);
+		double dy = (layer.getH()/2-my);
 
-		//The best to do is increment values (+=) and move mouse to center
-		angleY += dx*sensitivity;
-		angleX += dy*sensitivity * invert;
-				
-		angleX = clampAngle(angleX, 90);	
-	}
-	
-	public void updateMouseInactiveCenter(int w, int h, PointerEvent event) {
-		int mx = event.getX();
-		int my = event.getY();
-		
-		int invert = invertedVertically ? -1: 1;
-		
-		int dx = w/2-mx;
-		int dy = h/2-my;
-
-		//The best to do is increment values (+=) and move mouse to center
 		angleY = dx*sensitivity;
 		angleX = dy*sensitivity * invert;
-				
-		angleX = clampAngle(angleX, 90);		
-	}
-	
-	private double clampAngle(double angle, int limit) {
 		
-		if(angle<-limit) {
-			return -limit;
-		} else if(angle>limit) {
-			return limit;
-		}
+		//TODO Infinite rotate in Y
+		System.out.println("dx: "+dx);
+		System.out.println("ly: "+layer.getY());
 		
-		return angle; 
+		System.out.println("my: "+my);
+		System.out.println("Ax: "+angleX);
+			
+		updateMouse(layer, dx, dy);
+		
+		return offset;
 	}
 
+	protected void updateMouse(GeometricLayer window, double dx, double dy) {
+		
+		int x = MouseInfo.getPointerInfo().getLocation().x;
+		int y = MouseInfo.getPointerInfo().getLocation().y;
+		
+		boolean needUpdate = false;
+		
+		//Clamp angle Y (Horizontal)
+		if(dx<-360) {
+			int offset = 360+(int)dx;
+			x = window.getX()+window.getW()/2+offset;
+			
+			needUpdate = true;
+		} else if(dx>360) {
+			int offset = 360-(int)dx;
+			x = window.getX()+window.getW()/2+offset;
+			
+			needUpdate = true;
+		}
+		
+		//Clamp angle X (Vertical)
+		if(dy<-90) {
+			y = (int) (window.getY()+mouseYfromAngle(window, -90));
+			needUpdate = true;
+		} else if(dy>90) {
+			y = (int) (window.getY()+mouseYfromAngle(window, 90));
+			needUpdate = true;
+		}
+		
+		if(needUpdate) {
+			try {
+				Robot robot = new Robot();
+				robot.mouseMove(x, y);
+			} catch (AWTException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private double mouseYfromAngle(GeometricLayer window, double angle) {
+				
+		int invert = invertedVertically ? -1: 1;
+		
+		double value = ((angle/sensitivity)+window.getH()/2)*invert;
+		
+		return value;
+	}
+	
 	public double getAngleX() {
 		return angleX;
 	}

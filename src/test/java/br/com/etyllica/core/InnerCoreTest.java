@@ -34,7 +34,7 @@ public class InnerCoreTest {
 		fakeApplication = createFakeApplication();
 		window.setApplication(fakeApplication);
 		
-		innerCore = new InnerCore(window.getAsRectangle());
+		innerCore = new InnerCore();
 		
 		innerCore.replaceWindow(window);
 		
