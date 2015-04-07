@@ -1,9 +1,11 @@
 package br.com.etyllica.core;
 
-import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Frame;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -20,6 +22,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.input.HIDController;
 import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
@@ -97,11 +100,11 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	private LanguageHandler languageHandler;
 	
-	private Robot robot;
-
 	private List<Updatable> updatables = new ArrayList<Updatable>();
 
 	private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
+	
+	private List<Monitor> monitors = new ArrayList<Monitor>();
 	
 	public InnerCore() {
 		super();
@@ -121,22 +124,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		initTheme();
 
 		updatables.add(AnimationHandler.getInstance());
-	}
-
-	public InnerCore(Rectangle componentBounds) {
-		this();
-
-		this.componentBounds = componentBounds;
-	}
-
-	private void initRobot() {
-		try {
-			robot = new Robot();
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	}	
 
 	private void initTheme() {
 
@@ -314,40 +302,19 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		handleApplicationKeyEvents(context, event);
 	}
-
+	
 	public void updatePointerEvents(List<PointerEvent> events, Context context, List<View> components) {
 
 		int eventSize = events.size(); 
 		
-		int referenceX = 0;
-		int referenceY = 0;
-		
 		for(int i=0; i < eventSize; i++) {
 
 			PointerEvent event = events.get(i);
-
-			if(context.isActiveCenterMouse()) {
-				
-				if(robot == null) {
-					initRobot();
-				}
-				
-				event.setX(event.getX()-referenceX);
-				event.setY(event.getY()-referenceY);				
-			}
 			
 			context.updateMouse(event);
 
 			updatePointerEvent(event, components);
 			
-			if(context.isActiveCenterMouse()) {
-				int centerX = componentBounds.width/2;
-				int centerY = componentBounds.height/2;
-				robot.mouseMove(centerX, centerY);
-				
-				referenceX = event.getX()-centerX;
-				referenceY = event.getY()-centerY;
-			}
 		}
 		
 	}
@@ -807,7 +774,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	}
 
 	public void setMainApplication(Application application) {
-
 		reload(application);
 	}
 
@@ -826,17 +792,15 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			System.err.println("Application cannot be null.");
 			return;
 		}
-
-		application.setSession(activeWindow.getSession());
-
-		application.setCamera(activeWindow.getCamera());
+		
+		application.setParent(activeWindow);
 		
 		application.setDrawCursor(drawCursor);
 
 		application.setMouseStateListener(arrowDrawer);
 
 		application.setLanguageChangerListener(this);
-
+		
 		activeWindow.reload(application);
 	}
 
@@ -1005,5 +969,46 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
 	}
+	
+	public void initMonitors(int width, int height) {
+
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice[] devices = ge.getScreenDevices();
+
+		if(devices.length > 0) {
+
+			for (int i = 0; i < devices.length; i++) {
+
+				Rectangle gcBounds = devices[i].getDefaultConfiguration().getBounds();
+
+				int x = gcBounds.x;
+
+				int y = gcBounds.y;
+
+				int w = gcBounds.width;
+
+				int h = gcBounds.height;
+
+				monitors.add(new Monitor(x, y, w, h));
+			}
+
+		} else {
+			monitors.add(new Monitor(0, 0, width, height));
+		}
+
+	}
+	
+	public void moveToCenter(Component component) {
+		
+		Monitor firstMonitor = monitors.get(0);
+		int x = firstMonitor.getW()/2-component.getWidth()/2;
+		int y = firstMonitor.getH()/2-component.getHeight()/2;
+				
+		component.setLocation(x, y);
+	}
+	
+	public List<Monitor> getMonitors() {
+		return monitors;
+	}	
 
 }

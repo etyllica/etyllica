@@ -26,7 +26,7 @@ public class GeometricLayer extends PointInt2D implements Movable {
 	
 	public GeometricLayer(int x, int y, int w, int h) {
 		super();
-		setBounds(x, y, w, h);		
+		setBounds(x, y, w, h);
 	}
 
 	public int getW() {

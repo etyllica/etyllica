@@ -62,8 +62,6 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 	
 	private InnerCore innerCore;
 		
-	private List<Monitor> monitors = new ArrayList<Monitor>();
-	
 	private boolean running = true;
 	
 	private GameLoop gameLoop;
@@ -83,29 +81,19 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 		this.width = width;
 		this.height = height;
-
-		this.window = new Window(0, 0, width, height);
 		
 		initGraphics(width, height);
 		
-		innerCore = new InnerCore(component.getBounds());
+		innerCore = new InnerCore();
 
-		initMonitors();
-		moveToCenter(component);
+		innerCore.initMonitors(width, height);
+		innerCore.moveToCenter(component);
 		
-		gameLoop = new FrameSkippingLoop(this);
+		window = new Window(component.getX(), component.getY(), width, height);
 		
+		gameLoop = new FrameSkippingLoop(this);		
 	}
 	
-	private void moveToCenter(Component component) {
-		
-		Monitor firstMonitor = monitors.get(0);
-		int x = firstMonitor.getW()/2-component.getWidth()/2;
-		int y = firstMonitor.getH()/2-component.getHeight()/2;
-		
-		component.setLocation(x, y);
-	}
-
 	public void setSession(Session session) {
 		window.setSessionMap(session);
 	}
@@ -119,34 +107,6 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		defineSize(width, height);
 		
 		locked = false;
-	}
-
-	private void initMonitors() {
-
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsDevice[] devices = ge.getScreenDevices();
-
-		if(devices.length > 0) {
-
-			for (int i = 0; i < devices.length; i++) {
-
-				Rectangle gcBounds = devices[i].getDefaultConfiguration().getBounds();
-
-				int x = gcBounds.x;
-
-				int y = gcBounds.y;
-
-				int width = gcBounds.width;
-
-				int height = gcBounds.height;
-
-				monitors.add(new Monitor(x, y, width, height));
-			}
-
-		} else {
-			monitors.add(new Monitor(0, 0, width, height));
-		}
-
 	}
 
 	public String getPath() {
@@ -172,11 +132,11 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 	public void enableFullScreen() {
 
-		Monitor selectedMonitor = monitors.get(0);
+		Monitor selectedMonitor = innerCore.getMonitors().get(0);
 
 		Point p = this.component.getLocation();
 
-		for(Monitor monitor: monitors) {
+		for(Monitor monitor: innerCore.getMonitors()) {
 
 			if(CollisionDetector.colideRectPoint(monitor, p.x, p.y)) {
 				selectedMonitor = monitor;
@@ -189,7 +149,6 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		}
 
 		innerCore.addEffect(new GenericFullScreenEffect(0, 0, this.width, height));
-
 	}
 
 	public void disableFullScreen() {
