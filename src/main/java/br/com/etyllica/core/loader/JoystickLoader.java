@@ -39,7 +39,7 @@ public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
 	
 	private InputKeyListener listener;
 	
-	private int updateDelay = 20;
+	private int updateDelay = 5;//5 ms
 	
 	private int joysticks = 5;
 
@@ -88,7 +88,7 @@ public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
 			init(joysticks);
 		}
 			
-		update(0);		
+		update(0);
 	}
 
 	public List<KeyEvent> getJoyEvents() {
@@ -116,10 +116,10 @@ public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
 
 	private void listen(Integer id){
 
-		KeyEvent event = inputStreams.get(id).listen();
+		List<KeyEvent> eventList = inputStreams.get(id).listen();
 		
-		if(event!=null) {
-			joystickEvents.add(event);
+		if(!eventList.isEmpty()) {
+			joystickEvents.addAll(eventList);
 		}
 		
 	}

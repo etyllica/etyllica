@@ -12,7 +12,7 @@ public class KeyEvent{
 		
 	private int amount = Character.getNumericValue('\0');
 	
-	private long timestamp = System.currentTimeMillis();
+	private long timestamp = -1;
 	
 	public KeyEvent(int key, KeyState state) {
 		super();
@@ -37,14 +37,19 @@ public class KeyEvent{
 		this.amount = amount;
 		this.state = state;
 	}
+	
+	public KeyEvent(int id, int key, int amount, KeyState state, long timestamp) {
+		super();
+		
+		this.id = id;
+		this.key = key;
+		this.amount = amount;
+		this.state = state;
+		this.timestamp = timestamp;
+	}
 
 	public boolean isKeyDown(int keyCode) {
-		
-		if(this.key == keyCode){
-			return state==KeyState.PRESSED;
-		}
-		
-		return false;
+		return this.key == keyCode && state == KeyState.PRESSED;		
 	}
 	
 	public boolean isAnyKeyDown(int ... keyCodes) {
@@ -58,13 +63,8 @@ public class KeyEvent{
 		return false;
 	}
 		
-	public boolean isKeyUp(int keyCode){
-		
-		if(this.key == keyCode){
-			return state==KeyState.RELEASED;
-		}
-		
-		return false;
+	public boolean isKeyUp(int keyCode) {
+		return this.key == keyCode && state == KeyState.RELEASED;		
 	}
 	
 	public boolean isAnyKeyUp(int ... keyCodes) {
@@ -106,8 +106,17 @@ public class KeyEvent{
 	public KeyState getState() {
 		return state;
 	}
+	
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
 
 	public long getTimestamp() {
+		
+		if(timestamp<0) {
+			return System.currentTimeMillis();
+		}
+		
 		return timestamp;
 	}
 
