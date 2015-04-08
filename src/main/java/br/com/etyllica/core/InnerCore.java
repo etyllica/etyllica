@@ -288,7 +288,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		Context context = activeWindow.getContext();
 		
-		System.out.println("UpdateJoystick "+event.getKey());
+		//Debug Joystick Commands
+		//System.out.println("UpdateJoystick "+event.getKey());
 
 		handleApplicationKeyEvents(context, event);
 	}

@@ -15,7 +15,7 @@ public class SystemFontLoader extends LoaderImpl{
 	}
 	
 	@Override
-	public void start() {
+	public void initLoader() {
 
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		

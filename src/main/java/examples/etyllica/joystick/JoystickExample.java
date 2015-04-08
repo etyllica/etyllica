@@ -1,4 +1,4 @@
-package examples.etyllica.tutorial12;
+package examples.etyllica.joystick;
 
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
@@ -25,7 +25,6 @@ public class JoystickExample extends Application{
 	@Override
 	public void load() {
 		hello = new ImageLayer(200,100,"hello.png");
-		
 		loading = 100;
 	}
 
@@ -43,6 +42,13 @@ public class JoystickExample extends Application{
 	
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
+		
+		if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)){
+			hello.setOffsetX(10);
+		}
+		if(event.isKeyDown(KeyEvent.TSK_LEFT_ARROW)){
+			hello.setOffsetX(-10);
+		}
 		
 		if(event.isKeyDown(KeyEvent.TSK_JOYSTICK_RIGHT)){
 			hello.setOffsetX(10);

@@ -4,6 +4,6 @@ public interface Loader {
 	
 	public void setUrl(String url);
 	
-	public void start();
+	public void initLoader();
 
 }
