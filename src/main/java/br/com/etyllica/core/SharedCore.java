@@ -125,7 +125,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 
 		for(Loader loader:loaders) {
 			loader.setUrl(path);
-			loader.start();
+			loader.initLoader();
 		}
 
 	}

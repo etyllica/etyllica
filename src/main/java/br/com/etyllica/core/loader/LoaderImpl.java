@@ -39,7 +39,7 @@ public class LoaderImpl implements Loader {
 	}
 
 	@Override
-	public void start() {
+	public void initLoader() {
 		// TODO Auto-generated method stub
 		
 	}

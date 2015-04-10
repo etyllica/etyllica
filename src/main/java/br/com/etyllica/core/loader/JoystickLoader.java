@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.KeyEvent;
@@ -31,74 +35,73 @@ public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
 		return instance;
 	}
 	
-	@Override
-	public void run() {
-		
-		while(true) {
-			
-			update(0);
-			
-			try {
-				Thread.sleep(20);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}		
-	}
+	private boolean initialized = false;
 	
 	private InputKeyListener listener;
 	
-	private int joysticks = 10;
+	private int updateDelay = 5;//5 ms
+	
+	private int joysticks = 5;
 
 	private List<KeyEvent> joystickEvents = new ArrayList<KeyEvent>();
 
 	private Map<Integer, Joystick> inputStreams = new HashMap<Integer, Joystick>();
-		
+	
+	private ScheduledExecutorService executor;
+	
+	private ScheduledFuture<?> future;
+					
 	public void init(int joysticks) {
 		this.joysticks = joysticks;
-		start();
+		initLoader();
 		
-		new Thread(JoystickLoader.getInstance()).start();
+		executor = Executors.newSingleThreadScheduledExecutor();
+		future = executor.scheduleAtFixedRate(this, updateDelay, updateDelay, TimeUnit.MILLISECONDS);
 	}
 	
 	@Override
-	public void start() {
+	public void initLoader() {
 
+		initialized = true;
+		
 		int j = 0;
 
-		for(;j<joysticks;j++){
+		for(;j<joysticks;j++) {
 
 			try {
 				this.inputStreams.put(j, new Joystick(j));
 				System.out.println("Joystick "+j+ " found!");
 
 			} catch (FileNotFoundException e) {
-
-				System.out.println("Joystick "+j+ " not found.");
-				
-				//e.printStackTrace();
-				
-				return;	
+				System.out.println("Joystick "+j+ " not found.");								
+				break;
 			}
 		}
 		
 		this.joysticks = j;
+	}
 	
+	@Override
+	public void run() {
+		
+		if(!initialized) {
+			init(joysticks);
+		}
+			
+		update(0);
 	}
 
 	public List<KeyEvent> getJoyEvents() {
 		return joystickEvents;
 	}
 
-	public void update(long now){
-		
-		for(Entry<Integer, Joystick> entry: inputStreams.entrySet()){
+	public void update(long now) {
+				
+		for(Entry<Integer, Joystick> entry: inputStreams.entrySet()) {
 			listen(entry.getKey());
 		}
 		
 		notifyListener();
-
 	}
 	
 	private void notifyListener(){
@@ -113,11 +116,11 @@ public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
 
 	private void listen(Integer id){
 
-		KeyEvent event = inputStreams.get(id).listen();
+		List<KeyEvent> eventList = inputStreams.get(id).listen();
 		
-		if(event!=null){
-			joystickEvents.add(event);
-		}		
+		if(!eventList.isEmpty()) {
+			joystickEvents.addAll(eventList);
+		}
 		
 	}
 
@@ -127,6 +130,10 @@ public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
 
 	public void setListener(InputKeyListener listener) {
 		this.listener = listener;
+	}
+	
+	public ScheduledFuture<?> getFuture() {
+		return future;
 	}
 	
 }

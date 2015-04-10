@@ -3,24 +3,31 @@ package br.com.etyllica.core.input.joystick;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyState;
 
-public class Joystick{
+public class Joystick {
 
+	private int id;
+
+	private int lastXEvent = KeyEvent.TSK_JOYSTICK_CENTER_X;
+	private int lastYEvent = KeyEvent.TSK_JOYSTICK_CENTER_Y;
+	
+	private List<KeyEvent> list;
+	
+	private FileInputStream inputStream;
+	
 	private static final int JS_EVENT_BUTTON = 0x01;
 	private static final int JS_EVENT_AXIS = 0x02;
 	private static final int JS_EVENT_INIT = 0x80;
 
 	public static final int MAX_AXIS_MOVEMENT = 32767;
 	public static final int MIN_AXIS_MOVEMENT = -32767;
-
-	private final String JOYSTICK_DIRECTORY = "/dev/input/js";
-
-	private FileInputStream inputStream;
-
-	private int id;
+	
+	private static final String JOYSTICK_DIRECTORY = "/dev/input/js";
 
 	public Joystick(int id) throws FileNotFoundException{
 		super();
@@ -28,15 +35,20 @@ public class Joystick{
 		this.id = id;
 
 		inputStream = new FileInputStream(JOYSTICK_DIRECTORY+id);
-
+		
+		list = new ArrayList<KeyEvent>();
 	}
 
 	public FileInputStream getInputStream() {
 		return inputStream;
 	}
 
-	public KeyEvent listen(){
-
+	public List<KeyEvent> listen() {
+		
+		if(!list.isEmpty()) {
+			list.clear();
+		}
+		
 		byte[] buf = new byte[8];
 
 		int n = 0;
@@ -46,12 +58,19 @@ public class Joystick{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		readFromBuffer(buf, n);
+				
+		return list;
+	}
+
+	private void readFromBuffer(byte[] buf, int n) {
 		if (n == 8) {
 			long time = buf[3] << 24 | (buf[2] & 0xff) << 16 | (buf[1] & 0xff) << 8 | (buf[0] & 0xff);
 			int value = buf[5] << 8 | (buf[4] & 0xff);
 			int type = buf[6] & 0xff;
 			int channel = buf[7] & 0xff;
-
+			
 			if (type == JS_EVENT_AXIS) {
 
 				switch (channel) {
@@ -59,47 +78,62 @@ public class Joystick{
 				case 0:
 				case 2:
 
-					if(value>0){
-						return new KeyEvent(id, KeyEvent.TSK_JOYSTICK_RIGHT, value, KeyState.PRESSED);
-					}else if(value<0){					
-						return new KeyEvent(id, KeyEvent.TSK_JOYSTICK_LEFT, value,  KeyState.PRESSED);
-					}else{
-						return new KeyEvent(id, KeyEvent.TSK_JOYSTICK_CENTER_X, value,  KeyState.PRESSED);
-					}
+					axisXEvent(time, value);
+					break;
 
 				case 1:
 				case 3:
 
-					if(value>0){
-						return new KeyEvent(id, KeyEvent.TSK_JOYSTICK_DOWN, value, KeyState.PRESSED);
-					}else if(value<0){					
-						return new KeyEvent(id,KeyEvent.TSK_JOYSTICK_UP, value,  KeyState.PRESSED);
-					}else{
-						return new KeyEvent(id, KeyEvent.TSK_JOYSTICK_CENTER_Y, value,  KeyState.PRESSED);
-					}
+					axisYEvent(time, value);
+					break;
 
 				default:
 					break;
 				}
 
 			} else if (type == JS_EVENT_BUTTON) {
-
-				int buttonCode = (KeyEvent.TSK_JOYSTICK_BUTTON_1)+channel;
-
-				if(value==1){
-					return new KeyEvent(id, buttonCode, 0,  KeyState.PRESSED);
-				}else{
-					return new KeyEvent(id, buttonCode, 0, KeyState.RELEASED);
-				}
-
+				buttonEvent(time, value, channel);
 			}			
-
+			
 		} else {
 			System.err.println("only " + n + " of 8 bytes read");
 		}
-		
-		return null;
+	}
 
+	private void buttonEvent(long time, int value, int channel) {
+		int buttonCode = (KeyEvent.TSK_JOYSTICK_BUTTON_1)+channel;
+
+		if (value == 1) {
+			list.add(new KeyEvent(id, buttonCode, 0,  KeyState.PRESSED, time));
+		} else {
+			list.add(new KeyEvent(id, buttonCode, 0, KeyState.RELEASED, time));
+		}
+	}
+
+	private void axisYEvent(long time, int value) {
+		if (value > 0) {
+			lastYEvent = KeyEvent.TSK_JOYSTICK_DOWN;
+			list.add(new KeyEvent(id, lastYEvent, value, KeyState.PRESSED, time));
+		} else if(value < 0) {
+			lastYEvent = KeyEvent.TSK_JOYSTICK_UP;
+			list.add(new KeyEvent(id, lastYEvent, value, KeyState.PRESSED, time));
+		} else {
+			list.add(new KeyEvent(id, lastYEvent, value, KeyState.RELEASED, time));
+			list.add(new KeyEvent(id, KeyEvent.TSK_JOYSTICK_CENTER_Y, value,  KeyState.RELEASED, time));
+		}
+	}
+
+	private void axisXEvent(long time, int value) {
+		if (value > 0) {
+			lastXEvent = KeyEvent.TSK_JOYSTICK_RIGHT;
+			list.add(new KeyEvent(id, lastXEvent, value, KeyState.PRESSED, time));
+		} else if(value < 0) {
+			lastXEvent = KeyEvent.TSK_JOYSTICK_LEFT;
+			list.add(new KeyEvent(id, lastXEvent, value, KeyState.PRESSED, time));
+		} else {
+			list.add(new KeyEvent(id, lastXEvent, value, KeyState.RELEASED, time));
+			list.add(new KeyEvent(id, KeyEvent.TSK_JOYSTICK_CENTER_X, value,  KeyState.RELEASED, time));
+		}
 	}
 
 }
