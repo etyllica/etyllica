@@ -1,6 +1,11 @@
 package br.com.etyllica.core;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Frame;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -17,6 +22,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.input.HIDController;
 import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
@@ -43,6 +49,8 @@ import br.com.etyllica.theme.listener.ThemeListener;
 
 public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener, LanguageChangerListener {
 
+	protected Rectangle componentBounds;
+	
 	//External Windows
 	private Window activeWindow = null;
 
@@ -91,14 +99,16 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	private ArrowDrawer arrowDrawer;
 
 	private LanguageHandler languageHandler;
-
+	
 	private List<Updatable> updatables = new ArrayList<Updatable>();
 
 	private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
-
+	
+	private List<Monitor> monitors = new ArrayList<Monitor>();
+	
 	public InnerCore() {
 		super();
-
+		
 		guiEvents = new ArrayList<GUIEvent>();
 
 		control = new HIDController(this);
@@ -110,11 +120,11 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		arrowDrawer = new ArrowDrawer();
 
 		languageHandler = new LanguageHandler();
-
+		
 		initTheme();
 
 		updatables.add(AnimationHandler.getInstance());
-	}
+	}	
 
 	private void initTheme() {
 
@@ -293,19 +303,21 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		handleApplicationKeyEvents(context, event);
 	}
-
+	
 	public void updatePointerEvents(List<PointerEvent> events, Context context, List<View> components) {
 
 		int eventSize = events.size(); 
-
+		
 		for(int i=0; i < eventSize; i++) {
 
 			PointerEvent event = events.get(i);
-
+			
 			context.updateMouse(event);
 
 			updatePointerEvent(event, components);
+			
 		}
+		
 	}
 
 	public void updatePointerEvent(PointerEvent event, List<View> components) {
@@ -314,7 +326,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		updateMouseComponents(event, components);
 
-		updateWindowEvent(event, activeWindow);
+		updateWindowEvent(event, activeWindow);		
 	}
 
 	private void updateMouseComponents(PointerEvent event, List<View> components) {
@@ -380,7 +392,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		//Update Childs
 		for(View child: component.getViews()) {
-
 			updateGuiComponent(child, event);
 		}
 	}
@@ -394,7 +405,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		GUIEvent result = component.safeUpdateMouse(event);
 		
 		if(GUIEvent.MOUSE_IN == result) {
-			setMouseOver(component);			
+			setMouseOver(component);
 			return GUIEvent.NONE;
 		} else if (GUIEvent.MOUSE_OUT == result) {
 			resetMouseOver();
@@ -484,7 +495,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			 */
 
 		case UPDATE_MOUSE:
-			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));						
 			break;
 
 		case APPLICATION_CHANGED:
@@ -764,7 +775,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	}
 
 	public void setMainApplication(Application application) {
-
 		reload(application);
 	}
 
@@ -783,17 +793,15 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			System.err.println("Application cannot be null.");
 			return;
 		}
-
-		application.setSession(activeWindow.getSession());
-
-		application.setCamera(activeWindow.getCamera());
+		
+		application.setParent(activeWindow);
 		
 		application.setDrawCursor(drawCursor);
 
 		application.setMouseStateListener(arrowDrawer);
 
 		application.setLanguageChangerListener(this);
-
+		
 		activeWindow.reload(application);
 	}
 
@@ -962,5 +970,46 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
 	}
+	
+	public void initMonitors(int width, int height) {
+
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice[] devices = ge.getScreenDevices();
+
+		if(devices.length > 0) {
+
+			for (int i = 0; i < devices.length; i++) {
+
+				Rectangle gcBounds = devices[i].getDefaultConfiguration().getBounds();
+
+				int x = gcBounds.x;
+
+				int y = gcBounds.y;
+
+				int w = gcBounds.width;
+
+				int h = gcBounds.height;
+
+				monitors.add(new Monitor(x, y, w, h));
+			}
+
+		} else {
+			monitors.add(new Monitor(0, 0, width, height));
+		}
+
+	}
+	
+	public void moveToCenter(Component component) {
+		
+		Monitor firstMonitor = monitors.get(0);
+		int x = firstMonitor.getW()/2-component.getWidth()/2;
+		int y = firstMonitor.getH()/2-component.getHeight()/2;
+				
+		component.setLocation(x, y);
+	}
+	
+	public List<Monitor> getMonitors() {
+		return monitors;
+	}	
 
 }
