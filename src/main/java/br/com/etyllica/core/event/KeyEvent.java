@@ -113,7 +113,7 @@ public class KeyEvent{
 
 	public long getTimestamp() {
 		
-		if(timestamp<0) {
+		if(timestamp < 0) {
 			return System.currentTimeMillis();
 		}
 		

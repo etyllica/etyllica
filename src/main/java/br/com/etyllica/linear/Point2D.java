@@ -73,7 +73,6 @@ public class Point2D {
 	}
 
 	public double angle(Point2D point) {
-
 		return angle(point.getX(), point.getY());		
 	}
 	
@@ -111,6 +110,10 @@ public class Point2D {
 		
 		x = nx;
 		y = ny;
+	}
+	
+	public void rotate(Point2D p, double degreeAngle) {
+		rotate(p.getX(),  p.getY(), degreeAngle);
 	}
 	
 	public static boolean isRightTurn(Point2D a, Point2D b, Point2D c) {
