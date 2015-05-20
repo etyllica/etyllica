@@ -1,0 +1,60 @@
+package examples.linear.arrow.application;
+
+import java.awt.Color;
+
+import br.com.etyllica.context.Application;
+import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.linear.Point2D;
+
+public class ArrowApplication extends Application {
+
+	private Point2D p;
+	private Point2D q;
+	
+	public ArrowApplication(int w, int h) {
+		super(w,h);
+	}
+
+	public void load() {
+
+		p = new Point2D(100, 200);
+		q = new Point2D(200, 300);
+		
+		loading = 100;
+	}
+	
+	public void draw(Graphic g) {
+		g.setColor(Color.BLACK);
+				
+		double pq = p.distance(q);
+		int arrowSize = 25;
+		
+		Point2D p1 = p.distantPoint(q, pq+arrowSize);
+		Point2D p2 = new Point2D(p1.getX(), p1.getY());
+		
+		p1.rotate(q, 180-30);
+		p2.rotate(q, 180+30);
+		
+		g.drawLine(p, q);
+		g.drawLine(q, p1);
+		g.drawLine(q, p2);
+	}
+	
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		//dynamic position
+		q.setLocation(event.getX(), event.getY());
+		
+		return GUIEvent.NONE;
+	}
+
+	@Override
+	public GUIEvent updateKeyboard(KeyEvent event) {
+		return GUIEvent.NONE;
+	}
+
+}
+
