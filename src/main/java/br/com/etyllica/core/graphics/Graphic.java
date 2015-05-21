@@ -374,7 +374,6 @@ public class Graphic {
 	}
 	
 	private int centralizeTextX(String text) {
-		
 		return centralizeTextX(text, 0, width);
 	}
 	
@@ -389,7 +388,6 @@ public class Graphic {
 	}
 	
 	private int centralizeTextY(String text) {
-		
 		return centralizeTextY(text, 0, height);
 	}
 	
@@ -1183,6 +1181,26 @@ public class Graphic {
 
 	public void resetCamera(Camera camera) {
 		resetImage();
+	}
+
+	public void drawArrow(Point2D p, Point2D q, int arrowSize) {
+		double pq = p.distance(q);
+		
+		int arrowAngle = 30;
+		
+		Point2D p1 = p.distantPoint(q, pq+arrowSize);
+		Point2D p2 = new Point2D(p1.getX(), p1.getY());
+		
+		p1.rotate(q, 180-arrowAngle);
+		p2.rotate(q, 180+arrowAngle);
+		
+		drawLine(p, q);
+		drawLine(q, p1);
+		drawLine(q, p2);
+	}
+	
+	public void drawArrow(Point2D p, Point2D q) {
+		drawArrow(p, q, 25);
 	}
 	
 }

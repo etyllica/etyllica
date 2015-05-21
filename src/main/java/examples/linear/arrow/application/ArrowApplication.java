@@ -28,19 +28,7 @@ public class ArrowApplication extends Application {
 	
 	public void draw(Graphic g) {
 		g.setColor(Color.BLACK);
-				
-		double pq = p.distance(q);
-		int arrowSize = 25;
-		
-		Point2D p1 = p.distantPoint(q, pq+arrowSize);
-		Point2D p2 = new Point2D(p1.getX(), p1.getY());
-		
-		p1.rotate(q, 180-30);
-		p2.rotate(q, 180+30);
-		
-		g.drawLine(p, q);
-		g.drawLine(q, p1);
-		g.drawLine(q, p2);
+		g.drawArrow(p, q);
 	}
 	
 	@Override
