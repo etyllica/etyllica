@@ -159,6 +159,10 @@ public class Point2D {
 	public int getColor() {
 		return color;
 	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
 	
 	public static Point2D clone(Point2D point) {
 		return new Point2D(point.getX(), point.getY());
