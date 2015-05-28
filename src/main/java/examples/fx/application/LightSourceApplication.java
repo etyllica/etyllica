@@ -1,4 +1,4 @@
-package examples.etyllica.fx.application;
+package examples.fx.application;
 
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;

@@ -1,8 +1,8 @@
-package examples.etyllica.fx;
+package examples.fx;
 
-import examples.etyllica.fx.application.LightningApplication;
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.context.Application;
+import examples.fx.application.LightningApplication;
 
 public class ZeusTutorial extends Etyllica {
 
@@ -14,7 +14,7 @@ public class ZeusTutorial extends Etyllica {
 
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../../../");
 
 		return new LightningApplication(w,h);
 	}

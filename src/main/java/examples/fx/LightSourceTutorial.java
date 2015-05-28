@@ -1,8 +1,8 @@
-package examples.etyllica.fx;
+package examples.fx;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.context.Application;
-import examples.etyllica.fx.application.LightSourceApplication;
+import examples.fx.application.LightSourceApplication;
 
 public class LightSourceTutorial extends Etyllica {
 
@@ -14,7 +14,7 @@ public class LightSourceTutorial extends Etyllica {
 
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../../../");
 
 		return new LightSourceApplication(w,h);
 	}
