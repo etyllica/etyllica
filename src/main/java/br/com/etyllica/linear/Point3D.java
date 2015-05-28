@@ -20,6 +20,10 @@ public class Point3D {
 		this.z = z;				
 	}
 
+	public Point3D(Point3D point) {
+		this(point.x, point.y, point.z);
+	}
+
 	public double getX() {
 		return x;
 	}
