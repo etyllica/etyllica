@@ -89,10 +89,7 @@ public class AnimationHandler implements Updatable {
 	}
 	
 	private void notifyFinish(AnimationScript script, long now) {
-		if(script.getListener()==null)
-			return;
-		
-		script.getListener().onAnimationFinish(now);		
+		script.finish(now);		
 	}
 
 	public void add(AnimationScript script) {

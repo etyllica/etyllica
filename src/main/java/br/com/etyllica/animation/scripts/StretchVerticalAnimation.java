@@ -5,7 +5,7 @@ import br.com.etyllica.layer.Layer;
 
 public class StretchVerticalAnimation extends SingleIntervalAnimation {
 		
-	private int originalY;
+	protected int originalY;
 	
 	public StretchVerticalAnimation(long time) {
 		super(time);
@@ -22,7 +22,8 @@ public class StretchVerticalAnimation extends SingleIntervalAnimation {
 	@Override
 	public void setTarget(Layer target) {
 		super.setTarget(target);
-		originalY = target.getY();
+
+		originalY = (int)(target.getY());
 	}
 		
 	@Override

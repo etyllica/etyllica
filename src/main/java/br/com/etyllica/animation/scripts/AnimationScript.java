@@ -133,6 +133,13 @@ public abstract class AnimationScript {
 
 	public void setInterpolator(Interpolator interpolator) {
 		this.interpolator = interpolator;
-	}	
+	}
+
+	public void finish(long now) {
+		if(listener==null)
+			return;
+		
+		listener.onAnimationFinish(now);
+	}
 
 }
