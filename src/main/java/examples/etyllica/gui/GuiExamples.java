@@ -6,6 +6,7 @@ import br.com.etyllica.core.Configuration;
 import br.com.etyllica.theme.EtyllicTheme;
 import br.com.etyllica.theme.ThemeManager;
 import examples.etyllica.gui.simple.GeneralGuiExample;
+import examples.etyllica.gui.textfield.TextFieldExample;
 
 /**
  * 
@@ -33,7 +34,8 @@ public class GuiExamples extends Etyllica {
 		ThemeManager.getInstance().setTheme(new EtyllicTheme());
 		//ThemeManager.getInstance().setTheme(new EtyllicMonoTheme());
 		
-		return new GeneralGuiExample(w,h);
+		//return new GeneralGuiExample(w,h);
+		return new TextFieldExample(w,h);
 	}
 	
 }
