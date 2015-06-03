@@ -40,7 +40,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
 		super(x,y,1,1);
 	}
 	
-	public View(int x, int y, int w, int h){
+	public View(int x, int y, int w, int h) {
 		super(x,y,w,h);
 	}
 	
@@ -217,7 +217,6 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
 	
 	public GUIEvent safeUpdateMouse(PointerEvent event) {
 		if(!isMouseOver()) {
-			
 			if(onMouse(event)) {
 				mouseIn();
 				return GUIEvent.MOUSE_IN;

@@ -268,9 +268,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	public void addMouseMoveEvent(int x, int y) {
-
 		getSlot().set(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
-
 	}
 
 	public void packEvents() {
