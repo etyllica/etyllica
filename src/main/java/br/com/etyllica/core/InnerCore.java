@@ -2,7 +2,6 @@ package br.com.etyllica.core;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
@@ -49,6 +48,8 @@ import br.com.etyllica.theme.listener.ThemeListener;
 
 public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener, LanguageChangerListener {
 
+	private static final int TITLE_BAR_HEIGHT = 50;
+
 	protected Rectangle componentBounds;
 	
 	//External Windows
@@ -80,6 +81,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	private boolean needReload = false;
 
 	private boolean locked = false;
+	
+	private boolean fixEventPosition = false;
 
 	private Configuration configuration = Configuration.getInstance();
 
@@ -158,7 +161,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		Context application = activeWindow.getContext();
 
 		updateApplication(application, now);
-
+		
 		if(checkApplicationChange(application)) {
 			return;
 		}
@@ -271,10 +274,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 			//For each new window in application.windows
 			for(Window window : windows) {
-
 				//if this !windows.contains(window)
 				replaceWindow(window);
-
 			}
 
 			activeWindow.getWindows().clear();
@@ -306,7 +307,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	
 	public void updatePointerEvents(List<PointerEvent> events, Context context, List<View> components) {
 
-		int eventSize = events.size(); 
+		int eventSize = events.size();
 		
 		for(int i=0; i < eventSize; i++) {
 
@@ -315,14 +316,14 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			context.updateMouse(event);
 
 			updatePointerEvent(event, components);
-			
 		}
-		
 	}
 
 	public void updatePointerEvent(PointerEvent event, List<View> components) {
 
-		fixEventPosition(event);
+		if(fixEventPosition) {
+			fixEventPosition(event);
+		}
 
 		updateMouseComponents(event, components);
 
@@ -495,7 +496,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			 */
 
 		case UPDATE_MOUSE:
-			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));						
+			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));				
 			break;
 
 		case APPLICATION_CHANGED:
@@ -731,30 +732,16 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	private GUIEvent updateFrameEvents(PointerEvent event) {
 
-		if(event.getState()==PointerState.CLICK) {
+		if(event.getState() == PointerState.CLICK) {
 			return GUIEvent.REQUEST_FOCUS;
 		}
 
-		if(event.getState()==PointerState.DRAGGED) {
+		if(event.getState() == PointerState.DRAGGED) {
 
-			if(mouse.getY()<=50) {
-				/*Logger.log("Evento Mouse dragged");
-
-				Logger.log("Mx = "+mouse.getDragX());
-				Logger.log("My = "+mouse.getDragY());
-				Logger.log("Dx = "+mouse.getDragX());
-				Logger.log("Dy = "+mouse.getDragY());*/
+			if(mouse.getY() <= TITLE_BAR_HEIGHT) {
+				
 				return GUIEvent.WINDOW_MOVE;
 			}
-
-
-			/*if(event.getMouseButtonDragged(Tecla.MOUSE_BUTTON_LEFT)) {
-
-				if(mouse.getY()<20)
-				Logger.log("Evento Move Janela");
-
-				return GUIEvent.WINDOW_MOVE;
-			}*/
 		}
 
 		return GUIEvent.NONE;
