@@ -37,10 +37,10 @@ public class Effect extends AnimatedLayer {
 		super.notifyAnimationFinishListener(now);
 		
 		setVisible(false);
-		
 		active = false;
 	}
 	
+	@Override
 	public void animate(long now) {
 		if(!active)
 			return;

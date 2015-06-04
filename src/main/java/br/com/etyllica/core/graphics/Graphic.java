@@ -121,6 +121,10 @@ public class Graphic {
 		
 		screen.drawString(text, dx, dy);
 	}
+	
+	public void drawString(Layer layer, String text) {
+		drawString(layer.getX(), layer.getY(), layer.utilWidth(), layer.utilHeight(), text);
+	}
 
 	/**
 	 * 
