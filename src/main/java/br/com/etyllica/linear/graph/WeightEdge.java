@@ -3,7 +3,7 @@ package br.com.etyllica.linear.graph;
 
 public class WeightEdge<N> extends GenericEdge<N> {
 	
-	private int weight = 0;
+	protected int weight = 0;
 	
 	public WeightEdge(Node<N> origin, Node<N> destination) {
 		super(origin, destination);
