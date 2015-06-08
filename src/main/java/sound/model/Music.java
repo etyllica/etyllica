@@ -9,7 +9,7 @@ import sound.MultimediaLoader;
  *
  */
 
-public class Music extends Sound{
+public class Music extends Sound {
 
 	private boolean loop = true;
 	
@@ -26,15 +26,15 @@ public class Music extends Sound{
 	}
 
 	@Override
-	public void play(){
-		MultimediaLoader.getInstance().tocaMusica(path,loop);
+	public void play() {
+		MultimediaLoader.getInstance().playMusic(path,loop);
 	}
 	
-	public void playStream(){
-		MultimediaLoader.getInstance().tocaMusicaStream(path,loop);
+	public void playStream() {
+		MultimediaLoader.getInstance().playMusicStream(path,loop);
 	}
 	
-	public boolean isPlaying(){
+	public boolean isPlaying() {
 		return MultimediaLoader.getInstance().isPlaying(path);
 	}
 

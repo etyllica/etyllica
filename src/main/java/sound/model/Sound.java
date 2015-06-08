@@ -9,21 +9,21 @@ import sound.MultimediaLoader;
  *
  */
 
-public class Sound{
+public class Sound {
 
 	protected String path = "";
 	
-	public Sound(String path){
+	public Sound(String path) {
 		super();
 		this.path = path;
 	}
 	
-	public String getPath(){
+	public String getPath() {
 		return path;
 	}
-		
-	public void play(){
-		MultimediaLoader.getInstance().tocaSom(path);
+	
+	public void play() {
+		MultimediaLoader.getInstance().playSound(path);
 	}
 	
 } 

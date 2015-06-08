@@ -18,7 +18,7 @@ import sound.paulscode.libraries.LibraryJavaSound;
  *
  */
 
-public class MultimediaLoader extends LoaderImpl{
+public class MultimediaLoader extends LoaderImpl {
 
 	private SoundSystem mySoundSystem;
 
@@ -32,7 +32,7 @@ public class MultimediaLoader extends LoaderImpl{
 		return instance;
 	}
 
-	public MultimediaLoader(){
+	public MultimediaLoader() {
 
 		folder = "assets/sounds/";
 		
@@ -66,51 +66,43 @@ public class MultimediaLoader extends LoaderImpl{
 		}
 	}
 	
-	public boolean isPlaying(String path){
+	public boolean isPlaying(String path) {
 		return mySoundSystem.playing(path);
 	}
 	
 	//Loads ogg and mp3 too
-	public void loadMusic(String path){
-
+	public void loadMusic(String path) {
 		mySoundSystem.loadSound(path);
-		
-
 	}
 
-	public void tocaMusica(String caminho, boolean loop){
-		
-		mySoundSystem.backgroundMusic( caminho, caminho, loop );
-		
-        mySoundSystem.play(caminho);
+	public void playMusic(String path, boolean loop) {
+		mySoundSystem.backgroundMusic( path, path, loop );
+        mySoundSystem.play(path);
 	}
 	
 
-	public void carregaSom(String caminho){
-
-		mySoundSystem.loadSound(caminho);
-		
+	public void loadSound(String path) {
+		mySoundSystem.loadSound(path);
 	}
 
-	public void tocaSom(String caminho){
+	public void playSound(String path) {
 	
-		mySoundSystem.quickPlay( false, caminho, false,
+		mySoundSystem.quickPlay( false, path, false,
                 0, 0, 0,
                 SoundSystemConfig.ATTENUATION_NONE,
                 SoundSystemConfig.getDefaultRolloff());
 
 	}
 
-	public void tocaMusicaStream(String path) {
-		tocaMusicaStream(path, false);
+	public void playMusicStream(String path) {
+		playMusicStream(path, false);
 	}
 	
-	public void tocaMusicaStream(String path, boolean loop) {
+	public void playMusicStream(String path, boolean loop) {
 
 		//mySoundSystem.newStreamingSource(true, caminho, caminho, loop, 0, 0, 0, SoundSystemConfig.ATTENUATION_NONE, 0);
 		mySoundSystem.backgroundMusic(path, path, loop);
 		mySoundSystem.play(path);
-
 	}
 	
 	
