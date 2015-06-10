@@ -6,7 +6,9 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.awt.image.DataBufferInt;
+import java.awt.image.Raster;
 
 import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.core.graphics.Graphic;
@@ -49,7 +51,7 @@ public class BufferedLayer extends ImageLayer {
 		super(x,y,path);
 		copy(ImageLoader.getInstance().getImage(path));
 	}
-
+	
 	/**
 	 * 
 	 * @param path
@@ -72,7 +74,7 @@ public class BufferedLayer extends ImageLayer {
 		
 		copy(buffer);
 	}
-
+	
 	/**
 	 * 
 	 * @param x
@@ -87,10 +89,27 @@ public class BufferedLayer extends ImageLayer {
 		this.h = h;
 
 		originalBuffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-		
 		buffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 				
-		clearGraphics();		
+		clearGraphics();
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param imageData - Data as byteArray
+	 */
+	public BufferedLayer(int x, int y, int w, int h, byte[] imageData) {
+		this(x,y);
+
+		this.w = w;
+		this.h = h;
+
+		originalBuffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		createBuffer(imageData);
 	}
 
 	/**
@@ -325,7 +344,6 @@ public class BufferedLayer extends ImageLayer {
 				pixels[i][j][0] = r;
 				pixels[i][j][1] = g;
 				pixels[i][j][2] = b;
-
 			}
 		}
 
@@ -397,6 +415,12 @@ public class BufferedLayer extends ImageLayer {
 	public void simpleDraw(Graphic g, int x, int y) {
 		g.drawImage( buffer, x, y, x+w,y+h,
 				xImage,yImage,xImage+w,yImage+h, null );
+	}
+
+	public void createBuffer(byte[] imageData) {
+		DataBufferByte dataBuffer = new DataBufferByte(imageData, imageData.length);
+		originalBuffer.setData(Raster.createRaster(originalBuffer.getSampleModel(), dataBuffer, null));
+		resetImage();
 	}
 	
 }
