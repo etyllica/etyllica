@@ -1,4 +1,4 @@
-# Etyllica (v 4.5) ![Travis CI Badge](https://api.travis-ci.org/yuripourre/etyllica.svg)
+# Etyllica (v 4.6) ![Travis CI Badge](https://api.travis-ci.org/yuripourre/etyllica.svg)
 
 [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games fast. It can render 3D (by software) using [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) in unsigned applets and streams audio with [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) Library.
 
@@ -40,6 +40,7 @@
 - [EtyllicTTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
 - [Etyllic GameBoy](https://github.com/yuripourre/etyllic-gameboy) - A [Javaboy](http://www.millstone.demon.co.uk/download/javaboy/) fork with faster rendering.
 - [E-Motion](https://github.com/yuripourre/e-motion) - An Image Processing Library made in pure Java.
+- [Farthest in Future Algorithm](https://github.com/UNIRIO-SI/farthest-in-future-algorithm) - A Farthest in Future Algorithm implementation with animations.
 - [Rubik Solver](https://github.com/UNIRIO-SI/rubik-solver) - A Simple Rubik Cube Application.
 - [Veete](https://github.com/yuripourre/veete) - A VEry Easy Tilemap Editor
 - [Luvia](https://github.com/yuripourre/luvia) - An Etyllica fork using [JoGL](http://jogamp.org/jogl/www/) and [glg2d](https://github.com/brandonborkholder/glg2d) for GPU rendering.
@@ -49,10 +50,10 @@
 
 If you don't need 3D Graphics, Sound nor Physics, you just have to include the [etyllica-4.3.jar](https://github.com/yuripourre/etyllica/blob/master/Etyllica/libs/stable/etyllica-4.3.jar) (stable version with 230kB)
 
-- [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) (An OpenGL simulator)
-- [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library)
-- [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0)
-- [dyn4j](http://code.google.com/p/dyn4j/) (Physics Library)
+- [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) (An OpenGL simulator made by [Robin Bing-Yu Chen](http://graphics.im.ntu.edu.tw/~robin))
+- [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library made by [Paul Lamb](http://www.paulscode.com))
+- [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0) (Audio Codecs made by [Paul Lamb](http://www.paulscode.com))
+- [dyn4j](http://code.google.com/p/dyn4j/) (Physics Library made by [William Bittle](https://github.com/wnbittle))
 
 ## How to Start
 You can follow the [HelloWorld](https://github.com/yuripourre/etyllica/wiki/Hello-World) example.
