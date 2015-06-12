@@ -33,7 +33,7 @@ public class Point3D {
 	}
 
 	public void offsetX(double offset) {
-		this.x += x;
+		this.x += offset;
 	}
 
 	public double getY() {
@@ -45,7 +45,7 @@ public class Point3D {
 	}
 
 	public void offsetY(double offset) {
-		this.y += y;
+		this.y += offset;
 	}
 
 	public double getZ() {
@@ -57,7 +57,7 @@ public class Point3D {
 	}
 
 	public void offsetZ(double offset) {
-		this.z += z;
+		this.z += offset;
 	}
 
 	public void setCoordinates(double x, double y, double z) {
