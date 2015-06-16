@@ -684,12 +684,12 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			int velocidade = 1;
 
 			//Move Left/Right
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_ESQUERDA)) {
+			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_LEFT_ARROW)) {
 
 				mouse.setX(mouse.getX()-velocidade);
 				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
-			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_DIREITA)) {
+			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_RIGHT_ARROW)) {
 
 				mouse.setX(mouse.getX()+velocidade);
 				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
@@ -697,12 +697,12 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			}
 
 			//Move Up/Down
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_CIMA)) {
+			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_UP_ARROW)) {
 
 				mouse.setX(mouse.getY()-velocidade);
 				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
 
-			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_SETA_BAIXO)) {
+			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_DOWN_ARROW)) {
 
 				mouse.setX(mouse.getY()+velocidade);
 				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));

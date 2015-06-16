@@ -215,9 +215,11 @@ public class KeyEvent{
 	public static final int TSK_ENTER = java.awt.event.KeyEvent.VK_ENTER;
 	public static final int TSK_INSERT = java.awt.event.KeyEvent.VK_INSERT;
 	public static final int TSK_HOME = java.awt.event.KeyEvent.VK_HOME;
+	public static final int TSK_PAGE_UP = java.awt.event.KeyEvent.VK_PAGE_UP;
+	public static final int TSK_PAGE_DOWN = java.awt.event.KeyEvent.VK_PAGE_DOWN;
 	public static final int TSK_END = java.awt.event.KeyEvent.VK_END;
 	public static final int TSK_ESC = java.awt.event.KeyEvent.VK_ESCAPE;
-		
+			
 	private static final int TSK_ALT = java.awt.event.KeyEvent.VK_ALT;	
 	public static final int TSK_ALT_DIREITA = java.awt.event.KeyEvent.KEY_LOCATION_RIGHT*100+TSK_ALT;
 	public static final int TSK_ALT_ESQUERDA = java.awt.event.KeyEvent.KEY_LOCATION_LEFT*100+TSK_ALT;
@@ -255,10 +257,10 @@ public class KeyEvent{
 	public static final int TSK_NUMPAD_INS = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_INSERT;
 	public static final int TSK_NUMPAD_ENTER = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_ENTER;
 	
-	public static final int TSK_NUMPAD_SETA_BAIXO = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_BAIXO+185;
-	public static final int TSK_NUMPAD_SETA_CIMA = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_CIMA+186;
-	public static final int TSK_NUMPAD_SETA_DIREITA = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_DIREITA+188;
-	public static final int TSK_NUMPAD_SETA_ESQUERDA = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_ESQUERDA+189;
+	public static final int TSK_NUMPAD_DOWN_ARROW = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_BAIXO+185;
+	public static final int TSK_NUMPAD_UP_ARROW = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_CIMA+186;
+	public static final int TSK_NUMPAD_RIGHT_ARROW = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_DIREITA+188;
+	public static final int TSK_NUMPAD_LEFT_ARROW = java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD*100+TSK_SETA_ESQUERDA+189;
 			
 	public static final int TSK_ABRE_COLCHETES = java.awt.event.KeyEvent.VK_OPEN_BRACKET;
 	public static final int TSK_FECHA_COLCHETES = java.awt.event.KeyEvent.VK_CLOSE_BRACKET;
@@ -271,14 +273,24 @@ public class KeyEvent{
 	public static final int TSK_VIRGULA = java.awt.event.KeyEvent.VK_COMMA;
 	public static final int TSK_DOIS_PONTOS = java.awt.event.KeyEvent.VK_COLON;
 	
+	//Japanese Keys
 	public static final int TSK_HIRAGANA = java.awt.event.KeyEvent.VK_JAPANESE_HIRAGANA;
 	public static final int TSK_KATAKANA = java.awt.event.KeyEvent.VK_JAPANESE_KATAKANA;
 	public static final int TSK_ROMAJI = java.awt.event.KeyEvent.VK_JAPANESE_ROMAN;
-	public static final int TSK_KANJI = java.awt.event.KeyEvent.VK_KANJI;
-	
+	public static final int TSK_KANA = java.awt.event.KeyEvent.VK_KANA;
+	public static final int TSK_KANA_LOCK = java.awt.event.KeyEvent.VK_KANA_LOCK;
+		
 	public static final int TSK_NUM_LOCK = java.awt.event.KeyEvent.VK_NUM_LOCK;
 	
 	public static final int TSK_SUPER = java.awt.event.KeyEvent.VK_WINDOWS;
+	public static final int TSK_WINDOWS = java.awt.event.KeyEvent.VK_WINDOWS;
+
+	//Complex Keys
+	public static final int TSK_COPY = java.awt.event.KeyEvent.VK_COPY;
+	public static final int TSK_FIND = java.awt.event.KeyEvent.VK_FIND;
+	public static final int TSK_CUT = java.awt.event.KeyEvent.VK_CUT;
+	public static final int TSK_PASTE = java.awt.event.KeyEvent.VK_PASTE;
+	public static final int TSK_UNDO = java.awt.event.KeyEvent.VK_UNDO;
 		
 	public static final int TSK_JOYSTICK_UP = JoystickEvent.UP;
 	public static final int TSK_JOYSTICK_DOWN = JoystickEvent.DOWN;
@@ -300,7 +312,7 @@ public class KeyEvent{
 	public static final int TSK_JOYSTICK_BUTTON_10 = JoystickEvent.BUTTON_10;
 	public static final int TSK_JOYSTICK_BUTTON_11 = JoystickEvent.BUTTON_11;
 	public static final int TSK_JOYSTICK_BUTTON_12 = JoystickEvent.BUTTON_12;
-	
+			
 	public static final int TSK_NONE = 0;
 
 }
