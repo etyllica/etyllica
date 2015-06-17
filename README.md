@@ -32,6 +32,7 @@
 - [Marvel Quest](https://github.com/yuripourre/marvel-quest) - A beat 'em up game
 - [Ninja Robot](https://github.com/yuripourre/ninja-robot) - A casual game
 - [Tomb Runaway](https://github.com/yuripourre/runaway) - A maze game
+- [Helicoptr](https://github.com/yuripourre/helicoptr) - A flappy bird clone
 
 ### Non-Games
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - Paint Clone
