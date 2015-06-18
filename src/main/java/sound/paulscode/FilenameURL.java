@@ -1,6 +1,9 @@
 package sound.paulscode;
 
+import java.net.MalformedURLException;
 import java.net.URL;
+
+import br.com.etyllica.util.io.IOHelper;
 
 /**
  * The FilenameURL class is designed to associate a String filename/identifier
@@ -41,113 +44,126 @@ import java.net.URL;
  */
 public class FilenameURL
 {
-/**
- * Processes status messages, warnings, and error messages.
- */
-    private SoundSystemLogger logger;
+	/**
+	 * Processes status messages, warnings, and error messages.
+	 */
+	private SoundSystemLogger logger;
 
-/**
- * Filename or identifier for the file.
- */
-    private String filename = null;
+	/**
+	 * Filename or identifier for the file.
+	 */
+	private String filename = null;
 
-/**
- * URL interface to the file.
- */
-    private URL url = null;
+	/**
+	 * URL interface to the file.
+	 */
+	private URL url = null;
 
-/**
- * Constructor: Saves handles to the url and identifier.  The identifier should
- * look like a filename, and it must have the correct extension so SoundSystem
- * knows what format to use for the file referenced by the URL instance.
- * @param url URL interface to a file.
- * @param identifier Identifier (filename) for the file.
- */
-    public FilenameURL( URL url, String identifier )
-    {
-        // grab a handle to the message logger:
-        logger = SoundSystemConfig.getLogger();
+	/**
+	 * Constructor: Saves handles to the url and identifier.  The identifier should
+	 * look like a filename, and it must have the correct extension so SoundSystem
+	 * knows what format to use for the file referenced by the URL instance.
+	 * @param url URL interface to a file.
+	 * @param identifier Identifier (filename) for the file.
+	 */
+	public FilenameURL( URL url, String identifier )
+	{
+		// grab a handle to the message logger:
+		logger = SoundSystemConfig.getLogger();
 
-        filename = identifier;
-        this.url = url;
-    }
+		filename = identifier;
+		this.url = url;
+	}
 
-/**
- * Constructor: Saves a handle to the filename (used later to generate a URL
- * instance).  The file may either be located within the
- * JAR or at an online location.  If the file is online, filename must begin
- * with "http://", since that is how SoundSystem recognizes URL names.
- * @param filename Name of the file.
- */
-    public FilenameURL( String filename )
-    {
-        // grab a handle to the message logger:
-        logger = SoundSystemConfig.getLogger();
+	/**
+	 * Constructor: Saves a handle to the filename (used later to generate a URL
+	 * instance).  The file may either be located within the
+	 * JAR or at an online location.  If the file is online, filename must begin
+	 * with "http://", since that is how SoundSystem recognizes URL names.
+	 * @param filename Name of the file.
+	 */
+	public FilenameURL( String filename )
+	{
+		// grab a handle to the message logger:
+		logger = SoundSystemConfig.getLogger();
 
-        this.filename = filename;
-        url = null;
-    }
+		this.filename = filename;
+		url = null;
+	}
 
-/**
- * Returns the filename/identifier.
- * @return Filename or identifier for the file.
- */
-    public String getFilename()
-    {
-        return filename;
-    }
+	/**
+	 * Returns the filename/identifier.
+	 * @return Filename or identifier for the file.
+	 */
+	public String getFilename()
+	{
+		return filename;
+	}
 
-/**
- * Returns the URL interface to the file.  If a URL was not originally specified
- * in the constructor, then the first time this method is called it creates a
- * URL instance using the previously specified filename.
- * @return URL interface to the file.
- */
-    public URL getURL()
-    {
-        if( url == null )
-        {
-            // Check if the file is online or inside the JAR:
-            if( filename.matches( SoundSystemConfig.PREFIX_URL ) )
-            {
-                // Online
-                try
-                {
-                    url = new URL( filename );
-                }
-                catch( Exception e )
-                {
-                    errorMessage( "Unable to access online URL in " +
-                                  "method 'getURL'" );
-                    printStackTrace( e );
-                    return null;
-                }
-            }
-            else
-            {
-                // Inside the JAR
-                url = getClass().getClassLoader().getResource(
-                      SoundSystemConfig.getSoundFilesPackage() + filename );
-            }
-        }
-        return url;
-    }
+	/**
+	 * Returns the URL interface to the file.  If a URL was not originally specified
+	 * in the constructor, then the first time this method is called it creates a
+	 * URL instance using the previously specified filename.
+	 * @return URL interface to the file.
+	 */
+	public URL getURL()
+	{
+		if( url == null )
+		{
+			// Check if the file is online or inside the JAR:
+			if( filename.matches( SoundSystemConfig.PREFIX_URL ) )
+			{
+				// Online
+				try
+				{
+					url = new URL( filename );
+				}
+				catch( Exception e )
+				{
+					errorMessage( "Unable to access online URL in " +
+							"method 'getURL'" );
+					printStackTrace( e );
+					return null;
+				}
+			}
+			else
+			{
+				// Inside the JAR
+				url = getClass().getClassLoader().getResource(
+						SoundSystemConfig.getSoundFilesPackage() + filename );
 
-/**
- * Prints an error message.
- * @param message Message to print.
- */
-    private void errorMessage( String message )
-    {
-        logger.errorMessage( "MidiChannel", message, 0 );
-    }
+				if(url == null) {
+					loadFromAbsolutePath();
+				}
+			}
+		}
+		return url;
+	}
 
-/**
- * Prints an exception's error message followed by the stack trace.
- * @param e Exception containing the information to print.
- */
-    private void printStackTrace( Exception e )
-    {
-        logger.printStackTrace( e, 1 );
-    }
+	private void loadFromAbsolutePath() {
+		try {
+			url = new URL(IOHelper.FILE_PREFIX+filename);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Prints an error message.
+	 * @param message Message to print.
+	 */
+	private void errorMessage( String message )
+	{
+		logger.errorMessage( "MidiChannel", message, 0 );
+	}
+
+	/**
+	 * Prints an exception's error message followed by the stack trace.
+	 * @param e Exception containing the information to print.
+	 */
+	private void printStackTrace( Exception e )
+	{
+		logger.printStackTrace( e, 1 );
+	}
 }

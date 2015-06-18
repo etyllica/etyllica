@@ -46,7 +46,7 @@ public class MultimediaLoader extends LoaderImpl {
 			SoundSystemConfig.addLibrary(LibraryJavaSound.class);
 			//SoundSystemConfig.addLibrary(LibraryJOAL.class);
 			
-			SoundSystemConfig.setSoundFilesPackage(folder);
+			//SoundSystemConfig.setSoundFilesPackage(folder);
 			
 			mySoundSystem = new SoundSystem(LibraryJavaSound.class);
 			//mySoundSystem = new SoundSystem(LibraryJOAL.class);
@@ -69,29 +69,27 @@ public class MultimediaLoader extends LoaderImpl {
 	public boolean isPlaying(String path) {
 		return mySoundSystem.playing(path);
 	}
-	
-	//Loads ogg and mp3 too
-	public void loadMusic(String path) {
-		mySoundSystem.loadSound(path);
-	}
-
-	public void playMusic(String path, boolean loop) {
-		mySoundSystem.backgroundMusic( path, path, loop );
-        mySoundSystem.play(path);
-	}
-	
 
 	public void loadSound(String path) {
-		mySoundSystem.loadSound(path);
+		mySoundSystem.loadSound(fullPath()+path);
 	}
 
 	public void playSound(String path) {
 	
-		mySoundSystem.quickPlay( false, path, false,
+		mySoundSystem.quickPlay( false, fullPath()+path, false,
                 0, 0, 0,
                 SoundSystemConfig.ATTENUATION_NONE,
                 SoundSystemConfig.getDefaultRolloff());
 
+	}
+	
+	//Loads ogg and mp3 too
+	public void loadMusic(String path) {
+		mySoundSystem.loadSound(fullPath()+path);
+	}
+
+	public void playMusic(String path, boolean loop) {
+		mySoundSystem.backgroundMusic( fullPath()+path, fullPath()+path, loop );
 	}
 
 	public void playMusicStream(String path) {
@@ -100,9 +98,8 @@ public class MultimediaLoader extends LoaderImpl {
 	
 	public void playMusicStream(String path, boolean loop) {
 
-		//mySoundSystem.newStreamingSource(true, caminho, caminho, loop, 0, 0, 0, SoundSystemConfig.ATTENUATION_NONE, 0);
-		mySoundSystem.backgroundMusic(path, path, loop);
-		mySoundSystem.play(path);
+		//mySoundSystem.newStreamingSource(true, fullPath()+path, fullPath()+path, loop, 0, 0, 0, SoundSystemConfig.ATTENUATION_NONE, 0);
+		playMusic(path, loop);
 	}
 	
 	

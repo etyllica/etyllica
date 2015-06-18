@@ -17,7 +17,7 @@ public class LoaderImpl implements Loader {
 	//protected String folder = "http://www.etyllica.com.br/imagens/";
 	protected String folder;
 	
-	public void setUrl(String s){
+	public void setUrl(String s) {
 		try {
 			url = new URL(s);
 		} catch (MalformedURLException e) {
@@ -25,17 +25,21 @@ public class LoaderImpl implements Loader {
 		}
 	} 
 
-	public URL getUrl(){
+	public URL getUrl() {
 		return url;
 	}
 	
-	public String getPath(){
+	public String getPath() {
 		
 		String path = url.toString();
 		path = path.substring(5);
 		path = path.replaceAll("%20", " ");
 		
 		return path;
+	}
+	
+	public String fullPath() {
+		return getPath()+folder;
 	}
 
 	@Override
