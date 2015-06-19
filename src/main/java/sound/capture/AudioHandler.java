@@ -13,17 +13,17 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.TargetDataLine;
 
-public class CaptureHandler{
+public class AudioHandler {
 
 	private boolean recording = false;
 	
 	private ByteArrayOutputStream inputBuffer;
 	
-	private static CaptureHandler instance = null;
+	private static AudioHandler instance = null;
 	
-	public static CaptureHandler getInstance() {
-		if(instance==null){
-			instance = new CaptureHandler();
+	public static AudioHandler getInstance() {
+		if(instance==null) {
+			instance = new AudioHandler();
 		}
 
 		return instance;
@@ -31,7 +31,7 @@ public class CaptureHandler{
 	
 	private TargetDataLine line;
 		
-	public synchronized void captureAudio(){
+	public synchronized void captureAudio() {
 		
 		try {
 			
@@ -74,20 +74,20 @@ public class CaptureHandler{
 		
 	}
 	
-	public synchronized void stopCapture(){
+	public synchronized void stopCapture() {
 		recording = false;
 	}
 	
 	public synchronized void playAudio() {
 		byte audio[] = inputBuffer.toByteArray();
-		playAudio(audio);		
+		playAudio(audio, getFormat());
 	}
-	
-	public synchronized void playAudio(byte[] audio) {
+		
+	public synchronized void playAudio(byte[] audio, final AudioFormat format) {
 		
 		try {
+			
 			InputStream input = new ByteArrayInputStream(audio);
-			final AudioFormat format = getFormat();
 			final AudioInputStream ais = new AudioInputStream(input, format, audio.length / format.getFrameSize());
 			DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
 
@@ -138,7 +138,7 @@ public class CaptureHandler{
 		
 	}
 	
-	public int[][] getWaveformSamples(){
+	public int[][] getWaveformSamples() {
 		
 		int[][] waveSamples;
 		

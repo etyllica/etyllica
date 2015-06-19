@@ -2,7 +2,7 @@ package examples.etyllica.tutorial11;
 
 import java.awt.Color;
 
-import sound.capture.CaptureHandler;
+import sound.capture.AudioHandler;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
@@ -57,19 +57,19 @@ public class CaptureAudioApplication extends Application {
 		
 		stop.setDisabled(true);
 		play.setDisabled(false);
-		CaptureHandler.getInstance().stopCapture();
+		AudioHandler.getInstance().stopCapture();
 						
-		waveSamples = CaptureHandler.getInstance().getWaveformSamples();
+		waveSamples = AudioHandler.getInstance().getWaveformSamples();
 		canDraw = true;
 	}
 
 	public void captureAudio() {
 		stop.setDisabled(false);
-		CaptureHandler.getInstance().captureAudio();
+		AudioHandler.getInstance().captureAudio();
 	}
 
 	public void playAudio() {
-		CaptureHandler.getInstance().playAudio(); 
+		AudioHandler.getInstance().playAudio(); 
 	}
 
 	@Override

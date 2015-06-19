@@ -2,7 +2,9 @@ package examples.sound.application;
 
 import java.awt.Color;
 
-import sound.capture.CaptureHandler;
+import javax.sound.sampled.AudioFormat;
+
+import sound.capture.AudioHandler;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
 
@@ -24,17 +26,24 @@ public class SyntheticAudioApplication extends Application {
 
 	public void load() {
 		//Mono samples (Just one channel)
-		waveSamples = new byte[1][44000];
+		float sampleRate = 44000;
+		int sampleSizeInBits = 8;
+		int channels = 1;
+		boolean signed = true;
+		boolean bigEndian = true;
+		
+		AudioFormat format = new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
+		
+		waveSamples = new byte[1][(int)sampleRate*4];
 		generateWave(0, pitch);
 		
-		CaptureHandler.getInstance().playAudio(waveSamples[0]);
+		AudioHandler.getInstance().playAudio(waveSamples[0], format);
 	}
 
 	private void generateWave(int channel, int pitch) {
 		for(int i=0;i<waveSamples[channel].length;i++) {
-			byte value = (byte)(-128+pitch*i%256);
+			byte value = (byte)(-128+(pitch*(i/10))%256);
 			waveSamples[0][i] = value;
-			System.out.println(value);
 		}
 	}
 	
