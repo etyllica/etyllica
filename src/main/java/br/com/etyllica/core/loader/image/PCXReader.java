@@ -75,19 +75,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public class PCXReader extends ImageReaderImpl{
-
-	private static PCXReader instance = null;
+public class PCXReader implements ImageReader {
 	
-	public static PCXReader getInstance() {
-		if(instance==null){
-			instance = new PCXReader();
-		}
-
-		return instance;
-	}
-	
-	private static class PCXHeader{
+	private static class PCXHeader {
 		
 		private char	manufacturer;
 		private char	version;
@@ -243,7 +233,6 @@ public class PCXReader extends ImageReaderImpl{
 		bimg.setRGB(0, 0, imageWidth,imageHeight, pixel, 0,imageWidth);
 
 		return bimg;
-
 	}
 
 }

@@ -20,7 +20,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class ICOReader extends ImageReaderImpl{
+public class ICOReader implements ImageReader {
 
 	private static final short ICO = 1;
 	private static final short CUR = 2;

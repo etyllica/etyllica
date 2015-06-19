@@ -3,7 +3,7 @@ package br.com.etyllica.core.loader.image;
 import java.awt.image.BufferedImage;
 
 /*
- * based on GifFrame code from 
+ * based on GifFrame code
  */
 
 public class ImageFrame {
