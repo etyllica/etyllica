@@ -11,7 +11,7 @@ import java.awt.Color;
 
 public class Point3D extends br.com.etyllica.linear.Point3D {
 	
-	protected Color color;
+	protected Color color = Color.BLACK;
 	
 	public Point3D() {
 		super();
@@ -23,8 +23,6 @@ public class Point3D extends br.com.etyllica.linear.Point3D {
 	
 	public Point3D(double x, double y, double z) {
 		super(x, y, z);
-						
-		color = Color.BLACK;
 	}
 	
 	public Point3D(br.com.etyllica.linear.Point3D point) {
@@ -36,11 +34,6 @@ public class Point3D extends br.com.etyllica.linear.Point3D {
 		this.y = y;
 	}
 	
-	public void setCoordinates(double x, double y, double z){
-		setCoordinates(x, y);
-		this.z = z;
-	}
-
 	public void setOffsetX(double x) {
 		this.x += x;
 	}
