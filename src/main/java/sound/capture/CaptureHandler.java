@@ -79,10 +79,13 @@ public class CaptureHandler{
 	}
 	
 	public synchronized void playAudio() {
+		byte audio[] = inputBuffer.toByteArray();
+		playAudio(audio);		
+	}
+	
+	public synchronized void playAudio(byte[] audio) {
 		
 		try {
-			
-			byte audio[] = inputBuffer.toByteArray();
 			InputStream input = new ByteArrayInputStream(audio);
 			final AudioFormat format = getFormat();
 			final AudioInputStream ais = new AudioInputStream(input, format, audio.length / format.getFrameSize());

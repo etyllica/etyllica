@@ -3,6 +3,7 @@ package examples.sound;
 import sound.MultimediaLoader;
 import examples.physics.application.BoxesFalling;
 import examples.sound.application.PlaySoundApplication;
+import examples.sound.application.SyntheticAudioApplication;
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.context.Application;
 
@@ -29,7 +30,8 @@ public class SoundExample extends EtyllicaFrame {
 		
 		initialSetup("../../../../");
 		
-		return new PlaySoundApplication(w,h);
+		//return new PlaySoundApplication(w,h);
+		return new SyntheticAudioApplication(w,h);
 	}
 
 }
