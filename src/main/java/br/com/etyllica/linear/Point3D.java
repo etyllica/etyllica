@@ -1,5 +1,6 @@
 package br.com.etyllica.linear;
 
+
 public class Point3D {
 
 	protected double x;
@@ -10,6 +11,10 @@ public class Point3D {
 
 	public Point3D() {
 		this(0,0,0);
+	}
+	
+	public Point3D(double x, double y) {
+		this(x,y,0);
 	}
 
 	public Point3D(double x, double y, double z) {
@@ -125,6 +130,14 @@ public class Point3D {
 		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
 
 		return angleInDegrees;		
+	}
+	
+	public double distanceXY(Point3D p) {
+		return distanceXY(p.x, p.y);
+	}
+
+	public double distanceXY(double px, double py) {
+		return (px - x) * (px - x) + (py - y) * (py - y);
 	}
 	
 }
