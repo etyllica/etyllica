@@ -144,5 +144,10 @@ public class AimPoint extends Point3D {
 	private static double sin(double angleDegree) {
 		return Math.sin(Math.toRadians(angleDegree));
 	}
+	
+	public void moveXZ(double distance) {
+		setX(x + AimPoint.sin(angleY) * distance);
+		setZ(z - AimPoint.cos(angleY-180) * distance);
+	}
 		
 }
