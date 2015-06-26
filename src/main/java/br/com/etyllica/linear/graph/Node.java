@@ -11,7 +11,7 @@ public class Node<T> {
 	private Point2D point;
 	
 	public Node() {
-		this(0, 0);		
+		this(0, 0);
 	}
 	
 	public Node(T data) {
