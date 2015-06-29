@@ -22,10 +22,11 @@ import br.com.etyllica.util.StringUtils;
 public class MeshLoader extends LoaderImpl {
 
 	private static MeshLoader instance = null;
-	
+
 	private Map<String, VBOLoader> loaders = new HashMap<String, VBOLoader>();
-	
+
 	private static final String OBJ = "obj";
+	private static final String MAX3D = "3ds";
 
 	public static MeshLoader getInstance() {
 		if(instance==null){
@@ -34,48 +35,49 @@ public class MeshLoader extends LoaderImpl {
 
 		return instance;
 	}
-	
+
 	private MeshLoader() {
 		super();
-		
+
 		folder = "assets/models/";
-		
+
 		loaders.put(OBJ, new OBJLoader());
+		loaders.put(MAX3D, new Max3DLoader());
 	}
-	
+
 	public VBO loadModel(String path) {
-				
+
 		URL dir = null;
 		try {
 			dir = getFullURL(path);
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		String ext = StringUtils.fileExtension(path);
 		VBOLoader loader = getLoader(ext);
-		
-		try {
-			return loader.loadModel(dir);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+
+		if(loader == null) {
+			System.out.println("Etyllica can't load "+ext+" files.");
+		} else {
+			try {
+				return loader.loadModel(dir);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.err.println("Asset "+path+" not found.");
+			}
 		}
-		
+
 		return null;
 	}
-	
-	public URL getFullURL(String filename) throws MalformedURLException {
-		return new URL(url, folder+filename);
-	}
-	
+
 	public VBOLoader getLoader(String extension) {
 		return loaders.get(extension);
 	}
-	
+
 	public Set<String> supportedExtensions() {
 		return loaders.keySet();
 	}
-	
+
 }

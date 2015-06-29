@@ -29,6 +29,10 @@ public class LoaderImpl implements Loader {
 		return url;
 	}
 	
+	public URL getFullURL(String filename) throws MalformedURLException {
+		return new URL(url, folder+filename);
+	}
+	
 	public String getPath() {
 		
 		String path = url.toString();
