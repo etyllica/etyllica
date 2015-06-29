@@ -30,14 +30,14 @@ public class OBJLoader implements VBOLoader {
 
 	private static final String DEFAULT_GROUP_NAME = "default";
 	
-	private static final String VERTEX = "v";
-	private static final String FACE = "f";
-	private static final String GROUP = "g";
-	private static final String VERTEX_TEXCOORD = "vt";
-	private static final String VERTEX_NORMAL = "vn";
-	private static final String OBJECT = "o";
-	private static final String MATERIAL_LIB = "mtllib";
-	private static final String USE_MATERIAL = "usemtl";
+	public static final String VERTEX = "v";
+	public static final String FACE = "f";
+	public static final String GROUP = "g";
+	public static final String VERTEX_TEXCOORD = "vt";
+	public static final String VERTEX_NORMAL = "vn";
+	public static final String OBJECT = "o";
+	public static final String MATERIAL_LIB = "mtllib";
+	public static final String USE_MATERIAL = "usemtl";
 		
 	private static final String SEPARATOR = "/";
 
@@ -57,7 +57,7 @@ public class OBJLoader implements VBOLoader {
 
 		List<Group> groups = new ArrayList<Group>();
 
-		Group group = null;
+		Group group = new Group(DEFAULT_GROUP_NAME);
 
 		String line;
 
@@ -101,8 +101,8 @@ public class OBJLoader implements VBOLoader {
 				int sides = splitLine.length;
 
 				int[] vIndexes = new int[sides];
-				Vector3f[] nIndexes = new Vector3f[sides];
-				Vector2f[] texIndexes = new Vector2f[sides];
+				int[] nIndexes = new int[sides];
+				int[] texIndexes = new int[sides];
 
 				for(int i=0;i<sides;i++) {
 
@@ -110,16 +110,19 @@ public class OBJLoader implements VBOLoader {
 
 					if(face.length > 1) {
 
-						//-1 is very important
+						//vIndexes starts in 0
+						//Faces starts in 1
 						vIndexes[i] = Integer.parseInt(face[0])-1;
 
-						if(!splitLine[i].split(SEPARATOR)[1].isEmpty())
-							texIndexes[i] = vbo.getTextures().get(Integer.parseInt(face[1])-1);
+						if(!face[1].isEmpty()) {
+							texIndexes[i] = Integer.parseInt(face[1])-1;
+						}
 
-						if(face.length > 2)
-							nIndexes[i] = vbo.getNormals().get(Integer.parseInt(face[2])-1);
+						if(face.length > 2) {
+							nIndexes[i] = Integer.parseInt(face[2])-1;
+						}
 
-					}else{
+					} else {
 						//Save only the vertexes indexes
 						vIndexes[i] = Integer.parseInt(splitLine[i])-1;
 					}

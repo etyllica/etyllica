@@ -269,7 +269,6 @@ public class Vector3f extends Vector implements Serializable, ReadableVector3f, 
 		z *= scale;
 
 		return this;
-
 	}
 
 	/* (non-Javadoc)

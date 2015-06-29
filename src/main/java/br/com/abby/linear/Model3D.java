@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.jgl.GL;
 import org.jgl.GLAUX;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import br.com.abby.GLDrawable;
@@ -75,7 +76,7 @@ public class Model3D extends AimPoint implements GLDrawable {
 
 	}
 	
-	private void drawFaces(GLAUX gl){
+	private void drawFaces(GLAUX gl) {
 
 		if(!drawFaces){
 			return;
@@ -125,7 +126,7 @@ public class Model3D extends AimPoint implements GLDrawable {
 
 					gl.glBegin(GL.GL_TRIANGLES);
 
-				}else{ //TODO Transform all faces in tris
+				} else { //TODO Transform all faces in tris
 
 					gl.glBegin(GL.GL_QUADS);
 
@@ -134,8 +135,12 @@ public class Model3D extends AimPoint implements GLDrawable {
 				for(int i=0;i<face.vertexIndex.length;i++){
 
 					if(drawTexture){
-						gl.glNormal3d(face.normal[i].getX(), face.normal[i].getY(), face.normal[i].getZ());
-						gl.glTexCoord2d(face.texture[i].getX(), face.texture[i].getY());
+						
+						Vector3f normal = vbo.getNormals().get(i);
+						gl.glNormal3d(normal.getX(), normal.getY(), normal.getZ());
+						
+						Vector2f textureCoordinate = vbo.getTextures().get(i);
+						gl.glTexCoord2d(textureCoordinate.getX(), textureCoordinate.getY());
 					}
 					
 					int index = face.vertexIndex[i];
@@ -146,18 +151,15 @@ public class Model3D extends AimPoint implements GLDrawable {
 				}
 
 				gl.glEnd();
-
 			}
-		
 		}
-
 	}
 	
-	private Texture getTexture(String map){
+	private Texture getTexture(String map) {
 		
 		Texture texture = textureMap.get(map);
 		
-		if(texture==null){
+		if(texture==null) {
 			
 			System.out.println("Trying to load: "+map);
 			

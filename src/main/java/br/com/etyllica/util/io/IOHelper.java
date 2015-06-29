@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import br.com.etyllica.util.StringUtils;
+
 public class IOHelper {
 
 	public static final String FILE_PREFIX = "file:";
-	
-	public static final String WINDOWS_SPACING = "%20";
 	
 	public static final String ENCODING_UTF_8 = "UTF-8";
 
@@ -34,12 +34,17 @@ public class IOHelper {
 
 	}
 
-	private static File getFile(String path) throws IOException {
+	public static File getFile(String path) throws IOException {
 		
 		File file = new File(fixPrefixPath(path));
-
-		if(!file.exists())
+				
+		if(!file.getParentFile().exists()) {
+			file.getParentFile().mkdirs();
+		}
+		
+		if(!file.exists()) {
 			file.createNewFile();
+		}
 
 		return file;
 	}
@@ -52,7 +57,7 @@ public class IOHelper {
 			 filePath = path.substring(5);
 		}
 		
-		if(path.contains(WINDOWS_SPACING)) {
+		if(path.contains(StringUtils.WINDOWS_SPACING)) {
 			filePath = fixPath(filePath);
 		}
 		
@@ -60,7 +65,7 @@ public class IOHelper {
 	}
 	
 	public static String fixPath(String path) {
-		return path.replaceAll(WINDOWS_SPACING, " ");
+		return path.replaceAll(StringUtils.WINDOWS_SPACING, StringUtils.WHITE_SPACE);
 	}
 
 }
