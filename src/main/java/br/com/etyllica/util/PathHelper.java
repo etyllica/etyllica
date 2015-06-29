@@ -1,5 +1,7 @@
 package br.com.etyllica.util;
 
+import java.net.URL;
+
 import javax.swing.filechooser.FileSystemView;
 
 import br.com.etyllica.util.io.IOHelper;
@@ -7,7 +9,8 @@ import br.com.etyllica.util.io.IOHelper;
 public class PathHelper {
 
 	public static String currentDirectory() {
-		String currentDirectory = IOHelper.FILE_PREFIX+ClassLoader.getSystemResource("").getPath();
+		URL location = PathHelper.class.getProtectionDomain().getCodeSource().getLocation();
+		String currentDirectory = IOHelper.FILE_PREFIX+location.getPath();
 		return currentDirectory;
 	}
 	
