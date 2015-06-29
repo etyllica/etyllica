@@ -1,6 +1,7 @@
 package br.com.abby.loader;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,22 +38,19 @@ public class OBJLoader implements VBOLoader {
 	private static final String OBJECT = "o";
 	private static final String MATERIAL_LIB = "mtllib";
 	private static final String USE_MATERIAL = "usemtl";
-	private static final String NEW_MATERIAL = "newmtl";
-	private static final String DIFFUSE_COLOR = "Kd";
-	private static final String DIFFUSE_TEX_MAP = "map_Kd";
-	
+		
 	private static final String SEPARATOR = "/";
 
 	public VBO loadModel(URL url) throws FileNotFoundException, IOException {
 
 		String fpath = url.getPath();
-		String separator = "/";
+		String separator = File.pathSeparator;
 
 		if(!fpath.contains(separator)) {
 			separator="\\";
 		}
 
-		String folder = fpath.substring(0,fpath.lastIndexOf(separator)+1);
+		String modelFolder = fpath.substring(0,fpath.lastIndexOf(separator)+1);
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 		VBO vbo = new VBO();
@@ -65,11 +63,12 @@ public class OBJLoader implements VBOLoader {
 
 		while ((line = reader.readLine()) != null) {
 
-			line = line.replaceAll("  ", " ");
+			line = fixLine(line);
 
 			if (line.startsWith(GROUP+" ")) {
 
 				if(group!=null) {
+					//Add last group
 					groups.add(group);
 				}
 
@@ -135,7 +134,7 @@ public class OBJLoader implements VBOLoader {
 
 			} else if (line.startsWith(MATERIAL_LIB)) {
 
-				List<OBJMaterial> materials = parseMaterial(folder, line);
+				List<OBJMaterial> materials = parseMaterial(modelFolder, line);
 
 				for(OBJMaterial material: materials) {
 					vbo.getMaterials().put(material.getName(), material);
@@ -154,6 +153,10 @@ public class OBJLoader implements VBOLoader {
 		vbo.setGroups(groups);
 
 		return vbo;
+	}
+
+	private String fixLine(String line) {
+		return line.replaceAll("  "," ");
 	}
 
 	private static void parseVertex(String line, VBO vbo) {

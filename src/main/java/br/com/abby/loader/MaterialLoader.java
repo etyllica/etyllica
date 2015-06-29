@@ -19,6 +19,10 @@ import br.com.abby.material.OBJMaterial;
  */
 
 public class MaterialLoader {
+	
+	private static final String NEW_MATERIAL = "newmtl";
+	private static final String DIFFUSE_COLOR = "Kd";
+	private static final String DIFFUSE_TEX_MAP = "map_Kd";
 
 	public static List<OBJMaterial> loadMaterial(String folder, String filename) throws IOException{
 		
@@ -39,7 +43,7 @@ public class MaterialLoader {
 			String[] splitLine = line.split(" ");
 			String prefix = splitLine[0];
 			
-			if("newmtl".equalsIgnoreCase(prefix)) {
+			if(NEW_MATERIAL.equalsIgnoreCase(prefix)) {
 				
 				if(mat!=null){
 					materials.add(mat);
@@ -53,7 +57,7 @@ public class MaterialLoader {
                 float y = Float.valueOf(splitLine[2]);
                 float z = Float.valueOf(splitLine[3]);
                 mat.setKa(new Vector3f(x, y, z));
-            } else if ("kd".equalsIgnoreCase(prefix)) {
+            } else if (DIFFUSE_COLOR.equalsIgnoreCase(prefix)) {
                 float x = Float.valueOf(splitLine[1]);
                 float y = Float.valueOf(splitLine[2]);
                 float z = Float.valueOf(splitLine[3]);
@@ -66,26 +70,19 @@ public class MaterialLoader {
             } else if ("illum".equalsIgnoreCase(prefix)) {
                 int illum = Integer.valueOf(splitLine[1]);
                 mat.setIllum(illum);
-                
             } else if ("map_d".equalsIgnoreCase(prefix)) {
-            	
             	mat.setMapD(folder+splitLine[1]);
-            	
-            } else if ("map_kd".equalsIgnoreCase(prefix)) {
-            	
+            } else if (DIFFUSE_TEX_MAP.equalsIgnoreCase(prefix)) {
             	mat.setMapKd(folder+splitLine[1]);
-            	            	
             }else if ("map_ka".equalsIgnoreCase(prefix)) {
-            	
             	mat.setMapKa(folder+splitLine[1]);
-            	            	
             }
 			
 		}
 
 		reader.close();
 
-		if(mat!=null){
+		if (mat != null) {
 			materials.add(mat);
 		}
 		

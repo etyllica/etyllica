@@ -55,7 +55,7 @@ public class Loader {
 					Face3D pol = new Face3D();
 					for(int i = 1;i<poliLine.length;i++){						
 						
-						pol.novoPonto(vertices.get(Integer.parseInt(poliLine[i])-1));
+						pol.addPoint(vertices.get(Integer.parseInt(poliLine[i])-1));
 						
 					}
 					
@@ -102,9 +102,9 @@ public class Loader {
 			
 				for (j=0;j<npontos;j++){
 					
-				   cpoints[i][j][0] = (float) faces.get(i).getPontos().get(j).getX();
-				   cpoints[i][j][1] = (float) faces.get(i).getPontos().get(j).getY();
-				   cpoints[i][j][2] = (float) faces.get(i).getPontos().get(j).getZ();
+				   cpoints[i][j][0] = (float) faces.get(i).getPoints().get(j).getX();
+				   cpoints[i][j][1] = (float) faces.get(i).getPoints().get(j).getY();
+				   cpoints[i][j][2] = (float) faces.get(i).getPoints().get(j).getZ();
 				   //System.out.println("["+i+"]["+j+"] - existe");
 				   
 			   }
