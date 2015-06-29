@@ -7,21 +7,16 @@ import br.com.etyllica.util.io.IOHelper;
 public class PathHelper {
 
 	public static String currentDirectory() {
-		
-		String currentDirectory = IOHelper.FILE_PREFIX+ClassLoader.getSystemClassLoader().getResource(".").getPath();
-		
+		String currentDirectory = IOHelper.FILE_PREFIX+ClassLoader.getSystemResource("").getPath();
 		return currentDirectory;
 	}
 	
 	public static String desktopDirectory() {
-		
 		FileSystemView filesys = FileSystemView.getFileSystemView();
-
 		return filesys.getHomeDirectory().getAbsolutePath();
 	}
 	
 	public static String programFilesDirectory() {
-
 		return System.getenv("ProgramFiles");	
 	}
 	

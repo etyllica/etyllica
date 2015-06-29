@@ -12,4 +12,10 @@ public class StringUtils {
 		return count;
 	}
 	
+	public static String fileExtension(String path) {
+		int mid = path.lastIndexOf(".");
+		String ext = path.substring(mid+1,path.length()).toLowerCase();
+		return ext;
+	}
+	
 }

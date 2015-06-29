@@ -41,7 +41,7 @@ public class LoaderImpl implements Loader {
 	public String fullPath() {
 		return getPath()+folder;
 	}
-
+	
 	@Override
 	public void initLoader() {
 		// TODO Auto-generated method stub

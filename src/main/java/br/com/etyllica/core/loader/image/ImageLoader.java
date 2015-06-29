@@ -7,11 +7,11 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
+import java.util.Set;
 
 import br.com.etyllica.core.loader.LoaderImpl;
 import br.com.etyllica.layer.StaticLayer;
+import br.com.etyllica.util.StringUtils;
 
 /**
  * 
@@ -116,8 +116,7 @@ public class ImageLoader extends LoaderImpl {
 				e1.printStackTrace();
 			}
 
-			int mid = diretorio.lastIndexOf(".");
-			String ext = diretorio.substring(mid+1,diretorio.length()).toLowerCase();
+			String ext = StringUtils.fileExtension(diretorio);
 
 			ImageReader reader = readers.get(ext);
 
@@ -163,14 +162,12 @@ public class ImageLoader extends LoaderImpl {
 				e1.printStackTrace();
 			}
 
-			int mid= diretorio.lastIndexOf(".");
-			String ext=diretorio.substring(mid+1,diretorio.length()).toLowerCase();
+			String ext = StringUtils.fileExtension(diretorio);
 
 			if(ext.equals("gif")) {
 
 				try {
 					list = GIFReader.getInstance().loadAnimation(dir);
-
 					animations.put(diretorio, list);
 
 				} catch (IOException e) {
@@ -179,13 +176,14 @@ public class ImageLoader extends LoaderImpl {
 
 					e.printStackTrace();
 				}
-
 			}
 
 			return list;
 		}
-
 	}
-
+	
+	public Set<String> supportedExtensions() {
+		return readers.keySet();
+	}
 
 }
