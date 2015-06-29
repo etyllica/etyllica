@@ -12,6 +12,10 @@ import org.lwjgl.util.vector.Vector3f;
 import br.com.abby.vbo.Face;
 import br.com.abby.vbo.VBO;
 
+/**
+ * Code forked from min3d library https://code.google.com/p/min3d/
+ *
+ */
 public class Max3DLoader extends StreamParser implements VBOLoader {
 
 	private final int IDENTIFIER_3DS = 0x4D4D;
