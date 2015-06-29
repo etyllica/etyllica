@@ -140,4 +140,9 @@ public class Point3D {
 		return (px - x) * (px - x) + (py - y) * (py - y);
 	}
 	
+	public String toString() {
+		String text = "("+x+", "+y+", "+z+")"; 
+		return text;
+	}
+	
 }
