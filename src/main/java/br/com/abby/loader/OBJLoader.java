@@ -67,81 +67,34 @@ public class OBJLoader implements VBOLoader {
 
 			if (line.startsWith(GROUP+" ")) {
 
-				if(group!=null) {
+				if(!DEFAULT_GROUP_NAME.equals(group.getName())) {
 					//Add last group
 					groups.add(group);
+				} else if(!group.getFaces().isEmpty()) {
+					//If group has at least one face 
+					groups.add(group);
 				}
-
 				group = new Group(line.split(" ")[1]);
-			}
-			else if (line.startsWith(USE_MATERIAL+" ")) {
+				
+			} else if (line.startsWith(USE_MATERIAL+" ")) {
 
 				String materialName = line.split(" ")[1];
-				if(group == null) {
-					group = new Group(DEFAULT_GROUP_NAME);
-				}
 				group.setMaterial(vbo.getMaterials().get(materialName));
-			}
-
-			if (line.startsWith(VERTEX+" ")) {
-
+				
+			} else if (line.startsWith(VERTEX+" ")) {
 				parseVertex(line, vbo);                
 
 			} else if (line.startsWith(VERTEX_NORMAL+" ")) {
-
 				parseVertexNormal(line, vbo);
 
 			} else if (line.startsWith(VERTEX_TEXCOORD+" ")) {
 				parseVertexTexture(line, vbo);
 
 			} else if (line.startsWith(FACE+" ")) {
-
-				String[] splitLine = line.substring(2).split(" ");
-
-				int sides = splitLine.length;
-
-				int[] vIndexes = new int[sides];
-				int[] nIndexes = new int[sides];
-				int[] texIndexes = new int[sides];
-
-				for(int i=0;i<sides;i++) {
-
-					String[] face = splitLine[i].split(SEPARATOR);
-
-					if(face.length > 1) {
-
-						//vIndexes starts in 0
-						//Faces starts in 1
-						vIndexes[i] = Integer.parseInt(face[0])-1;
-
-						if(!face[1].isEmpty()) {
-							texIndexes[i] = Integer.parseInt(face[1])-1;
-						}
-
-						if(face.length > 2) {
-							nIndexes[i] = Integer.parseInt(face[2])-1;
-						}
-
-					} else {
-						//Save only the vertexes indexes
-						vIndexes[i] = Integer.parseInt(splitLine[i])-1;
-					}
-				}
-
-				Face face = new Face(vIndexes, texIndexes, nIndexes);
-				face.setSides(sides);
-
-				group.getFaces().add(face);
-				//TODO Remove face from model
-				vbo.getFaces().add(face);
+				parseFace(vbo, group, line);
 
 			} else if (line.startsWith(MATERIAL_LIB)) {
-
-				List<OBJMaterial> materials = parseMaterial(modelFolder, line);
-
-				for(OBJMaterial material: materials) {
-					vbo.getMaterials().put(material.getName(), material);
-				}
+				parseMaterial(modelFolder, vbo, line);
 
 			}
 		}
@@ -156,6 +109,56 @@ public class OBJLoader implements VBOLoader {
 		vbo.setGroups(groups);
 
 		return vbo;
+	}
+
+	private void parseMaterial(String modelFolder, VBO vbo, String line)
+			throws IOException {
+		List<OBJMaterial> materials = parseMaterial(modelFolder, line);
+
+		for(OBJMaterial material: materials) {
+			vbo.getMaterials().put(material.getName(), material);
+		}
+	}
+
+	private void parseFace(VBO vbo, Group group, String line) {
+		String[] splitLine = line.substring(2).split(" ");
+
+		int sides = splitLine.length;
+
+		int[] vIndexes = new int[sides];
+		int[] nIndexes = new int[sides];
+		int[] texIndexes = new int[sides];
+
+		for(int i=0;i<sides;i++) {
+
+			String[] face = splitLine[i].split(SEPARATOR);
+
+			if(face.length > 1) {
+
+				//vIndexes starts in 0
+				//Faces starts in 1
+				vIndexes[i] = Integer.parseInt(face[0])-1;
+
+				if(!face[1].isEmpty()) {
+					texIndexes[i] = Integer.parseInt(face[1])-1;
+				}
+
+				if(face.length > 2) {
+					nIndexes[i] = Integer.parseInt(face[2])-1;
+				}
+
+			} else {
+				//Save only the vertexes indexes
+				vIndexes[i] = Integer.parseInt(splitLine[i])-1;
+			}
+		}
+
+		Face face = new Face(vIndexes, texIndexes, nIndexes);
+		face.setSides(sides);
+
+		group.getFaces().add(face);
+		//TODO Remove face from model
+		vbo.getFaces().add(face);
 	}
 
 	private String fixLine(String line) {
