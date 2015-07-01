@@ -10,7 +10,9 @@ import java.util.Set;
 
 import br.com.abby.vbo.VBO;
 import br.com.etyllica.core.loader.LoaderImpl;
+import br.com.etyllica.util.PathHelper;
 import br.com.etyllica.util.StringUtils;
+import br.com.etyllica.util.io.IOHelper;
 
 /**
  * 
@@ -44,12 +46,20 @@ public class MeshLoader extends LoaderImpl {
 		loaders.put(OBJ, new OBJLoader());
 		loaders.put(MAX3D, new Max3DLoader());
 	}
-
+	
 	public VBO loadModel(String path) {
+		return loadModel(path, false);
+	}
+
+	public VBO loadModel(String path, boolean absolutePath) {
 
 		URL dir = null;
 		try {
-			dir = getFullURL(path);
+			if(!absolutePath) {
+				dir = getFullURL(path);
+			} else {
+				dir = new URL(IOHelper.FILE_PREFIX+path);
+			}
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
