@@ -16,6 +16,8 @@ import br.com.etyllica.util.StringUtils;
 import br.com.etyllica.util.io.IOHelper;
 
 public class OBJWriter implements VBOWriter {
+	
+	private static final String FACE_SEPARATOR = "/";
 
 	@Override
 	public void writeVBO(VBO vbo, String filename) throws IOException {
@@ -67,14 +69,15 @@ public class OBJWriter implements VBOWriter {
 				boolean hasTexture = false;
 				if(face.textureIndex!=null && face.textureIndex.length > 0) {
 					hasTexture = true;
-					sb.append("/");
+					sb.append(FACE_SEPARATOR);
 					sb.append(face.textureIndex[i]);
-					sb.append("/");
+					sb.append(FACE_SEPARATOR);
 				}
 				
 				if(face.normalIndex!=null && face.normalIndex.length > 0) {
 					if(!hasTexture) {
-						sb.append("//");
+						sb.append(FACE_SEPARATOR);
+						sb.append(FACE_SEPARATOR);
 					}
 					sb.append(face.normalIndex[i]);
 				}				

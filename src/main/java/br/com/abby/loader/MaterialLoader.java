@@ -25,7 +25,7 @@ public class MaterialLoader {
 	private static final String DIFFUSE_TEX_MAP = "map_Kd";
 
 	public static List<OBJMaterial> loadMaterial(String folder, String filename) throws IOException{
-		
+				
 		File f = new File(folder+filename);
 		
 		BufferedReader reader = new BufferedReader(new FileReader(f));
