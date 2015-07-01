@@ -41,7 +41,10 @@ public abstract class SingleIntervalAnimation extends AnimationScript {
 		this.startValue = startValue;
 		this.endValue = endValue;
 		
-		calculate(0);
+		//Update for the first value
+		if (target != null) {
+			calculate(0);
+		}
 	}
 
 	public Layer getTarget() {

@@ -66,7 +66,6 @@ public abstract class AnimationScript {
 				}
 				
 			} else {
-				
 				if(now-startedAt >= delay) {
 					this.animate(now);
 				}
@@ -77,16 +76,14 @@ public abstract class AnimationScript {
 	}
 
 	public void animate(long now) {
-
 		long timeElapsed = now-startedAt-delay;
-
 		float factor = (float)timeElapsed/time;
 
-		calculate(factor);		
+		calculate(factor);
 	}
 	
 	public abstract void calculate(double factor);
-
+	
 	public boolean isStopped() {
 		return stopped;
 	}

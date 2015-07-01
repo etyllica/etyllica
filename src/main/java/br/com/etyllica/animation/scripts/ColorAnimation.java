@@ -29,7 +29,6 @@ public class ColorAnimation extends AnimationScript {
 		double blueValue = initialColor.getBlue()+(endColor.getBlue()-initialColor.getBlue())*factor;
 		
 		currentColor = new Color((int)redValue, (int)greenValue, (int)blueValue);
-		
 	}
 
 	public Color getInitialColor() {
