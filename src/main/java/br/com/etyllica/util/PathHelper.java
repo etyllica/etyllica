@@ -34,7 +34,7 @@ public class PathHelper {
 	
 	public static String desktopDirectory() {
 		FileSystemView filesys = FileSystemView.getFileSystemView();
-		return filesys.getHomeDirectory().getAbsolutePath();
+		return filesys.getHomeDirectory().getAbsolutePath()+File.separator;
 	}
 	
 	public static String programFilesDirectory() {
