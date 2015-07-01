@@ -1,7 +1,6 @@
 package br.com.abby.loader;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,6 +15,7 @@ import br.com.abby.material.OBJMaterial;
 import br.com.abby.vbo.Face;
 import br.com.abby.vbo.Group;
 import br.com.abby.vbo.VBO;
+import br.com.etyllica.util.PathHelper;
 
 
 /**
@@ -44,14 +44,9 @@ public class OBJLoader implements VBOLoader {
 	public VBO loadModel(URL url) throws FileNotFoundException, IOException {
 
 		String fpath = url.getPath();
-		String separator = File.pathSeparator;
-
-		if(!fpath.contains(separator)) {
-			separator="\\";
-		}
-
-		String modelFolder = fpath.substring(0,fpath.lastIndexOf(separator)+1);
-
+		
+		String modelFolder = PathHelper.upperDirectory(fpath);
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 		VBO vbo = new VBO();
 

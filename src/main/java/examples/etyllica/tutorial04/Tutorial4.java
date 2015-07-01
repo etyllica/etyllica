@@ -20,7 +20,7 @@ public class Tutorial4 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../");
 		hideCursor();
 		
 		return new ProceduralColorChange(w,h);

@@ -20,7 +20,6 @@ public class Tutorial5 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		
 		return new FollowingText(w,h);
 	}
 	

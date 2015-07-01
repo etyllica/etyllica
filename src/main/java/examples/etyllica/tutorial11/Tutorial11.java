@@ -19,7 +19,7 @@ public class Tutorial11 extends Etyllica{
 
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../");
+		initialSetup("../../");
 		return new CaptureAudioApplication(w, h);
 	}
 

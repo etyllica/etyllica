@@ -14,7 +14,7 @@ public class Tutorial8 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../");		
+		initialSetup("../../");
 		return new AnimatedMenu(w, h);
 	}
 	

@@ -13,7 +13,7 @@ public class Tutorial18 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../");
 		return new AlphaCollision(w, h);
 	}
 	

@@ -13,7 +13,7 @@ public class Tutorial21 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../");
 		return new ParallaxApplication(w, h);
 	}
 	

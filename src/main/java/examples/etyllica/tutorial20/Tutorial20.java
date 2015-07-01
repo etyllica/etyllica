@@ -13,7 +13,7 @@ public class Tutorial20 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../");
 		return new AnimatedDialog(w, h);
 	}
 	

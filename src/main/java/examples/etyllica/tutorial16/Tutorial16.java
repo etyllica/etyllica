@@ -13,7 +13,7 @@ public class Tutorial16 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../");
 		return new ParticleApplication(w,h);
 	}
 	

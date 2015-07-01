@@ -21,7 +21,7 @@ public class Tutorial7 extends Etyllica {
 
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../");
 		return new AnimationExample(w,h);
 	}
 

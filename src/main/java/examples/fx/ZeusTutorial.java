@@ -14,7 +14,7 @@ public class ZeusTutorial extends Etyllica {
 
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../");
+		initialSetup("../../");
 
 		return new LightningApplication(w,h);
 	}

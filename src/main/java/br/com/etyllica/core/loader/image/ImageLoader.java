@@ -88,6 +88,7 @@ public class ImageLoader extends LoaderImpl {
 		StringBuilder sb = new StringBuilder();
 
 		if(!absolute) {
+			sb.append(url.getPath());
 			sb.append(folder);
 		}
 

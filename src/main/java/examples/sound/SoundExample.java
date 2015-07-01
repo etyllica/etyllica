@@ -28,7 +28,7 @@ public class SoundExample extends EtyllicaFrame {
 	public Application startApplication() {
 		addLoader(MultimediaLoader.getInstance());
 		
-		initialSetup("../../../../");
+		initialSetup("../../");
 		
 		//return new PlaySoundApplication(w,h);
 		return new SyntheticAudioApplication(w,h);

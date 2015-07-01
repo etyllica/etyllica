@@ -14,7 +14,7 @@ public class StretchTutorial extends Etyllica {
 
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../");
+		initialSetup("../../");
 
 		return new StretchApplication(w,h);
 	}

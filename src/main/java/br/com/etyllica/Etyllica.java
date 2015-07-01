@@ -11,6 +11,7 @@ import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.engine.SharedEngine;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.util.PathHelper;
 
 /**
  * 
@@ -88,7 +89,7 @@ public abstract class Etyllica extends Applet implements Engine {
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
-		String defaultPath = this.getClass().getResource("").toString();
+		String defaultPath = PathHelper.currentDirectory().toString();
 					
 		setPath(defaultPath+suffix);
 	}

@@ -13,7 +13,7 @@ public class Tutorial22 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../");
 		return new SplitCameraApplication(w, h);
 	}
 	

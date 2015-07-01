@@ -20,7 +20,7 @@ public class Tutorial15 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../");
+		initialSetup("../../");
 		return new ChatWindowExample(w,h);
 	}
 	

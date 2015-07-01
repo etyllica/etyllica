@@ -23,6 +23,8 @@ public class FollowingText extends Application{
 		text.setBorderColor(Color.BLACK);
 		text.setBorderWidth(3f);
 		
+		text.setColor(Color.WHITE);
+		
 		loading = 100;
 	}
 	
