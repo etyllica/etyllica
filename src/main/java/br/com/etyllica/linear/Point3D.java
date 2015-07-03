@@ -136,9 +136,17 @@ public class Point3D {
 	}
 
 	public double distanceXY(double px, double py) {
-		return (px - x) * (px - x) + (py - y) * (py - y);
+		return Math.sqrt((px - x) * (px - x) + (py - y) * (py - y));
 	}
 	
+	public double distance(Point3D target) {
+		double deltaX = x-target.getX();
+		double deltaY = y-target.getY();
+		double deltaZ = z-target.getZ();
+		
+		return Math.sqrt(deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ);
+	}
+		
 	public Point3D distantPoint(Point3D target, double distance) {
 		
 		double deltaX = x-target.getX();
