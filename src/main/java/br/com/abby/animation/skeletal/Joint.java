@@ -6,7 +6,7 @@ import java.util.List;
 import org.jgl.GLAUX;
 
 import br.com.abby.GLDrawable;
-import br.com.abby.linear.Point3D;
+import br.com.abby.linear.ColoredPoint3D;
 
 /**
  * 
@@ -15,7 +15,7 @@ import br.com.abby.linear.Point3D;
  *
  */
 
-public class Joint extends Point3D implements GLDrawable{
+public class Joint extends ColoredPoint3D implements GLDrawable{
 
 	private List<Bone> bones = new ArrayList<Bone>();
 

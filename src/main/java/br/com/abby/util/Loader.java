@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import br.com.abby.linear.Face3D;
-import br.com.abby.linear.Point3D;
+import br.com.abby.linear.ColoredPoint3D;
 
 /**
  * 
@@ -26,7 +26,7 @@ public class Loader {
 		
 		path = path.substring(6);
 		
-		Vector<Point3D> vertices = new Vector<Point3D>();
+		Vector<ColoredPoint3D> vertices = new Vector<ColoredPoint3D>();
 		Vector<Face3D> faces = new Vector<Face3D>();
 
 		try {
@@ -46,7 +46,7 @@ public class Loader {
 					double y = Double.parseDouble(eachLine.split(" ")[2]);
 					double z = Double.parseDouble(eachLine.split(" ")[3]);					
 					
-					vertices.add(new Point3D(x,y,z));
+					vertices.add(new ColoredPoint3D(x,y,z));
 				}
 				else if(eachLine.startsWith("f")){
 					

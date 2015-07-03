@@ -11,7 +11,7 @@ import java.util.Vector;
 
 public class Polygon3D extends AimPoint {
 			
-	protected Vector<Point3D> vertices;
+	protected Vector<ColoredPoint3D> vertices;
 	
 	public Polygon3D(){
 		this(0,0,0);
@@ -19,7 +19,7 @@ public class Polygon3D extends AimPoint {
 	public Polygon3D(double x, double y, double z){
 		super(x,y,z);
 		
-		vertices = new Vector<Point3D>();
+		vertices = new Vector<ColoredPoint3D>();
 			
 		/*
 		 * Teste
@@ -53,10 +53,10 @@ public class Polygon3D extends AimPoint {
 	}
 		
 	public void novoVertice(double x, double y, double z){
-		vertices.add(new Point3D(x,y,z));
+		vertices.add(new ColoredPoint3D(x,y,z));
 	}
 	
-	public Vector<Point3D> getVertices(){
+	public Vector<ColoredPoint3D> getVertices(){
 		return vertices;
 	}
 

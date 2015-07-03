@@ -1,6 +1,5 @@
 package br.com.etyllica.linear;
 
-
 public class Point3D {
 
 	protected double x;
@@ -138,6 +137,23 @@ public class Point3D {
 
 	public double distanceXY(double px, double py) {
 		return (px - x) * (px - x) + (py - y) * (py - y);
+	}
+	
+	public Point3D distantPoint(Point3D target, double distance) {
+		
+		double deltaX = x-target.getX();
+		double deltaY = y-target.getY();
+		double deltaZ = z-target.getZ();
+		
+		double dist = Math.sqrt(deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ);
+		
+		deltaX /= dist;
+		deltaY /= dist;
+		deltaZ /= dist;
+				
+		Point3D c = new Point3D(x-distance*deltaX, y-distance*deltaY, z-distance*deltaZ);
+
+		return c;
 	}
 	
 	public Point3D sub(Point3D p) {

@@ -14,22 +14,22 @@ public class Face3D {
 	
 	protected Color color;
 	
-	protected Vector<Point3D> points;
+	protected Vector<ColoredPoint3D> points;
 
 	public Face3D() {
 		color = Color.BLACK;
-		points = new Vector<Point3D>();
+		points = new Vector<ColoredPoint3D>();
 	}
 
 	public void addPoint(int x, int y) {
-		points.add(new Point3D(x,y));
+		points.add(new ColoredPoint3D(x,y));
 	}
 	
 	public void addPoint(int x, int y, int z) {
-		points.add(new Point3D(x,y,z));
+		points.add(new ColoredPoint3D(x,y,z));
 	}
 	
-	public void addPoint(Point3D p) {
+	public void addPoint(ColoredPoint3D p) {
 		points.add(p);
 	}
 
@@ -69,7 +69,7 @@ public class Face3D {
 		}
 	}
 	
-	public Vector<Point3D> getPoints() {
+	public Vector<ColoredPoint3D> getPoints() {
 		return points;
 	}
 	
@@ -80,7 +80,7 @@ public class Face3D {
 		
 		for(int p = 0;p<points.size();p++) {
 			
-			Point3D point = points.get(p);
+			ColoredPoint3D point = points.get(p);
 			text +="Point "+Integer.toString(p)+": "+point.toString();
 			text += "\n";
 		}

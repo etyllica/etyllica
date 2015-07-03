@@ -1,5 +1,10 @@
 package br.com.abby.linear;
 
+import org.lwjgl.util.vector.Vector3f;
+
+import br.com.abby.adapter.PointToVectorAdapter;
+import br.com.etyllica.linear.Point3D;
+
 /**
  * AABB Bounding Box
  */
@@ -20,6 +25,10 @@ public class BoundingBox3D {
 		this.maxPoint = new Point3D(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
 	}
 
+	public void add(Vector3f vertex) {
+		addPoint(PointToVectorAdapter.adapt(vertex));
+	}
+	
 	public void addPoint(Point3D point) {
 		double px = point.getX();
 		double py = point.getY();

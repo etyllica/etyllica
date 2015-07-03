@@ -1,6 +1,6 @@
 package br.com.abby.util;
 
-import br.com.abby.linear.Point3D;
+import br.com.abby.linear.ColoredPoint3D;
 
 /**
  * 
@@ -9,7 +9,7 @@ import br.com.abby.linear.Point3D;
  *
  */
 
-public class Lamp extends Point3D{
+public class Lamp extends ColoredPoint3D{
 	
 	protected float intensity;
 	

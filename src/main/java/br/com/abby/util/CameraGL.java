@@ -1,6 +1,6 @@
 package br.com.abby.util;
 
-import br.com.abby.linear.Point3D;
+import br.com.abby.linear.ColoredPoint3D;
 
 /**
  * 
@@ -9,20 +9,20 @@ import br.com.abby.linear.Point3D;
  *
  */
 
-public class CameraGL extends Point3D {
+public class CameraGL extends ColoredPoint3D {
 	
-	private Point3D target;
+	private ColoredPoint3D target;
 	
 	public CameraGL(double x, double y, double z) {
 		super(x, y, z);
-		target = new Point3D(0,0,0);
+		target = new ColoredPoint3D(0,0,0);
 	}
 	
-	public Point3D getTarget(){
+	public ColoredPoint3D getTarget(){
 		return target;
 	}
 	
-	public void setTarget(Point3D target){
+	public void setTarget(ColoredPoint3D target){
 		this.target = target;
 	}
 	

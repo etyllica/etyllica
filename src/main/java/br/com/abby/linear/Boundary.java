@@ -12,9 +12,9 @@ import br.com.etyllica.core.graphics.Graphic;
  * 
  */
 
-public class Boundary extends Point3D{
+public class Boundary extends ColoredPoint3D{
 
-	protected List<Point3D> points = new ArrayList<Point3D>(); // Points making up the boundary
+	protected List<ColoredPoint3D> points = new ArrayList<ColoredPoint3D>(); // Points making up the boundary
 
 	public Boundary(){
 		super(0,0,0);
@@ -27,10 +27,10 @@ public class Boundary extends Point3D{
 	}
 	
 	public void add(double x, double y, double z){
-		add(new Point3D(x, y, z));
+		add(new ColoredPoint3D(x, y, z));
 	}
 	
-	public void add(Point3D ponto){
+	public void add(ColoredPoint3D ponto){
 		points.add(ponto);		
 	}
 
@@ -68,11 +68,11 @@ public class Boundary extends Point3D{
 
 	}
 	
-	public List<Point3D> getPoints() {
+	public List<ColoredPoint3D> getPoints() {
 		return points;
 	}
 	
-	public void setPoints(List<Point3D> points) {
+	public void setPoints(List<ColoredPoint3D> points) {
 		this.points = points;
 	}
 	

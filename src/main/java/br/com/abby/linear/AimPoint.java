@@ -1,6 +1,6 @@
 package br.com.abby.linear;
 
-public class AimPoint extends Point3D {
+public class AimPoint extends ColoredPoint3D {
 
 	protected double angleX = 0;
 	
@@ -16,7 +16,7 @@ public class AimPoint extends Point3D {
 		super(x, y, z);
 	}
 	
-	public AimPoint(Point3D point) {
+	public AimPoint(ColoredPoint3D point) {
 		super(point.getX(), point.getY(), point.getZ());
 	}
 
