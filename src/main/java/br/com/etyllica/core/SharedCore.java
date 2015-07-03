@@ -13,8 +13,6 @@ import java.awt.Transparency;
 import java.awt.event.ComponentEvent;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -26,6 +24,7 @@ import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Session;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.graphics.AWTGraphics;
 import br.com.etyllica.core.graphics.FullScreenWindow;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.Monitor;
@@ -102,7 +101,7 @@ public class SharedCore implements Runnable, GameCore, java.awt.event.ComponentL
 		
 		locked = true;
 		
-		this.graphic = new Graphic(width, height);
+		this.graphic = new AWTGraphics(width, height);
 
 		defineSize(width, height);
 		
