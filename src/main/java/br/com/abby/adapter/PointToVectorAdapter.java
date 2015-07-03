@@ -16,4 +16,14 @@ public class PointToVectorAdapter {
 		return vector;
 	}
 	
+	public static Point3D adapt(Vector3f vector) {
+		
+		double px = vector.getX();
+		double py = vector.getY();
+		double pz = vector.getZ();
+		
+		Point3D point = new Point3D(px, py, pz);
+		return point;
+	}
+	
 }

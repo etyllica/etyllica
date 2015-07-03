@@ -28,7 +28,7 @@ public class AimPoint extends ColoredPoint3D {
 		this.angleX = angleX;
 	}
 	
-	public void setOffsetAngleX(double offsetAngleX) {
+	public void offsetAngleX(double offsetAngleX) {
 		this.angleX += offsetAngleX;
 	}
 
@@ -40,7 +40,7 @@ public class AimPoint extends ColoredPoint3D {
 		this.angleY = angleY;
 	}
 	
-	public void setOffsetAngleY(double offsetAngleY) {
+	public void offsetAngleY(double offsetAngleY) {
 		this.angleY += offsetAngleY;
 	}
 
@@ -52,7 +52,7 @@ public class AimPoint extends ColoredPoint3D {
 		this.angleZ = angleZ;
 	}
 	
-	public void setOffsetAngleZ(double offsetAngleZ) {
+	public void offsetAngleZ(double offsetAngleZ) {
 		this.angleZ += offsetAngleZ;
 	}
 	
