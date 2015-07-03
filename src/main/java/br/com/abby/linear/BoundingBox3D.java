@@ -90,12 +90,28 @@ public class BoundingBox3D {
 
 		return false;
 	}
+	
+	public Point3D getMinPoint() {
+		return minPoint;
+	}
 
+	public Point3D getMaxPoint() {
+		return maxPoint;
+	}
+
+	public double getVolume() {
+		double dx = (maxPoint.getX()-minPoint.getX())/2;
+		double dy = (maxPoint.getY()-minPoint.getY())/2;
+		double dz = (maxPoint.getZ()-minPoint.getZ())/2;
+
+		return dx*dy*dz;
+	}
+	
 	public Point3D getCenter() {
-		double cx = (minPoint.getX()+maxPoint.getX())/2;
-		double cy = (minPoint.getY()+maxPoint.getY())/2;
-		double cz = (minPoint.getZ()+maxPoint.getZ())/2;
-
+		double cx = (maxPoint.getX()+minPoint.getX())/2;
+		double cy = (maxPoint.getY()+minPoint.getY())/2;
+		double cz = (maxPoint.getZ()+minPoint.getZ())/2;
+		
 		return new Point3D(cx, cy, cz); 
 	}
 }

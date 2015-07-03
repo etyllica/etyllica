@@ -90,7 +90,6 @@ public class OBJLoader implements VBOLoader {
 
 			} else if (line.startsWith(MATERIAL_LIB)) {
 				parseMaterial(modelFolder, vbo, line);
-
 			}
 		}
 
@@ -167,7 +166,8 @@ public class OBJLoader implements VBOLoader {
 		float x = Float.valueOf(parts[1]);
 		float y = Float.valueOf(parts[2]);
 		float z = Float.valueOf(parts[3]);
-		vbo.getVertices().add(new Vector3f(x, y, z));
+		
+		vbo.addVertex(new Vector3f(x, y, z));
 	}
 
 	private static void parseVertexNormal(String line, VBO vbo) {
@@ -177,7 +177,7 @@ public class OBJLoader implements VBOLoader {
 		float x = Float.valueOf(parts[1]);
 		float y = Float.valueOf(parts[2]);
 		float z = Float.valueOf(parts[3]);
-
+		
 		vbo.getNormals().add(new Vector3f(x, y, z));    	
 	}
 

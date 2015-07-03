@@ -8,11 +8,14 @@ import java.util.Map;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import br.com.abby.linear.BoundingBox3D;
 import br.com.abby.material.OBJMaterial;
 
 public class VBO {
 	
 	private String name;
+	
+	private BoundingBox3D boundingBox = new BoundingBox3D();
 	
 	//Original vertices positions
 	private List<Vector3f> vertices = new ArrayList<Vector3f>();
@@ -32,9 +35,10 @@ public class VBO {
 	public List<Vector3f> getVertices() {
 		return vertices;
 	}
-
-	public void setVertices(List<Vector3f> vertices) {
-		this.vertices = vertices;
+	
+	public void addVertex(Vector3f vertex) {
+		vertices.add(vertex);
+		boundingBox.add(vertex);
 	}
 
 	public List<Vector3f> getNormals() {
@@ -72,7 +76,7 @@ public class VBO {
 	public Map<String, OBJMaterial> getMaterials() {
 		return materials;
 	}
-
+	
 	public void setMaterials(Map<String, OBJMaterial> materials) {
 		this.materials = materials;
 	}
@@ -84,5 +88,9 @@ public class VBO {
 	public void setName(String name) {
 		this.name = name;
 	}
-		
+
+	public BoundingBox3D getBoundingBox() {
+		return boundingBox;
+	}
+			
 }

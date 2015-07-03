@@ -38,4 +38,9 @@ public class BoundingBox3DTest {
 		Assert.assertTrue(box.intersects(anotherBox));
 	}
 	
+	@Test
+	public void testVolume() {
+		Assert.assertEquals(125, box.getVolume(), 0.1);
+	}
+	
 }

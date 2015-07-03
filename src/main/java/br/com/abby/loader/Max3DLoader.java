@@ -150,7 +150,7 @@ public class Max3DLoader extends StreamParser implements VBOLoader {
 			y = z;
 			z = -tmpy;
 
-			vbo.getVertices().add(new Vector3f(x, y, z));
+			vbo.addVertex(new Vector3f(x, y, z));
 		}
 	}
 
