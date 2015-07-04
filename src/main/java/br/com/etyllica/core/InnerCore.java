@@ -12,6 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import br.com.etyllica.animation.AnimationHandler;
 import br.com.etyllica.animation.scripts.AnimationScript;
 import br.com.etyllica.animation.scripts.SingleIntervalAnimation;
+import br.com.etyllica.awt.AWTArrowDrawer;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Context;
 import br.com.etyllica.context.UpdateIntervalListener;
@@ -109,6 +110,10 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	
 	private List<Monitor> monitors = new ArrayList<Monitor>();
 	
+	//Timer click arc
+	private int arc = 0;
+	private boolean overClickable = false;
+	
 	public InnerCore() {
 		super();
 		
@@ -120,7 +125,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		keyboard = control.getKeyboard();
 
-		arrowDrawer = new ArrowDrawer();
+		arrowDrawer = new AWTArrowDrawer();
 
 		languageHandler = new LanguageHandler();
 		
@@ -533,6 +538,9 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			if(activeWindow.getContext().isDrawCursor()) {
 				arrowDrawer.setCoordinates(mouse.getX(), mouse.getY());
 				arrowDrawer.draw(g);
+				if(Configuration.getInstance().isTimerClick()&&overClickable) {
+					arrowDrawer.drawTimerArc(g, arc);
+				}
 			}
 		}
 
@@ -808,7 +816,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 	private void updateHelperUI(long now) {
 		updateTimerClick(now);
 	}
-
+	
 	//Move to ArrowDrawer
 	private void updateTimerClick(long now) {
 
@@ -818,10 +826,8 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 			if(configuration.isTimerClick()) {
 
-				//TODO Implement automatic increment
-				int arc = arrowDrawer.getArc();
 				if(arc<360) {
-					arrowDrawer.setArc(arc+speed);
+					arc += speed;
 				}else{
 
 					updateEvent(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
@@ -834,7 +840,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		}else{
 
 			if(configuration.isTimerClick()) {
-				arrowDrawer.setArc(0);
+				arc = 0;
 			}
 
 		}
@@ -900,7 +906,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		mouseOver = view;
 		mouseOver.mouseIn();
 
-		arrowDrawer.setOverClickable(true);
+		overClickable = true;
 	}
 
 	private void resetMouseOver() {
@@ -909,7 +915,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		mouseOver = null;
 
-		arrowDrawer.setOverClickable(false);
+		overClickable = false;
 	}
 
 	private void removeMouseOver(View view) {

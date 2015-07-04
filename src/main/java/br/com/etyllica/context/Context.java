@@ -1,7 +1,5 @@
 package br.com.etyllica.context;
 
-import java.awt.Rectangle;
-
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.load.DefaultLoadApplication;
 import br.com.etyllica.context.load.LoadListener;
