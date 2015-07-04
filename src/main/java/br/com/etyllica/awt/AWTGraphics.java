@@ -1,4 +1,4 @@
-package br.com.etyllica.core.graphics;
+package br.com.etyllica.awt;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -20,6 +20,7 @@ import java.awt.image.ImageObserver;
 import java.awt.image.VolatileImage;
 
 import br.com.etyllica.cinematics.Camera;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.linear.Point2D;

@@ -19,13 +19,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import br.com.etyllica.awt.AWTGraphics;
+import br.com.etyllica.awt.FullScreenWindow;
 import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.context.Application;
 import br.com.etyllica.context.Session;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.graphics.AWTGraphics;
-import br.com.etyllica.core.graphics.FullScreenWindow;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.loader.Loader;

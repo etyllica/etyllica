@@ -1,4 +1,4 @@
-package br.com.etyllica.core.graphics;
+package br.com.etyllica.awt;
 
 import java.awt.Cursor;
 import java.awt.Frame;
@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 
 import br.com.etyllica.core.InnerCore;
+import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 
