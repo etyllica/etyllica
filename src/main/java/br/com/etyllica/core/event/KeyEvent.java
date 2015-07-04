@@ -14,6 +14,8 @@ public class KeyEvent{
 	
 	private long timestamp = -1;
 	
+	private boolean consumed = false;
+	
 	public KeyEvent(int key, KeyState state) {
 		super();
 		
@@ -49,10 +51,15 @@ public class KeyEvent{
 	}
 
 	public boolean isKeyDown(int keyCode) {
+		if(consumed)
+			return false;
+		
 		return this.key == keyCode && state == KeyState.PRESSED;		
 	}
 	
 	public boolean isAnyKeyDown(int ... keyCodes) {
+		if(consumed)
+			return false;
 		
 		for(int keyCode : keyCodes) {
 			if(isKeyDown(keyCode)) {
@@ -64,10 +71,15 @@ public class KeyEvent{
 	}
 		
 	public boolean isKeyUp(int keyCode) {
+		if(consumed)
+			return false;
+		
 		return this.key == keyCode && state == KeyState.RELEASED;		
 	}
 	
 	public boolean isAnyKeyUp(int ... keyCodes) {
+		if(consumed)
+			return false;
 		
 		for(int keyCode : keyCodes) {
 			if(isKeyUp(keyCode)) {
@@ -78,9 +90,9 @@ public class KeyEvent{
 		return false;
 	}
 		
-	public char getChar(){
+	public char getChar() {
 		
-		if(amount>Character.MIN_VALUE&&amount<Character.MAX_VALUE){
+		if(amount > Character.MIN_VALUE && amount < Character.MAX_VALUE){
 			return (char)amount;
 		}
 		
@@ -118,6 +130,14 @@ public class KeyEvent{
 		}
 		
 		return timestamp;
+	}
+	
+	public void consume() {
+		consumed = true;
+	}
+	
+	public void setConsumed(boolean consumed) {
+		this.consumed = consumed;
 	}
 
 	//List of Inputs
