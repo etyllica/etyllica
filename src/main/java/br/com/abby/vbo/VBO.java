@@ -10,6 +10,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import br.com.abby.linear.BoundingBox3D;
 import br.com.abby.material.OBJMaterial;
+import br.com.etyllica.linear.Point3D;
 
 public class VBO {
 	
@@ -92,5 +93,20 @@ public class VBO {
 	public BoundingBox3D getBoundingBox() {
 		return boundingBox;
 	}
-			
+
+	public Point3D centroid(Face face) {
+		float cx = 0, cy = 0, cz = 0;
+		
+		for(int i:face.vertexIndex) {
+			Vector3f vertice = vertices.get(i);
+			cx += vertice.getX();
+			cy += vertice.getY();
+			cz += vertice.getZ();
+		}
+		
+		int n = face.vertexIndex.length;
+		
+		return new Point3D(cx/n, cy/n, cz/n);
+	}
+	
 }
