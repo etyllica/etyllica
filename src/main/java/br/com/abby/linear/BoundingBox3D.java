@@ -13,16 +13,22 @@ public class BoundingBox3D {
 	private Point3D minPoint;
 	private Point3D maxPoint;
 
+	public BoundingBox3D() {
+		super();
+		this.minPoint = new Point3D(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
+		this.maxPoint = new Point3D(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
+	}
+	
 	public BoundingBox3D(Point3D minPoint, Point3D maxPoint) {
 		super();
 		this.minPoint = minPoint;
 		this.maxPoint = maxPoint;
 	}
-
-	public BoundingBox3D() {
+	
+	public BoundingBox3D(BoundingBox3D box) {
 		super();
-		this.minPoint = new Point3D(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
-		this.maxPoint = new Point3D(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
+		this.minPoint = new Point3D(box.minPoint);
+		this.maxPoint = new Point3D(box.maxPoint);
 	}
 
 	public void add(Vector3f vertex) {
