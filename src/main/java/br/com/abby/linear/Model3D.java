@@ -28,9 +28,9 @@ import br.com.etyllica.core.loader.image.ImageLoader;
  */
 
 public class Model3D extends AimPoint implements GLDrawable {
-	
+
 	private VBO vbo;
-	
+
 	private double scale = 1;
 
 	private Set<Integer> vertexSelection = new HashSet<Integer>();
@@ -41,12 +41,12 @@ public class Model3D extends AimPoint implements GLDrawable {
 
 	//TODO Just for test, Remove!
 	public Integer specialVertex = 0;
-	
+
 	private Map<String, Texture> textureMap = new HashMap<String, Texture>();
 
 	public Model3D(String path) {
 		super(0,0,0);
-		
+
 		this.vbo = MeshLoader.getInstance().loadModel(path);		
 	}
 
@@ -56,11 +56,11 @@ public class Model3D extends AimPoint implements GLDrawable {
 		gl.glPushMatrix();
 
 		gl.glColor3i(color.getRed(), color.getGreen(), color.getBlue());
-		
+
 		if(scale!=1) {
 			gl.glScaled(2, 2, 2);	
 		}
-		
+
 		//gl.glTranslated(x, y, z);
 		gl.glRotated(angleY, 0, 1, 0);
 		gl.glRotated(angleZ, 0, 0, 1);
@@ -75,24 +75,24 @@ public class Model3D extends AimPoint implements GLDrawable {
 		gl.glPopMatrix();
 
 	}
-	
+
 	private void drawFaces(GLAUX gl) {
 
-		if(!drawFaces){
+		if(!drawFaces) {
 			return;
 		}
-		
+
 		for(Group group: vbo.getGroups()) {
 
 			String map = group.getMaterial().getMapD();
 			//map = "";
 
-			if(!map.isEmpty()){
+			if(!map.isEmpty()) {
 
 				Texture texture = getTexture(map);
-				
-				
-				if(drawTexture){
+
+
+				if(drawTexture) {
 
 					setTexture(gl, texture);
 					gl.glEnable (GL.GL_DEPTH_TEST);
@@ -120,9 +120,9 @@ public class Model3D extends AimPoint implements GLDrawable {
 				//gl.glEnd();
 			}
 
-			for(Face face: group.getFaces()){
+			for(Face face: group.getFaces()) {
 
-				if(face.vertexIndex.length==3){
+				if(face.vertexIndex.length==3) {
 
 					gl.glBegin(GL.GL_TRIANGLES);
 
@@ -132,21 +132,20 @@ public class Model3D extends AimPoint implements GLDrawable {
 
 				}
 
-				for(int i=0;i<face.vertexIndex.length;i++){
+				for(int i=0;i<face.vertexIndex.length;i++) {
 
-					if(drawTexture){
-						
-						Vector3f normal = vbo.getNormals().get(i);
+					if(drawTexture) {
+						Vector3f normal = vbo.getNormals().get(face.normalIndex[i]);
 						gl.glNormal3d(normal.getX(), normal.getY(), normal.getZ());
-						
-						Vector2f textureCoordinate = vbo.getTextures().get(i);
+
+						Vector2f textureCoordinate = vbo.getTextures().get(face.textureIndex[i]);
 						gl.glTexCoord2d(textureCoordinate.getX(), textureCoordinate.getY());
 					}
-					
+
 					int index = face.vertexIndex[i];
-					
+
 					Vector3f vertex = vbo.getVertices().get(index);
-					
+
 					gl.glVertex3d(vertex.getX(), vertex.getY(), vertex.getZ());
 				}
 
@@ -154,33 +153,31 @@ public class Model3D extends AimPoint implements GLDrawable {
 			}
 		}
 	}
-	
+
 	private Texture getTexture(String map) {
-		
+
 		Texture texture = textureMap.get(map);
-		
+
 		if(texture==null) {
-			
 			System.out.println("Trying to load: "+map);
-			
+
 			texture = new Texture(ImageLoader.getInstance().getImage(map,true));
 			textureMap.put(map, texture);
-			
 		}
-		
+
 		return texture;
-		
+
 	}
 
-	public void drawVertexes(GLAUX gl){
-		
-		double vsize = 0.015;
-		
-		List<Vector3f> vertices = vbo.getVertices();
-		
-		for(int i=0;i<vertices.size(); i++){
+	public void drawVertexes(GLAUX gl) {
 
-			if(vertexSelection.contains(i)){
+		double vsize = 0.015;
+
+		List<Vector3f> vertices = vbo.getVertices();
+
+		for(int i=0;i<vertices.size(); i++) {
+
+			if(vertexSelection.contains(i)) {
 				gl.glColor3i(0xff,0xff,0xff);
 			}else{
 				//gl.glColor3i(0xdd,0x88,0x55);
@@ -188,7 +185,7 @@ public class Model3D extends AimPoint implements GLDrawable {
 			}
 
 			//TODO Remove
-			if(i==specialVertex){
+			if(i==specialVertex) {
 				gl.glColor3i(0xff,0xff,0x00);
 				vsize*=2;
 			}
@@ -201,7 +198,7 @@ public class Model3D extends AimPoint implements GLDrawable {
 
 	}
 
-	protected void setTexture(GL gl, Texture texture){
+	protected void setTexture(GL gl, Texture texture) {
 
 		gl.glTexImage2D(GL.GL_TEXTURE_2D, 0, GL.GL_RGB, (int)texture.getW(), (int)texture.getH(), 0,
 				GL.GL_RGB, GL.GL_UNSIGNED_BYTE, texture.getBytes());
@@ -214,8 +211,7 @@ public class Model3D extends AimPoint implements GLDrawable {
 
 	}
 
-	protected void setAlphaTexture(GL gl, Texture texture){
-
+	protected void setAlphaTexture(GL gl, Texture texture) {
 
 		//gl.glEnable(GL.GL_ALPHA_TEST);
 
@@ -274,5 +270,5 @@ public class Model3D extends AimPoint implements GLDrawable {
 	public void setVbo(VBO vbo) {
 		this.vbo = vbo;
 	}
-			
+
 }
