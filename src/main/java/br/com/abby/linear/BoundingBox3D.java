@@ -1,5 +1,8 @@
 package br.com.abby.linear;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.util.vector.Vector3f;
 
 import br.com.abby.adapter.PointToVectorAdapter;
@@ -119,5 +122,21 @@ public class BoundingBox3D {
 		double cz = (maxPoint.getZ()+minPoint.getZ())/2;
 		
 		return new Point3D(cx, cy, cz); 
+	}
+
+	public List<Vector3f> getVertexList() {
+		
+		List<Vector3f> vertexList = new ArrayList<Vector3f>();
+		
+		vertexList.add(PointToVectorAdapter.adapt(minPoint));
+		vertexList.add(new Vector3f((float)maxPoint.getX(), (float)minPoint.getY(), (float)minPoint.getZ()));
+		vertexList.add(new Vector3f((float)minPoint.getX(), (float)maxPoint.getY(), (float)minPoint.getZ()));
+		vertexList.add(new Vector3f((float)minPoint.getX(), (float)maxPoint.getY(), (float)maxPoint.getZ()));
+		vertexList.add(new Vector3f((float)maxPoint.getX(), (float)maxPoint.getY(), (float)minPoint.getZ()));
+		vertexList.add(new Vector3f((float)maxPoint.getX(), (float)minPoint.getY(), (float)maxPoint.getZ()));
+		vertexList.add(new Vector3f((float)minPoint.getX(), (float)minPoint.getY(), (float)maxPoint.getZ()));
+		vertexList.add(PointToVectorAdapter.adapt(maxPoint));
+		
+		return vertexList;
 	}
 }

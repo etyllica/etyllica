@@ -1,9 +1,10 @@
 package br.com.abby.linear;
 
+import java.util.List;
+
 import org.lwjgl.util.vector.Vector3f;
 
 import br.com.abby.adapter.PointToVectorAdapter;
-import br.com.abby.util.CameraGL;
 import br.com.etyllica.collision.CollisionStatus;
 
 /**
@@ -23,7 +24,7 @@ public class Frustrum {
 	public Vector3f ntl,ntr,nbl,nbr,ftl,ftr,fbl,fbr;
 
 	public float nearD, farD, ratio, angle,tan;
-	public float nw,nh,fw,fh;
+	public float nWidth, nHeight, fWidth, fHeight;
 
 	private static final float ANG2RAD = (float)Math.PI/180.0f;
 
@@ -44,13 +45,13 @@ public class Frustrum {
 		// compute width and height of the near and far plane sections
 		//tan = (float)Math.tan(Math.toRadians(angle * 0.5));
 		tan = (float)Math.tan(ANG2RAD * angle * 0.5);
-		nh = nearDistance * tan;
-		nw = nh * ratio;
-		fh = farDistance * tan;
-		fw = fh * ratio;
+		nHeight = nearDistance * tan;
+		nWidth = nHeight * ratio;
+		fHeight = farDistance * tan;
+		fWidth = fHeight * ratio;
 	}
 
-	public void setCamDef(CameraGL camera) {
+	public void setCamDef(Camera3D camera) {
 
 		Vector3f position = PointToVectorAdapter.adapt(camera);
 		Vector3f target = PointToVectorAdapter.adapt(camera.getTarget());
@@ -85,16 +86,16 @@ public class Frustrum {
 		Vector3f fc = Vector3f.sub(position, farZ, null);
 
 		Vector3f nwX = new Vector3f(X);
-		nwX.scale(nw);
+		nwX.scale(nWidth);
 
 		Vector3f fwX = new Vector3f(X);
-		fwX.scale(fw);
+		fwX.scale(fWidth);
 
 		Vector3f nhY = new Vector3f(Y);
-		nhY.scale(nh);
+		nhY.scale(nHeight);
 
 		Vector3f fhY = new Vector3f(Y);
-		fhY.scale(fh);
+		fhY.scale(fHeight);
 
 		// compute the 4 corners of the frustum on the near plane
 		ntl = Vector3f.add(nc, Vector3f.sub(nhY, nwX, null), null);
@@ -129,12 +130,56 @@ public class Frustrum {
 
 		return result;
 	}
-
-	/*public int sphereInFrustum(Vector3f p, float raio) {
-
+	
+	public CollisionStatus sphereInFrustum(Vector3f p, float radius) {
+		double distance;
+		CollisionStatus result = CollisionStatus.INSIDE;
+		
+		for(int i=0; i < 6; i++) {
+			distance = planes[i].distance(p);
+			if (distance < -radius)
+				return CollisionStatus.OUTSIDE;
+			else if (distance < radius)
+				result =  CollisionStatus.INTERSECT;
+		}
+		
+		return result;
 	}
-	public int boxInFrustum(BoundingBox3D b) {
+	
+	public CollisionStatus boxInFrustum(BoundingBox3D b) {
+		CollisionStatus result = CollisionStatus.INSIDE;
+		
+		int out, in;
 
-	}*/
+		// for each plane do ...
+		for(int i=0; i < 6; i++) {
+
+			// reset counters for corners in and out
+			out=0;in=0;
+			// for each corner of the box do ...
+			// get out of the cycle as soon as a box as corners
+			// both inside and out of the frustum
+			for (int k = 0; k < 8 && (in==0 || out==0); k++) {
+			
+				List<Vector3f> boxList = b.getVertexList();
+				
+				// is the corner outside or inside
+				if (planes[i].distance(boxList.get(k)) < 0) {
+					out++;
+				} else {
+					in++;
+				}
+			}
+			//if all corners are out
+			if (in == 0) {
+				return (CollisionStatus.OUTSIDE);
+			}
+			// if some corners are out and others are in	
+			else if (out != 0) {
+				result = CollisionStatus.INTERSECT;
+			}
+		}
+		return(result);
+	}
 
 }
