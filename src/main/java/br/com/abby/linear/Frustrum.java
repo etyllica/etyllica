@@ -21,10 +21,10 @@ public class Frustrum {
 
 	public Plane planes[] = new Plane[6];
 
-	public Vector3f ntl,ntr,nbl,nbr,ftl,ftr,fbl,fbr;
+	public Vector3f nTopLeft,nTopRight,nBottomLeft,nBottomRight,fTopLeft,fTopRight,fBottomLeft,fBottomRight;
 
-	public float nearD, farD, ratio, angle,tan;
-	public float nWidth, nHeight, fWidth, fHeight;
+	public double nearD, farD, ratio, angle, tan;
+	public double nWidth, nHeight, fWidth, fHeight;
 
 	private static final float ANG2RAD = (float)Math.PI/180.0f;
 
@@ -34,7 +34,7 @@ public class Frustrum {
 		}
 	}
 
-	public void setCamInternals(float angle, float ratio, float nearDistance, float farDistance) {
+	public void setCamInternals(double angle, double ratio, double nearDistance, double farDistance) {
 
 		// store the information
 		this.ratio = ratio;
@@ -44,7 +44,7 @@ public class Frustrum {
 
 		// compute width and height of the near and far plane sections
 		//tan = (float)Math.tan(Math.toRadians(angle * 0.5));
-		tan = (float)Math.tan(ANG2RAD * angle * 0.5);
+		tan = Math.tan(ANG2RAD * angle * 0.5);
 		nHeight = nearDistance * tan;
 		nWidth = nHeight * ratio;
 		fHeight = farDistance * tan;
@@ -77,47 +77,47 @@ public class Frustrum {
 
 		// compute the centers of the near and far planes
 		Vector3f nearZ = new Vector3f(Z);
-		nearZ.scale(nearD);
+		nearZ.scale((float)nearD);
 
 		Vector3f farZ = new Vector3f(Z);
-		farZ.scale(farD);
+		farZ.scale((float)farD);
 
 		Vector3f nc = Vector3f.sub(position, nearZ, null);
 		Vector3f fc = Vector3f.sub(position, farZ, null);
 
 		Vector3f nwX = new Vector3f(X);
-		nwX.scale(nWidth);
+		nwX.scale((float)nWidth);
 
 		Vector3f fwX = new Vector3f(X);
-		fwX.scale(fWidth);
+		fwX.scale((float)fWidth);
 
 		Vector3f nhY = new Vector3f(Y);
-		nhY.scale(nHeight);
+		nhY.scale((float)nHeight);
 
 		Vector3f fhY = new Vector3f(Y);
-		fhY.scale(fHeight);
+		fhY.scale((float)fHeight);
 
 		// compute the 4 corners of the frustum on the near plane
-		ntl = Vector3f.add(nc, Vector3f.sub(nhY, nwX, null), null);
-		ntr = Vector3f.add(nc, Vector3f.add(nhY, nwX, null), null);
-		nbl = Vector3f.sub(nc, Vector3f.sub(nhY, nwX, null), null);
-		nbr = Vector3f.sub(nc, Vector3f.add(nhY, nwX, null), null);
+		nTopLeft = Vector3f.add(nc, Vector3f.sub(nhY, nwX, null), null);
+		nTopRight = Vector3f.add(nc, Vector3f.add(nhY, nwX, null), null);
+		nBottomLeft = Vector3f.sub(nc, Vector3f.sub(nhY, nwX, null), null);
+		nBottomRight = Vector3f.sub(nc, Vector3f.add(nhY, nwX, null), null);
 
 		// compute the 4 corners of the frustum on the far plane
-		ftl = Vector3f.add(fc, Vector3f.sub(fhY, fwX, null), null);
-		ftr = Vector3f.add(fc, Vector3f.add(fhY, fwX, null), null);
-		fbl = Vector3f.sub(fc, Vector3f.sub(fhY, fwX, null), null);
-		fbr = Vector3f.sub(fc, Vector3f.add(fhY, fwX, null), null);
+		fTopLeft = Vector3f.add(fc, Vector3f.sub(fhY, fwX, null), null);
+		fTopRight = Vector3f.add(fc, Vector3f.add(fhY, fwX, null), null);
+		fBottomLeft = Vector3f.sub(fc, Vector3f.sub(fhY, fwX, null), null);
+		fBottomRight = Vector3f.sub(fc, Vector3f.add(fhY, fwX, null), null);
 
 		// compute the six planes
 		// the function setPoints assumes that the points
 		// are given in counter clockwise order
-		planes[TOP].setPoints(ntr, ntl, ftl);
-		planes[BOTTOM].setPoints(nbl, nbr, fbr);
-		planes[LEFT].setPoints(ntl, nbl, fbl);
-		planes[RIGHT].setPoints(nbr, ntr, fbr);
-		planes[NEAR_PLANE].setPoints(ntl, ntr, nbr);
-		planes[FAR_PLANE].setPoints(ftr, ftl, fbl);
+		planes[TOP].setPoints(nTopRight, nTopLeft, fTopLeft);
+		planes[BOTTOM].setPoints(nBottomLeft, nBottomRight, fBottomRight);
+		planes[LEFT].setPoints(nTopLeft, nBottomLeft, fBottomLeft);
+		planes[RIGHT].setPoints(nBottomRight, nTopRight, fBottomRight);
+		planes[NEAR_PLANE].setPoints(nTopLeft, nTopRight, nBottomRight);
+		planes[FAR_PLANE].setPoints(fTopRight, fTopLeft, fBottomLeft);
 	}
 
 	public CollisionStatus pointInFrustum(Vector3f p) {
@@ -181,5 +181,5 @@ public class Frustrum {
 		}
 		return(result);
 	}
-
+	
 }

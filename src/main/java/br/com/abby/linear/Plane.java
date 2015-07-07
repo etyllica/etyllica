@@ -24,8 +24,8 @@ public class Plane {
 	}
 	
 	public void setPoints(Vector3f a, Vector3f b, Vector3f c) {
-		Vector3f v = Vector3f.sub(b, a);
-		Vector3f u = Vector3f.sub(c, a);
+		Vector3f v = Vector3f.sub(b, a, null);
+		Vector3f u = Vector3f.sub(c, a, null);
 		
 		normal = Vector3f.cross(v, u, null);
 		normal.normalise();
