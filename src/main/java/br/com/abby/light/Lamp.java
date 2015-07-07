@@ -1,6 +1,6 @@
-package br.com.abby.util;
+package br.com.abby.light;
 
-import br.com.abby.linear.ColoredPoint3D;
+import br.com.abby.linear.AimPoint;
 
 /**
  * 
@@ -9,7 +9,7 @@ import br.com.abby.linear.ColoredPoint3D;
  *
  */
 
-public class Lamp extends ColoredPoint3D{
+public class Lamp extends AimPoint {
 	
 	protected float intensity;
 	
@@ -17,8 +17,7 @@ public class Lamp extends ColoredPoint3D{
 		super(x,y,z);
 	}
 	
-	public float getIntensidade(){
+	public float getIntensity() {
 		return intensity;
 	}
-
 }
