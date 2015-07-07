@@ -56,7 +56,7 @@ public class CollisionDetector {
 	}
 
 	public static boolean colideRectPoint(GeometricLayer layer, double  px, double py) {
-		
+
 		int rectWidth = layer.utilWidth();
 		int rectHeight = layer.utilHeight();
 		int rectCenterX = layer.getX()+rectWidth/2;
@@ -64,7 +64,7 @@ public class CollisionDetector {
 
 		return Math.abs(rectCenterX-px) <= rectWidth/2 && Math.abs(rectCenterY-py) <= rectHeight/2;
 	}
-	
+
 	/**
 	 * Code found at: http://stackoverflow.com/questions/5650032/collision-detection-with-rotated-rectangles
 	 */
@@ -78,12 +78,12 @@ public class CollisionDetector {
 
 		return testRectangleToPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
 	}
-	
+
 	public static boolean colideRectPoint(Layer layer, double  px, double py, double scaleX, double scaleY) {
-		
+
 		int w = (int)(layer.getW()*scaleX);
 		int h = (int)(layer.getH()*scaleY);
-		
+
 		int rectCenterX = layer.getX()+w/2-(int)(layer.getW()/scaleX);
 		int rectCenterY = layer.getY()+h/2-(int)(layer.getH()/scaleY);
 		int rectWidth = w;
@@ -173,7 +173,7 @@ public class CollisionDetector {
 				testCircleToSegment(tx, ty, circleRadius, cx+rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy-rectHeight/2) ||
 				testCircleToSegment(tx, ty, circleRadius, cx-rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy+rectHeight/2);
 	}
-	
+
 	public static boolean colideRectRect(Layer a, Layer b) {
 
 		if(a.getAngle() == 0 && b.getAngle() == 0) {
