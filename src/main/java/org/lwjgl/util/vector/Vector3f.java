@@ -152,6 +152,10 @@ public class Vector3f extends Vector implements Serializable, ReadableVector3f, 
 			return dest;
 		}
 	}
+	
+	public static Vector3f sub(Vector3f left, Vector3f right) {
+		return sub(left, right, null);
+	}
 
 	/**
 	 * The cross product of two vectors.
