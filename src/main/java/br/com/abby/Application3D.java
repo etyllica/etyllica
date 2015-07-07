@@ -5,9 +5,9 @@ import org.jgl.GLAUX;
 
 import br.com.abby.light.Lamp;
 import br.com.abby.linear.Box3D;
+import br.com.abby.linear.Camera3D;
 import br.com.abby.linear.Polygon3D;
 import br.com.abby.material.Texture;
-import br.com.abby.util.CameraGL;
 import br.com.etyllica.linear.Point3D;
 
 /**
@@ -75,7 +75,7 @@ public abstract class Application3D extends GLAUX {
 		glEnable (GL_COLOR_MATERIAL);
 	}
 
-	protected void lookatCamera(CameraGL cam){
+	protected void lookatCamera(Camera3D cam){
 		Point3D target = cam.getTarget();
 
 		gluLookAt(cam.getX(), cam.getY(), cam.getZ(),target.getX(),target.getY(),target.getZ(),0,0,1);
