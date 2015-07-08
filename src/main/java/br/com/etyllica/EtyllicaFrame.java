@@ -6,12 +6,12 @@ import java.net.URL;
 import javax.swing.JFrame;
 
 import br.com.etyllica.context.Application;
-import br.com.etyllica.context.Session;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.engine.SharedEngine;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.util.PathHelper;
 
 /**
  * 
@@ -28,8 +28,6 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	
 	private SharedEngine engine;
 	
-	protected Session session = new Session();
-
 	protected int w = 640;
 	protected int h = 480;
 
@@ -68,8 +66,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	}
 	
 	private void initCore() {
-		
-		engine = new SharedEngine(this, w, h, session);
+		engine = new SharedEngine(this, w, h);
 
 		core = engine.getCore();
 
@@ -91,7 +88,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
-		String defaultPath = this.getClass().getResource("").toString();
+		String defaultPath = PathHelper.currentDirectory().toString();
 					
 		setPath(defaultPath+suffix);
 	}
@@ -102,10 +99,9 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	}
 	
 	protected void setPath(String path) {
-
 		core.setPath(path);
 
-		engine.initDefault();		
+		engine.initDefault();
 	}
 	
 	@Override

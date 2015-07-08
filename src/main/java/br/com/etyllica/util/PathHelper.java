@@ -1,8 +1,8 @@
 package br.com.etyllica.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 
 import javax.swing.filechooser.FileSystemView;
 
@@ -11,8 +11,18 @@ import br.com.etyllica.util.io.IOHelper;
 public class PathHelper {
 
 	public static String currentDirectory() {
-		String path = Paths.get(".").toAbsolutePath().normalize().toString();
-		String currentDirectory = IOHelper.FILE_PREFIX+path+File.separator; 
+		
+		String currentDirectory = "";
+		
+		try {
+			String path = new File(".").getCanonicalPath().toString();
+			currentDirectory = IOHelper.FILE_PREFIX+path+File.separator;
+			
+			return currentDirectory;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return currentDirectory;
 	}
 	

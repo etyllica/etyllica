@@ -18,8 +18,10 @@ public class SharedEngine {
 	private SharedCore core;
 
 	private Set<Loader> loaders = new HashSet<Loader>();
+	
+	protected Session session = new Session();
 
-	public SharedEngine(Component component, int w, int h, Session session) {
+	public SharedEngine(Component component, int w, int h) {
 		super();
 
 		this.component = component;

@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.net.URL;
 
 import br.com.etyllica.context.Application;
-import br.com.etyllica.context.Session;
 import br.com.etyllica.core.SharedCore;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.engine.SharedEngine;
@@ -27,9 +26,7 @@ public abstract class Etyllica extends Applet implements Engine {
 	private SharedCore core;
 
 	private SharedEngine engine;
-	
-	protected Session session = new Session();
-	
+		
 	protected int w = 640;
 	protected int h = 480;
 
@@ -66,8 +63,7 @@ public abstract class Etyllica extends Applet implements Engine {
 	}
 	
 	private void initCore() {
-		
-		engine = new SharedEngine(this, w, h, session);
+		engine = new SharedEngine(this, w, h);
 		
 		core = engine.getCore();
 
@@ -89,18 +85,16 @@ public abstract class Etyllica extends Applet implements Engine {
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
-		String defaultPath = PathHelper.currentDirectory().toString();
+		String defaultPath = PathHelper.currentDirectory();
 					
 		setPath(defaultPath+suffix);
 	}
 	
 	protected void setPath(URL url) {
-
 		setPath(url.toString());
 	}
 
-	protected void setPath(String path){
-
+	protected void setPath(String path) {
 		core.setPath(path);
 		
 		//Reload Loaders
