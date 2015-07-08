@@ -1,4 +1,4 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
 // HRect.java : Hyper-Rectangle class supporting KDTree class
 //

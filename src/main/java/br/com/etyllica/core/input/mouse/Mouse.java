@@ -14,7 +14,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.layer.AnimatedLayer;
 import br.com.etyllica.layer.ImageLayer;
-import br.com.etyllica.util.RingBuffer;
+import br.com.etyllica.storage.RingBuffer;
 
 /**
  * 

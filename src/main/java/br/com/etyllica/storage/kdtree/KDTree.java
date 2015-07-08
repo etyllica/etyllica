@@ -1,4 +1,4 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
 import java.io.Serializable;
 import java.util.List;

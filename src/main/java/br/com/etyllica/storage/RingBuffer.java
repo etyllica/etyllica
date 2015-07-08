@@ -1,4 +1,4 @@
-package br.com.etyllica.util;
+package br.com.etyllica.storage;
 
 import java.util.ArrayList;
 import java.util.List;

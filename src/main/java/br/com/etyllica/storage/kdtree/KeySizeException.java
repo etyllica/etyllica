@@ -1,4 +1,4 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
 /**
 * KeySizeException is thrown when a KDTree method is invoked on a

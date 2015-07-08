@@ -1,10 +1,11 @@
-package br.com.etyllica.util;
+package br.com.etyllica.storage;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.storage.RingBuffer;
 
 public class RingBufferTest {
 

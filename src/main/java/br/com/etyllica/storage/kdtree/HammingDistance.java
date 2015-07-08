@@ -1,6 +1,4 @@
-package br.com.etyllica.util.kdtree;
-
-// DistanceMetric.java : Abstract distance metric class
+// HammingDistance.java : Class for Hamming distance
 //
 // Copyright (C) Simon D. Levy 2014
 //
@@ -24,7 +22,19 @@ package br.com.etyllica.util.kdtree;
 //   <https://projects.ardrone.org/attachments/278/ParrotCopyrightAndDisclaimer.txt>.
 // 
 
-abstract class DistanceMetric {
+package br.com.etyllica.storage.kdtree;
+
+class HammingDistance extends DistanceMetric {
     
-    protected abstract double distance(double [] a, double [] b);
+    protected double distance(double [] a, double [] b)  {
+
+	double dist = 0;
+
+	for (int i=0; i<a.length; ++i) {
+	    double diff = (a[i] - b[i]);
+	    dist += Math.abs(diff);
+	}
+
+	return dist;
+    }     
 }

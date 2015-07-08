@@ -1,4 +1,4 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
 // Checker.java : class for filtering KD-Tree matches by usability
 //

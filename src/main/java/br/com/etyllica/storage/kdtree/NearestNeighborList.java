@@ -1,4 +1,4 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
 // NearestNeighborList.java : A solution to the KD-Tree n-nearest-neighbor problem
 //

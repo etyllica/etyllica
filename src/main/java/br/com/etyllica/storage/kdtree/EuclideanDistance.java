@@ -1,4 +1,4 @@
-// HammingDistance.java : Class for Hamming distance
+// EuclideanDistance.java : Class for Euclidean distance metric
 //
 // Copyright (C) Simon D. Levy 2014
 //
@@ -20,19 +20,24 @@
 //   <https://projects.ardrone.org/attachments/277/ParrotLicense.txt> 
 // and
 //   <https://projects.ardrone.org/attachments/278/ParrotCopyrightAndDisclaimer.txt>.
-// 
 
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
-class HammingDistance extends DistanceMetric {
+class EuclideanDistance extends DistanceMetric {
     
     protected double distance(double [] a, double [] b)  {
+	
+	return Math.sqrt(sqrdist(a, b));
+	
+    }
+    
+    protected static double sqrdist(double [] a, double [] b) {
 
 	double dist = 0;
 
 	for (int i=0; i<a.length; ++i) {
 	    double diff = (a[i] - b[i]);
-	    dist += Math.abs(diff);
+	    dist += diff*diff;
 	}
 
 	return dist;

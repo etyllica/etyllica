@@ -1,6 +1,6 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
-// KDException.java : general exception class for KD-Tree library
+// DistanceMetric.java : Abstract distance metric class
 //
 // Copyright (C) Simon D. Levy 2014
 //
@@ -22,10 +22,9 @@ package br.com.etyllica.util.kdtree;
 //   <https://projects.ardrone.org/attachments/277/ParrotLicense.txt> 
 // and
 //   <https://projects.ardrone.org/attachments/278/ParrotCopyrightAndDisclaimer.txt>.
+// 
 
-public class KDException extends Exception {
-    protected KDException(String s) {
-        super(s);
-    }
-    public static final long serialVersionUID = 1L;
+abstract class DistanceMetric {
+    
+    protected abstract double distance(double [] a, double [] b);
 }

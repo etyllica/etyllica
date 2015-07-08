@@ -1,12 +1,12 @@
-package br.com.etyllica.util;
+package br.com.etyllica.storage;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.etyllica.util.kdtree.KDTree;
-import br.com.etyllica.util.kdtree.KeyMissingException;
-import br.com.etyllica.util.kdtree.KeySizeException;
+import br.com.etyllica.storage.kdtree.KDTree;
+import br.com.etyllica.storage.kdtree.KeyMissingException;
+import br.com.etyllica.storage.kdtree.KeySizeException;
 
 /**
  * Tests based on kddemo.java examples

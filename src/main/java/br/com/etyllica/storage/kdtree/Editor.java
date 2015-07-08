@@ -1,4 +1,4 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
 // Editor.java : class for adding/removing nodes from KD-Tree
 //

@@ -1,4 +1,4 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
 /**
 * KeyDuplicateException is thrown when the <TT>KDTree.insert</TT> method

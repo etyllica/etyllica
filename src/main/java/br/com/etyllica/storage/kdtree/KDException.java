@@ -1,6 +1,6 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
-// HPoint.java : Hyper-Point class supporting KDTree class
+// KDException.java : general exception class for KD-Tree library
 //
 // Copyright (C) Simon D. Levy 2014
 //
@@ -23,51 +23,9 @@ package br.com.etyllica.util.kdtree;
 // and
 //   <https://projects.ardrone.org/attachments/278/ParrotCopyrightAndDisclaimer.txt>.
 
-import java.io.Serializable;
-
-class HPoint implements Serializable{
-
-    protected double [] coord;
-
-    protected HPoint(int n) {
-	coord = new double [n];
+public class KDException extends Exception {
+    protected KDException(String s) {
+        super(s);
     }
-
-    protected HPoint(double [] x) {
-
-	coord = new double[x.length];
-	for (int i=0; i<x.length; ++i) coord[i] = x[i];
-    }
-
-    protected Object clone() {
-
-	return new HPoint(coord);
-    }
-
-    protected boolean equals(HPoint p) {
-
-	// seems faster than java.util.Arrays.equals(), which is not 
-	// currently supported by Matlab anyway
-	for (int i=0; i<coord.length; ++i)
-	    if (coord[i] != p.coord[i])
-		return false;
-
-	return true;
-    }
-
-    protected static double sqrdist(HPoint x, HPoint y) {
-	
-	return EuclideanDistance.sqrdist(x.coord, y.coord);
-    }
-    
-
-
-    public String toString() {
-	String s = "";
-	for (int i=0; i<coord.length; ++i) {
-	    s = s + coord[i] + " ";
-	}
-	return s;
-    }
-
+    public static final long serialVersionUID = 1L;
 }

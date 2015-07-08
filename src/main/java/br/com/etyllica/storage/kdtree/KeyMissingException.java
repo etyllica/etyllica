@@ -1,4 +1,4 @@
-package br.com.etyllica.util.kdtree;
+package br.com.etyllica.storage.kdtree;
 
 // KeyMissingException.java : cKey-size mismatch exception supporting KDTree class
 //

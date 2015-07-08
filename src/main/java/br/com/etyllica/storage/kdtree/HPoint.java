@@ -1,4 +1,6 @@
-// EuclideanDistance.java : Class for Euclidean distance metric
+package br.com.etyllica.storage.kdtree;
+
+// HPoint.java : Hyper-Point class supporting KDTree class
 //
 // Copyright (C) Simon D. Levy 2014
 //
@@ -21,25 +23,51 @@
 // and
 //   <https://projects.ardrone.org/attachments/278/ParrotCopyrightAndDisclaimer.txt>.
 
-package br.com.etyllica.util.kdtree;
+import java.io.Serializable;
 
-class EuclideanDistance extends DistanceMetric {
-    
-    protected double distance(double [] a, double [] b)  {
+class HPoint implements Serializable{
+
+    protected double [] coord;
+
+    protected HPoint(int n) {
+	coord = new double [n];
+    }
+
+    protected HPoint(double [] x) {
+
+	coord = new double[x.length];
+	for (int i=0; i<x.length; ++i) coord[i] = x[i];
+    }
+
+    protected Object clone() {
+
+	return new HPoint(coord);
+    }
+
+    protected boolean equals(HPoint p) {
+
+	// seems faster than java.util.Arrays.equals(), which is not 
+	// currently supported by Matlab anyway
+	for (int i=0; i<coord.length; ++i)
+	    if (coord[i] != p.coord[i])
+		return false;
+
+	return true;
+    }
+
+    protected static double sqrdist(HPoint x, HPoint y) {
 	
-	return Math.sqrt(sqrdist(a, b));
-	
+	return EuclideanDistance.sqrdist(x.coord, y.coord);
     }
     
-    protected static double sqrdist(double [] a, double [] b) {
 
-	double dist = 0;
 
-	for (int i=0; i<a.length; ++i) {
-	    double diff = (a[i] - b[i]);
-	    dist += diff*diff;
+    public String toString() {
+	String s = "";
+	for (int i=0; i<coord.length; ++i) {
+	    s = s + coord[i] + " ";
 	}
+	return s;
+    }
 
-	return dist;
-    }     
 }
