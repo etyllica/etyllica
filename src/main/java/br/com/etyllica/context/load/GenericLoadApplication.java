@@ -58,7 +58,7 @@ public class GenericLoadApplication extends DefaultLoadApplication {
 		g.setFont(f);
 		
 		g.setColor(backgroundColor);
-		g.fillRect(0, 0, w, h);
+		g.fillRect(x, y, w, h);
 		
 		g.setColor(Color.WHITE);
 		g.drawStringShadowX(280-y, phrase);

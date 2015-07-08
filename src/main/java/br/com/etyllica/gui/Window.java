@@ -52,7 +52,7 @@ public class Window extends GeometricLayer implements ContextContainer {
 	public Window(int x, int y, int w, int h) {
 		super(x,y,w,h);
 		
-		camera = new Camera(0, 0, w, h);
+		camera = new Camera(x, y, w, h);
 
 		//load = new LoadApplication(x,y,w,h);
 		//load = new GenericLoadApplication(x,y,w,h);
@@ -61,7 +61,7 @@ public class Window extends GeometricLayer implements ContextContainer {
 
 		applicationLoader = new ApplicationLoader();
 		
-		loadApplication = new GenericLoadApplication(x,y,w,h);
+		loadApplication = new GenericLoadApplication(x-w/2,y-h/4,w,h);
 		loadApplication.load();
 	}
 	
