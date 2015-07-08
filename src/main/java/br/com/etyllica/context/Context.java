@@ -2,7 +2,7 @@ package br.com.etyllica.context;
 
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.context.load.DefaultLoadApplication;
-import br.com.etyllica.context.load.LoadListener;
+import br.com.etyllica.context.load.ApplicationLoadListener;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
@@ -97,7 +97,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	 */
 	protected boolean activeCenterMouse = false;
 
-	private LoadListener loadListener;
+	private ApplicationLoadListener loadListener;
 	
 	private MouseStateListener mouseStateListener;
 	
@@ -130,8 +130,6 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 		this.loading = 0;
 		//TODO Dictionary get "loading"+...
 		this.loadingInfo = "Carregando...";
-
-		//loadListeners = new ArrayList<LoadListener>();
 	}
 
 	/**
@@ -145,18 +143,15 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	}
 
 	public void startLoad() {
-
 		locked = true;
 		this.loading = 0;
 		load();
 		locked = false;
 		notifyListeners();
-
 	}
 
 	private void notifyListeners() {
-
-		loadListener.loaded();
+		loadListener.onApplicationLoaded();
 	}
 
 	/**
@@ -286,7 +281,7 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 		return locked;
 	}
 
-	public void setLoadListener(LoadListener listener) {
+	public void setLoadListener(ApplicationLoadListener listener) {
 		this.loadListener = listener;
 	}
 	

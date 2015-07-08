@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import br.com.etyllica.context.Context;
 import br.com.etyllica.gui.Window;
@@ -16,11 +17,11 @@ import br.com.etyllica.gui.Window;
  *
  */
 
-public class ApplicationLoader implements LoadListener {
+public class ApplicationLoader implements ApplicationLoadListener {
 
-	private Loader loader;
+	private Loader loader = new Loader();
 
-	private Updater updater;
+	private Updater updater = new Updater();
 
 	private Window window;
 
@@ -40,7 +41,6 @@ public class ApplicationLoader implements LoadListener {
 	
 	private float lastLoading = 0;
 	
-	
 	public ApplicationLoader() {
 		super();
 	}
@@ -53,13 +53,11 @@ public class ApplicationLoader implements LoadListener {
 		loadExecutor = Executors.newScheduledThreadPool(2);
 		
 		window.setLoaded(false);
-
-		loader = new Loader();
-		updater = new Updater();
-
-		future = loadExecutor.submit(loader);
 		
-		loadExecutor.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.MILLISECONDS);		
+		future = loadExecutor.submit(loader);
+				
+		loadExecutor.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
+		
 	}
 
 	private class Loader implements Runnable {
@@ -67,60 +65,53 @@ public class ApplicationLoader implements LoadListener {
 		public void run() {
 			called = false;
 
+			//Set the listener to listen to loaded event
 			application.setLoadListener(ApplicationLoader.this);
 			application.startLoad();
-
 		}
-
 	}
 
 	private class Updater implements Runnable {
 
 		public void run() {
-
+						
 			if(!called) {
-
+							
 				if(!window.isLoaded()) {
 					
 					notifyTextChanged();
-					
 					notifyLoadingChanged();
 					
 					getError();
 				}
 												
 			} else {
-								
-				window.setApplication(application);
-
-				window.setLoaded(true);
-		
-				//getError();
 				
-				loadExecutor.shutdownNow();
+				window.setApplication(application);
+				window.setLoaded(true);
+				
+				stopLoading();
 			}
 		}
 		
 	}
 	
 	private void notifyTextChanged() {
-		
 		String info = application.getLoadingInfo();
 		
-		if(!lastText.equals(info)) {			
-			lastText = info;			
-			loadApplication.onChangeText(info);	
+		if(!lastText.equals(info)) {
+			lastText = info;
+			loadApplication.onChangeText(info);
 		}
 	}
 	
 	private void notifyLoadingChanged() {
-		
 		float loading = application.getLoading();
 		
 		if(lastLoading != loading) {
-			lastLoading = loading;	
-			loadApplication.onChangeLoad(loading);	
-		}		
+			lastLoading = loading;
+			loadApplication.onChangeLoad(loading);
+		}
 	}
 
 	public Context getApplication() {
@@ -148,19 +139,28 @@ public class ApplicationLoader implements LoadListener {
 	}
 
 	@Override
-	public void loaded() {
+	public void onApplicationLoaded() {
 		called = true;
 	}
 
 	protected void getError() {
 		try {
-			future.get();
+			future.get(UPDATE_INTERVAL/2, TimeUnit.MILLISECONDS);
 		} catch (ExecutionException e) {
 			Throwable cause = e.getCause();
 			cause.printStackTrace();
+			stopLoading();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		} catch (TimeoutException e) {
+			//Timeout no error until here
+			//e.printStackTrace();
 		}
+	}
+
+	private void stopLoading() {
+		called = true;
+		loadExecutor.shutdownNow();
 	}
 
 }
