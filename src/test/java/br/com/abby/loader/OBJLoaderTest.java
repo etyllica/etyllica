@@ -20,8 +20,8 @@ public class OBJLoaderTest {
 	public void setUp() throws MalformedURLException {
 		String path = PathHelper.currentDirectory();
 				
-		URL url = new URL(path+"../../");
-				
+		URL url = new URL(path+"../");
+		
 		MeshLoader.getInstance().setUrl(url.toString());
 		
 		loader = (OBJLoader) MeshLoader.getInstance().getLoader("obj");
