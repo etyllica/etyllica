@@ -30,8 +30,11 @@ public class KeyFrame<T> {
 	}
 	
 	public void addRotation(T bone, int angle) {
-		
 		transformations.put(bone, new Transform(angle));
+	}
+	
+	public void addTransform(T bone, Transform transform) {
+		transformations.put(bone, new Transform(transform));
 	}
 
 	public Transform getTransformation(T bone) {
