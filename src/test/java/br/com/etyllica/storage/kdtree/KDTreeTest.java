@@ -1,4 +1,4 @@
-package br.com.etyllica.storage;
+package br.com.etyllica.storage.kdtree;
 
 import org.junit.Assert;
 import org.junit.Before;
