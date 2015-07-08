@@ -28,7 +28,6 @@ import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.debug.Logger;
 import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
@@ -475,7 +474,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		case NEXT_COMPONENT:
 
-			Logger.log("LostFocus");
+			System.out.println("LostFocus");
 
 			//controle.getTeclado().loseFocus();
 			//events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.))
@@ -779,7 +778,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		//Context application = activeWindow.getApplication();
 
 		reload(activeWindow.getContext().getNextApplication());
-
 	}
 
 	private void reload(Context application) {
@@ -860,7 +858,6 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 			if(focusEvent!=GUIEvent.NONE&&focusEvent!=null) {
 				//TODO Update NExtComponent
-				Logger.log(focusEvent);
 
 				View next = focus.findNext();
 
