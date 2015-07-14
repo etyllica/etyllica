@@ -39,7 +39,7 @@ public class PivotImageLayer extends ImageLayer{
 	}
 
 	@Override
-	public boolean colisionRotated(int mx, int my){
+	public boolean colideRotated(int mx, int my){
 		//Pivot Point of rotation
 		int px = x+xPivot;
 		int py = y+yPivot;
