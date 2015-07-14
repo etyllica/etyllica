@@ -7,16 +7,18 @@ import java.awt.Frame;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.etyllica.awt.core.AWTCore;
+
 public class SharedCoreTest {
 
 	private int INITIAL_WIDTH = 20;
 	private int INITIAL_HEIGHT = 20;
 	
-	private SharedCore core;
+	private AWTCore core;
 	
 	@Before
 	public void setUp(){
-		core = new SharedCore(new Frame(),INITIAL_WIDTH,INITIAL_HEIGHT);
+		core = new AWTCore(new Frame(),INITIAL_WIDTH,INITIAL_HEIGHT);
 	}
 	
 	@Test

@@ -27,8 +27,7 @@ public class PlaneTest {
 
 	@Test
 	public void testOrthogonalDistance() {
-		Vector3f point = new Vector3f(0, 5, 0);
-
+		Vector3f point = new Vector3f(2, 5, 0);
 		Assert.assertEquals(5, floor.distance(point), 0);
 	}
 }

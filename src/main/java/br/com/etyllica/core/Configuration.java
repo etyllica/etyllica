@@ -1,6 +1,6 @@
 package br.com.etyllica.core;
 
-import br.com.etyllica.i18n.Language;
+import br.com.etyllica.core.i18n.Language;
 
 /**
  * 

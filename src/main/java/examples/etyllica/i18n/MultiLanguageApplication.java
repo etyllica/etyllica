@@ -3,17 +3,17 @@ package examples.etyllica.i18n;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.etyllica.context.Application;
 import br.com.etyllica.core.Configuration;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.MultiLangLabel;
 import br.com.etyllica.gui.label.TextLabel;
-import br.com.etyllica.i18n.Language;
 
 public class MultiLanguageApplication extends Application {
 

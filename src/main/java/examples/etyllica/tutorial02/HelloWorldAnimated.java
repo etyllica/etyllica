@@ -1,8 +1,8 @@
 package examples.etyllica.tutorial02;
 
-import br.com.etyllica.animation.scripts.RotateAnimation;
-import br.com.etyllica.animation.scripts.ScaleUniformAnimation;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.animation.script.RotateAnimation;
+import br.com.etyllica.core.animation.script.ScaleUniformAnimation;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 

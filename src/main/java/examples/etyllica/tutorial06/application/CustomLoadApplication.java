@@ -2,12 +2,12 @@ package examples.etyllica.tutorial06.application;
 
 import java.awt.Color;
 
-import br.com.etyllica.context.Application;
+import br.com.etyllica.awt.SVGColor;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.graphics.SVGColor;
 
 public class CustomLoadApplication extends Application{
 	

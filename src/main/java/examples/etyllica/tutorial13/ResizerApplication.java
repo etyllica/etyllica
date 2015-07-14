@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.collision.CollisionDetector;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.collision.CollisionDetector;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;

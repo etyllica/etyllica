@@ -26,7 +26,7 @@ package examples.physics;
 
 import examples.physics.application.BoxesFalling;
 import br.com.etyllica.EtyllicaFrame;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 
 /**
  * Class used to show a simple example of using the dyn4j project using

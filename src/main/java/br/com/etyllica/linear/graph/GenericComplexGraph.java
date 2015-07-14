@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import br.com.etyllica.linear.Point2D;
+import br.com.etyllica.core.linear.Point2D;
 
 public abstract class GenericComplexGraph<N, E extends GenericEdge<N>> {
 

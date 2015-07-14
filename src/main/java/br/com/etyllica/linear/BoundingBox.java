@@ -1,5 +1,7 @@
 package br.com.etyllica.linear;
 
+import br.com.etyllica.core.linear.Point3D;
+
 
 /**
  * Created by IntelliJ IDEA.

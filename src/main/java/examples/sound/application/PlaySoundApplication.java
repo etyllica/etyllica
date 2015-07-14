@@ -10,12 +10,12 @@ import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Mass;
 
 import sound.model.Sound;
+import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 

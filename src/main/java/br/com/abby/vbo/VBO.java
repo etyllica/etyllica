@@ -10,7 +10,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import br.com.abby.linear.BoundingBox3D;
 import br.com.abby.material.OBJMaterial;
-import br.com.etyllica.linear.Point3D;
+import br.com.etyllica.core.linear.Point3D;
 
 public class VBO {
 	

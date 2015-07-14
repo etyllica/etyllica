@@ -2,7 +2,7 @@ package examples.jgl.application;
 
 import org.jgl.GLAUX;
 
-import br.com.etyllica.context.UpdateIntervalListener;
+import br.com.etyllica.core.context.UpdateIntervalListener;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;

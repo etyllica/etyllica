@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.linear.vector.Vector2D;
+import br.com.etyllica.core.linear.Point2D;
 
-public class PivotPoint extends Vector2D {
+public class PivotPoint extends Point2D {
 	
 	private List<Part> parts = new ArrayList<Part>();
 	

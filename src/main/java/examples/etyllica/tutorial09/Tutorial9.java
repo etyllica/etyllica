@@ -1,8 +1,8 @@
 package examples.etyllica.tutorial09;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.context.Application;
 import br.com.etyllica.core.Configuration;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.theme.EtyllicTheme;
 import br.com.etyllica.theme.ThemeManager;
 import examples.etyllica.tutorial09.application.SimpleGuiExample;

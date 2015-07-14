@@ -1,8 +1,8 @@
 package examples.etyllica.tutorial20;
 
-import br.com.etyllica.animation.AnimationHandler;
-import br.com.etyllica.animation.scripts.text.DialogScript;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.script.text.DialogScript;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;

@@ -2,11 +2,11 @@ package examples.etyllica.tutorial09.application;
 
 import java.awt.Color;
 
-import br.com.etyllica.context.Application;
+import br.com.etyllica.awt.SVGColor;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.graphics.SVGColor;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.TextLabel;
 

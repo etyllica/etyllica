@@ -3,7 +3,7 @@ package examples.etyllica.tutorial06.application;
 import java.awt.Color;
 import java.awt.Font;
 
-import br.com.etyllica.context.load.GenericLoadApplication;
+import br.com.etyllica.core.context.load.GenericLoadApplication;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;

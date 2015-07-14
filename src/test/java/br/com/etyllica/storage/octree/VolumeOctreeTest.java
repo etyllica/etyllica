@@ -7,10 +7,7 @@ import org.junit.Test;
 
 import br.com.abby.linear.BoundingBox3D;
 import br.com.abby.vbo.Face;
-import br.com.etyllica.linear.Point3D;
-import br.com.etyllica.storage.octree.Octree;
-import br.com.etyllica.storage.octree.OctreeNode;
-import br.com.etyllica.storage.octree.VolumeOctree;
+import br.com.etyllica.core.linear.Point3D;
 
 public class VolumeOctreeTest {
 

@@ -2,7 +2,7 @@ package examples.etyllica.camera;
 
 import examples.etyllica.camera.application.CameraExample;
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 
 public class CinematicsTutorial extends Etyllica {
 

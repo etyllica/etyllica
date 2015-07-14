@@ -1,7 +1,7 @@
 package examples.jgl;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 import examples.jgl.application.BezSurf;
 import examples.jgl.application.Checker;
 import examples.jgl.application.Clip;

@@ -3,7 +3,7 @@ package br.com.tide;
 import java.util.HashSet;
 import java.util.Set;
 
-import br.com.etyllica.linear.PointInt2D;
+import br.com.etyllica.core.linear.PointInt2D;
 
 public class Player extends PointInt2D {
 	

@@ -30,17 +30,20 @@ public class Plane {
 		normal = Vector3f.cross(v, u, null);
 		normal.normalise();
 
-		Vector3f negateNormal = normal.negate(null); 
-		d = Vector3f.cross(negateNormal, a, null);
+		Vector3f position = new Vector3f(b);
+		
+		Vector3f negateNormal = normal.negate(null);
+		d = Vector3f.cross(negateNormal, position, null);
+		
+		System.out.println("DLEN: "+d.length());
+		//DLEN: 0.8945184
+		
+		float dis = -Vector3f.dot(normal, position);
+		System.out.println("NEWD: "+dis);
 	}
 	
 	public double distance(Vector3f point) {
-		float a = normal.x;
-		float b = normal.y;
-		float c = normal.z;
-		
-		double dist = a*point.getX() + b*point.getY() + c*point.getZ() + d.length();
-		
+		double dist = Vector3f.dot(normal, point) + d.length();
 		return dist;
 	}
 }

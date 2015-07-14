@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import br.com.abby.vbo.VBO;
-import br.com.etyllica.core.loader.LoaderImpl;
+import br.com.etyllica.loader.LoaderImpl;
 import br.com.etyllica.util.PathHelper;
 import br.com.etyllica.util.StringUtils;
 import br.com.etyllica.util.io.IOHelper;

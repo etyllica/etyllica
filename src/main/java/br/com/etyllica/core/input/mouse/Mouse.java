@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.swing.event.MouseInputListener;
 
-import br.com.etyllica.collision.CollisionDetector;
+import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.layer.AnimatedLayer;

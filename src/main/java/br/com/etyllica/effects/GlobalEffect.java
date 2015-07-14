@@ -1,6 +1,6 @@
 package br.com.etyllica.effects;
 
-import br.com.etyllica.animation.scripts.SingleIntervalAnimation;
+import br.com.etyllica.core.animation.script.SingleIntervalAnimation;
 import br.com.etyllica.layer.Layer;
 
 /**

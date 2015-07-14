@@ -1,7 +1,7 @@
 package examples.etyllica.gui.list;
 
 
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.ScrollerPanel;
 import br.com.etyllica.gui.Select;

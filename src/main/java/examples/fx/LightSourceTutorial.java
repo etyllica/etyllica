@@ -1,7 +1,7 @@
 package examples.fx;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 import examples.fx.application.LightSourceApplication;
 
 public class LightSourceTutorial extends Etyllica {

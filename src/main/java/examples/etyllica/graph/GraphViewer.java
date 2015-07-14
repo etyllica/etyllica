@@ -2,7 +2,7 @@ package examples.etyllica.graph;
 import examples.etyllica.graph.view.MeshNavigationExample;
 import examples.etyllica.graph.view.SimpleGraphExample;
 import br.com.etyllica.EtyllicaFrame;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 
 public class GraphViewer extends EtyllicaFrame {
 

@@ -1,6 +1,6 @@
 package br.com.tide.ai.pathfind;
 
-import br.com.etyllica.linear.Point2D;
+import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.linear.PolygonalRegion;
 
 public class PolygonalData {

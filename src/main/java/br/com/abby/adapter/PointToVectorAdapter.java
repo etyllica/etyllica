@@ -2,7 +2,7 @@ package br.com.abby.adapter;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.etyllica.linear.Point3D;
+import br.com.etyllica.core.linear.Point3D;
 
 public class PointToVectorAdapter {
 

@@ -3,7 +3,7 @@ package br.com.etyllica.gui.selection;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
-import br.com.etyllica.collision.CollisionDetector;
+import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;

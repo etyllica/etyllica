@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.loader.image.ImageLoader;
 import br.com.etyllica.layer.PivotImageLayer;
+import br.com.etyllica.loader.image.ImageLoader;
 
 public class Part extends PivotImageLayer {
 

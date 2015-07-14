@@ -1,8 +1,8 @@
 package br.com.etyllica.effects;
 
-import br.com.etyllica.animation.AnimationHandler;
-import br.com.etyllica.animation.scripts.AnimationScript;
-import br.com.etyllica.animation.scripts.FrameAnimation;
+import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.script.AnimationScript;
+import br.com.etyllica.core.animation.script.FrameAnimation;
 import br.com.etyllica.layer.AnimatedLayer;
 
 /**

@@ -2,7 +2,7 @@ package examples.etyllica.tutorial08;
 
 import examples.etyllica.tutorial08.application.AnimatedMenu;
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 
 public class Tutorial8 extends Etyllica {
 

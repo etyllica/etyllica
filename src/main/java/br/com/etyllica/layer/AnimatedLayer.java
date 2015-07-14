@@ -1,7 +1,7 @@
 package br.com.etyllica.layer;
 
-import br.com.etyllica.animation.listener.OnAnimationFinishListener;
-import br.com.etyllica.animation.listener.OnFrameChangeListener;
+import br.com.etyllica.core.animation.OnAnimationFinishListener;
+import br.com.etyllica.core.animation.OnFrameChangeListener;
 
 /**
  * 

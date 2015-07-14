@@ -10,10 +10,10 @@ import java.awt.image.DataBufferByte;
 import java.awt.image.DataBufferInt;
 import java.awt.image.Raster;
 
-import br.com.etyllica.collision.CollisionDetector;
+import br.com.etyllica.awt.SVGColor;
+import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.graphics.SVGColor;
-import br.com.etyllica.core.loader.image.ImageLoader;
+import br.com.etyllica.loader.image.ImageLoader;
 
 /**
  * 

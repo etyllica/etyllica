@@ -1,7 +1,7 @@
 package sound;
 
 
-import br.com.etyllica.core.loader.LoaderImpl;
+import br.com.etyllica.loader.LoaderImpl;
 import sound.paulscode.Library;
 import sound.paulscode.SoundSystem;
 import sound.paulscode.SoundSystemConfig;

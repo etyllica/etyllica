@@ -1,7 +1,7 @@
 package br.com.etyllica.layer;
 
 import br.com.etyllica.core.Movable;
-import br.com.etyllica.linear.PointInt2D;
+import br.com.etyllica.core.linear.PointInt2D;
 
 public class GeometricLayer extends PointInt2D implements Movable {
 	

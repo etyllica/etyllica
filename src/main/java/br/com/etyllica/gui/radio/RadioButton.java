@@ -1,6 +1,6 @@
 package br.com.etyllica.gui.radio;
 
-import br.com.etyllica.collision.CollisionDetector;
+import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Radio;

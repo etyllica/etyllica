@@ -18,7 +18,7 @@ import br.com.abby.material.Texture;
 import br.com.abby.vbo.Face;
 import br.com.abby.vbo.Group;
 import br.com.abby.vbo.VBO;
-import br.com.etyllica.core.loader.image.ImageLoader;
+import br.com.etyllica.loader.image.ImageLoader;
 
 /**
  * 

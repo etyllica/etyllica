@@ -2,7 +2,7 @@ package br.com.etyllica.core.input;
 
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.core.loader.JoystickLoader;
+import br.com.etyllica.loader.JoystickLoader;
 
 /**
  * 

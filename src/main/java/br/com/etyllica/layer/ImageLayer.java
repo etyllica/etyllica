@@ -1,11 +1,11 @@
 package br.com.etyllica.layer;
 
-import br.com.etyllica.collision.CollisionDetector;
-import br.com.etyllica.collision.HitBox;
+import br.com.etyllica.core.collision.CollisionDetector;
+import br.com.etyllica.core.collision.HitBox;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.core.loader.image.ImageLoader;
-import br.com.etyllica.linear.Rectangle;
+import br.com.etyllica.core.linear.Rectangle;
+import br.com.etyllica.loader.image.ImageLoader;
 
 /**
  * 

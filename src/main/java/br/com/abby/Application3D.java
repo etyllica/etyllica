@@ -8,7 +8,7 @@ import br.com.abby.linear.Box3D;
 import br.com.abby.linear.Camera3D;
 import br.com.abby.linear.Polygon3D;
 import br.com.abby.material.Texture;
-import br.com.etyllica.linear.Point3D;
+import br.com.etyllica.core.linear.Point3D;
 
 /**
  * 

@@ -2,9 +2,9 @@ package examples.fx.application;
 
 import java.awt.Color;
 
-import br.com.etyllica.animation.AnimationHandler;
-import br.com.etyllica.animation.scripts.complex.StretchAndBackVertical;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.script.complex.StretchAndBackVertical;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 
