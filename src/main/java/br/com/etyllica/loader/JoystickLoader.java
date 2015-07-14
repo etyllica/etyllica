@@ -12,8 +12,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import br.com.etyllica.core.Updatable;
+import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.joystick.Joystick;
 
 /**
@@ -37,7 +37,7 @@ public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
 	
 	private boolean initialized = false;
 	
-	private InputKeyListener listener;
+	private KeyEventListener listener;
 	
 	private int updateDelay = 5;//5 ms
 	
@@ -124,11 +124,11 @@ public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
 		
 	}
 
-	public InputKeyListener getListener() {
+	public KeyEventListener getListener() {
 		return listener;
 	}
 
-	public void setListener(InputKeyListener listener) {
+	public void setListener(KeyEventListener listener) {
 		this.listener = listener;
 	}
 	

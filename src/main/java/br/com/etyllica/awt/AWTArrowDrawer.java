@@ -3,9 +3,9 @@ package br.com.etyllica.awt;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
+import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.input.mouse.MouseState;
 import br.com.etyllica.theme.mouse.ArrowTheme;
 import br.com.etyllica.theme.mouse.arrow.MouseArrow;
 

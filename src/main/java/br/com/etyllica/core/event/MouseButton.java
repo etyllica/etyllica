@@ -1,4 +1,4 @@
-package br.com.etyllica.core.input.mouse;
+package br.com.etyllica.core.event;
 
 
 /**

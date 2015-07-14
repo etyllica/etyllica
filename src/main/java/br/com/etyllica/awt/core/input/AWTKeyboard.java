@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyState;
-import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.util.concurrency.ConcurrentSet;
 
@@ -25,7 +25,7 @@ import br.com.etyllica.util.concurrency.ConcurrentSet;
 
 public class AWTKeyboard implements KeyListener, Keyboard {
 
-	private InputKeyListener listener;
+	private KeyEventListener listener;
 	
 	private List<KeyEvent> keyEvents = new ArrayList<KeyEvent>();
 
@@ -34,7 +34,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 
 	private ConcurrentSet<Integer> changed = new ConcurrentSet<Integer>();
 
-	public AWTKeyboard(InputKeyListener listener) {
+	public AWTKeyboard(KeyEventListener listener) {
 		super();
 		this.listener = listener;
 	}
@@ -90,7 +90,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 		changed.unlock();
 	}
 
-	public void poll(InputKeyListener listener) {
+	public void poll(KeyEventListener listener) {
 
 		List<KeyEvent> events = new CopyOnWriteArrayList<KeyEvent>(keyEvents);
 		

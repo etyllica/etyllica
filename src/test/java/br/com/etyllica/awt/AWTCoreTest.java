@@ -10,10 +10,10 @@ import org.junit.Test;
 
 import br.com.etyllica.awt.core.AWTCore;
 import br.com.etyllica.core.context.Application;
+import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.gui.factory.DefaultButton;

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.awt.AWTArrowDrawer;
+import br.com.etyllica.awt.core.input.AWTController;
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.script.AnimationScript;
 import br.com.etyllica.core.animation.script.SingleIntervalAnimation;
@@ -14,7 +15,9 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.context.UpdateIntervalListener;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
@@ -23,11 +26,8 @@ import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.i18n.LanguageHandler;
-import br.com.etyllica.core.input.HIDController;
-import br.com.etyllica.core.input.InputKeyListener;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
@@ -43,7 +43,7 @@ import br.com.etyllica.theme.listener.ThemeListener;
  *
  */
 
-public abstract class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener, LanguageChangerListener {
+public abstract class InnerCore implements Core, KeyEventListener, Updatable, ThemeListener, LanguageChangerListener {
 
 	private static final int TITLE_BAR_HEIGHT = 50;
 	
@@ -52,7 +52,7 @@ public abstract class InnerCore implements Core, InputKeyListener, Updatable, Th
 
 	private View focus;
 
-	protected HIDController control;
+	protected AWTController control;
 
 	private Mouse mouse;
 
@@ -113,7 +113,7 @@ public abstract class InnerCore implements Core, InputKeyListener, Updatable, Th
 		
 		guiEvents = new ArrayList<GUIEvent>();
 
-		control = new HIDController(this);
+		control = new AWTController(this);
 
 		setMouse(control.getMouse());
 
@@ -915,7 +915,7 @@ public abstract class InnerCore implements Core, InputKeyListener, Updatable, Th
 		view.update(GUIEvent.MOUSE_OUT);
 	}
 
-	public HIDController getControl() {
+	public AWTController getControl() {
 		return control;
 	}
 
