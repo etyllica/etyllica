@@ -16,13 +16,13 @@ import br.com.tide.input.controller.Controller;
  */
 public class FirstPersonController extends Controller {
 
-	protected int turnLeftButton = KeyEvent.TSK_LEFT_ARROW;
+	protected int turnLeftButton = KeyEvent.VK_LEFT;
 	
-	protected int turnRightButton = KeyEvent.TSK_RIGHT_ARROW;
+	protected int turnRightButton = KeyEvent.VK_RIGHT;
 	
-	protected int goForwardButton = KeyEvent.TSK_UP_ARROW;
+	protected int goForwardButton = KeyEvent.VK_UP;
 	
-	protected int goBackwardButton = KeyEvent.TSK_DOWN_ARROW;
+	protected int goBackwardButton = KeyEvent.VK_DOWN;
 	
 	protected int MAX_UP_ANGLE = -45;
 	protected int MIN_UP_ANGLE = 45;

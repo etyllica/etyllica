@@ -279,21 +279,21 @@ public class Resizer {
 
 	public void handleKeyEvent(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_UP_ARROW)) {
+		if(event.isKeyDown(KeyEvent.VK_UP_ARROW)) {
 			selected.setOffsetY(-keyboardSpeed);
 			notifyListener();
 			reselect();
-		} else if(event.isKeyDown(KeyEvent.TSK_DOWN_ARROW)) {
+		} else if(event.isKeyDown(KeyEvent.VK_DOWN_ARROW)) {
 			selected.setOffsetY(+keyboardSpeed);
 			notifyListener();
 			reselect();
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_LEFT_ARROW)) {
+		if(event.isKeyDown(KeyEvent.VK_LEFT_ARROW)) {
 			selected.setOffsetX(-keyboardSpeed);
 			notifyListener();
 			reselect();
-		} else if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)) {
+		} else if(event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
 			selected.setOffsetX(+keyboardSpeed);
 			notifyListener();
 			reselect();

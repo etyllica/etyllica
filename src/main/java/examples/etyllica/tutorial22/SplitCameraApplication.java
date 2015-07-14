@@ -52,11 +52,11 @@ public class SplitCameraApplication extends Application implements UpdateInterva
 		
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.isKeyDown(KeyEvent.TSK_UP_ARROW)) {
+		if(event.isKeyDown(KeyEvent.VK_UP_ARROW)) {
 			pressed = true;
 		}
 		
-		if(event.isKeyUp(KeyEvent.TSK_UP_ARROW)) {
+		if(event.isKeyUp(KeyEvent.VK_UP_ARROW)) {
 			pressed = false;
 		}
 		

@@ -130,7 +130,7 @@ public class ScrollerPanel extends View {
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_TAB)) {
+		if(event.isKeyDown(KeyEvent.VK_TAB)) {
 
 			return GUIEvent.NEXT_COMPONENT;
 

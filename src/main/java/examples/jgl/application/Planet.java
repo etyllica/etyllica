@@ -41,16 +41,16 @@ public class Planet extends GLAUX implements UpdateIntervalListener {
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)){
+		if(event.isKeyDown(KeyEvent.VK_LEFT)) {
 			monthSubtract();
 		}
-		else if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)){
+		else if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
 			monthAdd();
 		}
-		else if(event.isKeyDown(KeyEvent.TSK_SETA_CIMA)){
+		else if(event.isKeyDown(KeyEvent.VK_UP)) {
 			dayAdd();
 		}
-		else if(event.isKeyDown(KeyEvent.TSK_SETA_BAIXO)){
+		else if(event.isKeyDown(KeyEvent.VK_DOWN)) {
 			daySubtract();
 		}
 

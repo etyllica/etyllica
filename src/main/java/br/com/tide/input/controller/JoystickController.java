@@ -6,9 +6,9 @@ import br.com.tide.input.controller.Controller;
 
 public class JoystickController extends Controller {
 
-	private int centerX = KeyEvent.TSK_JOYSTICK_CENTER_X;
+	private int centerX = KeyEvent.VK_JOYSTICK_CENTER_X;
 
-	private int centerY = KeyEvent.TSK_JOYSTICK_CENTER_Y;
+	private int centerY = KeyEvent.VK_JOYSTICK_CENTER_Y;
 	
 	private boolean rightPressed = false;
 	
@@ -17,23 +17,23 @@ public class JoystickController extends Controller {
 	public JoystickController(ControllerListener listener) {
 		super(listener);
 
-		upButton = KeyEvent.TSK_JOYSTICK_UP;
+		upButton = KeyEvent.VK_JOYSTICK_UP;
 
-		downButton = KeyEvent.TSK_JOYSTICK_DOWN;
+		downButton = KeyEvent.VK_JOYSTICK_DOWN;
 
-		leftButton = KeyEvent.TSK_JOYSTICK_LEFT;
+		leftButton = KeyEvent.VK_JOYSTICK_LEFT;
 
-		rightButton = KeyEvent.TSK_JOYSTICK_RIGHT;
+		rightButton = KeyEvent.VK_JOYSTICK_RIGHT;
 
-		ButtonA = KeyEvent.TSK_JOYSTICK_BUTTON_3;
+		ButtonA = KeyEvent.VK_JOYSTICK_BUTTON_3;
 
-		ButtonB = KeyEvent.TSK_JOYSTICK_BUTTON_1;
+		ButtonB = KeyEvent.VK_JOYSTICK_BUTTON_1;
 
-		ButtonC = KeyEvent.TSK_JOYSTICK_BUTTON_2;
+		ButtonC = KeyEvent.VK_JOYSTICK_BUTTON_2;
 
-		startButton = KeyEvent.TSK_JOYSTICK_BUTTON_8;
+		startButton = KeyEvent.VK_JOYSTICK_BUTTON_8;
 
-		selectButton = KeyEvent.TSK_JOYSTICK_BUTTON_7;
+		selectButton = KeyEvent.VK_JOYSTICK_BUTTON_7;
 
 	}
 

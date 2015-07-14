@@ -43,37 +43,37 @@ public class JoystickExample extends Application{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)){
+		if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
 			hello.setOffsetX(10);
 		}
-		if(event.isKeyDown(KeyEvent.TSK_LEFT_ARROW)){
+		if(event.isKeyDown(KeyEvent.VK_LEFT)) {
 			hello.setOffsetX(-10);
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_JOYSTICK_RIGHT)){
+		if(event.isKeyDown(KeyEvent.VK_JOYSTICK_RIGHT)) {
 			hello.setOffsetX(10);
 		}
 		
-		else if(event.isKeyDown(KeyEvent.TSK_JOYSTICK_LEFT)){
+		else if(event.isKeyDown(KeyEvent.VK_JOYSTICK_LEFT)) {
 			hello.setOffsetX(-10);
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_JOYSTICK_UP)){
+		if(event.isKeyDown(KeyEvent.VK_JOYSTICK_UP)) {
 			hello.setOffsetY(-10);
 		}
 		
-		else if(event.isKeyDown(KeyEvent.TSK_JOYSTICK_DOWN)){
+		else if(event.isKeyDown(KeyEvent.VK_JOYSTICK_DOWN)) {
 			hello.setOffsetY(10);
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_JOYSTICK_BUTTON_1)){
+		if(event.isKeyDown(KeyEvent.VK_JOYSTICK_BUTTON_1)) {
 			hello.setOffsetAngle(10);
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_JOYSTICK_BUTTON_7)){
+		if(event.isKeyDown(KeyEvent.VK_JOYSTICK_BUTTON_7)) {
 			hello.setScale(1.5);
 		}
-		if(event.isKeyDown(KeyEvent.TSK_JOYSTICK_BUTTON_8)){
+		if(event.isKeyDown(KeyEvent.VK_JOYSTICK_BUTTON_8)) {
 			hello.setScale(1);
 		}
 				

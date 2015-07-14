@@ -23,33 +23,33 @@ public class Robot extends GLAUX{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.isKeyDown(KeyEvent.TSK_CTRL_ESQUERDA)||event.isKeyDown(KeyEvent.TSK_CTRL_DIREITA)){
+		if(event.isKeyDown(KeyEvent.VK_CTRL_LEFT)||event.isKeyDown(KeyEvent.VK_CTRL_RIGHT)) {
 			
-			if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)){
+			if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
 				shoulderAdd();
 			}
-			else if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)){
+			else if(event.isKeyDown(KeyEvent.VK_LEFT)) {
 				shoulderSubtract();
 			}
-			else if(event.isKeyDown(KeyEvent.TSK_SETA_CIMA)){
+			else if(event.isKeyDown(KeyEvent.VK_UP)) {
 				elbowAdd();
 			}
-			else if(event.isKeyDown(KeyEvent.TSK_SETA_BAIXO)){
+			else if(event.isKeyDown(KeyEvent.VK_DOWN)) {
 				elbowSubtract();
 			}
 			
 		}else{
 			
-			if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)){
+			if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
 				shoulderAdd();
 			}
-			else if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)){
+			else if(event.isKeyDown(KeyEvent.VK_LEFT)) {
 				shoulderSubtract();
 			}
-			else if(event.isKeyDown(KeyEvent.TSK_SETA_CIMA)){
+			else if(event.isKeyDown(KeyEvent.VK_UP)) {
 				elbowAdd();
 			}
-			else if(event.isKeyDown(KeyEvent.TSK_SETA_BAIXO)){
+			else if(event.isKeyDown(KeyEvent.VK_DOWN)) {
 				elbowSubtract();
 			}
 			

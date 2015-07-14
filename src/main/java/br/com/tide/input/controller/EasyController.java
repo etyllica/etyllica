@@ -8,29 +8,29 @@ public class EasyController extends Controller {
 	public EasyController(ControllerListener listener) {
 		super(listener);
 
-		upButton = KeyEvent.TSK_UP_ARROW;
+		upButton = KeyEvent.VK_UP;
 
-		downButton = KeyEvent.TSK_DOWN_ARROW;
+		downButton = KeyEvent.VK_DOWN;
 
-		leftButton = KeyEvent.TSK_LEFT_ARROW;
+		leftButton = KeyEvent.VK_LEFT;
 
-		rightButton = KeyEvent.TSK_RIGHT_ARROW;
+		rightButton = KeyEvent.VK_RIGHT;
 
-		ButtonA = KeyEvent.TSK_Z;
+		ButtonA = KeyEvent.VK_Z;
 
-		ButtonB = KeyEvent.TSK_X;
+		ButtonB = KeyEvent.VK_X;
 
-		ButtonC = KeyEvent.TSK_C;
+		ButtonC = KeyEvent.VK_C;
 		
-		ButtonX = KeyEvent.TSK_SHIFT_LEFT;
+		ButtonX = KeyEvent.VK_SHIFT_LEFT;
 
-		ButtonY = KeyEvent.TSK_CTRL_LEFT;
+		ButtonY = KeyEvent.VK_CTRL_LEFT;
 
-		ButtonZ = KeyEvent.TSK_ALT_LEFT;
+		ButtonZ = KeyEvent.VK_ALT_LEFT;
 
-		startButton = KeyEvent.TSK_ENTER;
+		startButton = KeyEvent.VK_ENTER;
 
-		selectButton = KeyEvent.TSK_SPACE;
+		selectButton = KeyEvent.VK_SPACE;
 
 	}
 

@@ -53,7 +53,7 @@ public class LightningApplication extends Application{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.isKeyUp(KeyEvent.TSK_SPACE)) {
+		if(event.isKeyUp(KeyEvent.VK_SPACE)) {
 			lightning.startEffect();			
 		}
 				

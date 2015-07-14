@@ -8,23 +8,23 @@ public class FirstPlayerController extends Controller {
 	public FirstPlayerController(ControllerListener listener) {
 		super(listener);
 		
-		upButton = KeyEvent.TSK_W;
+		upButton = KeyEvent.VK_W;
 		
-		downButton = KeyEvent.TSK_S;
+		downButton = KeyEvent.VK_S;
 		
-		leftButton = KeyEvent.TSK_A;
+		leftButton = KeyEvent.VK_A;
 		
-		rightButton = KeyEvent.TSK_D;
+		rightButton = KeyEvent.VK_D;
 		
-		ButtonA = KeyEvent.TSK_H;
+		ButtonA = KeyEvent.VK_H;
 		
-		ButtonB = KeyEvent.TSK_J;
+		ButtonB = KeyEvent.VK_J;
 		
-		ButtonC = KeyEvent.TSK_K;
+		ButtonC = KeyEvent.VK_K;
 		
-		startButton = KeyEvent.TSK_F;
+		startButton = KeyEvent.VK_F;
 		
-		selectButton = KeyEvent.TSK_G;
+		selectButton = KeyEvent.VK_G;
 		
 	}
 

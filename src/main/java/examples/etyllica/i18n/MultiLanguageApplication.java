@@ -82,13 +82,13 @@ public class MultiLanguageApplication extends Application {
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_1)) {
+		if(event.isKeyDown(KeyEvent.VK_1)) {
 			changeLanguage(Language.PORTUGUESE_BRAZIL);
 		}
-		if(event.isKeyDown(KeyEvent.TSK_2)) {
+		if(event.isKeyDown(KeyEvent.VK_2)) {
 			changeLanguage(Language.JAPANESE);
 		}
-		if(event.isKeyDown(KeyEvent.TSK_3)) {
+		if(event.isKeyDown(KeyEvent.VK_3)) {
 			changeLanguage(Language.ENGLISH_USA);
 		}
 		

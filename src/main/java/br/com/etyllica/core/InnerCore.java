@@ -638,26 +638,26 @@ public abstract class InnerCore implements Core, InputKeyListener, Updatable, Th
 
 	private void updateKeyboardEvents(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_ALT_DIREITA)||event.isKeyDown(KeyEvent.TSK_ALT_ESQUERDA)) {
+		if(event.isKeyDown(KeyEvent.VK_ALT_RIGHT)||event.isKeyDown(KeyEvent.VK_ALT_LEFT)) {
 
 			alt = true;
 		}
-		else if(event.isKeyUp(KeyEvent.TSK_ALT_DIREITA)||event.isKeyUp(KeyEvent.TSK_ALT_ESQUERDA)) {
+		else if(event.isKeyUp(KeyEvent.VK_ALT_RIGHT)||event.isKeyUp(KeyEvent.VK_ALT_LEFT)) {
 
 			alt = false;
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_ENTER)) {
+		if(event.isKeyDown(KeyEvent.VK_ENTER)) {
 			enter = true;
 		}
-		else if(event.isKeyUp(KeyEvent.TSK_ENTER)) {
+		else if(event.isKeyUp(KeyEvent.VK_ENTER)) {
 			enter = false;
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_ESC)) {
+		if(event.isKeyDown(KeyEvent.VK_ESC)) {
 			esc = true;
 		}
-		else if(event.isKeyUp(KeyEvent.TSK_ESC)) {
+		else if(event.isKeyUp(KeyEvent.VK_ESC)) {
 			esc = false;
 		}
 
@@ -686,12 +686,12 @@ public abstract class InnerCore implements Core, InputKeyListener, Updatable, Th
 			int velocidade = 1;
 
 			//Move Left/Right
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_LEFT_ARROW)) {
+			if(event.isKeyDown(KeyEvent.VK_NUMPAD_LEFT_ARROW)) {
 
 				getMouse().setX(getMouse().getX()-velocidade);
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
-			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_RIGHT_ARROW)) {
+			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_RIGHT_ARROW)) {
 
 				getMouse().setX(getMouse().getX()+velocidade);
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
@@ -699,12 +699,12 @@ public abstract class InnerCore implements Core, InputKeyListener, Updatable, Th
 			}
 
 			//Move Up/Down
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_UP_ARROW)) {
+			if(event.isKeyDown(KeyEvent.VK_NUMPAD_UP_ARROW)) {
 
 				getMouse().setX(getMouse().getY()-velocidade);
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
-			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_DOWN_ARROW)) {
+			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_DOWN_ARROW)) {
 
 				getMouse().setX(getMouse().getY()+velocidade);
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
@@ -712,21 +712,21 @@ public abstract class InnerCore implements Core, InputKeyListener, Updatable, Th
 			}
 
 			//Mouse Left Button
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_INS)) {
+			if(event.isKeyDown(KeyEvent.VK_NUMPAD_INS)) {
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
-			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_INS)) {
+			}else if(event.isKeyUp(KeyEvent.VK_NUMPAD_INS)) {
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
-			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_INS)) {
+			}/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_INS)) {
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_LEFT, KeyState.CLICK));
 			}*/
 
 			//Mouse Right Button
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_DEL)) {
+			if(event.isKeyDown(KeyEvent.VK_NUMPAD_DEL)) {
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
-			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_DEL)) {
+			}else if(event.isKeyUp(KeyEvent.VK_NUMPAD_DEL)) {
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
-			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_DEL)) {
-				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
+			}/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_DEL)) {
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
 			}*/
 
 		}

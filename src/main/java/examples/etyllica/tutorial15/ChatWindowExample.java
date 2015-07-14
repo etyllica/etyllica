@@ -56,27 +56,27 @@ public class ChatWindowExample extends Application{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event){
 		
-		if(event.isKeyDown(KeyEvent.TSK_1)){
+		if(event.isKeyDown(KeyEvent.VK_1)){
 			panel.addLine(friendname+": Hi");
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_2)){
+		if(event.isKeyDown(KeyEvent.VK_2)){
 			panel.addLine(friendname+": Hello");
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_3)){
+		if(event.isKeyDown(KeyEvent.VK_3)){
 			panel.addLine(friendname+": How are you?");
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_4)){
+		if(event.isKeyDown(KeyEvent.VK_4)){
 			panel.addLine(friendname+": I am fine, and you?");
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_5)){
+		if(event.isKeyDown(KeyEvent.VK_5)){
 			panel.addLine(friendname+": Thank You.");
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_6)){
+		if(event.isKeyDown(KeyEvent.VK_6)){
 			panel.addLine(friendname+": LOL :D");
 		}
 		

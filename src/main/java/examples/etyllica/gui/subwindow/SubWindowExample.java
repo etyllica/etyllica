@@ -22,9 +22,9 @@ public class SubWindowExample extends Application {
 	}
 
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event){
+	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.isKeyDown(KeyEvent.TSK_1)){
+		if(event.isKeyDown(KeyEvent.VK_1)) {
 			
 			Window subWindow = new Window(200, 20, 160, 400);
 			subWindow.setApplication(new SimpleGuiExample(subWindow.getW(), subWindow.getH()));

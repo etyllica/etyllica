@@ -74,7 +74,7 @@ public class ByeWorld extends Application{
 	@Override
 	public GUIEvent updateKeyboard( KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_BACK_SPACE)){
+		if(event.isKeyDown(KeyEvent.VK_BACK_SPACE)){
 			nextApplication = new CustomLoadApplication(w,h);
 		}
 

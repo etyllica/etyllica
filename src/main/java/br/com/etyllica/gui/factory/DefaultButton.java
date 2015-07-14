@@ -263,13 +263,13 @@ public class DefaultButton extends RoundGUIComponent {
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_TAB)) {
+		if(event.isKeyDown(KeyEvent.VK_TAB)) {
 
 			return GUIEvent.NEXT_COMPONENT;
 
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_ENTER)) {
+		if(event.isKeyDown(KeyEvent.VK_ENTER)) {
 
 			this.update(GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
 

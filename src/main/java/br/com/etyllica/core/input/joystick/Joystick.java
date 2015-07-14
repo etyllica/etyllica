@@ -13,8 +13,8 @@ public class Joystick {
 
 	private int id;
 
-	private int lastXEvent = KeyEvent.TSK_JOYSTICK_CENTER_X;
-	private int lastYEvent = KeyEvent.TSK_JOYSTICK_CENTER_Y;
+	private int lastXEvent = KeyEvent.VK_JOYSTICK_CENTER_X;
+	private int lastYEvent = KeyEvent.VK_JOYSTICK_CENTER_Y;
 	
 	private List<KeyEvent> list;
 	
@@ -101,7 +101,7 @@ public class Joystick {
 	}
 
 	private void buttonEvent(long time, int value, int channel) {
-		int buttonCode = (KeyEvent.TSK_JOYSTICK_BUTTON_1)+channel;
+		int buttonCode = (KeyEvent.VK_JOYSTICK_BUTTON_1)+channel;
 
 		if (value == 1) {
 			list.add(new KeyEvent(id, buttonCode, 0,  KeyState.PRESSED, time));
@@ -112,27 +112,27 @@ public class Joystick {
 
 	private void axisYEvent(long time, int value) {
 		if (value > 0) {
-			lastYEvent = KeyEvent.TSK_JOYSTICK_DOWN;
+			lastYEvent = KeyEvent.VK_JOYSTICK_DOWN;
 			list.add(new KeyEvent(id, lastYEvent, value, KeyState.PRESSED, time));
 		} else if(value < 0) {
-			lastYEvent = KeyEvent.TSK_JOYSTICK_UP;
+			lastYEvent = KeyEvent.VK_JOYSTICK_UP;
 			list.add(new KeyEvent(id, lastYEvent, value, KeyState.PRESSED, time));
 		} else {
 			list.add(new KeyEvent(id, lastYEvent, value, KeyState.RELEASED, time));
-			list.add(new KeyEvent(id, KeyEvent.TSK_JOYSTICK_CENTER_Y, value,  KeyState.RELEASED, time));
+			list.add(new KeyEvent(id, KeyEvent.VK_JOYSTICK_CENTER_Y, value,  KeyState.RELEASED, time));
 		}
 	}
 
 	private void axisXEvent(long time, int value) {
 		if (value > 0) {
-			lastXEvent = KeyEvent.TSK_JOYSTICK_RIGHT;
+			lastXEvent = KeyEvent.VK_JOYSTICK_RIGHT;
 			list.add(new KeyEvent(id, lastXEvent, value, KeyState.PRESSED, time));
 		} else if(value < 0) {
-			lastXEvent = KeyEvent.TSK_JOYSTICK_LEFT;
+			lastXEvent = KeyEvent.VK_JOYSTICK_LEFT;
 			list.add(new KeyEvent(id, lastXEvent, value, KeyState.PRESSED, time));
 		} else {
 			list.add(new KeyEvent(id, lastXEvent, value, KeyState.RELEASED, time));
-			list.add(new KeyEvent(id, KeyEvent.TSK_JOYSTICK_CENTER_X, value,  KeyState.RELEASED, time));
+			list.add(new KeyEvent(id, KeyEvent.VK_JOYSTICK_CENTER_X, value,  KeyState.RELEASED, time));
 		}
 	}
 

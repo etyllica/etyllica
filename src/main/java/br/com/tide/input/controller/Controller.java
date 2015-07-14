@@ -7,29 +7,29 @@ public class Controller {
 	
 	protected ControllerListener listener;
 	
-	protected int upButton = KeyEvent.TSK_UP_ARROW;
+	protected int upButton = KeyEvent.VK_UP;
 	
-	protected int downButton = KeyEvent.TSK_DOWN_ARROW;
+	protected int downButton = KeyEvent.VK_DOWN;
 	
-	protected int leftButton = KeyEvent.TSK_LEFT_ARROW;
+	protected int leftButton = KeyEvent.VK_LEFT;
 	
-	protected int rightButton = KeyEvent.TSK_RIGHT_ARROW;
+	protected int rightButton = KeyEvent.VK_RIGHT;
 	
-	protected int ButtonA = KeyEvent.TSK_Z;
+	protected int ButtonA = KeyEvent.VK_Z;
 	
-	protected int ButtonB = KeyEvent.TSK_X;
+	protected int ButtonB = KeyEvent.VK_X;
 	
-	protected int ButtonC = KeyEvent.TSK_C;
+	protected int ButtonC = KeyEvent.VK_C;
 	
-	protected int ButtonX = KeyEvent.TSK_V;
+	protected int ButtonX = KeyEvent.VK_V;
 	
-	protected int ButtonY = KeyEvent.TSK_B;
+	protected int ButtonY = KeyEvent.VK_B;
 	
-	protected int ButtonZ = KeyEvent.TSK_N;
+	protected int ButtonZ = KeyEvent.VK_N;
 	
-	protected int startButton = KeyEvent.TSK_ENTER;
+	protected int startButton = KeyEvent.VK_ENTER;
 	
-	protected int selectButton = KeyEvent.TSK_SPACE;
+	protected int selectButton = KeyEvent.VK_SPACE;
 	
 	public Controller(){
 		super();

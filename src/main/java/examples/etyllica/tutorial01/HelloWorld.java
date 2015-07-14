@@ -58,32 +58,32 @@ public class HelloWorld extends Application {
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)) {
+		if(event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
 			right = true;
 		}
-		if(event.isKeyUp(KeyEvent.TSK_RIGHT_ARROW)) {
+		if(event.isKeyUp(KeyEvent.VK_RIGHT_ARROW)) {
 			right = false;
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_LEFT_ARROW)) {
+		if(event.isKeyDown(KeyEvent.VK_LEFT_ARROW)) {
 			left = true;
 		}
-		if(event.isKeyUp(KeyEvent.TSK_LEFT_ARROW)) {
+		if(event.isKeyUp(KeyEvent.VK_LEFT_ARROW)) {
 			left = false;
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_UP_ARROW)) {
+		if(event.isKeyDown(KeyEvent.VK_UP_ARROW)) {
 			up = true;
 		}
-		if(event.isKeyUp(KeyEvent.TSK_UP_ARROW)) {
+		if(event.isKeyUp(KeyEvent.VK_UP_ARROW)) {
 			up = false;
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_DOWN_ARROW)) {
+		if(event.isKeyDown(KeyEvent.VK_DOWN_ARROW)) {
 			down = true;
 		}
 	
-		if(event.isKeyUp(KeyEvent.TSK_DOWN_ARROW)) {
+		if(event.isKeyUp(KeyEvent.VK_DOWN_ARROW)) {
 			down = false;
 		}
 		
