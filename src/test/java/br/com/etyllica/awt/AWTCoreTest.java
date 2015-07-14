@@ -1,6 +1,5 @@
 package br.com.etyllica.awt;
 
-import java.awt.Component;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.etyllica.awt.core.AWTCore;
-import br.com.etyllica.core.InnerCore;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
