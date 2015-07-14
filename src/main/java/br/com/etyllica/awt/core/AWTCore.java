@@ -21,6 +21,7 @@ import java.util.concurrent.Future;
 
 import br.com.etyllica.awt.AWTGraphics;
 import br.com.etyllica.awt.FullScreenWindow;
+import br.com.etyllica.awt.core.input.AWTKeyboard;
 import br.com.etyllica.core.GameCore;
 import br.com.etyllica.core.InnerCore;
 import br.com.etyllica.core.collision.CollisionDetector;
@@ -204,7 +205,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 		component.addMouseWheelListener( getMouse() );
 		component.addMouseListener( getMouse() );
 
-		component.addKeyListener( getKeyboard() );
+		component.addKeyListener( (AWTKeyboard)getKeyboard() );
 	}
 
 	//Component Methods
