@@ -1,4 +1,4 @@
-package br.com.abby.loader;
+package br.com.abby.core.loader;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,10 +11,10 @@ import java.util.List;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.material.OBJMaterial;
-import br.com.abby.vbo.Face;
-import br.com.abby.vbo.Group;
-import br.com.abby.vbo.VBO;
+import br.com.abby.core.material.OBJMaterial;
+import br.com.abby.core.vbo.Face;
+import br.com.abby.core.vbo.Group;
+import br.com.abby.core.vbo.VBO;
 import br.com.etyllica.util.PathHelper;
 
 

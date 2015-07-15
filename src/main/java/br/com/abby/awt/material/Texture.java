@@ -1,4 +1,4 @@
-package br.com.abby.material;
+package br.com.abby.awt.material;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

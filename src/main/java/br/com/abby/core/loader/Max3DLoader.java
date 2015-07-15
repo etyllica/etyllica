@@ -1,4 +1,4 @@
-package br.com.abby.loader;
+package br.com.abby.core.loader;
 
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
@@ -9,8 +9,8 @@ import java.net.URL;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.vbo.Face;
-import br.com.abby.vbo.VBO;
+import br.com.abby.core.vbo.Face;
+import br.com.abby.core.vbo.VBO;
 
 /**
  * Code forked from min3d library https://code.google.com/p/min3d/

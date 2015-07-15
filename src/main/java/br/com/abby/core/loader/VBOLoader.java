@@ -1,10 +1,10 @@
-package br.com.abby.loader;
+package br.com.abby.core.loader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 
-import br.com.abby.vbo.VBO;
+import br.com.abby.core.vbo.VBO;
 
 public interface VBOLoader {
 

@@ -1,4 +1,4 @@
-package br.com.abby.vbo;
+package br.com.abby.core.vbo;
 
 
 /**

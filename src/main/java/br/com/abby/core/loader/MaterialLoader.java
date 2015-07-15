@@ -1,4 +1,4 @@
-package br.com.abby.loader;
+package br.com.abby.core.loader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.material.OBJMaterial;
+import br.com.abby.core.material.OBJMaterial;
 
 /**
  * 

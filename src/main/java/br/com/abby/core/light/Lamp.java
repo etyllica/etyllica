@@ -1,4 +1,4 @@
-package br.com.abby.light;
+package br.com.abby.core.light;
 
 import br.com.abby.linear.AimPoint;
 
@@ -13,7 +13,7 @@ public class Lamp extends AimPoint {
 	
 	protected float intensity;
 	
-	public Lamp(double x, double y, double z){
+	public Lamp(double x, double y, double z) {
 		super(x,y,z);
 	}
 	

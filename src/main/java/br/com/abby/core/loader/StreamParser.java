@@ -1,4 +1,4 @@
-package br.com.abby.loader;
+package br.com.abby.core.loader;
 
 import java.io.IOException;
 import java.io.InputStream;

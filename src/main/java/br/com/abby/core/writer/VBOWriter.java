@@ -1,8 +1,8 @@
-package br.com.abby.writer;
+package br.com.abby.core.writer;
 
 import java.io.IOException;
 
-import br.com.abby.vbo.VBO;
+import br.com.abby.core.vbo.VBO;
 
 public interface VBOWriter {
 

@@ -1,4 +1,4 @@
-package br.com.abby.writer;
+package br.com.abby.core.writer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.loader.OBJLoader;
-import br.com.abby.vbo.Face;
-import br.com.abby.vbo.VBO;
+import br.com.abby.core.loader.OBJLoader;
+import br.com.abby.core.vbo.Face;
+import br.com.abby.core.vbo.VBO;
 import br.com.etyllica.util.PathHelper;
 
 public class OBJWriterTest {

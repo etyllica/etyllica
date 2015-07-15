@@ -1,4 +1,4 @@
-package br.com.abby.adapter;
+package br.com.abby.util;
 
 import org.lwjgl.util.vector.Vector3f;
 

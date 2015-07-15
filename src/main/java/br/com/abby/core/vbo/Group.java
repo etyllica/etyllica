@@ -1,9 +1,9 @@
-package br.com.abby.vbo;
+package br.com.abby.core.vbo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.abby.material.OBJMaterial;
+import br.com.abby.core.material.OBJMaterial;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package br.com.abby.loader;
+package br.com.abby.core.loader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.abby.vbo.VBO;
+import br.com.abby.core.vbo.VBO;
 import br.com.etyllica.util.PathHelper;
 
 public class OBJLoaderTest {

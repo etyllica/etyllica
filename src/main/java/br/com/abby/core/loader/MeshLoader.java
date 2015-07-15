@@ -1,4 +1,4 @@
-package br.com.abby.loader;
+package br.com.abby.core.loader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import br.com.abby.vbo.VBO;
+import br.com.abby.core.vbo.VBO;
 import br.com.etyllica.loader.LoaderImpl;
 import br.com.etyllica.util.PathHelper;
 import br.com.etyllica.util.StringUtils;
