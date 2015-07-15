@@ -161,11 +161,7 @@ public class Layer extends GeometricLayer implements Drawable {
 	 * @return
 	 */
 	public boolean onMouse(int px, int py) {
-
-		if(scaleX == 1 && scaleY == 1)
-			return CollisionDetector.colideRectPoint(this, px, py);
-		else
-			return CollisionDetector.colideRectPoint(this, px, py, scaleX, scaleY);
+		return CollisionDetector.colideRectPoint(this, px, py);
 	}
 
 	public AffineTransform getTransform() {

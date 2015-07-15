@@ -17,7 +17,7 @@ public class SharedCoreTest {
 	private AWTCore core;
 	
 	@Before
-	public void setUp(){
+	public void setUp() {
 		core = new AWTCore(new Frame(),INITIAL_WIDTH,INITIAL_HEIGHT);
 	}
 	

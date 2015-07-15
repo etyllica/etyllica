@@ -69,11 +69,12 @@ public class CollisionDetector {
 	 * Code found at: http://stackoverflow.com/questions/5650032/collision-detection-with-rotated-rectangles
 	 */
 	public static boolean colideRectPoint(Layer layer, double  px, double py) {
-		int rectCenterX = layer.getX()+layer.getW()/2;
-		int rectCenterY = layer.getY()+layer.getH()/2;
-		int rectWidth = layer.getW();
-		int rectHeight = layer.getH();
-
+		int rectWidth = (int)(layer.utilWidth()*layer.getScaleX());
+		int rectHeight = (int)(layer.utilHeight()*layer.getScaleY());
+		
+		int rectCenterX = layer.getX()+rectWidth/2;
+		int rectCenterY = layer.getY()+rectHeight/2;
+		
 		double rectRotation = Math.toRadians(-layer.getAngle());
 
 		return testRectangleToPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
@@ -81,13 +82,11 @@ public class CollisionDetector {
 
 	public static boolean colideRectPoint(Layer layer, double  px, double py, double scaleX, double scaleY) {
 
-		int w = (int)(layer.getW()*scaleX);
-		int h = (int)(layer.getH()*scaleY);
-
-		int rectCenterX = layer.getX()+w/2-(int)(layer.getW()/scaleX);
-		int rectCenterY = layer.getY()+h/2-(int)(layer.getH()/scaleY);
-		int rectWidth = w;
-		int rectHeight = h;
+		int rectWidth = (int)(layer.utilWidth()*scaleX);
+		int rectHeight = (int)(layer.utilHeight()*scaleY);
+		
+		int rectCenterX = layer.getX()+rectWidth/2;
+		int rectCenterY = layer.getY()+rectHeight/2;
 
 		double rectRotation = Math.toRadians(-layer.getAngle());
 

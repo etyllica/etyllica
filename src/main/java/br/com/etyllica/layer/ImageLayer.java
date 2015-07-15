@@ -257,11 +257,7 @@ public class ImageLayer extends StaticLayer {
 	}
 		
 	public boolean onMouse(Mouse mouse) {
-		if(angle!=0 && scaleX == 1 && scaleY == 1) {
-			return CollisionDetector.colideRectPoint(this, mouse.getX(), mouse.getY());	
-		} else {
-			return colideRotated(mouse.getX(), mouse.getY());
-		}
+		return CollisionDetector.colideRectPoint(this, mouse.getX(), mouse.getY());
 	}
 
 	public void clone(ImageLayer b) {
