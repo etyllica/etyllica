@@ -1,7 +1,6 @@
 package examples.etyllica.interpolation;
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.core.context.Application;
-import examples.etyllica.graph.view.MeshNavigationExample;
 
 public class Interpolation extends EtyllicaFrame {
 

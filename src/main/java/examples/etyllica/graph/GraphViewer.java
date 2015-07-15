@@ -1,8 +1,7 @@
 package examples.etyllica.graph;
-import examples.etyllica.graph.view.MeshNavigationExample;
-import examples.etyllica.graph.view.SimpleGraphExample;
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.core.context.Application;
+import examples.etyllica.graph.view.SimpleGraphExample;
 
 public class GraphViewer extends EtyllicaFrame {
 
@@ -22,8 +21,7 @@ public class GraphViewer extends EtyllicaFrame {
 	@Override
 	public Application startApplication() {
 		initialSetup("../../../../../");
-		//return new SimpleGraphExample(w,h);
-		return new MeshNavigationExample(w,h);
+		return new SimpleGraphExample(w,h);
 	}
 
 }
