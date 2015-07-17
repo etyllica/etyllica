@@ -4,6 +4,7 @@ import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.context.load.ApplicationLoadListener;
 import br.com.etyllica.core.context.load.DefaultLoadApplication;
+import br.com.etyllica.core.effect.TransitionEffect;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.graphics.Graphic;
@@ -12,7 +13,6 @@ import br.com.etyllica.core.i18n.LanguageChanger;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
-import br.com.etyllica.effects.TransitionEffect;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 

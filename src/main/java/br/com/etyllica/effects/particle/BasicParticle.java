@@ -1,5 +1,6 @@
 package br.com.etyllica.effects.particle;
 
+import br.com.etyllica.core.effect.particle.Particle;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 

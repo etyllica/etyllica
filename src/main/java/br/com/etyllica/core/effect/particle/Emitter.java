@@ -1,4 +1,4 @@
-package br.com.etyllica.effects.particle;
+package br.com.etyllica.core.effect.particle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,11 @@ public abstract class Emitter extends Layer implements Updatable{
 	
 	protected List<Particle> particles = new ArrayList<Particle>();
 	
-	public Emitter(int x, int y){
+	public Emitter(int x, int y) {
 		super(x, y);
 	}
 	
-	public Emitter(int x, int y, int w, int h){
+	public Emitter(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
 
@@ -32,9 +32,9 @@ public abstract class Emitter extends Layer implements Updatable{
 
 		long diff = now-lastUpdate;
 		
-		if(now-lastParticleUpdate>=particleDelay){
+		if (now-lastParticleUpdate >= particleDelay) {
 			
-			if(particles.size()>=maxParticles){
+			if(particles.size() >= maxParticles) {
 				particles.remove(0);
 			}
 			
@@ -43,9 +43,9 @@ public abstract class Emitter extends Layer implements Updatable{
 			lastParticleUpdate = now;
 		}
 						
-		if(diff>=delay){
+		if (diff >= delay) {
 		
-			for(Particle particle: particles){
+			for(Particle particle: particles) {
 				particle.update(now);				
 			}
 			
@@ -58,13 +58,13 @@ public abstract class Emitter extends Layer implements Updatable{
 	protected abstract Particle createParticle(long now);
 	
 	@Override
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 		drawEmitter(g);
 		drawParticles(g);
 	}
 	
-	public void drawParticles(Graphic g){
-		for(Particle particle: particles){
+	public void drawParticles(Graphic g) {
+		for(Particle particle: particles) {
 			particle.draw(g);
 		}
 	}

@@ -2,10 +2,10 @@ package br.com.etyllica.effects.particle.fireworks;
 
 import java.awt.Color;
 
+import br.com.etyllica.core.effect.particle.Emitter;
+import br.com.etyllica.core.effect.particle.Particle;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.effects.particle.BasicParticle;
-import br.com.etyllica.effects.particle.Emitter;
-import br.com.etyllica.effects.particle.Particle;
 
 public class FireworksEmitter extends Emitter{
 

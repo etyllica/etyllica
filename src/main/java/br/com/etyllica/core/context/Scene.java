@@ -8,8 +8,8 @@ import java.util.Map;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.script.AnimationScript;
+import br.com.etyllica.core.effect.particle.Emitter;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.effects.particle.Emitter;
 import br.com.etyllica.layer.Layer;
 
 public class Scene implements Updatable {

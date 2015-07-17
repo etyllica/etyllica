@@ -1,4 +1,4 @@
-package br.com.etyllica.effects;
+package br.com.etyllica.core.effect;
 
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.script.AnimationScript;
@@ -22,14 +22,14 @@ public class Effect extends AnimatedLayer {
 		super(x,y,xTile,yTile);
 		
 		setVisible(false);
-		script.setRepeat(AnimationScript.REPEAT_FOREVER);
+		//script.setRepeat(AnimationScript.REPEAT_FOREVER);
 	}
 	
 	public Effect(int x, int y, int xTile, int yTile, String path) {
 		super(x, y, xTile, yTile, path);
 		
 		setVisible(false);
-		script.setRepeat(AnimationScript.REPEAT_FOREVER);
+		//script.setRepeat(AnimationScript.REPEAT_FOREVER);
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package br.com.etyllica.effects;
+package br.com.etyllica.core.effect;
 
 /**
  * 

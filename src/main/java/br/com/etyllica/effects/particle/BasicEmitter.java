@@ -2,6 +2,8 @@ package br.com.etyllica.effects.particle;
 
 import java.awt.Color;
 
+import br.com.etyllica.core.effect.particle.Emitter;
+import br.com.etyllica.core.effect.particle.Particle;
 import br.com.etyllica.core.graphics.Graphic;
 
 public class BasicEmitter extends Emitter{

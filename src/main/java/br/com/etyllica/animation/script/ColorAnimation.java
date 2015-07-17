@@ -1,6 +1,8 @@
-package br.com.etyllica.core.animation.script;
+package br.com.etyllica.animation.script;
 
 import java.awt.Color;
+
+import br.com.etyllica.core.animation.script.AnimationScript;
 
 
 public class ColorAnimation extends AnimationScript {
