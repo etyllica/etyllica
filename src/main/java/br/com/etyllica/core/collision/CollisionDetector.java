@@ -174,17 +174,9 @@ public class CollisionDetector {
 	}
 
 	public static boolean colideRectRect(Layer a, Layer b) {
-
 		if(a.getAngle() == 0 && b.getAngle() == 0) {
-
-			if(b.getX() + b.getW() < a.getX())	return false;
-			if(b.getX() > a.getX() + a.getW())		return false;
-
-			if(b.getY() + b.getH() < a.getY())	return false;
-			if(b.getY() > a.getY() + a.getH())		return false;
-
-			return true;
-
+			return ((a.getX() + a.getW()/2 - b.getX()+b.getW()/2) * 2 < (a.getW() + b.getW())) &&
+			       ((a.getY() + a.getH()/2 - b.getY()+b.getH()/2) * 2 < (a.getH() + b.getH()));
 		} else {
 			return colidePolygon(a, b);
 		}
