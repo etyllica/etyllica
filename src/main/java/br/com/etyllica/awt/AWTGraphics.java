@@ -588,7 +588,7 @@ public class AWTGraphics implements Graphic {
 	 * 
 	 * @param width
 	 */
-	public void setBasicStroke(float width) {
+	public void setLineWidth(float width) {
 		screen.setStroke(new BasicStroke(width));
 	}
 

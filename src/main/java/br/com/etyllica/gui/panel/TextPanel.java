@@ -56,11 +56,11 @@ public class TextPanel extends View{
 		g.setColor(backgroundcolor);
 		g.fillRect(x,y,w,h);
 		
-		g.setBasicStroke(borderWidth);
+		g.setLineWidth(borderWidth);
 		g.setColor(bordercolor);
 		g.drawRect(x,y,w,h);
 		
-		g.setBasicStroke(1f);
+		g.setLineWidth(1f);
 
 		int i=0;
 		

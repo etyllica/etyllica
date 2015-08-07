@@ -29,7 +29,6 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.Session;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.loop.FrameSkippingLoop;
 import br.com.etyllica.core.loop.GameLoop;
@@ -55,7 +54,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 
 	private String path = "";
 
-	private Graphic graphic;
+	private AWTGraphics graphic;
 
 	private FullScreenWindow fullScreen = null;
 
