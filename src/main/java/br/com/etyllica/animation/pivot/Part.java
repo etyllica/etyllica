@@ -1,6 +1,5 @@
 package br.com.etyllica.animation.pivot;
 
-import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +11,6 @@ import br.com.etyllica.loader.image.ImageLoader;
 public class Part extends PivotImageLayer {
 
 	protected List<PivotPoint> points = new ArrayList<PivotPoint>();
-
-	private Color borderColor = Color.BLUE;
 
 	public Part(int x, int y) {
 		super(x,y);
@@ -61,7 +58,7 @@ public class Part extends PivotImageLayer {
 			
 		}
 		
-		setOffsetAngle(angle);		
+		setOffsetAngle(angle);
 	}
 
 	public AffineTransform getTransform() {
@@ -71,7 +68,6 @@ public class Part extends PivotImageLayer {
 	@Override
 	public void draw(Graphic g) {
 		if(visible) {
-
 			AffineTransform reset = g.getTransform();
 
 			g.setTransform(getTransform());
@@ -79,7 +75,6 @@ public class Part extends PivotImageLayer {
 					xImage,yImage,xImage+(int)w,yImage+(int)h, null );
 
 			g.setTransform(reset);
-			
 		}
 	}	
 	
@@ -118,14 +113,6 @@ public class Part extends PivotImageLayer {
 		}
 		
 	}*/
-	
-	public Color getBorderColor() {
-		return borderColor;
-	}
-
-	public void setBorderColor(Color borderColor) {
-		this.borderColor = borderColor;
-	}
 
 	public List<PivotPoint> getPoints() {
 		return points;
