@@ -3,7 +3,7 @@ package br.com.etyllica.storage.octree;
 import java.util.Set;
 
 import br.com.abby.linear.BoundingBox3D;
-import br.com.etyllica.linear.Point3D;
+import br.com.etyllica.core.linear.Point3D;
 
 public interface Octree<T> {
 	

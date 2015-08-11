@@ -37,5 +37,13 @@ public class Music extends Sound {
 	public boolean isPlaying() {
 		return MultimediaLoader.getInstance().isPlaying(path);
 	}
+	
+	public void stop() {
+		//Not implemented yet
+	}
+	
+	public void dispose() {
+		//Not implemented yet 
+	}
 
 }

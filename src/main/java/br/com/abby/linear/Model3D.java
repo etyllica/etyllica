@@ -13,12 +13,12 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import br.com.abby.GLDrawable;
-import br.com.abby.loader.MeshLoader;
-import br.com.abby.material.Texture;
-import br.com.abby.vbo.Face;
-import br.com.abby.vbo.Group;
-import br.com.abby.vbo.VBO;
-import br.com.etyllica.core.loader.image.ImageLoader;
+import br.com.abby.awt.material.Texture;
+import br.com.abby.core.loader.MeshLoader;
+import br.com.abby.core.vbo.Face;
+import br.com.abby.core.vbo.Group;
+import br.com.abby.core.vbo.VBO;
+import br.com.etyllica.loader.image.ImageLoader;
 
 /**
  * 

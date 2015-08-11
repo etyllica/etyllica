@@ -1,6 +1,6 @@
 package br.com.etyllica.core.engine;
 
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 
 

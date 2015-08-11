@@ -3,17 +3,17 @@ package examples.etyllica.i18n;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.etyllica.context.Application;
 import br.com.etyllica.core.Configuration;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.MultiLangLabel;
 import br.com.etyllica.gui.label.TextLabel;
-import br.com.etyllica.i18n.Language;
 
 public class MultiLanguageApplication extends Application {
 
@@ -82,13 +82,13 @@ public class MultiLanguageApplication extends Application {
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_1)) {
+		if(event.isKeyDown(KeyEvent.VK_1)) {
 			changeLanguage(Language.PORTUGUESE_BRAZIL);
 		}
-		if(event.isKeyDown(KeyEvent.TSK_2)) {
+		if(event.isKeyDown(KeyEvent.VK_2)) {
 			changeLanguage(Language.JAPANESE);
 		}
-		if(event.isKeyDown(KeyEvent.TSK_3)) {
+		if(event.isKeyDown(KeyEvent.VK_3)) {
 			changeLanguage(Language.ENGLISH_USA);
 		}
 		

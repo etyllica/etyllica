@@ -2,13 +2,15 @@ package examples.etyllica.colision;
 
 import java.awt.Color;
 
-import br.com.etyllica.collision.CollisionDetector;
-import br.com.etyllica.context.Application;
-import br.com.etyllica.context.UpdateIntervalListener;
+import br.com.etyllica.awt.SVGColor;
+import br.com.etyllica.core.collision.CollisionDetector;
+import br.com.etyllica.core.context.Application;
+import br.com.etyllica.core.context.UpdateIntervalListener;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.input.mouse.MouseButton;
+import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 
 public class ColisionElements extends Application implements UpdateIntervalListener {
@@ -16,11 +18,14 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 	private Color color = Color.BLUE;
 
 	private Layer rectangle1;
-
 	private Layer rectangle2;
 	
-	private int mx = 0;
+	private GeometricLayer greenRectangle;
+	private GeometricLayer orangeRectangle;
 	
+	private boolean colideGreenOrange = false;
+	
+	private int mx = 0;
 	private int my = 0;	
 
 	public ColisionElements(int w, int h) {
@@ -34,6 +39,9 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 		rectangle1.setAngle(20);
 
 		rectangle2 = new Layer(200, 200, 200, 50);
+		
+		greenRectangle = new Layer(480, 280, 200, 50);
+		orangeRectangle = new Layer(520, 300, 200, 50);
 
 		updateAtFixedRate(100, this);
 
@@ -49,6 +57,12 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 		}
 		
 		rectangle2.setOffsetAngle(10);
+		
+		if(orangeRectangle.colideRect(greenRectangle)) {
+			colideGreenOrange = true;
+		} else {
+			colideGreenOrange = false;
+		}
 	}
 
 	@Override
@@ -68,7 +82,20 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 		g.setColor(color);
 		g.fillRect(rectangle1);
 
-		g.resetTransform();				
+		g.resetTransform();
+		
+		//Draw fixed rectangles
+		g.setColor(SVGColor.GREEN);
+		g.fillRect(greenRectangle);
+		
+		g.setColor(SVGColor.ORANGE);
+		g.fillRect(orangeRectangle);
+		
+		if(colideGreenOrange) {
+			g.setColor(SVGColor.RED);
+			g.drawRect(greenRectangle);
+			g.drawRect(orangeRectangle);
+		}
 	}
 	
 	public GUIEvent updateMouse(PointerEvent event) {
@@ -78,6 +105,10 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 		
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 			rectangle1.setCoordinates(mx, my);
+		}
+		
+		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_RIGHT)) {
+			orangeRectangle.setCoordinates(mx, my);
 		}
 		
 		return GUIEvent.NONE;

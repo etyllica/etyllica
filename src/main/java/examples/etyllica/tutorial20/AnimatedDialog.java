@@ -1,13 +1,13 @@
 package examples.etyllica.tutorial20;
 
-import br.com.etyllica.animation.AnimationHandler;
-import br.com.etyllica.animation.scripts.text.DialogScript;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.animation.script.text.DialogScript;
+import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.layer.TextLayer;
 
 public class AnimatedDialog extends Application{

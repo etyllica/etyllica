@@ -2,12 +2,12 @@ package examples.fx.application;
 
 import java.awt.Color;
 
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
+import br.com.etyllica.core.effect.Effect;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.effects.Effect;
 
 public class LightningApplication extends Application{
 
@@ -53,8 +53,8 @@ public class LightningApplication extends Application{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.isKeyUp(KeyEvent.TSK_SPACE)) {
-			lightning.startEffect();			
+		if(event.isKeyUp(KeyEvent.VK_SPACE)) {
+			lightning.startEffect();
 		}
 				
 		// TODO Auto-generated method stub

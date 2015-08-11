@@ -2,8 +2,8 @@ package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
 
-import br.com.etyllica.collision.CollisionDetector;
 import br.com.etyllica.core.Drawable;
+import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 
@@ -161,11 +161,7 @@ public class Layer extends GeometricLayer implements Drawable {
 	 * @return
 	 */
 	public boolean onMouse(int px, int py) {
-
-		if(scaleX == 1 && scaleY == 1)
-			return CollisionDetector.colideRectPoint(this, px, py);
-		else
-			return CollisionDetector.colideRectPoint(this, px, py, scaleX, scaleY);
+		return CollisionDetector.colideRectPoint(this, px, py);
 	}
 
 	public AffineTransform getTransform() {
@@ -178,7 +174,7 @@ public class Layer extends GeometricLayer implements Drawable {
 		
 		if(angle != 0) {
 			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
-					x+utilWidth()/2, y+utilHeight()/2));
+					getX()+utilWidth()/2, getY()+utilHeight()/2));
 		}
 
 		if(scaleX != 1 || scaleY != 1) {
@@ -189,16 +185,15 @@ public class Layer extends GeometricLayer implements Drawable {
 			double dx = sw/2-utilWidth()/2;
 			double dy = sh/2-utilHeight()/2;
 
-			transform.translate(x-utilWidth()/2-dx, y-utilHeight()/2-dy);
+			transform.translate(getX()-utilWidth()/2-dx, getY()-utilHeight()/2-dy);
 
 			AffineTransform scaleTransform = new AffineTransform();
 
 			scaleTransform.translate(utilWidth()/2, utilHeight()/2);
 			scaleTransform.scale(scaleX,scaleY);
-			scaleTransform.translate(-x, -y);
+			scaleTransform.translate(-getX(), -getY());
 
 			transform.concatenate(scaleTransform);
-
 		}
 
 		return transform;

@@ -1,7 +1,7 @@
 package examples.etyllica.colision;
 
 import br.com.etyllica.EtyllicaFrame;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 
 public class ColisionTutorial extends EtyllicaFrame {
 

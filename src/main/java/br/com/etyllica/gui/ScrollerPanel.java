@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.gui.factory.DefaultButton;
 import br.com.etyllica.gui.icon.DownArrow;
 import br.com.etyllica.gui.icon.UpArrow;
@@ -130,7 +130,7 @@ public class ScrollerPanel extends View {
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_TAB)) {
+		if(event.isKeyDown(KeyEvent.VK_TAB)) {
 
 			return GUIEvent.NEXT_COMPONENT;
 

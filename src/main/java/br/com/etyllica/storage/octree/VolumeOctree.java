@@ -35,7 +35,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import br.com.abby.linear.BoundingBox3D;
-import br.com.etyllica.linear.Point3D;
+import br.com.etyllica.core.linear.Point3D;
 
 /**
  * Octree highly based on Shaven Puppy's Octree, found at: 

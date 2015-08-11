@@ -25,5 +25,5 @@ public class Sound {
 	public void play() {
 		MultimediaLoader.getInstance().playSound(path);
 	}
-	
+		
 } 

@@ -5,12 +5,12 @@ import java.net.URL;
 
 import javax.swing.JFrame;
 
-import br.com.etyllica.context.Application;
-import br.com.etyllica.core.SharedCore;
+import br.com.etyllica.awt.core.AWTCore;
+import br.com.etyllica.awt.engine.AWTEngine;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.engine.Engine;
-import br.com.etyllica.core.engine.SharedEngine;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.loader.Loader;
 import br.com.etyllica.util.PathHelper;
 
 /**
@@ -24,9 +24,9 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
-	private SharedCore core;
+	private AWTCore core;
 	
-	private SharedEngine engine;
+	private AWTEngine engine;
 	
 	protected int w = 640;
 	protected int h = 480;
@@ -66,7 +66,7 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	}
 	
 	private void initCore() {
-		engine = new SharedEngine(this, w, h);
+		engine = new AWTEngine(this, w, h);
 
 		core = engine.getCore();
 

@@ -14,13 +14,12 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.awt.image.VolatileImage;
 
 import br.com.etyllica.cinematics.Camera;
+import br.com.etyllica.core.linear.Point2D;
+import br.com.etyllica.core.linear.PointInt2D;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
-import br.com.etyllica.linear.Point2D;
-import br.com.etyllica.linear.PointInt2D;
 
 /**
  * 
@@ -34,8 +33,6 @@ public interface Graphic {
 	public void setFastImage(BufferedImage image);
 
 	public void setImage(BufferedImage image);
-
-	public void setVolatileImage(VolatileImage vimg);
 
 	public void resetImage();
 
@@ -266,12 +263,11 @@ public interface Graphic {
 	 */
 	public void fillArc(GeometricLayer layer, int startAngle, int arcAngle);
 
-	/** Funções Delegadas */
 	/**
 	 * 
 	 * @param width
 	 */
-	public void setBasicStroke(float width);
+	public void setLineWidth(float width);
 
 	public AffineTransform getTransform();
 
@@ -651,8 +647,6 @@ public interface Graphic {
 	}*/
 
 	public BufferedImage getBimg();
-
-	public VolatileImage getVimg();
 
 	/**
 	 * 

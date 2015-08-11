@@ -5,7 +5,7 @@ import examples.physics.application.BoxesFalling;
 import examples.sound.application.PlaySoundApplication;
 import examples.sound.application.SyntheticAudioApplication;
 import br.com.etyllica.EtyllicaFrame;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 
 public class SoundExample extends EtyllicaFrame {
 	

@@ -2,10 +2,11 @@ package br.com.etyllica.effects;
 
 import java.awt.Color;
 
-import br.com.etyllica.animation.scripts.OpacityAnimation;
 import br.com.etyllica.core.Configuration;
+import br.com.etyllica.core.animation.script.OpacityAnimation;
+import br.com.etyllica.core.effect.GlobalEffect;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.i18n.DefaultDictionary;
+import br.com.etyllica.core.i18n.DefaultDictionary;
 
 /**
  * 

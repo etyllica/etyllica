@@ -1,7 +1,7 @@
 package br.com.etyllica.gui.selection;
 
+import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.input.mouse.MouseState;
 import br.com.etyllica.layer.GeometricLayer;
 
 public class ResizerPoint extends GeometricLayer {

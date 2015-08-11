@@ -9,11 +9,9 @@ import java.util.List;
 
 import javax.swing.event.MouseInputListener;
 
-import br.com.etyllica.collision.CollisionDetector;
+import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
-import br.com.etyllica.layer.AnimatedLayer;
-import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.storage.RingBuffer;
 
 /**
@@ -224,45 +222,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 
 		getSlot().set(key, PointerState.PRESSED, x, y, mwe.getWheelRotation());
 	}
-
-	//Collision
-	public boolean sobMouseCircular(ImageLayer b) {
-
-		final float radius = b.getW()/2;
-
-		return sobMouseCircular(b.getX()+radius,b.getY()+radius, radius);
-	}
-
-	public boolean sobMouseCircular(float cx, float cy, float radius) {
-
-		return CollisionDetector.colideCirclePoint(cx, cy, radius, x, y);
-	}
-
-	public boolean sobMouseIso(ImageLayer cam) {
-
-		return CollisionDetector.colideIsometricPoint(cam, x, y);
-	}
-
-	public boolean sobMouse(float x, float y, float w, float h)	{
-
-		if((this.x<x)||(this.x>x + w)) {
-
-			return false;
-		}
-
-		if((this.y<y)||(this.y>y + h)) {
-
-			return false;
-		}
-
-		return true;	
-	}
-
-	public boolean sobMouse(AnimatedLayer cam) {
-
-		return sobMouse(cam.getX(), cam.getY(), cam.getTileW(), cam.getTileH());
-	}
-
+	
 	public List<PointerEvent> getEvents() {
 		return events.getList();
 	}

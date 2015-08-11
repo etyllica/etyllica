@@ -2,14 +2,14 @@ package examples.etyllica.tutorial07.application;
 
 import java.awt.Color;
 
-import br.com.etyllica.animation.scripts.AnimationScript;
-import br.com.etyllica.animation.scripts.HorizontalMovement;
-import br.com.etyllica.animation.scripts.OpacityAnimation;
-import br.com.etyllica.animation.scripts.OrbitAnimation;
-import br.com.etyllica.animation.scripts.RotateAnimation;
-import br.com.etyllica.animation.scripts.ScaleUniformAnimation;
-import br.com.etyllica.animation.scripts.VerticalMovementScript;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.animation.script.AnimationScript;
+import br.com.etyllica.core.animation.script.HorizontalMovement;
+import br.com.etyllica.core.animation.script.OpacityAnimation;
+import br.com.etyllica.core.animation.script.OrbitAnimation;
+import br.com.etyllica.core.animation.script.RotateAnimation;
+import br.com.etyllica.core.animation.script.ScaleUniformAnimation;
+import br.com.etyllica.core.animation.script.VerticalMovementScript;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;

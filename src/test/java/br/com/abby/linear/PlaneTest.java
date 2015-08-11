@@ -15,7 +15,7 @@ public class PlaneTest {
 		Vector3f origin = new Vector3f(0,0,0);
 		
 		//Plane expects points in clockwise order
-		floor = new Plane(origin, new Vector3f(0,0,1), new Vector3f(1,0,0));
+		floor = new Plane(new Vector3f(1,0,0), origin, new Vector3f(0,0,1));
 	}
 
 	@Test
@@ -27,8 +27,7 @@ public class PlaneTest {
 
 	@Test
 	public void testOrthogonalDistance() {
-		Vector3f point = new Vector3f(0, 5, 0);
-
+		Vector3f point = new Vector3f(2, 5, 0);
 		Assert.assertEquals(5, floor.distance(point), 0);
 	}
 }

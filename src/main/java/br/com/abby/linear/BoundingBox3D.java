@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.adapter.PointToVectorAdapter;
-import br.com.etyllica.linear.Point3D;
+import br.com.abby.util.PointToVectorAdapter;
+import br.com.etyllica.core.linear.Point3D;
 
 /**
  * AABB Bounding Box

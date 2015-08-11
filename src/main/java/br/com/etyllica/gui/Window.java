@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.cinematics.Camera;
-import br.com.etyllica.context.Context;
-import br.com.etyllica.context.ContextContainer;
-import br.com.etyllica.context.Session;
-import br.com.etyllica.context.load.ApplicationLoader;
-import br.com.etyllica.context.load.DefaultLoadApplication;
-import br.com.etyllica.context.load.GenericLoadApplication;
+import br.com.etyllica.core.context.Context;
+import br.com.etyllica.core.context.ContextContainer;
+import br.com.etyllica.core.context.Session;
+import br.com.etyllica.core.context.load.ApplicationLoader;
+import br.com.etyllica.core.context.load.DefaultLoadApplication;
+import br.com.etyllica.core.context.load.GenericLoadApplication;
 import br.com.etyllica.layer.GeometricLayer;
 
 /**

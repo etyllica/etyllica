@@ -3,12 +3,12 @@ package br.com.etyllica.gui.selection;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
-import br.com.etyllica.collision.CollisionDetector;
+import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.core.input.mouse.MouseState;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.gui.stroke.DashedStroke;
 import br.com.etyllica.layer.GeometricLayer;
@@ -279,21 +279,21 @@ public class Resizer {
 
 	public void handleKeyEvent(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_UP_ARROW)) {
+		if(event.isKeyDown(KeyEvent.VK_UP_ARROW)) {
 			selected.setOffsetY(-keyboardSpeed);
 			notifyListener();
 			reselect();
-		} else if(event.isKeyDown(KeyEvent.TSK_DOWN_ARROW)) {
+		} else if(event.isKeyDown(KeyEvent.VK_DOWN_ARROW)) {
 			selected.setOffsetY(+keyboardSpeed);
 			notifyListener();
 			reselect();
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_LEFT_ARROW)) {
+		if(event.isKeyDown(KeyEvent.VK_LEFT_ARROW)) {
 			selected.setOffsetX(-keyboardSpeed);
 			notifyListener();
 			reselect();
-		} else if(event.isKeyDown(KeyEvent.TSK_RIGHT_ARROW)) {
+		} else if(event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
 			selected.setOffsetX(+keyboardSpeed);
 			notifyListener();
 			reselect();

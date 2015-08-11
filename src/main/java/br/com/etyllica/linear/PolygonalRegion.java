@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.linear.Point2D;
 
 public class PolygonalRegion implements Drawable {
 		

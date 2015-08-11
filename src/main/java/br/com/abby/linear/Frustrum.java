@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import br.com.abby.adapter.PointToVectorAdapter;
-import br.com.etyllica.collision.CollisionStatus;
+import br.com.abby.util.PointToVectorAdapter;
+import br.com.etyllica.core.collision.CollisionStatus;
 
 /**
  * Frustrum class based on: http://cgvr.cs.uni-bremen.de/teaching/cg_literatur/lighthouse3d_view_frustum_culling/
@@ -112,6 +112,7 @@ public class Frustrum {
 		// compute the six planes
 		// the function setPoints assumes that the points
 		// are given in counter clockwise order
+		
 		planes[TOP].setPoints(nTopRight, nTopLeft, fTopLeft);
 		planes[BOTTOM].setPoints(nBottomLeft, nBottomRight, fBottomRight);
 		planes[LEFT].setPoints(nTopLeft, nBottomLeft, fBottomLeft);
@@ -179,7 +180,55 @@ public class Frustrum {
 				result = CollisionStatus.INTERSECT;
 			}
 		}
-		return(result);
+		
+		return result;
 	}
+	
+	/*public void drawFrustrumNormals(Frustrum frustrum) {
+	GL2 gl = getGL2();
+
+	gl.glBegin(GL2.GL_LINES);
+	
+	Vector3f a,b;
+
+		// near
+		a = (ntr + ntl + nbr + nbl) * 0.25;
+		b = a + pl[NEARP].normal;
+		glVertex3f(a.x,a.y,a.z);
+		glVertex3f(b.x,b.y,b.z);
+
+		// far
+		a = (ftr + ftl + fbr + fbl) * 0.25;
+		b = a + pl[FARP].normal;
+		glVertex3f(a.x,a.y,a.z);
+		glVertex3f(b.x,b.y,b.z);
+
+		// left
+		a = (ftl + fbl + nbl + ntl) * 0.25;
+		b = a + pl[LEFT].normal;
+		glVertex3f(a.x,a.y,a.z);
+		glVertex3f(b.x,b.y,b.z);
+		
+		// right
+		a = (ftr + nbr + fbr + ntr) * 0.25;
+		b = a + pl[RIGHT].normal;
+		glVertex3f(a.x,a.y,a.z);
+		glVertex3f(b.x,b.y,b.z);
+		
+		// top
+		a = (ftr + ftl + ntr + ntl) * 0.25;
+		b = a + pl[TOP].normal;
+		glVertex3f(a.x,a.y,a.z);
+		glVertex3f(b.x,b.y,b.z);
+		
+		// bottom
+		a = (fbr + fbl + nbr + nbl) * 0.25;
+		b = a + pl[BOTTOM].normal;
+		glVertex3f(a.x,a.y,a.z);
+		glVertex3f(b.x,b.y,b.z);
+
+	glEnd();
+
+}*/
 	
 }

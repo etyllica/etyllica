@@ -2,7 +2,7 @@ package br.com.abby.linear;
 
 import java.awt.Color;
 
-import br.com.etyllica.linear.Point3D;
+import br.com.etyllica.core.linear.Point3D;
 
 /**
  * 

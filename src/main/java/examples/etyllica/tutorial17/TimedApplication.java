@@ -1,13 +1,13 @@
 package examples.etyllica.tutorial17;
 
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 
-public class TimedApplication extends Application{
+public class TimedApplication extends Application {
 	
 	private ImageLayer layer;
 
@@ -57,15 +57,14 @@ public class TimedApplication extends Application{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)){
+		if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
 			press = true;
 		}
 		
-		if(event.isKeyUp(KeyEvent.TSK_SETA_DIREITA)){
+		if(event.isKeyUp(KeyEvent.VK_RIGHT)) {
 			press = false;
 		}
 		
-		// TODO Auto-generated method stub
 		return null;
 	}
 

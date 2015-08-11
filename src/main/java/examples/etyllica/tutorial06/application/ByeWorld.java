@@ -1,11 +1,11 @@
 package examples.etyllica.tutorial06.application;
 
-import br.com.etyllica.context.Application;
+import br.com.etyllica.awt.SVGColor;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.graphics.SVGColor;
 
 public class ByeWorld extends Application{
 
@@ -74,7 +74,7 @@ public class ByeWorld extends Application{
 	@Override
 	public GUIEvent updateKeyboard( KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_BACK_SPACE)){
+		if(event.isKeyDown(KeyEvent.VK_BACK_SPACE)){
 			nextApplication = new CustomLoadApplication(w,h);
 		}
 

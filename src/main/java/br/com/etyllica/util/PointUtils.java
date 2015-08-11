@@ -1,7 +1,7 @@
 package br.com.etyllica.util;
 
-import br.com.etyllica.linear.Point2D;
-import br.com.etyllica.linear.Point3D;
+import br.com.etyllica.core.linear.Point2D;
+import br.com.etyllica.core.linear.Point3D;
 
 public class PointUtils {
 	

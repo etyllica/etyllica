@@ -11,6 +11,7 @@ import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 
+import br.com.etyllica.awt.core.input.AWTKeyboard;
 import br.com.etyllica.core.InnerCore;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.input.keyboard.Keyboard;
@@ -77,7 +78,7 @@ public class FullScreenWindow extends Window{
 		addMouseMotionListener( mouse );
 		addMouseWheelListener( mouse );
 		addMouseListener( mouse );
-		addKeyListener( keyboard );
+		addKeyListener( (AWTKeyboard) keyboard );
 	}
 		
 	public void draw(Image volatileImage){

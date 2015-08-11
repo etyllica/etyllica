@@ -2,12 +2,12 @@ package examples.etyllica.tutorial06.application;
 
 import java.awt.Color;
 
-import br.com.etyllica.context.Application;
+import br.com.etyllica.awt.SVGColor;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.graphics.SVGColor;
 
 public class CustomLoadApplication extends Application{
 	
@@ -98,29 +98,29 @@ public class CustomLoadApplication extends Application{
 	public GUIEvent updateKeyboard(KeyEvent event) {
 				
 		//If Up Arrow is Pressed
-		if(event.isKeyDown(KeyEvent.TSK_SETA_CIMA)){
+		if(event.isKeyDown(KeyEvent.VK_UP)) {
 			yText-=10;
 		}
 		//Else If Down Arrow is Pressed
-		else if(event.isKeyDown(KeyEvent.TSK_SETA_BAIXO)){
+		else if(event.isKeyDown(KeyEvent.VK_DOWN)) {
 			yText+=10;
 		}
 		
 		//If RIGHT Arrow is Pressed
-		if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)){
+		if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
 			xText+=10;
 		}
 		//If LEFT Arrow is Pressed
-		else if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)){
+		else if(event.isKeyDown(KeyEvent.VK_LEFT)) {
 			xText-=10;
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_ENTER)){
+		if(event.isKeyDown(KeyEvent.VK_ENTER)){
 			xText = 0;
 			yText = 100;
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_ESPACO)){
+		if(event.isKeyDown(KeyEvent.VK_SPACE)){
 			nextApplication = new ByeWorld(w,h);
 		}
 

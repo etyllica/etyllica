@@ -1,7 +1,7 @@
 package examples.jgl.bezmesh;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 
 public class TutorialJGL2 extends Etyllica {
 

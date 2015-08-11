@@ -2,7 +2,7 @@ package org.dyn4j;
 
 import org.dyn4j.dynamics.World;
 
-import br.com.etyllica.context.Application;
+import br.com.etyllica.core.context.Application;
 
 public abstract class PhysicsApplication extends Application{
 

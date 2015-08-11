@@ -5,9 +5,9 @@ import java.awt.FontMetrics;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.core.input.mouse.MouseButton;
 import br.com.etyllica.gui.textfield.TextView;
 import br.com.etyllica.layer.BufferedLayer;
 import br.com.etyllica.theme.Theme;
@@ -101,37 +101,37 @@ public class TextField extends TextView {
 
 		if(!shift) {
 
-			if((event.isKeyDown(KeyEvent.TSK_SHIFT_DIREITA))||(event.isKeyDown(KeyEvent.TSK_SHIFT_ESQUERDA))) {
+			if((event.isKeyDown(KeyEvent.VK_SHIFT_RIGHT))||(event.isKeyDown(KeyEvent.VK_SHIFT_LEFT))) {
 				shift = true;
 				fixMark = cursor;
 			}
-			else if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)||(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA))) {
+			else if(event.isKeyDown(KeyEvent.VK_LEFT)||(event.isKeyDown(KeyEvent.VK_RIGHT))) {
 				fixMark = -1;
 			}
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_END)) {
+		if(event.isKeyDown(KeyEvent.VK_END)) {
 			cursor = text.length();
 		}
-		else if(event.isKeyDown(KeyEvent.TSK_HOME)) {
+		else if(event.isKeyDown(KeyEvent.VK_HOME)) {
 			moveCursorToStart();
 			//move cursor to start
 		}
 
 		if(!control) {
-			if(event.isKeyDown(KeyEvent.TSK_CTRL_DIREITA)||event.isKeyDown(KeyEvent.TSK_CTRL_ESQUERDA)) {
+			if(event.isKeyDown(KeyEvent.VK_CTRL_RIGHT)||event.isKeyDown(KeyEvent.VK_CTRL_LEFT)) {
 				control = true;
 			}
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)) {
+		if(event.isKeyDown(KeyEvent.VK_LEFT)) {
 			if(control) {
 				leftWithControl();
 			} else {
 				leftNormal();
 			}
 		}
-		else if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)) {
+		else if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
 
 			if(control) {
 				rightWithControl();
@@ -140,7 +140,7 @@ public class TextField extends TextView {
 			}
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_TAB)) {
+		if(event.isKeyDown(KeyEvent.VK_TAB)) {
 
 			return GUIEvent.NEXT_COMPONENT;
 		}
@@ -150,13 +150,13 @@ public class TextField extends TextView {
 
 	private GUIEvent updateReleased(KeyEvent event) {
 		if(control) {
-			if(event.isKeyDown(KeyEvent.TSK_CTRL_DIREITA)||event.isKeyDown(KeyEvent.TSK_CTRL_ESQUERDA)) {
+			if(event.isKeyDown(KeyEvent.VK_CTRL_RIGHT)||event.isKeyDown(KeyEvent.VK_CTRL_LEFT)) {
 				control = false;
 			}
 		}
 
 		if(shift) {
-			if(event.isKeyDown(KeyEvent.TSK_SHIFT_DIREITA)||event.isKeyDown(KeyEvent.TSK_SHIFT_ESQUERDA)) {
+			if(event.isKeyDown(KeyEvent.VK_SHIFT_RIGHT)||event.isKeyDown(KeyEvent.VK_SHIFT_LEFT)) {
 				shift = false;
 			}
 		}

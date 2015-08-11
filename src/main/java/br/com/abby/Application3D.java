@@ -3,12 +3,12 @@ package br.com.abby;
 import org.jgl.GL;
 import org.jgl.GLAUX;
 
-import br.com.abby.light.Lamp;
+import br.com.abby.awt.material.Texture;
+import br.com.abby.core.light.Lamp;
 import br.com.abby.linear.Box3D;
 import br.com.abby.linear.Camera3D;
 import br.com.abby.linear.Polygon3D;
-import br.com.abby.material.Texture;
-import br.com.etyllica.linear.Point3D;
+import br.com.etyllica.core.linear.Point3D;
 
 /**
  * 

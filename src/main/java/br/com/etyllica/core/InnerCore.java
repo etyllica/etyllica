@@ -1,39 +1,36 @@
 package br.com.etyllica.core;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
+//import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import br.com.etyllica.animation.AnimationHandler;
-import br.com.etyllica.animation.scripts.AnimationScript;
-import br.com.etyllica.animation.scripts.SingleIntervalAnimation;
 import br.com.etyllica.awt.AWTArrowDrawer;
-import br.com.etyllica.context.Application;
-import br.com.etyllica.context.Context;
-import br.com.etyllica.context.UpdateIntervalListener;
-import br.com.etyllica.core.drawer.ArrowDrawer;
+import br.com.etyllica.awt.core.input.AWTController;
+import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.script.AnimationScript;
+import br.com.etyllica.core.animation.script.SingleIntervalAnimation;
+import br.com.etyllica.core.context.Application;
+import br.com.etyllica.core.context.Context;
+import br.com.etyllica.core.context.UpdateIntervalListener;
+import br.com.etyllica.core.effect.GlobalEffect;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
+import br.com.etyllica.core.graphics.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.graphics.Monitor;
-import br.com.etyllica.core.input.HIDController;
-import br.com.etyllica.core.input.InputKeyListener;
+import br.com.etyllica.core.i18n.Language;
+import br.com.etyllica.core.i18n.LanguageChangerListener;
+import br.com.etyllica.core.i18n.LanguageHandler;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.effects.GlobalEffect;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
-import br.com.etyllica.i18n.Language;
-import br.com.etyllica.i18n.LanguageChangerListener;
-import br.com.etyllica.i18n.LanguageHandler;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.dalt.DaltArrowTheme;
@@ -46,22 +43,20 @@ import br.com.etyllica.theme.listener.ThemeListener;
  *
  */
 
-public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListener, LanguageChangerListener {
+public abstract class InnerCore implements Core, KeyEventListener, Updatable, ThemeListener, LanguageChangerListener {
 
 	private static final int TITLE_BAR_HEIGHT = 50;
-
-	protected Rectangle componentBounds;
 	
 	//External Windows
 	private Window activeWindow = null;
 
 	private View focus;
 
-	protected HIDController control;
+	protected AWTController control;
 
-	protected Mouse mouse;
+	private Mouse mouse;
 
-	protected Keyboard keyboard;
+	private Keyboard keyboard;
 
 	//Mouse Over View
 	protected View mouseOver = null;
@@ -76,7 +71,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	private boolean drawCursor = true;
 
-	protected boolean fullScreenEnable = false;
+	private boolean fullScreenEnable = false;
 
 	private boolean needReload = false;
 
@@ -107,7 +102,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
 	
-	private List<Monitor> monitors = new ArrayList<Monitor>();
+	protected List<Monitor> monitors = new ArrayList<Monitor>();
 	
 	//Timer click arc
 	private int arc = 0;
@@ -118,11 +113,11 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		
 		guiEvents = new ArrayList<GUIEvent>();
 
-		control = new HIDController(this);
+		control = new AWTController(this);
 
-		mouse = control.getMouse();
+		setMouse(control.getMouse());
 
-		keyboard = control.getKeyboard();
+		setKeyboard(control.getKeyboard());
 
 		arrowDrawer = new AWTArrowDrawer();
 
@@ -186,17 +181,17 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		updateGui(components, guiEvents);
 
-		mouse.lock();
-		List<PointerEvent> events = mouse.getEvents();
+		getMouse().lock();
+		List<PointerEvent> events = getMouse().getEvents();
 		updatePointerEvents(events, application, components);
-		mouse.packEvents();
-		mouse.unlock();
+		getMouse().packEvents();
+		getMouse().unlock();
 
 		updateHelperUI(now);
 
 		//updateKeyboard();
 
-		keyboard.update(now);
+		getKeyboard().update(now);
 	}
 	
 	private boolean checkApplicationChange(Context application) {
@@ -500,7 +495,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			 */
 
 		case UPDATE_MOUSE:
-			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));				
+			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));				
 			break;
 
 		case APPLICATION_CHANGED:
@@ -535,7 +530,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		if(drawCursor) {
 			if(activeWindow.getContext().isDrawCursor()) {
-				arrowDrawer.setCoordinates(mouse.getX(), mouse.getY());
+				arrowDrawer.setCoordinates(getMouse().getX(), getMouse().getY());
 				arrowDrawer.draw(g);
 				if(Configuration.getInstance().isTimerClick()&&overClickable) {
 					arrowDrawer.drawTimerArc(g, arc);
@@ -643,33 +638,33 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 	private void updateKeyboardEvents(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.TSK_ALT_DIREITA)||event.isKeyDown(KeyEvent.TSK_ALT_ESQUERDA)) {
+		if(event.isKeyDown(KeyEvent.VK_ALT_RIGHT)||event.isKeyDown(KeyEvent.VK_ALT_LEFT)) {
 
 			alt = true;
 		}
-		else if(event.isKeyUp(KeyEvent.TSK_ALT_DIREITA)||event.isKeyUp(KeyEvent.TSK_ALT_ESQUERDA)) {
+		else if(event.isKeyUp(KeyEvent.VK_ALT_RIGHT)||event.isKeyUp(KeyEvent.VK_ALT_LEFT)) {
 
 			alt = false;
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_ENTER)) {
+		if(event.isKeyDown(KeyEvent.VK_ENTER)) {
 			enter = true;
 		}
-		else if(event.isKeyUp(KeyEvent.TSK_ENTER)) {
+		else if(event.isKeyUp(KeyEvent.VK_ENTER)) {
 			enter = false;
 		}
 
-		if(event.isKeyDown(KeyEvent.TSK_ESC)) {
+		if(event.isKeyDown(KeyEvent.VK_ESC)) {
 			esc = true;
 		}
-		else if(event.isKeyUp(KeyEvent.TSK_ESC)) {
+		else if(event.isKeyUp(KeyEvent.VK_ESC)) {
 			esc = false;
 		}
 
 		if(alt&&enter) {
 			alt = false;
 			enter = false;
-			if(!fullScreenEnable) {
+			if(!isFullScreenEnable()) {
 				enableFullScreen = true;
 			}
 		}
@@ -677,7 +672,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		if(esc) {
 
 			esc = false;
-			if(fullScreenEnable) {
+			if(isFullScreenEnable()) {
 				disableFullScreen = true;
 			}
 		}
@@ -691,47 +686,47 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 			int velocidade = 1;
 
 			//Move Left/Right
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_LEFT_ARROW)) {
+			if(event.isKeyDown(KeyEvent.VK_NUMPAD_LEFT_ARROW)) {
 
-				mouse.setX(mouse.getX()-velocidade);
-				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+				getMouse().setX(getMouse().getX()-velocidade);
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
-			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_RIGHT_ARROW)) {
+			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_RIGHT_ARROW)) {
 
-				mouse.setX(mouse.getX()+velocidade);
-				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+				getMouse().setX(getMouse().getX()+velocidade);
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}
 
 			//Move Up/Down
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_UP_ARROW)) {
+			if(event.isKeyDown(KeyEvent.VK_NUMPAD_UP_ARROW)) {
 
-				mouse.setX(mouse.getY()-velocidade);
-				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+				getMouse().setX(getMouse().getY()-velocidade);
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
-			}else if(event.isKeyDown(KeyEvent.TSK_NUMPAD_DOWN_ARROW)) {
+			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_DOWN_ARROW)) {
 
-				mouse.setX(mouse.getY()+velocidade);
-				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));
+				getMouse().setX(getMouse().getY()+velocidade);
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}
 
 			//Mouse Left Button
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_INS)) {
-				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
-			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_INS)) {
-				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
-			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_INS)) {
+			if(event.isKeyDown(KeyEvent.VK_NUMPAD_INS)) {
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
+			}else if(event.isKeyUp(KeyEvent.VK_NUMPAD_INS)) {
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
+			}/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_INS)) {
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_LEFT, KeyState.CLICK));
 			}*/
 
 			//Mouse Right Button
-			if(event.isKeyDown(KeyEvent.TSK_NUMPAD_DEL)) {
-				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
-			}else if(event.isKeyUp(KeyEvent.TSK_NUMPAD_DEL)) {
-				mouse.addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
-			}/*else if(event.getKeyTyped(Tecla.TSK_NUMPAD_DEL)) {
-				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
+			if(event.isKeyDown(KeyEvent.VK_NUMPAD_DEL)) {
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
+			}else if(event.isKeyUp(KeyEvent.VK_NUMPAD_DEL)) {
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
+			}/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_DEL)) {
+				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
 			}*/
 
 		}
@@ -745,7 +740,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		if(event.getState() == PointerState.DRAGGED) {
 
-			if(mouse.getY() <= TITLE_BAR_HEIGHT) {
+			if(getMouse().getY() <= TITLE_BAR_HEIGHT) {
 				
 				return GUIEvent.WINDOW_MOVE;
 			}
@@ -803,8 +798,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		locked = true;
 
 		activeWindow.getContext().clearComponents();
-
-		activeWindow.getContext().load();
+		activeWindow.getContext().load();		
 
 		needReload = false;
 
@@ -920,7 +914,7 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 		view.update(GUIEvent.MOUSE_OUT);
 	}
 
-	public HIDController getControl() {
+	public AWTController getControl() {
 		return control;
 	}
 
@@ -960,46 +954,33 @@ public class InnerCore implements Core, InputKeyListener, Updatable, ThemeListen
 
 		updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
 	}
-	
-	public void initMonitors(int width, int height) {
-
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsDevice[] devices = ge.getScreenDevices();
-
-		if(devices.length > 0) {
-
-			for (int i = 0; i < devices.length; i++) {
-
-				Rectangle gcBounds = devices[i].getDefaultConfiguration().getBounds();
-
-				int x = gcBounds.x;
-
-				int y = gcBounds.y;
-
-				int w = gcBounds.width;
-
-				int h = gcBounds.height;
-
-				monitors.add(new Monitor(x, y, w, h));
-			}
-
-		} else {
-			monitors.add(new Monitor(0, 0, width, height));
-		}
-
-	}
-	
-	public void moveToCenter(Component component) {
 		
-		Monitor firstMonitor = monitors.get(0);
-		int x = firstMonitor.getW()/2-component.getWidth()/2;
-		int y = firstMonitor.getH()/2-component.getHeight()/2;
-				
-		component.setLocation(x, y);
-	}
-	
 	public List<Monitor> getMonitors() {
 		return monitors;
+	}
+
+	public boolean isFullScreenEnable() {
+		return fullScreenEnable;
+	}
+
+	public void setFullScreenEnable(boolean fullScreenEnable) {
+		this.fullScreenEnable = fullScreenEnable;
+	}
+
+	public Mouse getMouse() {
+		return mouse;
+	}
+
+	public void setMouse(Mouse mouse) {
+		this.mouse = mouse;
+	}
+
+	public Keyboard getKeyboard() {
+		return keyboard;
+	}
+
+	public void setKeyboard(Keyboard keyboard) {
+		this.keyboard = keyboard;
 	}	
 
 }

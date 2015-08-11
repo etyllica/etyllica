@@ -4,7 +4,7 @@ import java.util.Map;
 
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.i18n.Language;
+import br.com.etyllica.core.i18n.Language;
 
 /**
  * 

@@ -1,6 +1,6 @@
 package br.com.etyllica.linear.graph;
 
-import br.com.etyllica.linear.Point2D;
+import br.com.etyllica.core.linear.Point2D;
 
 public class Node<T> {
 	

@@ -1,6 +1,6 @@
 package br.com.abby.linear;
 
-import br.com.etyllica.linear.Point3D;
+import br.com.etyllica.core.linear.Point3D;
 
 /**
  * 

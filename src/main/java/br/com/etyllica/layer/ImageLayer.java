@@ -1,11 +1,11 @@
 package br.com.etyllica.layer;
 
-import br.com.etyllica.collision.CollisionDetector;
-import br.com.etyllica.collision.HitBox;
+import br.com.etyllica.core.collision.CollisionDetector;
+import br.com.etyllica.core.collision.HitBox;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.core.loader.image.ImageLoader;
-import br.com.etyllica.linear.Rectangle;
+import br.com.etyllica.core.linear.Rectangle;
+import br.com.etyllica.loader.image.ImageLoader;
 
 /**
  * 
@@ -141,18 +141,14 @@ public class ImageLayer extends StaticLayer {
 	}	
 
 	public boolean colideRetangular(int bx, int by, int bw, int bh) {
-
 		return colideRect(bx, by, bw, bh);
-
 	}
 
-	public boolean colideRetangular(Layer b)
-	{
+	public boolean colideRetangular(Layer b) {
 		return colideRetangular(b.getX(), b.getY(), b.getW(), b.getH());
 	}
 
 	private boolean colideRectangle(Rectangle rect, Rectangle rect2, int rect2x, int rect2y) {
-
 		if(rect2x+rect2.getX() + rect2.getW() < x+rect.getX())	return false;
 		if(rect2x+rect2.getX() > x+rect.getX() + rect.getW())		return false;
 
@@ -188,29 +184,27 @@ public class ImageLayer extends StaticLayer {
 	public boolean colideHitBoxes(ImageLayer b) {
 
 		for(Rectangle rect: colisionArea.getAreas()) {
-
 			for(Rectangle rect2: b.getColisionArea().getAreas()) {
-
 				if(colideRectangle(rect, rect2, b.getX(), b.getY())) {
 					return true;
 				}
-
 			}
-
 		}
 
 		return false;
 	}
 
-	//Based on code http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
-	public boolean colisionRotated(int mx, int my) {
-
+	//Based on code at: http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
+	public boolean colideRotated(int mx, int my) {
+		
+		int halfWidth = (int)((w*scaleX)/2);
+		int halfHeight = (int)((h*scaleY)/2);
+		
 		//Pivot Point of rotation
-		int px = x+w/2;
-		int py = y+h/2;
+		int px = x+halfWidth;
+		int py = y+halfHeight;
 
 		double c = Math.cos(angle);
-
 		double s = Math.sin(angle);
 
 		// UNrotate the point depending on the rotation of the rectangle
@@ -220,14 +214,13 @@ public class ImageLayer extends StaticLayer {
 
 		// perform a normal check if the new point is inside the 
 		// bounds of the UNrotated rectangle
-		int leftX = px - w / 2;
-		int rightX = px + w / 2;
-		int topY = py - h / 2;
-		int bottomY = py + h / 2;
+		int leftX = px - halfWidth;
+		int rightX = px + halfWidth;
+		int topY = py - halfHeight;
+		int bottomY = py + halfHeight;
 
 		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
 	}
-
 
 	@Override
 	public void draw(Graphic g) {
@@ -247,11 +240,10 @@ public class ImageLayer extends StaticLayer {
 		g.setTransform(getTransform(offsetX, offsetY));
 		simpleDraw(g);
 		g.resetTransform();
-				
-		if(opacity<0xff) {
+		
+		if(opacity < 0xff) {
 			g.resetOpacity();
 		}
-
 	}
 
 	@Override
@@ -265,7 +257,6 @@ public class ImageLayer extends StaticLayer {
 	}
 		
 	public boolean onMouse(Mouse mouse) {
-
 		return CollisionDetector.colideRectPoint(this, mouse.getX(), mouse.getY());
 	}
 
