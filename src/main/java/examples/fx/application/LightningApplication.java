@@ -54,7 +54,7 @@ public class LightningApplication extends Application{
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyUp(KeyEvent.VK_SPACE)) {
-			lightning.startEffect();			
+			lightning.startEffect();
 		}
 				
 		// TODO Auto-generated method stub

@@ -798,8 +798,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		locked = true;
 
 		activeWindow.getContext().clearComponents();
-
-		activeWindow.getContext().load();
+		activeWindow.getContext().load();		
 
 		needReload = false;
 
