@@ -102,4 +102,9 @@ public class GenericGraph<T, E extends GenericEdge<T>> {
 		
 		return neighbors;
 	}
+	
+	public boolean isEmpty() {
+		return nodes.size() == 0;
+	}
+
 }
