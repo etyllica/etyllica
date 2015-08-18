@@ -5,10 +5,6 @@ import br.com.etyllica.layer.Layer;
 
 public class HorizontalMovement extends SingleIntervalAnimation {
 		
-	public HorizontalMovement(long time) {
-		super(time);
-	}
-	
 	public HorizontalMovement(long delay, long time) {
 		super(delay, time);
 	}

@@ -8,9 +8,9 @@ import br.com.etyllica.core.interpolation.LinearInterpolator;
 public abstract class AnimationScript {
 
 	protected long startedAt = 0;
-	protected long time = 0;
+	protected long duration = 0;
 	protected long delay = 0;
-	protected int repeat = 0;
+	protected int loop = 0;
 
 	private boolean started = false;
 	private boolean stopped = false;
@@ -28,14 +28,18 @@ public abstract class AnimationScript {
 	public AnimationScript(long time) {
 		super();
 
-		this.time = time;
+		this.duration = time;
 	}
 
 	public AnimationScript(long delay, long time) {
 		super();
 
 		this.delay = delay;
-		this.time = time;
+		this.duration = time;
+	}
+
+	public AnimationScript() {
+		super();
 	}
 
 	public void restart() {
@@ -59,9 +63,9 @@ public abstract class AnimationScript {
 
 			long elapsedTime = now-startedAt-delay;
 			
-			if(elapsedTime >= time) {
+			if(elapsedTime >= duration) {
 				
-				if(elapsedTime >= time+endDelay) {
+				if(elapsedTime >= duration+endDelay) {
 					stopped = true;
 				}
 				
@@ -77,7 +81,7 @@ public abstract class AnimationScript {
 
 	public void animate(long now) {
 		long timeElapsed = now-startedAt-delay;
-		float factor = (float)timeElapsed/time;
+		float factor = (float)timeElapsed/duration;
 
 		calculate(factor);
 	}
@@ -89,11 +93,11 @@ public abstract class AnimationScript {
 	}
 
 	public int getRepeat() {
-		return repeat;
+		return loop;
 	}
 
 	public void setRepeat(int repeat) {
-		this.repeat = repeat;
+		this.loop = repeat;
 	}
 
 	public AnimationScript getNext() {
