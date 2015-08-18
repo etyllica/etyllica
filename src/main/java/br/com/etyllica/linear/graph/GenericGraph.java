@@ -107,4 +107,10 @@ public class GenericGraph<T, E extends GenericEdge<T>> {
 		return nodes.size() == 0;
 	}
 
+	public void moveNodes(int x, int y) {
+		for(Node<T> node: nodes) {
+			node.getPoint().setOffset(x, y);
+		}
+	}
+	
 }
