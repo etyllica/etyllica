@@ -1,5 +1,9 @@
 package br.com.etyllica.core.animation.script;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.OnAnimationFinishListener;
 import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.core.interpolation.LinearInterpolator;
@@ -14,10 +18,11 @@ public abstract class AnimationScript {
 
 	private boolean started = false;
 	private boolean stopped = false;
+	private boolean referenced = false;
 	
-	protected long endDelay = 0;	
+	protected long endDelay = 0;
 
-	private AnimationScript next;
+	protected List<AnimationScript> next;
 	
 	public static final int REPEAT_FOREVER = -1;
 	
@@ -100,12 +105,15 @@ public abstract class AnimationScript {
 		this.loop = repeat;
 	}
 
-	public AnimationScript getNext() {
+	public List<AnimationScript> getNext() {
 		return next;
 	}
 
-	public void setNext(AnimationScript next) {
-		this.next = next;
+	public void addNext(AnimationScript next) {
+		if (this.next == null) {
+			this.next = new ArrayList<AnimationScript>();
+		}
+		this.next.add(next);
 	}
 
 	public long getDelay() {
@@ -135,6 +143,14 @@ public abstract class AnimationScript {
 	public void setInterpolator(Interpolator interpolator) {
 		this.interpolator = interpolator;
 	}
+	
+	public boolean isReferenced() {
+		return referenced;
+	}
+
+	public void setReferenced(boolean referenced) {
+		this.referenced = referenced;
+	}
 
 	public void finish(long now) {
 		if(listener==null)
@@ -142,5 +158,4 @@ public abstract class AnimationScript {
 		
 		listener.onAnimationFinish(now);
 	}
-
 }

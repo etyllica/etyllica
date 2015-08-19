@@ -33,7 +33,7 @@ public class AnimatedMenu extends Application{
 		
 		scriptButton2.setInterval(w, button2.getX());
 		
-		script.setNext(scriptButton2);
+		script.addNext(scriptButton2);
 		
 		AnimationHandler.getInstance().add(script);
 				

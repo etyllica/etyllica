@@ -45,22 +45,22 @@ public class InterpolationExample extends Application {
 				
 		leftLinearScript = createLeftScript(linearBall, new LinearInterpolator());
 		rightLinearScript = createRightScript(linearBall, new LinearInterpolator());
-		rightLinearScript.setNext(leftLinearScript);
-		leftLinearScript.setNext(rightLinearScript);
+		rightLinearScript.addNext(leftLinearScript);
+		leftLinearScript.addNext(rightLinearScript);
 		
 		Interpolator quadraticInterpolator = new QuadraticInterpolator();
 		
 		leftQuadraticScript = createLeftScript(quadraticBall, quadraticInterpolator);
 		rightQuadraticScript = createRightScript(quadraticBall, quadraticInterpolator);
-		rightQuadraticScript.setNext(leftQuadraticScript);
-		leftQuadraticScript.setNext(rightQuadraticScript);
+		rightQuadraticScript.addNext(leftQuadraticScript);
+		leftQuadraticScript.addNext(rightQuadraticScript);
 		
 		Interpolator reverseQuadraticInterpolator = new ReverseQuadraticInterpolator();
 		
 		leftReverseQuadraticScript = createLeftScript(reverseQuadraticBall, reverseQuadraticInterpolator);
 		rightReverseQuadraticScript = createRightScript(reverseQuadraticBall, reverseQuadraticInterpolator);
-		rightReverseQuadraticScript.setNext(leftReverseQuadraticScript);
-		leftReverseQuadraticScript.setNext(rightReverseQuadraticScript);
+		rightReverseQuadraticScript.addNext(leftReverseQuadraticScript);
+		leftReverseQuadraticScript.addNext(rightReverseQuadraticScript);
 		
 		AnimationHandler.getInstance().add(rightLinearScript);
 		AnimationHandler.getInstance().add(rightQuadraticScript);

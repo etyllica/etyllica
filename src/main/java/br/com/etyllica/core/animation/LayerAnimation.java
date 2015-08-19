@@ -9,16 +9,16 @@ import br.com.etyllica.layer.Layer;
 public class LayerAnimation extends AnimationScript {
 
 	protected Layer target;
-	
+
 	public LayerAnimation(long time) {
 		super(time);
 	}
-	
+
 	public LayerAnimation(Layer target) {
 		super();
 		this.target = target;
 	}
-	
+
 	public LayerAnimation(Layer target, long time) {
 		super();
 		this.target = target;
@@ -28,7 +28,7 @@ public class LayerAnimation extends AnimationScript {
 	public LayerAnimation(long delay, long time) {
 		super(delay, time);
 	}
-	
+
 	public LayerAnimation(ImageLayer layer) {
 		super();
 		this.target = layer;
@@ -41,7 +41,7 @@ public class LayerAnimation extends AnimationScript {
 	public void setLayer(ImageLayer layer) {
 		this.target = layer;
 	}
-	
+
 
 	public Layer getTarget() {
 		return target;
@@ -55,38 +55,45 @@ public class LayerAnimation extends AnimationScript {
 	public void calculate(double factor) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	public LayerAnimation startAt(long delayValue) {
 		this.delay = delayValue;
 		return this;
 	}
-	
+
 	public LayerAnimation duration(long time) {
 		this.duration = time;
 		return this;
 	}
-	
+
 	public LayerAnimation interpolator(Interpolator interpolator) {
 		this.interpolator = interpolator;
 		return this;
 	}
-	
+
 	public MovementScript move(long time) {
 		MovementScript script = new MovementScript(target, time);
-		AnimationHandler.getInstance().add(script);
-		
-		return script;
-	}
-	
-	public MovementScript move() {
-		MovementScript script = new MovementScript(target);
-		AnimationHandler.getInstance().add(script);
+		addNext(script);
 		
 		return script;
 	}
 
-	public LayerAnimation then(LayerAnimation movementScript) {
-		setNext(movementScript);
+	public MovementScript move() {
+		MovementScript script = new MovementScript(target);
+		addNext(script);
+
+		return script;
+	}
+
+	public LayerAnimation then(LayerAnimation script) {
+		addNext(script);
+		return this;
+	}
+	
+	public LayerAnimation start() {
+		for(AnimationScript s: next) {
+			AnimationHandler.getInstance().add(s);
+		}
 		
 		return this;
 	}
