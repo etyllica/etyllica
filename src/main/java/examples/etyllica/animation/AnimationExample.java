@@ -33,14 +33,17 @@ public class AnimationExample extends Application {
 	
 		int duration = 2000;
 		
-		LayerAnimation linearAnimation = Animation.animate(linearBall).move(duration).from(40, 80).to(480, 80).interpolator(Interpolator.LINEAR_INTERPOLATOR); 
+		LayerAnimation linearAnimation = Animation.animate(linearBall).move(duration).from(40, 80).to(480, 80).interpolator(Interpolator.LINEAR_INTERPOLATOR);
 		linearAnimation.then(Animation.animate(linearBall).move(duration).from(480,80).to(40, 80).interpolator(Interpolator.LINEAR_INTERPOLATOR).then(linearAnimation));
+		linearAnimation.start();
 		
 		LayerAnimation quadraticAnimation = Animation.animate(quadraticBall).move(duration).from(40, 120).to(480, 120).interpolator(Interpolator.QUADRATIC_INTERPOLATOR); 
 		quadraticAnimation.then(Animation.animate(quadraticBall).move(duration).from(480,120).to(40, 120).interpolator(Interpolator.QUADRATIC_INTERPOLATOR).then(quadraticAnimation));
+		quadraticAnimation.start();
 		
 		LayerAnimation reverseQuadraticAnimation = Animation.animate(reverseQuadraticBall).move(duration).from(40, 160).to(480, 160).interpolator(Interpolator.REVERSE_QUADRATIC_INTERPOLATOR);
 		reverseQuadraticAnimation.then(Animation.animate(reverseQuadraticBall).move(duration).from(480,160).to(40, 160).interpolator(Interpolator.REVERSE_QUADRATIC_INTERPOLATOR).then(reverseQuadraticAnimation));
+		reverseQuadraticAnimation.start();
 		
 		loading = 100;
 	}

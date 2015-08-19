@@ -11,9 +11,7 @@ public class AnimationApp extends EtyllicaFrame {
 	}
 
 	public static void main(String[] args){
-		
 		AnimationApp viewer = new AnimationApp();
-		
 		viewer.init();
 	}	
 	

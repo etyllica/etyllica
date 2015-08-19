@@ -25,8 +25,8 @@ public class StretchAndBackVertical extends StretchVerticalAnimation {
 	private void init() {
 		backToNormal = new StretchVerticalAnimation(target, duration);
 		backToNormal.setInterval(endValue, startValue);
-		setNext(backToNormal);
-		backToNormal.setNext(this);
+		addNext(backToNormal);
+		backToNormal.addNext(this);
 	}
 
 	@Override

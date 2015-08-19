@@ -79,12 +79,14 @@ public class AnimationHandler implements Updatable {
 	}
 	
 	private void appendNextScript(AnimationScript script) {
-		//Next Script
-		AnimationScript nextScript = script.getNext();
+		//Next Scripts
+		List<AnimationScript> nextScript = script.getNext();
 
 		if(nextScript != null) {
-			nextScripts.add(nextScript);
-			nextScript.restart();
+			for(AnimationScript s: nextScript) {
+				nextScripts.add(s);	
+				s.restart();
+			}
 		}
 	}
 	
@@ -94,6 +96,15 @@ public class AnimationHandler implements Updatable {
 
 	public void add(AnimationScript script) {
 		scripts.add(new AnimationExecution(script));
+	}
+	
+	public void remove(AnimationScript script) {
+		for(AnimationExecution execution: scripts) {
+			if(execution.getScript() == script) {
+				scripts.remove(script);
+				break;
+			}
+		}
 	}
 
 }

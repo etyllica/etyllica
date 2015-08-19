@@ -58,8 +58,8 @@ public class AnimationExample extends Application {
 		HorizontalMovement invscript = new HorizontalMovement(bouncingText, 10000);
 		invscript.setInterval(10, 400);
 		//After the hscript, execute invscript
-		invscript.setNext(hscript);
-		hscript.setNext(invscript);
+		invscript.addNext(hscript);
+		hscript.addNext(invscript);
 		
 		VerticalMovementScript vscript = new VerticalMovementScript(bouncingText, 600);
 		vscript.setInterval(100, 200);
@@ -67,8 +67,8 @@ public class AnimationExample extends Application {
 		VerticalMovementScript invVscript = new VerticalMovementScript(600);
 		invVscript.setTarget(bouncingText);
 		invVscript.setInterval(200, 100);
-		invscript.setNext(vscript);
-		vscript.setNext(invVscript);
+		invscript.addNext(vscript);
+		vscript.addNext(invVscript);
 				
 		this.scene.addAnimation(hscript);
 		this.scene.addAnimation(vscript);
