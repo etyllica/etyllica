@@ -3,11 +3,15 @@ package br.com.etyllica.core.animation.script;
 import br.com.etyllica.layer.Layer;
 
 
-public class FadeInAnimation extends OpacityAnimation{
+public class FadeInAnimation extends OpacityAnimation {
 	
 	{
 		startValue = 0;
 		endValue = 255;
+	}
+	
+	public FadeInAnimation(Layer target) {
+		super(target);
 	}
 	
 	public FadeInAnimation(long time){
@@ -25,16 +29,10 @@ public class FadeInAnimation extends OpacityAnimation{
 	public FadeInAnimation(Layer target, long delay, long time){
 		super(target, delay, time);
 	}
-	
+		
 	@Override
-	public void setTarget(Layer target) {
-		super.setTarget(target);
-		target.setOpacity(0);
+	public void onStart() {
+		target.setOpacity((int) startValue);
 	}
-	
-	@Override
-	protected void update(double value){
-		target.setOpacity((int)value);
-	}	
 
 }

@@ -3,10 +3,8 @@ package br.com.etyllica.core.animation.script;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.OnAnimationFinishListener;
 import br.com.etyllica.core.interpolation.Interpolator;
-import br.com.etyllica.core.interpolation.LinearInterpolator;
 
 
 public abstract class AnimationScript {
@@ -28,7 +26,7 @@ public abstract class AnimationScript {
 	
 	private OnAnimationFinishListener listener;
 	
-	protected Interpolator interpolator = new LinearInterpolator();
+	protected Interpolator interpolator = Interpolator.LINEAR_INTERPOLATOR;
 
 	public AnimationScript(long time) {
 		super();

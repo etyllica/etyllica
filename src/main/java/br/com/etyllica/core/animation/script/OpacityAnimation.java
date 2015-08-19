@@ -4,7 +4,11 @@ import br.com.etyllica.layer.Layer;
 
 
 public class OpacityAnimation extends SingleIntervalAnimation {
-		
+	
+	public OpacityAnimation(Layer target) {
+		super(target);
+	}
+	
 	public OpacityAnimation(long time) {
 		super(time);
 		setInterval(0, 255);

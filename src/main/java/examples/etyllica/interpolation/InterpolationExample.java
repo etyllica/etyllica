@@ -3,7 +3,7 @@ package examples.etyllica.interpolation;
 import java.awt.Color;
 
 import br.com.etyllica.core.animation.AnimationHandler;
-import br.com.etyllica.core.animation.script.HorizontalMovement;
+import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -21,14 +21,14 @@ public class InterpolationExample extends Application {
 		super(w, h);
 	}
 	
-	HorizontalMovement rightLinearScript;
-	HorizontalMovement leftLinearScript;
+	HorizontalMovementScript rightLinearScript;
+	HorizontalMovementScript leftLinearScript;
 	
-	HorizontalMovement rightQuadraticScript;
-	HorizontalMovement leftQuadraticScript;
+	HorizontalMovementScript rightQuadraticScript;
+	HorizontalMovementScript leftQuadraticScript;
 	
-	HorizontalMovement rightReverseQuadraticScript;
-	HorizontalMovement leftReverseQuadraticScript;
+	HorizontalMovementScript rightReverseQuadraticScript;
+	HorizontalMovementScript leftReverseQuadraticScript;
 	
 	private Layer linearBall;
 	private Layer quadraticBall;
@@ -69,15 +69,15 @@ public class InterpolationExample extends Application {
 		loading = 100;
 	}
 
-	protected HorizontalMovement createRightScript(Layer target, Interpolator interpolator) {
-		HorizontalMovement rightScript = new HorizontalMovement(target, 3000);
+	protected HorizontalMovementScript createRightScript(Layer target, Interpolator interpolator) {
+		HorizontalMovementScript rightScript = new HorizontalMovementScript(target, 3000);
 		rightScript.setInterval(40, 640);
 		rightScript.setInterpolator(interpolator);
 		return rightScript;
 	}
 
-	protected HorizontalMovement createLeftScript(Layer target, Interpolator interpolator) {
-		HorizontalMovement leftScript = new HorizontalMovement(target, 3000);
+	protected HorizontalMovementScript createLeftScript(Layer target, Interpolator interpolator) {
+		HorizontalMovementScript leftScript = new HorizontalMovementScript(target, 3000);
 		leftScript.setInterval(640, 40);
 		leftScript.setInterpolator(interpolator);
 		return leftScript;

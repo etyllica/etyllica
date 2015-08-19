@@ -1,7 +1,10 @@
 package br.com.etyllica.core.animation;
 
 import br.com.etyllica.core.animation.script.AnimationScript;
+import br.com.etyllica.core.animation.script.FadeInAnimation;
+import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.animation.script.MovementScript;
+import br.com.etyllica.core.animation.script.VerticalMovementScript;
 import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
@@ -74,7 +77,7 @@ public class LayerAnimation extends AnimationScript {
 	public MovementScript move(long time) {
 		MovementScript script = new MovementScript(target, time);
 		addNext(script);
-		
+
 		return script;
 	}
 
@@ -84,17 +87,46 @@ public class LayerAnimation extends AnimationScript {
 
 		return script;
 	}
+	
+	public HorizontalMovementScript moveX(int duration) {
+		HorizontalMovementScript script = new HorizontalMovementScript(target, duration);
+		addNext(script);
+
+		return script;
+	}
+	
+	public VerticalMovementScript moveY(int duration) {
+		VerticalMovementScript script = new VerticalMovementScript(target, duration);
+		addNext(script);
+
+		return script;
+	}
+
+	public FadeInAnimation fadeIn() {
+		FadeInAnimation script = new FadeInAnimation(target);
+		addNext(script);
+
+		return script;
+	}
 
 	public LayerAnimation then(LayerAnimation script) {
 		addNext(script);
 		return this;
 	}
-	
+
 	public LayerAnimation start() {
-		for(AnimationScript s: next) {
-			AnimationHandler.getInstance().add(s);
+		onStart();
+
+		if(next != null) {
+			for(AnimationScript s: next) {
+				AnimationHandler.getInstance().add(s);
+			}
 		}
-		
+
 		return this;
 	}
+
+	public void onStart() { }
+	
+	public LayerAnimation from(double value) { return this; }
 }

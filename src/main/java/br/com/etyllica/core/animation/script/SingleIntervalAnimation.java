@@ -8,6 +8,10 @@ public abstract class SingleIntervalAnimation extends LayerAnimation {
 	protected double startValue = 0;
 	protected double endValue = 0;
 	
+	public SingleIntervalAnimation(Layer target) {
+		super(target);
+	}
+	
 	public SingleIntervalAnimation(long time) {
 		super(time);
 	}
@@ -29,6 +33,16 @@ public abstract class SingleIntervalAnimation extends LayerAnimation {
 	public void calculate(double x) {
 		double value = interpolator.factor(startValue, endValue, x);
 		update(value);
+	}
+	
+	public SingleIntervalAnimation from(double value) {
+		startValue = value;
+		return this;
+	}
+	
+	public SingleIntervalAnimation to(double value) {
+		endValue = value;
+		return this;
 	}
 	
 	protected abstract void update(double value);
