@@ -62,6 +62,28 @@ public class GenericGraph<T, E extends GenericEdge<T>> {
 		
 		return nodeEdges;
 	}
+	
+	public void removeEdgesFromNode(Node<T> node) {
+		for (int i = edges.size()-1;i>=0;i--) {
+			
+			E edge = edges.get(i);
+			
+			if (edge.getOrigin() == node || edge.getDestination() == node) {
+				edges.remove(i);
+			}
+		}
+	}
+	
+	public boolean hasEdge(Node<Integer> node, Node<Integer> otherNode) {
+		for(E edge:edges) {
+			if ((edge.getOrigin()==node||edge.getDestination()==node) ||
+			   (edge.getOrigin()==otherNode||edge.getDestination()==otherNode)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	public void setEdges(List<E> edges) {
 		this.edges = edges;
