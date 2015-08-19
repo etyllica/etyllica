@@ -85,9 +85,8 @@ public class LayerAnimation extends AnimationScript {
 		return script;
 	}
 
-	public LayerAnimation then(LayerAnimation movementScript) {
-		setNext(movementScript);
-		
+	public LayerAnimation then(LayerAnimation script) {
+		setNext(script);
 		return this;
 	}
 }
