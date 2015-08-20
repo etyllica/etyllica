@@ -50,7 +50,9 @@ public class AnimationExample extends Application {
 		reverseQuadraticAnimation.then(reverseQuadraticAnimation.move(duration).from(480,160).to(40, 160).interpolator(Interpolator.REVERSE_QUADRATIC_INTERPOLATOR).then(reverseQuadraticAnimation));
 		reverseQuadraticAnimation.start();
 		
-		Animation.animate(fadeBall).moveX(200).from(0).to(200).start();
+		LayerAnimation fadeAnimation = Animation.animate(fadeBall);
+		fadeAnimation.fadeIn().duration(duration).interpolator(Interpolator.LINEAR_INTERPOLATOR);
+		fadeAnimation.start();
 		
 		loading = 100;
 	}

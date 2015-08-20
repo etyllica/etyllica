@@ -127,6 +127,4 @@ public class LayerAnimation extends AnimationScript {
 	}
 
 	public void onStart() { }
-	
-	public LayerAnimation from(double value) { return this; }
 }

@@ -29,7 +29,7 @@ public class FadeInAnimation extends OpacityAnimation {
 	public FadeInAnimation(Layer target, long delay, long time){
 		super(target, delay, time);
 	}
-		
+	
 	@Override
 	public void onStart() {
 		target.setOpacity((int) startValue);
