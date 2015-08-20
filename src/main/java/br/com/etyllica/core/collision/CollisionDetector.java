@@ -252,5 +252,17 @@ public class CollisionDetector {
 
 	return false;
 	}
+	
+	public static boolean colideEllipsePoint(double cx, double cy, double angle, double a, double b, double px, double py) {
+		
+		double p = sqr(Math.cos(angle)*(px-cx)+Math.sin(angle)*(py-cy))/(a*a);
+		double q = sqr(Math.sin(angle)*(px-cx)-Math.cos(angle)*(py-cy))/(b*b);
+		
+		return (p+q<=1);
+	}
+	
+	public static double sqr(double value) {
+		return value*value;
+	}
 
 }
