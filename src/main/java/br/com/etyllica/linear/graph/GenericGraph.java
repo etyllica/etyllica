@@ -63,6 +63,11 @@ public class GenericGraph<T, E extends GenericEdge<T>> {
 		return nodeEdges;
 	}
 	
+	public void removeNode(Node<T> node) {
+		nodes.remove(node);
+		removeEdgesFromNode(node);
+	}
+	
 	public void removeEdgesFromNode(Node<T> node) {
 		for (int i = edges.size()-1;i>=0;i--) {
 			
