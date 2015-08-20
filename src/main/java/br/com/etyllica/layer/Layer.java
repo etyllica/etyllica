@@ -207,5 +207,4 @@ public class Layer extends GeometricLayer implements Drawable {
 	public void simpleDraw(Graphic g) {
 		// TODO Auto-generated method stub
 	}
-
 }

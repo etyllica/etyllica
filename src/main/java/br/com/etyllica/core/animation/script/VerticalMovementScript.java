@@ -9,6 +9,10 @@ public class VerticalMovementScript extends SingleIntervalAnimation {
 		super(time);
 	}
 	
+	public VerticalMovementScript(Layer target) {
+		super(target);
+	}
+	
 	public VerticalMovementScript(Layer target, long time) {
 		super(target, time);
 	}

@@ -1,7 +1,7 @@
 package examples.etyllica.tutorial08.application;
 
 import br.com.etyllica.core.animation.AnimationHandler;
-import br.com.etyllica.core.animation.script.HorizontalMovement;
+import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -25,15 +25,15 @@ public class AnimatedMenu extends Application{
 				
 		createButtons();
 		
-		HorizontalMovement script = new HorizontalMovement(button1, 2000);
+		HorizontalMovementScript script = new HorizontalMovementScript(button1, 2000);
 		
 		script.setInterval(w, button1.getX());
 				
-		HorizontalMovement scriptButton2 = new HorizontalMovement(button2, 2000);
+		HorizontalMovementScript scriptButton2 = new HorizontalMovementScript(button2, 2000);
 		
 		scriptButton2.setInterval(w, button2.getX());
 		
-		script.setNext(scriptButton2);
+		script.addNext(scriptButton2);
 		
 		AnimationHandler.getInstance().add(script);
 				

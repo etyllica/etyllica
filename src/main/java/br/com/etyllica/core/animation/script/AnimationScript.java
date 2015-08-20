@@ -1,41 +1,48 @@
 package br.com.etyllica.core.animation.script;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.etyllica.core.animation.OnAnimationFinishListener;
 import br.com.etyllica.core.interpolation.Interpolator;
-import br.com.etyllica.core.interpolation.LinearInterpolator;
 
 
 public abstract class AnimationScript {
 
 	protected long startedAt = 0;
-	protected long time = 0;
+	protected long duration = 0;
 	protected long delay = 0;
-	protected int repeat = 0;
+	protected int loop = 0;
 
 	private boolean started = false;
 	private boolean stopped = false;
+	private boolean referenced = false;
 	
-	protected long endDelay = 0;	
+	protected long endDelay = 0;
 
-	private AnimationScript next;
+	protected List<AnimationScript> next;
 	
 	public static final int REPEAT_FOREVER = -1;
 	
 	private OnAnimationFinishListener listener;
 	
-	protected Interpolator interpolator = new LinearInterpolator();
+	protected Interpolator interpolator = Interpolator.LINEAR_INTERPOLATOR;
 
 	public AnimationScript(long time) {
 		super();
 
-		this.time = time;
+		this.duration = time;
 	}
 
 	public AnimationScript(long delay, long time) {
 		super();
 
 		this.delay = delay;
-		this.time = time;
+		this.duration = time;
+	}
+
+	public AnimationScript() {
+		super();
 	}
 
 	public void restart() {
@@ -59,9 +66,9 @@ public abstract class AnimationScript {
 
 			long elapsedTime = now-startedAt-delay;
 			
-			if(elapsedTime >= time) {
+			if(elapsedTime >= duration) {
 				
-				if(elapsedTime >= time+endDelay) {
+				if(elapsedTime >= duration+endDelay) {
 					stopped = true;
 				}
 				
@@ -77,7 +84,7 @@ public abstract class AnimationScript {
 
 	public void animate(long now) {
 		long timeElapsed = now-startedAt-delay;
-		float factor = (float)timeElapsed/time;
+		float factor = (float)timeElapsed/duration;
 
 		calculate(factor);
 	}
@@ -89,19 +96,22 @@ public abstract class AnimationScript {
 	}
 
 	public int getRepeat() {
-		return repeat;
+		return loop;
 	}
 
 	public void setRepeat(int repeat) {
-		this.repeat = repeat;
+		this.loop = repeat;
 	}
 
-	public AnimationScript getNext() {
+	public List<AnimationScript> getNext() {
 		return next;
 	}
 
-	public void setNext(AnimationScript next) {
-		this.next = next;
+	public void addNext(AnimationScript next) {
+		if (this.next == null) {
+			this.next = new ArrayList<AnimationScript>();
+		}
+		this.next.add(next);
 	}
 
 	public long getDelay() {
@@ -131,6 +141,14 @@ public abstract class AnimationScript {
 	public void setInterpolator(Interpolator interpolator) {
 		this.interpolator = interpolator;
 	}
+	
+	public boolean isReferenced() {
+		return referenced;
+	}
+
+	public void setReferenced(boolean referenced) {
+		this.referenced = referenced;
+	}
 
 	public void finish(long now) {
 		if(listener==null)
@@ -138,5 +156,4 @@ public abstract class AnimationScript {
 		
 		listener.onAnimationFinish(now);
 	}
-
 }

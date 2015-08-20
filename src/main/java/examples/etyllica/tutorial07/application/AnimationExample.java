@@ -3,7 +3,7 @@ package examples.etyllica.tutorial07.application;
 import java.awt.Color;
 
 import br.com.etyllica.core.animation.script.AnimationScript;
-import br.com.etyllica.core.animation.script.HorizontalMovement;
+import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.animation.script.OpacityAnimation;
 import br.com.etyllica.core.animation.script.OrbitAnimation;
 import br.com.etyllica.core.animation.script.RotateAnimation;
@@ -52,14 +52,14 @@ public class AnimationExample extends Application {
 		bouncingText.setBorderColor(Color.BLACK);
 		bouncingText.setBorderWidth(3f);
 		
-		HorizontalMovement hscript = new HorizontalMovement(bouncingText, 10000);
+		HorizontalMovementScript hscript = new HorizontalMovementScript(bouncingText, 10000);
 		hscript.setInterval(400, 10);
 		
-		HorizontalMovement invscript = new HorizontalMovement(bouncingText, 10000);
+		HorizontalMovementScript invscript = new HorizontalMovementScript(bouncingText, 10000);
 		invscript.setInterval(10, 400);
 		//After the hscript, execute invscript
-		invscript.setNext(hscript);
-		hscript.setNext(invscript);
+		invscript.addNext(hscript);
+		hscript.addNext(invscript);
 		
 		VerticalMovementScript vscript = new VerticalMovementScript(bouncingText, 600);
 		vscript.setInterval(100, 200);
@@ -67,8 +67,8 @@ public class AnimationExample extends Application {
 		VerticalMovementScript invVscript = new VerticalMovementScript(600);
 		invVscript.setTarget(bouncingText);
 		invVscript.setInterval(200, 100);
-		invscript.setNext(vscript);
-		vscript.setNext(invVscript);
+		invscript.addNext(vscript);
+		vscript.addNext(invVscript);
 				
 		this.scene.addAnimation(hscript);
 		this.scene.addAnimation(vscript);

@@ -1,17 +1,17 @@
-package examples.etyllica.interpolation;
+package examples.etyllica.animation;
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.core.context.Application;
 
-public class Interpolation extends EtyllicaFrame {
+public class AnimationApp extends EtyllicaFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public Interpolation() {
+	public AnimationApp() {
 		super(800, 600);
 	}
 
 	public static void main(String[] args){
-		Interpolation viewer = new Interpolation();
+		AnimationApp viewer = new AnimationApp();
 		viewer.init();
 	}	
 	
@@ -19,7 +19,7 @@ public class Interpolation extends EtyllicaFrame {
 	public Application startApplication() {
 		initialSetup("../../../../../");
 
-		return new InterpolationExample(w,h);
+		return new AnimationExample(w,h);
 	}
 
 }

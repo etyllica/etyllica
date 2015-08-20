@@ -3,7 +3,6 @@ package br.com.etyllica.core.linear;
 public class PointInt2D {
 
 	protected int x = 0;
-	
 	protected int y = 0;
 	
 	public PointInt2D() {
