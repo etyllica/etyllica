@@ -13,4 +13,8 @@ public class EtyllicaMath {
 		return diff;
 	}
 	
+	public static double sqr(double a) {
+		return a*a;
+	}
+	
 }

@@ -10,8 +10,9 @@ import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 
 public class LayerAnimation extends AnimationScript {
-
+	
 	protected Layer target;
+	protected LayerAnimation root = this;
 
 	public LayerAnimation(long time) {
 		super(time);
@@ -77,6 +78,7 @@ public class LayerAnimation extends AnimationScript {
 	public MovementScript move(long time) {
 		MovementScript script = new MovementScript(target, time);
 		addNext(script);
+		setupRoot(script);
 
 		return script;
 	}
@@ -84,6 +86,7 @@ public class LayerAnimation extends AnimationScript {
 	public MovementScript move() {
 		MovementScript script = new MovementScript(target);
 		addNext(script);
+		setupRoot(script);
 
 		return script;
 	}
@@ -91,6 +94,7 @@ public class LayerAnimation extends AnimationScript {
 	public HorizontalMovementScript moveX(int duration) {
 		HorizontalMovementScript script = new HorizontalMovementScript(target, duration);
 		addNext(script);
+		setupRoot(script);
 
 		return script;
 	}
@@ -98,6 +102,7 @@ public class LayerAnimation extends AnimationScript {
 	public VerticalMovementScript moveY(int duration) {
 		VerticalMovementScript script = new VerticalMovementScript(target, duration);
 		addNext(script);
+		setupRoot(script);
 
 		return script;
 	}
@@ -105,16 +110,39 @@ public class LayerAnimation extends AnimationScript {
 	public FadeInAnimation fadeIn() {
 		FadeInAnimation script = new FadeInAnimation(target);
 		addNext(script);
+		setupRoot(script);
 
 		return script;
 	}
+	
+	private void setupRoot(LayerAnimation script) {
+		script.root = getRoot();
+	}
+	
+	private LayerAnimation getRoot() {
+		if(root!=null) {
+			return this;
+		} else {
+			return root;
+		}
+	}
 
+	public LayerAnimation and(LayerAnimation script) {
+		root.addNext(script);
+		return this;
+	}
+	
 	public LayerAnimation then(LayerAnimation script) {
 		addNext(script);
 		return this;
 	}
 
 	public LayerAnimation start() {
+		root.startChildren();
+		return root;
+	}
+	
+	private void startChildren() {
 		onStart();
 
 		if(next != null) {
@@ -122,8 +150,6 @@ public class LayerAnimation extends AnimationScript {
 				AnimationHandler.getInstance().add(s);
 			}
 		}
-
-		return this;
 	}
 
 	public void onStart() { }
