@@ -1,6 +1,7 @@
 package br.com.etyllica.linear;
 
 import br.com.etyllica.core.linear.Point2D;
+import br.com.etyllica.util.EtyllicaMath;
 
 public class Ellipse {
 
@@ -52,6 +53,13 @@ public class Ellipse {
 
 	public void setAngle(double angle) {
 		this.angle = angle;
+	}
+	
+	public boolean contains(double px, double py) {
+		double p = EtyllicaMath.sqr(Math.cos(angle)*(px-center.getX())+Math.sin(angle)*(py-center.getY()))/(w*w);
+		double q = EtyllicaMath.sqr(Math.sin(angle)*(px-center.getX())-Math.cos(angle)*(py-center.getY()))/(h*h);
+		
+		return (p + q <= 1);
 	}
 			
 }

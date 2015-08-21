@@ -4,6 +4,7 @@ import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.linear.Ellipse;
+import br.com.etyllica.util.EtyllicaMath;
 
 public class CollisionDetector {
 
@@ -255,7 +256,6 @@ public class CollisionDetector {
 	}
 	
 	public static boolean colideEllipsePoint(Ellipse ellipse, double px, double py) {
-		
 		double cx = ellipse.getCenter().getX();
 		double cy = ellipse.getCenter().getY();
 		double angle = ellipse.getAngle();
@@ -266,15 +266,10 @@ public class CollisionDetector {
 	}
 	
 	public static boolean colideEllipsePoint(double cx, double cy, double angle, double a, double b, double px, double py) {
-		
-		double p = sqr(Math.cos(angle)*(px-cx)+Math.sin(angle)*(py-cy))/(a*a);
-		double q = sqr(Math.sin(angle)*(px-cx)-Math.cos(angle)*(py-cy))/(b*b);
+		double p = EtyllicaMath.sqr(Math.cos(angle)*(px-cx)+Math.sin(angle)*(py-cy))/(a*a);
+		double q = EtyllicaMath.sqr(Math.sin(angle)*(px-cx)-Math.cos(angle)*(py-cy))/(b*b);
 		
 		return (p+q<=1);
-	}
-	
-	public static double sqr(double value) {
-		return value*value;
-	}
+	}	
 
 }
