@@ -258,7 +258,7 @@ public class CollisionDetector {
 	public static boolean colideEllipsePoint(Ellipse ellipse, double px, double py) {
 		double cx = ellipse.getCenter().getX();
 		double cy = ellipse.getCenter().getY();
-		double angle = ellipse.getAngle();
+		double angle = Math.toRadians(ellipse.getAngle());
 		double a = ellipse.getW();
 		double b = ellipse.getH();
 		
@@ -266,10 +266,14 @@ public class CollisionDetector {
 	}
 	
 	public static boolean colideEllipsePoint(double cx, double cy, double angle, double a, double b, double px, double py) {
-		double p = EtyllicaMath.sqr(Math.cos(angle)*(px-cx)+Math.sin(angle)*(py-cy))/(a*a);
-		double q = EtyllicaMath.sqr(Math.sin(angle)*(px-cx)-Math.cos(angle)*(py-cy))/(b*b);
 		
-		return (p+q<=1);
+		final double cos = Math.cos(angle);
+		final double sin = Math.sin(angle);
+		
+		double p = EtyllicaMath.sqr(cos*(px-cx)+sin*(py-cy))/(a*a);
+		double q = EtyllicaMath.sqr(sin*(px-cx)-cos*(py-cy))/(b*b);
+		
+		return (p + q <= 1);
 	}	
 
 }

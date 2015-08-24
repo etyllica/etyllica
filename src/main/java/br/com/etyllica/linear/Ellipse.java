@@ -22,6 +22,11 @@ public class Ellipse {
 		this.w = w;
 		this.h = h;
 	}
+	
+	public Ellipse(int x, int y, int w, int h, double angle) {
+		this(x, y, w, h);
+		this.angle = angle;
+	}
 
 	public Point2D getCenter() {
 		return center;
@@ -56,8 +61,14 @@ public class Ellipse {
 	}
 	
 	public boolean contains(double px, double py) {
-		double p = EtyllicaMath.sqr(Math.cos(angle)*(px-center.getX())+Math.sin(angle)*(py-center.getY()))/(w*w);
-		double q = EtyllicaMath.sqr(Math.sin(angle)*(px-center.getX())-Math.cos(angle)*(py-center.getY()))/(h*h);
+		
+		final double a = Math.toRadians(angle);
+		
+		final double cos = Math.cos(a);
+		final double sin = Math.sin(a);
+		
+		double p = EtyllicaMath.sqr(cos*(px-center.getX())+sin*(py-center.getY()))/(w*w);
+		double q = EtyllicaMath.sqr(sin*(px-center.getX())-cos*(py-center.getY()))/(h*h);
 		
 		return (p + q <= 1);
 	}
