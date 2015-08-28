@@ -13,6 +13,10 @@ public class ScaleUniformAnimation extends SingleIntervalAnimation {
 		super(delay, time);
 	}
 	
+	public ScaleUniformAnimation(Layer target) {
+		super(target);
+	}
+	
 	public ScaleUniformAnimation(Layer target, long time) {
 		super(target, time);
 	}

@@ -4,6 +4,7 @@ import br.com.etyllica.core.animation.script.AnimationScript;
 import br.com.etyllica.core.animation.script.FadeInAnimation;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.animation.script.MovementScript;
+import br.com.etyllica.core.animation.script.ScaleUniformAnimation;
 import br.com.etyllica.core.animation.script.VerticalMovementScript;
 import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.layer.ImageLayer;
@@ -115,6 +116,14 @@ public class LayerAnimation extends AnimationScript {
 		return script;
 	}
 	
+	public ScaleUniformAnimation scale(int duration) {
+		ScaleUniformAnimation script = new ScaleUniformAnimation(target, duration);
+		addNext(script);
+		setupRoot(script);
+		
+		return script;
+	}
+	
 	private void setupRoot(LayerAnimation script) {
 		script.root = getRoot();
 	}
@@ -153,4 +162,5 @@ public class LayerAnimation extends AnimationScript {
 	}
 
 	public void onStart() { }
+
 }

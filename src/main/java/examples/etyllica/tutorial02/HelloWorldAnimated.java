@@ -1,9 +1,11 @@
 package examples.etyllica.tutorial02;
 
+import br.com.etyllica.animation.Animation;
+import br.com.etyllica.core.animation.LayerAnimation;
 import br.com.etyllica.core.animation.script.RotateAnimation;
-import br.com.etyllica.core.animation.script.ScaleUniformAnimation;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.layer.ImageLayer;
 
 public class HelloWorldAnimated extends Application {
@@ -25,11 +27,9 @@ public class HelloWorldAnimated extends Application {
 				
 		loadingInfo = "Loading animations...";
 		loading = 50;
-		
-		ScaleUniformAnimation scaleAnimation = new ScaleUniformAnimation(0,10000);
-		scaleAnimation.setTarget(hello);
-		scaleAnimation.setInterval(0.1, 1);
-		scene.addAnimation(scaleAnimation);
+				
+		LayerAnimation scaleAnimation = Animation.animate(hello).scale(10000).from(0.1).to(1).interpolator(Interpolator.LINEAR_INTERPOLATOR);
+		scaleAnimation.start();
 		
 		RotateAnimation rotateAnimation = new RotateAnimation(0,5000);
 		rotateAnimation.setTarget(hello);
