@@ -93,7 +93,7 @@ public class AnimationExample extends Application {
 		OrbitAnimation orbit = new OrbitAnimation(0,60000);
 		orbit.setTarget(layer);
 		orbit.setInterval(0, 1080);
-		orbit.setCenter(cx, cy);
+		orbit.around(cx, cy);
 		
 		orbit.setRepeat(AnimationScript.REPEAT_FOREVER);
 				

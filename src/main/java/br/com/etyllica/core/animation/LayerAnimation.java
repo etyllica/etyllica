@@ -4,6 +4,7 @@ import br.com.etyllica.core.animation.script.AnimationScript;
 import br.com.etyllica.core.animation.script.FadeInAnimation;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.animation.script.MovementScript;
+import br.com.etyllica.core.animation.script.OrbitAnimation;
 import br.com.etyllica.core.animation.script.RotateAnimation;
 import br.com.etyllica.core.animation.script.ScaleUniformAnimation;
 import br.com.etyllica.core.animation.script.VerticalMovementScript;
@@ -22,22 +23,16 @@ public class LayerAnimation extends AnimationScript {
 
 	public LayerAnimation(Layer target) {
 		super();
-		this.target = target;
+		setTarget(target);
 	}
 
 	public LayerAnimation(Layer target, long time) {
-		super();
-		this.target = target;
+		this(target);
 		this.duration = time;
 	}
 
 	public LayerAnimation(long delay, long time) {
 		super(delay, time);
-	}
-
-	public LayerAnimation(ImageLayer layer) {
-		super();
-		this.target = layer;
 	}
 
 	public Layer getLayer() {
@@ -67,16 +62,21 @@ public class LayerAnimation extends AnimationScript {
 		return this;
 	}
 
-	public LayerAnimation duration(long time) {
+	public LayerAnimation during(long time) {
 		this.duration = time;
 		return this;
 	}
 
-	public LayerAnimation interpolator(Interpolator interpolator) {
+	public LayerAnimation interpolate(Interpolator interpolator) {
 		this.interpolator = interpolator;
 		return this;
 	}
 
+	public LayerAnimation twice() {
+		this.loop = 2;
+		return this;
+	}
+	
 	public LayerAnimation loop(int loop) {
 		this.loop = loop;
 		return this;
@@ -84,57 +84,77 @@ public class LayerAnimation extends AnimationScript {
 
 	public MovementScript move(long time) {
 		MovementScript script = new MovementScript(target, time);
-		addNext(script);
-		setupRoot(script);
+		concatenate(script);
 
 		return script;
 	}
 
 	public MovementScript move() {
 		MovementScript script = new MovementScript(target);
-		addNext(script);
-		setupRoot(script);
+		concatenate(script);
 
 		return script;
 	}
 	
 	public HorizontalMovementScript moveX(int duration) {
 		HorizontalMovementScript script = new HorizontalMovementScript(target, duration);
-		addNext(script);
-		setupRoot(script);
+		concatenate(script);
 
 		return script;
 	}
 	
 	public VerticalMovementScript moveY(int duration) {
 		VerticalMovementScript script = new VerticalMovementScript(target, duration);
-		addNext(script);
-		setupRoot(script);
+		concatenate(script);
 
 		return script;
 	}
 
 	public FadeInAnimation fadeIn() {
 		FadeInAnimation script = new FadeInAnimation(target);
-		addNext(script);
-		setupRoot(script);
+		concatenate(script);
 
 		return script;
 	}
 	
 	public ScaleUniformAnimation scale(int duration) {
 		ScaleUniformAnimation script = new ScaleUniformAnimation(target, duration);
-		addNext(script);
-		setupRoot(script);
+		concatenate(script);
+		
+		return script;
+	}
+	
+	public ScaleUniformAnimation scale() {
+		ScaleUniformAnimation script = new ScaleUniformAnimation(target);
+		concatenate(script);
 		
 		return script;
 	}
 	
 	public RotateAnimation rotate(int duration) {
 		RotateAnimation script = new RotateAnimation(target, duration);
+		concatenate(script);
+		
+		return script;
+	}
+	
+	public RotateAnimation rotate() {
+		RotateAnimation script = new RotateAnimation(target);
+		concatenate(script);
+		
+		return script;
+	}
+	
+	public OrbitAnimation orbit() {
+		OrbitAnimation script = new OrbitAnimation(target);
+		concatenate(script);
+		
+		return script;
+	}
+	
+	public LayerAnimation concatenate(LayerAnimation script) {
 		addNext(script);
 		setupRoot(script);
-		
 		return script;
 	}
 	
@@ -150,6 +170,10 @@ public class LayerAnimation extends AnimationScript {
 		}
 	}
 
+	public LayerAnimation and() {
+		return root;
+	}
+	
 	public LayerAnimation and(LayerAnimation script) {
 		root.addNext(script);
 		return this;

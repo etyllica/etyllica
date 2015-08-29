@@ -26,7 +26,7 @@ public abstract class AnimationScript {
 	
 	private OnAnimationFinishListener listener;
 	
-	protected Interpolator interpolator = Interpolator.LINEAR_INTERPOLATOR;
+	protected Interpolator interpolator = Interpolator.LINEAR;
 
 	public AnimationScript(long time) {
 		super();

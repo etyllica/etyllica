@@ -37,19 +37,19 @@ public class AnimationExample extends Application {
 	
 		int duration = 2000;
 		
-		LayerAnimation linearAnimation = Animation.animate(linearBall).move(duration).from(40, 80).to(480, 80).interpolator(Interpolator.LINEAR_INTERPOLATOR);
-		linearAnimation.move(duration).from(480,80).to(40, 80).interpolator(Interpolator.LINEAR_INTERPOLATOR).then(linearAnimation);
+		LayerAnimation linearAnimation = Animation.animate(linearBall).move(duration).from(40, 80).to(480, 80).interpolate(Interpolator.LINEAR);
+		linearAnimation.move(duration).from(480,80).to(40, 80).interpolate(Interpolator.LINEAR).then(linearAnimation);
 		linearAnimation.start();
 		
-		LayerAnimation quadraticAnimation = Animation.animate(quadraticBall).move(duration).from(40, 120).to(480, 120).interpolator(Interpolator.QUADRATIC_INTERPOLATOR); 
-		quadraticAnimation.move(duration).from(480,120).to(40, 120).interpolator(Interpolator.QUADRATIC_INTERPOLATOR).then(quadraticAnimation);
+		LayerAnimation quadraticAnimation = Animation.animate(quadraticBall).move(duration).from(40, 120).to(480, 120).interpolate(Interpolator.QUADRATIC); 
+		quadraticAnimation.move(duration).from(480,120).to(40, 120).interpolate(Interpolator.QUADRATIC).then(quadraticAnimation);
 		quadraticAnimation.start();
 		
-		LayerAnimation reverseQuadraticAnimation = Animation.animate(reverseQuadraticBall).move(duration).from(40, 160).to(480, 160).interpolator(Interpolator.REVERSE_QUADRATIC_INTERPOLATOR);
-		reverseQuadraticAnimation.move(duration).from(480,160).to(40, 160).interpolator(Interpolator.REVERSE_QUADRATIC_INTERPOLATOR).then(reverseQuadraticAnimation);
+		LayerAnimation reverseQuadraticAnimation = Animation.animate(reverseQuadraticBall).move(duration).from(40, 160).to(480, 160).interpolate(Interpolator.REVERSE_QUADRATIC);
+		reverseQuadraticAnimation.move(duration).from(480,160).to(40, 160).interpolate(Interpolator.REVERSE_QUADRATIC).then(reverseQuadraticAnimation);
 		reverseQuadraticAnimation.start();
 		
-		Animation.animate(fadeBall).fadeIn().duration(duration).start();
+		Animation.animate(fadeBall).fadeIn().during(duration).start();
 		
 		loading = 100;
 	}

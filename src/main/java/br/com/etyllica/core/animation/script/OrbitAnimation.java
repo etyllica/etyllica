@@ -19,12 +19,24 @@ public class OrbitAnimation extends SingleIntervalAnimation {
 	public OrbitAnimation(Layer target, long time) {
 		super(target, time);
 	}
-		
-	public void setCenter(float centerX, float centerY) {
+	
+	public OrbitAnimation(Layer target) {
+		super(target);
+	}
+	
+	@Override
+	public OrbitAnimation during(long time) {
+		super.during(time);
+		return this;
+	}
+	
+	public OrbitAnimation around(float centerX, float centerY) {
 		this.centerX = centerX;
 		this.centerY = centerY;
+		
+		return this;
 	}
-				
+	
 	@Override
 	public void setTarget(Layer target) {
 		super.setTarget(target);
@@ -33,7 +45,6 @@ public class OrbitAnimation extends SingleIntervalAnimation {
 		ty = target.getY();
 		tw = target.getW()/2;
 		th = target.getH()/2;
-				
 	}
 	
 	@Override
@@ -55,7 +66,6 @@ public class OrbitAnimation extends SingleIntervalAnimation {
 		// translate point back:
 		target.setX((int)(xnew + centerX - tw));
 		target.setY((int)(ynew + centerY - th));
-
-	}	
+	}
 
 }

@@ -1,8 +1,7 @@
 package examples.etyllica.tutorial03;
 
+import br.com.etyllica.core.animation.Animation;
 import br.com.etyllica.core.animation.script.AnimationScript;
-import br.com.etyllica.core.animation.script.OrbitAnimation;
-import br.com.etyllica.core.animation.script.RotateAnimation;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
@@ -14,9 +13,7 @@ public class StriderAnimation extends Application {
 	}
 	
 	private ImageLayer background;
-	
 	private ImageLayer machine;
-	
 	private ImageLayer anotherMachine;
 
 	@Override
@@ -29,7 +26,6 @@ public class StriderAnimation extends Application {
 		anotherMachine = new ImageLayer(180,270,"machine.png");
 		
 		createAnimationScripts(machine, 0);
-		
 		createAnimationScripts(anotherMachine, 180);
 				
 		loading = 50;
@@ -38,20 +34,11 @@ public class StriderAnimation extends Application {
 	}
 	
 	private void createAnimationScripts(ImageLayer machine, int offsetAngle) {
-		
-		OrbitAnimation orbitAnimation = new OrbitAnimation(0,5000);
-		orbitAnimation.setTarget(machine);
-		orbitAnimation.setCenter(machine.getX(), machine.getY()+70);
-		orbitAnimation.setInterval(offsetAngle, 360+offsetAngle);
-		orbitAnimation.setRepeat(AnimationScript.REPEAT_FOREVER);
-		this.scene.addAnimation(orbitAnimation);
-		
-		RotateAnimation rotateAnimation = new RotateAnimation(0,5000);
-		rotateAnimation.setTarget(machine);
-		rotateAnimation.setInterval(offsetAngle, 360+offsetAngle);
-		rotateAnimation.setRepeat(AnimationScript.REPEAT_FOREVER);
-		this.scene.addAnimation(rotateAnimation);
-		
+		Animation.animate(machine).orbit().during(5000)
+		.around(machine.getX(), machine.getY()+70).from(offsetAngle).to(360+offsetAngle)
+		.loop(AnimationScript.REPEAT_FOREVER).and()
+		.rotate(5000).from(offsetAngle).to(360+offsetAngle)
+		.loop(AnimationScript.REPEAT_FOREVER).start();
 	}
 
 	@Override
@@ -60,5 +47,4 @@ public class StriderAnimation extends Application {
 		machine.draw(g);
 		anotherMachine.draw(g);
 	}
-	
 }

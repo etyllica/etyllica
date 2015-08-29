@@ -26,8 +26,9 @@ public class HelloWorldAnimated extends Application {
 		loadingInfo = "Loading animations...";
 		loading = 50;
 				
-		Animation.animate(hello).scale(10000).from(0.1).to(1).interpolator(Interpolator.LINEAR_INTERPOLATOR).start();
-		Animation.animate(hello).rotate(5000).from(0).to(360).interpolator(Interpolator.LINEAR_INTERPOLATOR).loop(2).start();
+		Animation.animate(hello).scale().during(10000).from(0.1).to(1)
+		.interpolate(Interpolator.REVERSE_QUADRATIC)
+		.and().rotate().during(5000).from(0).to(360).twice().start();
 	}
 
 	@Override

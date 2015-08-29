@@ -35,6 +35,15 @@ public abstract class SingleIntervalAnimation extends LayerAnimation {
 		update(value);
 	}
 	
+	/**
+	 * This method override is needed
+	 */
+	@Override
+	public SingleIntervalAnimation during(long time) {
+		super.during(time);
+		return this;
+	}
+	
 	public SingleIntervalAnimation from(double value) {
 		startValue = value;
 		return this;
