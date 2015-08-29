@@ -2,7 +2,7 @@ package examples.etyllica.animation;
 
 import java.awt.Color;
 
-import br.com.etyllica.animation.Animation;
+import br.com.etyllica.core.animation.Animation;
 import br.com.etyllica.core.animation.LayerAnimation;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;

@@ -1,6 +1,6 @@
 package examples.etyllica.tutorial02;
 
-import br.com.etyllica.animation.Animation;
+import br.com.etyllica.core.animation.Animation;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.interpolation.Interpolator;
@@ -22,7 +22,7 @@ public class HelloWorldAnimated extends Application {
 		hello = new ImageLayer("hello.png");
 		hello.centralizeX(0,w);
 		hello.centralizeY(0,h);
-				
+		
 		loadingInfo = "Loading animations...";
 		loading = 50;
 				
