@@ -1,8 +1,6 @@
 package examples.etyllica.tutorial02;
 
 import br.com.etyllica.animation.Animation;
-import br.com.etyllica.core.animation.LayerAnimation;
-import br.com.etyllica.core.animation.script.RotateAnimation;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.interpolation.Interpolator;
@@ -28,15 +26,8 @@ public class HelloWorldAnimated extends Application {
 		loadingInfo = "Loading animations...";
 		loading = 50;
 				
-		LayerAnimation scaleAnimation = Animation.animate(hello).scale(10000).from(0.1).to(1).interpolator(Interpolator.LINEAR_INTERPOLATOR);
-		scaleAnimation.start();
-		
-		RotateAnimation rotateAnimation = new RotateAnimation(0,5000);
-		rotateAnimation.setTarget(hello);
-		rotateAnimation.setInterval(0, 360);
-		rotateAnimation.setRepeat(2);
-		scene.addAnimation(rotateAnimation);
-		
+		Animation.animate(hello).scale(10000).from(0.1).to(1).interpolator(Interpolator.LINEAR_INTERPOLATOR).start();
+		Animation.animate(hello).rotate(5000).from(0).to(360).interpolator(Interpolator.LINEAR_INTERPOLATOR).loop(2).start();
 	}
 
 	@Override

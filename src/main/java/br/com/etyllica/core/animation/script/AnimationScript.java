@@ -102,7 +102,7 @@ public abstract class AnimationScript {
 	public void setRepeat(int repeat) {
 		this.loop = repeat;
 	}
-
+	
 	public List<AnimationScript> getNext() {
 		return next;
 	}
