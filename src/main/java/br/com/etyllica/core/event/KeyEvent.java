@@ -376,6 +376,8 @@ public class KeyEvent {
 	//Japanese Keys
 	public static final int VK_ROMAJI = VK_JAPANESE_ROMAN;
 	
+	//Custom Keys
+	
 	//Shortcuts
 	public static final int VK_UP_ARROW = VK_UP;
 	public static final int VK_DOWN_ARROW = VK_DOWN;
@@ -384,7 +386,12 @@ public class KeyEvent {
 	public static final int VK_DEL = VK_DELETE;
 	public static final int VK_ESC = VK_ESCAPE;
 	public static final int VK_SUPER = VK_WINDOWS;
-	  
+	
+	//Mobile Keys
+	public static final int VK_BACK = VK_ESC;
+	public static final int VK_HOME_SCREEN = VK_HOME;
+	public static final int VK_RECENT_APPS = 599;
+	
 	//Joystick Keys
 	public static final int VK_JOYSTICK_UP = JoystickEvent.UP;
 	public static final int VK_JOYSTICK_DOWN = JoystickEvent.DOWN;
