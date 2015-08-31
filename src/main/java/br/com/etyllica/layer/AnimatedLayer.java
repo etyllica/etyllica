@@ -132,6 +132,10 @@ public class AnimatedLayer extends ImageLayer {
 	}
 
 	public void animateWithFrame(int frame) {
+		if(this.currentFrame != frame) {
+			notifyFrameChangeListener(0, frame);	
+		}
+		
 		setFrame(frame);
 		
 		if(frame == frames-1) {
@@ -155,7 +159,7 @@ public class AnimatedLayer extends ImageLayer {
 			
 			boolean hasNextFrame = nextFrame(); 
 			
-			notifyFrameChangeListener(now);
+			notifyFrameChangeListener(now, currentFrame);
 			
 			if(!hasNextFrame) {
 
@@ -177,12 +181,10 @@ public class AnimatedLayer extends ImageLayer {
 	}
 	
 	//Notify Listener about the frame change
-	protected void notifyFrameChangeListener(long now) {
-		
+	protected void notifyFrameChangeListener(long now, int currentFrame) {
 		if(onFrameChangeListener != null) {
-			onFrameChangeListener.onFrameChange(now);
+			onFrameChangeListener.onFrameChange(now, currentFrame);
 		}
-		
 	}
 	
 	public void animate() {

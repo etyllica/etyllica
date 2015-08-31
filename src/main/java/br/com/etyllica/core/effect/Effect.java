@@ -22,14 +22,12 @@ public class Effect extends AnimatedLayer {
 		super(x,y,xTile,yTile);
 		
 		setVisible(false);
-		//script.setRepeat(AnimationScript.REPEAT_FOREVER);
 	}
 	
 	public Effect(int x, int y, int xTile, int yTile, String path) {
 		super(x, y, xTile, yTile, path);
 		
 		setVisible(false);
-		//script.setRepeat(AnimationScript.REPEAT_FOREVER);
 	}
 	
 	@Override
@@ -49,16 +47,13 @@ public class Effect extends AnimatedLayer {
 	}
 	
 	public void startEffect() {
-
 		script.setTarget(this);
-		
 		active = true;
-				
+		
 		setVisible(true);
+		restartAnimation();
 		
-		restartAnimation();		
-		
-		AnimationHandler.getInstance().add(script);		
+		AnimationHandler.getInstance().add(script);
 	}
 	
 }
