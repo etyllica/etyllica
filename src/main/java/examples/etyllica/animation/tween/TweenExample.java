@@ -1,4 +1,4 @@
-package examples.etyllica.animation;
+package examples.etyllica.animation.tween;
 
 import java.awt.Color;
 
@@ -12,9 +12,9 @@ import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.layer.Layer;
 
-public class AnimationExample extends Application {
+public class TweenExample extends Application {
 
-	public AnimationExample(int w, int h) {
+	public TweenExample(int w, int h) {
 		super(w, h);
 	}
 	
