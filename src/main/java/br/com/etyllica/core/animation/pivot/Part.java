@@ -1,0 +1,138 @@
+package br.com.etyllica.core.animation.pivot;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import br.com.etyllica.core.linear.Point2D;
+import br.com.etyllica.layer.ImageLayer;
+
+public class Part extends ImageLayer {
+	
+	private Point2D fixed = new Point2D();
+	private Point2D anchor;
+
+	protected Map<Point2D, Set<Part>> parts = new LinkedHashMap<Point2D, Set<Part>>();
+
+	public Part(int x, int y) {
+		super(x,y);
+		fixed.setLocation(x, y);
+		anchor = new Point2D(0, 0);
+		addPoint(anchor);
+	}
+
+	public Part(int x, int y, String path) {
+		super(x, y, path);
+		fixed.setLocation(x, y);
+		anchor = new Point2D(w/2, h/2);
+		addPoint(anchor);
+	}
+
+	public Part(String path) {
+		this(0, 0, path);
+	}
+
+	public void addPoint(Point2D point) {
+		parts.put(point, new HashSet<Part>());
+	}
+
+	public void setAnchor(int x, int y) {
+		anchor.setLocation(x, y);
+	}
+
+	public void attach(Point2D point, Part part) {
+		parts.get(point).add(part);
+		movePart(part, point);
+	}
+	
+	private void movePart(Part part, Point2D point) {
+		part.moveTo(x+point.getX(), y+point.getY());
+	}
+	
+	public void moveTo(double x, double y) {
+		fixed.setLocation(x, y);
+		setLocation((int)(x-anchor.getX()), (int)(y-anchor.getY()));		
+		
+		for(Entry<Point2D, Set<Part>> entry: parts.entrySet()) {
+			Point2D point = entry.getKey();
+						
+			for(Part part: entry.getValue()) {
+				movePart(part, point);
+			}
+		}
+	}
+	
+	public void rotate(double angle) {
+		Point2D center = new Point2D(w/2, h/2);
+		double diffAngle = angle-this.angle;
+		
+		//TODO Move all parts based on delta (after rotate)
+		//dx = anchorRotated.getX()-anchor.getX()
+		//dy = anchorRotated.getX()-anchor.getX()
+		//Avoid reset Anchor
+		
+		rotateParts(center, diffAngle);
+		resetAnchor();
+		
+		setAngle(angle);
+	}
+	
+	private void resetAnchor() {
+		setX((int)(fixed.getX()-anchor.getX()));
+		setY((int)(fixed.getY()-anchor.getY()));
+		moveParts();
+	}
+
+	private void rotateParts(Point2D pivot, double diffAngle) {
+		for(Entry<Point2D, Set<Part>> entry: parts.entrySet()) {
+			Point2D point = entry.getKey();
+			point.rotate(pivot, diffAngle);
+			
+			Set<Part> parts = entry.getValue();
+			for(Part part: parts) {
+				part.rotate(part.getAngle()+diffAngle);
+				movePart(part, point);
+			}
+		}
+	}
+	
+	private void moveParts() {
+		for(Entry<Point2D, Set<Part>> entry: parts.entrySet()) {
+			Point2D point = entry.getKey();
+						
+			Set<Part> parts = entry.getValue();
+			for(Part part: parts) {
+				movePart(part, point);
+			}
+		}
+	}
+
+	public Set<Point2D> getPoints() {
+		return parts.keySet();
+	}
+	
+	public List<Point2D> getListPoints() {
+		List<Point2D> list = new ArrayList<Point2D>(parts.size());
+		list.addAll(parts.keySet());
+		
+		return list;
+	}
+
+	public Collection<Set<Part>> getParts() {
+		return parts.values();
+	}
+
+	public Set<Part> getParts(Point2D point) {
+		return parts.get(point);
+	}
+
+	public Point2D getAnchor() {
+		return anchor;
+	}
+	
+}
