@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import br.com.etyllica.core.linear.Point2D;
+import br.com.etyllica.core.linear.PointInt2D;
 import br.com.etyllica.layer.ImageLayer;
 
 public class Part extends ImageLayer {
@@ -133,6 +134,10 @@ public class Part extends ImageLayer {
 
 	public Point2D getAnchor() {
 		return anchor;
+	}
+
+	public Point2D getFixed() {
+		return fixed;
 	}
 	
 }
