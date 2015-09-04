@@ -10,16 +10,15 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import br.com.etyllica.core.linear.Point2D;
-import br.com.etyllica.core.linear.PointInt2D;
 import br.com.etyllica.layer.ImageLayer;
 
 public class Part extends ImageLayer {
 	
-	private Point2D fixed = new Point2D();
 	private Point2D anchor;
-
+	private Point2D fixed = new Point2D();
+		
 	protected Map<Point2D, Set<Part>> parts = new LinkedHashMap<Point2D, Set<Part>>();
-
+	
 	public Part(int x, int y) {
 		super(x,y);
 		fixed.setLocation(x, y);
@@ -138,6 +137,16 @@ public class Part extends ImageLayer {
 
 	public Point2D getFixed() {
 		return fixed;
+	}
+
+	public void flip() {
+		scaleX = -scaleX;
+		
+		for(Set<Part> ps: parts.values()) {
+			for(Part part : ps) {
+				part.flip();
+			}
+		}
 	}
 	
 }
