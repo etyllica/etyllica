@@ -13,12 +13,13 @@ import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.layer.ImageLayer;
 
 public class Part extends ImageLayer {
-	
+
 	private Point2D anchor;
 	private Point2D fixed = new Point2D();
-		
+	protected boolean flipped = false;
+
 	protected Map<Point2D, Set<Part>> parts = new LinkedHashMap<Point2D, Set<Part>>();
-	
+
 	public Part(int x, int y) {
 		super(x,y);
 		fixed.setLocation(x, y);
@@ -49,39 +50,39 @@ public class Part extends ImageLayer {
 		parts.get(point).add(part);
 		movePart(part, point);
 	}
-	
+
 	private void movePart(Part part, Point2D point) {
 		part.moveTo(x+point.getX(), y+point.getY());
 	}
-	
+
 	public void moveTo(double x, double y) {
 		fixed.setLocation(x, y);
 		setLocation((int)(x-anchor.getX()), (int)(y-anchor.getY()));		
-		
+
 		for(Entry<Point2D, Set<Part>> entry: parts.entrySet()) {
 			Point2D point = entry.getKey();
-						
+
 			for(Part part: entry.getValue()) {
 				movePart(part, point);
 			}
 		}
 	}
-	
+
 	public void rotate(double angle) {
 		Point2D center = new Point2D(w/2, h/2);
 		double diffAngle = angle-this.angle;
-		
+
 		//TODO Move all parts based on delta (after rotate)
 		//dx = anchorRotated.getX()-anchor.getX()
 		//dy = anchorRotated.getX()-anchor.getX()
 		//Avoid reset Anchor
-		
+
 		rotateParts(center, diffAngle);
 		resetAnchor();
-		
+
 		setAngle(angle);
 	}
-	
+
 	private void resetAnchor() {
 		setX((int)(fixed.getX()-anchor.getX()));
 		setY((int)(fixed.getY()-anchor.getY()));
@@ -92,7 +93,7 @@ public class Part extends ImageLayer {
 		for(Entry<Point2D, Set<Part>> entry: parts.entrySet()) {
 			Point2D point = entry.getKey();
 			point.rotate(pivot, diffAngle);
-			
+
 			Set<Part> parts = entry.getValue();
 			for(Part part: parts) {
 				part.rotate(part.getAngle()+diffAngle);
@@ -100,11 +101,11 @@ public class Part extends ImageLayer {
 			}
 		}
 	}
-	
+
 	private void moveParts() {
 		for(Entry<Point2D, Set<Part>> entry: parts.entrySet()) {
 			Point2D point = entry.getKey();
-						
+
 			Set<Part> parts = entry.getValue();
 			for(Part part: parts) {
 				movePart(part, point);
@@ -115,11 +116,11 @@ public class Part extends ImageLayer {
 	public Set<Point2D> getPoints() {
 		return parts.keySet();
 	}
-	
+
 	public List<Point2D> getListPoints() {
 		List<Point2D> list = new ArrayList<Point2D>(parts.size());
 		list.addAll(parts.keySet());
-		
+
 		return list;
 	}
 
@@ -141,12 +142,23 @@ public class Part extends ImageLayer {
 
 	public void flip() {
 		scaleX = -scaleX;
+		angle = -angle;
 		
-		for(Set<Part> ps: parts.values()) {
-			for(Part part : ps) {
-				part.flip();
-			}
+		double center = getW()/2;
+		
+		for(Entry<Point2D, Set<Part>> entry: parts.entrySet()) {
+			Point2D point = entry.getKey();
+
+				double dx = point.getX()-center;
+				point.setX(point.getX()-dx*2);
+
+				Set<Part> ps = entry.getValue();
+
+				for(Part part : ps) {
+					part.flip();
+				}		
 		}
+		moveParts();
 	}
-	
+
 }
