@@ -6,6 +6,7 @@ import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.linear.Rectangle;
 import br.com.etyllica.loader.image.ImageLoader;
+import br.com.etyllica.util.EtyllicaMath;
 
 /**
  * 
@@ -197,8 +198,11 @@ public class ImageLayer extends StaticLayer {
 	//Based on code at: http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
 	public boolean colideRotated(int mx, int my) {
 		
-		int halfWidth = (int)((w*scaleX)/2);
-		int halfHeight = (int)((h*scaleY)/2);
+		double sx = EtyllicaMath.mod(scaleX);
+		double sy = EtyllicaMath.mod(scaleY);
+		
+		int halfWidth = (int)((w*sx)/2);
+		int halfHeight = (int)((h*sy)/2);
 		
 		//Pivot Point of rotation
 		int px = x+halfWidth;
