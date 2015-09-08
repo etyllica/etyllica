@@ -14,6 +14,7 @@ import br.com.etyllica.layer.ImageLayer;
 
 public class Part extends ImageLayer {
 
+	private String name;
 	private Point2D anchor;
 	private Point2D fixed = new Point2D();
 	protected boolean flipped = false;
@@ -139,6 +140,14 @@ public class Part extends ImageLayer {
 	public Point2D getFixed() {
 		return fixed;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public void flip() {
 		scaleX = -scaleX;
@@ -160,5 +169,5 @@ public class Part extends ImageLayer {
 		}
 		moveParts();
 	}
-
+	
 }
