@@ -170,7 +170,7 @@ public class PivotExample extends Application {
 		Point2D kneeLeft = new Point2D(14,51);
 		thighLeft.addPoint(kneeLeft);
 
-		pelvis.attach(pelvis.getListPoints().get(1), thighLeft);
+		pelvis.attach(pelvis.getPoints().get(1), thighLeft);
 
 		//Left Leg
 		Part legLeft = new Part("parts/lleg.png");

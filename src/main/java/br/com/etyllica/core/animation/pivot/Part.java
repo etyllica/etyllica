@@ -19,6 +19,7 @@ public class Part extends ImageLayer {
 	private Point2D fixed = new Point2D();
 	protected boolean flipped = false;
 
+	protected List<Point2D> points = new ArrayList<Point2D>();
 	protected Map<Point2D, Set<Part>> parts = new LinkedHashMap<Point2D, Set<Part>>();
 
 	public Part(int x, int y) {
@@ -40,6 +41,7 @@ public class Part extends ImageLayer {
 	}
 
 	public void addPoint(Point2D point) {
+		points.add(point);
 		parts.put(point, new HashSet<Part>());
 	}
 
@@ -114,15 +116,8 @@ public class Part extends ImageLayer {
 		}
 	}
 
-	public Set<Point2D> getPoints() {
-		return parts.keySet();
-	}
-
-	public List<Point2D> getListPoints() {
-		List<Point2D> list = new ArrayList<Point2D>(parts.size());
-		list.addAll(parts.keySet());
-
-		return list;
+	public List<Point2D> getPoints() {
+		return points;
 	}
 
 	public Collection<Set<Part>> getParts() {
