@@ -87,6 +87,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 		moveToCenter();
 		
 		window = new Window(component.getX(), component.getY(), width, height);
+		window.setComponent(component);
 		
 		gameLoop = new FrameSkippingLoop(this);		
 	}
@@ -103,11 +104,8 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 				Rectangle gcBounds = devices[i].getDefaultConfiguration().getBounds();
 
 				int x = gcBounds.x;
-
 				int y = gcBounds.y;
-
 				int w = gcBounds.width;
-
 				int h = gcBounds.height;
 
 				monitors.add(new Monitor(x, y, w, h));

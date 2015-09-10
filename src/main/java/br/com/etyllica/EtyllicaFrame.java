@@ -25,7 +25,6 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 	private static final long serialVersionUID = 4588303747276461888L;
 
 	private AWTCore core;
-	
 	private AWTEngine engine;
 	
 	protected int w = 640;
@@ -69,14 +68,11 @@ public abstract class EtyllicaFrame extends JFrame implements Engine {
 		engine = new AWTEngine(this, w, h);
 
 		core = engine.getCore();
-
 		core.setEngine(this);
 	}
 	
 	private void startCore() {
-		
 		core.startCore(application);
-		
 		core.startEngine();
 		
 		addComponentListener(core);

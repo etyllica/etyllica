@@ -22,6 +22,8 @@ import br.com.etyllica.layer.GeometricLayer;
 
 public class Window extends GeometricLayer implements ContextContainer {
 	
+	private java.awt.Component component;
+	
 	protected Context application;
 
 	//TODO Change to Application backApplication
@@ -160,6 +162,14 @@ public class Window extends GeometricLayer implements ContextContainer {
 	@Override
 	public Context getContext() {
 		return application;
+	}
+
+	public java.awt.Component getComponent() {
+		return component;
+	}
+
+	public void setComponent(java.awt.Component component) {
+		this.component = component;
 	}	
-		
+			
 }
