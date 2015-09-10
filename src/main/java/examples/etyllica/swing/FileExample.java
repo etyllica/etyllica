@@ -127,6 +127,7 @@ public class FileExample extends Application implements SelectFileListener {
 		System.out.println("Selected: "+path);
 		
 		StaticLayer image = ImageLoader.getInstance().loadImage(path, true);
+		System.out.println(image.getPath());
 		
 		ImageLayer layer = new ImageLayer(px, py);
 		layer.cloneLayer(image);

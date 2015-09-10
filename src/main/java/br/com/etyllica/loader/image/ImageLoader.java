@@ -12,6 +12,7 @@ import java.util.Set;
 import br.com.etyllica.layer.StaticLayer;
 import br.com.etyllica.loader.LoaderImpl;
 import br.com.etyllica.util.StringUtils;
+import br.com.etyllica.util.io.IOHelper;
 
 /**
  * 
@@ -69,18 +70,36 @@ public class ImageLoader extends LoaderImpl {
 	}
 
 	public StaticLayer loadImage(String path) {
+		return loadImage(path, false);
+	}
+	
+	public StaticLayer loadImage(String path, boolean absolute) {
 
-		BufferedImage img = getImage(path);
+		BufferedImage img = getImage(path, absolute);
 
 		StaticLayer cam = new StaticLayer();
 		cam.setSize(img.getWidth(), img.getHeight());
-		cam.cloneLayer(path);
+		
+		if(absolute) {
+			cam.cloneLayer(IOHelper.FILE_PREFIX+path);	
+		} else {
+			cam.cloneLayer(path);
+		}
+			
+		
 
 		return cam;
 	}
 
 	public BufferedImage getImage(String path) {
-		return getImage(path, false);
+		
+		boolean absolute = false;
+		
+		if(path.startsWith(IOHelper.FILE_PREFIX)) {
+			absolute = true;
+		}
+		
+		return getImage(path, absolute);
 	}
 
 	private String getDiretorio(String path, boolean absolute) {
@@ -102,19 +121,31 @@ public class ImageLoader extends LoaderImpl {
 		String diretorio = getDiretorio(path, absolute);
 
 		if(images.containsKey(diretorio)) {
-
 			return images.get(diretorio);
-
 		} else {
 
 			BufferedImage img = null;
 
 			URL dir = null;
 
-			try {
-				dir = new URL(url, diretorio);
-			} catch (MalformedURLException e1) {
-				e1.printStackTrace();
+			if(!absolute) {
+				try {
+					dir = new URL(url, diretorio);
+				} catch (MalformedURLException e1) {
+					e1.printStackTrace();
+				}	
+			} else {
+				
+				if(!diretorio.startsWith(IOHelper.FILE_PREFIX)) {
+					diretorio = IOHelper.FILE_PREFIX+diretorio;	
+				}
+				
+				try {
+					dir = new URL(diretorio);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 			String ext = StringUtils.fileExtension(diretorio);
