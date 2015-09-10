@@ -1,23 +1,34 @@
 package examples.etyllica.swing;
 
-import javax.swing.JFileChooser;
+import java.util.ArrayList;
+import java.util.List;
 
+import br.com.etyllica.awt.components.chooser.FileChooser;
+import br.com.etyllica.awt.components.chooser.SelectFileListener;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
+import br.com.etyllica.layer.StaticLayer;
+import br.com.etyllica.loader.image.ImageLoader;
 import br.com.etyllica.util.PathHelper;
 
-public class FileExample extends Application implements Runnable {
+public class FileExample extends Application implements SelectFileListener {
 
-	private JFileChooser fc;
+	private FileChooser fc;
 	
 	public FileExample(int w, int h) {
 		super(w, h);
 	}
 
+	private int px, py;
+	
 	private ImageLayer hello;
+	
+	private List<ImageLayer> layers = new ArrayList<ImageLayer>();
 
 	@Override
 	public void load() {
@@ -26,13 +37,17 @@ public class FileExample extends Application implements Runnable {
 		hello = new ImageLayer(200,100,"hello.png");		
 		loading = 100;
 		
-		fc = new JFileChooser(PathHelper.currentDirectory());
-		new Thread(this).start();
+		fc = new FileChooser(this.parent.getComponent(), PathHelper.currentDirectory());
+		fc.setListener(this);
 	}	
 
 	@Override
 	public void draw(Graphic g) {
 		hello.draw(g);
+		
+		for(ImageLayer layer: layers) {
+			layer.draw(g);
+		}
 	}
 	
 	@Override
@@ -92,13 +107,31 @@ public class FileExample extends Application implements Runnable {
 			down = false;
 		}
 		
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	public void run() {
-		fc.showOpenDialog(this.parent.getComponent());
+	@Override
+	public GUIEvent updateMouse(PointerEvent event) {
+		
+		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+			px = event.getX();
+			py = event.getY();
+			fc.openDialog();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public void onSelectFile(String path) {
+		System.out.println("Selected: "+path);
+		
+		StaticLayer image = ImageLoader.getInstance().loadImage(path, true);
+		
+		ImageLayer layer = new ImageLayer(px, py);
+		layer.cloneLayer(image);
+		
+		layers.add(layer);
 	}
 	
-
 }
