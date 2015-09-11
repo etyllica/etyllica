@@ -3,11 +3,11 @@ package br.com.etyllica.animation.timeline;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Timeline<T> {
+public abstract class Timeline<T, F> {
 
 	protected int cursor = 0;
 
-	protected List<KeyFrame<T>> frames = new ArrayList<KeyFrame<T>>();
+	protected List<KeyFrame<F>> frames = new ArrayList<KeyFrame<F>>();
 
 	public Timeline() {
 		super();
@@ -35,7 +35,7 @@ public abstract class Timeline<T> {
 		}
 	}
 
-	public KeyFrame<T> currentFrame() {
+	public KeyFrame<F> currentFrame() {
 		return frames.get(cursor);
 	}
 
@@ -47,6 +47,6 @@ public abstract class Timeline<T> {
 		return cursor;
 	}
 
-	public abstract void reloadFrame(KeyFrame<T> frame);
+	public abstract void reloadFrame(KeyFrame<F> frame);
 
 }
