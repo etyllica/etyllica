@@ -4,29 +4,23 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.selection.Resizer;
-import br.com.etyllica.layer.GeometricLayer;
+import br.com.etyllica.layer.Layer;
 
 public class ResizerApplication extends Application {
 
 	private Resizer resizer;
 
-	private GeometricLayer overlay = null;
-
-	private GeometricLayer blueComponent;
-
-	private GeometricLayer redComponent;
-
-	private GeometricLayer yellowComponent;
+	private Layer blueComponent;
+	private Layer redComponent;
+	private Layer yellowComponent;
 	
-	private List<GeometricLayer> components;
+	private List<Layer> components;
 
 	public ResizerApplication(int w, int h) {
 		super(w, h);
@@ -36,17 +30,18 @@ public class ResizerApplication extends Application {
 	public void load() {
 
 		resizer = new Resizer(this);
-
-		components = new ArrayList<GeometricLayer>();
+		components = new ArrayList<Layer>();
 				
-		blueComponent = new GeometricLayer(40, 100, 200, 80);
+		blueComponent = new Layer(40, 100, 200, 80);
 		components.add(blueComponent);
 
-		redComponent = new GeometricLayer(40, 200, 200, 80);
+		redComponent = new Layer(40, 200, 200, 80);
 		components.add(redComponent);
 
-		yellowComponent = new GeometricLayer(300, 100, 200, 80);
+		yellowComponent = new Layer(300, 100, 200, 80);
 		components.add(yellowComponent);
+		
+		resizer.setLayers(components);
 	}
 
 	@Override
@@ -63,66 +58,18 @@ public class ResizerApplication extends Application {
 		g.setColor(Color.BLACK);
 		g.drawRect(yellowComponent);
 
-		drawOverlay(g);
-
 		resizer.draw(g);
-	}
-
-	private void drawOverlay(Graphic g) {
-
-		if(overlay == null)
-			return;
-
-		g.setColor(Color.BLACK);
-		g.setAlpha(60);
-		g.fillRect(overlay);
-		g.resetOpacity();
 	}
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-
-		int mx = event.getX();
-		int my = event.getY();
-
-		if(!resizer.isSelected()) {
-			
-			for(GeometricLayer component: components) {
-				if(CollisionDetector.colideRectPoint(this, mx, my)) {
-					overlay = component;
-					break;
-				}	
-			}			
-		}
-		
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
-
-			if(!resizer.isSelected()) {
-
-				for(GeometricLayer component: components) {
-					if(CollisionDetector.colideRectPoint(this, mx, my)) {
-						resizer.select(component);
-						overlay = null;	
-					}
-				}
-				
-			} else if(!resizer.isDragged()) {
-
-				resizer.deselect();
-			}
-
-		}
-
 		resizer.handleEvent(event);
-
 		return GUIEvent.NONE;
 	}
 
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
-		
 		resizer.handleKeyEvent(event);
-		
 		return GUIEvent.NONE;
 	}
 

@@ -24,7 +24,6 @@ public abstract class Etyllica extends Applet implements Engine {
 	private static final long serialVersionUID = 4588303747276461888L;
 	
 	private AWTCore core;
-
 	private AWTEngine engine;
 		
 	protected int w = 640;
@@ -66,14 +65,11 @@ public abstract class Etyllica extends Applet implements Engine {
 		engine = new AWTEngine(this, w, h);
 		
 		core = engine.getCore();
-
 		core.setEngine(this);
 	}
 	
 	private void startCore() {
-		
 		core.startCore(application);
-		
 		core.startEngine();
 		
 		addComponentListener(core);
@@ -85,7 +81,7 @@ public abstract class Etyllica extends Applet implements Engine {
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
-		String defaultPath = PathHelper.currentDirectory();
+		String defaultPath = PathHelper.currentDirectory().toString();
 					
 		setPath(defaultPath+suffix);
 	}
@@ -115,17 +111,17 @@ public abstract class Etyllica extends Applet implements Engine {
 		repaint();
 	}
 	
+	public void addLoader(Loader loader) {
+		engine.addLoader(loader);
+	}
+
 	protected void hideCursor() {
 		engine.hideCursor();
 	}
-
+	
 	@Override
 	public void updateSuperEvent(GUIEvent event) {
 		engine.updateSuperEvent(event);
-	}
-	
-	public void addLoader(Loader loader) {
-		engine.addLoader(loader);
 	}
 
 }

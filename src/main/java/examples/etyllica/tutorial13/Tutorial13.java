@@ -13,7 +13,7 @@ public class Tutorial13 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../");
+		//initialSetup("../../");
 		return new ResizerApplication(w, h);
 	}
 	

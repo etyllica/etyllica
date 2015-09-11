@@ -34,7 +34,7 @@ public class FileExample extends Application implements SelectFileListener {
 	public void load() {
 		
 		loading = 10;
-		hello = new ImageLayer(200,100,"hello.png");		
+		hello = new ImageLayer(200,100,"hello.png");
 		loading = 100;
 		
 		fc = new FileChooser(this.parent.getComponent(), PathHelper.currentDirectory());

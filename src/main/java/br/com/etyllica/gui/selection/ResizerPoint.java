@@ -2,9 +2,9 @@ package br.com.etyllica.gui.selection;
 
 import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.layer.GeometricLayer;
+import br.com.etyllica.layer.Layer;
 
-public class ResizerPoint extends GeometricLayer {
+public class ResizerPoint extends Layer {
 
 	private MouseState state;
 	
@@ -14,7 +14,13 @@ public class ResizerPoint extends GeometricLayer {
 	
 	//Draw with half size
 	public void draw(Graphic g) {
-		g.fillRect(x+w/4, y+h/4, w/2, h/2);
+		int sw = (int)(utilWidth()*getScaleX());
+		int sh = (int)(utilHeight()*getScaleY());
+				
+		int offsetX = (int)(utilWidth()*(1-getScaleX()))/2;
+		int offsetY = (int)(utilHeight()*(1-getScaleY()))/2;
+		
+		g.fillRect(getX()+offsetX, getY()+offsetY, sw, sh);
 	}
 
 	public MouseState getState() {
@@ -23,6 +29,6 @@ public class ResizerPoint extends GeometricLayer {
 
 	public void setState(MouseState state) {
 		this.state = state;
-	}	
+	}
 	
 }

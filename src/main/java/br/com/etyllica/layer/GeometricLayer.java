@@ -290,5 +290,5 @@ public class GeometricLayer extends PointInt2D implements Movable {
 	public int utilHeight() {
 		return getH();
 	}
-	
+		
 }
