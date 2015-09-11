@@ -6,31 +6,28 @@ import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class FileChooser extends JFileChooser implements Runnable {
+public class FileChooser implements Runnable {
 	
-	private static final long serialVersionUID = -6559989743288788106L;
-
+	private String path = "";
+	private JFileChooser chooser;
 	private Component component;
 	private SelectFileListener listener;
 	
 	public FileChooser(Component component) {
-		super();
+		super();		
 		this.component = component;
 		init();
 	}
 	
 	public FileChooser(Component component, String path) {
-		super(path);
+		super();
+		this.path = path;
 		this.component = component;
 		init();
 	}
 
 	private void init() {
-		initWithSystemUI();
-		
-		PreviewPane previewPane = new PreviewPane();
-		setAccessory(previewPane);
-		addPropertyChangeListener(previewPane);
+		initWithSystemUI();		
 	}
 
 	private void initWithSystemUI() {
@@ -52,15 +49,25 @@ public class FileChooser extends JFileChooser implements Runnable {
 	}
 	
 	public void openDialog() {
+		
+		chooser = new JFileChooser(path);
+		
+		PreviewPane previewPane = new PreviewPane();
+		chooser.setAccessory(previewPane);
+		chooser.addPropertyChangeListener(previewPane);
+		chooser.setVisible(true);
+		
 		new Thread(this).start();
 	}
 
 	@Override
 	public void run() {
-		if(showOpenDialog(this.component)==JFileChooser.APPROVE_OPTION) {
-			String path = getSelectedFile().getAbsolutePath();
+		if(chooser.showOpenDialog(this.component) == JFileChooser.APPROVE_OPTION) {
+			String path = chooser.getSelectedFile().getAbsolutePath();
 			notifyListener(path);
 		}
+		
+		chooser = null;
 	}
 
 	private void notifyListener(String path) {
