@@ -150,7 +150,6 @@ public class Layer extends GeometricLayer implements Drawable {
 	 * @return
 	 */
 	public boolean onMouse(PointerEvent event) {
-
 		return onMouse(event.getX(), event.getY());
 	}
 
@@ -206,5 +205,13 @@ public class Layer extends GeometricLayer implements Drawable {
 
 	public void simpleDraw(Graphic g) {
 		// TODO Auto-generated method stub
+	}
+	
+	public void copy(Layer layer) {
+		super.copy(layer);
+		setScaleX(layer.getScaleX());
+		setScaleY(layer.getScaleY());
+		setAngle(layer.getAngle());
+		setOpacity(layer.getOpacity());
 	}
 }
