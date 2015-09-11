@@ -22,25 +22,28 @@ public class CollisionDetector {
 
 	public static boolean colideIsometricPoint(Layer cam, int px, int py) {
 
-		float my = cam.getH()/2;
-		float mx = cam.getW()/2;
+		float mx = cam.utilWidth()/2;
+		float my = cam.utilHeight()/2;
 
 		float x = px-cam.getX();
 		float y = py-cam.getY();
 
-		if(y>+my)
-			y=my-(y-my);
+		if(y > my) {
+			y = my-(y-my);
+		}
 
-		if((x>mx+1+(2*y))||(x<mx-1-(2*y)))
+		if ((x > mx+1+(2*y))||(x < mx-1-(2*y))) {
 			return false;
+		}
 
 		return true;
 	}
 
+	//Checks collision with a vertical hexagon
 	public static boolean colideHexagonPoint(Layer cam, int px, int py) {
 
-		float my = cam.getH()/2;
-		float mx = cam.getW()/4;
+		float mx = cam.utilWidth()/4;
+		float my = cam.utilHeight()/2;
 
 		float x = px-cam.getX();
 		float y = py-cam.getY();
@@ -48,11 +51,12 @@ public class CollisionDetector {
 		if(x > mx*3) {
 			x = mx-(x-mx*3);
 		} else if(x > mx) {
-			return py >= cam.getY() && py <= cam.getY()+cam.getH();
+			return py >= cam.getY() && py <= cam.getY()+cam.utilHeight();
 		}
 
-		if((y > my + 1 + (2*x))||(y<my - 1 - (2*x)))
+		if ((y > my + 1 + (2*x)) || (y < my - 1 - (2*x))) {
 			return false;
+		}
 
 		return true;
 	}
@@ -71,12 +75,25 @@ public class CollisionDetector {
 	 * Code found at: http://stackoverflow.com/questions/5650032/collision-detection-with-rotated-rectangles
 	 */
 	public static boolean colideRectPoint(Layer layer, double  px, double py) {
-		int rectWidth = (int)(layer.utilWidth()*layer.getScaleX());
-		int rectHeight = (int)(layer.utilHeight()*layer.getScaleY());
 		
-		int rectCenterX = layer.getX()+rectWidth/2;
-		int rectCenterY = layer.getY()+rectHeight/2;
+		int rectWidth = layer.utilWidth();
+		int rectHeight = layer.utilHeight();
+		int offsetX = 0;
+		int offsetY = 0;
 		
+		if (layer.getScaleX() != 1) {
+			rectWidth *= layer.getScaleX();
+			offsetX = (int)(layer.utilWidth()*(1-layer.getScaleX()))/2;
+		}
+		
+		if (layer.getScaleY() != 1) {
+			rectHeight *= layer.getScaleY();
+			offsetY = (int)(layer.utilHeight()*(1-layer.getScaleY()))/2;
+		}
+		
+		int rectCenterX = layer.getX()+offsetX+rectWidth/2;
+		int rectCenterY = layer.getY()+offsetY+rectHeight/2;
+
 		double rectRotation = Math.toRadians(-layer.getAngle());
 
 		return testRectangleToPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
@@ -84,11 +101,23 @@ public class CollisionDetector {
 
 	public static boolean colideRectPoint(Layer layer, double  px, double py, double scaleX, double scaleY) {
 
-		int rectWidth = (int)(layer.utilWidth()*scaleX);
-		int rectHeight = (int)(layer.utilHeight()*scaleY);
+		int rectWidth = layer.utilWidth();
+		int rectHeight = layer.utilHeight();
+		int offsetX = 0;
+		int offsetY = 0;
 		
-		int rectCenterX = layer.getX()+rectWidth/2;
-		int rectCenterY = layer.getY()+rectHeight/2;
+		if(layer.getScaleX()!=1) {
+			rectWidth *= layer.getScaleX();
+			offsetX = (int)(layer.utilWidth()*(1-layer.getScaleX()))/2;
+		}
+		
+		if(layer.getScaleY()!=1) {
+			rectHeight *= layer.getScaleY();
+			offsetY = (int)(layer.utilHeight()*(1-layer.getScaleY()))/2;
+		}
+		
+		int rectCenterX = layer.getX()+offsetX+rectWidth/2;
+		int rectCenterY = layer.getY()+offsetY+rectHeight/2;
 
 		double rectRotation = Math.toRadians(-layer.getAngle());
 
@@ -97,10 +126,10 @@ public class CollisionDetector {
 
 	public static boolean colideRectPoint(Layer layer, Point2D point) {
 
-		int rectCenterX = layer.getX()+layer.getW()/2;
-		int rectCenterY = layer.getY()+layer.getH()/2;
-		int rectWidth = layer.getW();
-		int rectHeight = layer.getH();
+		int rectCenterX = layer.getX()+layer.utilWidth()/2;
+		int rectCenterY = layer.getY()+layer.utilHeight()/2;
+		int rectWidth = layer.utilWidth();
+		int rectHeight = layer.utilHeight();
 
 		double rectRotation = Math.toRadians(-layer.getAngle());
 
@@ -110,13 +139,13 @@ public class CollisionDetector {
 	/** Rectangle To Point. */
 	private static boolean testRectangleToPoint(double rectWidth, double rectHeight, double rectRotation, double rectCenterX, double rectCenterY, double pointX, double pointY) {
 
-		if(rectRotation == 0)   // Higher Efficiency for Rectangles with 0 rotation.
+		if(rectRotation == 0)   //High speed for rectangles without rotation
 			return Math.abs(rectCenterX-pointX) < rectWidth/2 && Math.abs(rectCenterY-pointY) < rectHeight/2;
 
 		final double cos = Math.cos(rectRotation);
 		final double sin = Math.cos(rectRotation);
 
-		double tx = cos*pointX - sin*pointY; 
+		double tx = cos*pointX - sin*pointY;
 		double ty = cos*pointY + sin*pointX;
 
 		double cx = cos*rectCenterX - sin*rectCenterY;
@@ -154,7 +183,7 @@ public class CollisionDetector {
 	public static boolean testRectangleToCircle(double rectWidth, double rectHeight, double rectRotation, double rectCenterX, double rectCenterY, double circleCenterX, double circleCenterY, double circleRadius) {
 		double tx, ty, cx, cy;
 
-		if(rectRotation == 0) { // Higher Efficiency for Rectangles with 0 rotation.
+		if(rectRotation == 0) { //High speed for rectangles without rotation
 			tx = circleCenterX;
 			ty = circleCenterY;
 
@@ -177,8 +206,8 @@ public class CollisionDetector {
 
 	public static boolean colideRectRect(Layer a, Layer b) {
 		if(a.getAngle() == 0 && b.getAngle() == 0) {
-			return ((a.getX() + a.getW()/2 - b.getX()+b.getW()/2) * 2 < (a.getW() + b.getW())) &&
-			       ((a.getY() + a.getH()/2 - b.getY()+b.getH()/2) * 2 < (a.getH() + b.getH()));
+			return ((a.getX() + a.utilWidth()/2 - b.getX()+b.utilWidth()/2) * 2 < (a.utilWidth() + b.utilWidth())) &&
+					((a.getY() + a.utilHeight()/2 - b.getY()+b.utilHeight()/2) * 2 < (a.utilHeight() + b.utilHeight()));
 		} else {
 			return colidePolygon(a, b);
 		}
@@ -188,26 +217,23 @@ public class CollisionDetector {
 	 * Code found at: http://stackoverflow.com/a/21647567
 	 */
 	public static boolean colidePolygon(Layer a, Layer b) {
-
 		Point2D[] pointsA = getBounds(a);
-
 		Point2D[] pointsB = getBounds(b);
 
 		return colidePoints(pointsA, pointsB);
 	}
 
 	public static Point2D[] getBounds(Layer layer) {
-
 		Point2D[] points = new Point2D[4];
 
 		points[0] = new Point2D(layer.getX(), layer.getY());
-		points[1] = new Point2D(layer.getX()+layer.getW(), layer.getY());
-		points[2] = new Point2D(layer.getX()+layer.getW(), layer.getY()+layer.getH());
-		points[3] = new Point2D(layer.getX(), layer.getY()+layer.getH());
+		points[1] = new Point2D(layer.getX()+layer.utilWidth(), layer.getY());
+		points[2] = new Point2D(layer.getX()+layer.utilWidth(), layer.getY()+layer.utilHeight());
+		points[3] = new Point2D(layer.getX(), layer.getY()+layer.utilHeight());
 
 		if(layer.getAngle() != 0) {
 			for(Point2D point: points) {
-				point.rotate(layer.getX()+layer.getW()/2, layer.getY()+layer.getH()/2, layer.getAngle());
+				point.rotate(layer.getX()+layer.utilWidth()/2, layer.getY()+layer.utilHeight()/2, layer.getAngle());
 			}
 		}
 
@@ -254,26 +280,26 @@ public class CollisionDetector {
 
 	return false;
 	}
-	
+
 	public static boolean colideEllipsePoint(Ellipse ellipse, double px, double py) {
 		double cx = ellipse.getCenter().getX();
 		double cy = ellipse.getCenter().getY();
 		double angle = Math.toRadians(ellipse.getAngle());
 		double a = ellipse.getW();
 		double b = ellipse.getH();
-		
+
 		return colideEllipsePoint(cx, cy, angle, a, b, px, py);
 	}
-	
+
 	public static boolean colideEllipsePoint(double cx, double cy, double angle, double a, double b, double px, double py) {
-		
+
 		final double cos = Math.cos(angle);
 		final double sin = Math.sin(angle);
-		
+
 		double p = EtyllicaMath.sqr(cos*(px-cx)+sin*(py-cy))/(a*a);
 		double q = EtyllicaMath.sqr(sin*(px-cx)-cos*(py-cy))/(b*b);
-		
+
 		return (p + q <= 1);
-	}	
+	}
 
 }
