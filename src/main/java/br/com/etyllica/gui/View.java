@@ -153,7 +153,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable {
 	
 	private void translateComponent(int x, int y, View component){
 		
-		component.setOffset(x, y);
+		component.setLocation(x, y);
 		
 		for(View child: component.views){
 			translateComponent(x, y, child);

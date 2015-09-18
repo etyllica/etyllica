@@ -605,9 +605,9 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 				
 				if(isTranslated(component)) {
 					//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
-					child.setOffset(component.getX(), component.getY());
+					child.setLocation(component.getX(), component.getY());
 					drawView(child,g);
-					child.setOffset(-component.getX(), -component.getY());
+					child.setLocation(-component.getX(), -component.getY());
 				} else {
 					drawView(child,g);	
 				}				

@@ -78,9 +78,9 @@ public class ButtonList extends View{
 	}
 	
 	@Override
-	public void setOffset(int offsetX, int offsetY){
+	public void setLocation(int offsetX, int offsetY){
 		for(DefaultButton button: buttons){
-			button.setOffset(offsetX, offsetY);
+			button.setLocation(offsetX, offsetY);
 		}
 		
 		this.x += offsetX;

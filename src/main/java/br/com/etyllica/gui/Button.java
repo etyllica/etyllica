@@ -185,8 +185,8 @@ public class Button extends View {
 		button.update(event);
 	}
 
-	public void setOffset(int offsetX, int offsetY) {
-		button.setOffset(offsetX, offsetY);
+	public void setLocation(int offsetX, int offsetY) {
+		button.setLocation(offsetX, offsetY);
 	}
 
 	public void setVisible(boolean visible) {
