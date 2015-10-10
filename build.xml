@@ -12,7 +12,6 @@
   <property name="libutil"     value="etyllica-util-${version}" />
   <property name="lib3d"       value="etyllica-${version}-3D" />
   <property name="libsound"    value="etyllica-${version}-sound" />
-  <property name="libphysics"  value="etyllica-${version}-physics" />
 
   <property name="src.dir"     value="src/main/java" />
   <property name="test.dir"    value="src/test/java" />
@@ -163,12 +162,6 @@
       <fileset dir="${build.dir}">
 	<include name="**/sound/*"/>
 	<include name="**/sound/**"/>
-      </fileset>
-    </jar>
-    <jar destfile="${lib.dir}/${libphysics}.jar">
-      <fileset dir="${build.dir}">
-	<include name="**/org/dyn4j/*"/>
-	<include name="**/org/dyn4j/**"/>
       </fileset>
     </jar>
   </target>

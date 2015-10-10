@@ -1,28 +1,19 @@
 package examples.sound.application;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.dyn4j.PhysicsApplication;
-import org.dyn4j.RigidBody;
-import org.dyn4j.dynamics.World;
-import org.dyn4j.geometry.Mass;
 
 import sound.model.Sound;
 import br.com.etyllica.awt.SVGColor;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 
-public class PlaySoundApplication extends PhysicsApplication {
+public class PlaySoundApplication extends Application {
 
 	private Layer layer;
-
 	private Sound sound;
 
 	public PlaySoundApplication(int w, int h) {
@@ -31,9 +22,7 @@ public class PlaySoundApplication extends PhysicsApplication {
 
 	@Override
 	public void load() {
-
 		layer = new Layer(30, 100, 80, 70);
-
 		sound = new Sound("magic1.wav");
 
 		loading = 100;
@@ -48,16 +37,7 @@ public class PlaySoundApplication extends PhysicsApplication {
 			}
 		}
 
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-
-		return null;
+		return GUIEvent.NONE;
 	}
 
 	@Override

@@ -1,11 +1,9 @@
 package examples.sound;
 
 import sound.MultimediaLoader;
-import examples.physics.application.BoxesFalling;
-import examples.sound.application.PlaySoundApplication;
-import examples.sound.application.SyntheticAudioApplication;
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.core.context.Application;
+import examples.sound.application.SyntheticAudioApplication;
 
 public class SoundExample extends EtyllicaFrame {
 	
