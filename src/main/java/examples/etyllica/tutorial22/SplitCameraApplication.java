@@ -4,7 +4,6 @@ import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.GeometricLayer;
@@ -22,7 +21,6 @@ public class SplitCameraApplication extends Application implements UpdateInterva
 	private boolean pressed = false;
 	private int aimY = 0;
 	
-		
 	public SplitCameraApplication(int w, int h) {
 		super(w, h);
 	}
@@ -50,7 +48,7 @@ public class SplitCameraApplication extends Application implements UpdateInterva
 		}
 	}
 		
-	public GUIEvent updateKeyboard(KeyEvent event) {
+	public void updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.VK_UP_ARROW)) {
 			pressed = true;
@@ -59,8 +57,6 @@ public class SplitCameraApplication extends Application implements UpdateInterva
 		if(event.isKeyUp(KeyEvent.VK_UP_ARROW)) {
 			pressed = false;
 		}
-		
-		return GUIEvent.NONE;
 	}
 
 	@Override

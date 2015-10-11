@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
@@ -46,12 +45,9 @@ public class CameraExample extends Application {
 	}
 	
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		
+	public void updateMouse(PointerEvent event) {
 		extendedCamera.setAimX((int)(event.getX()*extendedCamera.getZoomX()-w/2));
 		extendedCamera.setAimY((int)(event.getY()*extendedCamera.getZoomY()-h/2));
-		
-		return GUIEvent.NONE;
 	}
 	
 }

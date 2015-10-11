@@ -2,8 +2,6 @@ package examples.jgl.application;
 
 import org.jgl.GLAUX;
 
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
@@ -15,7 +13,7 @@ public class MoveLight extends GLAUX{
 	}
 
 	@Override
-	public void load(){
+	public void load() {
 		myinit();
 		loading = 100;
 	}	
@@ -27,16 +25,13 @@ public class MoveLight extends GLAUX{
 	}
 	
 	@Override
-	public GUIEvent updateMouse(PointerEvent event){
-
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
+	public void updateMouse(PointerEvent event) {
+		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 			movelight();
 		}
-
-		return GUIEvent	.NONE;
 	}
 
-	private void myinit () {
+	private void myinit() {
 		glEnable (GL_LIGHTING);
 		glEnable (GL_LIGHT0);
 
@@ -78,9 +73,4 @@ public class MoveLight extends GLAUX{
 		glMatrixMode (GL_MODELVIEW);
 	}
 
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent.NONE;
-	}
 }

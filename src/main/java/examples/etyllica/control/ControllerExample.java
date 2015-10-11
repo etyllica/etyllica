@@ -3,7 +3,6 @@ package examples.etyllica.control;
 import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.joystick.TouchJoystick;
@@ -48,9 +47,8 @@ public class ControllerExample extends Application {
 	}
 
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
+	public void updateMouse(PointerEvent event) {
 		joystick.updateMouse(event);
-		return GUIEvent.NONE;
 	}
 
 }

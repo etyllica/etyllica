@@ -2,9 +2,7 @@ package examples.jgl.application;
 
 import org.jgl.GLAUX;
 
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 
 public class Robot extends GLAUX{
@@ -21,7 +19,7 @@ public class Robot extends GLAUX{
 	private void shoulderSubtract() { shoulder = (shoulder - 5) % 360; }
 
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
+	public void updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.VK_CTRL_LEFT)||event.isKeyDown(KeyEvent.VK_CTRL_RIGHT)) {
 			
@@ -54,8 +52,6 @@ public class Robot extends GLAUX{
 			}
 			
 		}
-
-		return GUIEvent.NONE;
 	}
 
 	@Override
@@ -97,10 +93,4 @@ public class Robot extends GLAUX{
 		glLoadIdentity();
 		glTranslatef(0.0f, 0.0f, -5.0f);
 	}
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent.NONE;
-	}
-
 }

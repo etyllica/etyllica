@@ -29,6 +29,7 @@ import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.i18n.LanguageHandler;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
+import br.com.etyllica.core.ui.ViewGroup;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.theme.Theme;
@@ -142,12 +143,10 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	public void update(long now) {
-
-		if(!activeWindow.isLoaded()) {
-			return;
-
+		
+		if(!activeWindow.getContext().isLoaded()) {
+			return;			
 		} else if (needReload) {
-
 			fastReload();
 		}
 
@@ -232,7 +231,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	public boolean updateApplication(Context context, long now) {
-
+		
 		if(context.isLocked()) {
 			return false;
 		}
@@ -548,7 +547,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		if(context.isClearBeforeDraw()) {
 			g.setColor(Color.WHITE);
-
 			g.fillRect(0, 0, context.getW(), context.getH());
 		}
 
@@ -557,13 +555,10 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		context.getScene().draw(g);
 
 		drawViewChildren(context, g);
-
 	}	
 
 	private void updateEffects(long now) {
-
 		for(Updatable updatable: updatables) {
-
 			updatable.update(now);	
 		}
 	}
@@ -595,7 +590,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		drawViewChildren(component, g);
 	}
 
-	private void drawViewChildren(View component, Graphic g) {
+	private void drawViewChildren(ViewGroup component, Graphic g) {
 
 		if(!component.getViews().isEmpty()) {
 
@@ -610,12 +605,12 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 					child.setLocation(-component.getX(), -component.getY());
 				} else {
 					drawView(child,g);	
-				}				
+				}
 			}
 		}
 	}
 		
-	private boolean isTranslated(View view) {
+	private boolean isTranslated(ViewGroup view) {
 		return (view.getX() != 0 && view.getY() != 0);
 	}
 	
@@ -783,11 +778,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		}
 		
 		application.setParent(activeWindow);
-		
 		application.setDrawCursor(drawCursor);
-
 		application.setMouseStateListener(arrowDrawer);
-
 		application.setLanguageChangerListener(this);
 		
 		activeWindow.reload(application);
@@ -797,7 +789,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		locked = true;
 
-		activeWindow.getContext().clearComponents();
+		activeWindow.getContext().getViews().clear();
 		activeWindow.getContext().load();		
 
 		needReload = false;

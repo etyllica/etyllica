@@ -5,7 +5,6 @@ import java.util.Set;
 
 import br.com.etyllica.core.animation.pivot.Part;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
@@ -51,22 +50,17 @@ public class PivotExample extends Application {
 	}
 
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
+	public void updateMouse(PointerEvent event) {
 
 		if(event.isClicked()) {
 			System.out.println("x: "+event.getX());
 			System.out.println("y: "+event.getY());
 		}
-
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-
-		// TODO Auto-generated method stub
-		return null;
+	public void updateKeyboard(KeyEvent event) {
+		
 	}	
 
 	public void drawPart(Graphic g, Part part) {

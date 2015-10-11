@@ -6,7 +6,6 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.ScrollerPanel;
@@ -28,22 +27,22 @@ public class ChatWindowExample extends Application{
 	private String friendname = "Friend";
 	
 	@Override
-	public void load(){
+	public void load() {
 		
 		ScrollerPanel rollerPanel = new ScrollerPanel(20,20,300,240);
 		
 		panel = new TextPanel(300,240);
 		rollerPanel.setComponent(panel);
 		
-		add(rollerPanel);
+		addView(rollerPanel);
 		
 		tf = new TextField(20, 280, 200, 20);
-		add(tf);
+		addView(tf);
 		
 		Button button = new Button(tf.getX()+tf.getW()+10, tf.getY(), 90, tf.getH());
 		button.setLabel(new TextLabel("Send!"));
 		button.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "sendMsg"));
-		add(button);
+		addView(button);
 		
 		loading = 100;
 	}
@@ -54,7 +53,7 @@ public class ChatWindowExample extends Application{
 	}
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event){
+	public void updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.VK_1)){
 			panel.addLine(friendname+": Hi");
@@ -78,10 +77,7 @@ public class ChatWindowExample extends Application{
 		
 		if(event.isKeyDown(KeyEvent.VK_6)){
 			panel.addLine(friendname+": LOL :D");
-		}
-		
-		return GUIEvent.NONE;
-		
+		}	
 	}
 	
 	@Override
@@ -92,11 +88,4 @@ public class ChatWindowExample extends Application{
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(x,y,w,h);
 	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent event){
-		// TODO Auto-generated method stub
-		return GUIEvent	.NONE;
-	}
-	
 }

@@ -11,20 +11,18 @@ package br.com.etyllica.core.event;
 
 public class PointerEvent {
 
-	private MouseButton key;
+	private int id = 0;
 	
+	private MouseButton key;
 	private PointerState state;
 	
 	private int x = 0;
-	
 	private int y = 0;
 	
 	private int amountX = 0;
-	
 	private int amountY = 0;
 	
 	private boolean consumed = false;
-	
 	private long timestamp = System.currentTimeMillis();
 	
 	public PointerEvent() {
@@ -124,6 +122,14 @@ public class PointerEvent {
 		this.y = y;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public int getAmount() {
 		return amountY;
 	}

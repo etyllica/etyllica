@@ -4,9 +4,6 @@ import java.util.List;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.loader.image.ImageFrame;
 import br.com.etyllica.loader.image.ImageLoader;
@@ -29,7 +26,6 @@ public class GifAnimation extends Application implements UpdateIntervalListener 
 		updateAtFixedRate(frames.get(0).getDelay(), this);
 		
 		loading = 100;
-
 	}
 
 	private int count = 0;
@@ -45,18 +41,4 @@ public class GifAnimation extends Application implements UpdateIntervalListener 
 		g.drawImage(frames.get(count).getImage(), 0, 0);
 
 	}
-	
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
 }

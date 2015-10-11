@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
@@ -95,7 +94,7 @@ public class CustomLoadApplication extends Application{
 	}
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
+	public void updateKeyboard(KeyEvent event) {
 				
 		//If Up Arrow is Pressed
 		if(event.isKeyDown(KeyEvent.VK_UP)) {
@@ -123,17 +122,12 @@ public class CustomLoadApplication extends Application{
 		if(event.isKeyDown(KeyEvent.VK_SPACE)){
 			nextApplication = new ByeWorld(w,h);
 		}
-
-		return GUIEvent.NONE;
 	}
 	
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		
+	public void updateMouse(PointerEvent event) {
 		mx = event.getX();
 		my = event.getY();
-		
-		return GUIEvent	.NONE;
 	}
 	
 }

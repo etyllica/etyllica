@@ -33,7 +33,7 @@ public class HelloWorldAnimated extends Application {
 
 	@Override
 	public void draw(Graphic g) {
-		hello.draw(g);		
+		hello.draw(g);
 	}
 
 }

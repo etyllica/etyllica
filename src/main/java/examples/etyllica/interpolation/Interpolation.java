@@ -17,7 +17,7 @@ public class Interpolation extends EtyllicaFrame {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../../");
 
 		return new InterpolationExample(w,h);
 	}

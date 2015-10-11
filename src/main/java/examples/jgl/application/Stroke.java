@@ -2,9 +2,6 @@ package examples.jgl.application;
 
 import org.jgl.GL;
 
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 
 public class Stroke extends GL {
@@ -127,17 +124,4 @@ public class Stroke extends GL {
 		glPopMatrix();
 		glFlush(g);
 	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent.NONE;
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent.NONE;
-	}
-
 }

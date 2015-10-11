@@ -3,9 +3,7 @@ package examples.jgl.application;
 import org.jgl.GLAUX;
 
 import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 
 public class Planet extends GLAUX implements UpdateIntervalListener {
@@ -15,14 +13,12 @@ public class Planet extends GLAUX implements UpdateIntervalListener {
 	}
 	
 	@Override
-	public void load(){
-		
+	public void load() {
 		myReshape(w, h);
 		
 		updateAtFixedRate(50, this);
 		
 		loading = 100;
-		
 	}
 
 	private static int month = 0, day = 0;
@@ -39,7 +35,7 @@ public class Planet extends GLAUX implements UpdateIntervalListener {
 	}
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
+	public void updateKeyboard(KeyEvent event) {
 
 		if(event.isKeyDown(KeyEvent.VK_LEFT)) {
 			monthSubtract();
@@ -53,9 +49,6 @@ public class Planet extends GLAUX implements UpdateIntervalListener {
 		else if(event.isKeyDown(KeyEvent.VK_DOWN)) {
 			daySubtract();
 		}
-
-		return GUIEvent.NONE;
-
 	}
 
 	@Override
@@ -84,9 +77,4 @@ public class Planet extends GLAUX implements UpdateIntervalListener {
 		glTranslatef (0.0f, 0.0f, -5.0f);
 	}
 
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent.NONE;
-	}
 }

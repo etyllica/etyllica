@@ -7,13 +7,16 @@ import br.com.etyllica.layer.Layer;
 
 public class TouchJoystick {
 
+	private static final int INACTIVE = -1;
+	
 	private static final int DEFAULT_RADIUS = 120/2;
 	private static final int DEFAULT_JOYSTICK_RADIUS = 50/2;
 	
 	private Layer area;
 	private Layer joystick;
+	protected int activeId = INACTIVE;
 	protected boolean active = false;
-
+	
 	protected Point2D center;
 	protected Point2D joyPosition;
 	
@@ -60,8 +63,9 @@ public class TouchJoystick {
 		int my = event.getY();
 
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
-			if(!active) {
+			if(activeId == INACTIVE) {
 				if(joystick.colideCirclePoint(mx, my)) {
+					activeId = event.getId();
 					setActive(true);
 				}
 			} else {
@@ -77,13 +81,14 @@ public class TouchJoystick {
 
 		} else if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
 			//Release Joystick
-			if(active) {
+			if(active && event.getAmount() == activeId) {
 				setActive(false);
+				activeId = INACTIVE;
 				resetJoystick();
 				sensitivityX = 0;
 				sensitivityY = 0;
 			}
-		}		
+		}
 	}
 
 	protected void update() {

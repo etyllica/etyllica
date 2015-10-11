@@ -2,9 +2,6 @@ package examples.jgl.application;
 
 import org.jgl.GLAUX;
 
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 
 public class Clip extends GLAUX {
@@ -51,18 +48,6 @@ public class Clip extends GLAUX {
 		glLoadIdentity ();
 		gluPerspective (60.0, (float)w/(float)h, 1.0, 20.0);
 		glMatrixMode (GL_MODELVIEW);
-	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent.NONE;
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent.NONE;
 	}
 	
 }

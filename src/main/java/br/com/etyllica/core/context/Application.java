@@ -1,6 +1,5 @@
 package br.com.etyllica.core.context;
 
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 
@@ -17,13 +16,18 @@ public abstract class Application extends Context {
 	}
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		return GUIEvent.NONE;
+	public void updateKeyboard(KeyEvent event) {
+		
 	}
 
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		return GUIEvent.NONE;
+	public void updateMouse(PointerEvent event) {
+		
+	}
+	
+	@Override
+	public void resize(int width, int height) {
+		
 	}
 	
 }

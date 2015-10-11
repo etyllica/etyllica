@@ -1,7 +1,6 @@
 package examples.etyllica.tutorial01;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
@@ -16,13 +15,9 @@ public class HelloWorld extends Application {
 
 	@Override
 	public void load() {
-		
 		loading = 10;
-		
-		hello = new ImageLayer(200,100,"hello.png");
-		
+		hello = new ImageLayer(200,100,"hello.png");		
 		loading = 100;
-
 	}
 
 	@Override
@@ -46,7 +41,6 @@ public class HelloWorld extends Application {
 		if(up) {
 			hello.setOffsetY(-1);
 		}
-		
 	}
 	
 	private boolean up = false;
@@ -56,7 +50,8 @@ public class HelloWorld extends Application {
 	private boolean left = false;
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
+	public void updateKeyboard(KeyEvent event) {
+		System.out.println("Update Keyboard");
 		
 		if(event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
 			right = true;
@@ -86,10 +81,5 @@ public class HelloWorld extends Application {
 		if(event.isKeyUp(KeyEvent.VK_DOWN_ARROW)) {
 			down = false;
 		}
-		
-		// TODO Auto-generated method stub
-		return null;
 	}
-	
-
 }
