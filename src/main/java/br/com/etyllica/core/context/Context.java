@@ -83,9 +83,14 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	protected long lastUpdate = 0;
 
 	/**
-	 * Lock
+	 * Lock on update
 	 */
 	private boolean locked = false;
+	
+	/**
+	 * Lock on load
+	 */
+	private boolean loaded = false;
 
 	/**
 	 * Pause
@@ -349,6 +354,14 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 		this.parent = window;
 		setSession(window.getSession());
 		setCamera(window.getCamera());
+	}
+
+	public boolean isLoaded() {
+		return loaded;
+	}
+
+	public void setLoaded(boolean loaded) {
+		this.loaded = loaded;
 	}
 	
 }

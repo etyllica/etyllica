@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import br.com.etyllica.core.context.Context;
-import br.com.etyllica.gui.Window;
 
 /**
  * 
@@ -20,25 +19,19 @@ import br.com.etyllica.gui.Window;
 public class ApplicationLoader implements ApplicationLoadListener {
 
 	private Loader loader = new Loader();
-
 	private Updater updater = new Updater();
 
-	private Window window;
-
 	private Context application;
-
+	private LoaderListener listener;
 	private LoadApplication loadApplication;
-
-	private boolean called = false;
 	
+	private boolean called = false;
 	private ScheduledExecutorService loadExecutor;
-
 	private Future<?> future;
 	
 	private static final int UPDATE_INTERVAL = 10;
 	
 	private String lastText = "";
-	
 	private float lastLoading = 0;
 	
 	public ApplicationLoader() {
@@ -52,12 +45,9 @@ public class ApplicationLoader implements ApplicationLoadListener {
 		
 		loadExecutor = Executors.newScheduledThreadPool(2);
 		
-		window.setLoaded(false);
-		
 		future = loadExecutor.submit(loader);
 				
 		loadExecutor.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
-		
 	}
 
 	private class Loader implements Runnable {
@@ -76,9 +66,8 @@ public class ApplicationLoader implements ApplicationLoadListener {
 		public void run() {
 						
 			if(!called) {
-							
-				if(!window.isLoaded()) {
-					
+				
+				if(!application.isLoaded()) {
 					notifyTextChanged();
 					notifyLoadingChanged();
 					
@@ -86,11 +75,10 @@ public class ApplicationLoader implements ApplicationLoadListener {
 				}
 												
 			} else {
+				//Notify window
+				application.setLoaded(true);
 				
-				window.setApplication(application);
-				window.setLoaded(true);
-				
-				stopLoading();
+				finishLoading();
 			}
 		}
 		
@@ -130,14 +118,6 @@ public class ApplicationLoader implements ApplicationLoadListener {
 		this.loadApplication = loadApplication;
 	}
 
-	public Window getWindow() {
-		return window;
-	}
-
-	public void setWindow(Window window) {
-		this.window = window;
-	}
-
 	@Override
 	public void onApplicationLoaded() {
 		called = true;
@@ -149,7 +129,7 @@ public class ApplicationLoader implements ApplicationLoadListener {
 		} catch (ExecutionException e) {
 			Throwable cause = e.getCause();
 			cause.printStackTrace();
-			stopLoading();
+			finishLoading();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (TimeoutException e) {
@@ -158,9 +138,14 @@ public class ApplicationLoader implements ApplicationLoadListener {
 		}
 	}
 
-	private void stopLoading() {
+	private void finishLoading() {
+		listener.onLoad(application);
 		called = true;
 		loadExecutor.shutdownNow();
+	}
+
+	public void setListener(LoaderListener listener) {
+		this.listener = listener;
 	}
 
 }

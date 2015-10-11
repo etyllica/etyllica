@@ -11,6 +11,7 @@ import br.com.etyllica.core.context.Session;
 import br.com.etyllica.core.context.load.ApplicationLoader;
 import br.com.etyllica.core.context.load.DefaultLoadApplication;
 import br.com.etyllica.core.context.load.GenericLoadApplication;
+import br.com.etyllica.core.context.load.LoaderListener;
 import br.com.etyllica.layer.GeometricLayer;
 
 /**
@@ -20,7 +21,7 @@ import br.com.etyllica.layer.GeometricLayer;
  *
  */
 
-public class Window extends GeometricLayer implements ContextContainer {
+public class Window extends GeometricLayer implements ContextContainer, LoaderListener {
 	
 	private java.awt.Component component;
 	
@@ -92,7 +93,7 @@ public class Window extends GeometricLayer implements ContextContainer {
 			
 			checkForLoadApplication(context);
 			
-			applicationLoader.setWindow(this);
+			applicationLoader.setListener(this);
 			applicationLoader.setApplication(context);
 						
 			reloadLoadApplication();
@@ -170,6 +171,11 @@ public class Window extends GeometricLayer implements ContextContainer {
 
 	public void setComponent(java.awt.Component component) {
 		this.component = component;
+	}
+
+	@Override
+	public void onLoad(Context context) {
+		setApplication(context);
 	}	
 			
 }
