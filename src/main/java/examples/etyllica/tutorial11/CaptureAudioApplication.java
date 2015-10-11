@@ -6,8 +6,6 @@ import sound.capture.AudioHandler;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.TextLabel;
@@ -37,19 +35,19 @@ public class CaptureAudioApplication extends Application {
 		final Button capture = new Button(20,20,200,30);
 		capture.setLabel(new TextLabel("Capture"));
 		capture.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new Action(this, "captureAudio"));
-		this.add(capture);
+		addView(capture);
 
 		stop = new Button(20,60,200,30);
 		stop.setLabel(new TextLabel("Stop Capture"));
 		stop.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new Action(this, "stopCapture"));
 		stop.setDisabled(true);
-		this.add(stop);
+		addView(stop);
 
 		play = new Button(20,100,200,30);
 		play.setLabel(new TextLabel("Play"));
 		play.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new Action(this, "playAudio"));
 		play.setDisabled(true);
-		this.add(play);
+		addView(play);
 
 	}
 
@@ -102,18 +100,5 @@ public class CaptureAudioApplication extends Application {
 				lastY = y;
 			}
 		}
-	}	
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return null;
 	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

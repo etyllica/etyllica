@@ -27,7 +27,6 @@ public class LightningApplication extends Application{
 		lightning.setSpeed(100);
 				
 		loading = 100;
-
 	}
 
 	@Override
@@ -43,23 +42,11 @@ public class LightningApplication extends Application{
 	public void update(long now) {
 		
 	}
-	
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 		
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		
+	public void updateKeyboard(KeyEvent event) {
 		if(event.isKeyUp(KeyEvent.VK_SPACE)) {
 			lightning.startEffect();
 		}
-				
-		// TODO Auto-generated method stub
-		return null;
 	}
-	
-
 }

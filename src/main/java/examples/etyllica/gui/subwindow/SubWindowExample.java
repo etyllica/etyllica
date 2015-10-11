@@ -3,9 +3,7 @@ package examples.etyllica.gui.subwindow;
 import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Window;
 import examples.etyllica.tutorial09.application.SimpleGuiExample;
@@ -22,7 +20,7 @@ public class SubWindowExample extends Application {
 	}
 
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
+	public void updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.VK_1)) {
 			
@@ -30,23 +28,11 @@ public class SubWindowExample extends Application {
 			subWindow.setApplication(new SimpleGuiExample(subWindow.getW(), subWindow.getH()));
 			
 		}
-		
-		return GUIEvent.NONE;
-		
-	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-				
-		// TODO Auto-generated method stub
-		return GUIEvent	.NONE;
 	}
 	
 	@Override
 	public void draw(Graphic g) {
-		
-		//Drawing background
-		
+		//Draw background	
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(x,y,w,h);
 	}

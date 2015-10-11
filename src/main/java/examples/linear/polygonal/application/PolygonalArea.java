@@ -3,8 +3,6 @@ package examples.linear.polygonal.application;
 import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.linear.Point2D;
@@ -62,16 +60,9 @@ public class PolygonalArea extends Application {
 	}
 	
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
+	public void updateMouse(PointerEvent event) {
 		//dynamic position
 		q.setLocation(event.getX(), event.getY());
-		
-		return GUIEvent.NONE;
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		return GUIEvent.NONE;
 	}
 
 }

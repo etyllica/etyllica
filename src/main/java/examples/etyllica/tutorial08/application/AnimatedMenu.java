@@ -3,9 +3,6 @@ package examples.etyllica.tutorial08.application;
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.TextLabel;
@@ -57,9 +54,9 @@ public class AnimatedMenu extends Application{
 		button2.setLabel(new TextLabel("Button2"));
 		
 
-		this.add(button1);
+		addView(button1);
 		
-		this.add(button2);
+		addView(button2);
 		
 	}
 
@@ -67,22 +64,4 @@ public class AnimatedMenu extends Application{
 	public void draw(Graphic g) {
 
 	}
-		
-	@Override
-	public void update(long now){
-				
-	}
-	
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-						
-		return GUIEvent.NONE;
-	}
-	
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-
-		return GUIEvent.NONE;
-	}
-
 }

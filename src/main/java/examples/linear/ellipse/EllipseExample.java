@@ -2,7 +2,6 @@ package examples.linear.ellipse;
 
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.core.context.Application;
-import examples.linear.arrow.application.ArrowApplication;
 import examples.linear.ellipse.application.EllipseDrawing;
 
 public class EllipseExample extends EtyllicaFrame {

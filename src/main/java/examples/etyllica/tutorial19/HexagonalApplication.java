@@ -4,7 +4,6 @@ import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.BufferedLayer;
@@ -39,11 +38,9 @@ public class HexagonalApplication extends Application implements UpdateIntervalL
 		}				
 	}
 	
-	public GUIEvent updateMouse(PointerEvent event) {
+	public void updateMouse(PointerEvent event) {
 		mx = event.getX();
 		my = event.getY();
-		
-		return GUIEvent.NONE;
 	}
 
 	@Override

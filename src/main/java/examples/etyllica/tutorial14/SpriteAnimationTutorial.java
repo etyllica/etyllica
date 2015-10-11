@@ -3,9 +3,6 @@ package examples.etyllica.tutorial14;
 
 import br.com.etyllica.core.animation.script.FrameAnimation;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.AnimatedLayer;
 
@@ -32,23 +29,7 @@ public class SpriteAnimationTutorial extends Application{
 
 	@Override
 	public void draw(Graphic g) {
-		
-		fruit.draw(g);
-		
+		fruit.draw(g);		
 	}
-
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent.NONE;
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent.NONE;
-	}
-
-	
 
 }

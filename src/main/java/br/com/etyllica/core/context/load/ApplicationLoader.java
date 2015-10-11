@@ -39,14 +39,13 @@ public class ApplicationLoader implements ApplicationLoadListener {
 	}
 
 	public void loadApplication() {
-
 		lastText = "";
 		lastLoading = 0;
 		
 		loadExecutor = Executors.newScheduledThreadPool(2);
 		
 		future = loadExecutor.submit(loader);
-				
+		
 		loadExecutor.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
 	}
 
@@ -64,7 +63,6 @@ public class ApplicationLoader implements ApplicationLoadListener {
 	private class Updater implements Runnable {
 
 		public void run() {
-						
 			if(!called) {
 				
 				if(!application.isLoaded()) {
@@ -73,15 +71,12 @@ public class ApplicationLoader implements ApplicationLoadListener {
 					
 					getError();
 				}
-												
+				
 			} else {
 				//Notify window
-				application.setLoaded(true);
-				
 				finishLoading();
 			}
 		}
-		
 	}
 	
 	private void notifyTextChanged() {

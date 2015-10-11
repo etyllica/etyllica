@@ -1,5 +1,8 @@
 package br.com.etyllica.core.context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.context.load.ApplicationLoadListener;
@@ -13,8 +16,11 @@ import br.com.etyllica.core.i18n.LanguageChanger;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
+import br.com.etyllica.core.ui.UIComponent;
+import br.com.etyllica.core.ui.ViewGroup;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
+import br.com.etyllica.layer.Layer;
 
 /**
  * Class to represent sessions of the Main Application like Mini-Applications.  
@@ -24,7 +30,7 @@ import br.com.etyllica.gui.Window;
  *
  */
 
-public abstract class Context extends View implements Updatable, MouseStateChanger, LanguageChanger {
+public abstract class Context extends Layer implements ViewGroup, UIComponent, Updatable, MouseStateChanger, LanguageChanger {
 
 	/**
 	 * The updateInterval between executions
@@ -89,8 +95,9 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	
 	/**
 	 * Lock on load
+	 * Start as true
 	 */
-	private boolean loaded = false;
+	private boolean loaded = true;
 
 	/**
 	 * Pause
@@ -120,6 +127,8 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 	protected int fps = 0;
 	
 	private boolean drawCursor = true;
+	
+	protected List<View> views = new ArrayList<View>();
 	
 	/**
 	 * Constructor
@@ -362,6 +371,18 @@ public abstract class Context extends View implements Updatable, MouseStateChang
 
 	public void setLoaded(boolean loaded) {
 		this.loaded = loaded;
+	}
+
+	public List<View> getViews() {
+		return views;
+	}
+
+	public void setViews(List<View> views) {
+		this.views = views;
+	}
+	
+	protected void addView(View view) {
+		this.views.add(view);
 	}
 	
 }

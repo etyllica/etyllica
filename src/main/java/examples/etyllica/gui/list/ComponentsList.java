@@ -22,11 +22,11 @@ public class ComponentsList extends Application {
 		select.addOption(new Option("pt-br","Portuguese"));
 		select.addOption(new Option("en-us","English"));
 		select.addOption(new Option("es-es","Spanish" ));
-		add(select);
+		addView(select);
 		
 		ScrollerPanel panel = new ScrollerPanel(200,40,200,200);
 		panel.setComponent(new ColoredTextPanel(0, 0, 200, 300));
-		add(panel);
+		addView(panel);
 		
 		OptionPanel optionPanel = new OptionPanel(400,40,200,200);
 		
@@ -34,7 +34,7 @@ public class ComponentsList extends Application {
 		optionPanel.addOption(new Option("en-us","English"));
 		optionPanel.addOption(new Option("es-es","Spanish" ));
 
-		add(optionPanel);		
+		addView(optionPanel);
 		
 		loading = 100;
 	}

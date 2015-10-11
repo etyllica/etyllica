@@ -49,8 +49,6 @@ public class JGLTutorials extends Etyllica {
 		//Problem
 		//return new Simple(w, h);
 		//return new Stroke(w, h);
-		
-		
 	}
 	
 }

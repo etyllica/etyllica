@@ -32,16 +32,9 @@ public class ArrowApplication extends Application {
 	}
 	
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
+	public void updateMouse(PointerEvent event) {
 		//dynamic position
 		q.setLocation(event.getX(), event.getY());
-		
-		return GUIEvent.NONE;
-	}
-
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		return GUIEvent.NONE;
 	}
 
 }

@@ -27,35 +27,35 @@ public class SimpleGuiExample extends Application{
 		Button buttonWhite = new Button(20,30,120,40);
 		buttonWhite.setLabel(new TextLabel("WHITE!"));
 		buttonWhite.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", SVGColor.GHOST_WHITE));
-		add(buttonWhite);		
+		addView(buttonWhite);
 		
 		Button buttonBlue = new Button(20,80,120,40);
 		buttonBlue.setLabel(new TextLabel("BLUE!"));
 		buttonBlue.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", SVGColor.ROYAL_BLUE));
-		add(buttonBlue);
+		addView(buttonBlue);
 		
 		Button buttonSeaGreen = new Button(20,130,120,40);
 		buttonSeaGreen.setLabel(new TextLabel("SEA GREEN!"));
 		buttonSeaGreen.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", SVGColor.SEA_GREEN));
-		add(buttonSeaGreen);
+		addView(buttonSeaGreen);
 		
 		Button buttonOrchid = new Button(20,180,120,40);
 		buttonOrchid.setRoundness(10);
 		buttonOrchid.setLabel(new TextLabel("ORCHID!"));
 		buttonOrchid.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", SVGColor.ORCHID));
-		add(buttonOrchid);
+		addView(buttonOrchid);
 		
 		Button buttonOrange = new Button(20,230,120,40);
 		buttonOrange.setRoundness(10);
 		buttonOrange.setLabel(new TextLabel("ORANGE!"));
 		buttonOrange.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", SVGColor.ORANGE));
-		add(buttonOrange);
+		addView(buttonOrange);
 		
 		Button buttonCrimson = new Button(20,280,120,40);
 		buttonCrimson.setRoundness(10);
 		buttonCrimson.setLabel(new TextLabel("CRIMSON!"));
 		buttonCrimson.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", SVGColor.CRIMSON));
-		add(buttonCrimson);
+		addView(buttonCrimson);
 		
 		loading = 100;
 	}

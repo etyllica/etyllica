@@ -27,15 +27,15 @@ public class GeneralGuiExample extends Application{
 		Button buttonWhite = new Button(20,30,120,40);
 		buttonWhite.setLabel(new TextLabel("WHITE"));
 		buttonWhite.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", Color.WHITE));
-		add(buttonWhite);		
+		addView(buttonWhite);	
 		
 		Button buttonBlue = new Button(20,80,120,40);
 		buttonBlue.setLabel(new TextLabel("BLUE"));
 		buttonBlue.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", Color.BLUE));
-		add(buttonBlue);
+		addView(buttonBlue);
 		
 		TextField field = new TextField(100, 150, 120, 40);
-		add(field);
+		addView(field);
 		
 		loading = 100;
 	}
@@ -46,10 +46,8 @@ public class GeneralGuiExample extends Application{
 	
 	@Override
 	public void draw(Graphic g) {
-		
 		g.setColor(color);
 		g.fillRect(x, y, w, h);
-		
 	}
 
 }

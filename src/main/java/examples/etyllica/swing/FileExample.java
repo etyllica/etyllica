@@ -76,7 +76,7 @@ public class FileExample extends Application implements SelectFileListener {
 	private boolean left = false;
 	
 	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
+	public void updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
 			right = true;
@@ -106,20 +106,16 @@ public class FileExample extends Application implements SelectFileListener {
 		if(event.isKeyUp(KeyEvent.VK_DOWN_ARROW)) {
 			down = false;
 		}
-		
-		return null;
 	}
 	
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
+	public void updateMouse(PointerEvent event) {
 		
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 			px = event.getX();
 			py = event.getY();
 			fc.openDialog();
 		}
-		
-		return null;
 	}
 
 	@Override

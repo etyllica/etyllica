@@ -37,9 +37,6 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 	protected ApplicationLoader applicationLoader;
 
 	protected boolean close = false;
-
-	private boolean loaded = true;
-	//private boolean locked = false;
 	
 	private List<Window> windows = new ArrayList<Window>();
 	
@@ -87,9 +84,8 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 
 	public void reload(Context context) {
 		
-		if(loaded) {
-			
-			loaded = false;
+		if(context.isLoaded()) {
+			context.setLoaded(false);
 			
 			checkForLoadApplication(context);
 			
@@ -126,14 +122,6 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 
 	public void setClose(boolean close) {
 		this.close = close;
-	}
-
-	public boolean isLoaded() {
-		return loaded;
-	}
-
-	public void setLoaded(boolean loaded) {
-		this.loaded = loaded;
 	}
 
 	public List<Window> getWindows() {
@@ -174,8 +162,9 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 	}
 
 	@Override
-	public void onLoad(Context context) {
+	public void onLoad(Context context) {		
 		setApplication(context);
-	}	
+		context.setLoaded(true);
+	}
 			
 }

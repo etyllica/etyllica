@@ -1,8 +1,6 @@
 package examples.etyllica.tutorial18;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.BufferedLayer;
@@ -16,7 +14,6 @@ public class AlphaCollision extends Application{
 	}
 
 	private int mx = 0;
-	
 	private int my = 0;
 	
 	@Override
@@ -50,19 +47,9 @@ public class AlphaCollision extends Application{
 	}
 	
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		
+	public void updateMouse(PointerEvent event) {
 		mx = event.getX();
-		
 		my = event.getY();
-				
-		return null;
-	}
-	
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-
-		return GUIEvent.NONE;
 	}
 	
 	@Override

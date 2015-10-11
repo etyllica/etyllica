@@ -3,7 +3,6 @@ package examples.etyllica.tutorial04;
 import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.BufferedLayer;
@@ -18,14 +17,13 @@ public class ProceduralColorChange extends Application {
 
 	@Override
 	public void load(){
-		
 		cursor = new BufferedLayer(50,50,"cursor.png");
 		
 		loading = 100;
 	}
 		
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
+	public void updateMouse(PointerEvent event) {
 		
 		int ex = event.getX();
 		int ey = event.getY();
@@ -37,16 +35,11 @@ public class ProceduralColorChange extends Application {
 		int blue = 0;
 				
 		cursor.offsetRGB(red, green, blue);		
-		
-		return GUIEvent	.NONE;
-		
 	}
 	
 	@Override
 	public void draw(Graphic g) {
-		
 		//Drawing background
-		
 		g.setColor(Color.WHITE);
 		g.fillRect(x,y,w,h);
 		

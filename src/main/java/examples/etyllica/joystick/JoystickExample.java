@@ -1,9 +1,7 @@
 package examples.etyllica.joystick;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.layer.ImageLayer;
 
@@ -33,15 +31,8 @@ public class JoystickExample extends Application{
 		hello.draw(g);
 	}
 	
-
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
+	public void updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
 			hello.setOffsetX(10);
@@ -76,10 +67,6 @@ public class JoystickExample extends Application{
 		if(event.isKeyDown(KeyEvent.VK_JOYSTICK_BUTTON_8)) {
 			hello.setScale(1);
 		}
-				
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
-
 }

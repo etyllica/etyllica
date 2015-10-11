@@ -25,7 +25,7 @@ public class GuiExamples extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
+		initialSetup("../../../");
 		
 		//Enable Timer Click
 		Configuration.getInstance().setTimerClick(true);

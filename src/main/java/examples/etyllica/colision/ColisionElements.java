@@ -6,7 +6,6 @@ import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
@@ -98,7 +97,7 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 		}
 	}
 	
-	public GUIEvent updateMouse(PointerEvent event) {
+	public void updateMouse(PointerEvent event) {
 
 		mx = event.getX();
 		my = event.getY();
@@ -110,8 +109,6 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_RIGHT)) {
 			orangeRectangle.setCoordinates(mx, my);
 		}
-		
-		return GUIEvent.NONE;
 	}
 
 }

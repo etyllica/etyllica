@@ -11,6 +11,7 @@ import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.ui.ViewGroup;
 import br.com.etyllica.layer.Layer;
 
 /**
@@ -20,7 +21,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public abstract class View extends Layer implements GUIComponent, Drawable {
+public abstract class View extends Layer implements GUIComponent, Drawable, ViewGroup {
 	
 	protected GUIEvent lastEvent = GUIEvent.NONE;
 	

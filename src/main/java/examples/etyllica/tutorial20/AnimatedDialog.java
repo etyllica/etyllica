@@ -3,8 +3,6 @@ package examples.etyllica.tutorial20;
 import br.com.etyllica.animation.script.text.DialogScript;
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
@@ -44,20 +42,11 @@ public class AnimatedDialog extends Application{
 	}
 	
 	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-		
+	public void updateMouse(PointerEvent event) {
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 			AnimationHandler.getInstance().add(script);
 			script.restart();
 		}
-		
-		return GUIEvent.NONE;
-	}
-	
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-
-		return GUIEvent.NONE;
 	}
 
 }

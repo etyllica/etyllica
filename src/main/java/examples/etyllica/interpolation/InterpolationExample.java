@@ -5,9 +5,6 @@ import java.awt.Color;
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.core.interpolation.LinearInterpolator;
@@ -97,23 +94,4 @@ public class InterpolationExample extends Application {
 		g.drawOval(ball.getX(), ball.getY(), ball.getW(), ball.getH());
 	}
 		
-	@Override
-	public void update(long now) {
-		
-	}
-	
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
-				
-		// TODO Auto-generated method stub
-		return null;
-	}
-		
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

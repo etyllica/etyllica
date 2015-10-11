@@ -1,7 +1,6 @@
 package examples.fx.application;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.effects.light.LightSource;
@@ -44,11 +43,8 @@ public class LightSourceApplication extends Application{
 		shadow.drawLights(g, source, anotherSource);
 	}
 	
-	public GUIEvent updateMouse(PointerEvent event) {
-		
+	public void updateMouse(PointerEvent event) {
 		source.setCoordinates(event.getX()-source.getW()/2, event.getY()-source.getH()/2);
-		
-		return null;
 	}
 
 }
