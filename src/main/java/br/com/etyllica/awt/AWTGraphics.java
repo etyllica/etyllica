@@ -123,7 +123,7 @@ public class AWTGraphics implements Graphic {
 		screen.drawString(text, dx, dy);
 	}
 	
-	public void drawString(Layer layer, String text) {
+	public void drawString(GeometricLayer layer, String text) {
 		drawString(layer.getX(), layer.getY(), layer.utilWidth(), layer.utilHeight(), text);
 	}
 

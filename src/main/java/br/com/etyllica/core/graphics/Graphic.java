@@ -46,7 +46,7 @@ public interface Graphic {
 	 */
 	public void drawString(int x, int y, int w, int h, String text);
 	
-	public void drawString(Layer layer, String text);
+	public void drawString(GeometricLayer layer, String text);
 
 	/**
 	 * 
