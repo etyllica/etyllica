@@ -65,7 +65,7 @@ public class TouchJoystick {
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 			if(activeId == INACTIVE) {
 				if(joystick.colideCirclePoint(mx, my)) {
-					activeId = event.getId();
+					activeId = event.getPointer();
 					setActive(true);
 				}
 			} else {
@@ -81,7 +81,7 @@ public class TouchJoystick {
 
 		} else if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
 			//Release Joystick
-			if(active && event.getAmount() == activeId) {
+			if(active && event.getPointer() == activeId) {
 				setActive(false);
 				activeId = INACTIVE;
 				resetJoystick();
