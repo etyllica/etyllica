@@ -8,10 +8,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class FileChooser implements Runnable {
 	
-	private String path = "";
-	private JFileChooser chooser;
-	private Component component;
-	private SelectFileListener listener;
+	protected String path = "";
+	protected JFileChooser chooser;
+	protected Component component;
+	protected SelectFileListener listener;
+	protected boolean opened = false;
 	
 	public FileChooser(Component component) {
 		super();		
@@ -26,11 +27,11 @@ public class FileChooser implements Runnable {
 		init();
 	}
 
-	private void init() {
-		initWithSystemUI();		
+	protected void init() {
+		initWithSystemUI();
 	}
 
-	private void initWithSystemUI() {
+	protected void initWithSystemUI() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
@@ -49,13 +50,13 @@ public class FileChooser implements Runnable {
 	}
 	
 	public void openDialog() {
-		
+		if(opened) {
+			return;
+		}
+			
 		chooser = new JFileChooser(path);
-		
-		PreviewPane previewPane = new PreviewPane();
-		chooser.setAccessory(previewPane);
-		chooser.addPropertyChangeListener(previewPane);
 		chooser.setVisible(true);
+		opened = true;
 		
 		new Thread(this).start();
 	}
@@ -65,6 +66,7 @@ public class FileChooser implements Runnable {
 		if(chooser.showOpenDialog(this.component) == JFileChooser.APPROVE_OPTION) {
 			String path = chooser.getSelectedFile().getAbsolutePath();
 			notifyListener(path);
+			opened = false;
 		}
 		
 		chooser = null;
