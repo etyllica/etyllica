@@ -1,7 +1,5 @@
 package br.com.etyllica.core.event;
 
-
-
 /**
  * 
  * @author yuripourre
@@ -85,7 +83,6 @@ public class PointerEvent {
 		this.amountY = amountY;
 		
 		consumed = false;
-		
 	}
 	
 	public void copy(PointerEvent event) {
@@ -145,6 +142,10 @@ public class PointerEvent {
 	public long getTimestamp() {
 		return timestamp;
 	}
+	
+    public void resetTimestamp() {
+        this.timestamp = System.currentTimeMillis();
+    }
 		
 	public void consume() {
 		this.consumed = true;
