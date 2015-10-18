@@ -23,7 +23,7 @@ public class ApplicationLoader implements ApplicationLoadListener {
 
 	private Context application;
 	private LoaderListener listener;
-	private LoadApplication loadApplication;
+	private DefaultLoadApplication loadApplication;
 	
 	private boolean called = false;
 	private ScheduledExecutorService loadExecutor;
@@ -34,8 +34,11 @@ public class ApplicationLoader implements ApplicationLoadListener {
 	private String lastText = "";
 	private float lastLoading = 0;
 	
-	public ApplicationLoader() {
+	public ApplicationLoader(int w, int h) {
 		super();
+		
+		loadApplication = new GenericLoadApplication(0, 0, w, h);
+		loadApplication.load();
 	}
 
 	public void loadApplication() {
@@ -97,22 +100,6 @@ public class ApplicationLoader implements ApplicationLoadListener {
 		}
 	}
 
-	public Context getApplication() {
-		return application;
-	}
-
-	public void setApplication(Context application) {
-		this.application = application;
-	}
-
-	public LoadApplication getLoadApplication() {
-		return loadApplication;
-	}
-
-	public void setLoadApplication(LoadApplication loadApplication) {
-		this.loadApplication = loadApplication;
-	}
-
 	@Override
 	public void onApplicationLoaded() {
 		called = true;
@@ -138,9 +125,26 @@ public class ApplicationLoader implements ApplicationLoadListener {
 		called = true;
 		loadExecutor.shutdownNow();
 	}
-
-	public void setListener(LoaderListener listener) {
+	
+	private void checkForLoadApplication(Context context) {
+		DefaultLoadApplication loadApp = context.getLoadApplication();
+		
+		if(loadApp != null) {
+			this.loadApplication = loadApp;	
+		}
+	}
+	
+	public DefaultLoadApplication reloadApplication(LoaderListener listener, Context context) {
+		
+		context.setLoaded(false);
+		checkForLoadApplication(context);
+		
 		this.listener = listener;
+		this.application = context;
+		
+		loadApplication.load();
+		loadApplication();
+		return loadApplication;
 	}
 
 }

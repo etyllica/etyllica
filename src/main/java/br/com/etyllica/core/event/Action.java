@@ -34,7 +34,7 @@ public class Action {
 		this.object = object;
 		this.methodName = methodName;
 	}
-
+	
 	public Action(Object object, String methodName, List<Object> parameters){
 		this(object, methodName);
 

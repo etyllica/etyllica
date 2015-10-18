@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.cinematics.Camera;
+import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.context.ContextContainer;
 import br.com.etyllica.core.context.Session;
 import br.com.etyllica.core.context.load.ApplicationLoader;
 import br.com.etyllica.core.context.load.DefaultLoadApplication;
 import br.com.etyllica.core.context.load.GenericLoadApplication;
+import br.com.etyllica.core.context.load.LoadApplication;
 import br.com.etyllica.core.context.load.LoaderListener;
 import br.com.etyllica.layer.GeometricLayer;
 
@@ -39,12 +41,7 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 	protected boolean close = false;
 	
 	private List<Window> windows = new ArrayList<Window>();
-	
-	/**
-	 * Load Application
-	 */
-	protected DefaultLoadApplication loadApplication = null;
-
+		
 	public Window(int w, int h) {
 		this(0,0,w,h);
 	}		
@@ -59,10 +56,8 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_ARGB));
 		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB));
 
-		applicationLoader = new ApplicationLoader();
+		applicationLoader = new ApplicationLoader(w, h);
 		
-		loadApplication = new GenericLoadApplication(x-w/2,y-h/4,w,h);
-		loadApplication.load();
 	}
 	
 	public Rectangle getAsRectangle() {
@@ -77,41 +72,17 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 		this.application = application;
 	}
 
-	public void setLoadApplication(DefaultLoadApplication loadApplication) {
-		this.loadApplication = loadApplication;
+	public void setLoadApplication(Application loadApplication) {
+		//this.loadApplication = loadApplication;
 		this.application = loadApplication;
 	}
 
 	public void reload(Context context) {
-		
 		if(context.isLoaded()) {
-			context.setLoaded(false);
-			
-			checkForLoadApplication(context);
-			
-			applicationLoader.setListener(this);
-			applicationLoader.setApplication(context);
-						
-			reloadLoadApplication();
+			setLoadApplication(applicationLoader.reloadApplication(this, context));
 		}
 	}
 	
-	private void checkForLoadApplication(Context context) {
-		DefaultLoadApplication loadApp = context.getLoadApplication();
-		
-		if(loadApp != null) {
-			this.loadApplication = loadApp;	
-		}
-	}
-	
-	private void reloadLoadApplication() {
-		loadApplication.load();
-		setLoadApplication(loadApplication);
-		applicationLoader.setLoadApplication(loadApplication);
-		
-		applicationLoader.loadApplication();
-	}
-
 	public void closeWindow() {
 		setClose(true);
 	}

@@ -109,6 +109,9 @@ public abstract class Context extends Layer implements ViewGroup, UIComponent, U
 	 */
 	protected boolean activeCenterMouse = false;
 
+	/**
+     * Application to be shown during loading
+     */
 	private ApplicationLoadListener loadListener;
 	
 	private MouseStateListener mouseStateListener;
