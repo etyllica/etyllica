@@ -13,7 +13,6 @@ public class Point2D {
 	protected String name = "";
 	
 	protected double x = 0.0;
-	
 	protected double y = 0.0;
 	
 	protected int color = 0x000000;//Black Hex Value
@@ -38,6 +37,11 @@ public class Point2D {
 		setLocation(x, y);
 	}
 	
+	public Point2D(Point2D point) {
+		super();
+		setLocation(point.x, point.y);
+	}
+
 	public double getX() {
 		return x;
 	}
