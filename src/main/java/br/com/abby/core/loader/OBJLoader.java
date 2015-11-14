@@ -188,7 +188,7 @@ public class OBJLoader implements VBOLoader {
 		float x = Float.valueOf(parts[1]);
 		float y = Float.valueOf(parts[2]);
 
-		vbo.getTextures().add(new Vector2f(x, y));     	
+		vbo.getTextures().add(new Vector2f(x, y));
 	}
 
 	private static List<OBJMaterial> parseMaterial(String folder, String line) throws IOException {

@@ -1207,5 +1207,13 @@ public class AWTGraphics implements Graphic {
 	public void drawArrow(Point2D p, Point2D q) {
 		drawArrow(p, q, 25);
 	}
-	
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+		
 }

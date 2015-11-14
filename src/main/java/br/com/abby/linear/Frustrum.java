@@ -51,7 +51,7 @@ public class Frustrum {
 		fWidth = fHeight * ratio;
 	}
 
-	public void setCamDef(Camera3D camera) {
+	public void setCamDef(Camera camera) {
 
 		Vector3f position = PointToVectorAdapter.adapt(camera);
 		Vector3f target = PointToVectorAdapter.adapt(camera.getTarget());

@@ -9,12 +9,12 @@ import br.com.etyllica.core.linear.Point3D;
  *
  */
 
-public class Camera3D extends ColoredPoint3D {
+public class Camera extends ColoredPoint3D {
 	
 	private Point3D target;
 	private Point3D normal;
 	
-	public Camera3D(double x, double y, double z) {
+	public Camera(double x, double y, double z) {
 		super(x, y, z);
 		target = new Point3D(0,0,0);
 		normal = new Point3D(0,1,0);

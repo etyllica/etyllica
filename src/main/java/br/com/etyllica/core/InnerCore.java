@@ -145,7 +145,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	public void update(long now) {
 		
 		if(!activeWindow.getContext().isLoaded()) {
-			return;			
+			return;
 		} else if (needReload) {
 			fastReload();
 		}
