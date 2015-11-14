@@ -50,5 +50,9 @@ public class PathHelper {
 	public static String programFilesDirectory() {
 		return System.getenv("ProgramFiles");	
 	}
+
+	public String getExternalStoragePath() {
+		return currentPath();
+	}
 	
 }
