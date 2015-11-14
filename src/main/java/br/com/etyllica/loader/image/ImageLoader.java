@@ -102,7 +102,7 @@ public class ImageLoader extends LoaderImpl {
 		return getImage(path, absolute);
 	}
 
-	private String getDiretorio(String path, boolean absolute) {
+	private String getFullPath(String path, boolean absolute) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -118,7 +118,7 @@ public class ImageLoader extends LoaderImpl {
 
 	public BufferedImage getImage(String path, boolean absolute) {
 
-		String diretorio = getDiretorio(path, absolute);
+		String diretorio = getFullPath(path, absolute);
 
 		if(images.containsKey(diretorio)) {
 			return images.get(diretorio);
@@ -176,10 +176,9 @@ public class ImageLoader extends LoaderImpl {
 
 	public List<ImageFrame> getAnimation(String path, boolean absolute) {
 
-		String diretorio = getDiretorio(path, absolute);
+		String diretorio = getFullPath(path, absolute);
 
 		if(animations.containsKey(diretorio)) {
-
 			return animations.get(diretorio);
 
 		}else{
