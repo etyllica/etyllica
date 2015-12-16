@@ -9,9 +9,9 @@ import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.layer.Layer;
 
-public class TweenExample extends Application {
+public class TweenBallExample extends Application {
 
-	public TweenExample(int w, int h) {
+	public TweenBallExample(int w, int h) {
 		super(w, h);
 	}
 	

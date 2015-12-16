@@ -1,19 +1,18 @@
 package examples.etyllica.animation;
-import examples.etyllica.animation.pivot.PivotExample;
-import examples.etyllica.animation.tween.TweenExample;
 import br.com.etyllica.EtyllicaFrame;
 import br.com.etyllica.core.context.Application;
+import examples.etyllica.animation.tween.*;
 
-public class AnimationApp extends EtyllicaFrame {
+public class TweenApplication extends EtyllicaFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public AnimationApp() {
+	public TweenApplication() {
 		super(800, 600);
 	}
 
 	public static void main(String[] args){
-		AnimationApp viewer = new AnimationApp();
+		TweenApplication viewer = new TweenApplication();
 		viewer.init();
 	}	
 	
@@ -21,8 +20,9 @@ public class AnimationApp extends EtyllicaFrame {
 	public Application startApplication() {
 		initialSetup("../");
 
-		//return new TweenExample(w,h);
-		return new PivotExample(w,h);
+		return new TweenBallExample(w,h);
+		//return new HelloWorldAnimated(w,h);
+		//return new StriderAnimation(w,h);
 	}
 
 }
