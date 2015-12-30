@@ -19,6 +19,32 @@ public class CollisionDetector {
 
 		return false;
 	}
+	
+	/**
+	 * Found at: http://stackoverflow.com/a/402010
+	 * @param circle - the circular layer
+	 * @param rect - the rectangular layer
+	 * @return collision detected
+	 */
+	public static boolean colideCircleRect(Layer circle, Layer rect) {
+		int centerX = circle.getX()+circle.getW()/2;
+		int centerY = circle.getY()+circle.getH()/2;
+		int radius = circle.getW();
+		
+		double circleDistanceX = Math.abs(centerX - rect.getX());
+		double circleDistanceY = Math.abs(centerY - rect.getY());
+
+		if (circleDistanceX > (rect.getW()/2 + radius)) { return false; }
+		if (circleDistanceY > (rect.getH()/2 + radius)) { return false; }
+
+		if (circleDistanceX <= (rect.getW()/2)) { return true; } 
+		if (circleDistanceY <= (rect.getH()/2)) { return true; }
+
+		double cornerDistance = Math.pow((circleDistanceX - rect.getW()/2),2) +
+				Math.pow((circleDistanceY - rect.getH()/2),2);
+
+		return (cornerDistance <= (radius*radius));
+	}
 
 	public static boolean colideIsometricPoint(Layer cam, int px, int py) {
 
@@ -75,22 +101,22 @@ public class CollisionDetector {
 	 * Code found at: http://stackoverflow.com/questions/5650032/collision-detection-with-rotated-rectangles
 	 */
 	public static boolean colideRectPoint(Layer layer, double  px, double py) {
-		
+
 		int rectWidth = layer.utilWidth();
 		int rectHeight = layer.utilHeight();
 		int offsetX = 0;
 		int offsetY = 0;
-		
+
 		if (layer.getScaleX() != 1) {
 			rectWidth *= layer.getScaleX();
 			offsetX = (int)(layer.utilWidth()*(1-layer.getScaleX()))/2;
 		}
-		
+
 		if (layer.getScaleY() != 1) {
 			rectHeight *= layer.getScaleY();
 			offsetY = (int)(layer.utilHeight()*(1-layer.getScaleY()))/2;
 		}
-		
+
 		int rectCenterX = layer.getX()+offsetX+rectWidth/2;
 		int rectCenterY = layer.getY()+offsetY+rectHeight/2;
 
@@ -105,17 +131,17 @@ public class CollisionDetector {
 		int rectHeight = layer.utilHeight();
 		int offsetX = 0;
 		int offsetY = 0;
-		
+
 		if(layer.getScaleX()!=1) {
 			rectWidth *= layer.getScaleX();
 			offsetX = (int)(layer.utilWidth()*(1-layer.getScaleX()))/2;
 		}
-		
+
 		if(layer.getScaleY()!=1) {
 			rectHeight *= layer.getScaleY();
 			offsetY = (int)(layer.utilHeight()*(1-layer.getScaleY()))/2;
 		}
-		
+
 		int rectCenterX = layer.getX()+offsetX+rectWidth/2;
 		int rectCenterY = layer.getY()+offsetY+rectHeight/2;
 
