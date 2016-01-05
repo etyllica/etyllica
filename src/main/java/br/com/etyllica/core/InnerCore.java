@@ -14,6 +14,8 @@ import br.com.etyllica.core.animation.script.SingleIntervalAnimation;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.context.UpdateIntervalListener;
+import br.com.etyllica.core.context.load.ApplicationLoader;
+import br.com.etyllica.core.context.load.LoaderListener;
 import br.com.etyllica.core.effect.GlobalEffect;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEventListener;
@@ -44,7 +46,7 @@ import br.com.etyllica.theme.listener.ThemeListener;
  *
  */
 
-public abstract class InnerCore implements Core, KeyEventListener, Updatable, ThemeListener, LanguageChangerListener {
+public abstract class InnerCore implements Core, KeyEventListener, Updatable, ThemeListener, LanguageChangerListener, LoaderListener {
 
 	private static final int TITLE_BAR_HEIGHT = 50;
 	
@@ -109,7 +111,9 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	private int arc = 0;
 	private boolean overClickable = false;
 	
-	public InnerCore() {
+	protected ApplicationLoader applicationLoader;
+	
+	public InnerCore(int w, int h) {
 		super();
 		
 		guiEvents = new ArrayList<GUIEvent>();
@@ -127,6 +131,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		initTheme();
 
 		updatables.add(AnimationHandler.getInstance());
+		
+		applicationLoader = new ApplicationLoader(w, h);
 	}	
 
 	private void initTheme() {
@@ -782,11 +788,12 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		application.setMouseStateListener(arrowDrawer);
 		application.setLanguageChangerListener(this);
 		
-		activeWindow.reload(application);
+		if(application.isLoaded()) {
+			applicationLoader.reloadApplication(this, application);
+		}
 	}
 
 	private void fastReload() {
-
 		locked = true;
 
 		activeWindow.getContext().getViews().clear();
@@ -870,7 +877,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	protected void handleApplicationKeyEvents(Context context, KeyEvent event) {
-						
 		//Handle Application commands
 		context.updateKeyboard(event);
 	}
@@ -945,6 +951,12 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getContext().getViews());
 
 		updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
+	}
+	
+	@Override
+	public void onLoad(Context context) {		
+		activeWindow.setApplication(context);
+		context.setLoaded(true);
 	}
 		
 	public List<Monitor> getMonitors() {

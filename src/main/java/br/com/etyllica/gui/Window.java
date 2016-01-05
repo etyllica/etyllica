@@ -5,15 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.cinematics.Camera;
-import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.context.ContextContainer;
 import br.com.etyllica.core.context.Session;
-import br.com.etyllica.core.context.load.ApplicationLoader;
-import br.com.etyllica.core.context.load.DefaultLoadApplication;
-import br.com.etyllica.core.context.load.GenericLoadApplication;
-import br.com.etyllica.core.context.load.LoadApplication;
-import br.com.etyllica.core.context.load.LoaderListener;
 import br.com.etyllica.layer.GeometricLayer;
 
 /**
@@ -23,7 +17,7 @@ import br.com.etyllica.layer.GeometricLayer;
  *
  */
 
-public class Window extends GeometricLayer implements ContextContainer, LoaderListener {
+public class Window extends GeometricLayer implements ContextContainer {
 	
 	private java.awt.Component component;
 	
@@ -35,8 +29,6 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 	protected Camera camera;
 	
 	protected Session session = new Session();
-
-	protected ApplicationLoader applicationLoader;
 
 	protected boolean close = false;
 	
@@ -50,14 +42,6 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 		super(x,y,w,h);
 		
 		camera = new Camera(x, y, w, h);
-
-		//load = new LoadApplication(x,y,w,h);
-		//load = new GenericLoadApplication(x,y,w,h);
-		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_ARGB));
-		//load.setBimg(new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB));
-
-		applicationLoader = new ApplicationLoader(w, h);
-		
 	}
 	
 	public Rectangle getAsRectangle() {
@@ -70,17 +54,6 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 
 	public void setApplication(Context application) {
 		this.application = application;
-	}
-
-	public void setLoadApplication(Application loadApplication) {
-		//this.loadApplication = loadApplication;
-		this.application = loadApplication;
-	}
-
-	public void reload(Context context) {
-		if(context.isLoaded()) {
-			setLoadApplication(applicationLoader.reloadApplication(this, context));
-		}
 	}
 	
 	public void closeWindow() {
@@ -130,12 +103,5 @@ public class Window extends GeometricLayer implements ContextContainer, LoaderLi
 
 	public void setComponent(java.awt.Component component) {
 		this.component = component;
-	}
-
-	@Override
-	public void onLoad(Context context) {		
-		setApplication(context);
-		context.setLoaded(true);
-	}
-			
+	}			
 }

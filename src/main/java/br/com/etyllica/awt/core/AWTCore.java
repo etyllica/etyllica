@@ -71,7 +71,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 	private ExecutorService executor = Executors.newSingleThreadExecutor();
 	
 	public AWTCore(Component component, int width, int height) {
-		super();
+		super(width, height);
 
 		this.component = component;
 		
