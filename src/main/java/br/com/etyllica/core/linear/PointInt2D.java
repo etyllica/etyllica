@@ -36,4 +36,9 @@ public class PointInt2D {
 		this.y = y;
 	}
 	
+	@Override
+	public String toString() {
+		return "("+x+", "+y+")";
+	}
+
 }
