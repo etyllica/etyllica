@@ -37,4 +37,12 @@ public class PointUtils {
 		return c;
 	}
 	
+	public static double angle(double px, double py, double qx, double qy) {
+		double deltaX = px - qx;
+		double deltaY = py - qy;
+
+		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+		return angleInDegrees;
+	}
+	
 }
