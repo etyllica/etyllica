@@ -25,7 +25,7 @@ public class QuadraticInterpolatorTest {
 	@Test
 	public void testMiddle() {
 		double value = interpolator.factor(START, END, 0.5);
-		Assert.assertEquals(START+125, value, 0);
+		Assert.assertEquals(125, value, 0);		
 	}
 	
 	@Test

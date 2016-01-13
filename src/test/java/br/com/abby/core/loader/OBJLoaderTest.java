@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import br.com.abby.core.vbo.VBO;
 import br.com.etyllica.util.PathHelper;
+import br.com.etyllica.util.io.IOHelper;
 
 public class OBJLoaderTest {
 
@@ -42,6 +43,11 @@ public class OBJLoaderTest {
 		}
 		
 		try {
+			
+			if(OBJLoaderTest.isTestEnvironment(dir)) {
+				dir = new URL(MeshLoader.getInstance().getUrl(), "etyllica/assets/models/"+filename);
+			}
+			
 			VBO vbo = loader.loadModel(dir);
 			Assert.assertNotNull(vbo);
 			Assert.assertEquals(12, vbo.getFaces().size());
@@ -55,6 +61,11 @@ public class OBJLoaderTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private static boolean isTestEnvironment(URL dir) {
+		String prefix = IOHelper.FILE_PREFIX+"/home/ubuntu";
+		return dir.toString().startsWith(prefix);
 	}
 	
 }

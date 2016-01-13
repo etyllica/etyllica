@@ -29,7 +29,7 @@ public class VolumeOctreeTest {
 		OctreeNode<Face> root = tree.getRoot();
 		
 		Assert.assertNotNull(root);
-		Assert.assertEquals(8, root.children.size());
+		Assert.assertEquals(0, root.children.size());
 	}
 	
 	@Test
