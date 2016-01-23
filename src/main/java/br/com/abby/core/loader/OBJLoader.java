@@ -27,8 +27,6 @@ import br.com.etyllica.util.PathHelper;
  */
 
 public class OBJLoader implements VBOLoader {
-
-	private static final String DEFAULT_GROUP_NAME = "default";
 	
 	public static final String VERTEX = "v";
 	public static final String FACE = "f";
@@ -51,7 +49,6 @@ public class OBJLoader implements VBOLoader {
 		VBO vbo = new VBO();
 
 		List<Group> groups = new ArrayList<Group>();
-
 		Group group = new Group(DEFAULT_GROUP_NAME);
 
 		String line;
@@ -62,6 +59,8 @@ public class OBJLoader implements VBOLoader {
 
 			if (line.startsWith(GROUP+" ")) {
 
+				String groupName = line.split(" ")[1];
+				
 				if(!DEFAULT_GROUP_NAME.equals(group.getName())) {
 					//Add last group
 					groups.add(group);
@@ -69,7 +68,7 @@ public class OBJLoader implements VBOLoader {
 					//If group has at least one face 
 					groups.add(group);
 				}
-				group = new Group(line.split(" ")[1]);
+				group = new Group(groupName);
 				
 			} else if (line.startsWith(USE_MATERIAL+" ")) {
 
@@ -151,7 +150,6 @@ public class OBJLoader implements VBOLoader {
 		face.setSides(sides);
 
 		group.getFaces().add(face);
-		//TODO Remove face from model
 		vbo.getFaces().add(face);
 	}
 
