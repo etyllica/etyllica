@@ -11,6 +11,7 @@ import java.util.List;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import br.com.abby.core.material.OBJMaterial;
 import br.com.abby.core.vbo.Face;
 import br.com.abby.core.vbo.Group;
 import br.com.abby.core.vbo.VBO;
@@ -21,59 +22,75 @@ import br.com.abby.core.vbo.VBO;
  */
 public class Max3DLoader extends StreamParser implements VBOLoader {
 
-	private final int IDENTIFIER_3DS = 0x4D4D;
+	private final int IDENTIFIER_3DS = 0x4D4D; //Main Chunk
 	private final int M3D_VERSION = 0x0002;
-	private final int MESH_BLOCK = 0x3D3D;//3D Editor Chunk
+	private final int MESH_BLOCK = 0x3D3D; //3D Editor Chunk
 	private final int OBJECT_BLOCK = 0x4000;
 	private final int TRIMESH = 0x4100;
 	private final int TRI_MATERIAL = 0x4130;
 	private final int VERTICES = 0x4110;
 	private final int FACES = 0x4120;
 	private final int TEXCOORD = 0x4140;
-	
-	private final int TEX_FILENAME = 0xA300;
+
 	private final int MATERIAL = 0xAFFF;
 	private final int MATERIAL_NAME = 0xA000;
 	private final int MATERIAL_AMBIENT_COLOR = 0xA010;
 	private final int MATERIAL_DIFUSE_COLOR = 0xA020;
 	private final int MATERIAL_SPECULAR_COLOR = 0xA030;
+	private final int MATERIAL_RENDER_TYPE = 0xA100;
 	private final int MATERIAL_TEXTURE_MAP = 0xA200;
+	private final int MATERIAL_TEXTURE_FILENAME = 0xA300;
 	private final int MATERIAL_REFLECTION_MAP = 0xA220;
 	private final int MATERIAL_BUMP_MAP = 0xA230;
-	
 
-	private int chunkID;
-	private int chunkEndOffset;
-	private boolean endReached;
-	private String currentObjName;
+	private final int COLOR_F = 0x0010;
+	private final int COLOR_24 = 0x0011;
+	private final int LIN_COLOR_24 = 0x0012;
+	private final int LIN_COLOR_F = 0x0013;
+	private final int INT_PERCENTAGE = 0x0030;
+	private final int FLOAT_PERCENTAGE = 0x0031;
+	
+	private class Chunk {
+		public int id;
+		public int endOffset;
+	}
 
 	@Override
 	public VBO loadModel(URL url) throws FileNotFoundException, IOException {
 
 		BufferedInputStream stream = new BufferedInputStream(url.openStream());
 
+		String currentObjName = DEFAULT_GROUP_NAME;
+		
 		VBO vbo = new VBO();
-
-		readHeader(stream, vbo);
-		if(chunkID != IDENTIFIER_3DS) {
+		Chunk chunk = new Chunk();
+		
+		boolean endReached = false;
+		
+		endReached = readChunk(stream, chunk);
+		if(chunk.id != IDENTIFIER_3DS) {
 			System.err.println("Not a valid .3DS file!");
 			return null;
 		}
 
 		List<Group> groups = new ArrayList<Group>();
 		Group group = new Group(DEFAULT_GROUP_NAME);
+		OBJMaterial currentMaterial = null;
 
 		while(!endReached) {
 			//Read Chunks
-			readHeader(stream, vbo);
+			endReached = readChunk(stream, chunk);
+			if(endReached) {
+				break;
+			}
 
-			System.out.println("Chunk: 0x"+Integer.toString(chunkID, 16));
-			
-			switch (chunkID) {
+			System.out.println("Chunk: 0x"+Integer.toString(chunk.id, 16));
+
+			switch (chunk.id) {
 			case MESH_BLOCK:
 				break;
 			case OBJECT_BLOCK:
-				//Equivalent to Object in OBJ
+				//Equivalent to Object in OBJ format
 				currentObjName = readString(stream);
 				break;
 			case TRIMESH:
@@ -102,30 +119,35 @@ public class Max3DLoader extends StreamParser implements VBOLoader {
 				break;
 			case MATERIAL_NAME:
 				String currentMaterialKey = readString(stream);
+				currentMaterial = new OBJMaterial();
+				vbo.getMaterials().put(currentMaterialKey, currentMaterial);
+
 				System.out.println("Loading material: "+currentMaterialKey);
 				break;
-			case TEX_FILENAME:
+			case MATERIAL_DIFUSE_COLOR:
+				/*Chunk colorChunk = new Chunk();
+				endReached = readChunk(stream, colorChunk);
+				System.out.println("Color: "+colorChunk.id);
+				
+				float r = readFloat(stream);
+				float g = readFloat(stream);
+				float b = readFloat(stream);
+
+				Vector3f color = new Vector3f(r,g,b);
+
+				currentMaterial.setKd(color);*/
+				break;
+			case MATERIAL_TEXTURE_FILENAME:
 				String fileName = readString(stream);
 				System.out.println("Loading texture: "+fileName);
-				
-				//TODO Load texture
-				StringBuffer textureName = new StringBuffer(fileName.toLowerCase());
-				
-				/*int dotIndex = textureName.lastIndexOf(".");
-				if (dotIndex > -1)
-					texture.append(textureName.substring(0, dotIndex));
-				else
-					texture.append(textureName);
 
-				textureAtlas.addBitmapAsset(new BitmapAsset(currentMaterialKey, texture.toString()));*/
-
+				currentMaterial.setMapKd(fileName);
 				break;
 			case TRI_MATERIAL:
 				String materialName = readString(stream);
 				int numFaces = readShort(stream);
 
-				for(int i=0; i<numFaces; i++)
-				{
+				for(int i=0; i<numFaces; i++) {
 					int faceIndex = readShort(stream);
 
 					//vbo.getFaces().get(faceIndex).materialKey = materialName;
@@ -136,12 +158,12 @@ public class Max3DLoader extends StreamParser implements VBOLoader {
 			case MATERIAL_TEXTURE_MAP:
 				break;
 			default:
-				skipRead(stream);
-			}			
+				endReached = skipRead(stream, chunk);
+			}
 		}
 
 		//Add group to Model
-		if(group!=null) {
+		if (group != null) {
 			groups.add(group);
 		}
 
@@ -149,49 +171,42 @@ public class Max3DLoader extends StreamParser implements VBOLoader {
 
 		return vbo;
 	}
-
-	private void readHeader(InputStream stream, VBO co) throws IOException {
-		chunkID = readShort(stream);
-		chunkEndOffset = readInt(stream);
-		endReached = chunkID < 0;
+	
+	private boolean readChunk(InputStream stream, Chunk chunk) throws IOException {
+		chunk.id = readShort(stream);
+		chunk.endOffset = readInt(stream);
+		return chunk.id < 0;
 	}
 
-	private void readChunk(InputStream stream, VBO vbo) throws IOException {
-
-	}
-
-	private void skipRead(InputStream stream) throws IOException
-	{
-		for(int i=0; (i<chunkEndOffset - 6) && !endReached; i++)
-		{
+	private boolean skipRead(InputStream stream, Chunk chunk) throws IOException {
+		boolean endReached = false;
+		for(int i=0; (i<chunk.endOffset - 6) && !endReached; i++) {
 			endReached = stream.read() < 0;
 		}
+		return endReached;
 	}
 
 	private void readVertices(InputStream buffer, VBO vbo) throws IOException {
-		float x, y, z, tmpy;
+		float x, y, z;
 		int numVertices = readShort(buffer);
-		System.out.println("Loading vertices: "+numVertices);
-		
+
 		for (int i = 0; i < numVertices; i++) {
 			x = readFloat(buffer);
 			y = readFloat(buffer);
 			z = readFloat(buffer);
-			
+
 			Vector3f v = new Vector3f(x, z, -y);
 			vbo.addVertex(v);
 		}
 	}
 
 	private void readFaces(InputStream buffer, VBO vbo, Group group) throws IOException {
-		int triangles = readShort(buffer);
-
-		//int[] vertexIDs = new int[triangles]; 
+		int triangles = readShort(buffer); 
 
 		for (int i = 0; i < triangles; i++) {
 			//Set indices
 			int[] vertexIndexes = new int[3];
-			
+
 			vertexIndexes[0] = readShort(buffer);
 			vertexIndexes[1] = readShort(buffer);
 			vertexIndexes[2] = readShort(buffer);
@@ -214,7 +229,7 @@ public class Max3DLoader extends StreamParser implements VBOLoader {
 		for (int i = 0; i < numVertices; i++) {
 			Vector2f uv = new Vector2f();
 			uv.x = readFloat(buffer);
-			uv.y = readFloat(buffer) * -1f;
+			uv.y = -readFloat(buffer);
 			vbo.getTextures().add(uv);
 		}
 	}
