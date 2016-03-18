@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
-
 import br.com.abby.core.material.OBJMaterial;
 import br.com.abby.linear.BoundingBox3D;
 import br.com.etyllica.core.linear.Point3D;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class VBO {
 	
@@ -19,9 +19,9 @@ public class VBO {
 	private BoundingBox3D boundingBox = new BoundingBox3D();
 	
 	//Original vertices positions
-	private List<Vector3f> vertices = new ArrayList<Vector3f>();
-	private List<Vector3f> normals = new ArrayList<Vector3f>();
-	private List<Vector2f> textures = new ArrayList<Vector2f>();
+	private List<Vector3> vertices = new ArrayList<Vector3>();
+	private List<Vector3> normals = new ArrayList<Vector3>();
+	private List<Vector2> textures = new ArrayList<Vector2>();
 
 	private List<Face> faces = new ArrayList<Face>();
 
@@ -33,28 +33,28 @@ public class VBO {
 		super();
 	}
 
-	public List<Vector3f> getVertices() {
+	public List<Vector3> getVertices() {
 		return vertices;
 	}
 	
-	public void addVertex(Vector3f vertex) {
+	public void addVertex(Vector3 vertex) {
 		vertices.add(vertex);
 		boundingBox.add(vertex);
 	}
 
-	public List<Vector3f> getNormals() {
+	public List<Vector3> getNormals() {
 		return normals;
 	}
 
-	public void setNormals(List<Vector3f> normals) {
+	public void setNormals(List<Vector3> normals) {
 		this.normals = normals;
 	}
 
-	public List<Vector2f> getTextures() {
+	public List<Vector2> getTextures() {
 		return textures;
 	}
 
-	public void setTextures(List<Vector2f> textures) {
+	public void setTextures(List<Vector2> textures) {
 		this.textures = textures;
 	}
 
@@ -98,10 +98,10 @@ public class VBO {
 		float cx = 0, cy = 0, cz = 0;
 		
 		for(int i:face.vertexIndex) {
-			Vector3f vertice = vertices.get(i);
-			cx += vertice.getX();
-			cy += vertice.getY();
-			cz += vertice.getZ();
+			Vector3 vertice = vertices.get(i);
+			cx += vertice.x;
+			cy += vertice.y;
+			cz += vertice.z;
 		}
 		
 		int n = face.vertexIndex.length;

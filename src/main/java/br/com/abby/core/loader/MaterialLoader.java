@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.util.vector.Vector3f;
+import com.badlogic.gdx.math.Vector3;
 
 import br.com.abby.core.material.OBJMaterial;
 
@@ -56,17 +56,17 @@ public class MaterialLoader {
                 float x = Float.valueOf(splitLine[1]);
                 float y = Float.valueOf(splitLine[2]);
                 float z = Float.valueOf(splitLine[3]);
-                mat.setKa(new Vector3f(x, y, z));
+                mat.setKa(new Vector3(x, y, z));
             } else if (DIFFUSE_COLOR.equalsIgnoreCase(prefix)) {
                 float x = Float.valueOf(splitLine[1]);
                 float y = Float.valueOf(splitLine[2]);
                 float z = Float.valueOf(splitLine[3]);
-                mat.setKd(new Vector3f(x, y, z));
+                mat.setKd(new Vector3(x, y, z));
             } else if ("ks".equalsIgnoreCase(prefix)) {
                 float x = Float.valueOf(splitLine[1]);
                 float y = Float.valueOf(splitLine[2]);
                 float z = Float.valueOf(splitLine[3]);
-                mat.setKs(new Vector3f(x, y, z));
+                mat.setKs(new Vector3(x, y, z));
             } else if ("illum".equalsIgnoreCase(prefix)) {
                 int illum = Integer.valueOf(splitLine[1]);
                 mat.setIllum(illum);

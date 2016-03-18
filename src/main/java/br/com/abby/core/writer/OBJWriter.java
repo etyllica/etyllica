@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import org.lwjgl.util.vector.Vector3f;
-
 import br.com.abby.core.loader.OBJLoader;
 import br.com.abby.core.vbo.Face;
 import br.com.abby.core.vbo.VBO;
 import br.com.etyllica.util.StringUtils;
 import br.com.etyllica.util.io.IOHelper;
+
+import com.badlogic.gdx.math.Vector3;
 
 public class OBJWriter implements VBOWriter {
 	
@@ -90,14 +90,14 @@ public class OBJWriter implements VBOWriter {
 	}
 	
 	private void writeNormals(VBO vbo, Writer writer) throws IOException {
-		for(Vector3f vector: vbo.getNormals()) {
+		for(Vector3 vector: vbo.getNormals()) {
 			String text = OBJLoader.VERTEX_NORMAL+" "+vector.x+" "+vector.y+" "+vector.z+StringUtils.NEW_LINE;
 			writer.write(text);
 		}
 	}
 
 	private void writeVertexes(VBO vbo, Writer writer) throws IOException {
-		for(Vector3f vector: vbo.getVertices()) {
+		for(Vector3 vector: vbo.getVertices()) {
 			String text = OBJLoader.VERTEX+" "+vector.x+" "+vector.y+" "+vector.z+StringUtils.NEW_LINE;
 			writer.write(text);
 		}

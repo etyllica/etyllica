@@ -6,10 +6,11 @@ import java.util.List;
 
 import org.jgl.GL;
 import org.jgl.GLAUX;
-import org.lwjgl.util.vector.Vector3f;
 
 import br.com.abby.GLDrawable;
 import br.com.abby.linear.AimPoint;
+
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * 
@@ -30,7 +31,7 @@ public class Bone implements GLDrawable {
 	private double angleY = 0;
 	private double angleZ = 0;
 
-	private List<Vector3f> vectors = new ArrayList<Vector3f>();
+	private List<Vector3> vectors = new ArrayList<Vector3>();
 
 	private Joint orign = null;
 
@@ -64,21 +65,20 @@ public class Bone implements GLDrawable {
 
 		if(vectors!=null) {
 
-			for(Vector3f vector: vectors) {
+			for(Vector3 vector: vectors) {
 
 				//Initial values
-				double ix = vector.getX();
-				double iy = vector.getY();
-				double iz = vector.getZ();
+				double ix = vector.x;
+				double iy = vector.y;
+				double iz = vector.z;
 
 				double vx = ix+tx;
 				double vy = iy+ty;
 				double vz = iz+tz;
 
-				vector.setX((float)vx);
-				vector.setY((float)vy);
-				vector.setZ((float)vz);
-
+				vector.x = ((float)vx);
+				vector.y = ((float)vy);
+				vector.z = ((float)vz);
 			}
 
 		}
@@ -178,20 +178,20 @@ public class Bone implements GLDrawable {
 
 		if(vectors!=null) {
 
-			for(Vector3f vector: vectors) {
+			for(Vector3 vector: vectors) {
 
 				//Initial values
-				double ix = vector.getX();
-				double iy = vector.getY();
-				double iz = vector.getZ();
+				double ix = vector.x;
+				double iy = vector.y;
+				double iz = vector.z;
 
 				double vx = ix*m[0][0]+iy*m[0][1]+iz*m[0][2]+m[0][3];
 				double vy = ix*m[1][0]+iy*m[1][1]+iz*m[1][2]+m[1][3];
 				double vz = ix*m[2][0]+iy*m[2][1]+iz*m[2][2]+m[2][3];
 
-				vector.setX((float)(vx));
-				vector.setY((float)(vy));
-				vector.setZ((float)(vz));
+				vector.x = ((float)(vx));
+				vector.y = ((float)(vy));
+				vector.z = ((float)(vz));
 
 			}
 
@@ -221,11 +221,11 @@ public class Bone implements GLDrawable {
 
 	}
 
-	public List<Vector3f> getVectors() {
+	public List<Vector3> getVectors() {
 		return vectors;
 	}
 
-	public void addVectors(List<Vector3f> vectors) {
+	public void addVectors(List<Vector3> vectors) {
 		this.vectors.addAll(vectors);
 	}
 
@@ -252,10 +252,10 @@ public class Bone implements GLDrawable {
 
 		double vsize = 0.005;
 
-		for(Vector3f vector: vectors) {
+		for(Vector3 vector: vectors) {
 
 			gl.glPushMatrix();
-			gl.glTranslated(vector.getX(), vector.getY(), vector.getZ());
+			gl.glTranslated(vector.x, vector.y, vector.z);
 			gl.auxSolidCube(vsize);
 			gl.glPopMatrix();
 

@@ -1,6 +1,6 @@
 package br.com.abby.util;
 
-import org.lwjgl.util.vector.Quaternion;
+import com.badlogic.gdx.math.Quaternion;
 
 public class RotationUtil {
 	

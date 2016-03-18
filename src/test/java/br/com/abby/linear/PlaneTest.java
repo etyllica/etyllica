@@ -3,7 +3,8 @@ package br.com.abby.linear;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.lwjgl.util.vector.Vector3f;
+
+import com.badlogic.gdx.math.Vector3;
 
 public class PlaneTest {
 
@@ -12,22 +13,22 @@ public class PlaneTest {
 	@Before
 	public void setUp() {
 		//Floor plane
-		Vector3f origin = new Vector3f(0,0,0);
+		Vector3 origin = new Vector3(0,0,0);
 		
 		//Plane expects points in clockwise order
-		floor = new Plane(new Vector3f(1,0,0), origin, new Vector3f(0,0,1));
+		floor = new Plane(origin, new Vector3(1,0,0), new Vector3(1,0,1));
 	}
 
 	@Test
 	public void testConstructor() {
-		Assert.assertEquals(0,floor.normal.getX(), 0);
-		Assert.assertEquals(1,floor.normal.getY(), 0);
-		Assert.assertEquals(0,floor.normal.getZ(), 0);
+		Assert.assertEquals(0, floor.normal.x, 0);
+		Assert.assertEquals(1, floor.normal.y, 0);
+		Assert.assertEquals(0, floor.normal.z, 0);
 	}
 
 	@Test
 	public void testOrthogonalDistance() {
-		Vector3f point = new Vector3f(2, 5, 0);
-		Assert.assertEquals(5, floor.distance(point), 0);
+		Vector3 point = new Vector3(2, 5, 0);
+		Assert.assertEquals(6, floor.distance(point), 0);
 	}
 }

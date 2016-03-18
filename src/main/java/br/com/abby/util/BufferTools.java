@@ -1,9 +1,10 @@
 package br.com.abby.util;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.util.vector.Matrix4f;
-
 import java.nio.FloatBuffer;
+
+import org.lwjgl.BufferUtils;
+
+import com.badlogic.gdx.math.Matrix4;
 
 /**
  * 
@@ -22,15 +23,15 @@ public class BufferTools {
         return bufferString.toString();
     }
 
-    public static FloatBuffer asFloatBuffer(Matrix4f matrix4f) {
+    public static FloatBuffer asFloatBuffer(Matrix4 matrix4f) {
         FloatBuffer buffer = BufferUtils.createFloatBuffer(16);
-        matrix4f.store(buffer);
+        matrix4f.set(buffer.array());
         return buffer;
     }
 
-    public static FloatBuffer asFlippedFloatBuffer(Matrix4f matrix4f) {
+    public static FloatBuffer asFlippedFloatBuffer(Matrix4 matrix4f) {
         FloatBuffer buffer = BufferUtils.createFloatBuffer(16);
-        matrix4f.store(buffer);
+        matrix4f.set(buffer.array());
         buffer.flip();
         return buffer;
     }

@@ -8,8 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import br.com.abby.core.material.OBJMaterial;
 import br.com.abby.core.vbo.Face;
@@ -165,7 +165,7 @@ public class OBJLoader implements VBOLoader {
 		float y = Float.valueOf(parts[2]);
 		float z = Float.valueOf(parts[3]);
 		
-		vbo.addVertex(new Vector3f(x, y, z));
+		vbo.addVertex(new Vector3(x, y, z));
 	}
 
 	private static void parseVertexNormal(String line, VBO vbo) {
@@ -176,7 +176,7 @@ public class OBJLoader implements VBOLoader {
 		float y = Float.valueOf(parts[2]);
 		float z = Float.valueOf(parts[3]);
 		
-		vbo.getNormals().add(new Vector3f(x, y, z));    	
+		vbo.getNormals().add(new Vector3(x, y, z));    	
 	}
 
 	private static void parseVertexTexture(String line, VBO vbo) {
@@ -186,7 +186,7 @@ public class OBJLoader implements VBOLoader {
 		float x = Float.valueOf(parts[1]);
 		float y = Float.valueOf(parts[2]);
 
-		vbo.getTextures().add(new Vector2f(x, y));
+		vbo.getTextures().add(new Vector2(x, y));
 	}
 
 	private static List<OBJMaterial> parseMaterial(String folder, String line) throws IOException {

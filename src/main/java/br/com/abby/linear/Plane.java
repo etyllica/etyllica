@@ -1,11 +1,11 @@
 package br.com.abby.linear;
 
-import org.lwjgl.util.vector.Vector3f;
+import com.badlogic.gdx.math.Vector3;
 
 public class Plane {
 	
-	public Vector3f d;
-	public Vector3f normal;
+	public Vector3 d;
+	public Vector3 normal;
 	
 	public Plane() {
 		super();
@@ -17,33 +17,28 @@ public class Plane {
 	 * @param b
 	 * @param c
 	 */
-	public Plane(Vector3f a, Vector3f b, Vector3f c) {
+	public Plane(Vector3 a, Vector3 b, Vector3 c) {
 		super();
 		
 		setPoints(a, b, c);
 	}
 	
-	public void setPoints(Vector3f a, Vector3f b, Vector3f c) {
-		Vector3f v = Vector3f.sub(b, a, null);
-		Vector3f u = Vector3f.sub(c, a, null);
+	public void setPoints(Vector3 a, Vector3 b, Vector3 c) {
+		Vector3 v = new Vector3(b).sub(a);
+		Vector3 u = new Vector3(c).sub(a);
 		
-		normal = Vector3f.cross(v, u, null);
-		normal.normalise();
+		normal = new Vector3(v).crs(u);
+		normal.nor();
 
-		Vector3f position = new Vector3f(b);
+		Vector3 position = new Vector3(b);
 		
-		Vector3f negateNormal = normal.negate(null);
-		d = Vector3f.cross(negateNormal, position, null);
-		
-		System.out.println("DLEN: "+d.length());
-		//DLEN: 0.8945184
-		
-		float dis = -Vector3f.dot(normal, position);
-		System.out.println("NEWD: "+dis);
+		Vector3 negateNormal = normal.scl(-1f);
+		d = new Vector3(negateNormal).crs(position);
 	}
 	
-	public double distance(Vector3f point) {
-		double dist = Vector3f.dot(normal, point) + d.length();
+	public double distance(Vector3 point) {
+		double dist = normal.dot(point) + d.len();
 		return dist;
 	}
+	
 }

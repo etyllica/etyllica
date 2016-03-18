@@ -8,8 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import br.com.abby.core.material.OBJMaterial;
 import br.com.abby.core.vbo.Face;
@@ -195,7 +195,7 @@ public class Max3DLoader extends StreamParser implements VBOLoader {
 			y = readFloat(buffer);
 			z = readFloat(buffer);
 
-			Vector3f v = new Vector3f(x, z, -y);
+			Vector3 v = new Vector3(x, z, -y);
 			vbo.addVertex(v);
 		}
 	}
@@ -227,7 +227,7 @@ public class Max3DLoader extends StreamParser implements VBOLoader {
 		int numVertices = readShort(buffer);
 
 		for (int i = 0; i < numVertices; i++) {
-			Vector2f uv = new Vector2f();
+			Vector2 uv = new Vector2();
 			uv.x = readFloat(buffer);
 			uv.y = -readFloat(buffer);
 			vbo.getTextures().add(uv);

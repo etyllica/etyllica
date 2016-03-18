@@ -1,6 +1,6 @@
 package br.com.abby.core.material;
 
-import org.lwjgl.util.vector.Vector3f;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * 
@@ -14,15 +14,15 @@ public class OBJMaterial {
 	protected String name = "";
 	
 	//Ambient Color
-	protected Vector3f ka;
+	protected Vector3 ka;
 	protected String mapKa = "";
 	
 	//Diffuse Color
-	protected Vector3f kd;
+	protected Vector3 kd;
 	protected String mapKd = "";
 	
 	//Specular Color
-	protected Vector3f ks;
+	protected Vector3 ks;
 	protected String mapKs = "";
 	
 	//Specular Highlight
@@ -46,11 +46,11 @@ public class OBJMaterial {
 		this.name = name;
 	}
 
-	public Vector3f getKa() {
+	public Vector3 getKa() {
 		return ka;
 	}
 
-	public void setKa(Vector3f ka) {
+	public void setKa(Vector3 ka) {
 		this.ka = ka;
 	}
 
@@ -62,11 +62,11 @@ public class OBJMaterial {
 		this.mapKa = mapKa;
 	}
 
-	public Vector3f getKd() {
+	public Vector3 getKd() {
 		return kd;
 	}
 
-	public void setKd(Vector3f kd) {
+	public void setKd(Vector3 kd) {
 		this.kd = kd;
 	}
 
@@ -78,11 +78,11 @@ public class OBJMaterial {
 		this.mapKd = mapKd;
 	}
 
-	public Vector3f getKs() {
+	public Vector3 getKs() {
 		return ks;
 	}
 
-	public void setKs(Vector3f ks) {
+	public void setKs(Vector3 ks) {
 		this.ks = ks;
 	}
 

@@ -3,7 +3,7 @@ package br.com.abby.linear;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.util.vector.Vector3f;
+import com.badlogic.gdx.math.Vector3;
 
 import br.com.abby.util.PointToVectorAdapter;
 import br.com.etyllica.core.linear.Point3D;
@@ -34,7 +34,7 @@ public class BoundingBox3D {
 		this.maxPoint = new Point3D(box.maxPoint);
 	}
 
-	public void add(Vector3f vertex) {
+	public void add(Vector3 vertex) {
 		addPoint(PointToVectorAdapter.adapt(vertex));
 	}
 	
@@ -124,17 +124,17 @@ public class BoundingBox3D {
 		return new Point3D(cx, cy, cz); 
 	}
 
-	public List<Vector3f> getVertexList() {
+	public List<Vector3> getVertexList() {
 		
-		List<Vector3f> vertexList = new ArrayList<Vector3f>();
+		List<Vector3> vertexList = new ArrayList<Vector3>();
 		
 		vertexList.add(PointToVectorAdapter.adapt(minPoint));
-		vertexList.add(new Vector3f((float)maxPoint.getX(), (float)minPoint.getY(), (float)minPoint.getZ()));
-		vertexList.add(new Vector3f((float)minPoint.getX(), (float)maxPoint.getY(), (float)minPoint.getZ()));
-		vertexList.add(new Vector3f((float)minPoint.getX(), (float)maxPoint.getY(), (float)maxPoint.getZ()));
-		vertexList.add(new Vector3f((float)maxPoint.getX(), (float)maxPoint.getY(), (float)minPoint.getZ()));
-		vertexList.add(new Vector3f((float)maxPoint.getX(), (float)minPoint.getY(), (float)maxPoint.getZ()));
-		vertexList.add(new Vector3f((float)minPoint.getX(), (float)minPoint.getY(), (float)maxPoint.getZ()));
+		vertexList.add(new Vector3((float)maxPoint.getX(), (float)minPoint.getY(), (float)minPoint.getZ()));
+		vertexList.add(new Vector3((float)minPoint.getX(), (float)maxPoint.getY(), (float)minPoint.getZ()));
+		vertexList.add(new Vector3((float)minPoint.getX(), (float)maxPoint.getY(), (float)maxPoint.getZ()));
+		vertexList.add(new Vector3((float)maxPoint.getX(), (float)maxPoint.getY(), (float)minPoint.getZ()));
+		vertexList.add(new Vector3((float)maxPoint.getX(), (float)minPoint.getY(), (float)maxPoint.getZ()));
+		vertexList.add(new Vector3((float)minPoint.getX(), (float)minPoint.getY(), (float)maxPoint.getZ()));
 		vertexList.add(PointToVectorAdapter.adapt(maxPoint));
 		
 		return vertexList;

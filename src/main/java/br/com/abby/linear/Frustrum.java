@@ -2,10 +2,10 @@ package br.com.abby.linear;
 
 import java.util.List;
 
-import org.lwjgl.util.vector.Vector3f;
-
 import br.com.abby.util.PointToVectorAdapter;
 import br.com.etyllica.core.collision.CollisionStatus;
+
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * Frustrum class based on: http://cgvr.cs.uni-bremen.de/teaching/cg_literatur/lighthouse3d_view_frustum_culling/
@@ -21,7 +21,7 @@ public class Frustrum {
 
 	public Plane planes[] = new Plane[6];
 
-	public Vector3f nTopLeft,nTopRight,nBottomLeft,nBottomRight,fTopLeft,fTopRight,fBottomLeft,fBottomRight;
+	public Vector3 nTopLeft,nTopRight,nBottomLeft,nBottomRight,fTopLeft,fTopRight,fBottomLeft,fBottomRight;
 
 	public double nearD, farD, ratio, angle, tan;
 	public double nWidth, nHeight, fWidth, fHeight;
@@ -53,62 +53,62 @@ public class Frustrum {
 
 	public void setCamDef(Camera camera) {
 
-		Vector3f position = PointToVectorAdapter.adapt(camera);
-		Vector3f target = PointToVectorAdapter.adapt(camera.getTarget());
-		Vector3f up = PointToVectorAdapter.adapt(camera.getNormal());
+		Vector3 position = PointToVectorAdapter.adapt(camera);
+		Vector3 target = PointToVectorAdapter.adapt(camera.getTarget());
+		Vector3 up = PointToVectorAdapter.adapt(camera.getNormal());
 
 		setCamDef(position, target, up);
 	}
 
-	public void setCamDef(Vector3f position, Vector3f target, Vector3f up) {
+	public void setCamDef(Vector3 position, Vector3 target, Vector3 up) {
 
 		// compute the Z axis of camera
 		// this axis points in the opposite direction from 
 		// the looking direction
-		Vector3f Z = Vector3f.sub(position, target, null);
-		Z.normalise();
+		Vector3 Z = new Vector3(position).sub(target);
+		Z.nor();
 
 		// X axis of camera with given "up" vector and Z axis
-		Vector3f X = Vector3f.cross(up, Z, null);
-		X.normalise();
+		Vector3 X = new Vector3(up).crs(Z);
+		X.nor();
 
 		// the real "up" vector is the cross product of Z and X
-		Vector3f Y = Vector3f.cross(Z, X, null);
+		Vector3 Y = new Vector3(Z).crs(X);
 
 		// compute the centers of the near and far planes
-		Vector3f nearZ = new Vector3f(Z);
-		nearZ.scale((float)nearD);
+		Vector3 nearZ = new Vector3(Z);
+		nearZ.scl((float)nearD);
 
-		Vector3f farZ = new Vector3f(Z);
-		farZ.scale((float)farD);
+		Vector3 farZ = new Vector3(Z);
+		farZ.scl((float)farD);
 
-		Vector3f nc = Vector3f.sub(position, nearZ, null);
-		Vector3f fc = Vector3f.sub(position, farZ, null);
+		Vector3 nc = new Vector3(position).sub(nearZ);
+		Vector3 fc = new Vector3(position).sub(farZ);
 
-		Vector3f nwX = new Vector3f(X);
-		nwX.scale((float)nWidth);
+		Vector3 nwX = new Vector3(X);
+		nwX.scl((float)nWidth);
 
-		Vector3f fwX = new Vector3f(X);
-		fwX.scale((float)fWidth);
+		Vector3 fwX = new Vector3(X);
+		fwX.scl((float)fWidth);
 
-		Vector3f nhY = new Vector3f(Y);
-		nhY.scale((float)nHeight);
+		Vector3 nhY = new Vector3(Y);
+		nhY.scl((float)nHeight);
 
-		Vector3f fhY = new Vector3f(Y);
-		fhY.scale((float)fHeight);
-
+		Vector3 fhY = new Vector3(Y);
+		fhY.scl((float)fHeight);
+		
 		// compute the 4 corners of the frustum on the near plane
-		nTopLeft = Vector3f.add(nc, Vector3f.sub(nhY, nwX, null), null);
-		nTopRight = Vector3f.add(nc, Vector3f.add(nhY, nwX, null), null);
-		nBottomLeft = Vector3f.sub(nc, Vector3f.sub(nhY, nwX, null), null);
-		nBottomRight = Vector3f.sub(nc, Vector3f.add(nhY, nwX, null), null);
+		nTopLeft = new Vector3(nc).add(nhY).sub(nwX);
+		nTopRight = new Vector3(nc).add(nhY).add(nwX);
+		nBottomLeft = new Vector3(nc).sub(nhY).sub(nwX);
+		nBottomRight = new Vector3(nc).sub(nhY).add(nwX);
 
 		// compute the 4 corners of the frustum on the far plane
-		fTopLeft = Vector3f.add(fc, Vector3f.sub(fhY, fwX, null), null);
-		fTopRight = Vector3f.add(fc, Vector3f.add(fhY, fwX, null), null);
-		fBottomLeft = Vector3f.sub(fc, Vector3f.sub(fhY, fwX, null), null);
-		fBottomRight = Vector3f.sub(fc, Vector3f.add(fhY, fwX, null), null);
-
+		fTopLeft = new Vector3(fc).add(fc).sub(fwX);
+		fTopRight = new Vector3(fc).add(fc).add(fwX);
+		fBottomLeft = new Vector3(fc).sub(fc).sub(fwX);
+		fBottomRight = new Vector3(fc).sub(fhY).add(fwX);
+		
 		// compute the six planes
 		// the function setPoints assumes that the points
 		// are given in counter clockwise order
@@ -121,7 +121,7 @@ public class Frustrum {
 		planes[FAR_PLANE].setPoints(fTopRight, fTopLeft, fBottomLeft);
 	}
 
-	public CollisionStatus pointInFrustum(Vector3f p) {
+	public CollisionStatus pointInFrustum(Vector3 p) {
 		CollisionStatus result = CollisionStatus.INSIDE;
 		for(int i=0; i < 6; i++) {
 			if (planes[i].distance(p) < 0) {
@@ -132,7 +132,7 @@ public class Frustrum {
 		return result;
 	}
 	
-	public CollisionStatus sphereInFrustum(Vector3f p, float radius) {
+	public CollisionStatus sphereInFrustum(Vector3 p, float radius) {
 		double distance;
 		CollisionStatus result = CollisionStatus.INSIDE;
 		
@@ -162,7 +162,7 @@ public class Frustrum {
 			// both inside and out of the frustum
 			for (int k = 0; k < 8 && (in==0 || out==0); k++) {
 			
-				List<Vector3f> boxList = b.getVertexList();
+				List<Vector3> boxList = b.getVertexList();
 				
 				// is the corner outside or inside
 				if (planes[i].distance(boxList.get(k)) < 0) {
@@ -189,7 +189,7 @@ public class Frustrum {
 
 	gl.glBegin(GL2.GL_LINES);
 	
-	Vector3f a,b;
+	Vector3 a,b;
 
 		// near
 		a = (ntr + ntl + nbr + nbl) * 0.25;

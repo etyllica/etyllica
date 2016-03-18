@@ -1,6 +1,6 @@
 package br.com.abby.linear;
 
-import org.lwjgl.util.vector.Vector3f;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * 
@@ -11,25 +11,25 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class Vertex{
 
-	private Vector3f vector;
+	private Vector3 vector;
 	
 	private float weight = 0;
 	
 	public Vertex(float x, float y, float z){
 		super();
-		vector = new Vector3f(x,y,z);
+		vector = new Vector3(x,y,z);
 	}
 	
-	public Vertex(Vector3f vector){
+	public Vertex(Vector3 vector) {
 		super();
 		this.vector = vector;
 	}
 
-	public Vector3f getVector() {
+	public Vector3 getVector() {
 		return vector;
 	}
 
-	public void setVector(Vector3f vector) {
+	public void setVector(Vector3 vector) {
 		this.vector = vector;
 	}
 

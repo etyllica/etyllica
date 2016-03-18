@@ -9,8 +9,9 @@ import java.util.Set;
 
 import org.jgl.GL;
 import org.jgl.GLAUX;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import br.com.abby.GLDrawable;
 import br.com.abby.awt.material.Texture;
@@ -135,18 +136,18 @@ public class Model3D extends AimPoint implements GLDrawable {
 				for(int i=0;i<face.vertexIndex.length;i++) {
 
 					if(drawTexture) {
-						Vector3f normal = vbo.getNormals().get(face.normalIndex[i]);
-						gl.glNormal3d(normal.getX(), normal.getY(), normal.getZ());
+						Vector3 normal = vbo.getNormals().get(face.normalIndex[i]);
+						gl.glNormal3d(normal.x, normal.y, normal.z);
 
-						Vector2f textureCoordinate = vbo.getTextures().get(face.textureIndex[i]);
-						gl.glTexCoord2d(textureCoordinate.getX(), textureCoordinate.getY());
+						Vector2 textureCoordinate = vbo.getTextures().get(face.textureIndex[i]);
+						gl.glTexCoord2d(textureCoordinate.x, textureCoordinate.y);
 					}
 
 					int index = face.vertexIndex[i];
 
-					Vector3f vertex = vbo.getVertices().get(index);
+					Vector3 vertex = vbo.getVertices().get(index);
 
-					gl.glVertex3d(vertex.getX(), vertex.getY(), vertex.getZ());
+					gl.glVertex3d(vertex.x, vertex.y, vertex.z);
 				}
 
 				gl.glEnd();
@@ -173,7 +174,7 @@ public class Model3D extends AimPoint implements GLDrawable {
 
 		double vsize = 0.015;
 
-		List<Vector3f> vertices = vbo.getVertices();
+		List<Vector3> vertices = vbo.getVertices();
 
 		for(int i=0;i<vertices.size(); i++) {
 
@@ -191,7 +192,7 @@ public class Model3D extends AimPoint implements GLDrawable {
 			}
 
 			gl.glPushMatrix();
-			gl.glTranslated(vertices.get(i).getX(), vertices.get(i).getY(), vertices.get(i).getZ());
+			gl.glTranslated(vertices.get(i).x, vertices.get(i).y, vertices.get(i).z);
 			gl.auxSolidCube(vsize);
 			gl.glPopMatrix();
 		}

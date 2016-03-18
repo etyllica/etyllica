@@ -6,12 +6,13 @@ import java.net.URL;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.lwjgl.util.vector.Vector3f;
 
 import br.com.abby.core.loader.OBJLoader;
 import br.com.abby.core.vbo.Face;
 import br.com.abby.core.vbo.VBO;
 import br.com.etyllica.util.PathHelper;
+
+import com.badlogic.gdx.math.Vector3;
 
 public class OBJWriterTest {
 
@@ -23,21 +24,21 @@ public class OBJWriterTest {
 	public void setUp() {
 		vbo = new VBO();
 		
-		vbo.getVertices().add(new Vector3f(0,0,0));
-		vbo.getVertices().add(new Vector3f(0,0,1));
-		vbo.getVertices().add(new Vector3f(0,1,0));
-		vbo.getVertices().add(new Vector3f(0,1,1));
-		vbo.getVertices().add(new Vector3f(1,0,0));
-		vbo.getVertices().add(new Vector3f(1,0,1));
-		vbo.getVertices().add(new Vector3f(1,1,0));
-		vbo.getVertices().add(new Vector3f(1,1,1));
+		vbo.getVertices().add(new Vector3(0,0,0));
+		vbo.getVertices().add(new Vector3(0,0,1));
+		vbo.getVertices().add(new Vector3(0,1,0));
+		vbo.getVertices().add(new Vector3(0,1,1));
+		vbo.getVertices().add(new Vector3(1,0,0));
+		vbo.getVertices().add(new Vector3(1,0,1));
+		vbo.getVertices().add(new Vector3(1,1,0));
+		vbo.getVertices().add(new Vector3(1,1,1));
 		
-		vbo.getNormals().add(new Vector3f(0,0,1));
-		vbo.getNormals().add(new Vector3f(0,0,-1));
-		vbo.getNormals().add(new Vector3f(0,1,0));
-		vbo.getNormals().add(new Vector3f(0,-1,0));
-		vbo.getNormals().add(new Vector3f(1,0,0));
-		vbo.getNormals().add(new Vector3f(-1,0,0));
+		vbo.getNormals().add(new Vector3(0,0,1));
+		vbo.getNormals().add(new Vector3(0,0,-1));
+		vbo.getNormals().add(new Vector3(0,1,0));
+		vbo.getNormals().add(new Vector3(0,-1,0));
+		vbo.getNormals().add(new Vector3(1,0,0));
+		vbo.getNormals().add(new Vector3(-1,0,0));
 		
 		vbo.getFaces().add(new Face(3).addVertexes(1,7,5).addNormals(2,2,2));
 		vbo.getFaces().add(new Face(3).addVertexes(1,3,7).addNormals(2,2,2));
@@ -75,8 +76,6 @@ public class OBJWriterTest {
 			Assert.fail();
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 }
