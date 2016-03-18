@@ -3,7 +3,10 @@ package sound.paulscode;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ListIterator;
+
 import javax.sound.sampled.AudioFormat;
+
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * The Source class is used to store information about a source.  
@@ -125,7 +128,7 @@ public class Source
 /**
  * This source's position in 3D space.
  */
-    public Vector3D position;
+    public Vector3 position;
     
 /**
  * Attenuation model to use for this source.
@@ -140,7 +143,7 @@ public class Source
 /**
  * Source's velocity in world-space, for use in Doppler effect.
  */
-    public Vector3D velocity;
+    public Vector3 velocity;
     
 /**
  * This source's volume (a float between 0.0 - 1.0).  This value is used 
@@ -266,10 +269,10 @@ public class Source
         this.sourcename = sourcename;
         this.filenameURL = filenameURL;
         this.soundBuffer = soundBuffer;
-        position = new Vector3D( x, y, z );
+        position = new Vector3( x, y, z );
         this.attModel = attModel;
         this.distOrRoll = distOrRoll;
-        this.velocity = new Vector3D( 0, 0, 0 );
+        this.velocity = new Vector3( 0, 0, 0 );
         this.temporary = temporary;
 
         if( toStream && filenameURL != null )
@@ -291,10 +294,10 @@ public class Source
         toLoop = old.toLoop;
         sourcename = old.sourcename;
         filenameURL = old.filenameURL;
-        position = old.position.clone();
+        position = old.position.cpy();
         attModel = old.attModel;
         distOrRoll = old.distOrRoll;
-        velocity = old.velocity.clone();
+        velocity = old.velocity.cpy();
         temporary = old.temporary;
         
         sourceVolume = old.sourceVolume;
@@ -332,10 +335,10 @@ public class Source
         this.sourcename = sourcename;
         this.filenameURL = null;
         this.soundBuffer = null;
-        position = new Vector3D( x, y, z );
+        position = new Vector3( x, y, z );
         this.attModel = attModel;
         this.distOrRoll = distOrRoll;
-        this.velocity = new Vector3D( 0, 0, 0 );
+        this.velocity = new Vector3( 0, 0, 0 );
         this.temporary = false;
 
         rawDataStream = true;

@@ -1,6 +1,7 @@
 package sound.paulscode.libraries;
 
 import java.util.LinkedList;
+
 import javax.sound.sampled.AudioFormat;
 
 import sound.paulscode.Channel;
@@ -9,7 +10,8 @@ import sound.paulscode.ListenerData;
 import sound.paulscode.SoundBuffer;
 import sound.paulscode.SoundSystemConfig;
 import sound.paulscode.Source;
-import sound.paulscode.Vector3D;
+
+import com.badlogic.gdx.math.Vector3;
 
 
 
@@ -433,12 +435,12 @@ public class SourceJavaSound extends Source
  */
     public void calculatePan()
     {
-        Vector3D side = listener.up.cross( listener.lookAt );
-        side.normalize();
-        float x = position.dot( position.subtract( listener.position ), side );
-        float z = position.dot( position.subtract( listener.position ),
-                                listener.lookAt );
-        side = null;        
+        Vector3 side = listener.up.crs( listener.lookAt );
+        side.nor();
+        Vector3 deltaPosition = position.cpy().sub( listener.position );
+        float x = deltaPosition.dot( side );
+        float z = deltaPosition.dot( listener.lookAt );
+        side = null;
         float angle = (float) Math.atan2( x, z );
         pan = (float) - Math.sin( angle );
         
@@ -470,14 +472,14 @@ public class SourceJavaSound extends Source
             {
                 float SS = 343.3f;
 
-                Vector3D SV = velocity;
-                Vector3D LV = listener.velocity;
+                Vector3 SV = velocity;
+                Vector3 LV = listener.velocity;
                 float DV = SoundSystemConfig.getDopplerVelocity();
                 float DF = SoundSystemConfig.getDopplerFactor();
-                Vector3D SL = listener.position.subtract( position );
+                Vector3 SL = listener.position.cpy().sub( position );
 
-                float vls = SL.dot( LV ) / SL.length();
-                float vss = SL.dot( SV ) / SL.length();
+                float vls = SL.dot( LV ) / SL.len();
+                float vss = SL.dot( SV ) / SL.len();
 
                 vss = min( vss, SS / DF );
                 vls = min( vls, SS / DF );

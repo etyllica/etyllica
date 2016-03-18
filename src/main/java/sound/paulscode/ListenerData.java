@@ -1,10 +1,12 @@
 package sound.paulscode;
 
+import com.badlogic.gdx.math.Vector3;
+
 /**
  * The listenerData class is used to store information about the 
  * listener's position and orientation.  A ListenerData object can be obtained 
  * using SoundSystem's getListenerData() method.  See 
- * {@link sound.paulscode.Vector3D Vector3D} for more information about 3D 
+ * {@link com.badlogic.gdx.math.Vector3 Vector3} for more information about 3D 
  * coordinates and vectors.
  *<br><br>
  *<b><i>    SoundSystem License:</b></i><br><b><br>
@@ -44,19 +46,19 @@ public class ListenerData
 /**
  * Listener's position in 3D space
  */
-    public Vector3D position;
+    public Vector3 position;
 /**
  * A normalized vector indicating the direction the listener is facing
  */
-    public Vector3D lookAt;
+    public Vector3 lookAt;
 /**
  * A normalized vector indicating the up direction
  */
-    public Vector3D up;
+    public Vector3 up;
 /**
  * Listener's velocity in world-space
  */
-    public Vector3D velocity;
+    public Vector3 velocity;
     
 /**
  * Used for easy rotation along the x/z plane (for use in a first-person 
@@ -69,10 +71,10 @@ public class ListenerData
  */
     public ListenerData()
     {
-        position = new Vector3D( 0.0f, 0.0f, 0.0f );
-        lookAt = new Vector3D( 0.0f, 0.0f, -1.0f );
-        up = new Vector3D( 0.0f, 1.0f, 0.0f );
-        velocity = new Vector3D( 0.0f, 0.0f, 0.0f );
+        position = new Vector3( 0.0f, 0.0f, 0.0f );
+        lookAt = new Vector3( 0.0f, 0.0f, -1.0f );
+        up = new Vector3( 0.0f, 1.0f, 0.0f );
+        velocity = new Vector3( 0.0f, 0.0f, 0.0f );
         angle = 0.0f;
     }
     
@@ -93,10 +95,10 @@ public class ListenerData
     public ListenerData( float pX, float pY, float pZ, float lX, float lY,
                          float lZ, float uX, float uY, float uZ, float a )
     {
-        position = new Vector3D( pX, pY, pZ );
-        lookAt = new Vector3D( lX, lY, lZ );
-        up = new Vector3D( uX, uY, uZ );
-        velocity = new Vector3D( 0.0f, 0.0f, 0.0f );
+        position = new Vector3( pX, pY, pZ );
+        lookAt = new Vector3( lX, lY, lZ );
+        up = new Vector3( uX, uY, uZ );
+        velocity = new Vector3( 0.0f, 0.0f, 0.0f );
         angle = a;
     }
     
@@ -108,12 +110,12 @@ public class ListenerData
  * @param u Normalized vector indicating the up direction.
  * @param a Angle in radians that the listener is turned counterclockwise around the y-axis.
  */
-    public ListenerData( Vector3D p, Vector3D l, Vector3D u, float a )
+    public ListenerData( Vector3 p, Vector3 l, Vector3 u, float a )
     {
-        position = p.clone();
-        lookAt = l.clone();
-        up = u.clone();
-        velocity = new Vector3D( 0.0f, 0.0f, 0.0f );
+        position = p.cpy();
+        lookAt = l.cpy();
+        up = u.cpy();
+        velocity = new Vector3( 0.0f, 0.0f, 0.0f );
         angle = a;
     }
     
@@ -154,7 +156,7 @@ public class ListenerData
  * @param u Normalized vector indicating the up direction.
  * @param a Angle in radians that the listener is turned counterclockwise around the y-axis.
  */
-    public void setData( Vector3D p, Vector3D l, Vector3D u, float a )
+    public void setData( Vector3 p, Vector3 l, Vector3 u, float a )
     {
         position.x = p.x;
         position.y = p.y;
@@ -203,7 +205,7 @@ public class ListenerData
  * Change this listener's position using the specified vector.
  * @param p New position.
  */
-    public void setPosition( Vector3D p )
+    public void setPosition( Vector3 p )
     {
         position.x = p.x;
         position.y = p.y;
@@ -235,7 +237,7 @@ public class ListenerData
  * @param l Normalized vector representing the look-at direction.
  * @param u Normalized vector representing the up direction.
  */
-    public void setOrientation( Vector3D l, Vector3D u )
+    public void setOrientation( Vector3 l, Vector3 u )
     {
         lookAt.x = l.x;
         lookAt.y = l.y;
@@ -249,7 +251,7 @@ public class ListenerData
  * Change this listener's velocity in world-space.
  * @param v New velocity.
  */
-    public void setVelocity( Vector3D v )
+    public void setVelocity( Vector3 v )
     {
         velocity.x = v.x;
         velocity.y = v.y;
