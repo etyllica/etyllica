@@ -1,5 +1,7 @@
 package br.com.etyllica.core.math;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,6 +10,19 @@ import br.com.etyllica.core.linear.Triangle;
 
 public class MathHelperTest {
 
+	@Test
+	public void testOrderedInZList() {
+		Point3D a = new Point3D(0,0,3);
+		Point3D b = new Point3D(10,0,2);
+		Point3D c = new Point3D(0,10,1);
+		
+		List<Point3D> ordered = MathHelper.orderedInZ(a, b, c);
+		
+		Assert.assertEquals(c, ordered.get(0));
+		Assert.assertEquals(b, ordered.get(1));
+		Assert.assertEquals(a, ordered.get(2));
+	}
+	
 	@Test
 	public void testAreaTriangleInOrigin() {
 		Point3D a = new Point3D(0,0,0);
