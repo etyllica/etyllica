@@ -31,9 +31,6 @@ public class MathHelperTest {
 		Assert.assertEquals(19.3067f, MathHelper.triangleArea(triangle), 0.0001);
 	}
 	
-	/**
-	 * Test based on explanation: https://www.youtube.com/watch?v=MnpaeFPyn1A
-	 */
 	@Test
 	public void testTriangularPrismVolume() {
 		Point3D a = new Point3D(-5,5,-5);
@@ -42,7 +39,27 @@ public class MathHelperTest {
 		Triangle triangle = new Triangle(a, b, c);
 		float height = 10;
 		
-		Assert.assertEquals(193.0673f, MathHelper.trianglularPrismaVolume(triangle, height), 0.0001);
+		Assert.assertEquals(193.0673f, MathHelper.trianglularPrismVolume(triangle, height), 0.0001);
 	}
 	
+	@Test
+	public void testVolumeUnderAlignedTriangle() {
+		Point3D a = new Point3D(0,0,1);
+		Point3D b = new Point3D(1,0,1);
+		Point3D c = new Point3D(0,1,1);
+		Triangle triangle = new Triangle(a, b, c);
+		
+		//0.5 = half of cube volume
+		Assert.assertEquals(0.5, MathHelper.volumeUnderTriangle(triangle), 0.001);
+	}
+	
+	@Test
+	public void testVolumeUnderTriangle() {
+		Point3D a = new Point3D(-5,5,-5);
+		Point3D b = new Point3D(1,-6,6);
+		Point3D c = new Point3D(2,-3,4);
+		Triangle triangle = new Triangle(a, b, c);
+		
+		Assert.assertEquals(-24.16666f, MathHelper.volumeUnderTriangle(triangle), 0.001);
+	}
 }
