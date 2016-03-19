@@ -5,6 +5,11 @@
 # SDK Projects
 /sdk
 
+# IntelliJ Files
+*.iml
+*/.idea
+*/.settings
+
 # Automatic Generated Files #
 *.applet
 *.attach
