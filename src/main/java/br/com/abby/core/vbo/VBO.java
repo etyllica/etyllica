@@ -24,7 +24,6 @@ public class VBO {
 	private List<Vector2> textures = new ArrayList<Vector2>();
 
 	private List<Face> faces = new ArrayList<Face>();
-
 	private List<Group> groups = new ArrayList<Group>();
 	
 	private Map<String, OBJMaterial> materials = new HashMap<String, OBJMaterial>();

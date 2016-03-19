@@ -17,7 +17,9 @@ import br.com.abby.core.vbo.Group;
 import br.com.abby.core.vbo.VBO;
 
 /**
+ * 
  * Code forked from min3d library https://code.google.com/p/min3d/
+ * Reference: http://cse.csusb.edu/tongyu/courses/cs520/notes/3DSINFO.TXT
  *
  */
 public class Max3DLoader extends StreamParser implements VBOLoader {
@@ -125,7 +127,13 @@ public class Max3DLoader extends StreamParser implements VBOLoader {
 				System.out.println("Loading material: "+currentMaterialKey);
 				break;
 			case MATERIAL_DIFUSE_COLOR:
-				/*Chunk colorChunk = new Chunk();
+				/*int rgb = readInt(stream);
+				
+				float r = (rgb >> 16) & 0xFF;
+				float g = (rgb >> 8) & 0xFF;
+				float b = rgb & 0xFF;
+				
+				Chunk colorChunk = new Chunk();
 				endReached = readChunk(stream, colorChunk);
 				System.out.println("Color: "+colorChunk.id);
 				
@@ -133,9 +141,11 @@ public class Max3DLoader extends StreamParser implements VBOLoader {
 				float g = readFloat(stream);
 				float b = readFloat(stream);
 
-				Vector3f color = new Vector3f(r,g,b);
+				
+				Vector3f color = new Vector3f(255/r, 255/g, 255/b);
 
-				currentMaterial.setKd(color);*/
+				currentMaterial.setKd(color);
+				*/
 				break;
 			case MATERIAL_TEXTURE_FILENAME:
 				String fileName = readString(stream);

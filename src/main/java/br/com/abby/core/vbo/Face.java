@@ -15,6 +15,9 @@ public class Face {
 
     public Face(int sides) {
     	this.sides = sides;
+    	vertexIndex = new int[sides];
+    	normalIndex = new int[sides];
+    	textureIndex = new int[sides];
     }
     
     public Face(int[] vertexIndex, int[] textureIndex, int[] normalIndex) {
