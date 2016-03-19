@@ -589,7 +589,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	private void drawView(View component, Graphic g) {
-
 		//Draw Component
 		component.draw(g);
 
@@ -610,7 +609,9 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 					drawView(child,g);
 					child.setLocation(-component.getX(), -component.getY());
 				} else {
-					drawView(child,g);	
+					
+						drawView(child,g);	
+					
 				}
 			}
 		}

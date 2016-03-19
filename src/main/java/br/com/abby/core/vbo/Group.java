@@ -15,7 +15,6 @@ import br.com.abby.core.material.OBJMaterial;
 public class Group {
 	
 	private String name;
-	
 	private List<Face> faces = new ArrayList<Face>();
 	
 	private OBJMaterial material;
