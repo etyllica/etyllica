@@ -28,6 +28,19 @@ public class MathHelper {
 		return normal;
 	}
 
+	public static boolean isClockwise(Triangle triangle) {
+		return isClockwise(triangle.getA(), triangle.getB(), triangle.getC());
+	}
+	
+	public static boolean isClockwise(Point3D a, Point3D b, Point3D c) {
+		PointLinePosition res = PointLineTest.pointLineTest(a, b, c);
+
+		return (res == PointLinePosition.ON_SEGMENT) ||
+				(res == PointLinePosition.LEFT) ||
+				(res == PointLinePosition.INFRONT_OF_A) ||
+				(res == PointLinePosition.BEHIND_B);
+	}
+
 	public static float triangleArea(Triangle triangle) {
 		Point3D a = triangle.getA();
 		Point3D b = triangle.getB();
@@ -82,7 +95,7 @@ public class MathHelper {
 		triangles.add(t5);
 		triangles.add(t6);
 		triangles.add(tp);
-		
+
 		return volumeOfMesh(triangles);
 	}
 
