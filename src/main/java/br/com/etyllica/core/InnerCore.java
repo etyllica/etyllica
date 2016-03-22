@@ -36,7 +36,7 @@ import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
-import br.com.etyllica.theme.dalt.DaltArrowTheme;
+import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;
 import br.com.etyllica.theme.listener.ThemeListener;
 
 /**
@@ -141,7 +141,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		ThemeManager.getInstance().setArrowThemeListener(arrowDrawer);
 
-		ThemeManager.getInstance().setArrowTheme(new DaltArrowTheme());
+		ThemeManager.getInstance().setArrowTheme(new EtyllicArrowTheme());
 	}
 
 	public Window getWindow() {
@@ -909,6 +909,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	private void removeMouseOver(View view) {
+		if (view == null)
+			return;
 		view.setMouseOver(false);
 		view.update(GUIEvent.MOUSE_OUT);
 	}

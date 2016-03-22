@@ -9,7 +9,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.icon.DownArrow;
 import br.com.etyllica.gui.list.Option;
 
@@ -17,7 +17,7 @@ public class Select extends View {
 		
 	private List<Option> options = new ArrayList<Option>();
 	
-	private DefaultButton button;
+	private BaseButton button;
 	
 	private int selectedOption = 0;
 	
@@ -29,7 +29,7 @@ public class Select extends View {
 		int buttonSize = h;
 		
 		//TODO ButtonDownArrow
-		button = new DefaultButton(w-buttonSize,0,buttonSize,buttonSize);
+		button = new BaseButton(w-buttonSize,0,buttonSize,buttonSize);
 		
 		DownArrow arrow = new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2);
 		button.setLabel(arrow);

@@ -1,11 +1,9 @@
 package br.com.etyllica.gui.radio;
 
 import br.com.etyllica.core.collision.CollisionDetector;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Radio;
 import br.com.etyllica.theme.Theme;
-import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -26,7 +24,7 @@ public class RadioButton extends Radio {
 		if(!visible)
 			return;
 
-		Theme theme = getTheme();		
+		Theme theme = getTheme();	
 
 		if(!disabled) {
 

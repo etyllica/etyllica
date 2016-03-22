@@ -1,7 +1,7 @@
-package br.com.etyllica.gui.checkbox;
+package br.com.etyllica.theme.etyllic.components;
 
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.CheckBox;
+import br.com.etyllica.gui.base.BaseCheckBox;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
@@ -12,35 +12,29 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class CheckButton extends CheckBox {
+public class CheckBox extends BaseCheckBox {
 
-	public CheckButton(int x, int y, int w, int h) {
+	public CheckBox(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
 	
 	@Override
-	public void draw(Graphic g){
+	public void draw(Graphic g) {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 
-		if(!mouseOver){
-
+		if (!mouseOver) {
 			g.setColor(theme.getButtonColor());
 
-		}else{
-
-			if(clicked){
-
+		} else {
+			if (clicked) {
 				g.setColor(theme.getButtonOnClick());
-
-			}else{
-
+			} else {
 				g.setColor(theme.getButtonOnMouse());
-
 			}
 		}
 
-		if(checked){
+		if (checked) {
 			g.setColor(theme.getButtonOnClick());
 		}
 		

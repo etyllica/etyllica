@@ -27,7 +27,7 @@ public class GeneralGuiExample extends Application{
 		Button buttonWhite = new Button(20,30,120,40);
 		buttonWhite.setLabel(new TextLabel("WHITE"));
 		buttonWhite.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", Color.WHITE));
-		addView(buttonWhite);	
+		addView(buttonWhite);
 		
 		Button buttonBlue = new Button(20,80,120,40);
 		buttonBlue.setLabel(new TextLabel("BLUE"));

@@ -9,7 +9,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.icon.DownArrow;
 import br.com.etyllica.gui.icon.UpArrow;
 import br.com.etyllica.gui.panel.ScrollBackground;
@@ -32,20 +32,20 @@ public class ScrollerPanel extends View {
 	private float offset = 0;
 	private float knobPosition = 0;
 
-	private DefaultButton upButton;
-	private DefaultButton downButton;
-	private DefaultButton knob;
+	private BaseButton upButton;
+	private BaseButton downButton;
+	private BaseButton knob;
 	private ScrollBackground track;
 
 	public ScrollerPanel(int x, int y, int w, int h) {
 		super(x, y, w, h);
 
-		upButton = new DefaultButton(w-buttonSize,0,buttonSize,buttonSize);
+		upButton = new BaseButton(w-buttonSize,0,buttonSize,buttonSize);
 		upButton.setLabel(new UpArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
 		upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollUp"));
 		upButton.setVisible(false);		
 		
-		downButton = new DefaultButton(w-buttonSize,h-buttonSize,buttonSize,buttonSize);
+		downButton = new BaseButton(w-buttonSize,h-buttonSize,buttonSize,buttonSize);
 		downButton.setLabel(new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
 		downButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollDown"));
 		downButton.setVisible(false);
@@ -160,7 +160,7 @@ public class ScrollerPanel extends View {
 		offset = scrollAmount*scrollFactor;
 		
 		remove(knob);
-		knob = new DefaultButton(w-buttonSize,(int)(knobPosition), buttonSize,((int)(h*scrollFactor))-buttonSize*2+1);
+		knob = new BaseButton(w-buttonSize,(int)(knobPosition), buttonSize,((int)(h*scrollFactor))-buttonSize*2+1);
 		knob.setVisible(false);
 		add(knob);
 		

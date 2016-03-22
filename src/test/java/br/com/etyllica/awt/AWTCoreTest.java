@@ -16,7 +16,7 @@ import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
 
 public class AWTCoreTest {
 
@@ -26,7 +26,7 @@ public class AWTCoreTest {
 		
 	private List<View> components;
 	
-	private DefaultButton button;
+	private BaseButton button;
 
 	@Before
 	public void setUp() {
@@ -41,7 +41,7 @@ public class AWTCoreTest {
 		
 		innerCore.replaceWindow(window);
 		
-		button = new DefaultButton(0, 0, 100, 20);
+		button = new BaseButton(0, 0, 100, 20);
 		
 		components = new ArrayList<View>();
 		components.add(button);

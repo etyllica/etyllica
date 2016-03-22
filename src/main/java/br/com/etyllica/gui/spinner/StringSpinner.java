@@ -10,7 +10,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.gui.Panel;
 import br.com.etyllica.gui.View;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.gui.spinner.composer.SpinnerComposer;
 import br.com.etyllica.gui.spinner.composer.StringHorizontalComposer;
@@ -26,8 +26,8 @@ public class StringSpinner extends View {
 
 	protected SpinnerComposer composer;
 	
-	protected DefaultButton next;
-	protected DefaultButton previous;
+	protected BaseButton next;
+	protected BaseButton previous;
 	protected TextLabel resultLabel;
 	protected Panel panel;
 	

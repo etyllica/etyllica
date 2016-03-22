@@ -1,12 +1,9 @@
 package examples.etyllica.gui;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.theme.EtyllicTheme;
-import br.com.etyllica.theme.ThemeManager;
 import examples.etyllica.gui.simple.GeneralGuiExample;
-import examples.etyllica.gui.textfield.TextFieldExample;
+import examples.etyllica.gui.slider.SliderExample;
 
 /**
  * 
@@ -28,14 +25,14 @@ public class GuiExamples extends Etyllica {
 		initialSetup("../../../");
 		
 		//Enable Timer Click
-		Configuration.getInstance().setTimerClick(true);
+		//Configuration.getInstance().setTimerClick(true);
 		
 		//Change Theme
-		ThemeManager.getInstance().setTheme(new EtyllicTheme());
-		//ThemeManager.getInstance().setTheme(new EtyllicMonoTheme());
+		//ThemeManager.getInstance().setTheme(new EtyllicTheme());
 		
 		//return new GeneralGuiExample(w,h);
-		return new TextFieldExample(w,h);
+		//return new TextFieldExample(w,h);
+		return new SliderExample(w,h);
 	}
 	
 }

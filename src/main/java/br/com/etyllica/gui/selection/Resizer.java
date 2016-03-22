@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.util.List;
 
+import br.com.etyllica.awt.stroke.DashedStroke;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
@@ -11,7 +12,6 @@ import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
-import br.com.etyllica.gui.stroke.DashedStroke;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 

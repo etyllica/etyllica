@@ -13,6 +13,8 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.ui.ViewGroup;
 import br.com.etyllica.layer.Layer;
+import br.com.etyllica.theme.Theme;
+import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -228,12 +230,11 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 			if(!onMouse(event)) {
 				mouseOut();
 				return GUIEvent.MOUSE_OUT;
-			} else {
-				return updateMouse(event);
 			}
 		}
 		
-		return GUIEvent.NONE;
+		//return GUIEvent.NONE;
+		return updateMouse(event);
 	}
 	
 	public void mouseIn() {
@@ -244,5 +245,9 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	public void mouseOut() {
 		setMouseOver(false);
 		update(GUIEvent.MOUSE_OUT);
+	}
+
+	public Theme getTheme() {
+		return ThemeManager.getInstance().getTheme();
 	}
 }

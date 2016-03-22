@@ -5,9 +5,9 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.label.TextLabel;
-import br.com.etyllica.gui.listener.SpinnerListener;
+import br.com.etyllica.gui.listener.ValueListener;
 import br.com.etyllica.gui.spinner.composer.SpinnerComposer;
 import br.com.etyllica.gui.spinner.composer.VerticalComposer;
 
@@ -22,8 +22,8 @@ public abstract class Spinner<T extends Number> extends View {
 
 	protected SpinnerComposer composer;
 	
-	protected DefaultButton plus;
-	protected DefaultButton minus;
+	protected BaseButton plus;
+	protected BaseButton minus;
 	protected TextLabel resultLabel;
 	protected Panel panel;
 
@@ -32,7 +32,7 @@ public abstract class Spinner<T extends Number> extends View {
 	protected T maxValue;
 	protected T minValue;
 
-	protected SpinnerListener<T> listener;
+	protected ValueListener<T> listener;
 	
 	public Spinner(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -165,11 +165,11 @@ public abstract class Spinner<T extends Number> extends View {
 		this.minValue = minValue;
 	}
 
-	public SpinnerListener<T> getListener() {
+	public ValueListener<T> getListener() {
 		return listener;
 	}
 
-	public void setListener(SpinnerListener<T> listener) {
+	public void setListener(ValueListener<T> listener) {
 		this.listener = listener;
 	}
 	

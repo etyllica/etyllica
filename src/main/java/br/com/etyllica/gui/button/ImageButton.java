@@ -1,7 +1,7 @@
 package br.com.etyllica.gui.button;
 
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.StaticLayer;
 
@@ -12,7 +12,7 @@ import br.com.etyllica.layer.StaticLayer;
  *
  */
 
-public class ImageButton extends DefaultButton{
+public class ImageButton extends BaseButton{
 
 	protected String normal;
 	protected String sobMouse;

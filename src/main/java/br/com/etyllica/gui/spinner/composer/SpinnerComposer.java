@@ -1,7 +1,7 @@
 package br.com.etyllica.gui.spinner.composer;
 
 import br.com.etyllica.gui.Label;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.layer.GeometricLayer;
 
@@ -15,9 +15,9 @@ public abstract class SpinnerComposer extends GeometricLayer {
 		super(x, y, w, h);
 	}
 	
-	public abstract DefaultButton buildPlusButton(int x, int y, int w, int h);
+	public abstract BaseButton buildPlusButton(int x, int y, int w, int h);
 	
-	public abstract DefaultButton buildMinusButton(int x, int y, int w, int h);
+	public abstract BaseButton buildMinusButton(int x, int y, int w, int h);
 	
 	protected Label buildPlusLabel() {
 		return new TextLabel("+");

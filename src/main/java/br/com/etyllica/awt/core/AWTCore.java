@@ -18,6 +18,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import br.com.etyllica.awt.AWTGraphics;
 import br.com.etyllica.awt.FullScreenWindow;
@@ -89,7 +91,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 		window = new Window(component.getX(), component.getY(), width, height);
 		window.setComponent(component);
 		
-		gameLoop = new FrameSkippingLoop(this);		
+		gameLoop = new FrameSkippingLoop(this);
 	}
 	
 	public void initMonitors(int width, int height) {
@@ -308,7 +310,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 	}
 	
 	public void render() {
-		engine.draw();	
+		engine.draw();
 	}
 	
 	@Override
@@ -337,19 +339,20 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 
 	protected void getError() {
 		try {
-			future.get();
+			future.get(100, TimeUnit.MILLISECONDS);
 		} catch (ExecutionException e) {
 			Throwable cause = e.getCause();
 			cause.printStackTrace();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 		
 	private void updateEngine(double delta) {
-
 		GUIEvent event = getSuperEvent();
-
 		engine.updateSuperEvent(event);
 	}
 	

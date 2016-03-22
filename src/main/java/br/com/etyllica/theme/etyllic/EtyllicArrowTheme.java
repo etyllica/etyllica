@@ -1,13 +1,13 @@
-package br.com.etyllica.theme.dalt;
+package br.com.etyllica.theme.etyllic;
 
-import br.com.etyllica.theme.dalt.arrow.DiagonalArrow;
-import br.com.etyllica.theme.dalt.arrow.HorizontalArrow;
-import br.com.etyllica.theme.dalt.arrow.InvertedDiagonalArrow;
-import br.com.etyllica.theme.dalt.arrow.MoveArrow;
-import br.com.etyllica.theme.dalt.arrow.NormalArrow;
-import br.com.etyllica.theme.dalt.arrow.TextArrow;
-import br.com.etyllica.theme.dalt.arrow.VerticalArrow;
-import br.com.etyllica.theme.dalt.arrow.WaitingArrow;
+import br.com.etyllica.theme.etyllic.arrow.DiagonalArrow;
+import br.com.etyllica.theme.etyllic.arrow.HorizontalArrow;
+import br.com.etyllica.theme.etyllic.arrow.InvertedDiagonalArrow;
+import br.com.etyllica.theme.etyllic.arrow.MoveArrow;
+import br.com.etyllica.theme.etyllic.arrow.NormalArrow;
+import br.com.etyllica.theme.etyllic.arrow.TextArrow;
+import br.com.etyllica.theme.etyllic.arrow.VerticalArrow;
+import br.com.etyllica.theme.etyllic.arrow.WaitingArrow;
 import br.com.etyllica.theme.mouse.ArrowThemeImpl;
 import br.com.etyllica.theme.mouse.arrow.MouseArrow;
 
@@ -18,11 +18,11 @@ import br.com.etyllica.theme.mouse.arrow.MouseArrow;
  *
  */
 
-public class DaltArrowTheme extends ArrowThemeImpl {
+public class EtyllicArrowTheme extends ArrowThemeImpl {
 
 	protected int arrowSize = 22;
 	
-	public DaltArrowTheme(){
+	public EtyllicArrowTheme() {
 		
 		normalArrow = new NormalArrow(arrowSize);
 		clickArrow = new NormalArrow(arrowSize);

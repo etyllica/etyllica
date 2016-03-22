@@ -8,7 +8,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
 
 /**
  * 
@@ -19,7 +19,7 @@ import br.com.etyllica.gui.factory.DefaultButton;
 
 public class ButtonList extends View{
 	
-	List<DefaultButton> buttons = new ArrayList<DefaultButton>();
+	List<BaseButton> buttons = new ArrayList<BaseButton>();
 	
 	public ButtonList(int x, int y, int w, int h){
 		super(x, y, w, h);
@@ -28,7 +28,7 @@ public class ButtonList extends View{
 	@Override
 	public GUIEvent updateMouse(PointerEvent event){
 		
-		for(DefaultButton button: buttons){
+		for(BaseButton button: buttons){
 			button.updateMouse(event);
 		}
 		
@@ -48,7 +48,7 @@ public class ButtonList extends View{
 		
 		//g.setBimg(bimg.getSubimage(0, y, w, h));
 		
-		for(DefaultButton button: buttons){
+		for(BaseButton button: buttons){
 			if(button.getY()<h-100){
 				button.draw(g);
 			}else{
@@ -69,7 +69,7 @@ public class ButtonList extends View{
 		
 	}
 	
-	public void add(DefaultButton button){
+	public void add(BaseButton button){
 		buttons.add(button);
 	}
 	
@@ -79,7 +79,7 @@ public class ButtonList extends View{
 	
 	@Override
 	public void setLocation(int offsetX, int offsetY){
-		for(DefaultButton button: buttons){
+		for(BaseButton button: buttons){
 			button.setLocation(offsetX, offsetY);
 		}
 		

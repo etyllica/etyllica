@@ -2,7 +2,7 @@ package br.com.etyllica.gui.button;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.theme.Theme;
 
 /**
@@ -12,7 +12,7 @@ import br.com.etyllica.theme.Theme;
  *
  */
 
-public class RoundButton extends DefaultButton{
+public class RoundButton extends BaseButton{
 
 	public RoundButton(int x, int y, int w, int h) {
 		super(x, y, w, h);

@@ -5,116 +5,138 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphic;
-import br.com.etyllica.gui.factory.DefaultButton;
+import br.com.etyllica.gui.base.BaseButton;
+import br.com.etyllica.gui.listener.ValueListener;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
 /**
- * 
  * @author yuripourre
  * @license LGPLv3
- *
  */
 
-public class Slider extends View{
+public class Slider extends View {
 
-	protected int minValue = 0;
-	
-	protected int maxValue = 255;
-	
-	protected int value = 0;
-	
-	protected DefaultButton button;
+    protected float minValue = 0;
 
-	public Slider(int x, int y, int w, int h){
-		
-		super(x,y,w,h);
+    protected float maxValue = 255;
 
-		button = new DefaultButton(x, y, h/3, h);
+    protected float value = 0;
 
-	}
+    protected BaseButton button;
 
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
+    private boolean activated = false;
 
-		if(mouseOver) {
-			
-			if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
-				
-				int interval = maxValue-minValue;
-				
-				int mx = event.getX()-x;
-				
-				value = (mx*interval)/w; 
-				
-				button.setX(event.getX()-button.getW()/2);
-				
-				return GUIEvent.COMPONENT_CHANGED;
-			}
-			
-		}
+    public Slider(int x, int y, int w, int h) {
 
-		return GUIEvent.NONE;
-	}
+        super(x, y, w, h);
 
-	@Override
-	public void update(GUIEvent event) {
-		// TODO Auto-generated method stub
+        button = new BaseButton(x, y, h / 4, h);
+    }
 
-	}
+    @Override
+    public GUIEvent updateMouse(PointerEvent event) {
 
-	@Override
-	public void draw(Graphic g){
+        if (mouseOver) {
+            if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+                activated = true;
+            }
+        }
 
-		//Draw Slide
-		Theme theme = ThemeManager.getInstance().getTheme();
+        if (activated) {
+            if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+                updateValue(event);
+                return GUIEvent.COMPONENT_CHANGED;
+            } else if (event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
+                activated = false;
+            }
+        }
 
-		g.setColor(theme.getBarColor());
+        return GUIEvent.NONE;
+    }
 
-		g.fillRect(x, y+h/3, w, h/5);
+    public void updateValue(PointerEvent event) {
+        float interval = maxValue - minValue;
+        int mx = event.getX() - x;
+        value = (mx * interval) / w;
 
-		//Draw Button
-		button.draw(g);
+        if (value < minValue) {
+            value = minValue;
+            button.setX(getX() - button.getW() / 2);
+        } else if (value > maxValue) {
+            value = maxValue;
+            button.setX(getX() + getW() - button.getW() / 2);
+        } else {
+            button.setX(event.getX() - button.getW() / 2);
+        }
+    }
 
-	}
+    @Override
+    public void update(GUIEvent event) {
+        // TODO Auto-generated method stub
 
-	public float getMinValue() {
-		return minValue;
-	}
+    }
 
-	public void setMinValue(int minValue) {
-		this.minValue = minValue;
-	}
+    @Override
+    public void draw(Graphic g) {
 
-	public float getMaxValue() {
-		return maxValue;
-	}
+        //Draw Slide
+        Theme theme = getTheme();
 
-	public void setMaxValue(int maxValue) {
-		this.maxValue = maxValue;
-	}
+        g.setColor(theme.getBarColor());
 
-	public float getValue() {
-		return value;
-	}
+        int sh = h / 5;
+        g.fillRect(x, y + h / 2 - sh / 2, w, sh);
 
-	public void setValue(int value) {
-		
-		this.value = value;
-		
-		int interval = maxValue-minValue; 
+        //Draw Button
+        button.draw(g);
 
-		int bx = x+((value*w)/interval);
-		
-		button.setX(bx-button.getW()/2);
-		
-	}
+    }
 
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return GUIEvent	.NONE;
-	}
+    public float getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(int minValue) {
+        this.minValue = minValue;
+    }
+
+    public float getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public float getValue() {
+        return value;
+    }
+
+    public void setValue(float value) {
+
+        this.value = value;
+
+        float interval = maxValue - minValue;
+
+        float bx = x + ((value * w) / interval);
+
+        button.setX((int)bx - button.getW() / 2);
+    }
+
+    @Override
+    public GUIEvent updateKeyboard(KeyEvent event) {
+        if (onFocus) {
+            if (event.isKeyDown(KeyEvent.VK_RIGHT)) {
+                setValue(value + 1);
+            }
+            if (event.isKeyDown(KeyEvent.VK_LEFT)) {
+                setValue(value + 1);
+            }
+        }
+
+        return GUIEvent.NONE;
+    }
 
 }
 

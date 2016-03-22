@@ -1,4 +1,4 @@
-package br.com.etyllica.theme.dalt.arrow;
+package br.com.etyllica.theme.etyllic.arrow;
 
 public class VerticalArrow extends NormalArrow {
 

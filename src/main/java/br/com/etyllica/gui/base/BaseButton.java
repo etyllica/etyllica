@@ -1,4 +1,4 @@
-package br.com.etyllica.gui.factory;
+package br.com.etyllica.gui.base;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -20,11 +20,11 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class DefaultButton extends RoundGUIComponent {
+public class BaseButton extends RoundGUIComponent {
 
 	protected Label label;
 
-	private Theme theme;
+	//private Theme theme;
 
 	private String alt = "";
 
@@ -32,7 +32,7 @@ public class DefaultButton extends RoundGUIComponent {
 	
 	protected boolean disabled = false;
 	
-	public DefaultButton(int x, int y, int w, int h) {
+	public BaseButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
 
@@ -284,20 +284,6 @@ public class DefaultButton extends RoundGUIComponent {
 
 	protected boolean hasLabel() {
 		return label != null; 
-	}
-
-	public Theme getTheme() {
-
-		if(theme == null) {
-			return ThemeManager.getInstance().getTheme();
-		} else {
-			return this.theme;
-		}		
-
-	}
-
-	public void setTheme(Theme theme) {
-		this.theme = theme;
 	}
 
 	public String getAlt() {

@@ -1,4 +1,4 @@
-package br.com.etyllica.gui.stroke;
+package br.com.etyllica.awt.stroke;
 
 import java.awt.BasicStroke;
 
