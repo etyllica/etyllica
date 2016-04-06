@@ -192,8 +192,8 @@ public class OBJLoader implements VBOLoader {
 	private static List<OBJMaterial> parseMaterial(String folder, String line) throws IOException {
 
 		String filename = line.substring(line.indexOf(" ")+1);
-
-		List<OBJMaterial> materials = MaterialLoader.loadMaterial(folder,filename);
+		
+		List<OBJMaterial> materials = OBJMaterialLoader.loadMaterial(folder,filename);
 
 		return materials;    	
 	}

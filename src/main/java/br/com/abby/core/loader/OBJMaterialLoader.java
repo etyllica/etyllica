@@ -18,7 +18,7 @@ import br.com.abby.core.material.OBJMaterial;
  *
  */
 
-public class MaterialLoader {
+public class OBJMaterialLoader {
 	
 	private static final String NEW_MATERIAL = "newmtl";
 	private static final String DIFFUSE_COLOR = "Kd";

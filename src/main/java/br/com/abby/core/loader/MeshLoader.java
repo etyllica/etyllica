@@ -10,7 +10,6 @@ import java.util.Set;
 
 import br.com.abby.core.vbo.VBO;
 import br.com.etyllica.loader.LoaderImpl;
-import br.com.etyllica.util.PathHelper;
 import br.com.etyllica.util.StringUtils;
 import br.com.etyllica.util.io.IOHelper;
 
@@ -84,6 +83,10 @@ public class MeshLoader extends LoaderImpl {
 
 	public VBOLoader getLoader(String extension) {
 		return loaders.get(extension);
+	}
+	
+	public void addLoader(String extension, VBOLoader loader) {
+		loaders.put(extension, loader);
 	}
 
 	public Set<String> supportedExtensions() {
