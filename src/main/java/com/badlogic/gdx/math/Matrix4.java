@@ -316,7 +316,8 @@ public class Matrix4 implements Serializable {
 	 * @param matrix The other matrix to multiply by.
 	 * @return This matrix for the purpose of chaining operations together. */
 	public Matrix4 mul (Matrix4 matrix) {
-		mul(val, matrix.val);
+		float[] out = mul(val, matrix.val);
+		this.set(out);
 		return this;
 	}
 
@@ -330,8 +331,8 @@ public class Matrix4 implements Serializable {
 	 * @return This matrix for the purpose of chaining operations together. */
 	public Matrix4 mulLeft (Matrix4 matrix) {
 		tmpMat.set(matrix);
-		mul(tmpMat.val, this.val);
-		return set(tmpMat);
+		float[] out = mul(tmpMat.val, this.val);		
+		return set(out);
 	}
 
 	/** Transposes the matrix.
@@ -864,7 +865,8 @@ public class Matrix4 implements Serializable {
 	public Matrix4 setToLookAt (Vector3 position, Vector3 target, Vector3 up) {
 		tmpVec.set(target).sub(position);
 		setToLookAt(tmpVec, up);
-		this.mul(tmpMat.setToTranslation(-position.x, -position.y, -position.z));
+		
+		this.set(this.mul(tmpMat.setToTranslation(-position.x, -position.y, -position.z)));
 
 		return this;
 	}
@@ -1153,7 +1155,7 @@ public class Matrix4 implements Serializable {
 		return inv().tra();
 	}
 
-	public static void matrix4_mul(float[] mata, float[] matb) {
+	public static float[] matrix4_mul(float[] mata, float[] matb) {
 		float[] tmp = new float[16];
 		tmp[M00] = mata[M00] * matb[M00] + mata[M01] * matb[M10] + mata[M02] * matb[M20] + mata[M03] * matb[M30];
 		tmp[M01] = mata[M00] * matb[M01] + mata[M01] * matb[M11] + mata[M02] * matb[M21] + mata[M03] * matb[M31];
@@ -1172,7 +1174,7 @@ public class Matrix4 implements Serializable {
 		tmp[M32] = mata[M30] * matb[M02] + mata[M31] * matb[M12] + mata[M32] * matb[M22] + mata[M33] * matb[M32];
 		tmp[M33] = mata[M30] * matb[M03] + mata[M31] * matb[M13] + mata[M32] * matb[M23] + mata[M33] * matb[M33];
 		//memcpy(mata, tmp, sizeof(float) *  16);
-		mata = tmp;
+		return tmp;
 	}
 
 	public static float matrix4_det(float[] val) {
@@ -1419,8 +1421,8 @@ public class Matrix4 implements Serializable {
 	 *
 	 * @param mata the first matrix.
 	 * @param matb the second matrix. */
-	public static void mul (float[] mata, float[] matb) /*-{ }-*/{
-		matrix4_mul(mata, matb);
+	public static float[] mul (float[] mata, float[] matb) /*-{ }-*/{
+		return matrix4_mul(mata, matb);
 	}
 	//
 	//*/
@@ -1431,7 +1433,8 @@ public class Matrix4 implements Serializable {
 	 * {@link Vector3#mul(Matrix4)}.
 	 * @param mat the matrix
 	 * @param vec the vector. */
-	public static native void mulVec (float[] mat, float[] vec) /*-{ }-*/; /*
+	//public static native void mulVec (float[] mat, float[] vec) /*-{ }-*/; 
+	/*
 		matrix4_mulVec(mat, vec);
 	 */
 
@@ -1446,7 +1449,8 @@ public class Matrix4 implements Serializable {
 	 * @param offset the offset into the vectors array
 	 * @param numVecs the number of vectors
 	 * @param stride the stride between vectors in floats */
-	public static native void mulVec (float[] mat, float[] vecs, int offset, int numVecs, int stride) /*-{ }-*/; /*
+	//public static native void mulVec (float[] mat, float[] vecs, int offset, int numVecs, int stride) /*-{ }-*/;
+	/*
 		float* vecPtr = vecs + offset;
 		for(int i = 0; i < numVecs; i++) {
 			matrix4_mulVec(mat, vecPtr);
@@ -1499,7 +1503,8 @@ public class Matrix4 implements Serializable {
 	 * same as {@link Vector3#rot(Matrix4)}.
 	 * @param mat the matrix
 	 * @param vec the vector. */
-	public static native void rot (float[] mat, float[] vec) /*-{ }-*/; /*
+	//public static native void rot (float[] mat, float[] vec) /*-{ }-*/; 
+	/*
 		matrix4_rot(mat, vec);
 	 */
 
@@ -1514,7 +1519,8 @@ public class Matrix4 implements Serializable {
 	 * @param offset the offset into the vectors array
 	 * @param numVecs the number of vectors
 	 * @param stride the stride between vectors in floats */
-	public static native void rot (float[] mat, float[] vecs, int offset, int numVecs, int stride) /*-{ }-*/; /*
+	//public static native void rot (float[] mat, float[] vecs, int offset, int numVecs, int stride) /*-{ }-*/; 
+	/*
 		float* vecPtr = vecs + offset;
 		for(int i = 0; i < numVecs; i++) {
 			matrix4_rot(mat, vecPtr);
@@ -1534,7 +1540,8 @@ public class Matrix4 implements Serializable {
 	 * from {@link Matrix4#val}.
 	 * @param values the matrix values.
 	 * @return the determinante. */
-	public static native float det (float[] values) /*-{ }-*/; /*
+	//public static native float det (float[] values) /*-{ }-*/; 
+	/*
 		return matrix4_det(values);
 	 */
 
@@ -1571,7 +1578,8 @@ public class Matrix4 implements Serializable {
 		tmp[M32] = 0;
 		tmp[M33] = 1;
 
-		mul(val, tmp);
+		float[] out = mul(val, tmp);
+		this.set(out);
 		return this;
 	}
 
@@ -1632,7 +1640,8 @@ public class Matrix4 implements Serializable {
 	 * @return This matrix for the purpose of chaining methods together. */
 	public Matrix4 rotate (Quaternion rotation) {
 		rotation.toMatrix(tmp);
-		mul(val, tmp);
+		float[] out = mul(val, tmp);
+		this.set(out);
 		return this;
 	}
 
@@ -1668,7 +1677,8 @@ public class Matrix4 implements Serializable {
 		tmp[M32] = 0;
 		tmp[M33] = 1;
 
-		mul(val, tmp);
+		float[] out = mul(val, tmp);
+		this.set(out);
 		return this;
 	}
 
