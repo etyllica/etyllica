@@ -1,5 +1,6 @@
 package br.com.etyllica.loader.image;
 
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,7 +26,7 @@ public class ImageLoader extends LoaderImpl {
 
 	private static ImageLoader instance = null;
 
-	private Map<String, ImageReader> readers = new HashMap<String, ImageReader>();
+	private Map<String, ImageReader> loaders = new HashMap<String, ImageReader>();
 
 	private Map<String, BufferedImage> images = new HashMap<String, BufferedImage>();
 
@@ -49,16 +50,16 @@ public class ImageLoader extends LoaderImpl {
 
 		AWTReader awtReader = new AWTReader();
 
-		readers.put(BMP, awtReader);
-		readers.put(JPG, awtReader);
-		readers.put(JPEG, awtReader);
-		readers.put(PNG, awtReader);
-		readers.put(TIF, awtReader);
-		readers.put(TIFF, awtReader);
-		readers.put(ICO, new ICOReader());
-		readers.put(GIF, new GIFReader());
-		readers.put(TGA, new TGAReader());
-		readers.put(PCX, new PCXReader());
+		loaders.put(BMP, awtReader);
+		loaders.put(JPG, awtReader);
+		loaders.put(JPEG, awtReader);
+		loaders.put(PNG, awtReader);
+		loaders.put(TIF, awtReader);
+		loaders.put(TIFF, awtReader);
+		loaders.put(ICO, new ICOReader());
+		loaders.put(GIF, new GIFReader());
+		loaders.put(TGA, new TGAReader());
+		loaders.put(PCX, new PCXReader());
 	}
 
 	public static ImageLoader getInstance() {
@@ -150,7 +151,7 @@ public class ImageLoader extends LoaderImpl {
 
 			String ext = StringUtils.fileExtension(diretorio);
 
-			ImageReader reader = readers.get(ext);
+			ImageReader reader = loaders.get(ext);
 
 			if(reader == null) {
 				System.out.println("Etyllica can't load "+ext+" files.");
@@ -214,7 +215,11 @@ public class ImageLoader extends LoaderImpl {
 	}
 	
 	public Set<String> supportedExtensions() {
-		return readers.keySet();
+		return loaders.keySet();
+	}
+	
+	public void addLoader(String extension, ImageReader loader) {
+		loaders.put(extension, loader);
 	}
 
 }
