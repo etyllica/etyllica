@@ -1,13 +1,18 @@
 package br.com.abby.linear;
 
+import br.com.abby.util.RotationUtil;
+
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
+import com.sun.org.apache.xpath.internal.operations.And;
+
 public class AimPoint extends ColoredPoint3D {
 
 	protected double angleX = 0;
-	
 	protected double angleY = 0;
-	
 	protected double angleZ = 0;
-	
+		
 	public AimPoint() {
 		super();
 	}
@@ -149,5 +154,21 @@ public class AimPoint extends ColoredPoint3D {
 		setX(x + AimPoint.sin(angleY) * distance);
 		setZ(z - AimPoint.cos(angleY-180) * distance);
 	}
+	
+	public Vector3 origin() {
+		return new Vector3((float)x, (float)y, (float)z);
+	}
 		
+	public Vector3 forward() {
+		float[] matrix = new float[16];
+		
+		Quaternion quaternion = RotationUtil.convertToQuaternion(Math.toRadians(angleY-180), Math.toRadians(angleX), Math.toRadians(angleZ));
+		quaternion.toMatrix(matrix);
+		
+		Matrix4 m = new Matrix4(matrix);
+		
+		Vector3 v = new Vector3(0,0,1).mul(m);
+		return v;
+	}
+	
 }
