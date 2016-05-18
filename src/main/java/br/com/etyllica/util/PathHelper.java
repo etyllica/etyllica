@@ -16,6 +16,22 @@ public class PathHelper {
 		
 		try {
 			String path = new File(".").getCanonicalPath().toString();
+			currentDirectory = path+File.separator;
+			
+			return currentDirectory;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return currentDirectory;
+	}
+	
+	public static String currentFileDirectory() {
+		
+		String currentDirectory = "";
+		
+		try {
+			String path = new File(".").getCanonicalPath().toString();
 			currentDirectory = IOHelper.FILE_PREFIX+path+File.separator;
 			
 			return currentDirectory;
