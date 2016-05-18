@@ -35,16 +35,16 @@ public interface GUIComponent {
 		
 	/**
 	 * 
-	 * @param mx mouse coordinate x
-	 * @param my mouse coordinate y
+	 * @param mx - mouse coordinate x
+	 * @param my - mouse coordinate y
 	 * @return
 	 */
 	public boolean onMouse(int mx, int my);
 	
 	/**
 	 * 
-	 * @param new window width 
-	 * @param new window height
+	 * @param width - new window width 
+	 * @param height - new window height
 	 */
 	public void resize(int width, int height);	
 

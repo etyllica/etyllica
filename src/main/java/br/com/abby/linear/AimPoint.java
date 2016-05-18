@@ -5,7 +5,6 @@ import br.com.abby.util.RotationUtil;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
-import com.sun.org.apache.xpath.internal.operations.And;
 
 public class AimPoint extends ColoredPoint3D {
 
