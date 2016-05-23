@@ -384,7 +384,7 @@ public abstract class Context extends Layer implements ViewGroup, UIComponent, U
 		this.views = views;
 	}
 	
-	protected void addView(View view) {
+	public void addView(View view) {
 		this.views.add(view);
 	}
 	

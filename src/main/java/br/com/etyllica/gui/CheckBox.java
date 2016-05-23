@@ -294,6 +294,10 @@ public class CheckBox extends View {
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		return checkbox.updateKeyboard(event);
+	}
+
+	public void setChecked(boolean checked) {
+		checkbox.setChecked(checked);
 	}	
 
 }
