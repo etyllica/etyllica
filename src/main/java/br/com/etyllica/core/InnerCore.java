@@ -790,7 +790,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		application.setLanguageChangerListener(this);
 		
 		if(application.isLoaded()) {
-			applicationLoader.reloadApplication(this, application);
+			activeWindow.setApplication(applicationLoader.reloadApplication(this, application));
 		}
 	}
 

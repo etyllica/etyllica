@@ -81,7 +81,7 @@ public abstract class Etyllica extends Applet implements Engine {
 		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
 
-		String defaultPath = PathHelper.currentDirectory().toString();
+		String defaultPath = PathHelper.currentFileDirectory().toString();
 					
 		setPath(defaultPath+suffix);
 	}

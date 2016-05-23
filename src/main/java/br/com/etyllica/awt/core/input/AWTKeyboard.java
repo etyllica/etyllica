@@ -45,39 +45,33 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 
 		for(Integer key: changedCopy) {
 
-			KeyState keyState = keyStates.get(key);
+			KeyState keyState = getState(key);
 
-			if( keys.get(key) ) {
+			if ( keys.get(key) ) {
 
-				if( keyState == KeyState.RELEASED ) {
+				if ( keyState == KeyState.RELEASED ) {
 
 					keyStates.put(key,KeyState.ONCE);
 
 					keyEvents.add(new KeyEvent(key, KeyState.PRESSED));
 
-				}else if(keyState != KeyState.PRESSED) {
+				} else if(keyState != KeyState.PRESSED) {
 
 					keyStates.put(key,KeyState.PRESSED);
 
 				}
 
-			}else{
+			} else {
 
 				if(( keyState == KeyState.ONCE )||( keyState == KeyState.PRESSED )) {
 
 					keyStates.put(key,KeyState.FIRST_RELEASED);
 
-				}else if(keyState==KeyState.FIRST_RELEASED) {
+				} else if(keyState==KeyState.FIRST_RELEASED) {
 
 					keyStates.put(key,KeyState.RELEASED);
 
 					keyEvents.add(new KeyEvent(key, KeyState.RELEASED));
-
-					changed.remove(key);
-
-				}else if(keyState!=KeyState.RELEASED) {
-
-					keyStates.put(key,KeyState.RELEASED);
 
 					changed.remove(key);
 
@@ -88,6 +82,15 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 		poll(listener);
 		
 		changed.unlock();
+	}
+
+	private KeyState getState(Integer key) {
+		KeyState state = keyStates.get(key);
+		if (state == null) {
+			state = KeyState.RELEASED;
+		}
+			
+		return state;
 	}
 
 	public void poll(KeyEventListener listener) {

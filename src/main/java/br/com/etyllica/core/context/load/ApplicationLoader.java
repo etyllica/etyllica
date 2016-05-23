@@ -143,6 +143,7 @@ public class ApplicationLoader implements ApplicationLoadListener {
 		this.application = context;
 		
 		loadApplication.load();
+		loadApplication.setLoaded(true);
 		loadApplication();
 		return loadApplication;
 	}

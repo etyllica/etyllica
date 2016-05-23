@@ -51,7 +51,6 @@ public class HelloWorld extends Application {
 	
 	@Override
 	public void updateKeyboard(KeyEvent event) {
-		System.out.println("Update Keyboard");
 		
 		if(event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
 			right = true;
