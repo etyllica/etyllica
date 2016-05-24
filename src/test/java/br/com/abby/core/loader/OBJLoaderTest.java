@@ -19,7 +19,7 @@ public class OBJLoaderTest {
 	
 	@Before
 	public void setUp() throws MalformedURLException {
-		String path = PathHelper.currentDirectory();
+		String path = PathHelper.currentFileDirectory();
 				
 		URL url = new URL(path+"../");
 		
