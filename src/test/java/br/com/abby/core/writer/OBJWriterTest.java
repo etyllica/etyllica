@@ -57,7 +57,7 @@ public class OBJWriterTest {
 	@Test
 	public void testVBOWriter() {
 		
-		String path = PathHelper.currentDirectory();
+		String path = PathHelper.currentFileDirectory();
 		
 		VBOWriter writer = new OBJWriter();
 		try {
