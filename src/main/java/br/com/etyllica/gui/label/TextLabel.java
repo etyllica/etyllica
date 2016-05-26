@@ -18,7 +18,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class TextLabel extends Label{
+public class TextLabel extends Label {
 
 	protected TextLayer layer;
 		
@@ -82,6 +82,7 @@ public class TextLabel extends Label{
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 	
+		g.setFont(theme.getFont().deriveFont(layer.getStyle()));
 		g.setFont(theme.getFont().deriveFont(layer.getSize()));
 		
 		if(!onFocus){
@@ -190,6 +191,14 @@ public class TextLabel extends Label{
 	
 	public TextLayer getLayer() {
 		return layer;
+	}
+
+	public int getFontStyle() {
+		return layer.getStyle();
+	}
+
+	public void setFontStyle(int fontStyle) {
+		layer.setStyle(fontStyle);
 	}
 		
 }
