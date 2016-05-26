@@ -1,10 +1,10 @@
 package examples.etyllica.camera;
 
 import examples.etyllica.camera.application.CameraExample;
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
 
-public class CinematicsTutorial extends Etyllica {
+public class CinematicsTutorial extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

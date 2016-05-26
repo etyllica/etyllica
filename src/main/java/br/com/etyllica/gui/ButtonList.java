@@ -7,7 +7,7 @@ import java.util.List;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.base.BaseButton;
 
 /**
@@ -42,7 +42,7 @@ public class ButtonList extends View{
 	}
 	
 	//TODO Desenha o botao ou o scroll 
-	public void draw(Graphic g){
+	public void draw(Graphics g){
 		
 		//BufferedImage bimg = g.getBimg();
 		
@@ -63,7 +63,7 @@ public class ButtonList extends View{
 		
 	}
 	
-	private void drawScroll(Graphic g){
+	private void drawScroll(Graphics g){
 		g.setColor(Color.GREEN);
 		g.fillRect(x+w-10,y,5,h);
 		

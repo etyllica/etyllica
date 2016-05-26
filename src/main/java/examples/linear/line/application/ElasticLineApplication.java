@@ -6,7 +6,7 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.util.PointUtils;
 
@@ -53,7 +53,7 @@ public class ElasticLineApplication extends Application implements UpdateInterva
 		}
 	}
 
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		if(pressed) {
 			g.setColor(Color.BLUE);

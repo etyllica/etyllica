@@ -69,7 +69,11 @@ public class ThemeManager {
 	public void setThemeListener(ThemeListener themeListener) {
 		this.themeListener = themeListener;		
 	}
-	
+		
+	public ArrowThemeListener getArrowThemeListener() {
+		return arrowThemeListener;
+	}
+
 	private void notifyThemeListener() {
 		
 		if(themeListener == null) return;

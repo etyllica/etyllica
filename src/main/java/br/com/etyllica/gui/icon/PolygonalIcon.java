@@ -3,7 +3,7 @@ package br.com.etyllica.gui.icon;
 import java.awt.Color;
 import java.awt.Polygon;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.label.Icon;
 
 public abstract class PolygonalIcon extends Icon{
@@ -41,7 +41,7 @@ public abstract class PolygonalIcon extends Icon{
 	protected abstract void initPolygon(int x, int y);
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		g.setColor(Color.WHITE);
 		//g.setColor(Color.BLUE);
 		

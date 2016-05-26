@@ -5,11 +5,10 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.RoundGUIComponent;
 import br.com.etyllica.theme.Theme;
-import br.com.etyllica.theme.ThemeManager;
 
 /**
  *
@@ -24,8 +23,6 @@ public class BaseButton extends RoundGUIComponent {
 
 	protected Label label;
 
-	//private Theme theme;
-
 	private String alt = "";
 
 	protected boolean clicked = false;
@@ -37,7 +34,7 @@ public class BaseButton extends RoundGUIComponent {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		if(!visible)
 			return;
@@ -76,7 +73,7 @@ public class BaseButton extends RoundGUIComponent {
 
 	}
 
-	protected void drawLabel(Graphic g) {
+	protected void drawLabel(Graphics g) {
 
 		if(hasLabel())
 			label.draw(g);		
@@ -109,18 +106,14 @@ public class BaseButton extends RoundGUIComponent {
 	protected void justOnMouse() {
 		//igualaImagem(sobMouse);
 	}
-
-	public void mouseOut() {
-		//igualaImagem(normal);
-		super.mouseOut();
-	}
-
+	
 	public GUIEvent updateMouse(PointerEvent event) {
 
 		GUIEvent retorno = GUIEvent.NONE;
 
 		if(!disabled) {
 
+			//If mouse is Over
 			if(mouseOver) {
 				
 				if(event.getState() == PointerState.PRESSED) {
@@ -191,15 +184,10 @@ public class BaseButton extends RoundGUIComponent {
 
 				}
 
+			//If mouse is not over
 			} else {
 
-				if(event.getState() == PointerState.MOVE) {
-
-					mouseOut();
-
-					retorno = GUIEvent.MOUSE_OUT;
-
-				} else if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+				if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 
 					onFocus = false;
 

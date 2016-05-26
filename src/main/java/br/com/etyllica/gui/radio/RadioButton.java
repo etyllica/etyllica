@@ -1,7 +1,7 @@
 package br.com.etyllica.gui.radio;
 
 import br.com.etyllica.core.collision.CollisionDetector;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Radio;
 import br.com.etyllica.theme.Theme;
 
@@ -19,7 +19,7 @@ public class RadioButton extends Radio {
 	}
 			
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		if(!visible)
 			return;

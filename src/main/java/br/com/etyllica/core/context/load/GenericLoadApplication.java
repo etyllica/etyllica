@@ -3,7 +3,7 @@ package br.com.etyllica.core.context.load;
 import java.awt.Color;
 import java.awt.Font;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
@@ -53,7 +53,7 @@ public class GenericLoadApplication extends DefaultLoadApplication {
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		g.setFont(f);
 		

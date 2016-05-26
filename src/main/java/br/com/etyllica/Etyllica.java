@@ -1,8 +1,9 @@
 package br.com.etyllica;
 
-import java.applet.Applet;
 import java.awt.Graphics;
 import java.net.URL;
+
+import javax.swing.JFrame;
 
 import br.com.etyllica.awt.core.AWTCore;
 import br.com.etyllica.awt.engine.AWTEngine;
@@ -19,23 +20,25 @@ import br.com.etyllica.util.PathHelper;
  *
  */
 
-public abstract class Etyllica extends Applet implements Engine {
+public abstract class Etyllica extends JFrame implements Engine {
 
 	private static final long serialVersionUID = 4588303747276461888L;
-	
+
 	private AWTCore core;
 	private AWTEngine engine;
-		
+	
 	protected int w = 640;
 	protected int h = 480;
 
 	private Application application;
-		
+	
 	public Etyllica(int width, int height) {
 		super();
-		
+
 		this.w = width;
-		this.h = height;	
+		this.h = height;
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);		
 	}
 	
 	public void init(String path) {
@@ -63,7 +66,7 @@ public abstract class Etyllica extends Applet implements Engine {
 	
 	private void initCore() {
 		engine = new AWTEngine(this, w, h);
-		
+
 		core = engine.getCore();
 		core.setEngine(this);
 	}
@@ -85,18 +88,18 @@ public abstract class Etyllica extends Applet implements Engine {
 					
 		setPath(defaultPath+suffix);
 	}
-	
+
 	protected void setPath(URL url) {
+
 		setPath(url.toString());
 	}
-
+	
 	protected void setPath(String path) {
 		core.setPath(path);
-		
-		//Reload Loaders
+
 		engine.initDefault();
 	}
-
+	
 	@Override
 	public void paint( Graphics g ) {
 		core.paint(g);
@@ -110,7 +113,7 @@ public abstract class Etyllica extends Applet implements Engine {
 	public void draw() {
 		repaint();
 	}
-	
+
 	public void addLoader(Loader loader) {
 		engine.addLoader(loader);
 	}

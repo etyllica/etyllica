@@ -1,7 +1,7 @@
 package br.com.etyllica.gui.selection;
 
 import br.com.etyllica.core.event.MouseState;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.Layer;
 
 public class ResizerPoint extends Layer {
@@ -13,7 +13,7 @@ public class ResizerPoint extends Layer {
 	}
 	
 	//Draw with half size
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		int sw = (int)(utilWidth()*getScaleX());
 		int sh = (int)(utilHeight()*getScaleY());
 				

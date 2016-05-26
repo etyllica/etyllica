@@ -10,7 +10,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
@@ -112,7 +112,7 @@ public class Resizer {
 
 	}
 
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		drawOverlay(g);
 		
@@ -130,7 +130,7 @@ public class Resizer {
 		g.setStroke(resetStroke);
 	}
 
-	private void drawScaledRect(Graphic g, Layer layer) {
+	private void drawScaledRect(Graphics g, Layer layer) {
 		int sw = (int)(layer.utilWidth()*layer.getScaleX());
 		int sh = (int)(layer.utilHeight()*layer.getScaleY());
 				
@@ -140,7 +140,7 @@ public class Resizer {
 		g.drawRect(layer.getX()+offsetX, layer.getY()+offsetY, sw, sh);
 	}
 	
-	private void fillScaledRect(Graphic g, Layer layer) {
+	private void fillScaledRect(Graphics g, Layer layer) {
 		int sw = (int)(layer.utilWidth()*layer.getScaleX());
 		int sh = (int)(layer.utilHeight()*layer.getScaleY());
 		
@@ -150,7 +150,7 @@ public class Resizer {
 		g.fillRect(layer.getX()+offsetX, layer.getY()+offsetY, sw, sh);
 	}
 		
-	private void drawOverlay(Graphic g) {
+	private void drawOverlay(Graphics g) {
 
 		if(overlay.isVisible() == false)
 			return;

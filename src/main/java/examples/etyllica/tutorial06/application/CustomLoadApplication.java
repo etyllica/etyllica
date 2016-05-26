@@ -6,7 +6,7 @@ import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 public class CustomLoadApplication extends Application{
 	
@@ -65,7 +65,7 @@ public class CustomLoadApplication extends Application{
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		//Set Color to SVG Crimson
 		g.setColor(SVGColor.CRIMSON);		

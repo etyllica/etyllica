@@ -1,7 +1,7 @@
 package br.com.etyllica.gui.button;
 
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.theme.Theme;
 
@@ -19,7 +19,7 @@ public class RoundCornerButton extends BaseButton{
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		Theme theme = getTheme();
 

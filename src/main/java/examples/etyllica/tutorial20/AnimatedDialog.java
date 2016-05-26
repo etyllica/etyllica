@@ -5,7 +5,7 @@ import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.TextLayer;
 
 public class AnimatedDialog extends Application{
@@ -31,7 +31,7 @@ public class AnimatedDialog extends Application{
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		layer.draw(g);
 	}

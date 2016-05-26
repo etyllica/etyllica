@@ -10,7 +10,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.StaticLayer;
 import br.com.etyllica.loader.image.ImageLoader;
@@ -42,7 +42,7 @@ public class FileExample extends Application implements SelectFileListener {
 	}	
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		hello.draw(g);
 		
 		for(ImageLayer layer: layers) {

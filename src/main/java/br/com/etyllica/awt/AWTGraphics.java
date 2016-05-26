@@ -20,7 +20,7 @@ import java.awt.image.ImageObserver;
 import java.awt.image.VolatileImage;
 
 import br.com.etyllica.cinematics.Camera;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.core.linear.PointInt2D;
 import br.com.etyllica.layer.GeometricLayer;
@@ -33,7 +33,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public class AWTGraphics implements Graphic {
+public class AWTGraphics implements Graphics {
 
 	private VolatileImage vimg;
 

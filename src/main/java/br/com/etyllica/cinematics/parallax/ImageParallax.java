@@ -1,6 +1,6 @@
 package br.com.etyllica.cinematics.parallax;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 
 public class ImageParallax extends Parallax {
@@ -14,7 +14,7 @@ public class ImageParallax extends Parallax {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		int mod = (offset/proximity)%layer.getW();
 		

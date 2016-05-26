@@ -24,13 +24,15 @@ import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.i18n.LanguageHandler;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
+import br.com.etyllica.core.ui.UICore;
+import br.com.etyllica.core.ui.UICoreListener;
 import br.com.etyllica.core.ui.ViewGroup;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
@@ -46,27 +48,18 @@ import br.com.etyllica.theme.listener.ThemeListener;
  *
  */
 
-public abstract class InnerCore implements Core, KeyEventListener, Updatable, ThemeListener, LanguageChangerListener, LoaderListener {
+public abstract class InnerCore implements Core, KeyEventListener, Updatable, ThemeListener, LanguageChangerListener, LoaderListener, UICoreListener {
 
 	private static final int TITLE_BAR_HEIGHT = 50;
 	
 	//External Windows
 	private Window activeWindow = null;
 
-	private View focus;
-
 	protected AWTController control;
 
 	private Mouse mouse;
 
 	private Keyboard keyboard;
-
-	//Mouse Over View
-	protected View mouseOver = null;
-
-	protected View focusComponent = null;
-
-	private List<GUIEvent> guiEvents;
 
 	//private List<KeyEvent> joyEvents;
 
@@ -81,8 +74,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	private boolean locked = false;
 	
 	private boolean fixEventPosition = false;
-
-	private Configuration configuration = Configuration.getInstance();
 
 	private int fps = 0;
 
@@ -106,18 +97,13 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
 	
 	protected List<Monitor> monitors = new ArrayList<Monitor>();
-	
-	//Timer click arc
-	private int arc = 0;
-	private boolean overClickable = false;
-	
+		
 	protected ApplicationLoader applicationLoader;
+	protected UICore uiCore;
 	
 	public InnerCore(int w, int h) {
 		super();
 		
-		guiEvents = new ArrayList<GUIEvent>();
-
 		control = new AWTController(this);
 
 		setMouse(control.getMouse());
@@ -126,6 +112,10 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		arrowDrawer = new AWTArrowDrawer();
 
+		uiCore = new UICore(w, h, this);
+		uiCore.setArrowDrawer(arrowDrawer);
+		uiCore.setMouse(control.getMouse());
+		
 		languageHandler = new LanguageHandler();
 		
 		initTheme();
@@ -184,7 +174,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		//Update All components
 		List<View> components = new CopyOnWriteArrayList<View>(application.getViews());
 
-		updateGui(components, guiEvents);
+		uiCore.updateGui(components);
 
 		getMouse().lock();
 		List<PointerEvent> events = getMouse().getEvents();
@@ -329,39 +319,12 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			fixEventPosition(event);
 		}
 
-		updateMouseComponents(event, components);
+		uiCore.updateMouseComponents(event, components);
 
 		updateWindowEvent(event, activeWindow);		
 	}
 
-	private void updateMouseComponents(PointerEvent event, List<View> components) {
-
-		for(View component: components) {
-
-			GUIEvent nextEvent = updateMouse(component, event);
-
-			if(nextEvent != GUIEvent.NONE) {
-
-				View next = component.findNext();
-
-				if(next!=null) {
-
-					focusComponent = next;
-
-					if(nextEvent == GUIEvent.NEXT_COMPONENT) {
-
-						updateEvent(focusComponent, GUIEvent.GAIN_FOCUS);
-					} else {
-
-						updateEvent(focusComponent, nextEvent);
-					}
-				}
-
-				break;
-			}
-
-		}
-	}
+	
 
 	private void updateWindowEvent(PointerEvent event, Window window) {
 
@@ -373,173 +336,17 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	}
 
-	private void updateGui(List<View> components, List<GUIEvent> guiEvents) {
-
-		for(GUIEvent event: guiEvents) {
-
-			updateGuiEvent(components, event);
-		}
-
-		guiEvents.clear();
-	}
-
-	private void updateGuiEvent(List<View> components, GUIEvent event) {
-
-		for(View component: components) {
-
-			updateGuiComponent(component, event);
-		}		
-	}	
-
-	private void updateGuiComponent(View component, GUIEvent event) {
-
-		component.update(event);
-
-		//Update Childs
-		for(View child: component.getViews()) {
-			updateGuiComponent(child, event);
-		}
-	}
-
-	private GUIEvent updateMouse(View component, PointerEvent event) {
-
-		if(!component.isVisible()) {
-			return GUIEvent.NONE;
-		}
-
-		GUIEvent result = component.safeUpdateMouse(event);
-		
-		if(GUIEvent.MOUSE_IN == result) {
-			setMouseOver(component);
-			return GUIEvent.NONE;
-		} else if (GUIEvent.MOUSE_OUT == result) {
-			resetMouseOver();
-		} else if(result != GUIEvent.NONE && result != null) {
-			updateEvent(component, result);
-		}
-				
-		return GUIEvent.NONE;
-	}
-
-	private void updateEvent(View componente, GUIEvent lastEvent) {
-
-		switch (lastEvent) {
-
-		case GAIN_FOCUS:
-
-			//Remove focus from last
-			if(focus != null) {
-				focus.update(GUIEvent.LOST_FOCUS);
-			}
-
-			componente.setOnFocus(true);
-
-			focus = componente;
-
-			break;
-
-		case LOST_FOCUS:
-
-			if(componente == focus) {
-				//TODO Mouse.loseFocus()
-				//events.add(new Event(Tecla.NONE, KeyState.LOSE_FOCUS));
-				//events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.LOSE_FOCUS));
-
-				//TODO improve it
-				focus = null;
-			}
-
-			break;
-
-			/*case MOUSE_OVER:
-			if(!mouseOver) {
-				mouseOver = true;
-				mouseOverClickable = true;
-				//TODO componente.setMouseOver(true);
-			}
-
-			break;*/
-
-			/*case MOUSE_OVER_UNCLICKABLE:
-			if(!mouseOver) {
-				mouseOver = true;
-				mouseOverClickable = false;
-			}			
-			break;*/
-
-		case MOUSE_OVER_WITH_FOCUS:
-
-			//lastOver = componente;
-			break;
-
-		case NEXT_COMPONENT:
-
-			System.out.println("LostFocus");
-
-			//controle.getTeclado().loseFocus();
-			//events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.))
-
-			componente.update(GUIEvent.LOST_FOCUS);
-
-			break;
-
-		case WINDOW_CLOSE:
-
-			//TODO
-			//((Window)componente.setClose(true));
-
-			break;
-
-			/*case ONCE:
-			//this.event (param)
-			event.setState(KeyState.PRESSED);
-
-			//Prevent consume
-			events.add(event);
-			break;
-			 */
-
-		case UPDATE_MOUSE:
-			updateMouse(componente, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));				
-			break;
-
-		case APPLICATION_CHANGED:
-			this.changeApplication();
-			break;
-
-		default:
-
-			if(componente.isMouseOver()) {
-				componente.update(GUIEvent.MOUSE_OUT);
-			}
-
-			break;
-		}
-
-		componente.setLastEvent(lastEvent);
-
-		componente.update(lastEvent);
-
-		componente.executeAction(lastEvent);
-
-	}
-
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		if(!canDraw())
 			return;
 
 		drawContext(activeWindow.getContext(), g);
-
 		drawGlobalEffects(g);
 
 		if(drawCursor) {
 			if(activeWindow.getContext().isDrawCursor()) {
-				arrowDrawer.setCoordinates(getMouse().getX(), getMouse().getY());
-				arrowDrawer.draw(g);
-				if(Configuration.getInstance().isTimerClick()&&overClickable) {
-					arrowDrawer.drawTimerArc(g, arc);
-				}
+				uiCore.drawCursor(g);
 			}
 		}
 
@@ -549,7 +356,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		return !locked && !needReload;
 	}
 
-	private void drawContext(Context context, Graphic g) {
+	private void drawContext(Context context, Graphics g) {
 
 		if(context.isClearBeforeDraw()) {
 			g.setColor(Color.WHITE);
@@ -569,7 +376,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		}
 	}
 
-	private void drawGlobalEffects(Graphic g) {
+	private void drawGlobalEffects(Graphics g) {
 
 		List<AnimationScript> remove = new ArrayList<AnimationScript>();
 
@@ -588,26 +395,26 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		}
 	}
 
-	private void drawView(View component, Graphic g) {
+	private void drawView(View view, Graphics g) {
 		//Draw Component
-		component.draw(g);
+		view.draw(g);
 
-		drawViewChildren(component, g);
+		drawViewChildren(view, g);
 	}
 
-	private void drawViewChildren(ViewGroup component, Graphic g) {
+	private void drawViewChildren(ViewGroup view, Graphics g) {
 
-		if(!component.getViews().isEmpty()) {
+		if(!view.getViews().isEmpty()) {
 
-			List<View> components = new CopyOnWriteArrayList<View>(component.getViews());
+			List<View> components = new CopyOnWriteArrayList<View>(view.getViews());
 
 			for(View child: components) {
 				
-				if(isTranslated(component)) {
+				if(isTranslated(view)) {
 					//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
-					child.setLocation(component.getX(), component.getY());
+					child.setLocation(view.getX(), view.getY());
 					drawView(child,g);
-					child.setLocation(-component.getX(), -component.getY());
+					child.setLocation(-view.getX(), -view.getY());
 				} else {
 					
 						drawView(child,g);	
@@ -622,11 +429,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 	
 	public boolean isMouseOver() {
-		return mouseOver != null;
+		return uiCore.mouseOver != null;
 	}
 
 	public View getMouseOver() {
-		return mouseOver;
+		return uiCore.mouseOver;
 	}
 
 	public void addEffect(GlobalEffect effect) {
@@ -685,17 +492,17 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		if(Configuration.getInstance().isNumpadMouse()) {
 
-			int velocidade = 1;
+			int speed = 1;
 
 			//Move Left/Right
 			if(event.isKeyDown(KeyEvent.VK_NUMPAD_LEFT_ARROW)) {
 
-				getMouse().setX(getMouse().getX()-velocidade);
+				getMouse().setX(getMouse().getX()-speed);
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_RIGHT_ARROW)) {
 
-				getMouse().setX(getMouse().getX()+velocidade);
+				getMouse().setX(getMouse().getX()+speed);
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}
@@ -703,12 +510,12 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			//Move Up/Down
 			if(event.isKeyDown(KeyEvent.VK_NUMPAD_UP_ARROW)) {
 
-				getMouse().setX(getMouse().getY()-velocidade);
+				getMouse().setX(getMouse().getY()-speed);
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_DOWN_ARROW)) {
 
-				getMouse().setX(getMouse().getY()+velocidade);
+				getMouse().setX(getMouse().getY()+speed);
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}
@@ -769,7 +576,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		reload(application);
 	}
 
-	protected void changeApplication() {
+	public void changeApplication() {
 
 		//Lock old application
 		//Context application = activeWindow.getApplication();
@@ -806,38 +613,9 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	private void updateHelperUI(long now) {
-		updateTimerClick(now);
+		uiCore.updateTimerClick(now);
 	}
 	
-	//Move to ArrowDrawer
-	private void updateTimerClick(long now) {
-
-		final int speed = 3;
-
-		if(mouseOver!=null) {
-
-			if(configuration.isTimerClick()) {
-
-				if(arc<360) {
-					arc += speed;
-				}else{
-
-					updateEvent(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
-					updateEvent(mouseOver, GUIEvent.MOUSE_LEFT_BUTTON_UP);
-
-					resetMouseOver();
-				}
-			}
-
-		}else{
-
-			if(configuration.isTimerClick()) {
-				arc = 0;
-			}
-
-		}
-	}
-
 	@Override
 	public void updateKeyEvent(KeyEvent event) {
 
@@ -845,32 +623,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		
 		handleApplicationKeyEvents(context, event);
 
-		//Only the focused component handles the keyboard
-		if(focus!=null) {
-
-			GUIEvent focusEvent = focus.updateKeyboard(event);
-
-			if(focusEvent!=GUIEvent.NONE&&focusEvent!=null) {
-				//TODO Update NExtComponent
-
-				View next = focus.findNext();
-
-				if(next!=null) {
-
-					if(focusEvent==GUIEvent.NEXT_COMPONENT) {
-
-						updateEvent(focus, focusEvent);
-						updateEvent(next, GUIEvent.GAIN_FOCUS);
-
-					}else{
-
-						updateEvent(next, focusEvent);
-
-					}
-
-				}
-			}
-		}
+		uiCore.updateKeyboard(event);
 
 		updateKeyboardEvents(event);
 
@@ -885,34 +638,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	private void fixEventPosition(PointerEvent event) {
 		event.setX(event.getX()-activeWindow.getX());
 		event.setY(event.getY()-activeWindow.getY());
-	}
-
-	private void setMouseOver(View view) {
-
-		if(mouseOver != null) {
-			removeMouseOver(mouseOver);	
-		}
-
-		mouseOver = view;
-		mouseOver.mouseIn();
-
-		overClickable = true;
-	}
-
-	private void resetMouseOver() {
-
-		removeMouseOver(mouseOver);
-
-		mouseOver = null;
-
-		overClickable = false;
-	}
-
-	private void removeMouseOver(View view) {
-		if (view == null)
-			return;
-		view.setMouseOver(false);
-		view.update(GUIEvent.MOUSE_OUT);
 	}
 
 	public AWTController getControl() {
@@ -953,7 +678,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getContext().getViews());
 
-		updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
+		uiCore.updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
 	}
 	
 	@Override

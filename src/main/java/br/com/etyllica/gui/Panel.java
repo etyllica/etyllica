@@ -3,7 +3,7 @@ package br.com.etyllica.gui;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 
@@ -38,7 +38,7 @@ public class Panel extends RoundGUIComponent {
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		Theme theme = ThemeManager.getInstance().getTheme();
 		

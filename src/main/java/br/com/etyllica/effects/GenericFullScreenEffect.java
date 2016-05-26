@@ -5,7 +5,7 @@ import java.awt.Color;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.animation.script.OpacityAnimation;
 import br.com.etyllica.core.effect.GlobalEffect;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.i18n.DefaultDictionary;
 
 /**
@@ -36,7 +36,7 @@ public class GenericFullScreenEffect extends GlobalEffect {
 	private final float rectY = h/2-h/4;
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		g.setOpacity(opacity);
 				

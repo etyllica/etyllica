@@ -1,11 +1,11 @@
 package examples.sound;
 
 import sound.MultimediaLoader;
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 import examples.sound.application.SyntheticAudioApplication;
 
-public class SoundExample extends EtyllicaFrame {
+public class SoundExample extends Etyllica {
 	
 	/** The serial version id */
 	private static final long serialVersionUID = 5663760293144882635L;

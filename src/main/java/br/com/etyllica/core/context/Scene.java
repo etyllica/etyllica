@@ -9,7 +9,7 @@ import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.script.AnimationScript;
 import br.com.etyllica.core.effect.particle.Emitter;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.Layer;
 
 public class Scene implements Updatable {
@@ -60,14 +60,14 @@ public class Scene implements Updatable {
 	/**
 	 * Draw Scene method with recurrency
 	 */
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		for(Layer layer: graph.keySet()) {
 			drawLayer(g, layer);
 		}
 	}
 
-	private void drawLayer(Graphic g, Layer layer) {
+	private void drawLayer(Graphics g, Layer layer) {
 		
 		layer.draw(g);
 		

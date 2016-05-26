@@ -12,7 +12,7 @@ import java.awt.image.Raster;
 
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.collision.CollisionDetector;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.loader.image.ImageLoader;
 
 /**
@@ -412,7 +412,7 @@ public class BufferedLayer extends ImageLayer {
 	}
 		
 	@Override
-	public void simpleDraw(Graphic g, int x, int y) {
+	public void simpleDraw(Graphics g, int x, int y) {
 		g.drawImage( buffer, x, y, x+w,y+h,
 				xImage,yImage,xImage+w,yImage+h, null );
 	}

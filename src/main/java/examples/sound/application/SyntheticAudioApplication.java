@@ -6,7 +6,7 @@ import javax.sound.sampled.AudioFormat;
 
 import sound.capture.AudioHandler;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 /**
  * 
@@ -72,7 +72,7 @@ public class SyntheticAudioApplication extends Application {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		g.setColor(Color.BLACK);
 

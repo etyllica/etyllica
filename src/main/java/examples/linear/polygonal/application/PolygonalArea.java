@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.linear.Point2D;
 
 public class PolygonalArea extends Application {
@@ -24,7 +24,7 @@ public class PolygonalArea extends Application {
 		loading = 99;
 	}
 	
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
 		
 		g.drawLine(p, q);
@@ -55,7 +55,7 @@ public class PolygonalArea extends Application {
 		drawPoint(g, q2);		
 	}
 	
-	private void drawPoint(Graphic g, Point2D point) {
+	private void drawPoint(Graphics g, Point2D point) {
 		g.fillCircle(point, 5);
 	}
 	

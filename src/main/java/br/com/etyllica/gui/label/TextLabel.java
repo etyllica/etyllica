@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.TextLayer;
@@ -18,7 +18,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class TextLabel extends Label{
+public class TextLabel extends Label {
 
 	protected TextLayer layer;
 		
@@ -78,10 +78,11 @@ public class TextLabel extends Label{
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 	
+		g.setFont(theme.getFont().deriveFont(layer.getStyle()));
 		g.setFont(theme.getFont().deriveFont(layer.getSize()));
 		
 		if(!onFocus){
@@ -190,6 +191,14 @@ public class TextLabel extends Label{
 	
 	public TextLayer getLayer() {
 		return layer;
+	}
+
+	public int getFontStyle() {
+		return layer.getStyle();
+	}
+
+	public void setFontStyle(int fontStyle) {
+		layer.setStyle(fontStyle);
 	}
 		
 }

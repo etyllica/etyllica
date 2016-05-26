@@ -6,7 +6,7 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.linear.Point2D;
 
 public class ArrowApplication extends Application {
@@ -26,7 +26,7 @@ public class ArrowApplication extends Application {
 		loading = 100;
 	}
 	
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.drawArrow(p, q);
 	}

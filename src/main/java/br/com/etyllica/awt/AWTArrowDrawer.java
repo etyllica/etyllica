@@ -5,7 +5,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.theme.mouse.ArrowTheme;
 import br.com.etyllica.theme.mouse.arrow.MouseArrow;
 
@@ -35,12 +35,12 @@ public class AWTArrowDrawer implements ArrowDrawer {
 		arrow.setCoordinates(x, y);
 	}
 
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		g.setStroke(strokeOne);
 		arrow.draw(g);
 	}	
 
-	public void drawTimerArc(Graphic g, int arc) {
+	public void drawTimerArc(Graphics g, int arc) {
 
 		g.setColor(Color.WHITE);
 		g.setStroke(strokeFive);  // set stroke width of 5

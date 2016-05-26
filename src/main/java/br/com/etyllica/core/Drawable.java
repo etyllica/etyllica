@@ -1,6 +1,6 @@
 package br.com.etyllica.core;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 /**
  * 
@@ -13,8 +13,8 @@ public interface Drawable {
 
 	/**
 	 * 
-	 * @param Graphic g
+	 * @param Graphics g
 	 */
-	public void draw(Graphic g);
+	public void draw(Graphics g);
 	
 }

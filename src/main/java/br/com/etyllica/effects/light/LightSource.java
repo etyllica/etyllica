@@ -4,7 +4,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.RadialGradientPaint;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.GeometricLayer;
 
 public class LightSource extends GeometricLayer implements LightSpot {
@@ -36,7 +36,7 @@ public class LightSource extends GeometricLayer implements LightSpot {
 		h = intensity;
 	}
 	
-	public void drawLight(Graphic g) {
+	public void drawLight(Graphics g) {
 
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
 		

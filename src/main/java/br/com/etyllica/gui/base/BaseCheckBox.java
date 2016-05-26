@@ -1,6 +1,6 @@
 package br.com.etyllica.gui.base;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.theme.Theme;
 
 /**
@@ -33,7 +33,7 @@ public class BaseCheckBox extends BaseButton {
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		Theme theme = getTheme();
 

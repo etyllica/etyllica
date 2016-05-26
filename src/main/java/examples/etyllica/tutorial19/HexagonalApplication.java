@@ -5,7 +5,7 @@ import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.BufferedLayer;
 
 public class HexagonalApplication extends Application implements UpdateIntervalListener {
@@ -44,7 +44,7 @@ public class HexagonalApplication extends Application implements UpdateIntervalL
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		g.setColor(SVGColor.SKY_BLUE);
 		g.fillRect(0, 0, w, h);

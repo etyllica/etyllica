@@ -3,7 +3,7 @@ package br.com.etyllica.gui;
 import java.awt.Color;
 
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.base.BaseCheckBox;
 import br.com.etyllica.theme.ThemeManager;
 
@@ -40,7 +40,7 @@ public class Radio extends BaseCheckBox {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		g.setColor(Color.WHITE);
 		//g.fillOval(x, y, w, h);

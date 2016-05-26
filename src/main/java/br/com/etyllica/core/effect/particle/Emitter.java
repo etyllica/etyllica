@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.core.Updatable;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.Layer;
 
 public abstract class Emitter extends Layer implements Updatable{
@@ -58,17 +58,17 @@ public abstract class Emitter extends Layer implements Updatable{
 	protected abstract Particle createParticle(long now);
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		drawEmitter(g);
 		drawParticles(g);
 	}
 	
-	public void drawParticles(Graphic g) {
+	public void drawParticles(Graphics g) {
 		for(Particle particle: particles) {
 			particle.draw(g);
 		}
 	}
 	
-	public abstract void drawEmitter(Graphic g);
+	public abstract void drawEmitter(Graphics g);
 	
 }

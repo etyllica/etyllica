@@ -6,6 +6,6 @@ import br.com.etyllica.theme.listener.ArrowThemeListener;
 
 
 public interface ArrowDrawer extends MouseStateListener, Drawable, ArrowThemeListener {
-	void drawTimerArc(Graphic g, int arc);
+	void drawTimerArc(Graphics g, int arc);
 	void setCoordinates(int mouseX, int mouseY);
 }

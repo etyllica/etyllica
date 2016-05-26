@@ -1,10 +1,10 @@
 package examples.fx;
 
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
 import examples.fx.application.LightSourceApplication;
 
-public class LightSourceTutorial extends Etyllica {
+public class LightSourceTutorial extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

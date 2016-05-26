@@ -1,7 +1,7 @@
 package examples.etyllica.tutorial16;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.effects.particle.BasicEmitter;
 
 public class ParticleApplication extends Application{
@@ -23,7 +23,7 @@ public class ParticleApplication extends Application{
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}

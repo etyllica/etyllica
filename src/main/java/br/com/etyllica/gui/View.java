@@ -226,7 +226,6 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 			}
 			
 		} else {
-			
 			if(!onMouse(event)) {
 				mouseOut();
 				return GUIEvent.MOUSE_OUT;

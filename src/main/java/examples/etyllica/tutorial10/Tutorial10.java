@@ -1,6 +1,6 @@
 package examples.etyllica.tutorial10;
 
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
 import examples.etyllica.tutorial10.application.SpinnerExample;
 
@@ -11,7 +11,7 @@ import examples.etyllica.tutorial10.application.SpinnerExample;
  *
  */
 
-public class Tutorial10 extends Etyllica {
+public class Tutorial10 extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

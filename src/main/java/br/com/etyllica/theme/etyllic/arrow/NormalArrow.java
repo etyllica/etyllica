@@ -2,7 +2,7 @@ package br.com.etyllica.theme.etyllic.arrow;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
 import br.com.etyllica.theme.mouse.arrow.MouseArrow;
@@ -56,7 +56,7 @@ public class NormalArrow extends PolygonalArrow implements MouseArrow {
 
 	}
 
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 

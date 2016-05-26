@@ -3,7 +3,7 @@ package examples.etyllica.tutorial06.application;
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 public class ByeWorld extends Application{
 
@@ -52,7 +52,7 @@ public class ByeWorld extends Application{
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		//Set Background Color
 		g.setColor(SVGColor.ORANGE_RED);
