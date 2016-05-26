@@ -5,6 +5,7 @@ import java.awt.FontMetrics;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
@@ -23,41 +24,43 @@ import br.com.etyllica.theme.ThemeManager;
 public class TextField extends TextView {
 
 	private BufferedLayer layer;
-		
+
 	public TextField(int x, int y, int w, int h) {
 		super(x,y,w,h);
-		
+
 		layer = new BufferedLayer(x, y, w+1, h+1);
 	}
-	
+
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
-		
+
 		//if(onFocus) {
-			
+
+		if(event.getState()==KeyState.TYPED) {
 			//Update component with typed events
 			if(event.getChar()!='\0') {
 				updateChar(event.getChar());
 			}
-						
-			//TODO Next Component
-			//Update component with Pressed Events
-			GUIEvent pressedEvent = updatePressed(event);
-			
-			//Update component with Released Events
-			GUIEvent releasedEvent = updateReleased(event);
+		}
 
-			minMark = getMinMark();
-			maxMark = getMaxMark();
-			
-			if(pressedEvent!=GUIEvent.NONE) {
-				return pressedEvent;		
-			}
-			
-			if(releasedEvent!=GUIEvent.NONE) {
-				return releasedEvent;		
-			}
-			
+		//TODO Next Component
+		//Update component with Pressed Events
+		GUIEvent pressedEvent = updatePressed(event);
+
+		//Update component with Released Events
+		GUIEvent releasedEvent = updateReleased(event);
+
+		minMark = getMinMark();
+		maxMark = getMaxMark();
+
+		if(pressedEvent!=GUIEvent.NONE) {
+			return pressedEvent;		
+		}
+
+		if(releasedEvent!=GUIEvent.NONE) {
+			return releasedEvent;		
+		}
+
 		//}
 
 		return GUIEvent.NONE;
@@ -81,11 +84,11 @@ public class TextField extends TextView {
 		}else if(mouseOver) {
 
 			if(!onFocus) {
-				
+
 				return GUIEvent.MOUSE_OVER;
-				
+
 			}else{
-				
+
 				return GUIEvent.MOUSE_OVER_WITH_FOCUS;
 			}
 
@@ -160,7 +163,7 @@ public class TextField extends TextView {
 				shift = false;
 			}
 		}
-		
+
 		return GUIEvent.NONE;	
 	}
 
@@ -169,7 +172,7 @@ public class TextField extends TextView {
 	public void draw(Graphics g) {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
-		
+
 		g.setImage(layer.getBuffer());
 		int x = 0;
 		int y = 0;
@@ -241,7 +244,7 @@ public class TextField extends TextView {
 		}
 
 		if(onFocus) {
-			
+
 			g.setColor(theme.getTextFieldColor());
 			//Draw Cursor
 
@@ -249,21 +252,21 @@ public class TextField extends TextView {
 			cx+=x+1;
 
 			int padding = 3;
-			
+
 			if(dif>0) {
 				g.drawLine(cx+1, y+padding, cx+1, y+h-padding);
 			} else {
 				g.drawLine(dif+cx, y+padding, dif+cx, y+h-padding);
 			}
-			
+
 		}
-		
+
 		g.resetImage();
 		layer.draw(g);
 		layer.resetImage();
 
 	}
-	
+
 	@Override
 	protected void notifyTextChanged() {
 		super.notifyTextChanged();
@@ -308,13 +311,13 @@ public class TextField extends TextView {
 	private void updateChar(char c) {
 
 		if(TEXT_BACKSPACE == (int)c) {
-			
+
 			eraseAsBackSpace();
-			
+
 		}else if(TEXT_DELETE == (int)c) {
-			
+
 			eraseAsDelete();
-			
+
 		}else if(TEXT_ENTER == (int)c || 
 				TEXT_TAB == (int)c || 
 				TEXT_ESC == (int)c) {
@@ -326,13 +329,13 @@ public class TextField extends TextView {
 					addChar(c);
 				}
 			}else{
-				
+
 				addChar(c);				
 			}
 		}
 
 	}
-	
+
 	public String getText() {
 		//Remove Tabs
 		text = text.replace("\n", "").replace("\r", "");
