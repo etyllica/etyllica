@@ -1,7 +1,7 @@
 package br.com.etyllica.gui.tab;
 
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
@@ -22,7 +22,7 @@ public class ImageTab extends BaseButton {
 	}
 
 	@Override
-	public void draw(Graphic g){
+	public void draw(Graphics g){
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 		

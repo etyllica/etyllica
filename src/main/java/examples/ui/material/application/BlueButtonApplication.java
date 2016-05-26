@@ -6,7 +6,7 @@ import br.com.etyllica.awt.ColorHelper;
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 public class BlueButtonApplication extends Application {
 
@@ -26,7 +26,7 @@ public class BlueButtonApplication extends Application {
 
 	}
 
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		g.setFont(g.getFont().deriveFont(Font.BOLD));
 		g.setFontSize(16f);

@@ -28,7 +28,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public interface Graphic {
+public interface Graphics {
 
 	public void setFastImage(BufferedImage image);
 

@@ -7,7 +7,7 @@ import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Panel;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.base.BaseButton;
@@ -121,21 +121,21 @@ public class StringSpinner extends View {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		drawPanel(g);
 		drawResult(g);
 		drawButtons(g);
 	}
 
-	protected void drawPanel(Graphic g) {
+	protected void drawPanel(Graphics g) {
 		panel.draw(g);
 	}
 
-	protected void drawResult(Graphic g) {
+	protected void drawResult(Graphics g) {
 		resultLabel.draw(g);		
 	}
 
-	protected void drawButtons(Graphic g) {
+	protected void drawButtons(Graphics g) {
 		next.draw(g);
 		previous.draw(g);
 	}

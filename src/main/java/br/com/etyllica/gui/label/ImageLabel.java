@@ -1,6 +1,6 @@
 package br.com.etyllica.gui.label;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 
 /**
@@ -35,7 +35,7 @@ public class ImageLabel extends Icon {
 	}
 		
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		//layer.draw(g);
 		layer.simpleDraw(g);
 	}

@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.loader.image.ImageFrame;
 import br.com.etyllica.loader.image.ImageLoader;
 
@@ -36,7 +36,7 @@ public class GifAnimation extends Application implements UpdateIntervalListener 
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 				
 		g.drawImage(frames.get(count).getImage(), 0, 0);
 

@@ -2,7 +2,7 @@ package examples.etyllica.gui.list;
 
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.ScrollerPanel;
 import br.com.etyllica.gui.Select;
 import br.com.etyllica.gui.list.Option;
@@ -40,7 +40,7 @@ public class ComponentsList extends Application {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		/*g.setColor(Color.RED);
 		g.fillRect(x, y, w, h);*/
 	}

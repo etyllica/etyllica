@@ -2,7 +2,7 @@ package examples.fx.application;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.effects.light.LightSource;
 import br.com.etyllica.effects.light.ShadowLayer;
 import br.com.etyllica.layer.ImageLayer;
@@ -36,7 +36,7 @@ public class LightSourceApplication extends Application{
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		background.draw(g);
 		

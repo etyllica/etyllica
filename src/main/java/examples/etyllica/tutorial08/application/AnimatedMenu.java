@@ -3,7 +3,7 @@ package examples.etyllica.tutorial08.application;
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.TextLabel;
 
@@ -61,7 +61,7 @@ public class AnimatedMenu extends Application{
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 	}
 }

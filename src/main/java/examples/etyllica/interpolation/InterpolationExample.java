@@ -5,7 +5,7 @@ import java.awt.Color;
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.core.interpolation.LinearInterpolator;
 import br.com.etyllica.core.interpolation.QuadraticInterpolator;
@@ -81,13 +81,13 @@ public class InterpolationExample extends Application {
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		drawBall(g, linearBall);
 		drawBall(g, quadraticBall);
 		drawBall(g, reverseQuadraticBall);
 	}
 
-	protected void drawBall(Graphic g, Layer ball) {
+	protected void drawBall(Graphics g, Layer ball) {
 		g.setColor(Color.RED);
 		g.fillOval(ball.getX(), ball.getY(), ball.getW(), ball.getH());
 		g.setColor(Color.BLACK);

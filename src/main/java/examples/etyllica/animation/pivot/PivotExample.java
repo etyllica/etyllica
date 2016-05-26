@@ -7,7 +7,7 @@ import br.com.etyllica.core.animation.pivot.Part;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.linear.Point2D;
 
 public class PivotExample extends Application {
@@ -39,7 +39,7 @@ public class PivotExample extends Application {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		drawPart(g, root);
 	}
 
@@ -63,7 +63,7 @@ public class PivotExample extends Application {
 		
 	}	
 
-	public void drawPart(Graphic g, Part part) {
+	public void drawPart(Graphics g, Part part) {
 		part.draw(g);
 		drawPoints(g, part);
 
@@ -74,7 +74,7 @@ public class PivotExample extends Application {
 		}
 	}
 
-	public void drawPoints(Graphic g, Part part) {
+	public void drawPoints(Graphics g, Part part) {
 		for(Point2D point: part.getPoints()) {
 			g.setColor(Color.BLACK);
 			g.fillCircle(part.getX()+point.getX(), part.getY()+point.getY(), 5);

@@ -2,7 +2,7 @@ package br.com.etyllica.layer;
 
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.collision.HitBox;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.linear.Rectangle;
 import br.com.etyllica.loader.image.ImageLoader;
@@ -227,11 +227,11 @@ public class ImageLayer extends StaticLayer {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		draw(g, 0, 0);
 	}
 	
-	public void draw(Graphic g, int offsetX, int offsetY) {
+	public void draw(Graphics g, int offsetX, int offsetY) {
 	
 		if(!visible) {
 			return;
@@ -251,11 +251,11 @@ public class ImageLayer extends StaticLayer {
 	}
 
 	@Override
-	public void simpleDraw(Graphic g) {
+	public void simpleDraw(Graphics g) {
 		simpleDraw(g, x, y);
 	}
 
-	public void simpleDraw(Graphic g, int x, int y) {
+	public void simpleDraw(Graphics g, int x, int y) {
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+utilWidth(), y+utilHeight(),
 				xImage,yImage,xImage+utilWidth(),yImage+utilHeight(), null );
 	}

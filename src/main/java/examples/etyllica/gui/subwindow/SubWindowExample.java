@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Window;
 import examples.etyllica.tutorial09.application.SimpleGuiExample;
 
@@ -31,7 +31,7 @@ public class SubWindowExample extends Application {
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		//Draw background	
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(x,y,w,h);

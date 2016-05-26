@@ -7,7 +7,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.textfield.TextView;
 import br.com.etyllica.layer.BufferedLayer;
 import br.com.etyllica.theme.Theme;
@@ -166,7 +166,7 @@ public class TextField extends TextView {
 
 	//TODO escreve texto.sub(0,minMark);
 	//Para não sair da caixa
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		Theme theme = ThemeManager.getInstance().getTheme();
 		

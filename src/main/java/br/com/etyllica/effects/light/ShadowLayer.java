@@ -3,7 +3,7 @@ package br.com.etyllica.effects.light;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.BufferedLayer;
 
 public class ShadowLayer extends BufferedLayer {
@@ -14,7 +14,7 @@ public class ShadowLayer extends BufferedLayer {
 		super(x, y, w, h);		
 	}
 	
-	public void drawLights(Graphic g, LightSpot ... spots) {
+	public void drawLights(Graphics g, LightSpot ... spots) {
 		
 		refresh();
 		

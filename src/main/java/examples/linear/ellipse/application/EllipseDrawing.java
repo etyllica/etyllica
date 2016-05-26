@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.linear.Ellipse;
 
 public class EllipseDrawing extends Application {
@@ -33,7 +33,7 @@ public class EllipseDrawing extends Application {
 		loading = 100;
 	}
 	
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		g.setColor(Color.RED);
 		for (int j = 0; j < h; j++) {
 			for (int i = 0; i < w; i++) {

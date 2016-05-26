@@ -10,7 +10,7 @@ import br.com.etyllica.core.animation.script.RotateAnimation;
 import br.com.etyllica.core.animation.script.ScaleUniformAnimation;
 import br.com.etyllica.core.animation.script.VerticalMovementScript;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
@@ -118,7 +118,7 @@ public class AnimationExample extends Application {
 	}	
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 				
 		//Drawing background
 		g.setColor(Color.LIGHT_GRAY);

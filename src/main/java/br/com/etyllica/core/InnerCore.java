@@ -24,7 +24,7 @@ import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
@@ -524,7 +524,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	}
 
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 
 		if(!canDraw())
 			return;
@@ -549,7 +549,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		return !locked && !needReload;
 	}
 
-	private void drawContext(Context context, Graphic g) {
+	private void drawContext(Context context, Graphics g) {
 
 		if(context.isClearBeforeDraw()) {
 			g.setColor(Color.WHITE);
@@ -569,7 +569,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		}
 	}
 
-	private void drawGlobalEffects(Graphic g) {
+	private void drawGlobalEffects(Graphics g) {
 
 		List<AnimationScript> remove = new ArrayList<AnimationScript>();
 
@@ -588,14 +588,14 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		}
 	}
 
-	private void drawView(View component, Graphic g) {
+	private void drawView(View component, Graphics g) {
 		//Draw Component
 		component.draw(g);
 
 		drawViewChildren(component, g);
 	}
 
-	private void drawViewChildren(ViewGroup component, Graphic g) {
+	private void drawViewChildren(ViewGroup component, Graphics g) {
 
 		if(!component.getViews().isEmpty()) {
 

@@ -5,7 +5,7 @@ import java.awt.Color;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.BufferedLayer;
 
 /**
@@ -31,7 +31,7 @@ public class ColorPicker extends View{
 		
 	}
 	
-	public void draw(Graphic g){
+	public void draw(Graphics g){
 		int offsetX = 26;
 		int offsetY = 90;
 		

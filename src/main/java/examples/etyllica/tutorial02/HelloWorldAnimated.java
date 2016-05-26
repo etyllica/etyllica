@@ -2,7 +2,7 @@ package examples.etyllica.tutorial02;
 
 import br.com.etyllica.core.animation.Animation;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.layer.ImageLayer;
 
@@ -32,7 +32,7 @@ public class HelloWorldAnimated extends Application {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		hello.draw(g);
 	}
 

@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.animation.timer.Timer;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 /**
  * 
@@ -42,7 +42,7 @@ public class TimerApplication extends Application {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(x, 100, RECT_SIZE, RECT_SIZE);
 	}

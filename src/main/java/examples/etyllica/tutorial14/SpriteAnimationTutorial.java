@@ -3,7 +3,7 @@ package examples.etyllica.tutorial14;
 
 import br.com.etyllica.core.animation.script.FrameAnimation;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.AnimatedLayer;
 
 public class SpriteAnimationTutorial extends Application{
@@ -28,7 +28,7 @@ public class SpriteAnimationTutorial extends Application{
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		fruit.draw(g);		
 	}
 

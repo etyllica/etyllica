@@ -9,7 +9,7 @@ import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.loader.FontLoader;
 
 /**
@@ -81,7 +81,7 @@ public class TextLayer extends ImageLayer {
 	}
 
 	@Override
-	public void simpleDraw(Graphic g, int x, int y) {
+	public void simpleDraw(Graphics g, int x, int y) {
 
 		if(font == null) {
 			font = g.getFont().deriveFont(style, size);

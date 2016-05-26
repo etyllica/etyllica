@@ -5,7 +5,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.RoundGUIComponent;
 import br.com.etyllica.theme.Theme;
@@ -37,7 +37,7 @@ public class BaseButton extends RoundGUIComponent {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		if(!visible)
 			return;
@@ -76,7 +76,7 @@ public class BaseButton extends RoundGUIComponent {
 
 	}
 
-	protected void drawLabel(Graphic g) {
+	protected void drawLabel(Graphics g) {
 
 		if(hasLabel())
 			label.draw(g);		

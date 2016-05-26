@@ -5,7 +5,7 @@ import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.GeometricLayer;
 
 public class SplitCameraApplication extends Application implements UpdateIntervalListener {
@@ -60,7 +60,7 @@ public class SplitCameraApplication extends Application implements UpdateInterva
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		g.setCamera(camera1);		
 		drawScene(g);
@@ -71,7 +71,7 @@ public class SplitCameraApplication extends Application implements UpdateInterva
 		g.resetCamera(camera2);
 	}
 	
-	private void drawScene(Graphic g) {
+	private void drawScene(Graphics g) {
 		g.setColor(SVGColor.PURPLE);
 		g.drawRect(square);
 		

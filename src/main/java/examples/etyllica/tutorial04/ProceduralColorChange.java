@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.BufferedLayer;
 
 public class ProceduralColorChange extends Application {
@@ -38,7 +38,7 @@ public class ProceduralColorChange extends Application {
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		//Drawing background
 		g.setColor(Color.WHITE);
 		g.fillRect(x,y,w,h);

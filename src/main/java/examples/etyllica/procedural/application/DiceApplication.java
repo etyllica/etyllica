@@ -3,7 +3,7 @@ package examples.etyllica.procedural.application;
 import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 public class DiceApplication extends Application {
 
@@ -17,7 +17,7 @@ public class DiceApplication extends Application {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(this);
 		
@@ -36,33 +36,33 @@ public class DiceApplication extends Application {
 		drawNumberSix(g, 40+70*5, 40);
 	}
 
-	private void drawNumberOne(Graphic g, int x, int y) {
+	private void drawNumberOne(Graphics g, int x, int y) {
 		g.fillCircle(x+30, y+30, 8);
 	}
 	
-	private void drawNumberTwo(Graphic g, int x, int y) {
+	private void drawNumberTwo(Graphics g, int x, int y) {
 		g.fillCircle(x+16-4, y+16-4, 8);
 		g.fillCircle(x+60-8-4, y+60-8-4, 8);
 	}
 	
-	private void drawNumberThree(Graphic g, int x, int y) {
+	private void drawNumberThree(Graphics g, int x, int y) {
 		drawNumberOne(g, x, y);
 		drawNumberTwo(g, x, y);
 	}
 	
-	private void drawNumberFour(Graphic g, int x, int y) {
+	private void drawNumberFour(Graphics g, int x, int y) {
 		g.fillCircle(x+16-4, y+16-4, 8);
 		g.fillCircle(x+60-8-4, y+16-4, 8);
 		g.fillCircle(x+16-4, y+60-8-4, 8);
 		g.fillCircle(x+60-8-4, y+60-8-4, 8);
 	}
 	
-	private void drawNumberFive(Graphic g, int x, int y) {
+	private void drawNumberFive(Graphics g, int x, int y) {
 		drawNumberOne(g, x, y);
 		drawNumberFour(g, x, y);
 	}
 	
-	private void drawNumberSix(Graphic g, int x, int y) {
+	private void drawNumberSix(Graphics g, int x, int y) {
 		drawNumberFour(g, x, y);
 		g.fillCircle(x+16-4, y+34-4, 8);
 		g.fillCircle(x+60-8-4, y+34-4, 8);

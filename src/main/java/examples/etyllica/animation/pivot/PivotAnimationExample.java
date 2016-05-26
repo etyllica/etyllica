@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.animation.pivot.Part;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 public class PivotAnimationExample extends Application {
 
@@ -27,7 +27,7 @@ public class PivotAnimationExample extends Application {
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.drawRect(part);
 		g.drawRect(otherPart);

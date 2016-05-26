@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.joystick.TouchJoystick;
 
 public class ControllerExample extends Application {
@@ -22,7 +22,7 @@ public class ControllerExample extends Application {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		drawTouchJoystick(g);
 
 		g.setColor(Color.WHITE);
@@ -31,7 +31,7 @@ public class ControllerExample extends Application {
 		g.drawShadow(40, 100, "A: "+Double.toString(joystick.getAngle()));
 	}
 	
-	public void drawTouchJoystick(Graphic g) {
+	public void drawTouchJoystick(Graphics g) {
 		g.setAlpha(50);
 		g.setColor(Color.BLACK);
 		g.fillOval(joystick.getArea());

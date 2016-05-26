@@ -2,7 +2,7 @@ package examples.etyllica.tutorial17;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 
 public class TimedApplication extends Application {
@@ -24,7 +24,7 @@ public class TimedApplication extends Application {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		layer.draw(g);
 	}

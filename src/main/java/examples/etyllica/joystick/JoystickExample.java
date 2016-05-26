@@ -2,7 +2,7 @@ package examples.etyllica.joystick;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 
 /**
@@ -27,7 +27,7 @@ public class JoystickExample extends Application{
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		hello.draw(g);
 	}
 	

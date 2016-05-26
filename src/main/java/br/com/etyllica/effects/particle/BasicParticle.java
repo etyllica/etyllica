@@ -1,7 +1,7 @@
 package br.com.etyllica.effects.particle;
 
 import br.com.etyllica.core.effect.particle.Particle;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 
 
@@ -16,7 +16,7 @@ public class BasicParticle extends Particle{
 	}
 
 	@Override
-	public void draw(Graphic g){
+	public void draw(Graphics g){
 	
 		layer.draw(g);
 		

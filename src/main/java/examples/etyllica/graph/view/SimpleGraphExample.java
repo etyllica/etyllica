@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.linear.graph.Node;
 import br.com.etyllica.linear.graph.common.IntegerEdge;
@@ -60,12 +60,12 @@ public class SimpleGraphExample extends Application{
 	}
 	
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		
 		drawNode(g, root);
 	}
 	
-	private void drawLeaf(Graphic g, Node<Integer> node) {
+	private void drawLeaf(Graphics g, Node<Integer> node) {
 		Point2D point = node.getPoint();
 		
 		int radius = 12;
@@ -83,7 +83,7 @@ public class SimpleGraphExample extends Application{
 		g.setColor(SVGColor.BLACK);
 	}
 	
-	private void drawNode(Graphic g, Node<Integer> node) {
+	private void drawNode(Graphics g, Node<Integer> node) {
 						
 		//Draw Children
 		drawEdges(g, node);
@@ -92,7 +92,7 @@ public class SimpleGraphExample extends Application{
 		drawLeaf(g, node);
 	}
 		
-	private void drawEdges(Graphic g, Node<Integer> node) {
+	private void drawEdges(Graphics g, Node<Integer> node) {
 		
 		List<IntegerEdge> edges = graph.getEdges(node);
 		

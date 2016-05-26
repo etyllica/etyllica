@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.effect.particle.Emitter;
 import br.com.etyllica.core.effect.particle.Particle;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 public class BasicEmitter extends Emitter{
 
@@ -13,7 +13,7 @@ public class BasicEmitter extends Emitter{
 	}
 	
 	@Override
-	public void drawEmitter(Graphic g) {
+	public void drawEmitter(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect(x, y, w, h);
 	}

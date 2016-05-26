@@ -5,7 +5,7 @@ import java.awt.geom.AffineTransform;
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 
 /**
  * 
@@ -199,11 +199,11 @@ public class Layer extends GeometricLayer implements Drawable {
 	}
 
 	@Override
-	public void draw(Graphic g) {
+	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 	}
 
-	public void simpleDraw(Graphic g) {
+	public void simpleDraw(Graphics g) {
 		// TODO Auto-generated method stub
 	}
 	

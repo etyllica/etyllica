@@ -10,7 +10,7 @@ import br.com.etyllica.core.context.load.DefaultLoadApplication;
 import br.com.etyllica.core.effect.TransitionEffect;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.MouseState;
-import br.com.etyllica.core.graphics.Graphic;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.core.i18n.LanguageChanger;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
@@ -180,7 +180,7 @@ public abstract class Context extends Layer implements ViewGroup, UIComponent, U
 	/**
 	 * Draw method
 	 */
-	public abstract void draw(Graphic g);
+	public abstract void draw(Graphics g);
 
 	/**
 	 * Unload is not implemented yet but is useful when Applications needs free memory before change to next Application
