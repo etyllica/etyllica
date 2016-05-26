@@ -34,6 +34,7 @@ public class GeneralGuiExample extends Application{
 		buttonBlue.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", Color.BLUE));
 		addView(buttonBlue);
 		
+		
 		TextField field = new TextField(100, 150, 120, 40);
 		addView(field);
 		

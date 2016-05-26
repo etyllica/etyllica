@@ -132,7 +132,7 @@ public class UICore {
 		}
 
 		GUIEvent result = component.safeUpdateMouse(event);
-
+		
 		if(GUIEvent.MOUSE_IN == result) {
 			setMouseOver(component);
 			return GUIEvent.NONE;
@@ -233,9 +233,9 @@ public class UICore {
 
 		default:
 
-			if(view.isMouseOver()) {
+			/*if(view.isMouseOver()) {
 				view.update(GUIEvent.MOUSE_OUT);
-			}
+			}*/
 
 			break;
 		}
@@ -250,8 +250,8 @@ public class UICore {
 
 	public void setMouseOver(View view) {
 
-		if(mouseOver != null) {
-			removeMouseOver(mouseOver);	
+		if (mouseOver != null) {
+			removeMouseOver(mouseOver);
 		}
 
 		mouseOver = view;
