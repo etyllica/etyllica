@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <project name="Etyllica" default="dist" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
-  <path id="maven-ant-tasks.classpath" path="libs/maven-ant-tasks-2.1.3.jar" />
+  <path id="maven-ant-tasks.classpath" path="maven/libs/maven-ant-tasks-2.1.3.jar" />
   <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
            uri="antlib:org.apache.maven.artifact.ant"
            classpathref="maven-ant-tasks.classpath" />
         
   <property name="version"  value="5.0" /><!-- Change version in maven/pom.xml-->
-  <property name="maven-version"  value="${version}-SNAPSHOT" />
+  <property name="maven-version"  value="${version}-RELEASE" />
 
   <property name="libcore"     value="etyllica-${version}" />
   <property name="libutil"     value="etyllica-util-${version}" />

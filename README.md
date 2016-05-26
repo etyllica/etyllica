@@ -54,7 +54,7 @@
 
 ## Dependencies (optional)
 
-If you don't need Sound nor Physics, you just have to include the [etyllica-4.3.jar](https://github.com/yuripourre/etyllica/blob/master/Etyllica/libs/stable/etyllica-4.3.jar) (stable version with 230kB)
+If you don't need Sound nor Physics, you just have to include the [etyllica-5.0.jar](https://github.com/yuripourre/etyllica/releases/download/v5.0/etyllica-5.0.jar) (stable version with 326kB)
 
 - [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library made by [Paul Lamb](http://www.paulscode.com))
 - [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0) (Audio Codecs made by [Paul Lamb](http://www.paulscode.com))
