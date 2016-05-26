@@ -10,7 +10,6 @@
 
   <property name="libcore"     value="etyllica-${version}" />
   <property name="libutil"     value="etyllica-util-${version}" />
-  <property name="lib3d"       value="etyllica-${version}-3D" />
   <property name="libsound"    value="etyllica-${version}-sound" />
 
   <property name="src.dir"     value="src/main/java" />
@@ -146,16 +145,6 @@
       <fileset dir="${build.dir}">
 	<include name="**/br/com/etyllica/util/*"/>
 	<include name="**/br/com/etyllica/util/**"/>
-      </fileset>
-    </jar>
-    <jar destfile="${lib.dir}/${lib3d}.jar">
-      <fileset dir="${build.dir}">
-	<include name="**/br/com/abby/*"/>
-	<include name="**/br/com/abby/**"/>
-	<include name="**/org/jgl/*"/>
-	<include name="**/org/jgl/**"/>
-	<include name="**/org/lwjgl/*"/>
-	<include name="**/org/lwjgl/**"/>
       </fileset>
     </jar>
     <jar destfile="${lib.dir}/${libsound}.jar">
