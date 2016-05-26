@@ -1,9 +1,9 @@
 package examples.etyllica.tutorial19;
 
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
 
-public class Tutorial23 extends Etyllica {
+public class Tutorial23 extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

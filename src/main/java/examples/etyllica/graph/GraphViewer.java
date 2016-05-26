@@ -1,9 +1,9 @@
 package examples.etyllica.graph;
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 import examples.etyllica.graph.view.SimpleGraphExample;
 
-public class GraphViewer extends EtyllicaFrame {
+public class GraphViewer extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 

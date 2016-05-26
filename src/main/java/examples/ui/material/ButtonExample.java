@@ -1,10 +1,10 @@
 package examples.ui.material;
 
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 import examples.ui.material.application.BlueButtonApplication;
 
-public class ButtonExample extends EtyllicaFrame {
+public class ButtonExample extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 

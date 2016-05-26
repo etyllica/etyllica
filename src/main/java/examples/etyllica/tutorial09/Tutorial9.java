@@ -1,6 +1,6 @@
 package examples.etyllica.tutorial09;
 
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.theme.ThemeManager;
@@ -14,7 +14,7 @@ import examples.etyllica.tutorial09.application.SimpleGuiExample;
  *
  */
 
-public class Tutorial9 extends Etyllica {
+public class Tutorial9 extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

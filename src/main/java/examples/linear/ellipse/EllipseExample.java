@@ -1,10 +1,10 @@
 package examples.linear.ellipse;
 
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 import examples.linear.ellipse.application.EllipseDrawing;
 
-public class EllipseExample extends EtyllicaFrame {
+public class EllipseExample extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 

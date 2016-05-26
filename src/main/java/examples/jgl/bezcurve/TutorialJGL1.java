@@ -1,9 +1,9 @@
 package examples.jgl.bezcurve;
 
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
 
-public class TutorialJGL1 extends Etyllica {
+public class TutorialJGL1 extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

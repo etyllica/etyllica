@@ -1,10 +1,10 @@
 package examples.linear.line;
 
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 import examples.linear.line.application.ElasticLineApplication;
 
-public class LineExample extends EtyllicaFrame {
+public class LineExample extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 

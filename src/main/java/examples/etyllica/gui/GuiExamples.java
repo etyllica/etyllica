@@ -1,6 +1,6 @@
 package examples.etyllica.gui;
 
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
 import examples.etyllica.gui.simple.GeneralGuiExample;
 import examples.etyllica.gui.slider.SliderExample;
@@ -12,7 +12,7 @@ import examples.etyllica.gui.slider.SliderExample;
  *
  */
 
-public class GuiExamples extends Etyllica {
+public class GuiExamples extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

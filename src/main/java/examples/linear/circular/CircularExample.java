@@ -1,10 +1,10 @@
 package examples.linear.circular;
 
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 import examples.linear.circular.application.CircularApplication;
 
-public class CircularExample extends EtyllicaFrame {
+public class CircularExample extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 

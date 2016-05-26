@@ -1,9 +1,9 @@
 package examples.etyllica.animation;
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 import examples.etyllica.animation.pivot.PivotExample;
 
-public class PivotApplication extends EtyllicaFrame {
+public class PivotApplication extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 

@@ -1,9 +1,9 @@
 package examples.images;
 
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
 
-public class GifViewer extends Etyllica {
+public class GifViewer extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

@@ -2,10 +2,10 @@ package examples.linear.polygonal;
 
 import examples.linear.polygonal.application.PolygonalArea;
 import examples.linear.polygonal.application.PolygonalMultiArea;
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 
-public class PolygonalExample extends EtyllicaFrame {
+public class PolygonalExample extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 

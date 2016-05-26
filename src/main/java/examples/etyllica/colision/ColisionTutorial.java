@@ -1,9 +1,9 @@
 package examples.etyllica.colision;
 
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 
-public class ColisionTutorial extends EtyllicaFrame {
+public class ColisionTutorial extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 

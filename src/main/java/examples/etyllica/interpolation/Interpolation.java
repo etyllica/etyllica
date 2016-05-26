@@ -1,8 +1,8 @@
 package examples.etyllica.interpolation;
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 
-public class Interpolation extends EtyllicaFrame {
+public class Interpolation extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 

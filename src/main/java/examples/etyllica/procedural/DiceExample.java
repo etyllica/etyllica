@@ -1,10 +1,10 @@
 package examples.etyllica.procedural;
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 import examples.etyllica.procedural.application.DiceApplication;
 
 
-public class DiceExample extends EtyllicaFrame {
+public class DiceExample extends Etyllica {
 	private static final long serialVersionUID = 1L;
 	
 	public DiceExample() {

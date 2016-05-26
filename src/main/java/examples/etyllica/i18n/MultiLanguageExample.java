@@ -1,9 +1,9 @@
 package examples.etyllica.i18n;
 
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
 
-public class MultiLanguageExample extends Etyllica {
+public class MultiLanguageExample extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

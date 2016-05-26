@@ -1,6 +1,6 @@
 package examples.jgl;
 
-import br.com.etyllica.Etyllica;
+import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
 import examples.jgl.application.BezSurf;
 import examples.jgl.application.Checker;
@@ -14,7 +14,7 @@ import examples.jgl.application.TextureSurf;
 import examples.jgl.bezcurve.BezCurve;
 import examples.jgl.bezmesh.BezMesh;
 
-public class JGLTutorials extends Etyllica {
+public class JGLTutorials extends EtyllicaApplet {
 
 	private static final long serialVersionUID = 1L;
 

@@ -1,9 +1,9 @@
 package examples.etyllica.control;
 
-import br.com.etyllica.EtyllicaFrame;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.context.Application;
 
-public class ControlTutorial extends EtyllicaFrame {
+public class ControlTutorial extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 
