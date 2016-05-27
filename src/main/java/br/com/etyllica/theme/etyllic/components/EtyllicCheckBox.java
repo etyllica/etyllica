@@ -12,9 +12,9 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class CheckBox extends BaseCheckBox {
+public class EtyllicCheckBox extends BaseCheckBox {
 
-	public CheckBox(int x, int y, int w, int h) {
+	public EtyllicCheckBox(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
 	

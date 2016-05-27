@@ -26,9 +26,7 @@ public class BaseButton extends RoundGUIComponent {
 	private String alt = "";
 
 	protected boolean clicked = false;
-	
-	protected boolean disabled = false;
-	
+		
 	public BaseButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
@@ -280,14 +278,6 @@ public class BaseButton extends RoundGUIComponent {
 
 	public void setAlt(String alt) {
 		this.alt = alt;
-	}
-
-	public boolean isDisabled() {
-		return disabled;
-	}
-
-	public void setDisabled(boolean disabled) {
-		this.disabled = disabled;
 	}
 	
 	public boolean isClicked() {

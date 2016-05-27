@@ -1,6 +1,7 @@
 package br.com.etyllica.gui;
 
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.gui.base.BaseTextField;
 
 
 /**
@@ -10,7 +11,7 @@ import br.com.etyllica.core.event.GUIEvent;
  *
  */
 
-public class PasswordField extends TextField{
+public class PasswordField extends BaseTextField {
 
 	public PasswordField(int x, int y, int w, int h) {
 		super(x, y, w, h);

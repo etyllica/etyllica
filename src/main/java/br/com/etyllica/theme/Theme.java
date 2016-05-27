@@ -300,5 +300,5 @@ public abstract class Theme implements ThemeFactory {
 	public void setBaseColor(Color baseColor) {
 		this.baseColor = baseColor;
 	}
-		
+	
 }

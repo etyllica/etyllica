@@ -29,6 +29,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	
 	protected boolean onFocus = false;
 	protected boolean mouseOver = false;
+	protected boolean disabled = false;
 
 	protected View root = null;
 	
@@ -85,6 +86,14 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	 */
 	public void setOnFocus(boolean focus) {
 		this.onFocus = focus;
+	}
+	
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
 	}
 
 	public List<Action> getActions() {

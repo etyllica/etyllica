@@ -97,7 +97,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 
 		List<KeyEvent> events = new CopyOnWriteArrayList<KeyEvent>(keyEvents);
 		
-		for(KeyEvent event: events) {
+		for(KeyEvent event: events) {			
 			listener.updateKeyEvent(event);
 		}
 
@@ -139,7 +139,6 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 		}
 
 		ke.consume();
-
 	}
 
 	private int getKeyFromEvent(java.awt.event.KeyEvent ke) {
