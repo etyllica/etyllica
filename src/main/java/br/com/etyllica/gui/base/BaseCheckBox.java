@@ -1,6 +1,7 @@
 package br.com.etyllica.gui.base;
 
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.gui.Label;
 import br.com.etyllica.theme.Theme;
 
 /**
@@ -13,25 +14,25 @@ import br.com.etyllica.theme.Theme;
 public class BaseCheckBox extends BaseButton {
 
 	protected boolean checked = false;
+	protected Label checker;
 
 	public BaseCheckBox(int x, int y) {
 		super(x, y, 22, 22);
 	}
-	
+
 	public BaseCheckBox(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
-	
+
 	@Override
 	protected void leftClick() {
 		swapChecked();
 	}
 
 	private void swapChecked() {
-		
 		checked = !checked;		
 	}
-	
+
 	@Override
 	public void draw(Graphics g) {
 
@@ -40,12 +41,11 @@ public class BaseCheckBox extends BaseButton {
 		super.draw(g);
 
 		if(checked) {
-
 			//DrawShadow
 			if(theme.isShadow()) {
 
 				g.setColor(theme.getShadowColor());
-				
+
 				g.drawLine(x+3,y+3,x+w/2+1, y+h/2+1);
 				g.drawLine(x+w/2+1, y+h/2+1,x+w+5+1,y-5+1);
 			}
@@ -54,7 +54,6 @@ public class BaseCheckBox extends BaseButton {
 
 			g.drawLine(x+2,y+2,x+w/2, y+h/2);
 			g.drawLine(x+w/2, y+h/2,x+w+5,y-5);
-
 		}
 
 	}
@@ -67,5 +66,17 @@ public class BaseCheckBox extends BaseButton {
 		this.checked = checked;
 	}
 
+	public Label getChecker() {
+		return checker;
+	}
+
+	public void setChecker(Label checker) {
+		this.checker = checker;
+
+		checker.setX(x+(w/2-checker.getW()/2)+checker.getX());
+		checker.setY(y+(h/2-checker.getH()/2)+checker.getY());
+
+		checker.setContentBounds(x, y, w, h);
+	}
 
 }

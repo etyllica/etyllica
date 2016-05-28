@@ -25,22 +25,21 @@ public class EtyllicCheckBox extends BaseCheckBox {
 
 		if (!mouseOver) {
 			g.setColor(theme.getButtonColor());
-
 		} else {
-			if (clicked) {
+			if (clicked || checked) {
 				g.setColor(theme.getButtonOnClick());
 			} else {
 				g.setColor(theme.getButtonOnMouse());
 			}
 		}
-
-		if (checked) {
-			g.setColor(theme.getButtonOnClick());
-		}
 		
 		g.fillRect(x,y,w,h);
-		drawLabel(g);
 		
+		if (checked) {
+			if(checker != null) {
+				checker.draw(g);
+			}
+		}
 	}
 
 }

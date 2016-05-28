@@ -45,6 +45,10 @@ public class CheckBox extends UIView {
 
 	public void setChecked(boolean checked) {
 		checkbox.setChecked(checked);
-	}	
+	}
+	
+	public void setChecker(Label checker) {
+		checkbox.setChecker(checker);
+	}
 
 }

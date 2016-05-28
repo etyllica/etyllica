@@ -72,9 +72,8 @@ public class BaseButton extends RoundGUIComponent {
 	}
 
 	protected void drawLabel(Graphics g) {
-
 		if(hasLabel())
-			label.draw(g);		
+			label.draw(g);
 
 	}
 
