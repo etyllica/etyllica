@@ -198,7 +198,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 		component.setFocusable(true);
 		component.requestFocus();
 
-		hideDefaultCursor();
+		hideDefaultCursor(component);
 
 		component.addMouseMotionListener( getMouse() );
 		component.addMouseWheelListener( getMouse() );
@@ -242,7 +242,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 
 	}
 
-	public void hideDefaultCursor() {
+	public static void hideDefaultCursor(Component component) {
 		
 		int[] pixels = new int[16 * 16];
 		
