@@ -2,6 +2,8 @@ package examples.etyllica.gui;
 
 import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
+import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.theme.etyllic.EtyllicTheme;
 import examples.etyllica.gui.simple.GeneralGuiExample;
 import examples.etyllica.gui.slider.SliderExample;
 

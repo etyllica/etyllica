@@ -36,9 +36,7 @@ public class EtyllicCheckBox extends BaseCheckBox {
 		g.fillRect(x,y,w,h);
 		
 		if (checked) {
-			if(checker != null) {
-				checker.draw(g);
-			}
+			checker.draw(g);
 		}
 	}
 

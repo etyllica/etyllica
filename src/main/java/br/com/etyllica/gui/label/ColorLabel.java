@@ -5,7 +5,7 @@ import java.awt.Color;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Label;
 
-public class ColorLabel extends Label{
+public class ColorLabel extends Label {
 
 	public ColorLabel(int x, int y, int w, int h) {
 		super(x, y, w, h);

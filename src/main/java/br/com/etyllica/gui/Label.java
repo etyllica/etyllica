@@ -12,7 +12,7 @@ import br.com.etyllica.core.event.PointerEvent;
  *
  */
 
-public abstract class Label extends View{
+public abstract class Label extends View {
 	
 	protected int bx;
 	protected int by;

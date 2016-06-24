@@ -167,7 +167,7 @@ public class BaseTextField extends TextView {
 	//Para não sair da caixa
 	public void draw(Graphics g) {
 
-		Theme theme = ThemeManager.getInstance().getTheme();
+		Theme theme = getTheme();
 
 		g.setImage(layer.getBuffer());
 		int x = 0;

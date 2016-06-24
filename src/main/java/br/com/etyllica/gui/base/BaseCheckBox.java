@@ -2,6 +2,7 @@ package br.com.etyllica.gui.base;
 
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Label;
+import br.com.etyllica.gui.label.BaseCheckerLabel;
 import br.com.etyllica.theme.Theme;
 
 /**
@@ -17,11 +18,12 @@ public class BaseCheckBox extends BaseButton {
 	protected Label checker;
 
 	public BaseCheckBox(int x, int y) {
-		super(x, y, 22, 22);
+		this(x, y, 22, 22);
 	}
 
 	public BaseCheckBox(int x, int y, int w, int h) {
 		super(x, y, w, h);
+		checker = new BaseCheckerLabel(x, y, w, h);
 	}
 
 	@Override
@@ -36,24 +38,11 @@ public class BaseCheckBox extends BaseButton {
 	@Override
 	public void draw(Graphics g) {
 
-		Theme theme = getTheme();
-
 		super.draw(g);
 
+		Theme theme = getTheme();
 		if(checked) {
-			//DrawShadow
-			if(theme.isShadow()) {
-
-				g.setColor(theme.getShadowColor());
-
-				g.drawLine(x+3,y+3,x+w/2+1, y+h/2+1);
-				g.drawLine(x+w/2+1, y+h/2+1,x+w+5+1,y-5+1);
-			}
-
-			g.setColor(theme.getTextColor());
-
-			g.drawLine(x+2,y+2,x+w/2, y+h/2);
-			g.drawLine(x+w/2, y+h/2,x+w+5,y-5);
+			checker.draw(g);
 		}
 
 	}
