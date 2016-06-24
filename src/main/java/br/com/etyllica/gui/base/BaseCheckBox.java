@@ -3,7 +3,6 @@ package br.com.etyllica.gui.base;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.label.BaseCheckerLabel;
-import br.com.etyllica.theme.Theme;
 
 /**
  * 
@@ -40,11 +39,9 @@ public class BaseCheckBox extends BaseButton {
 
 		super.draw(g);
 
-		Theme theme = getTheme();
-		if(checked) {
+		if(isChecked()) {
 			checker.draw(g);
 		}
-
 	}
 
 	public boolean isChecked() {

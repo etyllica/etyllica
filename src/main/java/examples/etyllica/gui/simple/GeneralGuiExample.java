@@ -8,6 +8,8 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.CheckBox;
+import br.com.etyllica.gui.RadioButton;
+import br.com.etyllica.gui.RadioGroup;
 import br.com.etyllica.gui.TextField;
 import br.com.etyllica.gui.label.TextLabel;
 
@@ -41,6 +43,16 @@ public class GeneralGuiExample extends Application{
 		CheckBox checkbox = new CheckBox(280, 150, 60, 40);
 		checkbox.setChecked(true);
 		addView(checkbox);
+		
+		RadioGroup group = new RadioGroup();
+		RadioButton radio1 = new RadioButton(200, 50, 40, 40);
+		radio1.setGroup(group);
+		RadioButton radio2 = new RadioButton(280, 50, 40, 40);
+		radio2.setGroup(group);
+		radio1.check();
+		
+		addView(radio1);
+		addView(radio2);
 		
 		loading = 100;
 	}

@@ -1,10 +1,11 @@
-package br.com.etyllica.gui;
+package br.com.etyllica.gui.base;
 
 import java.awt.Color;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.base.BaseCheckBox;
+import br.com.etyllica.gui.RadioGroup;
+import br.com.etyllica.gui.label.BaseRadioLabel;
 import br.com.etyllica.theme.ThemeManager;
 
 /**
@@ -14,23 +15,23 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class Radio extends BaseCheckBox {
+public class BaseRadioButton extends BaseCheckBox {
 
 	private RadioGroup group;
-	
 	private String value;
 
-	public Radio(int x, int y){
-		super(x,y);
+	public BaseRadioButton(int x, int y) {
+		this(x,y, 22, 22);
 	}
 	
-	public Radio(int x, int y, int w, int h){
+	public BaseRadioButton(int x, int y, int w, int h) {
 		super(x,y,w,h);
+		checker = new BaseRadioLabel(x, y, w, h);
 	}
 
 	@Override
 	protected void leftClick() {
-		mark();
+		check();
 	}
 	
 	@Override
@@ -43,7 +44,6 @@ public class Radio extends BaseCheckBox {
 	public void draw(Graphics g) {
 
 		g.setColor(Color.WHITE);
-		//g.fillOval(x, y, w, h);
 		
 		if(!mouseOver) {
 			g.setColor(ThemeManager.getInstance().getTheme().getTextFieldWithoutFocusColor());
@@ -54,7 +54,8 @@ public class Radio extends BaseCheckBox {
 		g.drawOval(x, y, w, h);
 		
 		g.setColor(ThemeManager.getInstance().getTheme().getTextFieldWithoutFocusColor());
-		if(checked){
+		
+		if (isChecked()) {
 			g.fillCircle(x+w/2, y+h/2, w/5);
 		}
 	}
@@ -80,15 +81,19 @@ public class Radio extends BaseCheckBox {
 		this.value = value;
 	}
 	
-	public void mark() {
-		
-		if(!checked) {
-			
-			if(group!=null) {
-				group.mark(this);
+	@Override
+	public boolean isChecked() {
+		if (group != null) {
+			return this == group.getChecked();
+		}
+		return checked;
+	}
+	
+	public void check() {
+		if(!isChecked()) {
+			if (group != null) {
+				group.check(this);
 			}
-
-			checked = true;
 		}
 		
 	}

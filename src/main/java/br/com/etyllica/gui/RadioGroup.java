@@ -3,6 +3,8 @@ package br.com.etyllica.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.etyllica.gui.base.BaseRadioButton;
+
 /**
  * 
  * @author yuripourre
@@ -12,39 +14,47 @@ import java.util.List;
 
 public class RadioGroup {
 
-	private List<Radio> radios;
+	private BaseRadioButton checked;
+	private List<BaseRadioButton> radios;
 	
 	public RadioGroup(){
 		super();
 		
-		radios = new ArrayList<Radio>();
+		radios = new ArrayList<BaseRadioButton>();
 	}
 	
-	public void add(Radio radio){
+	public void add(BaseRadioButton radio){
 		this.radios.add(radio);
 		
 		radio.setGroup(this);		
 	}
 	
-	public void remove(Radio radio){
+	public void remove(BaseRadioButton radio) {
 		this.radios.remove(radio);
+		if (checked == radio) {
+			checked = null;
+		}
 	}
 	
-	public void mark(Radio radio){
-		for(Radio rad: radios){
-			if(rad!=radio){
-				if(rad.isChecked()){
+	public void check(BaseRadioButton radio) {
+		this.checked = radio;
+		radio.setChecked(true);
+		for(BaseRadioButton rad: radios){
+			if (rad != radio) {
+				if (rad.isChecked()) {
 					rad.setChecked(false);
 				}
 			}
 		}
 	}
 	
-	public String getValue(){
-		for(Radio rad: radios){
-			if(rad.isChecked()){
-				return rad.getValue();
-			}
+	public BaseRadioButton getChecked() {
+		return checked;
+	}
+	
+	public String getValue() {
+		if (checked != null) {
+			return checked.getValue();
 		}
 		
 		return "";
