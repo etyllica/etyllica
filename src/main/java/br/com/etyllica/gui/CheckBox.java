@@ -15,20 +15,12 @@ public class CheckBox extends UIView {
 		this.delegatedView = checkbox;
 	}
 
-	public int getRoundness() {
-		return checkbox.getRoundness();
-	}
-
 	public String getAlt() {
 		return checkbox.getAlt();
 	}
 
 	public Label getLabel() {
 		return checkbox.getLabel();
-	}
-
-	public void setRoundness(int roundness) {
-		checkbox.setRoundness(roundness);
 	}
 	
 	public void setAlt(String alt) {

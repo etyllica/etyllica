@@ -4,8 +4,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.theme.Theme;
-import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.gui.style.Roundness;
 
 /**
  * 
@@ -14,7 +13,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public class Panel extends RoundGUIComponent {
+public class Panel extends ViewGroup {
 	
 	public Panel(int x, int y, int w, int h){
 		super(x,y,w,h);
@@ -22,7 +21,7 @@ public class Panel extends RoundGUIComponent {
 	
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 		return GUIEvent.NONE;
 	}
 
@@ -39,21 +38,20 @@ public class Panel extends RoundGUIComponent {
 	
 	@Override
 	public void draw(Graphics g) {
+		g.setColor(getTheme().getPanelColor());
+		roundPanel(g, x, y, w, h, style.roundness);
+	}
+
+	public static void roundPanel(Graphics g, int x, int y, int w, int h, Roundness roundness) {
+		g.fillArc(x, y, roundness.width*2, roundness.height*2, 90, 90);
+		g.fillRect(x+roundness.width, y, w-roundness.width*2, roundness.height);
+		g.fillArc(x+w-roundness.width*2, y, roundness.width*2, roundness.height*2, 0, 90);
 		
-		Theme theme = ThemeManager.getInstance().getTheme();
+		g.fillRect(x, y+roundness.height, w, h-roundness.height*2);
 		
-		g.setColor(theme.getPanelColor());
-		
-		g.fillArc(x, y, roundness*2, roundness*2, 90, 90);
-		g.fillRect(x+roundness, y, w-roundness*2, roundness);
-		g.fillArc(x+w-roundness*2, y, roundness*2, roundness*2, 0, 90);
-		
-		g.fillRect(x, y+roundness, w, h-roundness*2);
-		
-		g.fillArc(x, y+h-roundness*2, roundness*2, roundness*2, 180, 90);
-		g.fillRect(x+roundness, y+h-roundness, w-roundness*2, roundness);
-		g.fillArc(x+w-roundness*2, y+h-roundness*2, roundness*2, roundness*2, 270, 90);
-	
+		g.fillArc(x, y+h-roundness.height*2, roundness.width*2, roundness.height*2, 180, 90);
+		g.fillRect(x+roundness.width, y+h-roundness.height, w-roundness.width*2, roundness.height);
+		g.fillArc(x+w-roundness.width*2, y+h-roundness.height*2, roundness.width*2, roundness.height*2, 270, 90);
 	}
 
 }

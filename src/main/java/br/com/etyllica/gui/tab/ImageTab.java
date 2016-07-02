@@ -28,34 +28,26 @@ public class ImageTab extends BaseButton {
 		
 		if(!mouseOver){
 
-			if(!active){
-				
-				g.setColor(theme.getButtonColor());
-				
-			}else{
-				
-				g.setColor(theme.getButtonOnMouse());
-				
+			if (!active) {
+				g.setColor(theme.getBaseColor());
+			} else {
+				g.setColor(theme.getSelectionColor());
 			}
 
-		}else{
+		} else {
 			
-			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
-
-				g.setColor(theme.getButtonOnClick());
-
-			}else{
-				
-				g.setColor(theme.getButtonOnMouse());
-				
+			if (lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN) {
+				g.setColor(theme.getActiveSelectionColor());
+			} else {
+				g.setColor(theme.getSelectionColor());
 			}
 		}
 		
-		g.fillArc(x, y, roundness*2, roundness*2, 90, 90);
-		g.fillRect(x+roundness, y, w-roundness*2, roundness);
-		g.fillArc(x+w-roundness*2, y, roundness*2, roundness*2, 0, 90);
+		g.fillArc(x, y, style.roundness.width*2, style.roundness.height*2, 90, 90);
+		g.fillRect(x+style.roundness.width, y, w-style.roundness.width*2, style.roundness.height);
+		g.fillArc(x+w-style.roundness.width*2, y, style.roundness.width*2, style.roundness.height*2, 0, 90);
 		
-		g.fillRect(x, y+roundness, w, h-roundness);
+		g.fillRect(x, y+style.roundness.height, w, h-style.roundness.height);
 				
 		//Draw Icon
 		drawLabel(g);

@@ -17,7 +17,7 @@ import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
 import br.com.etyllica.core.ui.UIComponent;
-import br.com.etyllica.core.ui.ViewGroup;
+import br.com.etyllica.core.ui.ViewContainer;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.layer.Layer;
@@ -30,7 +30,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public abstract class Context extends Layer implements ViewGroup, UIComponent, Updatable, MouseStateChanger, LanguageChanger {
+public abstract class Context extends Layer implements ViewContainer, UIComponent, Updatable, MouseStateChanger, LanguageChanger {
 
 	/**
 	 * The updateInterval between executions

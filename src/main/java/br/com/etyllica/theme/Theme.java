@@ -3,6 +3,8 @@ package br.com.etyllica.theme;
 import java.awt.Color;
 import java.awt.Font;
 
+import br.com.etyllica.gui.style.Style;
+
 /**
  * 
  * @author yuripourre
@@ -25,6 +27,8 @@ public abstract class Theme implements ThemeFactory {
 	private int fontStyle = Font.PLAIN;
 	private String fontName = FONT_DEFAULT;
 	
+	private Style style = new Style();
+	
 	//public static final String FONT_DEFAULT = "DejaVuSans.ttf";
 	public static final String FONT_DEFAULT = "Dialog";
 	public static final String FONT_JAPANESE = "mona.ttf";
@@ -40,36 +44,33 @@ public abstract class Theme implements ThemeFactory {
 		//font = new Font("Monospaced", fontStyle, fontSize);
 	}
 	
-	protected Color baseColor = new Color(0xF8, 0x1A, 0x27, 0xF0);
+	protected Color baseColor = new Color(0x22, 0xa9, 0x11, 0xa0);
+	protected Color borderColor = new Color(0x00,0x00, 0x00, 0xa0);
+	protected Color selectionColor = new Color(0x22, 0xca, 0x33, 0xa0);
+	protected Color backgroundColor = new Color(0xff, 0xff, 0xff, 0xa0);
+	protected Color activeSelectionColor = new Color(0x22, 0x87, 0x11, 0xa0);
 	
 	protected boolean shadow = true;
-	
-	protected Color shadowColor = Color.BLACK;
-		
-	protected Color backGroundColor = new Color(0x66, 0x66, 0x66);
+	protected Color shadowColor = Color.WHITE;
 	
 	protected Color barColor = new Color(0x00,0x00, 0x00, 0xa0);
 	protected Color barOnMouseColor = new Color(0x33, 0x33, 0x33, 0xa0);
 		
-	protected Color borderColor = new Color(0x00,0x00, 0x00, 0xa0);
-	
-	protected Color buttonColor = new Color(0x00,0x00, 0x00, 0xa0);
+	//protected Color buttonColor = new Color(0x00,0x00, 0x00, 0xa0);
 	protected Color buttonDisabledColor = new Color(0x55,0x55, 0x55, 0xb0);
 	protected Color buttonOnFocus = new Color(0x33, 0x33, 0x99, 0xa0);
-	protected Color buttonOnMouse = new Color(0x33, 0x33, 0x33, 0xa0);
-	protected Color buttonOnClick = new Color(0x99, 0x99, 0x99, 0xa0);
+	//protected Color buttonOnMouse = new Color(0x33, 0x33, 0x33, 0xa0);
+	//protected Color buttonOnClick = new Color(0x99, 0x99, 0x99, 0xa0);
 	
-	//private Color textColor = new Color(0x00, 0x00, 0x00);
-	protected Color textColor = new Color(0xff, 0xff, 0xff);
-	protected Color textSelectedColor = new Color(0x00, 0x00, 0x00);
-	protected Color textMarkColor = new Color(0x00, 0x00, 0x88,0xa0);
+	private Color textColor = new Color(0x00, 0x00, 0x00);
+	//protected Color textColor = new Color(0xff, 0xff, 0xff);
+	protected Color textSelectedColor = new Color(0xff, 0xff, 0xff);
+	protected Color textMarkColor = selectionColor;
 	
 	protected Color textFieldColor = new Color(0x88, 0x88, 0x88);
 	protected Color textFieldWithoutFocusColor = new Color (0xaa, 0xaa, 0xaa,0xcc);
-	protected Color textFieldOnMouseColor = new Color(0x00, 0x00, 0x88,0xa0);
-	
-	protected Color selectionTextColor = new Color(0x00, 0x00, 0xff);
-	
+	protected Color textFieldOnMouseColor = selectionColor;
+		
 	protected Color panelColor = new Color(0x00, 0x00, 0x00, 0xA0);
 	
 	protected Color mouseArrowColor = new Color(0xff, 0xff, 0xff);
@@ -109,12 +110,12 @@ public abstract class Theme implements ThemeFactory {
 		this.shadow = shadow;
 	}
 
-	public Color getBackGroundColor() {
-		return backGroundColor;
+	public Color getBackgroundColor() {
+		return backgroundColor;
 	}
 
 	public void setBackGroundColor(Color backGroundColor) {
-		this.backGroundColor = backGroundColor;
+		this.backgroundColor = backGroundColor;
 	}
 
 	public Color getBarColor() {
@@ -140,14 +141,6 @@ public abstract class Theme implements ThemeFactory {
 	public void setBorderColor(Color borderColor) {
 		this.borderColor = borderColor;
 	}
-
-	public Color getButtonColor() {
-		return buttonColor;
-	}
-
-	public void setButtonColor(Color buttonColor) {
-		this.buttonColor = buttonColor;
-	}
 	
 	public Color getButtonDisabledColor() {
 		return buttonDisabledColor;
@@ -155,14 +148,6 @@ public abstract class Theme implements ThemeFactory {
 
 	public void setButtonDisabledColor(Color buttonDisabledColor) {
 		this.buttonDisabledColor = buttonDisabledColor;
-	}
-
-	public Color getButtonOnMouse() {
-		return buttonOnMouse;
-	}
-
-	public void setButtonOnMouse(Color buttonOnMouse) {
-		this.buttonOnMouse = buttonOnMouse;
 	}
 	
 	public Color getButtonOnFocus() {
@@ -173,12 +158,12 @@ public abstract class Theme implements ThemeFactory {
 		this.buttonOnFocus = buttonOnFocus;
 	}
 
-	public Color getButtonOnClick() {
-		return buttonOnClick;
+	public Color getActiveSelectionColor() {
+		return activeSelectionColor;
 	}
 
-	public void setButtonOnClick(Color buttonOnClick) {
-		this.buttonOnClick = buttonOnClick;
+	public void setActiveSelectionColor(Color activeSelectionColor) {
+		this.activeSelectionColor = activeSelectionColor;
 	}
 
 	public Color getTextColor() {
@@ -213,12 +198,12 @@ public abstract class Theme implements ThemeFactory {
 		this.textFieldWithoutFocusColor = textFieldWithoutFocusColor;
 	}
 
-	public Color getSelectionTextColor() {
-		return selectionTextColor;
+	public Color getSelectionColor() {
+		return selectionColor;
 	}
 
-	public void setSelectionTextColor(Color selectionTextColor) {
-		this.selectionTextColor = selectionTextColor;
+	public void setSelectionColor(Color selectionColor) {
+		this.selectionColor = selectionColor;
 	}
 
 	public Color getPanelColor() {
@@ -299,6 +284,10 @@ public abstract class Theme implements ThemeFactory {
 
 	public void setBaseColor(Color baseColor) {
 		this.baseColor = baseColor;
+	}
+
+	public Style getStyle() {
+		return style;
 	}
 	
 }

@@ -7,7 +7,7 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Label;
-import br.com.etyllica.gui.RoundGUIComponent;
+import br.com.etyllica.gui.RoundView;
 import br.com.etyllica.theme.Theme;
 
 /**
@@ -19,7 +19,7 @@ import br.com.etyllica.theme.Theme;
  *
  */
 
-public class BaseButton extends RoundGUIComponent {
+public class BaseButton extends RoundView {
 
 	protected Label label;
 
@@ -43,26 +43,20 @@ public class BaseButton extends RoundGUIComponent {
 
 			if(!mouseOver) {
 
-				g.setColor(theme.getButtonColor());
+				g.setColor(theme.getBaseColor());
 
 			} else {
 
 				if(clicked) {
-
-					g.setColor(theme.getButtonOnClick());
-
+					g.setColor(theme.getActiveSelectionColor());
 				} else {
-
-					g.setColor(theme.getButtonOnMouse());
-
+					g.setColor(theme.getSelectionColor());
 				}
 
 			}
 
 		} else {
-
 			g.setColor(theme.getButtonDisabledColor());
-
 		}
 
 		g.fillRect(x,y,w,h);

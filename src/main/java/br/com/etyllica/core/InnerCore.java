@@ -33,7 +33,7 @@ import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.ui.UICore;
 import br.com.etyllica.core.ui.UICoreListener;
-import br.com.etyllica.core.ui.ViewGroup;
+import br.com.etyllica.core.ui.ViewContainer;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.theme.Theme;
@@ -402,7 +402,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		drawViewChildren(view, g);
 	}
 
-	private void drawViewChildren(ViewGroup view, Graphics g) {
+	private void drawViewChildren(ViewContainer view, Graphics g) {
 
 		if(!view.getViews().isEmpty()) {
 
@@ -410,7 +410,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 			for(View child: components) {
 				
-				if(isTranslated(view)) {
+				/*if(isTranslated(view)) {
 					//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
 					child.setLocation(view.getX(), view.getY());
 					drawView(child,g);
@@ -419,12 +419,13 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 					
 						drawView(child,g);	
 					
-				}
+				}*/
+				drawView(child,g);
 			}
 		}
 	}
 		
-	private boolean isTranslated(ViewGroup view) {
+	private boolean isTranslated(ViewContainer view) {
 		return (view.getX() != 0 && view.getY() != 0);
 	}
 	

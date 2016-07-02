@@ -10,9 +10,7 @@ import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.textfield.TextView;
-import br.com.etyllica.layer.BufferedLayer;
 import br.com.etyllica.theme.Theme;
-import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -23,12 +21,8 @@ import br.com.etyllica.theme.ThemeManager;
 
 public class BaseTextField extends TextView {
 
-	private BufferedLayer layer;
-
 	public BaseTextField(int x, int y, int w, int h) {
 		super(x,y,w,h);
-
-		layer = new BufferedLayer(x, y, w+1, h+1);
 	}
 
 	@Override
@@ -166,7 +160,6 @@ public class BaseTextField extends TextView {
 	//TODO escreve texto.sub(0,minMark);
 	//Para não sair da caixa
 	public void draw(Graphics g) {
-
 		Theme theme = getTheme();
 
 		g.setImage(layer.getBuffer());
@@ -182,8 +175,9 @@ public class BaseTextField extends TextView {
 		int fontSize = theme.getFontSize();
 
 		FontMetrics metrics = g.getGraphics().getFontMetrics();
-
-		float dif = w-metrics.stringWidth(text);
+		//3 is necessary to show the cursor
+		//3 = 1px bordex+1px padding +1px cursor
+		float dif = w-3-metrics.stringWidth(text);
 
 		//Remover
 		if(onFocus) {
@@ -201,14 +195,12 @@ public class BaseTextField extends TextView {
 		g.setColor(theme.getTextColor());
 
 		if(minMark == 0 && maxMark == 0) {
-
-			if(dif>0) {
-				g.drawShadow(x, y+h/2+fontSize/2, text);
-			}else{
-				g.drawShadow(x+dif, y+h/2+fontSize/2, text);
+			if (dif > 0) {
+				g.drawShadow(x, y+h/2+fontSize/2, text, getTheme().getShadowColor());
+			} else {
+				g.drawShadow(x+dif, y+h/2+fontSize/2, text, getTheme().getShadowColor());
 			}
-
-		}else{
+		} else {
 
 			/** Desenha Mark **/
 
@@ -218,11 +210,11 @@ public class BaseTextField extends TextView {
 
 			int cxm = metrics.stringWidth(text.substring(minMark,maxMark));
 
-			//Invert contentColor
-			g.setColor(theme.getSelectionTextColor());
+			//Draw selected text
+			g.setColor(theme.getSelectionColor());
 
 			//fill Mark Rect
-			g.fillRect(x+cx+2,y+2,cxm, h-3);			
+			g.fillRect(x+cx+2,y+2,cxm, h-3);
 
 			//Invert textColor
 

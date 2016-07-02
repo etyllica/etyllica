@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.etyllica.gui.View;
 
-public interface ViewGroup {
+public interface ViewContainer {
 	int getX();
 	int getY();
 	List<View> getViews();

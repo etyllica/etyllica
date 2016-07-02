@@ -20,20 +20,7 @@ public class EtyllicCheckBox extends BaseCheckBox {
 	
 	@Override
 	public void draw(Graphics g) {
-
-		Theme theme = ThemeManager.getInstance().getTheme();
-
-		if (!mouseOver) {
-			g.setColor(theme.getButtonColor());
-		} else {
-			if (clicked || checked) {
-				g.setColor(theme.getButtonOnClick());
-			} else {
-				g.setColor(theme.getButtonOnMouse());
-			}
-		}
-		
-		g.fillRect(x,y,w,h);
+		super.draw(g);
 		
 		if (checked) {
 			checker.draw(g);

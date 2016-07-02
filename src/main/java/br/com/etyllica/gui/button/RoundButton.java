@@ -31,28 +31,20 @@ public class RoundButton extends BaseButton{
 				
 			}else{
 				
-				g.setColor(theme.getButtonColor());
+				g.setColor(theme.getBaseColor());
 				
 			}
 
-		}else{
-						
-			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
-
-				g.setColor(theme.getButtonOnClick());
-
-			}else{
-
-				g.setColor(theme.getButtonOnMouse());
-
+		} else {		
+			if (lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN) {
+				g.setColor(theme.getActiveSelectionColor());
+			} else {
+				g.setColor(theme.getSelectionColor());
 			}
-						
 		}
 
 		g.fillOval(x,y,w,h);
-				
 		drawLabel(g);
-
 	}
 
 }

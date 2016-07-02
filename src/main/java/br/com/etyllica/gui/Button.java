@@ -14,10 +14,6 @@ public class Button extends UIView {
 		this.button = ThemeManager.getInstance().getTheme().createButton(x, y, w, h);
 		this.delegatedView = button;
 	}
-
-	public int getRoundness() {
-		return button.getRoundness();
-	}
 	
 	public String getAlt() {
 		return button.getAlt();
@@ -27,10 +23,6 @@ public class Button extends UIView {
 		return button.getLabel();
 	}
 
-	public void setRoundness(int roundness) {
-		button.setRoundness(roundness);
-	}
-	
 	public void setAlt(String alt) {
 		button.setAlt(alt);
 	}

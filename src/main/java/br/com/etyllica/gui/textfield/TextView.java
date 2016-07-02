@@ -1,8 +1,8 @@
 package br.com.etyllica.gui.textfield;
 
-import br.com.etyllica.gui.View;
+import br.com.etyllica.gui.BackBufferedView;
 
-public abstract class TextView extends View {
+public abstract class TextView extends BackBufferedView {
 
 	protected final int TEXT_BACKSPACE = 8;
 	protected final int TEXT_TAB = 9;

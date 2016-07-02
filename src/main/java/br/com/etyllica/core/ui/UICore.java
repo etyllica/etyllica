@@ -54,13 +54,11 @@ public class UICore {
 	public void updateGuiEvent(List<View> components, GUIEvent event) {
 
 		for(View component: components) {
-
 			updateGuiComponent(component, event);
 		}		
 	}	
 
 	private void updateGuiComponent(View component, GUIEvent event) {
-
 		component.update(event);
 
 		//Update Childs
@@ -73,7 +71,11 @@ public class UICore {
 
 		for(View component: components) {
 
-			GUIEvent nextEvent = updateMouse(component, event);
+			//Update Children
+			component.updateMouse(event);
+			updateMouseComponents(event, component.getViews());
+			
+			/*GUIEvent nextEvent = updateMouse(component, event);
 
 			if(nextEvent != GUIEvent.NONE) {
 
@@ -91,8 +93,8 @@ public class UICore {
 				}
 
 				break;
-			}
-
+			}*/
+			
 		}
 	}
 

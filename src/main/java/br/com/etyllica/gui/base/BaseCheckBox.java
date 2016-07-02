@@ -36,9 +36,17 @@ public class BaseCheckBox extends BaseButton {
 
 	@Override
 	public void draw(Graphics g) {
-
-		super.draw(g);
-
+		g.setColor(getTheme().getBackgroundColor());
+		g.fillRect(x, y, w, h);
+		
+		if(!mouseOver) {
+			g.setColor(getTheme().getTextFieldWithoutFocusColor());
+		}else{
+			g.setColor(getTheme().getTextFieldOnMouseColor());
+		}
+		
+		g.drawRect(x, y, w, h);
+		
 		if(isChecked()) {
 			checker.draw(g);
 		}

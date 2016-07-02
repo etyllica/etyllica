@@ -1,12 +1,9 @@
 package br.com.etyllica.gui.base;
 
-import java.awt.Color;
-
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.RadioGroup;
 import br.com.etyllica.gui.label.BaseRadioLabel;
-import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -42,18 +39,18 @@ public class BaseRadioButton extends BaseCheckBox {
 
 	@Override
 	public void draw(Graphics g) {
-
-		g.setColor(Color.WHITE);
+		g.setColor(getTheme().getBackgroundColor());
+		g.fillOval(x, y, w, h);
 		
 		if(!mouseOver) {
-			g.setColor(ThemeManager.getInstance().getTheme().getTextFieldWithoutFocusColor());
+			g.setColor(getTheme().getTextFieldWithoutFocusColor());
 		}else{
-			g.setColor(ThemeManager.getInstance().getTheme().getTextFieldOnMouseColor());
+			g.setColor(getTheme().getTextFieldOnMouseColor());
 		}
 		
 		g.drawOval(x, y, w, h);
 		
-		g.setColor(ThemeManager.getInstance().getTheme().getTextFieldWithoutFocusColor());
+		g.setColor(getTheme().getTextFieldWithoutFocusColor());
 		
 		if (isChecked()) {
 			g.fillCircle(x+w/2, y+h/2, w/5);

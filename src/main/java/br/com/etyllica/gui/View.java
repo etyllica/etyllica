@@ -11,7 +11,8 @@ import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.ui.ViewGroup;
+import br.com.etyllica.core.ui.ViewContainer;
+import br.com.etyllica.gui.style.Style;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.ThemeManager;
@@ -23,7 +24,7 @@ import br.com.etyllica.theme.ThemeManager;
  *
  */
 
-public abstract class View extends Layer implements GUIComponent, Drawable, ViewGroup {
+public abstract class View extends Layer implements GUIComponent, Drawable, ViewContainer {
 	
 	protected GUIEvent lastEvent = GUIEvent.NONE;
 	
@@ -33,12 +34,14 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 
 	protected View root = null;
 	
-	private List<View> views = new ArrayList<View>();
+	protected List<View> views = new ArrayList<View>();
 	
 	protected List<Action> actions = new ArrayList<Action>();
 	
 	//GUIAction's Map
 	protected Map<GUIEvent,Action> actionMap = new HashMap<GUIEvent, Action>();
+	
+	public Style style = new Style(); 
 		
 	public View(int x, int y) {
 		super(x,y,1,1);
@@ -254,6 +257,15 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 		setMouseOver(false);
 		update(GUIEvent.MOUSE_OUT);
 	}
+
+	/* Util methods to Resize
+	@Override
+	public void draw(Graphics g) {
+		this.draw(g, x, y, w, h);
+	}
+	
+	public abstract void draw(Graphics g, int x, int y, int w, int h);
+	*/
 
 	public Theme getTheme() {
 		return ThemeManager.getInstance().getTheme();

@@ -15,10 +15,6 @@ public class RadioButton extends UIView {
 		this.delegatedView = radio;
 	}
 
-	public int getRoundness() {
-		return radio.getRoundness();
-	}
-
 	public String getAlt() {
 		return radio.getAlt();
 	}
@@ -29,10 +25,6 @@ public class RadioButton extends UIView {
 	
 	public RadioGroup getGroup() {
 		return radio.getGroup();
-	}
-
-	public void setRoundness(int roundness) {
-		radio.setRoundness(roundness);
 	}
 	
 	public void setAlt(String alt) {

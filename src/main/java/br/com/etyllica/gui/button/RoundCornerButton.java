@@ -15,7 +15,6 @@ public class RoundCornerButton extends BaseButton{
 
 	public RoundCornerButton(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		this.roundness = 10;
 	}
 	
 	@Override
@@ -23,24 +22,17 @@ public class RoundCornerButton extends BaseButton{
 		
 		Theme theme = getTheme();
 
-		if(!mouseOver){
-
-			g.setColor(theme.getButtonColor());
-
-		}else{
-			if(lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
-
-				g.setColor(theme.getButtonOnClick());
-
-			}else{
-
-				g.setColor(theme.getButtonOnMouse());
-
+		if (!mouseOver) {
+			g.setColor(theme.getBaseColor());
+		} else {
+			if (lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN) {
+				g.setColor(theme.getActiveSelectionColor());
+			} else {
+				g.setColor(theme.getSelectionColor());
 			}
 		}
 		
-		g.fillRoundRect(x, y, w, h, roundness, roundness);
-		
+		g.fillRoundRect(x, y, w, h, style.roundness.width, style.roundness.height);
 		drawLabel(g);
 	}
 		
