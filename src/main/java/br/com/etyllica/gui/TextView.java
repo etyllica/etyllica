@@ -15,6 +15,11 @@ public class TextView extends UIView {
 		this.delegatedView = textView;
 	}
 	
+	public TextView(String text) {
+		this(0,0,0,0);
+		setText(text);
+	}
+
 	public String getText() {
 		return textView.getText();
 	}

@@ -18,7 +18,7 @@ public class TableView extends Application {
 
 		loading = 10;
 		
-		Panel panel = new Panel(20,60,260,160);
+		Panel panel = new Panel(20,60,260,360);
 		panel.style.padding.left = 2;
 		panel.style.padding.right = 2;
 				
@@ -57,4 +57,5 @@ public class TableView extends Application {
 		/*g.setColor(Color.RED);
 		g.fillRect(x, y, w, h);*/
 	}
+
 }

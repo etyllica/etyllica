@@ -9,7 +9,7 @@ import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.textfield.TextView;
+import br.com.etyllica.gui.textfield.TextFieldView;
 import br.com.etyllica.theme.Theme;
 
 /**
@@ -19,7 +19,7 @@ import br.com.etyllica.theme.Theme;
  *
  */
 
-public class BaseTextField extends TextView {
+public class BaseTextField extends TextFieldView {
 
 	public BaseTextField(int x, int y, int w, int h) {
 		super(x,y,w,h);

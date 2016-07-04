@@ -42,6 +42,9 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	protected Map<GUIEvent,Action> actionMap = new HashMap<GUIEvent, Action>();
 	
 	public Style style = new Style();
+	
+	private static long lastId = 0; 
+	private long id = generateId();
 		
 	public View(int x, int y) {
 		super(x,y,1,1);
@@ -286,5 +289,36 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	
 	protected int height() {
 		return h-style.margin.bottom;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		View other = (View) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	private static long generateId() {
+		lastId++;
+		return lastId;
 	}
 }

@@ -41,7 +41,7 @@ public class Panel extends ViewGroup {
 		g.setColor(getTheme().getPanelColor());
 		roundPanel(g, left(), top(), width(), height(), style.roundness);
 	}
-
+	
 	public static void roundPanel(Graphics g, int x, int y, int w, int h, Roundness roundness) {
 		g.fillArc(x, y, roundness.width*2, roundness.height*2, 90, 90);
 		g.fillRect(x+roundness.width, y, w-roundness.width*2, roundness.height);

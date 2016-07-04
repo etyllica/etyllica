@@ -5,6 +5,7 @@ import org.junit.Test;
 
 public class EtyllicaMathTest {
 
+	@Test
 	public void testDiffMod() {
 		int a = 50;
 		int b = 80;

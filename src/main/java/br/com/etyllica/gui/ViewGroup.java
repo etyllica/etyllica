@@ -1,5 +1,8 @@
 package br.com.etyllica.gui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * 
@@ -10,6 +13,7 @@ package br.com.etyllica.gui;
 
 public abstract class ViewGroup extends View {
 	
+	private Map<Long, Float> weights = new HashMap<Long, Float>();
 	protected Orientation orientation = Orientation.VERTICAL;
 	
 	public ViewGroup(int x, int y, int w, int h) {
@@ -18,52 +22,81 @@ public abstract class ViewGroup extends View {
 	
 	@Override
 	public void add(View component) {
+		this.add(component, 1);
+	}
+	
+	public void add(View component, float weight) {
 		super.add(component);
+		weights.put(component.getId(), weight);
 		
-		final int vx = x+style.padding.left;		
+		resize();
+	}
+	
+	private void resize() {
+		final int vx = x+style.padding.left;
 		final int vw = w-style.padding.right-style.padding.left;
 		final int vy = y+style.padding.top;
 		final int vh = h-style.padding.bottom-style.padding.top;
 				
 		int lastCursor = 0;
-		int leftSpace = 0;
+		int totalSpace = 0;
 		
 		if (orientation == Orientation.VERTICAL) {
-			leftSpace = vh;
+			totalSpace = vh;
 		} else {
-			leftSpace = vw;
+			totalSpace = vw;
 		}
 		
-		int i = 0;
 		for(View view: views) {
+
+			int size = (int)viewSize(totalSpace, view);
 			
-			int size = 0;
 			//Vertical Panel
 			if (orientation == Orientation.VERTICAL) {
-				if (view.getH() > 0 && view.getH() <= leftSpace) {
-					size = view.getH();
-				} else {
-					size = leftSpace/(views.size()-i);
-				}
-				
 				view.setBounds(vx, vy+lastCursor, vw, size);
+				
+				//leftSpace -= size+verticalMargin(view);
+				lastCursor += size+verticalMargin(view);
 								
 			} else {
-				if (view.getW() > 0 && view.getW() <= leftSpace) {
-					size = view.getW();
-				} else {
-					size = leftSpace/(views.size()-i);
-				}
 				view.setBounds(vx+lastCursor, vy, size, vh);
+				
+				//leftSpace -= size+horizontalMargin(view);
+				lastCursor += size+horizontalMargin(view);
 			}
-			
-			leftSpace -= size+view.style.margin.top+view.style.margin.bottom;
-			lastCursor += size+view.style.margin.top+view.style.margin.bottom;
-			
-			i++;
 		}
 	}
-
+	
+	public void setBounds(int x, int y, int w, int h) {
+		super.setBounds(x, y, w, h);
+		resize();
+	}
+	
+	private float viewSize(int total, View view) {
+		
+		float sizeUnit = total/weightSum();
+		float size = weights.get(view.getId())*sizeUnit;
+		
+		return size;
+	}
+	
+	private int horizontalMargin(View view) {
+		return view.style.margin.right+view.style.margin.left;
+	}
+	
+	private int verticalMargin(View view) {
+		return view.style.margin.top+view.style.margin.bottom;
+	}
+	
+	private float weightSum() {
+		float sum = 0;
+		
+		for (Float weight: this.weights.values()) {
+			sum += weight;
+		}
+		return sum;
+	}
+	
 	public Orientation getOrientation() {
 		return orientation;
 	}

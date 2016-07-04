@@ -2,7 +2,7 @@ package br.com.etyllica.gui.textfield;
 
 import br.com.etyllica.gui.BackBufferedView;
 
-public abstract class TextView extends BackBufferedView {
+public abstract class TextFieldView extends BackBufferedView {
 
 	protected final int TEXT_BACKSPACE = 8;
 	protected final int TEXT_TAB = 9;
@@ -22,7 +22,7 @@ public abstract class TextView extends BackBufferedView {
 
 	private OnTextChangedListener onTextChangeListener;
 	
-	public TextView(int x, int y, int w, int h) {
+	public TextFieldView(int x, int y, int w, int h) {
 		super(x,y,w,h);
 
 		clearField();
