@@ -5,8 +5,8 @@
            uri="antlib:org.apache.maven.artifact.ant"
            classpathref="maven-ant-tasks.classpath" />
         
-  <property name="version"  value="5.0" /><!-- Change version in maven/pom.xml-->
-  <property name="maven-version"  value="${version}-RELEASE" />
+  <property name="version" value="5.0" /><!-- Change version in maven/pom.xml-->
+  <property name="maven-version" value="${version}" />
 
   <property name="libcore"     value="etyllica-${version}" />
   <property name="libutil"     value="etyllica-util-${version}" />
@@ -54,7 +54,7 @@
     </artifact:mvn>
   </target>
 
-  <!-- before this, update project version (both build.xml and pom.xml) from SNAPSHOT to RELEASE -->
+  <!-- before this, update project version (both build.xml and maven/pom.xml) from SNAPSHOT to RELEASE(version) -->
   <target name="stage" depends="dist" description="deploy release version to Maven staging repository">
     <!-- sign and deploy the main artifact -->
     <artifact:mvn>
@@ -83,7 +83,7 @@
       <arg value="-Durl=${ossrh-staging-repository-url}" />
       <arg value="-DrepositoryId=${ossrh-server-id}" />
       <arg value="-DpomFile=${maven.dir}/pom.xml" />
-      <arg value="-Dfile=${maven.dir}/${javadoc-jar}" />
+      <arg value="-Dfile=${javadoc-jar}" />
       <arg value="-Dclassifier=javadoc" />
       <arg value="-Pgpg" />
     </artifact:mvn>
@@ -110,7 +110,8 @@
     <mkdir dir="${build.dir}" />
   </target>
   
-  <target name="compile">
+  <target name="compile" depends="init">
+    <mkdir dir="${build.dir}"/>
     <javac srcdir="${src.dir}" destdir="${build.dir}" source="1.6" target="1.6" debug="off" />
   </target>
 
@@ -124,7 +125,7 @@
     </javac>
   </target>
 
-  <target name="package" depends="init, compile, prepare">
+  <target name="package" depends="compile, prepare">
     <jar destfile="${lib.dir}/${libcore}.jar">
       <fileset dir="${build.dir}">
 	<include name="**/br/com/etyllica/*"/>
@@ -155,7 +156,7 @@
     </jar>
   </target>
 
-  <target name="test" depends="init, compile, compile-tests">
+  <target name="test" depends="compile, compile-tests">
     <junit printsummary="yes" haltonfailure="yes" showoutput="true">
       <classpath>
 	<pathelement location="${build.dir}"/>
