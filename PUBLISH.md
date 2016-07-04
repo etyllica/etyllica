@@ -6,7 +6,7 @@
 - ant deploy (if was a snapshot)
 - ant stage (after remove -SNAPSHOT from the version name if was a release)
 - Access [https://oss.sonatype.org/#stagingRepositories](https://oss.sonatype.org/#stagingRepositories)
-- Important! *Close your staging Repository!*
+- After your repository is checked as ok, click on *Release* button.
 - Check [Maven Central](http://search.maven.org/#search|ga|1|etyllica)
 
 #### References
