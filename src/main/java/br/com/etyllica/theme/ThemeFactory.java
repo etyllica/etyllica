@@ -4,9 +4,10 @@ import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.base.BaseCheckBox;
 import br.com.etyllica.gui.base.BaseRadioButton;
 import br.com.etyllica.gui.base.BaseTextField;
+import br.com.etyllica.gui.base.BaseTextView;
 
 public interface ThemeFactory {
-	
+		
 	public BaseButton createButton(int x, int y, int w, int h);
 	
 	public BaseCheckBox createCheckBox(int x, int y, int w, int h);
@@ -14,5 +15,7 @@ public interface ThemeFactory {
 	public BaseRadioButton createRadioButton(int x, int y, int w, int h);
 	
 	public BaseTextField createTextField(int x, int y, int w, int h);
+	
+	public BaseTextView createTextView(int x, int y, int w, int h);
 
 }

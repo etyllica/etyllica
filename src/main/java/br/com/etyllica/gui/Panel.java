@@ -39,7 +39,7 @@ public class Panel extends ViewGroup {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(getTheme().getPanelColor());
-		roundPanel(g, x, y, w, h, style.roundness);
+		roundPanel(g, left(), top(), width(), height(), style.roundness);
 	}
 
 	public static void roundPanel(Graphics g, int x, int y, int w, int h, Roundness roundness) {

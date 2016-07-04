@@ -4,6 +4,7 @@ import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.base.BaseCheckBox;
 import br.com.etyllica.gui.base.BaseRadioButton;
 import br.com.etyllica.gui.base.BaseTextField;
+import br.com.etyllica.gui.base.BaseTextView;
 import br.com.etyllica.theme.Theme;
 import br.com.etyllica.theme.etyllic.components.EtyllicCheckBox;
 
@@ -31,5 +32,11 @@ public class EtyllicTheme extends Theme {
 	public BaseTextField createTextField(int x, int y, int w, int h) {
 		BaseTextField textField = new BaseTextField(x, y, w, h);
 		return textField;
+	}
+
+	@Override
+	public BaseTextView createTextView(int x, int y, int w, int h) {
+		BaseTextView textView = new BaseTextView(x, y, w, h);
+		return textView;
 	}
 }

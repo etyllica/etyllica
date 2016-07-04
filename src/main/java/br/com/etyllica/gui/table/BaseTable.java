@@ -111,11 +111,11 @@ public class BaseTable extends View {
 		g.setFont(getTheme().getFont());
 
 		g.setColor(getTheme().getBackgroundColor());
-		g.fillRect(x, y, w, h);
+		g.fillRect(left(), top(), width(), height());
 
 		g.setColor(getTheme().getTextColor());
 		if(showContours) {
-			g.drawRect(x, y, w, h);
+			g.drawRect(left(), top(), width(), height());
 		}
 
 		drawRows(g);
@@ -149,15 +149,15 @@ public class BaseTable extends View {
 			g.drawString(label, style.padding.left+hx, style.padding.top+hy);
 			lastCW += cw;
 			if (showContours) {
-				g.drawLine(hx, y, hx, y+h);
+				g.drawLine(hx, top(), hx, top()+h);
 			}
 		}
 
 		if (showContours) {
-			g.drawLine(x, y+headerSize(), x+w, y+headerSize());
+			g.drawLine(left(), top()+headerSize(), left()+w, top()+headerSize());
 		}
 	}
-
+	
 	private void drawRows(Graphics g) {
 
 		int yOffset = style.padding.top;
@@ -165,7 +165,9 @@ public class BaseTable extends View {
 			yOffset = headerSize();
 		}
 
-		int ry = yOffset + y + rowSize()/2;
+		yOffset+=+style.margin.top;
+		
+		int ry = yOffset + top() + rowSize()/2;
 
 		for (int i = 0; i < rows.size(); i++) {
 			//if (ry + rowSize() > y + h) {
@@ -181,7 +183,7 @@ public class BaseTable extends View {
 			if (row == onMouseRow || row == selectedRow) {
 				g.setColor(getTheme().getSelectionColor());
 				int sy = headerSize()+rowSize()*i;
-				g.fillRect(x, y+sy, w, rowSize());
+				g.fillRect(x, top()+sy, w, rowSize());
 				g.setColor(getTheme().getTextSelectedColor());
 			}
 

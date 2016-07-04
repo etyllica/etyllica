@@ -18,23 +18,31 @@ public class TableView extends Application {
 
 		loading = 10;
 		
-		Panel panel = new Panel(20,60,260,100);
+		Panel panel = new Panel(20,60,260,160);
+		panel.style.padding.left = 2;
+		panel.style.padding.right = 2;
 				
-		Table table = new Table(0,0,0,0);
+		Table table = new Table(0,0,0,80);
+		table.style.margin.top = 2;
 		panel.add(table);
+		table.setHeaders("Name", "Description");
 		
 		loading = 20;
-		table.setHeaders("Name", "Description");
-
 		table.add(createRow("A", "descA"));
 		table.addRow("B", "descB");
 		table.addRow("C", "descC");
 		table.addRow("D", "descD");
 		table.addRow("E", "descE");
-		table.addRow("F", "descF");
+		
+		Table anotherTable = new Table(0,0,0,60);
+		anotherTable.style.margin.top = 2;
+		panel.add(anotherTable);
+		anotherTable.setHeaders("Name", "Description");
+		
+		anotherTable.addRow("F", "descF");
 		
 		addView(panel);
-		
+				
 		loading = 100;
 	}
 

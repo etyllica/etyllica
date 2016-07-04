@@ -5,6 +5,7 @@ import br.com.etyllica.core.context.Application;
 import examples.etyllica.gui.list.TableView;
 import examples.etyllica.gui.simple.GeneralGuiExample;
 import examples.etyllica.gui.textfield.TextFieldExample;
+import examples.etyllica.gui.textview.TextViewExample;
 
 /**
  * @author yuripourre
@@ -36,7 +37,8 @@ public class GuiExamples extends Etyllica {
 
         //return new GeneralGuiExample(w,h);
         //return new ComponentsList(w,h);
-        return new TableView(w, h);
+        //return new TableView(w, h);
+        return new TextViewExample(w, h);
         //return new TextFieldExample(w,h);
         //return new SliderExample(w,h);
     }

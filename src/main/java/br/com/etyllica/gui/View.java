@@ -41,7 +41,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	//GUIAction's Map
 	protected Map<GUIEvent,Action> actionMap = new HashMap<GUIEvent, Action>();
 	
-	public Style style = new Style(); 
+	public Style style = new Style();
 		
 	public View(int x, int y) {
 		super(x,y,1,1);
@@ -269,5 +269,22 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 
 	public Theme getTheme() {
 		return ThemeManager.getInstance().getTheme();
+	}
+	
+	//Style Helper Methods
+	protected int top() {
+		return y+style.margin.top;
+	}
+	
+	protected int left() {
+		return x+style.margin.left;
+	}
+	
+	protected int width() {
+		return w-style.margin.right;
+	}
+	
+	protected int height() {
+		return h-style.margin.bottom;
 	}
 }
