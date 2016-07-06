@@ -21,5 +21,10 @@ public class StringUtils {
 		String ext = path.substring(mid+1,path.length()).toLowerCase();
 		return ext;
 	}
+
+	public static String formatFloat(float x, int i) {
+		String decimals = Integer.toString(i);
+		return String.format(java.util.Locale.US,"%."+decimals+"f", x); 
+	}
 	
 }
