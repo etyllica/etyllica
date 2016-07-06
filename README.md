@@ -1,6 +1,6 @@
 # Etyllica (v 5.0) [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
 
-[Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games fastly.
+[Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games really fast.
 
 ## Features
 
@@ -16,7 +16,7 @@
 - Sound Loader that supports (MP3, OGG, WAV)
 - Audio Capture
 - WaveForm Drawing
-- OpenGL simulation with software rendering (even in unsigned applets)
+- OpenGL simulation with software rendering (even in unsigned applets with [abby-jgl](https://github.com/yuripourre/abby-jgl)
 - Basic Particle System
 - Basic Light Map Logic
 - 2D Physics (with [etyllica-physics](https://github.com/yuripourre/etyllica-physics))
@@ -36,7 +36,7 @@
 ### Non-Games
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - Paint Clone
 - [Etyllic Animator](http://yuripourre.github.com/etyllic-animator) - Pivot Animator (2D and 3D)
-- [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android.
+- [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android (deprecated).
 - [Etyllica Physics](https://github.com/yuripourre/etyllica-physics) - Etyllica extension to handle 2D physics.
 - [EtyllicTTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
 - [Etyllic GameBoy](https://github.com/yuripourre/etyllic-gameboy) - A [Javaboy](http://www.millstone.demon.co.uk/download/javaboy/) fork with faster rendering.
@@ -68,7 +68,7 @@ You can follow the [HelloWorld](https://github.com/yuripourre/etyllica/wiki/Hell
 <dependency>
   <groupId>br.com.etyllica</groupId>
   <artifactId>etyllica</artifactId>
-  <version>4.5</version>
+  <version>5.0</version>
 </dependency>
 ```
 
