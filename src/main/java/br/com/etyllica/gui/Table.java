@@ -27,9 +27,9 @@ public class Table extends UIView {
 		super();
 		
 		this.table = ThemeManager.getInstance().getTheme().createTable(x, y, w, h);
-		this.delegatedView = table;
+		delegateView(table);
 	}
-	
+
 	public Row addRow(String...values) {
 		return table.addRow(values);
 	}
@@ -68,6 +68,11 @@ public class Table extends UIView {
 		
 	public void selectRow(Row row) {
 		table.selectRow(row);
+	}
+	
+	@Override
+	public void resize() {
+		table.resize();
 	}
 
 }

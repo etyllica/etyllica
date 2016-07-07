@@ -12,7 +12,7 @@ public class RadioButton extends UIView {
 		super();
 		
 		this.radio = ThemeManager.getInstance().getTheme().createRadioButton(x, y, w, h);
-		this.delegatedView = radio;
+		delegateView(radio);
 	}
 
 	public String getAlt() {

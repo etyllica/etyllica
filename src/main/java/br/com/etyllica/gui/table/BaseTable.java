@@ -44,8 +44,6 @@ public class BaseTable extends View {
 
 	public BaseTable(int x, int y, int w, int h) {
 		super(x,y,w,h);
-		style.padding.top = 4;
-		style.padding.left = 4;
 	}
 
 	@Override
@@ -125,7 +123,9 @@ public class BaseTable extends View {
 	}
 
 	private int headerSize() {
-		return getTheme().getFontSize()+style.padding.top*2;
+		float size = getTheme().getFontSize()*1.4f;
+		
+		return (int)size;
 	}
 
 	private int rowSize() {
@@ -134,17 +134,17 @@ public class BaseTable extends View {
 
 	private void drawHeaders(Graphics g) {
 
-		int yOffset = headerSize()-getTheme().getFontSize()/2; 
+		float yOffset = (int)(headerSize()-getTheme().getFontSize()*0.5); 
 		int lastCW = 0;
 
-		int hy = yOffset+y;
+		int hy = (int)yOffset+top();
 
 		for (int i = 0; i < headers.size(); i++) {
 			String header = headers.get(i);
 			int cw = columns.get(header).size;
 			String label = headers.get(i);
 
-			int hx = x+lastCW;
+			int hx = left()+lastCW;
 
 			g.drawString(label, style.padding.left+hx, style.padding.top+hy);
 			lastCW += cw;
@@ -165,7 +165,7 @@ public class BaseTable extends View {
 			yOffset = headerSize();
 		}
 
-		yOffset+=+style.margin.top;
+		yOffset += style.margin.top;
 
 		int ry = yOffset + top() + rowSize()/2;
 
@@ -183,7 +183,7 @@ public class BaseTable extends View {
 			if (row == onMouseRow || row == selectedRow) {
 				g.setColor(getTheme().getSelectionColor());
 				int sy = headerSize()+rowSize()*i;
-				g.fillRect(x, top()+sy, w, rowSize());
+				g.fillRect(left(), top()+sy, width(), rowSize());
 				g.setColor(getTheme().getTextSelectedColor());
 			}
 
@@ -250,7 +250,7 @@ public class BaseTable extends View {
 	}
 
 	@Override
-	protected void resize() {
+	public void resize() {
 		super.resize();
 		resizeColumns();
 	}

@@ -333,7 +333,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	/**
 	 * Method to update the size
 	 */
-	protected void resize() {
+	public void resize() {
 		resize(w, h);
 	}
 }

@@ -162,10 +162,11 @@ public class BaseTextField extends TextFieldView {
 	public void draw(Graphics g) {
 		Theme theme = getTheme();
 
-		g.setImage(layer.getBuffer());
-		int x = 0;
-		int y = 0;
-
+		//g.setImage(layer.getBuffer());
+		//int x = 0;
+		//int y = 0;
+		g.setClip(left(), top(), width(), height());
+		
 		//TODO
 		//g.setFont(theme.getFont());
 
@@ -190,7 +191,8 @@ public class BaseTextField extends TextFieldView {
 			g.setColor(theme.getTextFieldOnMouseColor());	
 		}
 
-		g.drawRect(x,y,w,h);
+		//g.drawRect(x,y,w,h);
+		g.drawRect(left(), top(), width(), height());
 
 		g.setColor(theme.getTextColor());
 
@@ -249,10 +251,10 @@ public class BaseTextField extends TextFieldView {
 
 		}
 
-		g.resetImage();
+		g.resetClip();
+		/*g.resetImage();
 		layer.draw(g);
-		layer.resetImage();
-
+		layer.resetImage();*/
 	}
 
 	@Override

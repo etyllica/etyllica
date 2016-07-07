@@ -23,7 +23,10 @@ public class TableView extends Application {
 		panel.style.padding.right = 2;
 		
 		Table table = new Table();
+		table.style.padding.top = 4;
+		table.style.padding.left = 4;
 		table.style.margin.top = 2;
+		
 		table.setHeaders("Name", "Description");
 		
 		loading = 20;
@@ -32,10 +35,11 @@ public class TableView extends Application {
 		table.addRow("C", "descC");
 		table.addRow("D", "descD");
 		table.addRow("E", "descE");
-		
 		panel.add(table);
 		
 		Table anotherTable = new Table();
+		anotherTable.style.padding.top = 4;
+		anotherTable.style.padding.left = 4;
 		anotherTable.style.margin.top = 2;
 		anotherTable.style.margin.bottom = 2;
 		

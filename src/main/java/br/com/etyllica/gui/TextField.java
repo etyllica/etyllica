@@ -19,7 +19,7 @@ public class TextField extends UIView {
 		super();
 
 		this.textField = ThemeManager.getInstance().getTheme().createTextField(x, y, w, h);
-		this.delegatedView = textField;
+		delegateView(textField);
 	}
 
 	public String getText() {

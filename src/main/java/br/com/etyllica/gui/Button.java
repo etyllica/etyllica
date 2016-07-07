@@ -12,7 +12,7 @@ public class Button extends UIView {
 		super();
 		
 		this.button = ThemeManager.getInstance().getTheme().createButton(x, y, w, h);
-		this.delegatedView = button;
+		delegateView(button);
 	}
 	
 	public String getAlt() {

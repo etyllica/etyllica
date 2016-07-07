@@ -12,7 +12,7 @@ import br.com.etyllica.gui.View;
 
 public abstract class UIView extends View {
 
-	protected View delegatedView;
+	private View delegatedView;
 	
 	public UIView() {
 		super();
@@ -265,5 +265,10 @@ public abstract class UIView extends View {
 	@Override
 	public String toString() {
 		return delegatedView.toString();
+	}
+	
+	protected void delegateView(View view) {
+		this.delegatedView = view;
+		this.style = view.style;
 	}
 }

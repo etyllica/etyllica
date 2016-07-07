@@ -12,7 +12,7 @@ public class TextView extends UIView {
 		super();
 		
 		this.textView = ThemeManager.getInstance().getTheme().createTextView(x, y, w, h);
-		this.delegatedView = textView;
+		delegateView(textView);
 	}
 	
 	public TextView(String text) {

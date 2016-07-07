@@ -33,7 +33,7 @@ public abstract class ViewGroup extends View {
 	}
 	
 	@Override
-	protected void resize() {
+	public void resize() {
 		final int vx = left();
 		final int vw = width();
 		final int vy = top();
@@ -69,6 +69,7 @@ public abstract class ViewGroup extends View {
 		}
 	}
 	
+	@Override
 	public void setBounds(int x, int y, int w, int h) {
 		super.setBounds(x, y, w, h);
 		resize();

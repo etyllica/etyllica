@@ -12,7 +12,7 @@ public class CheckBox extends UIView {
 		super();
 		
 		this.checkbox = ThemeManager.getInstance().getTheme().createCheckBox(x, y, w, h);
-		this.delegatedView = checkbox;
+		delegateView(checkbox);
 	}
 
 	public String getAlt() {
