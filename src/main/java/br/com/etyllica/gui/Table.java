@@ -58,4 +58,16 @@ public class Table extends UIView {
 		return table.getRowListener();
 	}
 
+	public void selectRow(int index) {
+		table.selectRow(index);
+	}
+	
+	public void selectRow(String column, String label) {
+		table.selectRow(column, label);
+	}
+		
+	public void selectRow(Row row) {
+		table.selectRow(row);
+	}
+
 }
