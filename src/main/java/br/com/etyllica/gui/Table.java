@@ -11,6 +11,10 @@ import br.com.etyllica.gui.table.BaseTable;
 
 public class Table extends BaseTable {
 
+	public Table() {
+		super(0, 0, 0, 0);
+	}
+	
 	public Table(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}

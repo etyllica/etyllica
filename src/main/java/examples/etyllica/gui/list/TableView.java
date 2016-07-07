@@ -21,10 +21,9 @@ public class TableView extends Application {
 		Panel panel = new Panel(20,60,260,360);
 		panel.style.padding.left = 2;
 		panel.style.padding.right = 2;
-				
-		Table table = new Table(0,0,0,80);
+		
+		Table table = new Table();
 		table.style.margin.top = 2;
-		panel.add(table);
 		table.setHeaders("Name", "Description");
 		
 		loading = 20;
@@ -34,15 +33,19 @@ public class TableView extends Application {
 		table.addRow("D", "descD");
 		table.addRow("E", "descE");
 		
-		Table anotherTable = new Table(0,0,0,60);
-		anotherTable.style.margin.top = 2;
-		panel.add(anotherTable);
-		anotherTable.setHeaders("Name", "Description");
+		panel.add(table);
 		
+		Table anotherTable = new Table();
+		anotherTable.style.margin.top = 2;
+		anotherTable.style.margin.bottom = 2;
+		
+		anotherTable.setHeaders("Name", "Description");
 		anotherTable.addRow("F", "descF");
 		
+		panel.add(anotherTable);
+		
 		addView(panel);
-				
+		
 		loading = 100;
 	}
 

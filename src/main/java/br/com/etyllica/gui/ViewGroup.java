@@ -32,38 +32,40 @@ public abstract class ViewGroup extends View {
 		resize();
 	}
 	
-	private void resize() {
-		final int vx = x+style.padding.left;
-		final int vw = w-style.padding.right-style.padding.left;
-		final int vy = y+style.padding.top;
-		final int vh = h-style.padding.bottom-style.padding.top;
+	@Override
+	protected void resize() {
+		final int vx = left();
+		final int vw = width();
+		final int vy = top();
+		final int vh = height();
 				
-		int lastCursor = 0;
+		int lastPosition = 0;
 		int totalSpace = 0;
 		
 		if (orientation == Orientation.VERTICAL) {
-			totalSpace = vh;
+			totalSpace = vh-style.padding.top-style.padding.bottom;
 		} else {
-			totalSpace = vw;
+			totalSpace = vw-style.padding.left-style.padding.right;
 		}
 		
+		int count = 0;
 		for(View view: views) {
-
+			count ++;
 			int size = (int)viewSize(totalSpace, view);
-			
+			if (count == views.size()) {
+				size--;
+			}
+
 			//Vertical Panel
 			if (orientation == Orientation.VERTICAL) {
-				view.setBounds(vx, vy+lastCursor, vw, size);
-				
-				//leftSpace -= size+verticalMargin(view);
-				lastCursor += size+verticalMargin(view);
-								
+				view.setBounds(vx+style.padding.left, vy+lastPosition, vw-style.padding.left-style.padding.right-1, size);
 			} else {
-				view.setBounds(vx+lastCursor, vy, size, vh);
-				
-				//leftSpace -= size+horizontalMargin(view);
-				lastCursor += size+horizontalMargin(view);
+				view.setBounds(vx+lastPosition, vy+style.padding.top, size, vh-style.padding.top-style.padding.bottom-1);
 			}
+			
+			lastPosition += size;
+			
+			view.resize();
 		}
 	}
 	
@@ -79,15 +81,7 @@ public abstract class ViewGroup extends View {
 		
 		return size;
 	}
-	
-	private int horizontalMargin(View view) {
-		return view.style.margin.right+view.style.margin.left;
-	}
-	
-	private int verticalMargin(View view) {
-		return view.style.margin.top+view.style.margin.bottom;
-	}
-	
+		
 	private float weightSum() {
 		float sum = 0;
 		

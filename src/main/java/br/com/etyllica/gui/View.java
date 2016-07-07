@@ -284,11 +284,19 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	}
 	
 	protected int width() {
-		return w-style.margin.right;
+		return w-style.margin.left-style.margin.right;
 	}
 	
 	protected int height() {
-		return h-style.margin.bottom;
+		return h-style.margin.top-style.margin.bottom;
+	}
+		
+	protected int horizontalMargin() {
+		return style.margin.right+style.margin.left;
+	}
+	
+	protected int verticalMargin() {
+		return style.margin.top+style.margin.bottom;
 	}
 
 	public long getId() {
@@ -320,5 +328,12 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	private static long generateId() {
 		lastId++;
 		return lastId;
+	}
+
+	/**
+	 * Method to update the size
+	 */
+	protected void resize() {
+		resize(w, h);
 	}
 }

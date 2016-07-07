@@ -21,7 +21,7 @@ import br.com.etyllica.gui.listener.RowListener;
  */
 
 public class BaseTable extends View {
-	
+
 	boolean showContours = true;
 	boolean showHeaders = true;
 
@@ -37,7 +37,7 @@ public class BaseTable extends View {
 	private static final RowListener ROW_LISTENER_DUMMY = new RowListener() {
 		@Override
 		public void onMouse(Row row) {}
-		
+
 		@Override
 		public void onClick(Row row) {}
 	}; 
@@ -52,9 +52,9 @@ public class BaseTable extends View {
 	public GUIEvent updateMouse(PointerEvent event) {
 		int mx = event.getX();
 		int my = event.getY();
-		
+
 		checkSelectedRow(mx, my);
-		
+
 		if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 			if (onMouseRow != null) {
 				selectedRow = onMouseRow;
@@ -83,7 +83,7 @@ public class BaseTable extends View {
 				int index = (my-y-rh)/rowSize();
 				if (index >= 0 && index < visibleRows()) {
 					Row row = rows.get(index);
-					
+
 					if(row != onMouseRow) {
 						onMouseRow = rows.get(index);
 						rowListener.onMouse(row);
@@ -91,7 +91,7 @@ public class BaseTable extends View {
 				}
 			}
 		}
-				
+
 	}
 
 	@Override
@@ -104,10 +104,10 @@ public class BaseTable extends View {
 	public void update(GUIEvent event) {
 
 	}
-
+	
 	@Override
 	public void draw(Graphics g) {
-				
+
 		g.setFont(getTheme().getFont());
 
 		g.setColor(getTheme().getBackgroundColor());
@@ -149,15 +149,15 @@ public class BaseTable extends View {
 			g.drawString(label, style.padding.left+hx, style.padding.top+hy);
 			lastCW += cw;
 			if (showContours) {
-				g.drawLine(hx, top(), hx, top()+h);
+				g.drawLine(hx, top(), hx, top()+height());
 			}
 		}
 
 		if (showContours) {
-			g.drawLine(left(), top()+headerSize(), left()+w, top()+headerSize());
+			g.drawLine(left(), top()+headerSize(), left()+width(), top()+headerSize());
 		}
 	}
-	
+
 	private void drawRows(Graphics g) {
 
 		int yOffset = style.padding.top;
@@ -166,7 +166,7 @@ public class BaseTable extends View {
 		}
 
 		yOffset+=+style.margin.top;
-		
+
 		int ry = yOffset + top() + rowSize()/2;
 
 		for (int i = 0; i < rows.size(); i++) {
@@ -238,13 +238,23 @@ public class BaseTable extends View {
 		for(String header : headers) {
 			addHeader(header);
 		}
+		
+		resizeColumns();
+	}
 
+	private void resizeColumns() {
 		//Update column sizes
 		for(String header : this.headers) {
 			columns.get(header).size = w/this.headers.size();
 		}
 	}
 
+	@Override
+	protected void resize() {
+		super.resize();
+		resizeColumns();
+	}
+	
 	public void addHeader(String header) {
 		headers.add(header);
 		columns.put(header, new Column());
@@ -265,11 +275,11 @@ public class BaseTable extends View {
 	public void setRowListener(RowListener rowListener) {
 		this.rowListener = rowListener;
 	}
-	
+
 	public void selectRow(int index) {
 		selectedRow = rows.get(index);
 	}
-	
+
 	public void selectRow(Row row) {
 		for(Row r:rows) {
 			if(row == r) {
@@ -278,7 +288,7 @@ public class BaseTable extends View {
 			}
 		}
 	}
-	
+
 	public void selectRow(String column, String value) {
 		for(Row r:rows) {
 			if(r.getValue(column).equals(value)) {
