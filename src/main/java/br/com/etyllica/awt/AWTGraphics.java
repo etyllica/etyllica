@@ -1215,5 +1215,15 @@ public class AWTGraphics implements Graphics {
 	public int getHeight() {
 		return height;
 	}
+
+	@Override
+	public void setClip(int x, int y, int w, int h) {
+		screen.setClip(x, y, w, h);
+	}
+
+	@Override
+	public void resetClip() {
+		screen.setClip(null);
+	}
 		
 }

@@ -702,5 +702,9 @@ public interface Graphics {
 	public void drawArrow(Point2D p, Point2D q, int arrowSize);
 	
 	public void drawArrow(Point2D p, Point2D q);
+
+	public void setClip(int x, int y, int w, int h);
+	
+	public void resetClip();
 	
 }
