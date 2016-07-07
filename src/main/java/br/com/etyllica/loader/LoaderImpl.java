@@ -3,6 +3,8 @@ package br.com.etyllica.loader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import br.com.etyllica.util.io.IOHelper;
+
 /**
  * 
  * @author yuripourre
@@ -36,7 +38,7 @@ public class LoaderImpl implements Loader {
 	public String getPath() {
 		
 		String path = url.toString();
-		path = path.substring(5);
+		path = path.substring(IOHelper.FILE_PREFIX.length());
 		path = path.replaceAll("%20", " ");
 		
 		return path;
