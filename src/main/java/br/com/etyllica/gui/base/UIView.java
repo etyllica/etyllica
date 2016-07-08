@@ -221,6 +221,11 @@ public abstract class UIView extends View {
 	public void show() {
 		delegatedView.show();
 	}
+	
+	@Override
+	public void resize() {
+		delegatedView.resize();
+	}
 
 	@Override
 	public void setOnFocus(boolean focus) {

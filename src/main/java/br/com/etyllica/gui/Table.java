@@ -70,9 +70,4 @@ public class Table extends UIView {
 		table.selectRow(row);
 	}
 	
-	@Override
-	public void resize() {
-		table.resize();
-	}
-
 }
