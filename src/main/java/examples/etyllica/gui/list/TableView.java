@@ -35,6 +35,14 @@ public class TableView extends Application {
 		table.addRow("C", "descC");
 		table.addRow("D", "descD");
 		table.addRow("E", "descE");
+		table.addRow("F", "descF");
+		table.addRow("G", "descG");
+		table.addRow("H", "descH");
+		table.addRow("I", "descI");
+		table.addRow("J", "descJ");
+		table.addRow("K", "descK");
+		table.addRow("L", "descL");
+		table.addRow("M", "descM");
 		panel.add(table);
 		
 		Table anotherTable = new Table();

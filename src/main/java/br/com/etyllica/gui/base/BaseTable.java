@@ -81,7 +81,8 @@ public class BaseTable extends View {
 		if(mx > x && mx < x+w) {
 			if(my > y && my < y + h) {
 				int index = (my-y-rh)/rowSize();
-				if (index >= 0 && index < visibleRows()) {
+				//if (index >= scrollOffset && index <= scrollOffset+visibleRows()) {
+				if (index >= 0 && index < rows.size()) {
 					Row row = rows.get(index);
 
 					if(row != onMouseRow) {
@@ -107,7 +108,7 @@ public class BaseTable extends View {
 	
 	@Override
 	public void draw(Graphics g) {
-
+		g.setClip(left(), top(), width(), height());
 		g.setFont(getTheme().getFont());
 
 		g.setColor(getTheme().getBackgroundColor());
@@ -122,6 +123,8 @@ public class BaseTable extends View {
 		if (showHeaders) {
 			drawHeaders(g);
 		}
+		
+		g.resetClip();
 	}
 
 	private int headerSize() {
@@ -172,9 +175,7 @@ public class BaseTable extends View {
 		int ry = yOffset + top() + rowSize()/2;
 
 		for (int i = 0; i < rows.size(); i++) {
-			//if (ry + rowSize() > y + h) {
-			//Quick and Dirty way to avoid drawing outside
-			if (i > visibleRows() - 1) {
+			if (i > visibleRows()) {
 				break;
 			}
 
