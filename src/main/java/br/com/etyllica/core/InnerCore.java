@@ -578,11 +578,10 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	public void changeApplication() {
-
-		//Lock old application
-		//Context application = activeWindow.getApplication();
-
-		reload(activeWindow.getContext().getNextApplication());
+		Context currentApplication = activeWindow.getContext();
+		currentApplication.unload();
+		
+		reload(currentApplication.getNextApplication());
 	}
 
 	private void reload(Context application) {
