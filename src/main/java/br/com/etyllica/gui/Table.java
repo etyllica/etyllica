@@ -2,9 +2,9 @@ package br.com.etyllica.gui;
 
 import java.util.List;
 
+import br.com.etyllica.gui.base.BaseTable;
 import br.com.etyllica.gui.base.UIView;
 import br.com.etyllica.gui.listener.RowListener;
-import br.com.etyllica.gui.table.BaseTable;
 import br.com.etyllica.gui.table.Row;
 import br.com.etyllica.theme.ThemeManager;
 

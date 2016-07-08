@@ -3,9 +3,9 @@ package br.com.etyllica.theme;
 import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.base.BaseCheckBox;
 import br.com.etyllica.gui.base.BaseRadioButton;
+import br.com.etyllica.gui.base.BaseTable;
 import br.com.etyllica.gui.base.BaseTextField;
 import br.com.etyllica.gui.base.BaseTextView;
-import br.com.etyllica.gui.table.BaseTable;
 
 public interface ThemeFactory {
 		

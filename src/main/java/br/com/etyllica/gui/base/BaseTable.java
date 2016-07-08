@@ -1,4 +1,4 @@
-package br.com.etyllica.gui.table;
+package br.com.etyllica.gui.base;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +12,8 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.listener.RowListener;
+import br.com.etyllica.gui.table.Column;
+import br.com.etyllica.gui.table.Row;
 
 /**
  * 
