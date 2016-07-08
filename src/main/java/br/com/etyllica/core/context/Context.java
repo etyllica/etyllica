@@ -1,5 +1,6 @@
 package br.com.etyllica.core.context;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -386,6 +387,10 @@ public abstract class Context extends Layer implements ViewContainer, UIComponen
 	
 	public void addView(View view) {
 		this.views.add(view);
+	}
+
+	public Color getBackgroundColor() {
+		return Color.WHITE;
 	}
 	
 }

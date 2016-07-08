@@ -1,7 +1,5 @@
 package br.com.etyllica.core;
 
-import java.awt.Color;
-//import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -17,6 +15,7 @@ import br.com.etyllica.core.context.UpdateIntervalListener;
 import br.com.etyllica.core.context.load.ApplicationLoader;
 import br.com.etyllica.core.context.load.LoaderListener;
 import br.com.etyllica.core.effect.GlobalEffect;
+import br.com.etyllica.core.error.ErrorMessages;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.event.KeyEvent;
@@ -359,12 +358,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	private void drawContext(Context context, Graphics g) {
 
 		if(context.isClearBeforeDraw()) {
-			g.setColor(Color.WHITE);
+			g.setColor(context.getBackgroundColor());
 			g.fillRect(0, 0, context.getW(), context.getH());
 		}
 
 		context.draw(g);
-
 		context.getScene().draw(g);
 
 		drawViewChildren(context, g);
@@ -410,25 +408,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 			for(View child: components) {
 				
-				/*if(isTranslated(view)) {
-					//g.setBimg(g.getBimg().getSubimage(child.getX(), child.getY(), child.getW(), child.getH()));
-					child.setLocation(view.getX(), view.getY());
-					drawView(child,g);
-					child.setLocation(-view.getX(), -view.getY());
-				} else {
-					
-						drawView(child,g);	
-					
-				}*/
 				drawView(child,g);
 			}
 		}
 	}
 		
-	private boolean isTranslated(ViewContainer view) {
-		return (view.getX() != 0 && view.getY() != 0);
-	}
-	
 	public boolean isMouseOver() {
 		return uiCore.mouseOver != null;
 	}
@@ -587,7 +571,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	private void reload(Context application) {
 
 		if(application == null) {
-			System.err.println("Application cannot be null.");
+			System.err.println(ErrorMessages.APPLICATION_NULL);
 			return;
 		}
 		
