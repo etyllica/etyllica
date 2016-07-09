@@ -1,14 +1,14 @@
 package br.com.etyllica.gui.textfield;
 
-import br.com.etyllica.gui.BackBufferedView;
+import br.com.etyllica.gui.View;
 
-public abstract class TextFieldView extends BackBufferedView {
+public abstract class TextFieldView extends View {
 
-	protected final int TEXT_BACKSPACE = 8;
-	protected final int TEXT_TAB = 9;
-	protected final int TEXT_ENTER = 10;
-	protected final int TEXT_ESC = 27;
-	protected final int TEXT_DELETE = 127;
+	public static final int TEXT_BACKSPACE = 8;
+	public static final int TEXT_TAB = 9;
+	public static final int TEXT_ENTER = 10;
+	public static final int TEXT_ESC = 27;
+	public static final int TEXT_DELETE = 127;
 	
 	protected String text = "";
 
@@ -19,6 +19,8 @@ public abstract class TextFieldView extends BackBufferedView {
 	protected int maxMark = 0;
 
 	protected int maxLength = 0;
+	protected boolean shift = false;
+	protected boolean control = false;
 
 	private OnTextChangedListener onTextChangeListener;
 	
@@ -43,65 +45,72 @@ public abstract class TextFieldView extends BackBufferedView {
 	//Text Methods
 	protected void leftNormal() {
 
-		if(cursor>0) {
+		if (cursor>0) {
 			cursor--;
 		}
 
 	}
 
 	protected void leftWithControl() {
+		cursor = findPreviousBreak(cursor);
+	}
+	
+	private int findPreviousBreak(int cursor) {
+		int index = cursor;
+		
+		if (index > 0) {			
+			int i = cursor - 2;
 
-		if(cursor>0) {
-			
-			int i=cursor-2;
-
-			for(;i>0;i--) {
-				if(text.charAt(i)==' ') {
+			for(; i > 0; i--) {
+				if (text.charAt(i)==' ') {
 					i++;
 					break;
 				}
 			}
 
-			cursor = i;
+			index = i;
 		}
+		return index;
 	}
 
 	protected void rightWithControl() {
+		cursor = findNextBreak(cursor);
+	}
+	
+	private int findNextBreak(int cursor) {
+		int index = cursor+1;
 
-		int i=cursor+1;
-
-		for(;i<text.length();i++) {
-			if(text.charAt(i)==' ') {
+		for(int i = index; i < text.length(); i++) {
+			if (text.charAt(i)==' ') {
+				index = i;
 				break;
 			}
 		}
-		cursor = i;
+		return index;
 	}
 
 	protected void rightNormal() {
-		if(cursor<text.length()) {
+		if (cursor<text.length()) {
 			cursor++;
 		}
 	}
 
 	protected void eraseAsBackSpace() {
 
-		if(fixMark==-1&&cursor>0) {
-
-			if(cursor<text.length()) {
+		//if (fixMark==-1&&cursor>0) {
+		if (!isSelected()) {
+			if (cursor > 0 && cursor < text.length()) {
 				String t1 = text.substring(0,cursor-1);
 				String t2 = text.substring(cursor,text.length());
 
 				text = t1+t2;
-			}
-			else if(cursor>0) {
+			} else if (cursor > 0) {
 				text = text.substring(0,cursor-1);
 			}
 
 			leftNormal();
 
-		}else{
-
+		} else {
 			deleteMark();
 		}
 		
@@ -111,9 +120,9 @@ public abstract class TextFieldView extends BackBufferedView {
 
 	protected void eraseAsDelete() {
 
-		if(fixMark==-1) {
+		if (fixMark==-1) {
 
-			if(cursor<text.length()) {
+			if (cursor<text.length()) {
 				
 				String t1 = text.substring(0,cursor);
 				String t2 = text.substring(cursor+1,text.length());
@@ -132,20 +141,20 @@ public abstract class TextFieldView extends BackBufferedView {
 	private void deleteMark() {
 		
 		//System.out.println("deleteMark "+text.length());
+		
+		String t1 = text.substring(0,minMark);
+		String t2 = text.substring(maxMark,text.length());
+		
+		text = t1 + t2;
 
-		String t1 = text.substring(0,getMinMark());
-
-		String t2 = text.substring(getMaxMark(),text.length());
-
-		text = t1+t2;
-
-		cursor = getMinMark();
-		fixMark = -1;
+		cursor = minMark;
+		maxMark = cursor;
+		//fixMark = -1;
 	}
 
 	protected void addChar(char c) {
 
-		if(cursor<text.length()) {
+		if (cursor<text.length()) {
 			
 			String t1 = text.substring(0,cursor);
 			t1+=c;
@@ -165,11 +174,11 @@ public abstract class TextFieldView extends BackBufferedView {
 
 	protected int getMinMark() {
 
-		if(fixMark<0) {
+		if (fixMark<0) {
 			return 0;
 		}
 
-		if(cursor<fixMark) {
+		if (cursor<fixMark) {
 			return cursor;
 		}
 		else{
@@ -180,12 +189,11 @@ public abstract class TextFieldView extends BackBufferedView {
 
 	protected int getMaxMark() {
 
-		if(fixMark<0) {
+		if (fixMark<0) {
 			return 0;
 		}
 
-		if(cursor<fixMark) {
-
+		if (cursor<fixMark) {
 			return fixMark;
 		}
 		else{
@@ -203,7 +211,7 @@ public abstract class TextFieldView extends BackBufferedView {
 	
 
 	protected void notifyTextChanged() {
-		if(onTextChangeListener == null)
+		if (onTextChangeListener == null)
 			return;
 	}
 	
@@ -215,4 +223,7 @@ public abstract class TextFieldView extends BackBufferedView {
 		this.onTextChangeListener = onTextChangeListener;
 	}
 	
+	public boolean isSelected() {
+		return shift;
+	}
 }

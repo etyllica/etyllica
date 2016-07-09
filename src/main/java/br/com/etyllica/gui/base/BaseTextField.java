@@ -1,6 +1,5 @@
 package br.com.etyllica.gui.base;
 
-import java.awt.Color;
 import java.awt.FontMetrics;
 
 import br.com.etyllica.core.event.GUIEvent;
@@ -35,27 +34,27 @@ public class BaseTextField extends TextFieldView {
 			}
 		}
 
+		GUIEvent internalEvent = GUIEvent.NONE;
 		//TODO Next Component
 		//Update component with Pressed Events
-		GUIEvent pressedEvent = updatePressed(event);
-
-		//Update component with Released Events
-		GUIEvent releasedEvent = updateReleased(event);
-
-		minMark = getMinMark();
-		maxMark = getMaxMark();
-
-		if (pressedEvent!=GUIEvent.NONE) {
-			return pressedEvent;		
+		if (event.getState() == KeyState.PRESSED) {
+			internalEvent = updatePressed(event);
+			if (internalEvent != GUIEvent.NONE) {
+				return internalEvent;		
+			}
+		} else if(event.getState() == KeyState.RELEASED) {
+			internalEvent = updateReleased(event);
+			if (internalEvent != GUIEvent.NONE) {
+				return internalEvent;		
+			}
 		}
 
-		if (releasedEvent!=GUIEvent.NONE) {
-			return releasedEvent;		
-		}
+		//minMark = getMinMark();
+		//maxMark = getMaxMark();
 
 		return GUIEvent.NONE;
 	}
-	
+
 	public GUIEvent updateMouse(PointerEvent event) {
 		GUIEvent value = super.updateMouse(event);
 
@@ -88,19 +87,13 @@ public class BaseTextField extends TextFieldView {
 		return value;
 	}
 
-	private boolean shift = false;
-	private boolean control = false;
-
 	private GUIEvent updatePressed(KeyEvent event) {
 
 		if (!shift) {
-
 			if ((event.isKeyDown(KeyEvent.VK_SHIFT_RIGHT))||(event.isKeyDown(KeyEvent.VK_SHIFT_LEFT))) {
 				shift = true;
-				fixMark = cursor;
-			}
-			else if (event.isKeyDown(KeyEvent.VK_LEFT)||(event.isKeyDown(KeyEvent.VK_RIGHT))) {
-				fixMark = -1;
+				maxMark = cursor;
+				minMark = cursor;
 			}
 		}
 
@@ -119,7 +112,17 @@ public class BaseTextField extends TextFieldView {
 		}
 
 		if (event.isKeyDown(KeyEvent.VK_LEFT)) {
-			if (control) {
+			if (shift && !control) {
+
+				if(minMark == cursor) {
+					minMark--;
+					cursor--;
+				} else if(maxMark == cursor) {
+					maxMark--;
+					cursor--;
+				}
+
+			} else if (control) {
 				leftWithControl();
 			} else {
 				leftNormal();
@@ -127,7 +130,15 @@ public class BaseTextField extends TextFieldView {
 		}
 		else if (event.isKeyDown(KeyEvent.VK_RIGHT)) {
 
-			if (control) {
+			if (shift && !control) {
+				if(maxMark == cursor) {
+					maxMark++;
+					cursor++;
+				} else if(maxMark == cursor) {
+					maxMark++;
+					cursor++;
+				}
+			} else if (control) {
 				rightWithControl();
 			} else {
 				rightNormal();
@@ -142,6 +153,14 @@ public class BaseTextField extends TextFieldView {
 		return GUIEvent.NONE;
 	}
 
+	private boolean reachStart() {
+		return cursor <= 0;
+	}
+
+	private boolean reachEnd() {
+		return cursor >= text.length();
+	}
+
 	private GUIEvent updateReleased(KeyEvent event) {
 		if (control) {
 			if (event.isKeyDown(KeyEvent.VK_CTRL_RIGHT)||event.isKeyDown(KeyEvent.VK_CTRL_LEFT)) {
@@ -150,8 +169,10 @@ public class BaseTextField extends TextFieldView {
 		}
 
 		if (shift) {
-			if (event.isKeyDown(KeyEvent.VK_SHIFT_RIGHT)||event.isKeyDown(KeyEvent.VK_SHIFT_LEFT)) {
+			if (event.isKeyUp(KeyEvent.VK_SHIFT_RIGHT)||event.isKeyUp(KeyEvent.VK_SHIFT_LEFT)) {
 				shift = false;
+				minMark = cursor;
+				maxMark = cursor;
 			}
 		}
 
@@ -199,9 +220,9 @@ public class BaseTextField extends TextFieldView {
 
 		if (minMark == 0 && maxMark == 0) {
 			if (dif > 0) {
-				g.drawShadow(x, y+h/2+fontSize/2, text, getTheme().getShadowColor());
+				drawText(g, x, y+h/2+fontSize/2, text);
 			} else {
-				g.drawShadow(x+dif, y+h/2+fontSize/2, text, getTheme().getShadowColor());
+				drawText(g, (int)(x+dif), y+h/2+fontSize/2, text);
 			}
 		} else {
 
@@ -225,13 +246,13 @@ public class BaseTextField extends TextFieldView {
 			//g.setColor(theme.getTextMarkColor());
 			//g.setColor(Color.BLACK);
 			g.setColor(theme.getTextColor());
-			g.drawShadow(x, y+h/2+fontSize/2, text.substring(0,minMark));
+			drawText(g, x, y+h/2+fontSize/2, text.substring(0,minMark));
 
 			g.setColor(theme.getTextSelectedColor());
-			g.drawShadow(x+cx, y+h/2+fontSize/2, text.substring(minMark,maxMark),Color.WHITE);
+			drawSelectedText(g, x+cx, y+h/2+fontSize/2, text.substring(minMark,maxMark));
 
 			g.setColor(theme.getTextColor());
-			g.drawShadow(x+cx+cxm, y+h/2+fontSize/2, text.substring(maxMark,text.length()),Color.WHITE);
+			drawText(g, x+cx+cxm, y+h/2+fontSize/2, text.substring(maxMark,text.length()));
 		}
 
 		if (onFocus) {
@@ -256,6 +277,14 @@ public class BaseTextField extends TextFieldView {
 		/*g.resetImage();
 		layer.draw(g);
 		layer.resetImage();*/
+	}
+	
+	private void drawText(Graphics g, int x, int y, String text) {
+		g.drawShadow(x, y, text, getTheme().getShadowColor());
+	}
+	
+	private void drawSelectedText(Graphics g, int x, int y, String text) {
+		g.drawShadow(x, y, text, getTheme().getBackgroundColor());
 	}
 
 	@Override
@@ -334,6 +363,14 @@ public class BaseTextField extends TextFieldView {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public int getCursor() {
+		return cursor;
+	}
+
+	public void setCursor(int cursor) {
+		this.cursor = cursor;
 	}
 
 }

@@ -97,7 +97,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 
 		List<KeyEvent> events = new CopyOnWriteArrayList<KeyEvent>(keyEvents);
 		
-		for(KeyEvent event: events) {			
+		for (KeyEvent event: events) {
 			listener.updateKeyEvent(event);
 		}
 

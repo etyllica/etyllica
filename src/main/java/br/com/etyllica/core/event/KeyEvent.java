@@ -15,7 +15,7 @@ public class KeyEvent {
 		super();
 
 		this.key = key;
-		this.state = state; 
+		this.state = state;
 	}
 
 	public KeyEvent(int key, int amount, KeyState state) {
