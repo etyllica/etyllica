@@ -96,9 +96,8 @@ public class StringSpinner extends View {
 	
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-		next.safeUpdateMouse(event);
-
-		previous.safeUpdateMouse(event);	
+		next.updateMouse(event);
+		previous.updateMouse(event);	
 
 		return GUIEvent.NONE;
 	}

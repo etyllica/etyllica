@@ -89,8 +89,8 @@ public abstract class Spinner<T extends Number> extends View {
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-		plus.safeUpdateMouse(event);
-		minus.safeUpdateMouse(event);			
+		plus.updateMouse(event);
+		minus.updateMouse(event);
 
 		return GUIEvent.NONE;
 	}
