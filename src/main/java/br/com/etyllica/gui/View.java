@@ -233,13 +233,12 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 		// TODO Auto-generated method stub
 	}
 	
-	public GUIEvent safeUpdateMouse(PointerEvent event) {
+	public GUIEvent updateMouse(PointerEvent event) {
 		if(!isMouseOver()) {
 			if(onMouse(event)) {
 				mouseIn();
 				return GUIEvent.MOUSE_IN;
 			}
-			
 		} else {
 			if(!onMouse(event)) {
 				mouseOut();
@@ -247,8 +246,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 			}
 		}
 		
-		//return GUIEvent.NONE;
-		return updateMouse(event);
+		return GUIEvent.NONE;
 	}
 	
 	public void mouseIn() {

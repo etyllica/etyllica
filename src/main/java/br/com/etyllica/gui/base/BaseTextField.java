@@ -30,7 +30,7 @@ public class BaseTextField extends TextFieldView {
 
 		if (event.getState() == KeyState.TYPED) {
 			//Update component with typed events
-			if(event.getChar()!='\0') {
+			if (event.getChar()!='\0') {
 				updateChar(event.getChar());
 			}
 		}
@@ -45,46 +45,47 @@ public class BaseTextField extends TextFieldView {
 		minMark = getMinMark();
 		maxMark = getMaxMark();
 
-		if(pressedEvent!=GUIEvent.NONE) {
+		if (pressedEvent!=GUIEvent.NONE) {
 			return pressedEvent;		
 		}
 
-		if(releasedEvent!=GUIEvent.NONE) {
+		if (releasedEvent!=GUIEvent.NONE) {
 			return releasedEvent;		
 		}
 
 		return GUIEvent.NONE;
 	}
-
+	
 	public GUIEvent updateMouse(PointerEvent event) {
+		GUIEvent value = super.updateMouse(event);
 
-		if((event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT))) {
+		if (value != GUIEvent.NONE) {
+			return value;
+		}
 
-			if(mouseOver) {
-
-				//TODO posiciona cursor onMouse
-
-				return GUIEvent.GAIN_FOCUS;
-
-			}else{
-
-				return GUIEvent.LOST_FOCUS;
+		if ((event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT))) {
+			if (mouseOver) {
+				if(!onFocus) {
+					value = GUIEvent.GAIN_FOCUS;
+					return value;
+				}
+			} else if(onFocus) {
+				value = GUIEvent.LOST_FOCUS;
+				return value;
 			}
 
-		}else if(mouseOver) {
+		} else if (mouseOver) {
+			if (!onFocus) {
+				value = GUIEvent.MOUSE_OVER;
 
-			if(!onFocus) {
-
-				return GUIEvent.MOUSE_OVER;
-
-			}else{
-
-				return GUIEvent.MOUSE_OVER_WITH_FOCUS;
+			} else {
+				value = GUIEvent.MOUSE_OVER_WITH_FOCUS;
 			}
 
 		}
 
-		return GUIEvent.NONE;
+		update(value);
+		return value;
 	}
 
 	private boolean shift = false;
@@ -92,48 +93,48 @@ public class BaseTextField extends TextFieldView {
 
 	private GUIEvent updatePressed(KeyEvent event) {
 
-		if(!shift) {
+		if (!shift) {
 
-			if((event.isKeyDown(KeyEvent.VK_SHIFT_RIGHT))||(event.isKeyDown(KeyEvent.VK_SHIFT_LEFT))) {
+			if ((event.isKeyDown(KeyEvent.VK_SHIFT_RIGHT))||(event.isKeyDown(KeyEvent.VK_SHIFT_LEFT))) {
 				shift = true;
 				fixMark = cursor;
 			}
-			else if(event.isKeyDown(KeyEvent.VK_LEFT)||(event.isKeyDown(KeyEvent.VK_RIGHT))) {
+			else if (event.isKeyDown(KeyEvent.VK_LEFT)||(event.isKeyDown(KeyEvent.VK_RIGHT))) {
 				fixMark = -1;
 			}
 		}
 
-		if(event.isKeyDown(KeyEvent.VK_END)) {
+		if (event.isKeyDown(KeyEvent.VK_END)) {
 			cursor = text.length();
 		}
-		else if(event.isKeyDown(KeyEvent.VK_HOME)) {
+		else if (event.isKeyDown(KeyEvent.VK_HOME)) {
 			moveCursorToStart();
 			//move cursor to start
 		}
 
-		if(!control) {
-			if(event.isKeyDown(KeyEvent.VK_CTRL_RIGHT)||event.isKeyDown(KeyEvent.VK_CTRL_LEFT)) {
+		if (!control) {
+			if (event.isKeyDown(KeyEvent.VK_CTRL_RIGHT)||event.isKeyDown(KeyEvent.VK_CTRL_LEFT)) {
 				control = true;
 			}
 		}
 
-		if(event.isKeyDown(KeyEvent.VK_LEFT)) {
-			if(control) {
+		if (event.isKeyDown(KeyEvent.VK_LEFT)) {
+			if (control) {
 				leftWithControl();
 			} else {
 				leftNormal();
 			}
 		}
-		else if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
+		else if (event.isKeyDown(KeyEvent.VK_RIGHT)) {
 
-			if(control) {
+			if (control) {
 				rightWithControl();
-			}else{
+			} else {
 				rightNormal();
 			}
 		}
 
-		if(event.isKeyDown(KeyEvent.VK_TAB)) {
+		if (event.isKeyDown(KeyEvent.VK_TAB)) {
 
 			return GUIEvent.NEXT_COMPONENT;
 		}
@@ -142,14 +143,14 @@ public class BaseTextField extends TextFieldView {
 	}
 
 	private GUIEvent updateReleased(KeyEvent event) {
-		if(control) {
-			if(event.isKeyDown(KeyEvent.VK_CTRL_RIGHT)||event.isKeyDown(KeyEvent.VK_CTRL_LEFT)) {
+		if (control) {
+			if (event.isKeyDown(KeyEvent.VK_CTRL_RIGHT)||event.isKeyDown(KeyEvent.VK_CTRL_LEFT)) {
 				control = false;
 			}
 		}
 
-		if(shift) {
-			if(event.isKeyDown(KeyEvent.VK_SHIFT_RIGHT)||event.isKeyDown(KeyEvent.VK_SHIFT_LEFT)) {
+		if (shift) {
+			if (event.isKeyDown(KeyEvent.VK_SHIFT_RIGHT)||event.isKeyDown(KeyEvent.VK_SHIFT_LEFT)) {
 				shift = false;
 			}
 		}
@@ -166,7 +167,7 @@ public class BaseTextField extends TextFieldView {
 		//int x = 0;
 		//int y = 0;
 		g.setClip(left(), top(), width(), height());
-		
+
 		//TODO
 		//g.setFont(theme.getFont());
 
@@ -181,13 +182,13 @@ public class BaseTextField extends TextFieldView {
 		float dif = w-3-metrics.stringWidth(text);
 
 		//Remover
-		if(onFocus) {
+		if (onFocus) {
 			g.setColor(theme.getTextFieldColor());
-		}else{
+		} else {
 			g.setColor(theme.getTextFieldWithoutFocusColor());
 		}
 
-		if(mouseOver) {
+		if (mouseOver) {
 			g.setColor(theme.getTextFieldOnMouseColor());	
 		}
 
@@ -196,7 +197,7 @@ public class BaseTextField extends TextFieldView {
 
 		g.setColor(theme.getTextColor());
 
-		if(minMark == 0 && maxMark == 0) {
+		if (minMark == 0 && maxMark == 0) {
 			if (dif > 0) {
 				g.drawShadow(x, y+h/2+fontSize/2, text, getTheme().getShadowColor());
 			} else {
@@ -233,7 +234,7 @@ public class BaseTextField extends TextFieldView {
 			g.drawShadow(x+cx+cxm, y+h/2+fontSize/2, text.substring(maxMark,text.length()),Color.WHITE);
 		}
 
-		if(onFocus) {
+		if (onFocus) {
 
 			g.setColor(theme.getTextFieldColor());
 			//Draw Cursor
@@ -243,7 +244,7 @@ public class BaseTextField extends TextFieldView {
 
 			int padding = 3;
 
-			if(dif>0) {
+			if (dif>0) {
 				g.drawLine(cx+1, y+padding, cx+1, y+h-padding);
 			} else {
 				g.drawLine(dif+cx, y+padding, dif+cx, y+h-padding);
@@ -300,30 +301,29 @@ public class BaseTextField extends TextFieldView {
 
 	private void updateChar(char c) {
 
-		if(TEXT_BACKSPACE == (int)c) {
+		if (TEXT_BACKSPACE == (int)c) {
 
 			eraseAsBackSpace();
 
-		}else if(TEXT_DELETE == (int)c) {
+		} else if (TEXT_DELETE == (int)c) {
 
 			eraseAsDelete();
 
-		}else if(TEXT_ENTER == (int)c || 
+		} else if (TEXT_ENTER == (int)c || 
 				TEXT_TAB == (int)c || 
 				TEXT_ESC == (int)c) {
 
 		}
-		else{
-			if(maxLength>0) {
-				if(text.length()<maxLength) {
+		else {
+			if (maxLength>0) {
+				if (text.length()<maxLength) {
 					addChar(c);
 				}
-			}else{
+			} else {
 
 				addChar(c);				
 			}
 		}
-
 	}
 
 	public String getText() {

@@ -72,7 +72,7 @@ public class UICore {
 		for(View component: components) {
 
 			//Update Children
-			component.updateMouse(event);
+			updateEvent(component, component.updateMouse(event));
 			updateMouseComponents(event, component.getViews());
 			
 			/*GUIEvent nextEvent = updateMouse(component, event);
@@ -100,8 +100,7 @@ public class UICore {
 
 	public void updateKeyboard(KeyEvent event) {
 		//Only the focused component handles the keyboard
-		if(focus!=null) {
-
+		if (focus != null) {
 			GUIEvent focusEvent = focus.updateKeyboard(event);
 
 			if(focusEvent!=GUIEvent.NONE&&focusEvent!=null) {
@@ -133,14 +132,17 @@ public class UICore {
 			return GUIEvent.NONE;
 		}
 
-		GUIEvent result = component.safeUpdateMouse(event);
+		GUIEvent result = component.updateMouse(event);
 		
 		if(GUIEvent.MOUSE_IN == result) {
 			setMouseOver(component);
-			return GUIEvent.NONE;
 		} else if (GUIEvent.MOUSE_OUT == result) {
 			resetMouseOver();
-		} else if(result != GUIEvent.NONE && result != null) {
+		} else if(GUIEvent.GAIN_FOCUS == result) {
+			setFocus(component);
+		} else if(GUIEvent.LOST_FOCUS == result) {
+			removeFocus(component);
+		}else if(result != GUIEvent.NONE && result != null) {
 			updateEvent(component, result);
 		}
 
@@ -251,7 +253,6 @@ public class UICore {
 	}
 
 	public void setMouseOver(View view) {
-
 		if (mouseOver != null) {
 			removeMouseOver(mouseOver);
 		}
@@ -263,12 +264,26 @@ public class UICore {
 	}
 
 	public void resetMouseOver() {
-
 		removeMouseOver(mouseOver);
-
 		mouseOver = null;
-
 		overClickable = false;
+	}
+	
+	private void setFocus(View component) {
+		if (focus != null) {
+			removeFocus(focus);
+		}
+		focus = component;
+		component.setOnFocus(true);
+		component.update(GUIEvent.GAIN_FOCUS);
+	}
+	
+	private void removeFocus(View component) {
+		if (component == focus) {
+			component.setOnFocus(false);
+			component.update(GUIEvent.LOST_FOCUS);
+			focus = null;			
+		}
 	}
 
 	private void removeMouseOver(View view) {

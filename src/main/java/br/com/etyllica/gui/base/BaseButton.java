@@ -98,10 +98,14 @@ public class BaseButton extends RoundView {
 		//igualaImagem(sobMouse);
 	}
 	
+	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-
-		GUIEvent retorno = GUIEvent.NONE;
-
+		GUIEvent value = super.updateMouse(event);
+		
+		if(value != GUIEvent.NONE) {
+			return value;
+		}
+		
 		if(!disabled) {
 
 			//If mouse is Over
@@ -115,19 +119,19 @@ public class BaseButton extends RoundView {
 
 						leftClick();
 
-						retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
+						value = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 
 					} else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
 
 						rightClick();
 
-						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
+						value = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
 
 					} else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
 
 						middleClick();
 
-						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
+						value = GUIEvent.MOUSE_MIDDLE_BUTTON_DOWN;
 					}
 				}
 
@@ -139,15 +143,15 @@ public class BaseButton extends RoundView {
 						
 						leftUp();
 
-						retorno = GUIEvent.MOUSE_LEFT_BUTTON_UP;
+						value = GUIEvent.MOUSE_LEFT_BUTTON_UP;
 
 					} else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
 
-						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
+						value = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
 
 					} else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
 
-						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
+						value = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
 
 					}
 
@@ -155,15 +159,15 @@ public class BaseButton extends RoundView {
 
 					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
 
-						retorno = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
+						value = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
 
 					} else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
 
-						retorno = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
+						value = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
 
 					} else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
 
-						retorno = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
+						value = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
 
 					}
 
@@ -171,7 +175,7 @@ public class BaseButton extends RoundView {
 
 					justOnMouse();
 
-					retorno = GUIEvent.MOUSE_OVER;
+					value = GUIEvent.MOUSE_OVER;
 
 				}
 
@@ -187,9 +191,8 @@ public class BaseButton extends RoundView {
 			}
 		}
 		
-		update(retorno);
-
-		return retorno;
+		update(value);
+		return value;
 
 	}
 
