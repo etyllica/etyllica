@@ -259,7 +259,7 @@ public class ImageLayer extends StaticLayer {
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+utilWidth(), y+utilHeight(),
 				xImage,yImage,xImage+utilWidth(),yImage+utilHeight(), null );
 	}
-		
+	
 	public boolean onMouse(Mouse mouse) {
 		return CollisionDetector.colideRectPoint(this, mouse.getX(), mouse.getY());
 	}
@@ -270,6 +270,10 @@ public class ImageLayer extends StaticLayer {
 
 		this.xImage = b.xImage;
 		this.yImage = b.yImage;
+		
+		this.scaleX = b.scaleX;
+		this.scaleY = b.scaleY;
+		this.angle = b.angle;
 
 		this.path = b.path;
 	}

@@ -11,6 +11,7 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.loader.Loader;
+import br.com.etyllica.loader.image.ImageLoader;
 import br.com.etyllica.util.PathHelper;
 
 /**
@@ -29,6 +30,7 @@ public abstract class Etyllica extends JFrame implements Engine {
 	
 	protected int w = 640;
 	protected int h = 480;
+	protected String icon = "";
 
 	private Application application;
 	
@@ -50,6 +52,7 @@ public abstract class Etyllica extends JFrame implements Engine {
 		this.application = startApplication();
 		
 		startCore();
+		updateIcon();
 	}
 	
 	@Override
@@ -58,10 +61,11 @@ public abstract class Etyllica extends JFrame implements Engine {
 		initCore();
 
 		initialSetup("");
-
+		
 		this.application = startApplication();
 		
 		startCore();
+		updateIcon();
 	}
 	
 	private void initCore() {
@@ -90,14 +94,16 @@ public abstract class Etyllica extends JFrame implements Engine {
 	}
 
 	protected void setPath(URL url) {
-
 		setPath(url.toString());
 	}
 	
 	protected void setPath(String path) {
 		core.setPath(path);
-
 		engine.initDefault();
+	}
+	
+	protected String getPath() {
+		return core.getPath();
 	}
 	
 	@Override
@@ -125,6 +131,16 @@ public abstract class Etyllica extends JFrame implements Engine {
 	@Override
 	public void updateSuperEvent(GUIEvent event) {
 		engine.updateSuperEvent(event);
+	}
+	
+	protected void setIcon(String icon) {
+		this.icon = icon;
+	}
+		
+	private void updateIcon() {
+		if(!icon.isEmpty()) {
+			setIconImage(ImageLoader.getInstance().getImage(icon));
+		}
 	}
 
 }

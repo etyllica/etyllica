@@ -5,9 +5,9 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 
-public class HelloWorld extends Application {
+public class MoveImage extends Application {
 
-	public HelloWorld(int w, int h) {
+	public MoveImage(int w, int h) {
 		super(w, h);
 	}
 
