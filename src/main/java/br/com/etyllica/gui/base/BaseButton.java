@@ -59,7 +59,7 @@ public class BaseButton extends RoundView {
 			g.setColor(theme.getButtonDisabledColor());
 		}
 
-		g.fillRect(x,y,w,h);
+		g.fillRect(left(),top(),width(),height());
 
 		drawLabel(g);
 
@@ -212,26 +212,25 @@ public class BaseButton extends RoundView {
 		//label.setX(x+offsetX);
 		//label.setY(y+offsetY);
 
-		label.setContentBounds(x, y, w, h);
-
+		label.setContentBounds(left(), top(), width(), height());
 	}
 
 	public void setCenterLabel(Label label) {
 		this.label = label;
 
-		label.setX(label.getX()+(x+w/2-label.getW()/2));
-		label.setY(label.getY()+(y+h/2-label.getH()/2));
+		label.setX(label.getX()+(left()+width()/2-label.getW()/2));
+		label.setY(label.getY()+(top()+height()/2-label.getH()/2));
 
-		label.setContentBounds(x, y, w, h);
-
+		label.setContentBounds(left(), top(), width(), height());
 	}
 
 	@Override
 	public void setX(int x) {
 		super.setX(x);
 
-		if(hasLabel())
-			label.setContentBounds(x, y, w, h);
+		if(hasLabel()) {
+			label.setContentBounds(left(), top(), width(), height());
+		}
 	}
 
 	@Override
@@ -239,22 +238,18 @@ public class BaseButton extends RoundView {
 		super.setY(y);
 
 		if(hasLabel())
-			label.setContentBounds(x, y, w, h);
+			label.setContentBounds(left(), top(), width(), height());
 	}
 
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 
 		if(event.isKeyDown(KeyEvent.VK_TAB)) {
-
 			return GUIEvent.NEXT_COMPONENT;
-
 		}
 
 		if(event.isKeyDown(KeyEvent.VK_ENTER)) {
-
 			this.update(GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
-
 		}/*else if(event.getReleased(Tecla.TSK_ENTER)) {
 
 			return GUIEvent.MOUSE_LEFT_BUTTON_UP;
@@ -278,6 +273,22 @@ public class BaseButton extends RoundView {
 	
 	public boolean isClicked() {
 		return clicked;
+	}
+	
+	@Override
+	public void resize() {
+		super.resize();
+		if(hasLabel()) {
+			label.resize();	
+		}
+	}
+	
+	@Override
+	public void setBounds(int x, int y, int w, int h) {
+		super.setBounds(x, y, w, h);
+		if(hasLabel()) {
+			label.setContentBounds(left(), top(), width(), height());
+		}
 	}
 
 }

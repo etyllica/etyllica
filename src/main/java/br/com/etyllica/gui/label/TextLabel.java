@@ -104,7 +104,6 @@ public class TextLabel extends Label {
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.VK_TAB)) {
-
 			return GUIEvent.NEXT_COMPONENT;
 		}
 		

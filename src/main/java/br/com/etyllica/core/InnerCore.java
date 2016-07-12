@@ -171,8 +171,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	private void updateInput(Context application, long now) {
 		//Update All components
-		List<View> components = new CopyOnWriteArrayList<View>(application.getViews());
-
+		//List<View> components = new CopyOnWriteArrayList<View>(application.getViews());
+		List<View> components = application.getViews();
 		uiCore.updateGui(components);
 
 		getMouse().lock();
