@@ -6,7 +6,6 @@ import java.util.List;
 import br.com.etyllica.awt.components.chooser.FileChooser;
 import br.com.etyllica.awt.components.chooser.SelectFileListener;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
@@ -129,6 +128,11 @@ public class FileExample extends Application implements SelectFileListener {
 		layer.cloneLayer(image);
 		
 		layers.add(layer);
+	}
+
+	@Override
+	public void onCancel() {
+		System.out.println("Dialog was closed.");
 	}
 	
 }

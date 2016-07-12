@@ -67,6 +67,8 @@ public class FileChooser implements Runnable {
 			String path = chooser.getSelectedFile().getAbsolutePath();
 			notifyListener(path);
 			opened = false;
+		} else {
+			notifyListenerCancel();
 		}
 		
 		chooser = null;
@@ -75,6 +77,12 @@ public class FileChooser implements Runnable {
 	private void notifyListener(String path) {
 		if (listener != null) {
 			listener.onSelectFile(path);
+		}
+	}
+	
+	private void notifyListenerCancel() {
+		if (listener != null) {
+			listener.onCancel();
 		}
 	}
 
