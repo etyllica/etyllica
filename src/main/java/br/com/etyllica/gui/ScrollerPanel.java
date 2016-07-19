@@ -1,7 +1,6 @@
 package br.com.etyllica.gui;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
 
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
@@ -15,199 +14,207 @@ import br.com.etyllica.gui.icon.UpArrow;
 import br.com.etyllica.gui.panel.ScrollBackground;
 
 /**
- * 
  * @author yuripourre
  * @license LGPLv3
- *
  */
 
 public class ScrollerPanel extends View {
 
-	private float lastComponentH = 0;
-	private View component;
+    private float lastComponentH = 0;
+    private View component;
 
-	private int buttonSize = 20;
-	private int scrollAmount = 10;
-	private float scrollFactor = 1;
-	private float offset = 0;
-	private float knobPosition = 0;
+    private int buttonSize = 20;
+    private int scrollAmount = 10;
+    private int scrollCursor = 0;
+    private int steps = 0;
+    private float scrollFactor = 1;
+    private float offset = 0;
+    private float knobPosition = 0;
 
-	private BaseButton upButton;
-	private BaseButton downButton;
-	private BaseButton knob;
-	private ScrollBackground track;
+    private BaseButton upButton;
+    private BaseButton downButton;
+    private BaseButton knob;
+    private ScrollBackground track;
 
-	public ScrollerPanel(int x, int y, int w, int h) {
-		super(x, y, w, h);
+    public ScrollerPanel(int x, int y, int w, int h) {
+        super(x, y, w, h);
 
-		upButton = new BaseButton(w-buttonSize,0,buttonSize,buttonSize);
-		upButton.setLabel(new UpArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
-		upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollUp"));
-		upButton.setVisible(false);		
-		
-		downButton = new BaseButton(w-buttonSize,h-buttonSize,buttonSize,buttonSize);
-		downButton.setLabel(new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2));
-		downButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollDown"));
-		downButton.setVisible(false);
-		
-		track = new ScrollBackground(w-buttonSize, buttonSize, buttonSize, h-buttonSize*2);
-		track.setVisible(false);
-		
-		add(track);
+        upButton = new BaseButton(x + w - buttonSize, y, buttonSize, buttonSize);
+        upButton.setLabel(new UpArrow((-buttonSize / 3), -buttonSize / 3, buttonSize / 2));
+        upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollUp"));
+        upButton.setVisible(false);
 
-		add(upButton);
-		add(downButton);
-	}
+        downButton = new BaseButton(x + w - buttonSize, y + h - buttonSize, buttonSize, buttonSize);
+        downButton.setLabel(new DownArrow(-buttonSize / 3, -buttonSize / 3, buttonSize / 2));
+        downButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollDown"));
+        downButton.setVisible(false);
 
-	@Override
-	public void draw(Graphics g) {
+        track = new ScrollBackground(x + w - buttonSize, y + buttonSize, buttonSize, h - buttonSize * 2);
+        track.setVisible(false);
 
-		g.setColor(Color.WHITE);
+        add(track);
 
-		g.fillRect(x,y,w,h);
+        add(upButton);
+        add(downButton);
+    }
+    
+    @Override
+    public void resize() {
+    	upButton.setBounds(x + w - buttonSize, y, buttonSize, buttonSize);
+    	downButton.setBounds(x + w - buttonSize, y + h - buttonSize, buttonSize, buttonSize);
+    	track.setBounds(x + w - buttonSize, y + buttonSize, buttonSize, h - buttonSize * 2);
+    }
 
-		//TODO Fix this
-		BufferedImage back = g.getBimg();
-		//g.setBufferedImage(back.getSubimage(x, y, w, h));
-		
-		if(component!=null) {
-			
-			if(lastComponentH!=component.getH()) {
-				resetScroll();
-				lastComponentH = component.getH();
-			}
-			
-			//component.draw(g);
-			
-			
-			component.draw(g);
-			
-		}
-		
-		//g.setBufferedImage(back);
+    @Override
+    public void draw(Graphics g) {
 
-	}
+        g.setColor(Color.WHITE);
 
-	@Override
-	public void update(GUIEvent event) {
+        g.fillRect(left(), top(), width(), height());
 
-	}
+        g.setClip(x, y, w, h);
 
-	@Override
-	public GUIEvent updateMouse(PointerEvent event) {
+        if (component != null) {
 
-		if(mouseOver) {
+            if (lastComponentH != component.getH()) {
+                resetScroll();
+                lastComponentH = component.getH();
+            }
 
-			if(event.isButtonDown(MouseButton.MOUSE_WHEEL_DOWN)) {
+            component.draw(g);
+        }
 
-				for(int i=0;i<event.getAmount();i++) {
-					scrollDown();
-				}
-			}
+        g.resetClip();
+    }
 
-			if(event.isButtonDown(MouseButton.MOUSE_WHEEL_UP)) {
+    @Override
+    public void update(GUIEvent event) {
 
-				for(int i=event.getAmount();i<0;i++) {
-					scrollUp();
-				}
-			}
+    }
 
+    @Override
+    public GUIEvent updateMouse(PointerEvent event) {
 
-			if(knob.isMouseOver()) {
+        if (mouseOver) {
 
-				if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
-					//TODO Mouse dragged with knob move scroll
-				}
+            if (event.isButtonDown(MouseButton.MOUSE_WHEEL_DOWN)) {
 
-			}
-		}
+                for (int i = 0; i < event.getAmount(); i++) {
+                    scrollDown();
+                }
+            }
 
+            if (event.isButtonDown(MouseButton.MOUSE_WHEEL_UP)) {
 
-		return GUIEvent.NONE;
+                for (int i = event.getAmount(); i < 0; i++) {
+                    scrollUp();
+                }
+            }
 
-	}
+            if (knob.isMouseOver()) {
 
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
+                if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+                    //TODO Mouse dragged with knob move scroll
+                }
 
-		if(event.isKeyDown(KeyEvent.VK_TAB)) {
+            }
+        }
 
-			return GUIEvent.NEXT_COMPONENT;
+        return GUIEvent.NONE;
+    }
 
-		}
+    @Override
+    public GUIEvent updateKeyboard(KeyEvent event) {
 
-		return GUIEvent.NONE;
-	}
+        if (event.isKeyDown(KeyEvent.VK_TAB)) {
+            return GUIEvent.NEXT_COMPONENT;
+        }
 
-	public void setComponent(View component) {
-		this.component = component;
-		lastComponentH = component.getH();
+        return GUIEvent.NONE;
+    }
 
-		knobPosition = buttonSize;
-		
-		resetScroll();
-	}
+    public void setComponent(View component) {
+        this.component = component;
+        knobPosition = buttonSize;
+        resetScroll();
+        this.component.setBounds(x, y, component.getW(), component.getH());
+        this.component.resize();
+        lastComponentH = component.getH();
+    }
 
-	private void resetScroll() {
-		
-		boolean needScroll = false; 
-		
-		if(component.getH()>h) {
-			scrollFactor = (float)((float)h/(float)component.getH());
-			needScroll = true;
-		}
+    private void resetScroll() {
+        if (component.getH() <= h) {
+            return;
+        }
 
-		offset = scrollAmount*scrollFactor;
-		
-		remove(knob);
-		knob = new BaseButton(w-buttonSize,(int)(knobPosition), buttonSize,((int)(h*scrollFactor))-buttonSize*2+1);
-		knob.setVisible(false);
-		add(knob);
-		
-		
-		
-		if(needScroll) {
-			showButtons();
-		}
-			
-		
-	}
-	
-	private void showButtons() {
-		track.setVisible(true);
-		upButton.setVisible(true);
-		downButton.setVisible(true);
-		knob.setVisible(true);
-	}
+        scrollCursor = 0;
+        scrollFactor = ((float) (h) / (float) component.getH());
+        
+        float utilScrollH = (h - buttonSize * 2);
+        float scrollSize = utilScrollH * scrollFactor;
 
-	public void scrollDown() {
+        float dif = component.getH() - h;
+        steps = (int) Math.abs(dif / scrollAmount);
+        
+        offset = (utilScrollH-scrollSize) / steps;
 
-		float panelDif = h-component.getH();
+        if (knob == null) {
+            knob = new BaseButton(x + w - buttonSize, y + (int) (knobPosition), buttonSize, ((int) (scrollSize)));
+            add(knob);
+        } else {
+            knob.setBounds(x + w - buttonSize, y + (int) (knobPosition), buttonSize, ((int) (scrollSize)));
+        }
+        knob.setVisible(false);
 
-		if(component.getY()-panelDif>0) {
+        showButtons();
+    }
 
-			component.setOffsetY(-scrollAmount);
+    private void showButtons() {
+        track.setVisible(true);
+        upButton.setVisible(true);
+        downButton.setVisible(true);
+        knob.setVisible(true);
+    }
 
-			knobPosition+=offset;
+    public void scrollDown() {
+        if (scrollCursor < steps) {
+            scrollCursor++;
+            component.setOffsetY(-scrollAmount);
+            knobPosition += offset;
+            knob.setY(y + (int) knobPosition);
 
-			knob.setY((int)knobPosition);
+            int limit = y - buttonSize + h - knob.getH();
+            
+            if (knob.getY() > limit) {
+                knob.setY(limit);
+            }
+        }
+    }
 
-		}
+    public void scrollUp() {
 
-	}
+        if (scrollCursor > 0) {
+            scrollCursor--;
+            component.setOffsetY(+scrollAmount);
+            knobPosition -= offset;
+            knob.setY(y + (int) knobPosition);
 
-	public void scrollUp() {
+            if (knob.getY() < buttonSize) {
+                knob.setY(buttonSize);
+            }
+        }
+    }
 
-		if(component.getY()<0) {
+    public BaseButton getKnob() {
+        return knob;
+    }
 
-			component.setOffsetY(+scrollAmount);
+    public int getButtonSize() {
+        return buttonSize;
+    }
 
-			knobPosition-=offset;
-
-			knob.setY((int)knobPosition);
-
-		}
-
-	}
+    public void setButtonSize(int buttonSize) {
+        this.buttonSize = buttonSize;
+    }
 
 }

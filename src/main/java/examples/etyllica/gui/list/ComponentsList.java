@@ -6,42 +6,40 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.ScrollerPanel;
 import br.com.etyllica.gui.Select;
 import br.com.etyllica.gui.list.Option;
-import br.com.etyllica.gui.list.OptionPanel;
 import br.com.etyllica.gui.panel.ColoredTextPanel;
 
 public class ComponentsList extends Application {
 
-	public ComponentsList(int w, int h) {
-		super(w,h);
-	}
-	
-	@Override
-	public void load() {
+    public ComponentsList(int w, int h) {
+        super(w, h);
+    }
 
-		Select select = new Select(20,20,100,16);
+    @Override
+    public void load() {
+        Select select = new Select(10,80,160,26);
 		select.addOption(new Option("pt-br","Portuguese"));
 		select.addOption(new Option("en-us","English"));
 		select.addOption(new Option("es-es","Spanish" ));
 		addView(select);
+
+        ScrollerPanel panel = new ScrollerPanel(180, 180, 200, 200);
+        panel.setComponent(new ColoredTextPanel(0, 0, 200, 400));
+        addView(panel);
 		
-		ScrollerPanel panel = new ScrollerPanel(200,40,200,200);
-		panel.setComponent(new ColoredTextPanel(0, 0, 200, 300));
-		addView(panel);
-		
-		OptionPanel optionPanel = new OptionPanel(400,40,200,200);
+		/*OptionPanel optionPanel = new OptionPanel(400,40,200,200);
 		
 		optionPanel.addOption(new Option("pt-BR", "Portuguese"));
 		optionPanel.addOption(new Option("en-us","English"));
 		optionPanel.addOption(new Option("es-es","Spanish" ));
 
-		addView(optionPanel);
-		
-		loading = 100;
-	}
+		addView(optionPanel);*/
 
-	@Override
-	public void draw(Graphics g) {
+        loading = 100;
+    }
+
+    @Override
+    public void draw(Graphics g) {
 		/*g.setColor(Color.RED);
 		g.fillRect(x, y, w, h);*/
-	}
+    }
 }

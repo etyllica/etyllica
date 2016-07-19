@@ -14,7 +14,7 @@ import br.com.etyllica.gui.icon.DownArrow;
 import br.com.etyllica.gui.list.Option;
 
 public class Select extends View {
-		
+	
 	private List<Option> options = new ArrayList<Option>();
 	
 	private BaseButton button;
@@ -23,40 +23,38 @@ public class Select extends View {
 	
 	private boolean showOptions = false;
 	
-	public Select(int x, int y, int w, int h){
+	public Select(int x, int y, int w, int h) {
 		super(x,y,w,h);
 		
 		int buttonSize = h;
 		
-		//TODO ButtonDownArrow
-		button = new BaseButton(w-buttonSize,0,buttonSize,buttonSize);
+		button = new BaseButton(x+w-buttonSize,y,buttonSize,buttonSize);
 		
-		DownArrow arrow = new DownArrow(x+buttonSize/4, y+buttonSize/5, buttonSize/2);
+		DownArrow arrow = new DownArrow(-buttonSize/4, -buttonSize/3, buttonSize/2);
 		button.setLabel(arrow);
 		button.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "swapShowOptions"));
 		
 		add(button);
-		
 	}
 	
-	public void swapShowOptions(){
+	public void swapShowOptions() {
 		showOptions = !showOptions;
 	}
 	
-	public void addOption(Option option){
+	public void addOption(Option option) {
 		options.add(option);
 		//optionsPanel.addOption(option);
 	}
 	
 	
 	@Override
-	public void update(GUIEvent event){
+	public void update(GUIEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void draw(Graphics g){
+	public void draw(Graphics g) {
 		
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, w, h);
@@ -66,7 +64,7 @@ public class Select extends View {
 		
 		g.write(x+textOffset, y+fontSize, options.get(selectedOption).getLabel());
 		
-		if(showOptions){
+		if(showOptions) {
 		
 			float initialY = y+h;
 			float finalY = h*(options.size()+1);
@@ -77,7 +75,7 @@ public class Select extends View {
 			g.setColor(Color.BLACK);
 			int i=0;			
 			
-			for(Option option: options){
+			for(Option option: options) {
 				g.write(x+textOffset, y+h*(2+i), option.getLabel());
 				
 				i++;
@@ -85,14 +83,11 @@ public class Select extends View {
 
 			g.setColor(Color.BLACK);
 			g.drawRect(x, initialY, w, finalY);
-			
 		}
-						
 	}
 
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
 		return GUIEvent	.NONE;
 	}
 

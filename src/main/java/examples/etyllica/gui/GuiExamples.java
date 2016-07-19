@@ -36,8 +36,8 @@ public class GuiExamples extends Etyllica {
         //Change Theme
         //ThemeManager.getInstance().setTheme(new EtyllicTheme());
 
-        return new GeneralGuiExample(w,h);
-        //return new ComponentsList(w,h);
+        //return new GeneralGuiExample(w,h);
+        return new ComponentsList(w,h);
         //return new TableView(w, h);
         //return new TextViewExample(w, h);
         //return new TextFieldExample(w,h);
