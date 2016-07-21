@@ -187,14 +187,8 @@ public class ScrollView extends View {
             scrollCursor++;
             component.setOffsetY(-scrollAmount);
             component.resize();
-            knobPosition += offset;
+            knobPosition = buttonSize+offset*scrollCursor;
             knob.setY(y + (int) knobPosition);
-
-            int limit = y - buttonSize + h - knob.getH();
-            
-            if (knob.getY() > limit) {
-                knob.setY(limit);
-            }
         }
     }
 
@@ -204,12 +198,8 @@ public class ScrollView extends View {
             scrollCursor--;
             component.setOffsetY(+scrollAmount);
             component.resize();
-            knobPosition -= offset;
+            knobPosition = buttonSize+offset*scrollCursor;
             knob.setY(y + (int) knobPosition);
-
-            if (knob.getY() < buttonSize) {
-                knob.setY(buttonSize);
-            }
         }
     }
 

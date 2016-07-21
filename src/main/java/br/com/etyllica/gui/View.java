@@ -351,12 +351,15 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	}
 
 	public void drawChildren(Graphics g) {
-		if (!views.isEmpty()) {
+		for (View child: views) {
+			child.draw(g);
+		}
+		/*if (!views.isEmpty()) {
 			List<View> components = new CopyOnWriteArrayList<View>(views);
 			for (View child: components) {
 				child.draw(g);
 			}
-		}
+		}*/
 	}
 
 	public void cascadeClipOnDraw(boolean clipOnDraw) {
