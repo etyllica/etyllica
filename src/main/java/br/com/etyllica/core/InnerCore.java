@@ -31,7 +31,6 @@ import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.ui.UICore;
 import br.com.etyllica.core.ui.UICoreListener;
-import br.com.etyllica.core.ui.ViewContainer;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 import br.com.etyllica.theme.Theme;
@@ -363,7 +362,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		context.draw(g);
 		context.getScene().draw(g);
-		drawViewChildren(context, g);
+		uiCore.drawUIViews(g, context);
 	}
 
 	private void updateEffects(long now) {
@@ -389,21 +388,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			globalScripts.remove(script);
 		}
 	}
-	
-	private void drawViewChildren(ViewContainer view, Graphics g) {
-		for (View child: view.getViews()) {
-			child.drawWithChildren(g);
-		}
-		
-		/*if (!view.getViews().isEmpty()) {
-			List<View> components = new CopyOnWriteArrayList<View>(view.getViews());
-
-			for (View child: components) {
-				child.drawWithChildren(g);
-			}
-		}*/
-	}
-		
+			
 	public boolean isMouseOver() {
 		return uiCore.mouseOver != null;
 	}

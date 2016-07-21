@@ -30,7 +30,7 @@ public class UICore {
 	protected View focusComponent = null;
 
 	private boolean overClickable = false;
-	
+
 	private UICoreListener listener;
 
 	public List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
@@ -43,7 +43,6 @@ public class UICore {
 	}
 
 	public void updateGui(List<View> components) {
-
 		for(GUIEvent event: guiEvents) {
 			updateGuiEvent(components, event);
 		}
@@ -52,16 +51,14 @@ public class UICore {
 	}
 
 	public void updateGuiEvent(List<View> components, GUIEvent event) {
-
 		for(View component: components) {
 			updateGuiComponent(component, event);
-		}		
-	}	
+		}
+	}
 
 	private void updateGuiComponent(View component, GUIEvent event) {
 		component.update(event);
 
-		//Update Childs
 		for(View child: component.getViews()) {
 			updateGuiComponent(child, event);
 		}
@@ -72,9 +69,11 @@ public class UICore {
 		for(View component: components) {
 
 			//Update Children
-			updateEvent(component, component.updateMouse(event));
+			//updateEvent(component, component.updateMouse(event));
+			component.updateMouse(event);
 			updateMouseComponents(event, component.getViews());
-			
+
+			//TODO Handle TAB key (and accessibility)
 			/*GUIEvent nextEvent = updateMouse(component, event);
 
 			if(nextEvent != GUIEvent.NONE) {
@@ -94,7 +93,7 @@ public class UICore {
 
 				break;
 			}*/
-			
+
 		}
 	}
 
@@ -133,7 +132,7 @@ public class UICore {
 		}
 
 		GUIEvent result = component.updateMouse(event);
-		
+
 		if(GUIEvent.MOUSE_IN == result) {
 			setMouseOver(component);
 		} else if (GUIEvent.MOUSE_OUT == result) {
@@ -249,7 +248,7 @@ public class UICore {
 		view.executeAction(lastEvent);
 
 		return GUIEvent.NONE;
-		
+
 	}
 
 	public void setMouseOver(View view) {
@@ -268,7 +267,7 @@ public class UICore {
 		mouseOver = null;
 		overClickable = false;
 	}
-	
+
 	private void setFocus(View component) {
 		if (focus != null) {
 			removeFocus(focus);
@@ -277,7 +276,7 @@ public class UICore {
 		component.setOnFocus(true);
 		component.update(GUIEvent.GAIN_FOCUS);
 	}
-	
+
 	private void removeFocus(View component) {
 		if (component == focus) {
 			component.setOnFocus(false);
@@ -344,5 +343,10 @@ public class UICore {
 		this.mouse = mouse;
 	}
 
+	public void drawUIViews(Graphics g, ViewContainer context) {
+		for (View child: context.getViews()) {
+			child.drawWithChildren(g);
+		}
+	}
 
 }
