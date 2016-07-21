@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.Action;
@@ -354,12 +353,6 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 		for (View child: views) {
 			child.draw(g);
 		}
-		/*if (!views.isEmpty()) {
-			List<View> components = new CopyOnWriteArrayList<View>(views);
-			for (View child: components) {
-				child.draw(g);
-			}
-		}*/
 	}
 
 	public void cascadeClipOnDraw(boolean clipOnDraw) {

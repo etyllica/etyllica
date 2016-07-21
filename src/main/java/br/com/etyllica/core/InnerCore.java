@@ -2,7 +2,6 @@ package br.com.etyllica.core;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.awt.AWTArrowDrawer;
 import br.com.etyllica.awt.core.input.AWTController;
@@ -17,8 +16,8 @@ import br.com.etyllica.core.context.load.LoaderListener;
 import br.com.etyllica.core.effect.GlobalEffect;
 import br.com.etyllica.core.error.ErrorMessages;
 import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
@@ -392,14 +391,17 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 	
 	private void drawViewChildren(ViewContainer view, Graphics g) {
-
-		if (!view.getViews().isEmpty()) {
+		for (View child: view.getViews()) {
+			child.drawWithChildren(g);
+		}
+		
+		/*if (!view.getViews().isEmpty()) {
 			List<View> components = new CopyOnWriteArrayList<View>(view.getViews());
 
 			for (View child: components) {
 				child.drawWithChildren(g);
 			}
-		}
+		}*/
 	}
 		
 	public boolean isMouseOver() {
@@ -649,7 +651,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		languageHandler.changeLanguage(language);
 
-		List<View> components = new CopyOnWriteArrayList<View>(activeWindow.getContext().getViews());
+		List<View> components = activeWindow.getContext().getViews();
 
 		uiCore.updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
 	}
