@@ -8,11 +8,11 @@ import br.com.etyllica.gui.base.BaseButton;
 
 public class ScrollerPanelTest {
 
-	ScrollerPanel panel;
+	ScrollView panel;
 	
 	@Before
 	public void setUp() {
-		panel = new ScrollerPanel(0,40,260,200);
+		panel = new ScrollView(0,40,260,200);
 	}
 	
 	@Test

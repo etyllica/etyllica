@@ -18,9 +18,8 @@ import br.com.etyllica.gui.panel.ScrollBackground;
  * @license LGPLv3
  */
 
-public class ScrollerPanel extends View {
+public class ScrollView extends View {
 
-    private float lastComponentH = 0;
     private View component;
 
     private int buttonSize = 20;
@@ -36,10 +35,15 @@ public class ScrollerPanel extends View {
     private BaseButton knob;
     private ScrollBackground track;
 
-    public ScrollerPanel(int x, int y, int w, int h) {
+    public ScrollView(int x, int y, int w, int h) {
         super(x, y, w, h);
 
-        upButton = new BaseButton(x + w - buttonSize, y, buttonSize, buttonSize);
+        clipOnDraw = true;
+        build();
+    }
+    
+    private void build() {
+    	upButton = new BaseButton(x + w - buttonSize, y, buttonSize, buttonSize);
         upButton.setLabel(new UpArrow((-buttonSize / 3), -buttonSize / 3, buttonSize / 2));
         upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollUp"));
         upButton.setVisible(false);
@@ -53,7 +57,6 @@ public class ScrollerPanel extends View {
         track.setVisible(false);
 
         add(track);
-
         add(upButton);
         add(downButton);
     }
@@ -63,30 +66,29 @@ public class ScrollerPanel extends View {
     	upButton.setBounds(x + w - buttonSize, y, buttonSize, buttonSize);
     	downButton.setBounds(x + w - buttonSize, y + h - buttonSize, buttonSize, buttonSize);
     	track.setBounds(x + w - buttonSize, y + buttonSize, buttonSize, h - buttonSize * 2);
+    	
+    	/*if(component != null) {
+    		setComponent(component);
+    	}*/
     }
 
     @Override
     public void draw(Graphics g) {
-
         g.setColor(Color.WHITE);
-
         g.fillRect(left(), top(), width(), height());
-
-        g.setClip(x, y, w, h);
-
-        if (component != null) {
-
-            if (lastComponentH != component.getH()) {
-                resetScroll();
-                lastComponentH = component.getH();
-            }
-
-            component.draw(g);
-        }
-
-        g.resetClip();
     }
-
+    
+    @Override
+    public void drawWithChildren(Graphics g) {
+    	if (clipOnDraw) {
+    		g.setClip(x, y, w, h);
+    	}
+    	super.drawWithChildren(g);
+    	if (clipOnDraw) {
+    		g.resetClip();	
+    	}
+	}
+    
     @Override
     public void update(GUIEvent event) {
 
@@ -134,12 +136,16 @@ public class ScrollerPanel extends View {
     }
 
     public void setComponent(View component) {
-        this.component = component;
+    	views.clear();
+    	views.add(component);
+    	build();
+    	this.component = component;
+    	component.cascadeClipOnDraw(false);
+    	    	
         knobPosition = buttonSize;
         resetScroll();
         this.component.setBounds(x, y, component.getW(), component.getH());
         this.component.resize();
-        lastComponentH = component.getH();
     }
 
     private void resetScroll() {
@@ -180,6 +186,7 @@ public class ScrollerPanel extends View {
         if (scrollCursor < steps) {
             scrollCursor++;
             component.setOffsetY(-scrollAmount);
+            component.resize();
             knobPosition += offset;
             knob.setY(y + (int) knobPosition);
 
@@ -196,6 +203,7 @@ public class ScrollerPanel extends View {
         if (scrollCursor > 0) {
             scrollCursor--;
             component.setOffsetY(+scrollAmount);
+            component.resize();
             knobPosition -= offset;
             knob.setY(y + (int) knobPosition);
 

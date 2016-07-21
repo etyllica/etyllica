@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.ui.ViewContainer;
 import br.com.etyllica.gui.style.Style;
 import br.com.etyllica.layer.Layer;
@@ -25,39 +27,40 @@ import br.com.etyllica.theme.ThemeManager;
  */
 
 public abstract class View extends Layer implements GUIComponent, Drawable, ViewContainer {
-	
+
 	protected GUIEvent lastEvent = GUIEvent.NONE;
-	
+
 	protected boolean onFocus = false;
 	protected boolean mouseOver = false;
 	protected boolean disabled = false;
+	protected boolean clipOnDraw = false;
 
 	protected View root = null;
-	
+
 	protected List<View> views = new ArrayList<View>();
-	
+
 	protected List<Action> actions = new ArrayList<Action>();
-	
+
 	//GUIAction's Map
 	protected Map<GUIEvent,Action> actionMap = new HashMap<GUIEvent, Action>();
-	
+
 	public Style style = new Style();
-	
+
 	private static long lastId = 0; 
 	private long id = generateId();
-		
+
 	public View(int x, int y) {
 		super(x,y,1,1);
 	}
-	
+
 	public View(int x, int y, int w, int h) {
 		super(x,y,w,h);
 	}
-	
+
 	public View() {
 		super(0, 0);
 	}
-	
+
 	public GUIEvent getLastEvent() {
 		return lastEvent;
 	}
@@ -73,7 +76,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	public boolean isMouseOver() {
 		return mouseOver;
 	}
-	
+
 	/**
 	 * 
 	 * @param mouseOver
@@ -93,7 +96,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	public void setOnFocus(boolean focus) {
 		this.onFocus = focus;
 	}
-	
+
 	public boolean isDisabled() {
 		return disabled;
 	}
@@ -121,7 +124,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	public void clearComponents(){
 		this.views.clear();
 	}
-	
+
 	/**
 	 * 
 	 * @param component
@@ -129,7 +132,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	public void remove(View component){
 		this.views.remove(component);
 	}
-	
+
 	/**
 	 * 
 	 * @param components
@@ -137,7 +140,7 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	public void removeAll(Collection<? extends View> components){
 		this.views.removeAll(components);
 	}
-	
+
 	/**
 	 * @param component
 	 */
@@ -145,19 +148,19 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 		component.setRoot(this);
 		this.views.add(component);
 	}
-	
+
 	/**
 	 * 
 	 * @param components
 	 */
 	public void addAll(Collection<? extends View> components) {
-		
+
 		for(View component: components)	{
 			add(component);
 		}
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param x
@@ -168,15 +171,15 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 			translateComponent(x, y, component);
 		}
 	}
-	
+
 	private void translateComponent(int x, int y, View component){
-		
+
 		component.setLocation(x, y);
-		
+
 		for(View child: component.views){
 			translateComponent(x, y, child);
 		}
-		
+
 	}	
 
 
@@ -190,9 +193,9 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 		if(actionMap.containsKey(event)) {
 			actionMap.get(event).executeAction();
 		}
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param event
@@ -201,38 +204,38 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	public void addAction(GUIEvent event, Action action){
 		actionMap.put(event, action);
 	}
-	
+
 	protected void setRoot(View root){
 		this.root = root;
 	}
-	
+
 	public View findNext(){
-						
+
 		if(root!=null){
-			
+
 			Iterator<View> it = root.getViews().iterator();
 
-	        while(it.hasNext()){
-	        	
-	        	if(this.equals(it.next())){
-	        		
-	        		if(it.hasNext()){
-	        			return it.next();
-	        		}
-	        	}
-	        	
-	        }
-			
+			while(it.hasNext()){
+
+				if(this.equals(it.next())){
+
+					if(it.hasNext()){
+						return it.next();
+					}
+				}
+
+			}
+
 		}
-		
+
 		return null;
-		
+
 	}
-	
+
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	public GUIEvent updateMouse(PointerEvent event) {
 		if(!isMouseOver()) {
 			if(onMouse(event)) {
@@ -245,15 +248,15 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 				return GUIEvent.MOUSE_OUT;
 			}
 		}
-		
+
 		return GUIEvent.NONE;
 	}
-	
+
 	public void mouseIn() {
 		setMouseOver(true);
 		update(GUIEvent.MOUSE_IN);
 	}	
-	
+
 	public void mouseOut() {
 		setMouseOver(false);
 		update(GUIEvent.MOUSE_OUT);
@@ -264,35 +267,35 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	public void draw(Graphics g) {
 		this.draw(g, x, y, w, h);
 	}
-	
+
 	public abstract void draw(Graphics g, int x, int y, int w, int h);
-	*/
+	 */
 
 	public Theme getTheme() {
 		return ThemeManager.getInstance().getTheme();
 	}
-	
+
 	//Style Helper Methods
 	protected int top() {
 		return y+style.margin.top;
 	}
-	
+
 	protected int left() {
 		return x+style.margin.left;
 	}
-	
+
 	protected int width() {
 		return w-style.margin.left-style.margin.right;
 	}
-	
+
 	protected int height() {
 		return h-style.margin.top-style.margin.bottom;
 	}
-		
+
 	protected int horizontalMargin() {
 		return style.margin.right+style.margin.left;
 	}
-	
+
 	protected int verticalMargin() {
 		return style.margin.top+style.margin.bottom;
 	}
@@ -333,5 +336,33 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	 */
 	public void resize() {
 		resize(w, h);
+	}
+
+	public boolean isClipOnDraw() {
+		return clipOnDraw;
+	}
+
+	public void drawWithChildren(Graphics g) {
+		this.draw(g);
+
+		for (View child: views) {
+			child.drawWithChildren(g);
+		}
+	}
+
+	public void drawChildren(Graphics g) {
+		if (!views.isEmpty()) {
+			List<View> components = new CopyOnWriteArrayList<View>(views);
+			for (View child: components) {
+				child.draw(g);
+			}
+		}
+	}
+
+	public void cascadeClipOnDraw(boolean clipOnDraw) {
+		this.clipOnDraw = clipOnDraw;
+		for (View child: views) {
+			child.cascadeClipOnDraw(clipOnDraw);
+		}
 	}
 }

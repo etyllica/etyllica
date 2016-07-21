@@ -3,6 +3,8 @@ package br.com.etyllica.gui;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.etyllica.core.graphics.Graphics;
+
 
 /**
  * 
@@ -12,12 +14,17 @@ import java.util.Map;
  */
 
 public abstract class ViewGroup extends View {
+
+	protected static final int DYNAMIC = -20;
+	
+	protected int rowSize = DYNAMIC;
 	
 	private Map<Long, Float> weights = new HashMap<Long, Float>();
 	protected Orientation orientation = Orientation.VERTICAL;
 	
 	public ViewGroup(int x, int y, int w, int h) {
 		super(x,y,w,h);
+		clipOnDraw = true;
 	}
 	
 	@Override
@@ -51,9 +58,14 @@ public abstract class ViewGroup extends View {
 		int count = 0;
 		for(View view: views) {
 			count ++;
-			int size = (int)viewSize(totalSpace, view);
-			if (count == views.size()) {
-				size--;
+			
+			int size = rowSize;
+			
+			if (rowSize == DYNAMIC) {
+				size = (int)viewSize(totalSpace, view);
+				if (count == views.size()) {
+					size--;
+				}
 			}
 
 			//Vertical Panel
@@ -64,8 +76,11 @@ public abstract class ViewGroup extends View {
 			}
 			
 			lastPosition += size;
-			
 			view.resize();
+		}
+		
+		if (rowSize != DYNAMIC) {
+			this.setH(count * rowSize);
 		}
 	}
 	
@@ -76,7 +91,6 @@ public abstract class ViewGroup extends View {
 	}
 	
 	private float viewSize(int total, View view) {
-		
 		float sizeUnit = total/weightSum();
 		float size = weights.get(view.getId())*sizeUnit;
 		
@@ -99,4 +113,20 @@ public abstract class ViewGroup extends View {
 	public void setOrientation(Orientation orientation) {
 		this.orientation = orientation;
 	}
+
+	public void setRowSize(int rowSize) {
+		this.rowSize = rowSize;
+	}
+	
+	@Override
+    public void drawWithChildren(Graphics g) {
+		if (clipOnDraw) {
+    		g.setClip(x, y, w, h);	
+    	}
+    	super.drawWithChildren(g);
+    	if (clipOnDraw) {
+    		g.resetClip();	
+    	}
+	}
+	
 }

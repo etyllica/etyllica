@@ -8,7 +8,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Button;
-import br.com.etyllica.gui.ScrollerPanel;
+import br.com.etyllica.gui.ScrollView;
 import br.com.etyllica.gui.TextField;
 import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.gui.panel.TextPanel;
@@ -29,7 +29,7 @@ public class ChatWindowExample extends Application{
 	@Override
 	public void load() {
 		
-		ScrollerPanel rollerPanel = new ScrollerPanel(20,20,300,240);
+		ScrollView rollerPanel = new ScrollView(20,20,300,240);
 		
 		panel = new TextPanel(300,240);
 		rollerPanel.setComponent(panel);

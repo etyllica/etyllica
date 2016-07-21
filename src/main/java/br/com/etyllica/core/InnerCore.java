@@ -364,9 +364,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		context.draw(g);
 		context.getScene().draw(g);
-
 		drawViewChildren(context, g);
-	}	
+	}
 
 	private void updateEffects(long now) {
 		for(Updatable updatable: updatables) {
@@ -385,30 +384,20 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			} else {
 				remove.add(script);
 			}
-
 		}
 
 		for(AnimationScript script: remove) {
 			globalScripts.remove(script);
 		}
 	}
-
-	private void drawView(View view, Graphics g) {
-		//Draw Component
-		view.draw(g);
-
-		drawViewChildren(view, g);
-	}
-
+	
 	private void drawViewChildren(ViewContainer view, Graphics g) {
 
-		if(!view.getViews().isEmpty()) {
-
+		if (!view.getViews().isEmpty()) {
 			List<View> components = new CopyOnWriteArrayList<View>(view.getViews());
 
-			for(View child: components) {
-				
-				drawView(child,g);
+			for (View child: components) {
+				child.drawWithChildren(g);
 			}
 		}
 	}

@@ -3,7 +3,9 @@ package examples.etyllica.gui.list;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.ScrollerPanel;
+import br.com.etyllica.gui.Orientation;
+import br.com.etyllica.gui.Panel;
+import br.com.etyllica.gui.ScrollView;
 import br.com.etyllica.gui.Select;
 import br.com.etyllica.gui.list.Option;
 import br.com.etyllica.gui.panel.ColoredTextPanel;
@@ -22,9 +24,13 @@ public class ComponentsList extends Application {
 		select.addOption(new Option("es-es","Spanish" ));
 		addView(select);
 
-        ScrollerPanel panel = new ScrollerPanel(180, 180, 200, 200);
-        panel.setComponent(new ColoredTextPanel(0, 0, 200, 400));
-        addView(panel);
+        Panel panel = new Panel(0,0, 400, 400);
+        panel.setOrientation(Orientation.VERTICAL);
+        panel.add(new ColoredTextPanel(0, 0, 0, 0));
+		
+		ScrollView scrollView = new ScrollView(180, 180, 400, 200);
+        scrollView.setComponent(panel);
+        addView(scrollView);
 		
 		/*OptionPanel optionPanel = new OptionPanel(400,40,200,200);
 		

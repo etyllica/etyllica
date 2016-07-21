@@ -1,9 +1,9 @@
 package br.com.etyllica.gui.list;
 
-import br.com.etyllica.gui.ScrollerPanel;
+import br.com.etyllica.gui.ScrollView;
 import br.com.etyllica.gui.panel.TextPanel;
 
-public class OptionPanel extends ScrollerPanel {
+public class OptionPanel extends ScrollView {
 
 	private TextPanel panel;
 
