@@ -12,7 +12,7 @@ import br.com.etyllica.gui.View;
 
 public abstract class UIView extends View {
 
-	private View delegatedView;
+	protected View delegatedView;
 	
 	public UIView() {
 		super();
@@ -275,5 +275,16 @@ public abstract class UIView extends View {
 	protected void delegateView(View view) {
 		this.delegatedView = view;
 		this.style = view.style;
+		this.clipOnDraw = view.isClipOnDraw();
+	}
+	
+	@Override
+	public boolean isClipOnDraw() {
+		return this.delegatedView.isClipOnDraw();
+	}
+	
+	@Override
+	public void cascadeClipOnDraw(boolean clipOnDraw) {
+		this.delegatedView.cascadeClipOnDraw(clipOnDraw);
 	}
 }

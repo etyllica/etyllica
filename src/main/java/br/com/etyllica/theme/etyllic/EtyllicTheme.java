@@ -2,6 +2,7 @@ package br.com.etyllica.theme.etyllic;
 
 import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.base.BaseCheckBox;
+import br.com.etyllica.gui.base.BasePanel;
 import br.com.etyllica.gui.base.BaseRadioButton;
 import br.com.etyllica.gui.base.BaseTable;
 import br.com.etyllica.gui.base.BaseTextField;
@@ -45,5 +46,21 @@ public class EtyllicTheme extends Theme {
 	public BaseTable createTable(int x, int y, int w, int h) {
 		BaseTable table = new BaseTable(x, y, w, h);
 		return table;
+	}
+
+	@Override
+	public BasePanel createPanel(int x, int y, int w, int h) {
+		BasePanel panel = new BasePanel(x, y, w, h);
+		return panel;
+	}
+	
+	@Override
+	public BasePanel createLeftPanel(int x, int y, int w, int h) {
+		return createPanel(x, y, w, h);
+	}
+	
+	@Override
+	public BasePanel createRightPanel(int x, int y, int w, int h) {
+		return createPanel(x, y, w, h);
 	}
 }

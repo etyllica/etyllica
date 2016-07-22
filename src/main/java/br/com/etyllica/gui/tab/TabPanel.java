@@ -2,6 +2,7 @@ package br.com.etyllica.gui.tab;
 
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Panel;
+import br.com.etyllica.gui.base.BasePanel;
 
 /**
  * 
@@ -19,7 +20,7 @@ public class TabPanel extends Panel {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(getTheme().getSelectionColor());
-		Panel.roundPanel(g, x, y, w, h, style.roundness);
+		BasePanel.roundPanel(g, x, y, w, h, style.roundness);
 	}
 		
 }
