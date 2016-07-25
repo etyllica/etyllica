@@ -11,7 +11,6 @@ public class AnimationHandler implements Updatable {
 	private static AnimationHandler instance;
 
 	private List<AnimationExecution> scripts = new ArrayList<AnimationExecution>();
-
 	private List<AnimationScript> nextScripts = new ArrayList<AnimationScript>();
 
 	private AnimationHandler() {
@@ -105,6 +104,11 @@ public class AnimationHandler implements Updatable {
 				break;
 			}
 		}
+	}
+	
+	public void clearAll() {
+		scripts.clear();
+		nextScripts.clear();
 	}
 
 }
