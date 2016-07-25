@@ -3,13 +3,15 @@ package br.com.etyllica.core.linear;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.badlogic.gdx.math.Vector3;
+
 public class TriangleTest {
 	
 	@Test
 	public void testEquals() {
-		Point3D a = new Point3D(1,1,1);
-		Point3D b = new Point3D(2,2,1);
-		Point3D c = new Point3D(2,2,2);
+		Vector3 a = new Vector3(1,1,1);
+		Vector3 b = new Vector3(2,2,1);
+		Vector3 c = new Vector3(2,2,2);
 		
 		Triangle t1 = new Triangle(a, b, c);
 		Triangle t2 = new Triangle(a, b, c);

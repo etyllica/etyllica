@@ -1,6 +1,6 @@
 package br.com.etyllica.core.math;
 
-import br.com.etyllica.core.linear.Point3D;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * PointLineTest - simple geometry to make things easy!
@@ -20,11 +20,11 @@ public class PointLineTest {
 	 * @return the value (flag) of the relation between this point and the a,b
 	 *         line-segment.
 	 */
-	public static PointLinePosition pointLineTest(Point3D a, Point3D b, Point3D c) {
+	public static PointLinePosition pointLineTest(Vector3 a, Vector3 b, Vector3 c) {
 
-		double dx = b.getX() - a.getX();
-		double dy = b.getY() - a.getY();
-		double res = dy * (c.getX() - a.getX()) - dx * (c.getY() - a.getY());
+		double dx = b.x - a.x;
+		double dy = b.y - a.y;
+		double res = dy * (c.x - a.x) - dx * (c.y - a.y);
 
 		if (res < 0)
 			return PointLinePosition.LEFT;
@@ -32,30 +32,30 @@ public class PointLineTest {
 			return PointLinePosition.RIGHT;
 
 		if (dx > 0) {
-			if (c.getX() < a.getX())
+			if (c.x < a.x)
 				return PointLinePosition.INFRONT_OF_A;
-			if (b.getX() < c.getX())
+			if (b.x < c.x)
 				return PointLinePosition.BEHIND_B;
 			return PointLinePosition.ON_SEGMENT;
 		}
 		if (dx < 0) {
-			if (c.getX() > a.getX())
+			if (c.x > a.x)
 				return PointLinePosition.INFRONT_OF_A;
-			if (b.getX() > c.getX())
+			if (b.x > c.x)
 				return PointLinePosition.BEHIND_B;
 			return PointLinePosition.ON_SEGMENT;
 		}
 		if (dy > 0) {
-			if (c.getY() < a.getY())
+			if (c.y < a.y)
 				return PointLinePosition.INFRONT_OF_A;
-			if (b.getY() < c.getY())
+			if (b.y < c.y)
 				return PointLinePosition.BEHIND_B;
 			return PointLinePosition.ON_SEGMENT;
 		}
 		if (dy < 0) {
-			if (c.getY() > a.getY())
+			if (c.y > a.y)
 				return PointLinePosition.INFRONT_OF_A;
-			if (b.getY() > c.getY())
+			if (b.y > c.y)
 				return PointLinePosition.BEHIND_B;
 			return PointLinePosition.ON_SEGMENT;
 		}

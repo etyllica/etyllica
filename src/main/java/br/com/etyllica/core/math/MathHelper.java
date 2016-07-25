@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import br.com.etyllica.core.linear.Point3D;
 import br.com.etyllica.core.linear.Triangle;
 
 import com.badlogic.gdx.math.Vector3;
@@ -15,9 +14,9 @@ import com.badlogic.gdx.math.Vector3;
 public class MathHelper {
 
 	public static Vector3 calculateNormal(Triangle triangle) {
-		Vector3 a = new Vector3((float)triangle.getA().getX(), (float)triangle.getA().getY(), (float)triangle.getA().getZ());
-		Vector3 b = new Vector3((float)triangle.getB().getX(), (float)triangle.getB().getY(), (float)triangle.getB().getZ());
-		Vector3 c = new Vector3((float)triangle.getC().getX(), (float)triangle.getC().getY(), (float)triangle.getC().getZ());
+		Vector3 a = new Vector3(triangle.getA());
+		Vector3 b = new Vector3(triangle.getB());
+		Vector3 c = new Vector3(triangle.getC());
 
 		Vector3 v = new Vector3(b).sub(a);
 		Vector3 u = new Vector3(c).sub(a);
@@ -32,7 +31,7 @@ public class MathHelper {
 		return isClockwise(triangle.getA(), triangle.getB(), triangle.getC());
 	}
 	
-	public static boolean isClockwise(Point3D a, Point3D b, Point3D c) {
+	public static boolean isClockwise(Vector3 a, Vector3 b, Vector3 c) {
 		PointLinePosition res = PointLineTest.pointLineTest(a, b, c);
 
 		return (res == PointLinePosition.ON_SEGMENT) ||
@@ -42,12 +41,12 @@ public class MathHelper {
 	}
 
 	public static float triangleArea(Triangle triangle) {
-		Point3D a = triangle.getA();
-		Point3D b = triangle.getB();
-		Point3D c = triangle.getC();
+		Vector3 a = triangle.getA();
+		Vector3 b = triangle.getB();
+		Vector3 c = triangle.getC();
 
-		Vector3 ab = new Vector3((float)(b.getX()-a.getX()), (float)(b.getY()-a.getY()), (float)(b.getZ()-a.getZ()));
-		Vector3 ac = new Vector3((float)(c.getX()-a.getX()), (float)(c.getY()-a.getY()), (float)(c.getZ()-a.getZ()));
+		Vector3 ab = new Vector3(b.sub(a));
+		Vector3 ac = new Vector3(c.sub(a));
 
 		Vector3 result = ab.crs(ac);
 
@@ -68,15 +67,15 @@ public class MathHelper {
 		return volumeUnderTriangle(triangle, 0);
 	}
 
-	public static double volumeUnderTriangle(Triangle triangle, double z) {
-		Point3D a = triangle.getA();
-		Point3D b = triangle.getB();
-		Point3D c = triangle.getC();
+	public static double volumeUnderTriangle(Triangle triangle, float z) {
+		Vector3 a = triangle.getA();
+		Vector3 b = triangle.getB();
+		Vector3 c = triangle.getC();
 
 		//Projection points
-		Point3D pa = new Point3D(a.getX(),a.getY(),z);
-		Point3D pb = new Point3D(b.getX(),b.getY(),z);
-		Point3D pc = new Point3D(c.getX(),c.getY(),z);
+		Vector3 pa = new Vector3(a.x,a.y,z);
+		Vector3 pb = new Vector3(b.x,b.y,z);
+		Vector3 pc = new Vector3(c.x,c.y,z);
 
 		Triangle t1 = new Triangle(a, c, pa);
 		Triangle t2 = new Triangle(c, pc, pa);
@@ -120,27 +119,27 @@ public class MathHelper {
 		return signedVolumeOfTriangle(triangle.getA(), triangle.getB(), triangle.getC());
 	}
 
-	public static double signedVolumeOfTriangle(Point3D p1, Point3D p2, Point3D p3) {
-		double v321 = p3.getX()*p2.getY()*p1.getZ();
-		double v231 = p2.getX()*p3.getY()*p1.getZ();
-		double v312 = p3.getX()*p1.getY()*p2.getZ();
-		double v132 = p1.getX()*p3.getY()*p2.getZ();
-		double v213 = p2.getX()*p1.getY()*p3.getZ();
-		double v123 = p1.getX()*p2.getY()*p3.getZ();
+	public static double signedVolumeOfTriangle(Vector3 p1, Vector3 p2, Vector3 p3) {
+		double v321 = p3.x*p2.y*p1.z;
+		double v231 = p2.x*p3.y*p1.z;
+		double v312 = p3.x*p1.y*p2.z;
+		double v132 = p1.x*p3.y*p2.z;
+		double v213 = p2.x*p1.y*p3.z;
+		double v123 = p1.x*p2.y*p3.z;
 		return (-v321 + v231 + v312 - v132 - v213 + v123)/6.0f;
 	}
 
-	public static List<Point3D> orderedInZ(Point3D ... points) {
-		List<Point3D> ordered = Arrays.asList(points);
+	public static List<Vector3> orderedInZ(Vector3 ... points) {
+		List<Vector3> ordered = Arrays.asList(points);
 
 		Collections.sort(ordered, LOWER_Z_COMPARATOR);
 		return ordered;
 	}
 
-	private static final Comparator<Point3D> LOWER_Z_COMPARATOR = new Comparator<Point3D>() {
+	private static final Comparator<Vector3> LOWER_Z_COMPARATOR = new Comparator<Vector3>() {
 		@Override
-		public int compare(Point3D a, Point3D b) {
-			double diff = a.getZ()-b.getZ();
+		public int compare(Vector3 a, Vector3 b) {
+			double diff = a.z - b.z;
 
 			if (diff > 0) {
 				return 1;

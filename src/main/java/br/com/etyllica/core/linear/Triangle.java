@@ -1,40 +1,42 @@
 package br.com.etyllica.core.linear;
 
+import com.badlogic.gdx.math.Vector3;
+
 
 public class Triangle {
 	
-    Point3D a;
-    Point3D b;
-    Point3D c;
+	Vector3 a;
+    Vector3 b;
+    Vector3 c;
 
-    public Triangle(Point3D a, Point3D b, Point3D c) {
+    public Triangle(Vector3 a, Vector3 b, Vector3 c) {
         super();
         this.a = a;
         this.b = b;
         this.c = c;
     }
 
-    public Point3D getA() {
+    public Vector3 getA() {
         return a;
     }
 
-    public void setA(Point3D a) {
+    public void setA(Vector3 a) {
         this.a = a;
     }
 
-    public Point3D getB() {
+    public Vector3 getB() {
         return b;
     }
 
-    public void setB(Point3D b) {
+    public void setB(Vector3 b) {
         this.b = b;
     }
 
-    public Point3D getC() {
+    public Vector3 getC() {
         return c;
     }
 
-    public void setC(Point3D c) {
+    public void setC(Vector3 c) {
         this.c = c;
     }
     

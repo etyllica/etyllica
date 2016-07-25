@@ -7,7 +7,6 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.etyllica.core.linear.Point3D;
 import br.com.etyllica.core.linear.Triangle;
 
 import com.badlogic.gdx.math.Vector3;
@@ -15,9 +14,9 @@ import com.badlogic.gdx.math.Vector3;
 public class MathHelperTest {
 	@Test
 	public void testNormal() {
-		Point3D a = new Point3D(0,0,0);
-		Point3D b = new Point3D(10,0,0);
-		Point3D c = new Point3D(0,10,0);
+		Vector3 a = new Vector3(0,0,0);
+		Vector3 b = new Vector3(10,0,0);
+		Vector3 c = new Vector3(0,10,0);
 		Triangle triangle = new Triangle(a, b, c);
 		
 		Vector3 normal = MathHelper.calculateNormal(triangle);
@@ -29,11 +28,11 @@ public class MathHelperTest {
 	
 	@Test
 	public void testOrderedInZList() {
-		Point3D a = new Point3D(0,0,3);
-		Point3D b = new Point3D(10,0,2);
-		Point3D c = new Point3D(0,10,1);
+		Vector3 a = new Vector3(0,0,3);
+		Vector3 b = new Vector3(10,0,2);
+		Vector3 c = new Vector3(0,10,1);
 
-		List<Point3D> ordered = MathHelper.orderedInZ(a, b, c);
+		List<Vector3> ordered = MathHelper.orderedInZ(a, b, c);
 
 		Assert.assertEquals(c, ordered.get(0));
 		Assert.assertEquals(b, ordered.get(1));
@@ -42,9 +41,9 @@ public class MathHelperTest {
 
 	@Test
 	public void testAreaTriangleInOrigin() {
-		Point3D a = new Point3D(0,0,0);
-		Point3D b = new Point3D(10,0,0);
-		Point3D c = new Point3D(0,10,0);
+		Vector3 a = new Vector3(0,0,0);
+		Vector3 b = new Vector3(10,0,0);
+		Vector3 c = new Vector3(0,10,0);
 		Triangle triangle = new Triangle(a, b, c);
 
 		Assert.assertEquals(50, MathHelper.triangleArea(triangle), 0.00001);
@@ -55,9 +54,9 @@ public class MathHelperTest {
 	 */
 	@Test
 	public void testAreaTriangle() {
-		Point3D a = new Point3D(-5,5,-5);
-		Point3D b = new Point3D(1,-6,6);
-		Point3D c = new Point3D(2,-3,4);
+		Vector3 a = new Vector3(-5,5,-5);
+		Vector3 b = new Vector3(1,-6,6);
+		Vector3 c = new Vector3(2,-3,4);
 		Triangle triangle = new Triangle(a, b, c);
 
 		Assert.assertEquals(19.3067f, MathHelper.triangleArea(triangle), 0.0001);
@@ -65,9 +64,9 @@ public class MathHelperTest {
 
 	@Test
 	public void testTriangularPrismVolume() {
-		Point3D a = new Point3D(-5,5,-5);
-		Point3D b = new Point3D(1,-6,6);
-		Point3D c = new Point3D(2,-3,4);
+		Vector3 a = new Vector3(-5,5,-5);
+		Vector3 b = new Vector3(1,-6,6);
+		Vector3 c = new Vector3(2,-3,4);
 		Triangle triangle = new Triangle(a, b, c);
 		float height = 10;
 
@@ -76,12 +75,12 @@ public class MathHelperTest {
 
 	@Test
 	public void testVolumeUnderAlignedTriangle() {
-		Point3D a = new Point3D(0,0,1);
-		Point3D b = new Point3D(1,0,1);
-		Point3D c = new Point3D(0,1,1);
+		Vector3 a = new Vector3(0,0,1);
+		Vector3 b = new Vector3(1,0,1);
+		Vector3 c = new Vector3(0,1,1);
 		Triangle triangle = new Triangle(a, b, c);
 		
-		Point3D d = new Point3D(1,1,1);
+		Vector3 d = new Vector3(1,1,1);
 		Triangle otherTriangle = new Triangle(b, d, c);
 
 		//0.5 = half of cube volume
@@ -91,9 +90,9 @@ public class MathHelperTest {
 
 	@Test
 	public void testVolumeUnderOriginTriangle() {
-		Point3D a = new Point3D(0,0,0);
-		Point3D b = new Point3D(1,0,0);
-		Point3D c = new Point3D(0,1,0);
+		Vector3 a = new Vector3(0,0,0);
+		Vector3 b = new Vector3(1,0,0);
+		Vector3 c = new Vector3(0,1,0);
 		Triangle triangle = new Triangle(a, b, c);
 
 		Assert.assertEquals(0, MathHelper.volumeUnderTriangle(triangle), 0.001);
@@ -101,9 +100,9 @@ public class MathHelperTest {
 	
 	@Test
 	public void testVolumeUnderTriangle() {
-		Point3D a = new Point3D(-5,5,-5);
-		Point3D b = new Point3D(1,-6,6);
-		Point3D c = new Point3D(2,-3,4);
+		Vector3 a = new Vector3(-5,5,-5);
+		Vector3 b = new Vector3(1,-6,6);
+		Vector3 c = new Vector3(2,-3,4);
 		Triangle triangle = new Triangle(a, b, c);
 
 		Assert.assertEquals(24.166f, MathHelper.volumeUnderTriangle(triangle), 0.001);
@@ -111,9 +110,9 @@ public class MathHelperTest {
 	
 	@Test
 	public void testVolumeUnderOtherTriangle() {
-		Point3D a = new Point3D(57.352, 78.256, 16.55);
-		Point3D b = new Point3D(58.96, 78.256, 16.12);
-		Point3D c = new Point3D(58.96, 79.864, 21.98);
+		Vector3 a = new Vector3(57.352f, 78.256f, 16.55f);
+		Vector3 b = new Vector3(58.96f, 78.256f, 16.12f);
+		Vector3 c = new Vector3(58.96f, 79.864f, 21.98f);
 		Triangle triangle = new Triangle(a, b, c);
 
 		Assert.assertEquals(23.5519f, MathHelper.volumeUnderTriangle(triangle), 0.001);
@@ -121,15 +120,15 @@ public class MathHelperTest {
 	
 	@Test
 	public void testVolumeOfMesh() {
-		Point3D a = new Point3D(0,0,1);
-		Point3D b = new Point3D(1,0,1);
-		Point3D c = new Point3D(0,-1,1);
+		Vector3 a = new Vector3(0,0,1);
+		Vector3 b = new Vector3(1,0,1);
+		Vector3 c = new Vector3(0,-1,1);
 		Triangle triangle = new Triangle(a, c, b);
 		
 		//Projection points
-		Point3D pa = new Point3D(a.getX(),a.getY(),0);
-		Point3D pb = new Point3D(b.getX(),b.getY(),0);
-		Point3D pc = new Point3D(c.getX(),c.getY(),0);
+		Vector3 pa = new Vector3(a.x,a.y,0);
+		Vector3 pb = new Vector3(b.x,b.y,0);
+		Vector3 pc = new Vector3(c.x,c.y,0);
 		
 		Triangle t1 = new Triangle(a, b, pa);
 		Triangle t2 = new Triangle(b, pb, pa);
