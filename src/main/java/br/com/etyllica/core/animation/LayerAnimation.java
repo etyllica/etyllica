@@ -72,13 +72,15 @@ public class LayerAnimation extends AnimationScript {
 		return this;
 	}
 
+	@Override
 	public LayerAnimation twice() {
-		this.loop = 2;
+		super.twice();
 		return this;
 	}
 	
+	@Override
 	public LayerAnimation loop(int loop) {
-		this.loop = loop;
+		super.loop(loop);
 		return this;
 	}
 
@@ -163,7 +165,7 @@ public class LayerAnimation extends AnimationScript {
 	}
 	
 	private LayerAnimation getRoot() {
-		if(root!=null) {
+		if (root != null) {
 			return this;
 		} else {
 			return root;
@@ -186,7 +188,7 @@ public class LayerAnimation extends AnimationScript {
 
 	public LayerAnimation start() {
 		root.startChildren();
-		return root;
+		return this;
 	}
 	
 	private void startChildren() {

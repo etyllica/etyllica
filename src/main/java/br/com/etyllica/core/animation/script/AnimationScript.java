@@ -103,6 +103,16 @@ public abstract class AnimationScript {
 		this.loop = repeat;
 	}
 	
+	public AnimationScript twice() {
+		this.loop = 2;
+		return this;
+	}
+	
+	public AnimationScript loop(int loop) {
+		this.loop = loop;
+		return this;
+	}
+	
 	public List<AnimationScript> getNext() {
 		return next;
 	}
