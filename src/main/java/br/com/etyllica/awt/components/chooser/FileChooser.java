@@ -6,6 +6,8 @@ import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import br.com.etyllica.core.context.Application;
+
 public class FileChooser implements Runnable {
 	
 	protected String path = "";
@@ -24,6 +26,13 @@ public class FileChooser implements Runnable {
 		super();
 		this.path = path;
 		this.component = component;
+		init();
+	}
+	
+	public FileChooser(Application application, String path) {
+		super();
+		this.path = path;
+		this.component = application.getComponent();
 		init();
 	}
 
@@ -50,7 +59,7 @@ public class FileChooser implements Runnable {
 	}
 	
 	public void openDialog() {
-		if(opened) {
+		if (opened) {
 			return;
 		}
 			

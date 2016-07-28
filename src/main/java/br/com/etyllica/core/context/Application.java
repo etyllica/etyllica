@@ -1,5 +1,7 @@
 package br.com.etyllica.core.context;
 
+import java.awt.Component;
+
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 
@@ -28,6 +30,10 @@ public abstract class Application extends Context {
 	@Override
 	public void resize(int width, int height) {
 		
+	}
+
+	public Component getComponent() {
+		return parent.getComponent();
 	}
 	
 }

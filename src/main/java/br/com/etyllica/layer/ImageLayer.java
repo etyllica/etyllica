@@ -95,6 +95,11 @@ public class ImageLayer extends StaticLayer {
 		this(0,0,path);
 	}
 
+	public ImageLayer(int x, int y, String path, boolean absolute) {
+		super(path, absolute);
+		setCoordinates(x, y);
+	}
+
 	public int getXImage() {
 		return xImage;
 	}

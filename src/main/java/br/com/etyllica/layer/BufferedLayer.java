@@ -54,6 +54,18 @@ public class BufferedLayer extends ImageLayer {
 	
 	/**
 	 * 
+	 * @param x
+	 * @param y
+	 * @param path
+	 * @param absolute
+	 */
+	public BufferedLayer(int x, int y, String path, boolean absolute) {
+		super(x,y,path, absolute);
+		copy(ImageLoader.getInstance().getImage(path, absolute));
+	}
+	
+	/**
+	 * 
 	 * @param path
 	 */
 	public BufferedLayer(String path) {

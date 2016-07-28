@@ -64,6 +64,11 @@ public class StaticLayer extends Layer {
 		load();
 	}
 	
+	public StaticLayer(String path, boolean absolute) {
+		this.path = path;
+		load(absolute);
+	}
+
 	public String getPath() {
 		return path;
 	}
@@ -106,7 +111,11 @@ public class StaticLayer extends Layer {
 	}
 
 	public StaticLayer load() {
-		StaticLayer layer = ImageLoader.getInstance().loadImage(path);
+		return load(false);
+	}
+	
+	public StaticLayer load(boolean absolute) {
+		StaticLayer layer = ImageLoader.getInstance().loadImage(path, absolute);
 		this.w = layer.getW();
 		this.h = layer.getH();
 		
