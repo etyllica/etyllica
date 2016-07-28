@@ -18,6 +18,7 @@ public abstract class ViewGroup extends View {
 	protected static final int DYNAMIC = -20;
 	
 	protected int rowSize = DYNAMIC;
+	protected boolean shrink = true;
 	
 	private Map<Long, Float> weights = new HashMap<Long, Float>();
 	protected Orientation orientation = Orientation.VERTICAL;
@@ -79,8 +80,12 @@ public abstract class ViewGroup extends View {
 			view.resize();
 		}
 		
-		if (rowSize != DYNAMIC) {
-			this.setH(count * rowSize);
+		if (rowSize != DYNAMIC && shrink) {
+			if (orientation == Orientation.VERTICAL) {
+				this.setH(count * rowSize);
+			} else if (orientation == Orientation.HORIZONTAL) {
+				this.setW(count * rowSize);
+			}
 		}
 	}
 	
@@ -117,7 +122,15 @@ public abstract class ViewGroup extends View {
 	public void setRowSize(int rowSize) {
 		this.rowSize = rowSize;
 	}
-	
+		
+	public boolean isShrink() {
+		return shrink;
+	}
+
+	public void setShrink(boolean shrink) {
+		this.shrink = shrink;
+	}
+
 	@Override
     public void drawWithChildren(Graphics g) {
 		if (isClipOnDraw()) {

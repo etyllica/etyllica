@@ -46,4 +46,12 @@ public abstract class UIViewGroup extends UIView {
 	public Orientation getOrientation() {
 		return ((ViewGroup) delegatedView).getOrientation();
 	}
+	
+	public void setShrink(boolean shrink) {
+		((ViewGroup) delegatedView).setShrink(shrink);
+	}
+	
+	public boolean isShrink(boolean shrink) {
+		return ((ViewGroup) delegatedView).isShrink();
+	}
 }
