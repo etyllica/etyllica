@@ -16,7 +16,7 @@ public class ImageLabel extends Icon {
 
 	protected ImageLayer layer; 
 	
-	public ImageLabel(int x, int y, String path){
+	public ImageLabel(int x, int y, String path) {
 		super(x, y);
 		layer = new ImageLayer(0,0,path);
 	}
@@ -25,12 +25,12 @@ public class ImageLabel extends Icon {
 		this(0, 0, path);
 	}
 	
-	public ImageLabel(int x, int y, ImageLayer layer){
+	public ImageLabel(int x, int y, ImageLayer layer) {
 		super(x, y);
 		this.layer = layer;
 	}
 	
-	public ImageLabel(ImageLayer layer){
+	public ImageLabel(ImageLayer layer) {
 		this(0, 0, layer);
 	}
 		
@@ -59,6 +59,14 @@ public class ImageLabel extends Icon {
 	@Override
 	public int getH(){
 		return layer.getH();
+	}
+	
+	@Override
+	public void setContentBounds(int bx, int by, int bw, int bh) {
+		super.setContentBounds(bx, by, bw, bh);
+		if (this.layer != null) {
+			this.layer.centralize(bx, by, bw, bh);	
+		}
 	}
 	
 }

@@ -15,6 +15,11 @@ public class Button extends UIView {
 		delegateView(button);
 	}
 	
+	public Button(Label label) {
+		this(0,0,0,0);
+		this.button.setLabel(label);
+	}
+
 	public String getAlt() {
 		return button.getAlt();
 	}
