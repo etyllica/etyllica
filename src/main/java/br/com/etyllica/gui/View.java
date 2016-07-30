@@ -342,6 +342,9 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 	}
 
 	public void drawWithChildren(Graphics g) {
+		if (!visible) {
+			return;
+		}
 		this.draw(g);
 
 		for (View child: views) {

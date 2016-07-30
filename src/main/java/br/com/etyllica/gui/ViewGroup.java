@@ -133,6 +133,9 @@ public abstract class ViewGroup extends View {
 
 	@Override
     public void drawWithChildren(Graphics g) {
+		if (!visible) {
+			return;
+		}
 		if (isClipOnDraw()) {
     		g.setClip(x, y, w, h);
     	}
