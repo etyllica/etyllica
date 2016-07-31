@@ -103,6 +103,7 @@ public class BaseButton extends RoundView {
 		GUIEvent value = super.updateMouse(event);
 		
 		if(value != GUIEvent.NONE) {
+			update(value);
 			return value;
 		}
 		
@@ -193,7 +194,6 @@ public class BaseButton extends RoundView {
 		
 		update(value);
 		return value;
-
 	}
 
 	public Label getLabel() {

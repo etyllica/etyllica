@@ -59,17 +59,20 @@ public class BaseTextField extends TextFieldView {
 		GUIEvent value = super.updateMouse(event);
 
 		if (value != GUIEvent.NONE) {
+			update(value);
 			return value;
 		}
 
-		if ((event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT))) {
+		if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 			if (mouseOver) {
 				if(!onFocus) {
 					value = GUIEvent.GAIN_FOCUS;
+					update(value);
 					return value;
 				}
 			} else if(onFocus) {
 				value = GUIEvent.LOST_FOCUS;
+				update(value);
 				return value;
 			}
 
@@ -220,12 +223,11 @@ public class BaseTextField extends TextFieldView {
 
 		if (minMark == 0 && maxMark == 0) {
 			if (dif > 0) {
-				drawText(g, x, y+h/2+fontSize/2, text);
+				drawText(g, left(), top()+h/2+fontSize/2, text);
 			} else {
-				drawText(g, (int)(x+dif), y+h/2+fontSize/2, text);
+				drawText(g, (int)(left()+dif), top()+h/2+fontSize/2, text);
 			}
 		} else {
-
 			/** Desenha Mark **/
 
 			// get metrics from the graphics
@@ -278,11 +280,11 @@ public class BaseTextField extends TextFieldView {
 		layer.draw(g);
 		layer.resetImage();*/
 	}
-	
+
 	private void drawText(Graphics g, int x, int y, String text) {
 		g.drawShadow(x, y, text, getTheme().getShadowColor());
 	}
-	
+
 	private void drawSelectedText(Graphics g, int x, int y, String text) {
 		g.drawShadow(x, y, text, getTheme().getBackgroundColor());
 	}
@@ -298,10 +300,7 @@ public class BaseTextField extends TextFieldView {
 		switch (event) {
 
 		case GAIN_FOCUS:
-
 			onFocus = true;
-			//System.out.println("TextField, gain focus");
-
 			break;
 
 		case LOST_FOCUS:
@@ -349,8 +348,7 @@ public class BaseTextField extends TextFieldView {
 					addChar(c);
 				}
 			} else {
-
-				addChar(c);				
+				addChar(c);
 			}
 		}
 	}

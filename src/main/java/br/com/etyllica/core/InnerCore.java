@@ -316,7 +316,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			fixEventPosition(event);
 		}
 
-		uiCore.updateMouseComponents(event, components);
+		uiCore.updateMouseViews(event, components);
 
 		updateWindowEvent(event, activeWindow);		
 	}

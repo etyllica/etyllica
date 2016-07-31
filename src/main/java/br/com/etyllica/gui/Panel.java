@@ -21,5 +21,9 @@ public class Panel extends UIViewGroup {
 		this.panel = ThemeManager.getInstance().getTheme().createPanel(x, y, w, h);
 		delegateView(panel);
 	}
+
+	public Panel() {
+		this(0,0,0,0);
+	}
 	
 }

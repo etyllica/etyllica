@@ -64,36 +64,15 @@ public class UICore {
 		}
 	}
 
-	public void updateMouseComponents(PointerEvent event, List<View> components) {
+	public void updateMouseViews(PointerEvent event, List<View> views) {
 
-		for(View component: components) {
+		for(View component: views) {
 
+			//Update View
+			updateEvent(component, component.updateMouse(event));
+			
 			//Update Children
-			//updateEvent(component, component.updateMouse(event));
-			component.updateMouse(event);
-			updateMouseComponents(event, component.getViews());
-
-			//TODO Handle TAB key (and accessibility)
-			/*GUIEvent nextEvent = updateMouse(component, event);
-
-			if(nextEvent != GUIEvent.NONE) {
-
-				View next = component.findNext();
-
-				if(next!=null) {
-
-					focusComponent = next;
-
-					if(nextEvent == GUIEvent.NEXT_COMPONENT) {
-						updateEvent(focusComponent, GUIEvent.GAIN_FOCUS);
-					} else {
-						updateEvent(focusComponent, nextEvent);
-					}
-				}
-
-				break;
-			}*/
-
+			updateMouseViews(event, component.getViews());
 		}
 	}
 
@@ -102,24 +81,18 @@ public class UICore {
 		if (focus != null) {
 			GUIEvent focusEvent = focus.updateKeyboard(event);
 
-			if(focusEvent!=GUIEvent.NONE&&focusEvent!=null) {
+			if (focusEvent != GUIEvent.NONE && focusEvent != null) {
 				//TODO Update NExtComponent
 
-				View next = focus.findNext();
+				if (focusEvent == GUIEvent.NEXT_COMPONENT) {
+					View next = focus.findNext();
 
-				if(next!=null) {
-
-					if(focusEvent==GUIEvent.NEXT_COMPONENT) {
-
+					if (next != null) {
 						updateEvent(focus, focusEvent);
 						updateEvent(next, GUIEvent.GAIN_FOCUS);
-
-					}else{
-
-						updateEvent(next, focusEvent);
-
 					}
-
+				} else {
+					updateEvent(focus, focusEvent);
 				}
 			}
 		}
@@ -243,12 +216,11 @@ public class UICore {
 			break;
 		}
 
-		view.setLastEvent(lastEvent);
-		view.update(lastEvent);
-		view.executeAction(lastEvent);
+		//view.setLastEvent(lastEvent);
+		//view.update(lastEvent);
+		//view.executeAction(lastEvent);
 
 		return GUIEvent.NONE;
-
 	}
 
 	public void setMouseOver(View view) {
