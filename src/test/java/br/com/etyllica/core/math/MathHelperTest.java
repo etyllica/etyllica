@@ -115,7 +115,7 @@ public class MathHelperTest {
 		Vector3 c = new Vector3(58.96f, 79.864f, 21.98f);
 		Triangle triangle = new Triangle(a, b, c);
 
-		Assert.assertEquals(23.5519f, MathHelper.volumeUnderTriangle(triangle), 0.001);
+		Assert.assertEquals(23.5468f, MathHelper.volumeUnderTriangle(triangle), 0.001);
 	}
 	
 	@Test
