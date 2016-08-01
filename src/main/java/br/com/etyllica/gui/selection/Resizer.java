@@ -17,6 +17,7 @@ import br.com.etyllica.layer.Layer;
 
 public class Resizer {
 
+	private int selectedIndex;
 	private Layer selected;
 	private Layer overlay = new Layer();
 	
@@ -181,14 +182,17 @@ public class Resizer {
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 
 			if(!isSelected()) {
-				for(Layer component: layers) {
+				int index = 0;
+				for (Layer component: layers) {
 					if(component.onMouse(mx, my)) {
 						overlay.copy(component);
+						selectedIndex = index;
 						select(component);
 						overlay.setVisible(false);
 						
 						break;
 					}
+					index++;
 				}
 				
 			} else if(!isDragged()) {
@@ -222,6 +226,7 @@ public class Resizer {
 
 		if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
 			dragged = false;
+			notifyListener();
 		} else if(dragged && event.isDraggedButton(MouseButton.MOUSE_BUTTON_LEFT)) {
 			resizeEvent(lastIndex, event);
 			//notifyListener();
@@ -371,7 +376,7 @@ public class Resizer {
 		
 		int w = (int)(selected.utilWidth()+selected.getScaleX());
 		int h = (int)(selected.utilHeight()+selected.getScaleY());
-		listener.onResize(selected.getX(), selected.getY(), w, h);		
+		listener.onResize(selectedIndex, selected.getX(), selected.getY(), w, h);		
 	}
 
 	public ResizerListener getListener() {
