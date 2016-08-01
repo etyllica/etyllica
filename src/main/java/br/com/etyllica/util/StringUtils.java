@@ -1,5 +1,7 @@
 package br.com.etyllica.util;
 
+import java.io.File;
+
 public class StringUtils {
 
 	public static final String NEW_LINE = "\n";
@@ -17,9 +19,15 @@ public class StringUtils {
 	}
 	
 	public static String fileExtension(String path) {
-		int mid = path.lastIndexOf(".");
-		String ext = path.substring(mid+1,path.length()).toLowerCase();
+		int token = path.lastIndexOf(".");
+		String ext = path.substring(token+1,path.length()).toLowerCase();
 		return ext;
+	}
+	
+	public static String fileName(String path) {
+		int token = path.lastIndexOf(File.separator);
+		String filename = path.substring(token+1,path.length()).toLowerCase();
+		return filename;
 	}
 
 	public static String formatFloat(float x, int i) {
