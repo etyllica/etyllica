@@ -66,7 +66,10 @@ public class StaticLayer extends Layer {
 	
 	public StaticLayer(String path, boolean absolute) {
 		this.path = path;
-		load(absolute);
+		StaticLayer loaded = load(absolute);
+		if (absolute) {
+			this.path = loaded.getPath();	
+		}
 	}
 
 	public String getPath() {
