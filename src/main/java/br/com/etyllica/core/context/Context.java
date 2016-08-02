@@ -1,6 +1,7 @@
 package br.com.etyllica.core.context;
 
 import java.awt.Color;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.context.load.ApplicationLoadListener;
 import br.com.etyllica.core.context.load.DefaultLoadApplication;
+import br.com.etyllica.core.dnd.DropTarget;
 import br.com.etyllica.core.effect.TransitionEffect;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.MouseState;
@@ -31,7 +33,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public abstract class Context extends Layer implements ViewContainer, UIComponent, Updatable, MouseStateChanger, LanguageChanger {
+public abstract class Context extends Layer implements ViewContainer, UIComponent, Updatable, MouseStateChanger, LanguageChanger, DropTarget {
 
 	/**
 	 * The updateInterval between executions
@@ -64,12 +66,12 @@ public abstract class Context extends Layer implements ViewContainer, UIComponen
 	protected String title = "Application";
 
 	/**
-	 * Clear application before every draw call  
+	 * Clear application before every draw call
 	 */
 	protected boolean clearBeforeDraw = true;
 
 	/**
-	 * Map shared between Applications  
+	 * Map shared between Applications
 	 */
 	protected Session session;
 
@@ -393,4 +395,15 @@ public abstract class Context extends Layer implements ViewContainer, UIComponen
 		return Color.WHITE;
 	}
 	
+	public void dragEnter() {
+		
+	}
+	
+	public void dragExit() {
+		
+	}
+	
+	public void dropFiles(List<File> files) {
+		
+	}
 }

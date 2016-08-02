@@ -85,9 +85,7 @@ public class ImageLoader extends LoaderImpl {
 			cam.cloneLayer(IOHelper.FILE_PREFIX+path);	
 		} else {
 			cam.cloneLayer(path);
-		}
-			
-		
+		}		
 
 		return cam;
 	}

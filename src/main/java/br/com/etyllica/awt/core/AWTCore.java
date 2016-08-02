@@ -10,9 +10,21 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Transparency;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
 import java.awt.event.ComponentEvent;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -28,6 +40,7 @@ import br.com.etyllica.core.GameCore;
 import br.com.etyllica.core.InnerCore;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.context.Application;
+import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.context.Session;
 import br.com.etyllica.core.engine.Engine;
 import br.com.etyllica.core.event.GUIEvent;
@@ -39,7 +52,7 @@ import br.com.etyllica.gui.Window;
 import br.com.etyllica.loader.Loader;
 import br.com.etyllica.util.io.IOHelper;
 
-public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.event.ComponentListener {
+public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.event.ComponentListener, DropTargetListener {
 
 	private int width;
 	private int height;
@@ -61,39 +74,43 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 	private FullScreenWindow fullScreen = null;
 
 	private Engine engine;
-			
+
 	private boolean running = true;
-	
+
 	private GameLoop gameLoop;
-	
+
 	private boolean locked = false;
-	
+
 	private Future<?> future;
-	
+
 	private ExecutorService executor = Executors.newSingleThreadExecutor();
-	
+
+	private DropTarget dropTarget;
+
 	public AWTCore(Component component, int width, int height) {
 		super(width, height);
 
 		this.component = component;
-		
+
 		this.configuration = component.getGraphicsConfiguration();
 
 		this.width = width;
 		this.height = height;
-		
+
 		initGraphics(width, height);
-		
+
 		//Core methods
 		initMonitors(width, height);
 		moveToCenter();
-		
+
 		window = new Window(component.getX(), component.getY(), width, height);
 		window.setComponent(component);
-		
+
 		gameLoop = new FrameSkippingLoop(this);
+
+		dropTarget = new DropTarget(component, this);
 	}
-	
+
 	public void initMonitors(int width, int height) {
 
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -117,27 +134,27 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 			monitors.add(new Monitor(0, 0, width, height));
 		}
 	}
-	
+
 	public void moveToCenter() {	
 		Monitor firstMonitor = monitors.get(0);
 		int x = firstMonitor.getW()/2-component.getWidth()/2;
 		int y = firstMonitor.getH()/2-component.getHeight()/2;
-				
+
 		component.setLocation(x, y);
 	}
-	
+
 	public void setSession(Session session) {
 		window.setSessionMap(session);
 	}
-	
+
 	private void initGraphics(int width, int height) {
-		
+
 		locked = true;
-		
+
 		this.graphic = new AWTGraphics(width, height);
 
 		defineSize(width, height);
-		
+
 		locked = false;
 	}
 
@@ -243,9 +260,9 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 	}
 
 	public static void hideDefaultCursor(Component component) {
-		
+
 		int[] pixels = new int[16 * 16];
-		
+
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))
 				, new Point(0, 0), "invisibleCursor");
@@ -256,7 +273,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 
 		if(locked)
 			return;
-		
+
 		//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
 
@@ -269,7 +286,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 
 		if(graphic.getVimg() == null)
 			return;
-		
+
 		if(!isFullScreenEnable()) {
 			g.drawImage(graphic.getVimg(), (int)window.getContext().getX(), (int)window.getContext().getY(), component);
 		}
@@ -301,18 +318,18 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 	}
 
 	public void update(double delta) {
-				
+
 		long now = System.currentTimeMillis();
 
 		update(now);
-			
+
 		updateEngine(delta);
 	}
-	
+
 	public void render() {
 		engine.draw();
 	}
-	
+
 	@Override
 	public void hideCursor() {
 		super.hideCursor();
@@ -323,12 +340,12 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 	}
 
 	public void startEngine() {
-		
+
 		component.setVisible(true);
-		
+
 		future = executor.submit(this);
 	}
-		
+
 	@Override
 	public void run() {
 
@@ -350,15 +367,15 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 			e.printStackTrace();
 		}
 	}
-		
+
 	private void updateEngine(double delta) {
 		GUIEvent event = getSuperEvent();
 		engine.updateSuperEvent(event);
 	}
-	
+
 	@Override
 	public boolean isRunning() {
-		
+
 		return running;
 	}
 
@@ -380,14 +397,14 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 
 	@Override
 	public void componentResized(ComponentEvent event) {
-		
+
 		Component component = event.getComponent();
-		
+
 		Rectangle bounds = component.getBounds();
-		
+
 		int width = bounds.width;
 		int height = bounds.height;
-		
+
 		initGraphics(width, height);
 		//System.out.println("Resized: "+bounds.x+", "+bounds.y+", "+bounds.width+", "+bounds.height);
 		resizeApplication(width, height);
@@ -396,6 +413,53 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 	@Override
 	public void componentShown(ComponentEvent event) {
 		// TODO Auto-generated method stub
+	}
+
+	//DropTargetListener Methods
+	@Override
+	public void dragEnter(DropTargetDragEvent dtde) {
+		Context context = currentContext();
+		context.dragEnter();
+	}
+
+	@Override
+	public void dragOver(DropTargetDragEvent dtde) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void dropActionChanged(DropTargetDragEvent dtde) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void dragExit(DropTargetEvent dte) {
+		Context context = currentContext();
+		context.dragExit();
+	}
+
+	@Override
+	public void drop(DropTargetDropEvent evt) {
+		int action = evt.getDropAction();
+		evt.acceptDrop(action);
+		try {
+			Transferable data = evt.getTransferable();
+			//DataFlavor flavors[] = data.getTransferDataFlavors();
+			if (data.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+				List<File> list = (List<File>) data.getTransferData(DataFlavor.javaFileListFlavor);
+				
+				Context context = currentContext();
+				context.dropFiles(list);
+			}
+		} catch (UnsupportedFlavorException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			evt.dropComplete(true);
+		}
 	}
 
 }

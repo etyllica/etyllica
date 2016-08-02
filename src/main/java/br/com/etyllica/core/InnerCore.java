@@ -137,7 +137,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	public void update(long now) {
 		
-		if(!activeWindow.getContext().isLoaded()) {
+		if(!currentContext().isLoaded()) {
 			return;
 		} else if (needReload) {
 			fastReload();
@@ -149,7 +149,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		updateEffects(now);
 
-		Context application = activeWindow.getContext();
+		Context application = currentContext();
 
 		updateApplication(application, now);
 		
@@ -215,7 +215,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	public void resizeApplication(int w, int h) {
 
-		Context application = activeWindow.getContext();
+		Context application = currentContext();
 
 		application.resize(w, h);
 
@@ -288,7 +288,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	@Override
 	public void updateJoystickEvent(KeyEvent event) {
 
-		Context context = activeWindow.getContext();
+		Context context = currentContext();
 		
 		//Debug Joystick Commands
 		//System.out.println("UpdateJoystick "+event.getKey());
@@ -338,11 +338,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		if(!canDraw())
 			return;
 
-		drawContext(activeWindow.getContext(), g);
+		drawContext(currentContext(), g);
 		drawGlobalEffects(g);
 
 		if(drawCursor) {
-			if(activeWindow.getContext().isDrawCursor()) {
+			if(currentContext().isDrawCursor()) {
 				uiCore.drawCursor(g);
 			}
 		}
@@ -538,10 +538,14 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	public void changeApplication() {
-		Context currentApplication = activeWindow.getContext();
+		Context currentApplication = currentContext();
 		currentApplication.unload();
 		
 		reload(currentApplication.getNextApplication());
+	}
+
+	protected Context currentContext() {
+		return activeWindow.getContext();
 	}
 
 	private void reload(Context application) {
@@ -564,8 +568,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	private void fastReload() {
 		locked = true;
 
-		activeWindow.getContext().getViews().clear();
-		activeWindow.getContext().load();		
+		currentContext().getViews().clear();
+		currentContext().load();		
 
 		needReload = false;
 
@@ -579,7 +583,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	@Override
 	public void updateKeyEvent(KeyEvent event) {
 
-		Context context = activeWindow.getContext();
+		Context context = currentContext();
 		
 		handleApplicationKeyEvents(context, event);
 
@@ -636,7 +640,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		languageHandler.changeLanguage(language);
 
-		List<View> components = activeWindow.getContext().getViews();
+		List<View> components = currentContext().getViews();
 
 		uiCore.updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
 	}
@@ -673,6 +677,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	public void setKeyboard(Keyboard keyboard) {
 		this.keyboard = keyboard;
-	}	
+	}
 
 }
