@@ -68,7 +68,7 @@ public class StaticLayer extends Layer {
 		this.path = path;
 		StaticLayer loaded = load(absolute);
 		if (absolute) {
-			this.path = loaded.getPath();	
+			this.path = loaded.getPath();
 		}
 	}
 

@@ -23,7 +23,6 @@ import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -451,7 +450,9 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 				List<File> list = (List<File>) data.getTransferData(DataFlavor.javaFileListFlavor);
 				
 				Context context = currentContext();
-				context.dropFiles(list);
+				int mx = (int) evt.getLocation().getX();
+				int my = (int) evt.getLocation().getY();
+				context.dropFiles(mx, my, list);
 			}
 		} catch (UnsupportedFlavorException e) {
 			e.printStackTrace();

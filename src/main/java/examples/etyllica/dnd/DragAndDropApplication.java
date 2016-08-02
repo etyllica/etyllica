@@ -57,7 +57,7 @@ public class DragAndDropApplication extends Application {
 	}
 		
 	@Override
-	public void dropFiles(List<File> files) {
+	public void dropFiles(int x, int y, List<File> files) {
 		paths.clear();
 		for(File f: files) {
 			paths.add(f.getAbsolutePath());

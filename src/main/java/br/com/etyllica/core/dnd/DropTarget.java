@@ -6,5 +6,5 @@ import java.util.List;
 public interface DropTarget {
 	void dragEnter();
 	void dragExit();
-	void dropFiles(List<File> files);
+	void dropFiles(int x, int y, List<File> files);
 }

@@ -403,7 +403,7 @@ public abstract class Context extends Layer implements ViewContainer, UIComponen
 		
 	}
 	
-	public void dropFiles(List<File> files) {
+	public void dropFiles(int x, int y, List<File> files) {
 		
 	}
 }

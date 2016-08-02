@@ -13,7 +13,7 @@ import br.com.etyllica.layer.Layer;
 
 public class ResizerApplication extends Application {
 
-	private Resizer resizer;
+	private Resizer<Layer> resizer;
 
 	private Layer blueComponent;
 	private Layer redComponent;
@@ -28,7 +28,7 @@ public class ResizerApplication extends Application {
 	@Override
 	public void load() {
 
-		resizer = new Resizer(this);
+		resizer = new Resizer<Layer>(this);
 		components = new ArrayList<Layer>();
 				
 		blueComponent = new Layer(40, 100, 200, 80);

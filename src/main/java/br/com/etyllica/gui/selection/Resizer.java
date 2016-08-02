@@ -2,7 +2,11 @@ package br.com.etyllica.gui.selection;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import br.com.etyllica.awt.stroke.DashedStroke;
 import br.com.etyllica.core.collision.CollisionDetector;
@@ -15,11 +19,16 @@ import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 
-public class Resizer {
+public class Resizer<T extends Layer> {
 
-	private int selectedIndex;
+	public static final int UNKNOWN = -1;
+	
+	private int count = 0;
+	protected Map<Integer, T> layers = new HashMap<Integer, T>();
+	
+	protected int selectedIndex = UNKNOWN;
 	private Layer selected;
-	private Layer overlay = new Layer();
+	protected Layer overlay = new Layer();
 	
 	private ResizerPoint selectedArea;
 	private ResizerPoint[] points;
@@ -41,10 +50,12 @@ public class Resizer {
 
 	private int lastIndex = 0;
 
+	private static final int SHIFT_SPEED = 10;
+	private static final int NORMAL_SPEED = 1;
+	
 	private int keyboardSpeed = 1;
-	
-	private List<Layer> layers;
-	
+	private int speedFactor = NORMAL_SPEED;
+
 	public Resizer(MouseStateChanger context) {
 		super();
 
@@ -170,38 +181,18 @@ public class Resizer {
 		int my = event.getY();
 
 		if(!isSelected()) {
-			for(Layer component: layers) {
-				if(component.onMouse(mx, my)) {
-					overlay.setVisible(true);
-					overlay.copy(component);
-					break;
-				}
-			}
+			checkMouseOver(mx, my);
 		}
 		
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
-
 			if(!isSelected()) {
-				int index = 0;
-				for (Layer component: layers) {
-					if(component.onMouse(mx, my)) {
-						overlay.copy(component);
-						selectedIndex = index;
-						select(component);
-						overlay.setVisible(false);
-						
-						break;
-					}
-					index++;
-				}
-				
+				checkSelection(mx, my);
 			} else if(!isDragged()) {
 				deselect();
 			}
-
 		}
 		
-		if(selected == null)
+		if (selected == null)
 			return;
 
 		changed = false;
@@ -223,7 +214,6 @@ public class Resizer {
 			}
 		}
 
-
 		if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
 			dragged = false;
 			notifyListener();
@@ -241,6 +231,31 @@ public class Resizer {
 			changer.changeMouseState(MouseState.NORMAL);
 		}
 
+	}
+
+	protected void checkMouseOver(int mx, int my) {
+		for(Layer component: layers.values()) {
+			if(component.onMouse(mx, my)) {
+				overlay.setVisible(true);
+				overlay.copy(component);
+				break;
+			}
+		}
+	}
+
+	protected void checkSelection(int mx, int my) {
+		selectedIndex = UNKNOWN;
+		for (Entry<Integer, T> entry: layers.entrySet()) {
+			T component = entry.getValue();
+			if(component.onMouse(mx, my)) {
+				overlay.copy(component);
+				selectedIndex = entry.getKey();
+				select(component);
+				overlay.setVisible(false);
+				
+				break;
+			}
+		}
 	}
 
 	private void resizeEvent(int index, PointerEvent event) {
@@ -289,7 +304,7 @@ public class Resizer {
 
 	private void handleDragEvent(PointerEvent event) {
 
-		if(!dragged && event.isDraggedButton(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (!dragged && event.isDraggedButton(MouseButton.MOUSE_BUTTON_LEFT)) {
 			setInitialValues();
 			dragged = true;
 		}
@@ -349,25 +364,35 @@ public class Resizer {
 
 	public void handleKeyEvent(KeyEvent event) {
 
+		if(event.isAnyKeyDown(KeyEvent.VK_SHIFT_LEFT, KeyEvent.VK_SHIFT_RIGHT)) {
+			speedFactor = SHIFT_SPEED;
+		} else if(event.isAnyKeyUp(KeyEvent.VK_SHIFT_LEFT, KeyEvent.VK_SHIFT_RIGHT)) {
+			speedFactor = NORMAL_SPEED;
+		}
+		
 		if(event.isKeyDown(KeyEvent.VK_UP_ARROW)) {
-			selected.setOffsetY(-keyboardSpeed);
+			selected.setOffsetY(-speed());
 			notifyListener();
 			reselect();
 		} else if(event.isKeyDown(KeyEvent.VK_DOWN_ARROW)) {
-			selected.setOffsetY(+keyboardSpeed);
+			selected.setOffsetY(+speed());
 			notifyListener();
 			reselect();
 		}
 
 		if(event.isKeyDown(KeyEvent.VK_LEFT_ARROW)) {
-			selected.setOffsetX(-keyboardSpeed);
+			selected.setOffsetX(-speed());
 			notifyListener();
 			reselect();
 		} else if(event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
-			selected.setOffsetX(+keyboardSpeed);
+			selected.setOffsetX(+speed());
 			notifyListener();
 			reselect();
 		}
+	}
+
+	protected int speed() {
+		return keyboardSpeed*speedFactor;
 	}
 	
 	private void notifyListener() {
@@ -387,12 +412,45 @@ public class Resizer {
 		this.listener = listener;
 	}
 
-	public List<Layer> getLayers() {
-		return layers;
+	public Collection<T> getLayers() {
+		return layers.values();
 	}
 
-	public void setLayers(List<Layer> layers) {
-		this.layers = layers;
+	public void setLayers(List<T> layers) {
+		for(T layer:layers) {
+			addLayer(layer);
+		}
 	}
+
+	private Integer generateId() {
+		count++;
+		return count;
+	}
+	
+	public int getId(T layer) {
+		for(Entry<Integer, T> entry:layers.entrySet()) {
+			if(entry.getValue().equals(layer)) {
+				return entry.getKey();
+			}
+		}
+		return UNKNOWN;
+	}
+
+	public int addLayer(T layer) {
+		int id = generateId();
+		layers.put(id, layer);
 		
+		return id;
+	}
+
+	public int getSelectedIndex() {
+		return selectedIndex;
+	}
+
+	public void removeLayer(int index) {
+		if (selectedIndex == index) {
+			deselect();
+		}
+		layers.remove(index);
+	}
 }
