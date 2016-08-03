@@ -21,6 +21,9 @@ import br.com.etyllica.layer.Layer;
 
 public class Resizer<T extends Layer> {
 
+	ResizerEvent lastEvent = null;
+	Layer copy = new Layer();
+	
 	public static final int UNKNOWN = -1;
 	
 	private int count = 0;
@@ -81,7 +84,7 @@ public class Resizer<T extends Layer> {
 		points[8].setState(MouseState.MOVE);
 	}
 
-	public void reselect() {
+	public void refresh() {
 		select(selected);
 	}
 
@@ -99,7 +102,7 @@ public class Resizer<T extends Layer> {
 
 		this.selected = layer;
 		selectedArea.copy(layer);
-		
+				
 		int inc = 0;
 
 		//Update 8 points
@@ -214,20 +217,23 @@ public class Resizer<T extends Layer> {
 			}
 		}
 
-		if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
 			dragged = false;
-			notifyListener();
-		} else if(dragged && event.isDraggedButton(MouseButton.MOUSE_BUTTON_LEFT)) {
+			if(lastEvent != null) {
+				notifyListener(lastEvent);
+				lastEvent = null;	
+			}
+		} else if (dragged && event.isDraggedButton(MouseButton.MOUSE_BUTTON_LEFT)) {
 			resizeEvent(lastIndex, event);
 			//notifyListener();
-			reselect();
+			refresh();
 		}
 		
-		if(!changed && event.isClicked(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (!changed && event.isClicked(MouseButton.MOUSE_BUTTON_LEFT)) {
 			deselect();
 		}
 
-		if(!changed) {
+		if (!changed) {
 			changer.changeMouseState(MouseState.NORMAL);
 		}
 
@@ -259,6 +265,9 @@ public class Resizer<T extends Layer> {
 	}
 
 	private void resizeEvent(int index, PointerEvent event) {
+		
+		lastEvent = ResizerEvent.SCALE;
+		
 		switch (index) {
 		case 0:
 			resizeUp(event);
@@ -298,6 +307,7 @@ public class Resizer<T extends Layer> {
 
 		default:
 			moveSelected(event);
+			lastEvent = ResizerEvent.MOVE;
 			break;
 		}
 	}
@@ -307,6 +317,7 @@ public class Resizer<T extends Layer> {
 		if (!dragged && event.isDraggedButton(MouseButton.MOUSE_BUTTON_LEFT)) {
 			setInitialValues();
 			dragged = true;
+			copy.copy(selected);
 		}
 
 		if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
@@ -372,22 +383,22 @@ public class Resizer<T extends Layer> {
 		
 		if(event.isKeyDown(KeyEvent.VK_UP_ARROW)) {
 			selected.setOffsetY(-speed());
-			notifyListener();
-			reselect();
+			notifyListener(ResizerEvent.MOVE);
+			refresh();
 		} else if(event.isKeyDown(KeyEvent.VK_DOWN_ARROW)) {
 			selected.setOffsetY(+speed());
-			notifyListener();
-			reselect();
+			notifyListener(ResizerEvent.MOVE);
+			refresh();
 		}
 
 		if(event.isKeyDown(KeyEvent.VK_LEFT_ARROW)) {
 			selected.setOffsetX(-speed());
-			notifyListener();
-			reselect();
+			notifyListener(ResizerEvent.MOVE);
+			refresh();
 		} else if(event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
 			selected.setOffsetX(+speed());
-			notifyListener();
-			reselect();
+			notifyListener(ResizerEvent.MOVE);
+			refresh();
 		}
 	}
 
@@ -395,13 +406,11 @@ public class Resizer<T extends Layer> {
 		return keyboardSpeed*speedFactor;
 	}
 	
-	private void notifyListener() {
+	private void notifyListener(ResizerEvent event) {
 		if(listener == null)
 			return;
 		
-		int w = (int)(selected.utilWidth()+selected.getScaleX());
-		int h = (int)(selected.utilHeight()+selected.getScaleY());
-		listener.onResize(selectedIndex, selected.getX(), selected.getY(), w, h);		
+		listener.onResize(event, selectedIndex, selected, copy);		
 	}
 
 	public ResizerListener getListener() {
