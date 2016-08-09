@@ -82,10 +82,10 @@ public class ImageLoader extends LoaderImpl {
 		cam.setSize(img.getWidth(), img.getHeight());
 		
 		if(absolute) {
-			cam.cloneLayer(IOHelper.FILE_PREFIX+path);	
+			cam.cloneLayer(IOHelper.FILE_PREFIX+path);
 		} else {
 			cam.cloneLayer(path);
-		}		
+		}
 
 		return cam;
 	}

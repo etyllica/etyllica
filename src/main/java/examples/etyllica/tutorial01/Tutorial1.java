@@ -18,7 +18,7 @@ public class Tutorial1 extends Etyllica {
 	
 	@Override
 	public Application startApplication() {
-		initialSetup("../../");
+		initialSetup("../");
 		return new MoveImage(w,h);
 	}
 

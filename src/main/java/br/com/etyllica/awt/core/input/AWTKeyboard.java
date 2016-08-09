@@ -52,10 +52,9 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 				if ( keyState == KeyState.RELEASED ) {
 
 					keyStates.put(key,KeyState.ONCE);
-
 					keyEvents.add(new KeyEvent(key, KeyState.PRESSED));
 
-				} else if(keyState != KeyState.PRESSED) {
+				} else if (keyState != KeyState.PRESSED) {
 
 					keyStates.put(key,KeyState.PRESSED);
 
@@ -63,14 +62,13 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 
 			} else {
 
-				if(( keyState == KeyState.ONCE )||( keyState == KeyState.PRESSED )) {
+				if (( keyState == KeyState.ONCE )||( keyState == KeyState.PRESSED )) {
 
 					keyStates.put(key,KeyState.FIRST_RELEASED);
 
-				} else if(keyState==KeyState.FIRST_RELEASED) {
+				} else if (keyState == KeyState.FIRST_RELEASED) {
 
-					keyStates.put(key,KeyState.RELEASED);
-
+					keyStates.put(key, KeyState.RELEASED);
 					keyEvents.add(new KeyEvent(key, KeyState.RELEASED));
 
 					changed.remove(key);
@@ -104,7 +102,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 		keyEvents.clear();
 	}
 
-	public synchronized void keyPressed( java.awt.event.KeyEvent ke ) {
+	public void keyPressed( java.awt.event.KeyEvent ke ) {
 
 		int code = getKeyFromEvent(ke);
 
@@ -115,7 +113,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 		ke.consume();
 	}
 
-	public synchronized void keyReleased( java.awt.event.KeyEvent ke ) {
+	public void keyReleased( java.awt.event.KeyEvent ke ) {
 
 		int code = getKeyFromEvent(ke);
 
@@ -144,7 +142,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 	private int getKeyFromEvent(java.awt.event.KeyEvent ke) {
 		int code = ke.getKeyCode();
 
-		if(ke.getKeyLocation()!=java.awt.event.KeyEvent.KEY_LOCATION_STANDARD) {
+		if (ke.getKeyLocation() != java.awt.event.KeyEvent.KEY_LOCATION_STANDARD) {
 			code+=ke.getKeyLocation()*100;
 		}
 
@@ -157,7 +155,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 	 */
 
 	public void init() {
-		Field[] fields = KeyEvent.class.getDeclaredFields();
+		/*Field[] fields = KeyEvent.class.getDeclaredFields();
 
 		for (Field f : fields) {
 			if (Modifier.isPublic(f.getModifiers()) && Modifier.isStatic(f.getModifiers()) && f.getName().startsWith("TSK_")) {
@@ -172,7 +170,11 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 					e.printStackTrace();
 				}                                
 			}
-		}
+		}*/
+	}
+
+	public boolean hasPendingEvent() {
+		return changed.getSet().size() > 0;
 	}
 
 }
