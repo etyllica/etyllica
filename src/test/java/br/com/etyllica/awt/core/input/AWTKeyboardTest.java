@@ -30,5 +30,5 @@ public class AWTKeyboardTest {
 		keyboard.keyPressed(new KeyEvent(frame, 1, System.currentTimeMillis(), 0, KeyEvent.VK_0, '0'));
 		Assert.assertTrue(keyboard.hasPendingEvent());
 	}
-
+	
 }
