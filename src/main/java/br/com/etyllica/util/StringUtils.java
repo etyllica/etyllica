@@ -26,7 +26,7 @@ public class StringUtils {
 	
 	public static String fileName(String path) {
 		int token = path.lastIndexOf(File.separator);
-		String filename = path.substring(token+1,path.length()).toLowerCase();
+		String filename = path.substring(token+1,path.length());
 		return filename;
 	}
 
