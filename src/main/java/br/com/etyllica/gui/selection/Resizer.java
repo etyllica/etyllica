@@ -23,22 +23,22 @@ public class Resizer<T extends Layer> {
 
 	ResizerEvent lastEvent = null;
 	Layer copy = new Layer();
-	
+
 	public static final int UNKNOWN = -1;
-	
+
 	private int count = 0;
 	protected Map<Integer, T> layers = new HashMap<Integer, T>();
-	
+
 	protected int selectedIndex = UNKNOWN;
 	private Layer selected;
 	protected Layer overlay = new Layer();
-	
+
 	private ResizerPoint selectedArea;
 	private ResizerPoint[] points;
 
 	private ResizerListener listener;
 	private MouseStateChanger changer;
-	
+
 	private int buttonSize = 16;
 
 	private final DashedStroke dash = new DashedStroke();
@@ -46,6 +46,9 @@ public class Resizer<T extends Layer> {
 
 	private boolean dragged = false;
 
+	private int offsetX = 0;
+	private int offsetY = 0;
+	
 	private int initialX = 0;
 	private int initialY = 0;
 	private double initialW = 0;
@@ -55,7 +58,7 @@ public class Resizer<T extends Layer> {
 
 	private static final int SHIFT_SPEED = 10;
 	private static final int NORMAL_SPEED = 1;
-	
+
 	private int keyboardSpeed = 1;
 	private int speedFactor = NORMAL_SPEED;
 
@@ -102,7 +105,7 @@ public class Resizer<T extends Layer> {
 
 		this.selected = layer;
 		selectedArea.copy(layer);
-				
+
 		int inc = 0;
 
 		//Update 8 points
@@ -115,10 +118,10 @@ public class Resizer<T extends Layer> {
 				inc = -1;
 				continue;
 			}
-			
+
 			int offsetX = (int)(layer.utilWidth()*(1-layer.getScaleX()))/2;
 			int offsetY = (int)(layer.utilHeight()*(1-layer.getScaleY()))/2;
-			
+
 			int bx = (int)(layer.getX()+offsetX+i*(layer.utilWidth()*layer.getScaleX()/2) - buttonSize/2);
 			int by = (int)(layer.getY()+offsetY+j*(layer.utilHeight()*layer.getScaleY()/2) - buttonSize/2);
 
@@ -126,20 +129,19 @@ public class Resizer<T extends Layer> {
 		}
 
 	}
-
+	
 	public void draw(Graphics g) {
-
 		drawOverlay(g);
-		
+
 		if(!isSelected())
 			return;
-		
+
 		g.setColor(Color.BLACK);
 		g.setStroke(dash);
 		drawScaledRect(g, selected);
 
 		for(int b=0; b < 8; b++) {
-			points[b].draw(g);
+			points[b].draw(g, offsetX, offsetY);
 		}
 
 		g.setStroke(resetStroke);
@@ -148,23 +150,23 @@ public class Resizer<T extends Layer> {
 	private void drawScaledRect(Graphics g, Layer layer) {
 		int sw = (int)(layer.utilWidth()*layer.getScaleX());
 		int sh = (int)(layer.utilHeight()*layer.getScaleY());
-				
-		int offsetX = (int)(layer.utilWidth()*(1-layer.getScaleX()))/2;
-		int offsetY = (int)(layer.utilHeight()*(1-layer.getScaleY()))/2;
-		
-		g.drawRect(layer.getX()+offsetX, layer.getY()+offsetY, sw, sh);
+
+		int oX = (int)(layer.utilWidth()*(1-layer.getScaleX()))/2;
+		int oY = (int)(layer.utilHeight()*(1-layer.getScaleY()))/2;
+
+		g.drawRect(layer.getX()+oX+offsetX, layer.getY()+oY+offsetY, sw, sh);
 	}
-	
+
 	private void fillScaledRect(Graphics g, Layer layer) {
 		int sw = (int)(layer.utilWidth()*layer.getScaleX());
 		int sh = (int)(layer.utilHeight()*layer.getScaleY());
-		
-		int offsetX = (int)(layer.utilWidth()*(1-layer.getScaleX()))/2;
-		int offsetY = (int)(layer.utilHeight()*(1-layer.getScaleY()))/2;
-		
-		g.fillRect(layer.getX()+offsetX, layer.getY()+offsetY, sw, sh);
+
+		int oX = (int)(layer.utilWidth()*(1-layer.getScaleX()))/2;
+		int oY = (int)(layer.utilHeight()*(1-layer.getScaleY()))/2;
+
+		g.fillRect(layer.getX()+oX+offsetX, layer.getY()+oY+offsetY, sw, sh);
 	}
-		
+
 	private void drawOverlay(Graphics g) {
 
 		if(overlay.isVisible() == false)
@@ -180,13 +182,13 @@ public class Resizer<T extends Layer> {
 
 	public void handleEvent(PointerEvent event) {
 
-		int mx = event.getX();
-		int my = event.getY();
+		int mx = event.getX()-offsetX;
+		int my = event.getY()-offsetY;
 
 		if(!isSelected()) {
 			checkMouseOver(mx, my);
 		}
-		
+
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 			if(!isSelected()) {
 				checkSelection(mx, my);
@@ -194,7 +196,7 @@ public class Resizer<T extends Layer> {
 				deselect();
 			}
 		}
-		
+
 		if (selected == null)
 			return;
 
@@ -228,7 +230,7 @@ public class Resizer<T extends Layer> {
 			//notifyListener();
 			refresh();
 		}
-		
+
 		if (!changed && event.isClicked(MouseButton.MOUSE_BUTTON_LEFT)) {
 			deselect();
 		}
@@ -258,16 +260,16 @@ public class Resizer<T extends Layer> {
 				selectedIndex = entry.getKey();
 				select(component);
 				overlay.setVisible(false);
-				
+
 				break;
 			}
 		}
 	}
 
 	private void resizeEvent(int index, PointerEvent event) {
-		
+
 		lastEvent = ResizerEvent.SCALE;
-		
+
 		switch (index) {
 		case 0:
 			resizeUp(event);
@@ -380,36 +382,44 @@ public class Resizer<T extends Layer> {
 		} else if(event.isAnyKeyUp(KeyEvent.VK_SHIFT_LEFT, KeyEvent.VK_SHIFT_RIGHT)) {
 			speedFactor = NORMAL_SPEED;
 		}
-		
+
 		if(event.isKeyDown(KeyEvent.VK_UP_ARROW)) {
-			selected.setOffsetY(-speed());
-			notifyListener(ResizerEvent.MOVE);
-			refresh();
+			if(selectedIndex != UNKNOWN) {
+				selected.setOffsetY(-speed());
+				notifyListener(ResizerEvent.MOVE);
+				refresh();	
+			}			
 		} else if(event.isKeyDown(KeyEvent.VK_DOWN_ARROW)) {
-			selected.setOffsetY(+speed());
-			notifyListener(ResizerEvent.MOVE);
-			refresh();
+			if(selectedIndex != UNKNOWN) {
+				selected.setOffsetY(+speed());
+				notifyListener(ResizerEvent.MOVE);
+				refresh();
+			}
 		}
 
 		if(event.isKeyDown(KeyEvent.VK_LEFT_ARROW)) {
-			selected.setOffsetX(-speed());
-			notifyListener(ResizerEvent.MOVE);
-			refresh();
+			if(selectedIndex != UNKNOWN) {
+				selected.setOffsetX(-speed());
+				notifyListener(ResizerEvent.MOVE);
+				refresh();
+			}
 		} else if(event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
-			selected.setOffsetX(+speed());
-			notifyListener(ResizerEvent.MOVE);
-			refresh();
+			if(selectedIndex != UNKNOWN) {
+				selected.setOffsetX(+speed());
+				notifyListener(ResizerEvent.MOVE);
+				refresh();
+			}
 		}
 	}
 
 	protected int speed() {
 		return keyboardSpeed*speedFactor;
 	}
-	
+
 	private void notifyListener(ResizerEvent event) {
 		if(listener == null)
 			return;
-		
+
 		listener.onResize(event, selectedIndex, selected, copy);		
 	}
 
@@ -435,7 +445,7 @@ public class Resizer<T extends Layer> {
 		count++;
 		return count;
 	}
-	
+
 	public int getId(T layer) {
 		for(Entry<Integer, T> entry:layers.entrySet()) {
 			if(entry.getValue().equals(layer)) {
@@ -448,7 +458,7 @@ public class Resizer<T extends Layer> {
 	public int addLayer(T layer) {
 		int id = generateId();
 		layers.put(id, layer);
-		
+
 		return id;
 	}
 
@@ -462,4 +472,22 @@ public class Resizer<T extends Layer> {
 		}
 		layers.remove(index);
 	}
+
+	public int getOffsetX() {
+		return offsetX;
+	}
+
+	public void setOffsetX(int offsetX) {
+		this.offsetX = offsetX;
+	}
+
+	public int getOffsetY() {
+		return offsetY;
+	}
+
+	public void setOffsetY(int offsetY) {
+		this.offsetY = offsetY;
+	}
+	
+	
 }

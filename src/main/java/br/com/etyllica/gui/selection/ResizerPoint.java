@@ -14,13 +14,17 @@ public class ResizerPoint extends Layer {
 	
 	//Draw with half size
 	public void draw(Graphics g) {
+		draw(g, 0, 0);
+	}
+	
+	public void draw(Graphics g, int offsetX, int offsetY) {
 		int sw = (int)(utilWidth()*getScaleX());
 		int sh = (int)(utilHeight()*getScaleY());
 				
-		int offsetX = (int)(utilWidth()*(1-getScaleX()))/2;
-		int offsetY = (int)(utilHeight()*(1-getScaleY()))/2;
+		int oX = (int)(utilWidth()*(1-getScaleX()))/2;
+		int oY = (int)(utilHeight()*(1-getScaleY()))/2;
 		
-		g.fillRect(getX()+offsetX, getY()+offsetY, sw, sh);
+		g.fillRect(getX()+oX+offsetX, getY()+oY+offsetY, sw, sh);
 	}
 
 	public MouseState getState() {
