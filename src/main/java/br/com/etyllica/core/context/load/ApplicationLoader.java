@@ -29,7 +29,7 @@ public class ApplicationLoader {
 	private ScheduledExecutorService loadExecutor;
 	private Future<?> future;
 	
-	private static final int UPDATE_INTERVAL = 10;
+	private static final int UPDATE_INTERVAL = 50;
 	
 	private String lastText = "";
 	private float lastLoading = 0;
@@ -48,8 +48,7 @@ public class ApplicationLoader {
 		loadExecutor = Executors.newScheduledThreadPool(2);
 		
 		future = loadExecutor.submit(loader);
-		
-		loadExecutor.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
+		loadExecutor.scheduleAtFixedRate(updater, UPDATE_INTERVAL, UPDATE_INTERVAL, TimeUnit.MILLISECONDS);
 	}
 
 	private class Loader implements Runnable {
@@ -115,8 +114,6 @@ public class ApplicationLoader {
 
 	private void finishLoading() {
 		listener.onLoad(application);
-		called = true;
-		loadExecutor.shutdownNow();
 	}
 	
 	private void checkForLoadApplication(Context context) {
@@ -127,8 +124,7 @@ public class ApplicationLoader {
 		}
 	}
 	
-	public DefaultLoadApplication reloadApplication(LoaderListener listener, Context context) {
-		
+	public DefaultLoadApplication reloadApplication(LoaderListener listener, Context context) {		
 		context.setLoaded(false);
 		checkForLoadApplication(context);
 		
