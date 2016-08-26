@@ -569,7 +569,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		locked = true;
 
 		currentContext().getViews().clear();
-		currentContext().load();		
+		currentContext().load();
 
 		needReload = false;
 

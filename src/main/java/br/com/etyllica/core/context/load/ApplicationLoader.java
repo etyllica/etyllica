@@ -16,7 +16,7 @@ import br.com.etyllica.core.context.Context;
  *
  */
 
-public class ApplicationLoader implements ApplicationLoadListener {
+public class ApplicationLoader {
 
 	private Loader loader = new Loader();
 	private Updater updater = new Updater();
@@ -56,10 +56,8 @@ public class ApplicationLoader implements ApplicationLoadListener {
 
 		public void run() {
 			called = false;
-
-			//Set the listener to listen to loaded event
-			application.setLoadListener(ApplicationLoader.this);
 			application.startLoad();
+			called = true;
 		}
 	}
 
@@ -100,11 +98,6 @@ public class ApplicationLoader implements ApplicationLoadListener {
 		}
 	}
 
-	@Override
-	public void onApplicationLoaded() {
-		called = true;
-	}
-
 	protected void getError() {
 		try {
 			future.get(UPDATE_INTERVAL/2, TimeUnit.MILLISECONDS);
@@ -116,7 +109,7 @@ public class ApplicationLoader implements ApplicationLoadListener {
 			e.printStackTrace();
 		} catch (TimeoutException e) {
 			//Timeout no error until here
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 

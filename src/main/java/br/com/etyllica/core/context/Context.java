@@ -35,6 +35,11 @@ import br.com.etyllica.layer.Layer;
 
 public abstract class Context extends Layer implements ViewContainer, UIComponent, Updatable, MouseStateChanger, LanguageChanger, DropTarget {
 
+	private static final ApplicationLoadListener DUMMY_LOAD_LISTENER = new ApplicationLoadListener() {
+		@Override
+		public void onApplicationLoaded() {}
+	};
+
 	/**
 	 * The updateInterval between executions
 	 */
@@ -115,7 +120,7 @@ public abstract class Context extends Layer implements ViewContainer, UIComponen
 	/**
      * Application to be shown during loading
      */
-	private ApplicationLoadListener loadListener;
+	private ApplicationLoadListener loadListener = DUMMY_LOAD_LISTENER;
 	
 	private MouseStateListener mouseStateListener;
 	
