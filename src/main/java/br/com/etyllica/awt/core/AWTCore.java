@@ -25,12 +25,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import br.com.etyllica.awt.AWTGraphics;
 import br.com.etyllica.awt.FullScreenWindow;
@@ -79,10 +75,6 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 	private GameLoop gameLoop;
 
 	private boolean locked = false;
-
-	private Future<?> future;
-
-	private ExecutorService executor = Executors.newSingleThreadExecutor();
 
 	private DropTarget dropTarget;
 
@@ -316,7 +308,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 		this.loaders = loaders;
 	}
 
-	public void update(double delta) {
+	public void update(double delta) throws Exception {
 
 		long now = System.currentTimeMillis();
 
@@ -339,30 +331,17 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 	}
 
 	public void startEngine() {
-
 		component.setVisible(true);
-
-		future = executor.submit(this);
+		
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+		executor.execute(this);
 	}
 
 	@Override
 	public void run() {
-
-		if(!gameLoop.loop()) {
-			getError();
-		}
-	}
-
-	protected void getError() {
 		try {
-			future.get(100, TimeUnit.MILLISECONDS);
-		} catch (ExecutionException e) {
-			Throwable cause = e.getCause();
-			cause.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
+			gameLoop.loop();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

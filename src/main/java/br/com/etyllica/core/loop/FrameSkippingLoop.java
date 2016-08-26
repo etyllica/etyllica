@@ -19,7 +19,7 @@ public class FrameSkippingLoop extends GameLoopImpl {
 	}
 
 	@Override
-	public boolean loop() {
+	public boolean loop() throws Exception {
 
 		long beginTime;		// the time when the cycle begun
 		long timeDiff;		// the time it took for the cycle to execute
@@ -35,7 +35,8 @@ public class FrameSkippingLoop extends GameLoopImpl {
 			beginTime = System.currentTimeMillis();
 			framesSkipped = 0;	// resetting the frames skipped
  
-			core.update(1);			
+			core.update(1);
+				
 			core.render();
 			// calculate how long did the cycle take
 			timeDiff = System.currentTimeMillis() - beginTime;

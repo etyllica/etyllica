@@ -2,7 +2,7 @@ package br.com.etyllica.core;
 
 public interface GameCore {
 
-	public void update(double delta);
+	public void update(double delta) throws Exception;
 	
 	public void render();
 	
