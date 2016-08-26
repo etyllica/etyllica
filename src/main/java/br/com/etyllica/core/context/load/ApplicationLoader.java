@@ -108,8 +108,8 @@ public class ApplicationLoader {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (TimeoutException e) {
-			//Timeout no error until here
-			e.printStackTrace();
+			//Ignore the Timeout Exception
+			//e.printStackTrace();
 		}
 	}
 
