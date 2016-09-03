@@ -26,6 +26,10 @@ public class FadeOutAnimation extends OpacityAnimation {
 		super(target, delay, time);
 	}
 	
+	public FadeOutAnimation(Layer target) {
+		super(target);
+	}
+
 	@Override
 	public void setTarget(Layer target) {
 		super.setTarget(target);

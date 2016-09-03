@@ -2,6 +2,7 @@ package br.com.etyllica.core.animation;
 
 import br.com.etyllica.core.animation.script.AnimationScript;
 import br.com.etyllica.core.animation.script.FadeInAnimation;
+import br.com.etyllica.core.animation.script.FadeOutAnimation;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.animation.script.MovementScript;
 import br.com.etyllica.core.animation.script.OrbitAnimation;
@@ -114,6 +115,13 @@ public class LayerAnimation extends AnimationScript {
 
 	public FadeInAnimation fadeIn() {
 		FadeInAnimation script = new FadeInAnimation(target);
+		concatenate(script);
+
+		return script;
+	}
+	
+	public FadeOutAnimation fadeOut() {
+		FadeOutAnimation script = new FadeOutAnimation(target);
 		concatenate(script);
 
 		return script;
