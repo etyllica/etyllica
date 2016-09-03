@@ -138,7 +138,7 @@ public class AnimatedLayer extends ImageLayer {
 		
 		setFrame(frame);
 		
-		if(frame == frames-1) {
+		if (frame == frames-1) {
 			notifyAnimationFinishListener(0);
 		}
 	}	
@@ -157,14 +157,12 @@ public class AnimatedLayer extends ImageLayer {
 			
 			changedAt = now;
 			
-			boolean hasNextFrame = nextFrame(); 
+			boolean hasNextFrame = nextFrame();
 			
 			notifyFrameChangeListener(now, currentFrame);
 			
 			if(!hasNextFrame) {
-
 				notifyAnimationFinishListener(now);
-				
 			}
 						
 		}
@@ -188,9 +186,7 @@ public class AnimatedLayer extends ImageLayer {
 	}
 	
 	public void animate() {
-
 		nextFrame();
-
 		stopped = false;
 	}
 
@@ -198,24 +194,13 @@ public class AnimatedLayer extends ImageLayer {
 		stopped = true;
 	}	
 
-	public void animaOnce() {
-
-		visible = true;
-		
-		lockOnce = false;
-		
+	public void animateOnce() {
 		once = true;
-		
 		stopped = false;
+		lockOnce = false;
 
 		currentFrame = 0;
-
-		if(animateHorizontally) {
-			xImage = 0;
-		}else{
-			yImage = 0;
-		}
-
+		setFrame(currentFrame);
 	}
 	
 	public boolean nextFrame() {
@@ -229,15 +214,12 @@ public class AnimatedLayer extends ImageLayer {
 		} else {
 
 			if(once) {
-				visible = false;
 				lockOnce = true;
 				//stopped = true;
 				//setFrame(currentFrame);
 				
 			} else {
-			
 				currentFrame = 0;
-				
 			}
 			
 			hasNextFrame = false;
