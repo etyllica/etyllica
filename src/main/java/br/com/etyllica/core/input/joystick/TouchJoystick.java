@@ -12,8 +12,8 @@ public class TouchJoystick {
 	private static final int DEFAULT_RADIUS = 120/2;
 	private static final int DEFAULT_JOYSTICK_RADIUS = 50/2;
 	
-	private Layer area;
-	private Layer joystick;
+	protected Layer area;
+	protected Layer joystick;
 	protected int activeId = INACTIVE;
 	protected boolean active = false;
 	
@@ -29,10 +29,14 @@ public class TouchJoystick {
 	protected double sensitivityY = 0;
 	
 	public TouchJoystick(int x, int y) {
-		this(x, y, DEFAULT_RADIUS);
+		this(x, y, DEFAULT_RADIUS, DEFAULT_JOYSTICK_RADIUS);
 	}
 	
 	public TouchJoystick(int x, int y, int radius) {
+		this(x, y, radius, DEFAULT_JOYSTICK_RADIUS);
+	}
+	
+	public TouchJoystick(int x, int y, int radius, int joystickRadius) {
 		super();
 		area = new Layer(x, y, radius*2, radius*2);
 
@@ -103,7 +107,7 @@ public class TouchJoystick {
 		dist = joyPosition.distance(center);
 
 		if(dist < radius) {
-			joystick.setCoordinates(jx, jy);					
+			joystick.setCoordinates(jx, jy);			
 		} else {
 			double lx = sensitivityX*radius;
 			double ly = sensitivityY*radius;
@@ -121,7 +125,7 @@ public class TouchJoystick {
 		}
 	}
 
-	private void resetJoystick() {
+	protected void resetJoystick() {
 		joystick.setCoordinates((int)center.getX()-joystickRadius, (int)center.getY()-joystickRadius);
 		onReset();
 	}
