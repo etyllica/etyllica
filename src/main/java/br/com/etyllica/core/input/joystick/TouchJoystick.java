@@ -166,4 +166,8 @@ public class TouchJoystick {
 		this.joystickRadius = joystickRadius;
 	}
 	
+	public Point2D getCenter() {
+		return center;
+	}
+	
 }
