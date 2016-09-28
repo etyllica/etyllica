@@ -173,10 +173,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		List<View> components = application.getViews();
 		uiCore.updateGui(components);
 
-		getMouse().lock();
-		List<PointerEvent> events = getMouse().getEvents();
+		List<PointerEvent> events = getMouse().lock();
 		updatePointerEvents(events, application, components);
-		getMouse().packEvents();
 		getMouse().unlock();
 
 		updateHelperUI(now);

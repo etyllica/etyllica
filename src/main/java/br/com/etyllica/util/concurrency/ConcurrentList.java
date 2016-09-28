@@ -11,6 +11,13 @@ public class ConcurrentList<T> {
 	
 	private boolean locked = false;
 	
+	public ConcurrentList(int initialSize) {
+		super();
+		
+		list = new ArrayList<T>(initialSize);
+		alternativeList = new ArrayList<T>(initialSize);
+	}
+	
 	public ConcurrentList() {
 		super();
 		
@@ -28,7 +35,6 @@ public class ConcurrentList<T> {
 	
 	public List<T> lock() {
 		locked = true;
-		
 		return list;
 	}
 	

@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.event.MouseInputListener;
@@ -12,7 +11,7 @@ import javax.swing.event.MouseInputListener;
 import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
-import br.com.etyllica.storage.RingBuffer;
+import br.com.etyllica.util.concurrency.ConcurrentList;
 
 /**
  * 
@@ -24,9 +23,7 @@ import br.com.etyllica.storage.RingBuffer;
 public class Mouse implements MouseMotionListener, MouseInputListener, MouseWheelListener {
 
 	protected int x = 0;
-
 	protected int y = 0;
-
 	protected int z = 0;
 
 	protected int clicks = 0;
@@ -40,18 +37,13 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	protected int dragX = 0;
 	protected int dragY = 0;
 
-	private boolean locked = false;
-
-	private RingBuffer<PointerEvent> events = new RingBuffer<PointerEvent>(PointerEvent.class);
-	private List<PointerEvent> moreEvents = new ArrayList<PointerEvent>();
-
+	private ConcurrentList<PointerEvent> events = new ConcurrentList<PointerEvent>(4);
+	
 	public Mouse(int x, int y) {
 		super();
 
 		this.x = x;
 		this.y = y;
-
-		events.setMinimumSlots(4);
 	}
 
 	public int getX() {
@@ -84,12 +76,10 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	private void addEvent(int button, PointerState state) {
-
 		addEvent(button, state, 0);
 	}
 
 	private void addEvent(int button, PointerState state, int amount) {
-
 		addEvent(button, state, 0, amount);
 	}
 
@@ -109,8 +99,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 			break;
 		}
 
-		getSlot().set(key, state, x, y, amountX, amountY);
-
+		events.add(new PointerEvent(key, state, x, y, amountX, amountY));
 	}
 
 	@Override
@@ -220,38 +209,26 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 			key = MouseButton.MOUSE_WHEEL_UP;
 		}
 
-		getSlot().set(key, PointerState.PRESSED, x, y, mwe.getWheelRotation());
+		events.add(new PointerEvent(key, PointerState.PRESSED, x, y, mwe.getWheelRotation()));
 	}
 	
-	public List<PointerEvent> getEvents() {
-		return events.getList();
-	}
-
 	public void addMouseMoveEvent(int x, int y) {
-		getSlot().set(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y);
-	}
-
-	public void packEvents() {
-		events.pack();
-
-		if(locked)
-			return;
-		
-		if(!moreEvents.isEmpty()) {
-
-			for(PointerEvent event: moreEvents) {
-				getSlot().copy(event);
-			}
-
-			moreEvents.clear();
-		}
+		events.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y));
 	}
 
 	public void addEvent(PointerEvent event) {
-		getSlot().copy(event);
+		events.add(event);
 	}
 
-	private PointerEvent getSlot() {
+	public List<PointerEvent> lock() {
+		return events.lock();
+	}
+
+	public void unlock() {
+		events.unlock();
+	}
+
+	/*private PointerEvent getSlot() {
 
 		if(!locked) {
 
@@ -260,8 +237,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		} else {
 
 			PointerEvent event = new PointerEvent();
-
-			moreEvents.add(event);
+			alternativeList.add(event);
 
 			return event;
 		}
@@ -282,6 +258,6 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 
 	public void setLocked(boolean locked) {
 		this.locked = locked;
-	}	
+	}*/
 
 }
