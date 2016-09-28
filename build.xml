@@ -10,7 +10,7 @@
 
   <property name="libcore"     value="etyllica-${version}" />
   <property name="libutil"     value="etyllica-util-${version}" />
-  <property name="libsound"    value="etyllica-${version}-sound" />
+  <property name="libsound"    value="etyllica-sound-${version}" />
 
   <property name="src.dir"     value="src/main/java" />
   <property name="test.dir"    value="src/test/java" />
