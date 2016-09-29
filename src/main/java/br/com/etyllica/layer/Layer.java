@@ -95,6 +95,10 @@ public class Layer extends GeometricLayer implements Drawable {
 	public void setOrigin(Vector2 origin) {
 		this.origin = origin;
 	}
+	
+	public void setOrigin(float ox, float oy) {
+		this.origin.set(ox, oy);
+	}
 
 	/**
 	 * 
