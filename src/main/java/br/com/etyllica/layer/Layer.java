@@ -29,16 +29,14 @@ public class Layer extends GeometricLayer implements Drawable {
 	protected double angle = 0;
 	
 	/**
-	 * Pivot point of rotation
+	 * Reference point to scale and rotation
 	 */
-	protected Vector2 origin = Vector2.Zero;
-
+	protected float originX, originY;
+	
 	/**
 	 * Scale factors
 	 */
-	protected double scaleX = 1;
-
-	protected double scaleY = 1;
+	protected double scaleX = 1, scaleY = 1;
 
 	/**
 	 * if layer is visible
@@ -84,20 +82,26 @@ public class Layer extends GeometricLayer implements Drawable {
 		this.angle = angle;
 	}
 	
-	public Vector2 getOrigin() {
-		return origin;
+	public float getOriginX() {
+		return originX;
+	}
+	
+	public float getOriginY() {
+		return originY;
 	}
 
 	/**
 	 * 
-	 * @param origin - Rotation pivot point
+	 * @param origin
 	 */
-	public void setOrigin(Vector2 origin) {
-		this.origin = origin;
+	public void setOrigin(float originX, float originY) {
+		this.originX = originX;
+		this.originY = originY;
 	}
 	
-	public void setOrigin(float ox, float oy) {
-		this.origin.set(ox, oy);
+	public void setOriginCenter() {
+		this.originX = utilWidth() / 2;
+		this.originY = utilHeight() / 2;
 	}
 
 	/**
@@ -190,39 +194,47 @@ public class Layer extends GeometricLayer implements Drawable {
 		return getTransform(0, 0);
 	}	
 	
-	public AffineTransform getTransform(int offsetX, int offsetY) {
+	public AffineTransform getTransform(float offsetX, float offsetY) {
 
+		float px = getX();
+		if (originX != 0) {
+			px = originX;
+		}
+		
+		float py = getY();
+		if (originY != 0) {
+			py -= originY;
+		}
+		
 		AffineTransform transform = AffineTransform.getTranslateInstance(offsetX, offsetY);
 		
+		double halfWidth = utilWidth()/2;
+		double halfHeight = utilHeight()/2;
+		
 		if(angle != 0) {
-			if (origin == Vector2.Zero) {
-				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
-						getX()+utilWidth()/2, getY()+utilHeight()/2));	
-			} else {
-				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
-						getX()+origin.x, getY()+origin.y));
-			}
+			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
+					px+halfWidth, py+halfHeight));
 		}
 
 		if(scaleX != 1 || scaleY != 1) {
 
 			double sw = utilWidth()*scaleX;
 			double sh = utilHeight()*scaleY;
+			
+			double dx = sw/2-halfWidth;
+			double dy = sh/2-halfHeight;
 
-			double dx = sw/2-utilWidth()/2;
-			double dy = sh/2-utilHeight()/2;
-
-			transform.translate(getX()-utilWidth()/2-dx, getY()-utilHeight()/2-dy);
+			transform.translate(px-halfWidth-dx, py-halfHeight-dy);
 
 			AffineTransform scaleTransform = new AffineTransform();
 
-			scaleTransform.translate(utilWidth()/2, utilHeight()/2);
-			scaleTransform.scale(scaleX,scaleY);
-			scaleTransform.translate(-getX(), -getY());
+			scaleTransform.translate(halfWidth, halfHeight);
+			scaleTransform.scale(scaleX, scaleY);
+			scaleTransform.translate(-px, -py);
 
 			transform.concatenate(scaleTransform);
 		}
-
+		
 		return transform;
 	}
 

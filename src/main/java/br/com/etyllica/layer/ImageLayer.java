@@ -92,7 +92,11 @@ public class ImageLayer extends StaticLayer {
 	 * @param path
 	 */
 	public ImageLayer(String path) {
-		this(0,0,path);
+		this(0, 0, path);
+	}
+	
+	public ImageLayer(String path, boolean absolute) {
+		this(0, 0, path, absolute);
 	}
 
 	public ImageLayer(int x, int y, String path, boolean absolute) {
