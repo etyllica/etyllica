@@ -2,6 +2,8 @@ package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
 
+import com.badlogic.gdx.math.Vector2;
+
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.PointerEvent;
@@ -25,6 +27,11 @@ public class Layer extends GeometricLayer implements Drawable {
 	 * Angle in degrees
 	 */
 	protected double angle = 0;
+	
+	/**
+	 * Pivot point of rotation
+	 */
+	protected Vector2 origin = Vector2.Zero;
 
 	/**
 	 * Scale factors
@@ -75,6 +82,18 @@ public class Layer extends GeometricLayer implements Drawable {
 	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
+	}
+	
+	public Vector2 getOrigin() {
+		return origin;
+	}
+
+	/**
+	 * 
+	 * @param origin - Rotation pivot point
+	 */
+	public void setOrigin(Vector2 origin) {
+		this.origin = origin;
 	}
 
 	/**
@@ -172,8 +191,13 @@ public class Layer extends GeometricLayer implements Drawable {
 		AffineTransform transform = AffineTransform.getTranslateInstance(offsetX, offsetY);
 		
 		if(angle != 0) {
-			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
-					getX()+utilWidth()/2, getY()+utilHeight()/2));
+			if (origin == Vector2.Zero) {
+				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
+						getX()+utilWidth()/2, getY()+utilHeight()/2));	
+			} else {
+				transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
+						getX()+origin.x, getY()+origin.y));
+			}
 		}
 
 		if(scaleX != 1 || scaleY != 1) {
