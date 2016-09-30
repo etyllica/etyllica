@@ -2,8 +2,6 @@ package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
 
-import com.badlogic.gdx.math.Vector2;
-
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.PointerEvent;
@@ -195,45 +193,41 @@ public class Layer extends GeometricLayer implements Drawable {
 	}	
 	
 	public AffineTransform getTransform(float offsetX, float offsetY) {
-
-		float px = getX();
+		
+		final float px = getX();
+		final float py = getY();
+		
+		final float halfWidth = utilWidth()/2;
+		final float halfHeight = utilHeight()/2;
+		
+		float ox = halfWidth;
+		float oy = halfHeight;
+		
+		// Origin does not affect translation, only rotation and scaling.
 		if (originX != 0) {
-			px = originX;
+			ox = originX;
 		}
 		
-		float py = getY();
 		if (originY != 0) {
-			py -= originY;
+			oy = originY;
 		}
 		
-		AffineTransform transform = AffineTransform.getTranslateInstance(offsetX, offsetY);
-		
-		double halfWidth = utilWidth()/2;
-		double halfHeight = utilHeight()/2;
-		
-		if(angle != 0) {
-			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),
-					px+halfWidth, py+halfHeight));
-		}
-
-		if(scaleX != 1 || scaleY != 1) {
-
-			double sw = utilWidth()*scaleX;
-			double sh = utilHeight()*scaleY;
+		AffineTransform transform = new AffineTransform();
 			
-			double dx = sw/2-halfWidth;
-			double dy = sh/2-halfHeight;
-
-			transform.translate(px-halfWidth-dx, py-halfHeight-dy);
-
-			AffineTransform scaleTransform = new AffineTransform();
-
-			scaleTransform.translate(halfWidth, halfHeight);
-			scaleTransform.scale(scaleX, scaleY);
-			scaleTransform.translate(-px, -py);
-
-			transform.concatenate(scaleTransform);
+		transform.translate(px + ox, py + oy);
+				
+		// Scale
+		if(scaleX != 1 || scaleY != 1) {
+			transform.scale(scaleX, scaleY);
 		}
+		
+		// Rotate
+		if(angle != 0) {
+			transform.rotate(Math.toRadians(angle));
+		}
+
+		// Move to origin (centered)
+		transform.translate(-px - ox, -py - oy);
 		
 		return transform;
 	}
@@ -249,6 +243,7 @@ public class Layer extends GeometricLayer implements Drawable {
 	
 	public void copy(Layer layer) {
 		super.copy(layer);
+		setOrigin(layer.getOriginX(), layer.getOriginY());
 		setScaleX(layer.getScaleX());
 		setScaleY(layer.getScaleY());
 		setAngle(layer.getAngle());
