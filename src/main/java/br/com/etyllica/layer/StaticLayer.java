@@ -121,7 +121,7 @@ public class StaticLayer extends Layer {
 		StaticLayer layer = ImageLoader.getInstance().loadImage(path, absolute);
 		this.w = layer.getW();
 		this.h = layer.getH();
-		
+		setOriginCenter();
 		return layer;
 	}
 

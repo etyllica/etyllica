@@ -197,24 +197,9 @@ public class Layer extends GeometricLayer implements Drawable {
 		final float px = getX();
 		final float py = getY();
 		
-		final float halfWidth = utilWidth()/2;
-		final float halfHeight = utilHeight()/2;
-		
-		float ox = halfWidth;
-		float oy = halfHeight;
-		
-		// Origin does not affect translation, only rotation and scaling.
-		if (originX != 0) {
-			ox = originX;
-		}
-		
-		if (originY != 0) {
-			oy = originY;
-		}
-		
 		AffineTransform transform = new AffineTransform();
 			
-		transform.translate(px + ox, py + oy);
+		transform.translate(px + originX, py + originY);
 				
 		// Scale
 		if(scaleX != 1 || scaleY != 1) {
@@ -227,7 +212,7 @@ public class Layer extends GeometricLayer implements Drawable {
 		}
 
 		// Move to origin (centered)
-		transform.translate(-px - ox, -py - oy);
+		transform.translate(-px - originX, -py - originY);
 		
 		return transform;
 	}
