@@ -1,9 +1,7 @@
 package br.com.etyllica.awt.core.input;
 
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,6 +9,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.event.KeyState;
 import br.com.etyllica.core.input.keyboard.Keyboard;
+import br.com.etyllica.util.concurrency.ConcurrentList;
 import br.com.etyllica.util.concurrency.ConcurrentSet;
 
 /**
@@ -24,11 +23,10 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 
 	private KeyEventListener listener;
 	
-	private List<KeyEvent> keyEvents = new ArrayList<KeyEvent>();
-	private List<KeyEvent> queueEvents = new ArrayList<KeyEvent>();
+	private ConcurrentList<KeyEvent> keyEvents = new ConcurrentList<KeyEvent>();
 
-	private Map<Integer,Boolean> keys = new HashMap<Integer,Boolean>();
-	private Map<Integer,KeyState> keyStates = new HashMap<Integer,KeyState>();
+	private Map<Integer, Boolean> keys = new HashMap<Integer, Boolean>();
+	private Map<Integer, KeyState> keyStates = new HashMap<Integer, KeyState>();
 
 	private ConcurrentSet<Integer> changed = new ConcurrentSet<Integer>();
 
@@ -51,7 +49,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 
 				if (keyState == KeyState.RELEASED) {
 					keyStates.put(key,KeyState.ONCE);
-					queueEvents.add(new KeyEvent(key, KeyState.PRESSED));
+					keyEvents.add(new KeyEvent(key, KeyState.PRESSED));
 				} else if (keyState != KeyState.PRESSED) {
 					keyStates.put(key,KeyState.PRESSED);
 				}
@@ -62,7 +60,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 					keyStates.put(key,KeyState.FIRST_RELEASED);
 				} else if (keyState == KeyState.FIRST_RELEASED) {
 					keyStates.put(key, KeyState.RELEASED);
-					queueEvents.add(new KeyEvent(key, KeyState.RELEASED));
+					keyEvents.add(new KeyEvent(key, KeyState.RELEASED));
 
 					changed.remove(key);
 				}
@@ -84,14 +82,12 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 	}
 
 	public void poll(KeyEventListener listener) {
-		keyEvents.addAll(queueEvents);
-		queueEvents.clear();
 		
-		for (KeyEvent event: keyEvents) {
+		for (KeyEvent event: keyEvents.lock()) {
 			listener.updateKeyEvent(event);
 		}
 
-		keyEvents.clear();
+		keyEvents.unlock();
 	}
 
 	public void keyPressed( java.awt.event.KeyEvent ke ) {
