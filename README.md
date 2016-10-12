@@ -1,4 +1,4 @@
-# Etyllica (v 5.1) [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
+# ![https://github.com/yuripourre/etyllica/blob/master/assets/images/etyllica_logo.png?raw=true](Etyllica Logo) (v 5.1.2) [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
 
 [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games really fast.
 
@@ -32,11 +32,10 @@
 - [Ninja Robot](https://github.com/yuripourre/ninja-robot) - A casual game
 - [Tomb Runaway](https://github.com/yuripourre/runaway) - A maze game
 - [Helicoptr](https://github.com/yuripourre/helicoptr) - A flappy bird clone
+- [Snake Game](https://github.com/yuripourre/snake-game) - A snake game clone
 
 ### Non-Games
-- [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - Paint Clone
-- [Etyllic Animator](http://yuripourre.github.com/etyllic-animator) - Pivot Animator (2D and 3D)
-- [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android (deprecated).
+- [Etyllic Spriter](https://github.com/yuripourre/etyllica-spriter) - A [Spriter](https://brashmonkey.com/) plugin
 - [Etyllica Physics](https://github.com/yuripourre/etyllica-physics) - Etyllica extension to handle 2D physics.
 - [EtyllicTTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
 - [Etyllic GameBoy](https://github.com/yuripourre/etyllic-gameboy) - A [Javaboy](http://www.millstone.demon.co.uk/download/javaboy/) fork with faster rendering.
@@ -51,6 +50,11 @@
 ### Other Non-Games
 - [Farthest in Future Algorithm](https://github.com/UNIRIO-SI/farthest-in-future-algorithm) - A Farthest in Future Algorithm implementation with animations.
 - [Rubik Solver](https://github.com/UNIRIO-SI/rubik-solver) - A Simple Rubik Cube Application.
+
+### Deprecated Non-Games
+- [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - Paint Clone
+- [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android (deprecated).
+
 
 ## Dependencies (optional)
 
