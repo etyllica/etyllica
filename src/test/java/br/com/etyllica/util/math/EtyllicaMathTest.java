@@ -1,7 +1,9 @@
-package br.com.etyllica.util;
+package br.com.etyllica.util.math;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import br.com.etyllica.util.math.EtyllicaMath;
 
 public class EtyllicaMathTest {
 

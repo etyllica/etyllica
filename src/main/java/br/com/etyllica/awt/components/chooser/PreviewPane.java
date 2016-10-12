@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
+ * A JPanel with Image Preview
+ * 
  * Code found at: http://www.javalobby.org/forums/thread.jspa?messageID=91844740
  */
 public class PreviewPane extends JPanel implements PropertyChangeListener {

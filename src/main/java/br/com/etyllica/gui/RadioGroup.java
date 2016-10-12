@@ -8,7 +8,6 @@ import br.com.etyllica.gui.base.BaseRadioButton;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

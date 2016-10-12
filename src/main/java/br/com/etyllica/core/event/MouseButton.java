@@ -1,9 +1,9 @@
 package br.com.etyllica.core.event;
 
-
 /**
  * Reference: http://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseEvent.html
  */
+
 public enum MouseButton {
 
 	MOUSE_BUTTON_LEFT(1),

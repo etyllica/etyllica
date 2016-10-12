@@ -6,12 +6,12 @@ import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.theme.Theme;
 
 /**
+ * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 
-public class RoundCornerButton extends BaseButton{
+public class RoundCornerButton extends BaseButton {
 
 	public RoundCornerButton(int x, int y, int w, int h) {
 		super(x, y, w, h);

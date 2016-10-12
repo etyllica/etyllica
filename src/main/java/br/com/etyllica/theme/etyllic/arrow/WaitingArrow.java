@@ -3,7 +3,6 @@ package br.com.etyllica.theme.etyllic.arrow;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

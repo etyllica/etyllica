@@ -2,13 +2,10 @@ package br.com.etyllica.theme.etyllic.components;
 
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.base.BaseCheckBox;
-import br.com.etyllica.theme.Theme;
-import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

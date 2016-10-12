@@ -14,7 +14,6 @@ import br.com.etyllica.gui.spinner.composer.VerticalComposer;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

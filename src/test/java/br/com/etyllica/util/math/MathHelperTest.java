@@ -1,4 +1,4 @@
-package br.com.etyllica.core.math;
+package br.com.etyllica.util.math;
 
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.etyllica.core.linear.Triangle;
+import br.com.etyllica.util.math.MathHelper;
 
 import com.badlogic.gdx.math.Vector3;
 

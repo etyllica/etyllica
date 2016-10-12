@@ -7,7 +7,6 @@ import br.com.etyllica.gui.base.BasePanel;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

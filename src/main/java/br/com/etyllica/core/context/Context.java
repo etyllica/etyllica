@@ -29,7 +29,6 @@ import br.com.etyllica.layer.Layer;
  * Class to represent sessions of the Main Application like Mini-Applications.  
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

@@ -7,7 +7,6 @@ import br.com.etyllica.core.Movable;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

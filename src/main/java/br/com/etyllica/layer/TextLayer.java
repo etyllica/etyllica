@@ -15,7 +15,6 @@ import br.com.etyllica.loader.FontLoader;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

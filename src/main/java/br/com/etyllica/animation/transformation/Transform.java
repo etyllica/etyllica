@@ -12,8 +12,6 @@ public class Transform {
 	private double scaleX = 1;
 	private double scaleY = 1;
 	
-	private boolean flip = false;
-	
 	public Transform() {
 		super();
 	}
@@ -82,12 +80,12 @@ public class Transform {
 		this.scaleY = scaleY;
 	}
 
-	public boolean isFlip() {
-		return flip;
+	public boolean isFlippedX() {
+		return scaleX < 0;
 	}
-
-	public void setFlip(boolean flip) {
-		this.flip = flip;
+	
+	public boolean isFlippedY() {
+		return scaleY < 0;
 	}
 	
 	public void copy(Transform copy) {
@@ -99,9 +97,6 @@ public class Transform {
 		
 		this.scaleX = copy.scaleX;
 		this.scaleY = copy.scaleY;
-				
-		this.flip = copy.flip;		
-		
 	}
 	
 	public AffineTransform getIncompleteTransform(double pivotX, double pivotY) {
@@ -114,13 +109,8 @@ public class Transform {
 	public AffineTransform getTransformorm(double pivotX, double pivotY) {
 		AffineTransform transform = AffineTransform.getTranslateInstance(x, y);
 		
-		if(flip) {
-			transform.concatenate(AffineTransform.getScaleInstance(-scaleX, scaleY));
-		} else {
-			transform.concatenate(AffineTransform.getScaleInstance(scaleX, scaleY));
-		}
-		
-		transform.concatenate(AffineTransform.getRotateInstance(angle, pivotX, pivotY));		
+		transform.concatenate(AffineTransform.getRotateInstance(angle, pivotX, pivotY));
+		transform.concatenate(AffineTransform.getScaleInstance(scaleX, scaleY));
 		
 		return transform;
 	}

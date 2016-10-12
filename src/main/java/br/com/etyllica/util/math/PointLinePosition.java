@@ -1,4 +1,4 @@
-package br.com.etyllica.core.math;
+package br.com.etyllica.util.math;
 
 public enum PointLinePosition {
 

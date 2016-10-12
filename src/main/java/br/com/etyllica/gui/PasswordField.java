@@ -3,11 +3,9 @@ package br.com.etyllica.gui;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.gui.base.BaseTextField;
 
-
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

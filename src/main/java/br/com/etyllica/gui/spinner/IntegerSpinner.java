@@ -5,7 +5,6 @@ import br.com.etyllica.gui.Spinner;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

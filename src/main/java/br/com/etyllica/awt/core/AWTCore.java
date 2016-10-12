@@ -37,7 +37,7 @@ import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.context.Session;
-import br.com.etyllica.core.engine.Engine;
+import br.com.etyllica.core.engine.EtyllicaFrame;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.loop.FrameSkippingLoop;
@@ -47,6 +47,11 @@ import br.com.etyllica.gui.Window;
 import br.com.etyllica.loader.Loader;
 import br.com.etyllica.util.io.IOHelper;
 
+/**
+ * AWTCore is an InnerCore based on AWT 
+ * @author yuripourre
+ *
+ */
 public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.event.ComponentListener, DropTargetListener {
 
 	private int width;
@@ -68,7 +73,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 
 	private FullScreenWindow fullScreen = null;
 
-	private Engine engine;
+	private EtyllicaFrame engine;
 
 	private boolean running = true;
 
@@ -326,7 +331,7 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 		super.hideCursor();
 	}
 
-	public void setEngine(Engine engine) {
+	public void setEngine(EtyllicaFrame engine) {
 		this.engine = engine;
 	}
 

@@ -16,9 +16,9 @@ import br.com.etyllica.gui.table.Column;
 import br.com.etyllica.gui.table.Row;
 
 /**
+ * Table component
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

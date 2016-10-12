@@ -5,7 +5,6 @@ import br.com.etyllica.core.i18n.Language;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

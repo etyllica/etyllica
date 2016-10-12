@@ -8,11 +8,10 @@ import br.com.etyllica.layer.StaticLayer;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 
-public class ImageButton extends BaseButton{
+public class ImageButton extends BaseButton {
 
 	protected String normal;
 	protected String sobMouse;

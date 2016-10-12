@@ -41,7 +41,6 @@ import br.com.etyllica.theme.listener.ThemeListener;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

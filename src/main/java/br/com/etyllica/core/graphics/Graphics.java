@@ -24,7 +24,6 @@ import br.com.etyllica.layer.Layer;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

@@ -16,7 +16,6 @@ import br.com.etyllica.util.concurrency.ConcurrentList;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

@@ -8,7 +8,6 @@ import br.com.etyllica.gui.style.Style;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

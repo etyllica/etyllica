@@ -3,9 +3,7 @@ package br.com.etyllica.core.linear;
 public class Point3D {
 
 	protected double x;
-
 	protected double y;
-
 	protected double z;
 
 	public Point3D() {

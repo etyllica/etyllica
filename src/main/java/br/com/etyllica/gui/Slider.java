@@ -6,13 +6,10 @@ import br.com.etyllica.core.event.MouseButton;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.base.BaseButton;
-import br.com.etyllica.gui.listener.ValueListener;
 import br.com.etyllica.theme.Theme;
-import br.com.etyllica.theme.ThemeManager;
 
 /**
  * @author yuripourre
- * @license LGPLv3
  */
 
 public class Slider extends View {

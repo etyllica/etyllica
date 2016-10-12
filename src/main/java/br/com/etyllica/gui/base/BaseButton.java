@@ -15,7 +15,6 @@ import br.com.etyllica.theme.Theme;
  * Button Component
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

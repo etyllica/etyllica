@@ -1,7 +1,6 @@
 package br.com.etyllica.core.event;
 
 
-
 public class KeyEvent {
 
 	private int id = 0; 

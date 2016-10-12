@@ -13,7 +13,6 @@ import br.com.etyllica.gui.base.BaseButton;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

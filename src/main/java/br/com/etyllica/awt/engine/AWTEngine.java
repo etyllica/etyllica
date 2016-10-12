@@ -5,13 +5,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 import br.com.etyllica.awt.core.AWTCore;
+import br.com.etyllica.core.Engine;
 import br.com.etyllica.core.context.Session;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.loader.FontLoader;
 import br.com.etyllica.loader.Loader;
 import br.com.etyllica.loader.image.ImageLoader;
-
-public class AWTEngine {
+/**
+ * AWTEngine is an Engine based on AWT
+ * @author yuripourre
+ *
+ */
+public class AWTEngine implements Engine {
 
 	private Component component;
 
@@ -32,33 +37,28 @@ public class AWTEngine {
 
 	public void updateSuperEvent(GUIEvent event) {
 
-		if(event==GUIEvent.ENABLE_FULL_SCREEN) {
+		if (event == GUIEvent.ENABLE_FULL_SCREEN) {
 
 			core.enableFullScreen();
 
-		}else if(event==GUIEvent.DISABLE_FULL_SCREEN) {
+		} else if (event == GUIEvent.DISABLE_FULL_SCREEN) {
 
 			core.disableFullScreen();
-
-			//TODO When Frame
-			//}else if(event==GUIEvent.WINDOW_MOVE) {
-			//	setLocation(this.getX()+(mouse.getX()-mouse.getDragX()), this.getY()+(mouse.getY()-mouse.getDragY()));
+			
 		}
-		else if(event==GUIEvent.REQUEST_FOCUS) {
+		else if (event == GUIEvent.REQUEST_FOCUS) {
 
 			if ( !component.hasFocus() ) {
 				component.requestFocus();
 			}
-
 		}
-
 	}
 	
 	public AWTCore getCore() {
 		return core;
 	}
 
-	public void initDefault() {
+	public void init() {
 		
 		initLoaders();
 

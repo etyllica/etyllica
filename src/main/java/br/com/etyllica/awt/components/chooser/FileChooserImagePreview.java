@@ -7,7 +7,7 @@ import javax.swing.JFileChooser;
 public class FileChooserImagePreview extends FileChooser implements Runnable {
 	
 	public FileChooserImagePreview(Component component) {
-		super(component);		
+		super(component);
 		init();
 	}
 	

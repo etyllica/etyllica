@@ -5,7 +5,6 @@ import br.com.etyllica.layer.ImageLayer;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

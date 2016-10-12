@@ -6,7 +6,6 @@ import br.com.etyllica.core.animation.OnFrameChangeListener;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

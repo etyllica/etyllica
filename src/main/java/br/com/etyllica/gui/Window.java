@@ -13,7 +13,6 @@ import br.com.etyllica.layer.GeometricLayer;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

@@ -5,7 +5,6 @@ import br.com.etyllica.loader.image.ImageLoader;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

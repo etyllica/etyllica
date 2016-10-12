@@ -12,13 +12,10 @@ import br.com.etyllica.theme.mouse.arrow.MouseArrow;
 public class AWTArrowDrawer implements ArrowDrawer {
 
 	private int x = 0;
-
 	private int y = 0;
 
 	private static final BasicStroke strokeOne = new BasicStroke(1F);
-
 	private static final BasicStroke strokeThree = new BasicStroke(3F);
-
 	private static final BasicStroke strokeFive = new BasicStroke(5F);
 
 	protected ArrowTheme arrowTheme;
@@ -59,7 +56,6 @@ public class AWTArrowDrawer implements ArrowDrawer {
 		//}
 
 		g.getGraphics().setStroke(strokeOne);
-
 	}
 	
 	@Override

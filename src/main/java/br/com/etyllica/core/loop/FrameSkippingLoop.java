@@ -3,8 +3,10 @@ package br.com.etyllica.core.loop;
 import br.com.etyllica.core.GameCore;
 
 /**
- *	Based on code at http://obviam.net/index.php/the-android-game-loop/
+ * A Game loop with frame skip
+ * Based on code at http://obviam.net/index.php/the-android-game-loop/
  */
+
 public class FrameSkippingLoop extends GameLoopImpl {
 
 	// desired fps

@@ -12,9 +12,9 @@ import br.com.etyllica.gui.textfield.TextFieldView;
 import br.com.etyllica.theme.Theme;
 
 /**
+ * TextField component
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

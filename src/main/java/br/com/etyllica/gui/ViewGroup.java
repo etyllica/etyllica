@@ -4,12 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.etyllica.core.graphics.Graphics;
-
+import br.com.etyllica.gui.style.Orientation;
 
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

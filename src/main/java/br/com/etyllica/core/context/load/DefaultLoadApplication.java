@@ -5,7 +5,6 @@ import br.com.etyllica.core.context.Application;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

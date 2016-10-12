@@ -6,9 +6,9 @@ import br.com.etyllica.gui.RadioGroup;
 import br.com.etyllica.gui.label.BaseRadioLabel;
 
 /**
+ * Radio Button component
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

@@ -19,7 +19,6 @@ import br.com.etyllica.core.input.joystick.Joystick;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

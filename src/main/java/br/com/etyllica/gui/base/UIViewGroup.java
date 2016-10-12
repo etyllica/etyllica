@@ -1,9 +1,9 @@
 package br.com.etyllica.gui.base;
 
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.Orientation;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.ViewGroup;
+import br.com.etyllica.gui.style.Orientation;
 
 public abstract class UIViewGroup extends UIView {
 	

@@ -8,7 +8,6 @@ import br.com.etyllica.core.i18n.Language;
 /**
  * 
  * @author yuripourre
- * @license GPLv3
  *
  */
 

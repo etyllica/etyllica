@@ -12,7 +12,6 @@ import br.com.etyllica.core.context.Context;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

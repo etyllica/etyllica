@@ -8,9 +8,9 @@ import br.com.etyllica.gui.ViewGroup;
 import br.com.etyllica.gui.style.Roundness;
 
 /**
+ * Panel component
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

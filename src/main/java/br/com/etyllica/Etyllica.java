@@ -7,8 +7,9 @@ import javax.swing.JFrame;
 
 import br.com.etyllica.awt.core.AWTCore;
 import br.com.etyllica.awt.engine.AWTEngine;
+import br.com.etyllica.core.Engine;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.engine.Engine;
+import br.com.etyllica.core.engine.EtyllicaFrame;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.loader.Loader;
 import br.com.etyllica.loader.image.ImageLoader;
@@ -17,16 +18,15 @@ import br.com.etyllica.util.PathHelper;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 
-public abstract class Etyllica extends JFrame implements Engine {
+public abstract class Etyllica extends JFrame implements EtyllicaFrame {
 
 	private static final long serialVersionUID = 4588303747276461888L;
 
 	private AWTCore core;
-	private AWTEngine engine;
+	private Engine engine;
 	
 	protected int w = 640;
 	protected int h = 480;
@@ -99,7 +99,7 @@ public abstract class Etyllica extends JFrame implements Engine {
 	
 	protected void setPath(String path) {
 		core.setPath(path);
-		engine.initDefault();
+		engine.init();
 	}
 	
 	protected String getPath() {
@@ -138,7 +138,7 @@ public abstract class Etyllica extends JFrame implements Engine {
 	}
 		
 	private void updateIcon() {
-		if(!icon.isEmpty()) {
+		if (!icon.isEmpty()) {
 			setIconImage(ImageLoader.getInstance().getImage(icon));
 		}
 	}

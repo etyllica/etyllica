@@ -3,7 +3,6 @@ package br.com.etyllica.core.effect;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

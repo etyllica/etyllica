@@ -21,7 +21,6 @@ import br.com.etyllica.theme.ThemeManager;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

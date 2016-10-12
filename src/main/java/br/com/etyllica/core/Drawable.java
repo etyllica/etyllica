@@ -5,7 +5,6 @@ import br.com.etyllica.core.graphics.Graphics;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

@@ -10,11 +10,10 @@ import br.com.etyllica.theme.Theme;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 
-public class PolygonalButton extends BaseButton{
+public class PolygonalButton extends BaseButton {
 
 	protected Polygon polygon = new Polygon();
 

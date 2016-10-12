@@ -3,7 +3,6 @@ package br.com.etyllica.core.event;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

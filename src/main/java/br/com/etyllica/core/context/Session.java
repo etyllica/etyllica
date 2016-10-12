@@ -6,7 +6,6 @@ import java.util.Map;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

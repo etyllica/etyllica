@@ -8,7 +8,6 @@ import br.com.etyllica.core.linear.Rectangle;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

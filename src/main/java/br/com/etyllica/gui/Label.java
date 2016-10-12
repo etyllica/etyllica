@@ -8,7 +8,6 @@ import br.com.etyllica.core.event.PointerEvent;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

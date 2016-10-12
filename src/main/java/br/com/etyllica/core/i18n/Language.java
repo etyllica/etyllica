@@ -3,7 +3,6 @@ package br.com.etyllica.core.i18n;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

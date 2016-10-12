@@ -5,7 +5,6 @@ import java.awt.Color;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

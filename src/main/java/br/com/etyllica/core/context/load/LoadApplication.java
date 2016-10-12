@@ -4,7 +4,6 @@ package br.com.etyllica.core.context.load;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

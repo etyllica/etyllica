@@ -8,7 +8,6 @@ import br.com.etyllica.util.io.IOHelper;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

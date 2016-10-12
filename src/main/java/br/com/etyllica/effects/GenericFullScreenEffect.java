@@ -11,7 +11,6 @@ import br.com.etyllica.core.i18n.DefaultDictionary;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

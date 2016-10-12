@@ -7,6 +7,13 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.layer.ImageLayer;
 
+/**
+ * ImageView component
+ * 
+ * @author yuripourre
+ *
+ */
+
 public class BaseImageView extends View {
 	
 	private ImageLayer layer;

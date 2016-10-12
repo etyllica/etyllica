@@ -11,7 +11,6 @@ import br.com.etyllica.layer.BufferedLayer;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

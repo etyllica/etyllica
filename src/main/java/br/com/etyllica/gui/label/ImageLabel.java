@@ -8,7 +8,6 @@ import br.com.etyllica.layer.ImageLayer;
  * ImageLayer as label
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

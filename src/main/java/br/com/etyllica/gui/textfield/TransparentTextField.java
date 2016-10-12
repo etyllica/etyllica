@@ -5,7 +5,6 @@ import br.com.etyllica.gui.base.BaseTextField;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

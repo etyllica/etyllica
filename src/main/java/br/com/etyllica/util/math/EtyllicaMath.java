@@ -1,4 +1,4 @@
-package br.com.etyllica.util;
+package br.com.etyllica.util.math;
 
 public class EtyllicaMath {
 

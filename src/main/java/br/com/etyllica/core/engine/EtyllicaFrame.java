@@ -4,7 +4,7 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 
 
-public interface Engine {
+public interface EtyllicaFrame {
 
 	public void init();
 	

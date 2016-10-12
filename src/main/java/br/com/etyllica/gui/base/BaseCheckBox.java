@@ -5,9 +5,9 @@ import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.label.BaseCheckerLabel;
 
 /**
+ * Checkbox component
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

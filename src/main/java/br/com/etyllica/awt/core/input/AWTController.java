@@ -11,7 +11,6 @@ import br.com.etyllica.loader.JoystickLoader;
  * HIDController have the input controls, like mouse, keyboard and joystick.
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

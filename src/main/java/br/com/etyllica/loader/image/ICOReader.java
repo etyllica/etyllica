@@ -3,7 +3,6 @@ package br.com.etyllica.loader.image;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

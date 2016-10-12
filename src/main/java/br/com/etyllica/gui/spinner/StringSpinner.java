@@ -18,7 +18,6 @@ import br.com.etyllica.gui.spinner.composer.StringHorizontalComposer;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

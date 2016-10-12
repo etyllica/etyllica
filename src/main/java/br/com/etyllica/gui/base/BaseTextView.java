@@ -6,6 +6,13 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.View;
 
+/**
+ * TextView (non-editable) component
+ * 
+ * @author yuripourre
+ *
+ */
+
 public class BaseTextView extends View {
 
 	private String text = "";

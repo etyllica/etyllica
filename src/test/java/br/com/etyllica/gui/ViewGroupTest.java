@@ -3,6 +3,8 @@ package br.com.etyllica.gui;
 import org.junit.Assert;
 import org.junit.Test;
 
+import br.com.etyllica.gui.style.Orientation;
+
 public class ViewGroupTest {
 
 	@Test

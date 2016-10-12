@@ -2,12 +2,12 @@ package br.com.etyllica.loader;
 
 import java.awt.GraphicsEnvironment;
 
-public class SystemFontLoader extends LoaderImpl{
+public class SystemFontLoader extends LoaderImpl {
 
 	private static SystemFontLoader instance = null;
 	
 	public static SystemFontLoader getInstance() {
-		if(instance==null){
+		if (instance == null) {
 			instance = new SystemFontLoader();
 		}
 

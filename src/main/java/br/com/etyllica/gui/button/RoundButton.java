@@ -8,11 +8,10 @@ import br.com.etyllica.theme.Theme;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 
-public class RoundButton extends BaseButton{
+public class RoundButton extends BaseButton {
 
 	public RoundButton(int x, int y, int w, int h) {
 		super(x, y, w, h);

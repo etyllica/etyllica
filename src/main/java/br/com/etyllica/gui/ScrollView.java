@@ -14,8 +14,9 @@ import br.com.etyllica.gui.icon.UpArrow;
 import br.com.etyllica.gui.panel.ScrollBackground;
 
 /**
+ * 
  * @author yuripourre
- * @license LGPLv3
+ * 
  */
 
 public class ScrollView extends View {

@@ -20,11 +20,10 @@ import br.com.etyllica.core.input.mouse.Mouse;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 
-public class FullScreenWindow extends Window{
+public class FullScreenWindow extends Window {
 	
 	private static final long serialVersionUID = -5176767672500250086L;
 	
@@ -52,15 +51,13 @@ public class FullScreenWindow extends Window{
 		this.w = (int)monitor.getW();
 		this.h = (int)monitor.getH();
 		
-		//TODO Calcular se eh widescreen
+		//TODO Calculate monitor aspect
 		
 		int wfactor = this.w/16;
 		
 		utilHeight = 9*wfactor;
 		
 		offsetY = (this.h-utilHeight)/2;
-				
-		//setLayout(null);
 
 		hideDefaultCursor();
 		
@@ -70,8 +67,7 @@ public class FullScreenWindow extends Window{
 		
 	}	
 	
-	private void setListeners(){
-		
+	private void setListeners() {
 		Mouse mouse = core.getControl().getMouse();
 		Keyboard keyboard = core.getControl().getKeyboard();
 		
@@ -81,7 +77,7 @@ public class FullScreenWindow extends Window{
 		addKeyListener( (AWTKeyboard) keyboard );
 	}
 		
-	public void draw(Image volatileImage){
+	public void draw(Image volatileImage) {
 		
 		//int w, int h;
 		int y = offsetY;
@@ -94,14 +90,13 @@ public class FullScreenWindow extends Window{
 	    //Fastest (in multicore)
 	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
 	    
-	    //g.drawImage(volatileImage, 0, 0, largura, altura, 0, 0, volatileImage.getWidth(), volatileImage.getHeight(), null);
 	    g.drawImage(volatileImage, 0, y, w, h, 0, 0, volatileImage.getWidth(null), y+volatileImage.getHeight(null), null);
 	    g.dispose();
 				
 		getGraphics().drawImage(resized,0,0,null);
 	}
 	
-	private void hideDefaultCursor(){
+	private void hideDefaultCursor() {
 		int[] pixels = new int[16 * 16];
 		Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
 				Toolkit.getDefaultToolkit().createImage( new MemoryImageSource(16, 16, pixels, 0, 16))

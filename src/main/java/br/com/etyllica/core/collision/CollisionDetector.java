@@ -4,7 +4,7 @@ import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.linear.Ellipse;
-import br.com.etyllica.util.EtyllicaMath;
+import br.com.etyllica.util.math.EtyllicaMath;
 
 public class CollisionDetector {
 

@@ -6,7 +6,6 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 
 
-
 public abstract class Application extends Context {
 		
 	public Application(int w, int h) {

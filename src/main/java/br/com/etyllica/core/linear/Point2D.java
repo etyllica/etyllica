@@ -4,7 +4,6 @@ package br.com.etyllica.core.linear;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

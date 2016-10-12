@@ -6,12 +6,11 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.linear.Rectangle;
 import br.com.etyllica.loader.image.ImageLoader;
-import br.com.etyllica.util.EtyllicaMath;
+import br.com.etyllica.util.math.EtyllicaMath;
 
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 

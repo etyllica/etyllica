@@ -4,11 +4,10 @@ import br.com.etyllica.layer.StaticLayer;
 /**
  * 
  * @author yuripourre
- * @license LGPLv3
  *
  */
 
-public class ImageRoundButton extends ImageButton{
+public class ImageRoundButton extends ImageButton {
 
 	public ImageRoundButton(int x, int y, StaticLayer normal,
 			StaticLayer sobMouse) {
