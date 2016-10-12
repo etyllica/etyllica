@@ -79,5 +79,10 @@ You can follow the [HelloWorld](https://github.com/yuripourre/etyllica/wiki/Hell
 </dependency>
 ```
 
+## Gradle Integration
+```
+compile group: 'br.com.etyllica', name: 'etyllica', version: '5.1'
+```
+
 ## License
 - [LGPL](http://www.gnu.org/copyleft/lesser.html)
