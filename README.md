@@ -1,6 +1,8 @@
-# ![https://github.com/yuripourre/etyllica/blob/master/assets/images/etyllica_logo.png?raw=true](Etyllica Logo) (v 5.1.2) [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
+![Etyllica Logo](https://github.com/yuripourre/etyllica/blob/master/assets/images/etyllica_logo.png?raw=true) 
 
-[Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games really fast.
+### Current Version: 5.1.2 [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
+
+### [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games really fast.
 
 ## Features
 
@@ -16,10 +18,16 @@
 - Sound Loader that supports (MP3, OGG, WAV)
 - Audio Capture
 - WaveForm Drawing
-- OpenGL simulation with software rendering (even in unsigned applets with [abby-jgl](https://github.com/yuripourre/abby-jgl)
 - Basic Particle System
 - Basic Light Map Logic
 - 2D Physics (with [etyllica-physics](https://github.com/yuripourre/etyllica-physics))
+
+### Extensions
+- [Etyllic Spriter](https://github.com/yuripourre/etyllica-spriter) - A [Spriter](https://brashmonkey.com/) plugin.
+- [Etyllica Physics](https://github.com/yuripourre/etyllica-physics) - Etyllica extension to handle 2D physics.
+- [Abby](https://github.com/yuripourre/abby) - 3D Fork of Etyllica
+- [Luvia](https://github.com/yuripourre/luvia) - JoGL backend to Abby
+- [Abby-jGL](https://github.com/yuripourre/abby-jgl) - An OpenGL simulation with software rendering (even in unsigned applets)
 
 ## Related Projects
 ### Games
@@ -35,15 +43,10 @@
 - [Snake Game](https://github.com/yuripourre/snake-game) - A snake game clone
 
 ### Non-Games
-- [Etyllic Spriter](https://github.com/yuripourre/etyllica-spriter) - A [Spriter](https://brashmonkey.com/) plugin
-- [Etyllica Physics](https://github.com/yuripourre/etyllica-physics) - Etyllica extension to handle 2D physics.
 - [EtyllicTTS](https://github.com/yuripourre/etyllic-tts) - A FreeTTS fork
 - [Etyllic GameBoy](https://github.com/yuripourre/etyllic-gameboy) - A [Javaboy](http://www.millstone.demon.co.uk/download/javaboy/) fork with faster rendering.
 - [E-Motion](https://github.com/yuripourre/e-motion) - An Image Processing Library made in pure Java.
 - [Veete](https://github.com/yuripourre/veete) - A VEry Easy Tilemap Editor
-- [Abby](https://github.com/yuripourre/abby) - A Etyllica 3D fork.
-- [Abby-jGL](https://github.com/yuripourre/abby-jgl) - An Abby fork using [jGL](http://www.cmlab.csie.ntu.edu.tw/~robin/jGL/) for CPU rendering.
-- [Luvia](https://github.com/yuripourre/luvia) - An Abby fork using [JoGL](http://jogamp.org/jogl/www/) and [glg2d](https://github.com/brandonborkholder/glg2d) for GPU rendering.
  rendering.
 - [IP-Fun](https://github.com/yuripourre/ip-fun) - An Application to help children to remember IP Addresses.
 
@@ -52,7 +55,7 @@
 - [Rubik Solver](https://github.com/UNIRIO-SI/rubik-solver) - A Simple Rubik Cube Application.
 
 ### Deprecated Non-Games
-- [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - Paint Clone
+- [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - A Paint Clone
 - [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android (deprecated).
 
 
@@ -76,5 +79,5 @@ You can follow the [HelloWorld](https://github.com/yuripourre/etyllica/wiki/Hell
 </dependency>
 ```
 
-##License
+## License
 - [LGPL](http://www.gnu.org/copyleft/lesser.html)
