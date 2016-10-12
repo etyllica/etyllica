@@ -24,7 +24,7 @@ public class DiceApplication extends Application {
 		g.setColor(Color.WHITE);
 		
 		for(int i=0;i<6;i++) {
-			g.fillRect(40+70*i,40,60,60);	
+			g.fillRect(38+70*i,38,64,64);	
 		}
 		
 		g.setColor(Color.BLACK);
