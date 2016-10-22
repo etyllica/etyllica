@@ -35,6 +35,10 @@ public interface Graphics {
 
 	public void resetImage();
 
+	public int getWidth();
+	
+	public int getHeight();
+	
 	/**
 	 * 
 	 * @param x
