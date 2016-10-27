@@ -39,7 +39,7 @@ public class Music extends Sound {
 	}
 	
 	public void stop() {
-		//Not implemented yet
+		MultimediaLoader.getInstance().stop(path);
 	}
 	
 	public void dispose() {

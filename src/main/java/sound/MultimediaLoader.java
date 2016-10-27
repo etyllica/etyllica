@@ -80,7 +80,6 @@ public class MultimediaLoader extends LoaderImpl {
                 0, 0, 0,
                 SoundSystemConfig.ATTENUATION_NONE,
                 SoundSystemConfig.getDefaultRolloff());
-
 	}
 	
 	//Loads ogg and mp3 too
@@ -97,11 +96,13 @@ public class MultimediaLoader extends LoaderImpl {
 	}
 	
 	public void playMusicStream(String path, boolean loop) {
-
 		//mySoundSystem.newStreamingSource(true, fullPath()+path, fullPath()+path, loop, 0, 0, 0, SoundSystemConfig.ATTENUATION_NONE, 0);
 		playMusic(path, loop);
 	}
-	
+
+	public void stop(String path) {
+		mySoundSystem.stop(fullPath()+path);
+	}
 	
 
 }
