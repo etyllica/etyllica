@@ -397,6 +397,13 @@ public interface Graphics {
 	public void drawLine(Point2D p, Point2D q);
 
 	/**
+	 * @param xPoints
+	 * @param yPoints
+	 * @param nPoints
+	 */
+	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints);
+	
+	/**
 	 * 
 	 * @param polygon
 	 */
@@ -622,6 +629,13 @@ public interface Graphics {
 	 */
 	public void fillOval(float x, float y, float w, float h);
 
+	/**
+	 * @param xPoints
+	 * @param yPoints
+	 * @param nPoints
+	 */
+	public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints);
+	
 	/**
 	 * 
 	 * @param text

@@ -1225,5 +1225,15 @@ public class AWTGraphics implements Graphics {
 	public void resetClip() {
 		screen.setClip(null);
 	}
+
+	@Override
+	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints) {
+		screen.drawPolygon(xPoints, yPoints, nPoints);
+	}
+
+	@Override
+	public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints) {
+		screen.fillPolygon(xPoints, yPoints, nPoints);
+	}
 		
 }
