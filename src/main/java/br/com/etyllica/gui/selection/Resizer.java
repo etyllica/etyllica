@@ -25,12 +25,13 @@ public class Resizer<T extends Layer> {
 	Layer copy = new Layer();
 
 	public static final int UNKNOWN = -1;
+	private static final Layer NULL_LAYER = new Layer(UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN);
 
 	private int count = 0;
 	protected Map<Integer, T> layers = new HashMap<Integer, T>();
 
 	protected int selectedIndex = UNKNOWN;
-	private Layer selected;
+	private Layer selected = NULL_LAYER;
 	protected Layer overlay = new Layer();
 
 	private ResizerPoint selectedArea;
@@ -43,7 +44,7 @@ public class Resizer<T extends Layer> {
 
 	private final DashedStroke dash = new DashedStroke();
 	private final BasicStroke resetStroke = new BasicStroke(1);
-
+	
 	private boolean dragged = false;
 
 	private int offsetX = 0;
@@ -92,7 +93,7 @@ public class Resizer<T extends Layer> {
 	}
 
 	public void deselect() {
-		this.selected = null;
+		this.selected = NULL_LAYER;
 
 		changer.changeMouseState(MouseState.NORMAL);
 	}
@@ -197,7 +198,7 @@ public class Resizer<T extends Layer> {
 			}
 		}
 
-		if (selected == null)
+		if (selected == NULL_LAYER)
 			return;
 
 		changed = false;
