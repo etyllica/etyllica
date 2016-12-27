@@ -1,6 +1,6 @@
 ![Etyllica Logo](https://github.com/yuripourre/etyllica/blob/master/assets/images/etyllica_logo.png?raw=true) 
 
-### Current Version: 5.1.2 [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
+### Current Version: 5.1.4 [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
 
 ### [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games really fast.
 
@@ -61,7 +61,7 @@
 
 ## Dependencies (optional)
 
-If you don't need Sound nor Physics, you just have to include the [etyllica-5.1.jar](https://github.com/yuripourre/etyllica/releases/download/v5.1/etyllica-5.1.jar) (stable version with 351kB)
+If you don't need Sound nor Physics, you just have to include the [etyllica-5.1.4.jar](https://github.com/yuripourre/etyllica/releases/download/v5.1/etyllica-5.1.4.jar) (stable version with 351kB)
 
 - [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library made by [Paul Lamb](http://www.paulscode.com))
 - [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0) (Audio Codecs made by [Paul Lamb](http://www.paulscode.com))
