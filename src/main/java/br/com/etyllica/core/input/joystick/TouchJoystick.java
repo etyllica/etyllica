@@ -38,15 +38,16 @@ public class TouchJoystick {
 	
 	public TouchJoystick(int x, int y, int radius, int joystickRadius) {
 		super();
-		area = new Layer(x, y, radius*2, radius*2);
+		area = new Layer(x, y, radius * 2, radius * 2);
 
-		int cx = area.getX()+radius;
-		int cy = area.getY()+radius;
+		int cx = x + radius;
+		int cy = y + radius;
 
 		center = new Point2D(cx, cy);
 		joyPosition = new Point2D(cx, cy);
 
-		joystick = new Layer(cx-joystickRadius, cy-joystickRadius, joystickRadius*2, joystickRadius*2);
+		joystick = new Layer(cx - joystickRadius, cy - joystickRadius, joystickRadius * 2, joystickRadius * 2);
+		reset();
 	}
 	
 	public Layer getArea() {
@@ -67,8 +68,8 @@ public class TouchJoystick {
 		int my = event.getY();
 
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
-			if(activeId == INACTIVE) {
-				if(joystick.colideCirclePoint(mx, my)) {
+			if (activeId == INACTIVE) {
+				if (joystick.colideCirclePoint(mx, my)) {
 					activeId = event.getPointer();
 					setActive(true);
 				}
@@ -88,7 +89,7 @@ public class TouchJoystick {
 			if(active && event.getPointer() == activeId) {
 				setActive(false);
 				activeId = INACTIVE;
-				resetJoystick();
+				reset();
 				sensitivityX = 0;
 				sensitivityY = 0;
 			}
@@ -125,11 +126,11 @@ public class TouchJoystick {
 		}
 	}
 
-	protected void resetJoystick() {
+	public void reset() {
 		joystick.setCoordinates((int)center.getX()-joystickRadius, (int)center.getY()-joystickRadius);
 		onReset();
 	}
-
+	
 	protected void onReset() {
 		
 	}
