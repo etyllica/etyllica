@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Paint;
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Stroke;
@@ -43,6 +44,8 @@ public class AWTGraphics implements Graphics {
 	private int height;
 
 	private Color shadowColor = Color.BLACK;
+	
+	private static final Rectangle CLIP = new Rectangle();
 
 	//Identity matrix
 	private static final AffineTransform RESET_TRANSFORM = AffineTransform.getScaleInstance(1, 1);
@@ -1215,10 +1218,15 @@ public class AWTGraphics implements Graphics {
 	public int getHeight() {
 		return height;
 	}
-
+	
 	@Override
 	public void setClip(int x, int y, int w, int h) {
-		screen.setClip(x, y, w, h);
+		CLIP.x = x;
+		CLIP.y = y;
+		CLIP.width = w;
+		CLIP.height = h;
+		
+		screen.setClip(CLIP);
 	}
 
 	@Override
