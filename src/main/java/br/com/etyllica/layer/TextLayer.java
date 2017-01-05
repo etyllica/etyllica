@@ -82,19 +82,16 @@ public class TextLayer extends ImageLayer {
 	@Override
 	public void simpleDraw(Graphics g, int x, int y) {
 
-		if(font == null) {
+		if (font == null) {
 			font = g.getFont().deriveFont(style, size);
 		}
 
 		g.setFont(font);
 		
-		if(!border) {
-
+		if (!border) {
 			g.setColor(color);
-			
 			g.write(x, y, text);
-
-		}else{
+		} else {
 
 			FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
 			
@@ -109,7 +106,6 @@ public class TextLayer extends ImageLayer {
 
 			g.setColor(color);
 			g.fill(sha);
-
 		}
 
 	}

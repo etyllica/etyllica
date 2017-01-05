@@ -24,35 +24,37 @@ public class TextLabel extends Label {
 	public TextLabel(int x, int y) {
 		super(x, y);
 		
-		this.layer = new TextLayer(x,y,"");
+		this.layer = new TextLayer(x, y, "");
 	}
 	
 	public TextLabel(int x, int y, int w) {
 		super(x, y, w);
 		
-		this.layer = new TextLayer(x,y,"");
+		this.layer = new TextLayer(x, y, "");
 	}
 	
 	public TextLabel(int x, int y, String text) {
 		super(x, y);
 		
-		this.layer = new TextLayer(x,y,text);
+		this.layer = new TextLayer(x, y, text);
 	}
 	
 	public TextLabel(String text) {
-		this(0,0,text);
+		this(0, 0, text);
 	}
 	
 	public TextLabel(String text, float size) {
-		this(0,0,text);
+		this(0, 0, text);
 		this.layer.setSize(size);
 	}
 	
+	@Override
 	public void setX(int x) {
 		this.x = x;
 		this.layer.setX(x);
 	}
 
+	@Override
 	public void setY(int y) {
 		this.y = y;
 		this.layer.setY(y);

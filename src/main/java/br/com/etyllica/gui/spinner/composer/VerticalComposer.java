@@ -1,7 +1,7 @@
 package br.com.etyllica.gui.spinner.composer;
 
+import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.Label;
-import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.label.TextLabel;
 
 public class VerticalComposer extends SpinnerComposer {
@@ -11,10 +11,10 @@ public class VerticalComposer extends SpinnerComposer {
 	}
 
 	@Override
-	public BaseButton buildPlusButton(int x, int y, int w, int h) {
-		BaseButton plus = new BaseButton(x+w-buttonWidth-border, y+border, buttonWidth, h/2-border-1);
+	public Button buildPlusButton(int x, int y, int w, int h) {
+		Button plus = new Button(x, y, w, h);
 		plus.setLabel(buildPlusLabel());
-				
+		
 		return plus;
 	}
 	
@@ -24,8 +24,8 @@ public class VerticalComposer extends SpinnerComposer {
 	}
 
 	@Override
-	public BaseButton buildMinusButton(int x, int y, int w, int h) {
-		BaseButton minus = new BaseButton(x+w-buttonWidth-border, y+h/2+border, buttonWidth, h/2-border);
+	public Button buildMinusButton(int x, int y, int w, int h) {
+		Button minus = new Button(x, y, w, h);
 		minus.setLabel(buildMinusLabel());
 				
 		return minus;

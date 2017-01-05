@@ -40,7 +40,7 @@ public class BaseTextView extends View {
 	@Override
 	public void draw(Graphics g) {
 		if (!getTheme().isShadow()) {
-			g.drawString(left(), top(), width(), height(), text);	
+			g.drawString(left(), top(), width(), height(), text);
 		} else {
 			g.drawStringShadow(left(), top(), width(), height(), text, getTheme().getShadowColor());
 		}

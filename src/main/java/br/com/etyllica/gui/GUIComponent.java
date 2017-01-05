@@ -45,6 +45,6 @@ public interface GUIComponent {
 	 * @param width - new window width 
 	 * @param height - new window height
 	 */
-	public void resize(int width, int height);	
+	public void resize(int width, int height);
 
 }

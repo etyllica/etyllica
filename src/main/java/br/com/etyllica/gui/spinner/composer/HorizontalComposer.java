@@ -1,6 +1,6 @@
 package br.com.etyllica.gui.spinner.composer;
 
-import br.com.etyllica.gui.base.BaseButton;
+import br.com.etyllica.gui.Button;
 
 public class HorizontalComposer extends SpinnerComposer {
 	
@@ -9,18 +9,18 @@ public class HorizontalComposer extends SpinnerComposer {
 	}
 
 	@Override
-	public BaseButton buildPlusButton(int x, int y, int w, int h) {
-		BaseButton plus = new BaseButton(x+w-buttonWidth-border, y+border, buttonWidth, h-border*2);
+	public Button buildPlusButton(int x, int y, int w, int h) {
+		Button plus = new Button(x, y, w, h);
 		plus.setLabel(buildPlusLabel());
-				
+		
 		return plus;
 	}
 	
 	@Override
-	public BaseButton buildMinusButton(int x, int y, int w, int h) {
-		BaseButton minus = new BaseButton(x+border, y+border, buttonWidth, h-border*2);
+	public Button buildMinusButton(int x, int y, int w, int h) {
+		Button minus = new Button(x, y, w, h);
 		minus.setLabel(buildMinusLabel());
-				
+		
 		return minus;
 	}	
 

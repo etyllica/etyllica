@@ -15,7 +15,7 @@ import java.util.Map;
  *
  */
 
-public class FontLoader extends LoaderImpl{
+public class FontLoader extends LoaderImpl {
 
 	private static FontLoader instance = null;
 
@@ -23,32 +23,29 @@ public class FontLoader extends LoaderImpl{
 	
 	private Map<String, Font> fonts = new HashMap<String, Font>();
 
-	private FontLoader(){
+	private FontLoader() {
 		super();
 		
 		folder = "assets/fonts/";
 	}
 
 	public static FontLoader getInstance() {
-		if(instance==null){
+		if (instance == null) {
 			instance = new FontLoader();
 		}
 
 		return instance;
 	}
 
-	public Font getFont(String fontName, float size){
-		
+	public Font getFont(String fontName, float size) {
 		Font font = loadFont(fontName);
 		
-		
 		return font.deriveFont(size);
-		
 	}
 		
-	public Font loadFont(String fontName){
+	public Font loadFont(String fontName) {
 
-		if(!fonts.containsKey(fontName)){
+		if(!fonts.containsKey(fontName)) {
 
 			String diretorio = folder+fontName;
 			

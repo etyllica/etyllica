@@ -8,9 +8,9 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.Panel;
 import br.com.etyllica.gui.View;
-import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.gui.spinner.composer.SpinnerComposer;
 import br.com.etyllica.gui.spinner.composer.StringHorizontalComposer;
@@ -25,8 +25,8 @@ public class StringSpinner extends View {
 
 	protected SpinnerComposer composer;
 	
-	protected BaseButton next;
-	protected BaseButton previous;
+	protected Button next;
+	protected Button previous;
 	protected TextLabel resultLabel;
 	protected Panel panel;
 	
@@ -56,13 +56,13 @@ public class StringSpinner extends View {
 	
 	private void configureButtons() {
 		
-		composer.setBorder(1);
-		composer.setButtonWidth(w/6);
+		int border = 1;
+		int buttonWidth = w/6;
 		
-		next = composer.buildPlusButton(x, y, w, h);
+		next = composer.buildPlusButton(x+w-buttonWidth-border, y+border, buttonWidth, h-border*2);
 		next.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "nextItem"));
 		
-		previous = composer.buildMinusButton(x, y, w, h);
+		previous = composer.buildMinusButton(x+border, y+border, buttonWidth, h-border*2);
 		previous.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "previousItem"));		
 	}
 	

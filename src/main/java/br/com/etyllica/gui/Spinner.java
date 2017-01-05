@@ -5,8 +5,6 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.base.BaseButton;
-import br.com.etyllica.gui.label.TextLabel;
 import br.com.etyllica.gui.listener.ValueListener;
 import br.com.etyllica.gui.spinner.composer.SpinnerComposer;
 import br.com.etyllica.gui.spinner.composer.VerticalComposer;
@@ -20,10 +18,10 @@ import br.com.etyllica.gui.spinner.composer.VerticalComposer;
 public abstract class Spinner<T extends Number> extends View {
 
 	protected SpinnerComposer composer;
-	
-	protected BaseButton plus;
-	protected BaseButton minus;
-	protected TextLabel resultLabel;
+
+	protected Button plus;
+	protected Button minus;
+	protected TextView currentValue;
 	protected Panel panel;
 
 	protected T value;
@@ -32,33 +30,34 @@ public abstract class Spinner<T extends Number> extends View {
 	protected T minValue;
 
 	protected ValueListener<T> listener;
-	
+
 	public Spinner(int x, int y, int w, int h) {
 		super(x, y, w, h);
-				
+
 		panel = new Panel(x, y, w, h);
 
-		//TODO change size based on fontSize
-		resultLabel = new TextLabel(x+w/3,y+2+h/2,"0");
-
 		composer = buildComposer();
-		
+
 		configureButtons();
 	}
-	
+
 	protected SpinnerComposer buildComposer() {
 		return new VerticalComposer(x, y, w, h);
 	}
-	
+
 	private void configureButtons() {
-		
-		composer.setBorder(1);
-		composer.setButtonWidth(w/6);
-		
-		plus = composer.buildPlusButton(x, y, w, h);
+
+		int border = 1;
+		int buttonWidth = w/6;
+
+		//TODO change size based on fontSize
+		currentValue = new TextView(x, y + h/2 - 10, w - buttonWidth, h/2 - 10);
+		currentValue.setText("0");
+
+		plus = composer.buildPlusButton(x+w-buttonWidth-border, y+border, buttonWidth, h/2-border);
 		plus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "addReload"));
-		
-		minus = composer.buildMinusButton(x, y, w, h);
+
+		minus = composer.buildMinusButton(x+w-buttonWidth-border, y+h/2+border, buttonWidth, h/2-border*2);
 		minus.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "subReload"));		
 	}
 
@@ -75,12 +74,12 @@ public abstract class Spinner<T extends Number> extends View {
 	}
 
 	protected void reload() {
-		if(listener!=null) {
+		if (listener != null) {
 			listener.onChange(value);
 		}
-		
+
 		String result = value.toString();
-		resultLabel.setText(result);
+		currentValue.setText(result);
 	}
 
 	public abstract void add();
@@ -98,10 +97,10 @@ public abstract class Spinner<T extends Number> extends View {
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		return GUIEvent.NONE;
 	}
-	
+
 	public void mouseOut() {
 		super.mouseOut();
-		
+
 		plus.setMouseOver(false);
 		minus.setMouseOver(false);
 	}
@@ -114,7 +113,7 @@ public abstract class Spinner<T extends Number> extends View {
 	@Override
 	public void draw(Graphics g) {
 		drawPanel(g);
-		drawResult(g);
+		drawCurrentValue(g);
 		drawButtons(g);
 	}
 
@@ -122,8 +121,8 @@ public abstract class Spinner<T extends Number> extends View {
 		panel.draw(g);
 	}
 
-	protected void drawResult(Graphics g) {
-		resultLabel.draw(g);		
+	protected void drawCurrentValue(Graphics g) {
+		currentValue.draw(g);
 	}
 
 	protected void drawButtons(Graphics g) {
@@ -171,5 +170,18 @@ public abstract class Spinner<T extends Number> extends View {
 	public void setListener(ValueListener<T> listener) {
 		this.listener = listener;
 	}
-	
+
+	@Override
+	public void setBounds(int x, int y, int w, int h) {
+		panel.setBounds(x, y, w, h);
+
+		int border = 1;
+		int buttonWidth = w/6;
+
+		plus.setBounds(x+w-buttonWidth-border, y+border, buttonWidth, h/2-border);
+		minus.setBounds(x+w-buttonWidth-border, y+h/2+border, buttonWidth, h/2-border*2);
+
+		currentValue.setBounds(x, y + h/2 - 10, w - buttonWidth, h/2 - 10);
+	}
+
 }
