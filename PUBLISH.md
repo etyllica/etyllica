@@ -2,9 +2,9 @@
 
 - Configure .m2/settings file
 - Change the version in build.xml
-- Change the version in maven.xml
-- ant deploy (if was a snapshot)
-- ant stage (after remove -SNAPSHOT from the version name if was a release)
+- Change the version in maven/pom.xml
+- ant deploy (if it was a snapshot)
+- ant stage (after remove -SNAPSHOT from the version name if it was a release)
 - Access [https://oss.sonatype.org/#stagingRepositories](https://oss.sonatype.org/#stagingRepositories)
 - Close your staging repository, to automatic check if everything is ok.
 - After your repository is checked as ok, click on *Release* button.
