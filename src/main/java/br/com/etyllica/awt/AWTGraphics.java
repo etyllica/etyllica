@@ -129,6 +129,10 @@ public class AWTGraphics implements Graphics {
 	public void drawString(GeometricLayer layer, String text) {
 		drawString(layer.getX(), layer.getY(), layer.utilWidth(), layer.utilHeight(), text);
 	}
+	
+	public void drawString(GeometricLayer layer, int x, int y, String text) {
+		drawString(layer.getX()+x, layer.getY()+y, layer.utilWidth(), layer.utilHeight(), text);
+	}
 
 	/**
 	 * 
@@ -148,8 +152,8 @@ public class AWTGraphics implements Graphics {
 	 * @param text
 	 * @param exponent
 	 */
-	public void drawStringExponent(String text, String exponent, int x, int y) {
-		this.drawString(text, x, y);
+	public void drawStringExponent(int x, int y, String text, String exponent) {
+		this.drawString(x, y, text);
 
 		FontMetrics fm = screen.getFontMetrics();
 
@@ -166,8 +170,8 @@ public class AWTGraphics implements Graphics {
 
 	}
 
-	public void drawStringExponentShadow(String text, String exponent, int x, int y) {
-		this.drawShadow(x, y, text);
+	public void drawStringExponentShadow(int x, int y, String text, String exponent) {
+		this.drawStringShadow(x, y, text);
 
 		FontMetrics fm = screen.getFontMetrics();
 
@@ -178,7 +182,7 @@ public class AWTGraphics implements Graphics {
 		int w = fm.stringWidth(text);
 
 		this.setFontSize(h);
-		this.drawShadow(x+w, (int)(y-h*0.5f), exponent);
+		this.drawStringShadow(x+w, (int)(y-h*0.5f), exponent);
 
 		this.setFontSize(lastSize);
 
@@ -203,7 +207,7 @@ public class AWTGraphics implements Graphics {
 		
 		int dy = centralizeTextY(text, y, h);
 
-		drawShadow(dx, dy, text, shadowColor);
+		drawStringShadow(dx, dy, text, shadowColor);
 	}
 	
 	/**
@@ -226,7 +230,7 @@ public class AWTGraphics implements Graphics {
 	 * @param text
 	 * @param border
 	 */
-	public void writeX(float offsetX, float y, String text, boolean border) {
+	public void drawStringX(float offsetX, float y, String text, boolean border) {
 
 		if((text==null)||(text.isEmpty())) {
 			return;
@@ -258,12 +262,11 @@ public class AWTGraphics implements Graphics {
 		}
 	}
 
-	public void drawStringBorder(String text, int x, int y, int w, int h) {
-		
+	public void drawStringBorder(int x, int y, int w, int h, String text) {
 		int dx = centralizeTextX(text, x, w);
 		int dy = centralizeTextY(text, y, h);
 		
-		drawStringBorder(text, dx, dy);		
+		drawStringBorder(dx, dy, text);		
 	}
 	
 	/**
@@ -273,7 +276,7 @@ public class AWTGraphics implements Graphics {
 	 * @param text
 	 * @param border
 	 */
-	public void drawStringBorder(String text, float x, float y) {
+	public void drawStringBorder(float x, float y, String text) {
 
 		if((text==null)||(text.isEmpty())) {
 			return;
@@ -299,17 +302,14 @@ public class AWTGraphics implements Graphics {
 	
 	/**
 	 * 
-	 * @param offsetX
 	 * @param y
 	 * @param text
-	 * @param border
 	 */
-	public void drawStringBorderX(String text, float y) {
+	public void drawStringBorderX(float y, String text) {
 
 		int x = centralizeTextX(text);
 		
-		drawStringBorder(text, x, y);		
-
+		drawStringBorder(x, y, text);
 	}
 
 	/**
@@ -318,8 +318,8 @@ public class AWTGraphics implements Graphics {
 	 * @param y
 	 * @param text
 	 */
-	public void drawShadow(int x, int y, String text) {
-		drawShadow(x, y, text, shadowColor);
+	public void drawStringShadow(int x, int y, String text) {
+		drawStringShadow(x, y, text, shadowColor);
 	}
 
 	/**
@@ -328,8 +328,8 @@ public class AWTGraphics implements Graphics {
 	 * @param y
 	 * @param text
 	 */
-	public void drawShadow(float x, float y, String text) {
-		this.drawShadow(x, y, text, shadowColor);
+	public void drawStringShadow(float x, float y, String text) {
+		this.drawStringShadow(x, y, text, shadowColor);
 	}
 
 	/**
@@ -339,7 +339,7 @@ public class AWTGraphics implements Graphics {
 	 * @param text
 	 * @param shadowColor
 	 */
-	public void drawShadow(int x, int y, String text, Color shadowColor) {
+	public void drawStringShadow(int x, int y, String text, Color shadowColor) {
 
 		if((text!=null)&&(!text.isEmpty())) {
 
@@ -359,8 +359,8 @@ public class AWTGraphics implements Graphics {
 	 * @param text
 	 * @param shadowColor
 	 */
-	public void drawShadow(float x, float y, String text, Color shadowColor) {
-		this.drawShadow((int)x, (int)y, text, shadowColor);
+	public void drawStringShadow(float x, float y, String text, Color shadowColor) {
+		this.drawStringShadow((int)x, (int)y, text, shadowColor);
 	}
 
 	/**
@@ -376,8 +376,7 @@ public class AWTGraphics implements Graphics {
 			int x = centralizeTextX(text);
 			int fy = y+fm.getHeight();
 
-			drawShadow(x, fy, text);
-
+			drawStringShadow(x, fy, text);
 		}
 	}
 	
@@ -390,7 +389,7 @@ public class AWTGraphics implements Graphics {
 
 		int textWidth = fm.stringWidth(text);
 		
-		int dx = x+w/2 - textWidth/2;
+		int dx = x + w/2 - textWidth/2;
 		
 		return dx;
 	}
@@ -426,19 +425,19 @@ public class AWTGraphics implements Graphics {
 	 * @param y
 	 * @param text
 	 */
-	public void write(float x, float y, String text) {
+	public void drawString(float x, float y, String text) {
 		if((text!=null)&&(!text.isEmpty())) {
 			screen.drawString(text,x,y);
 		}
 	}
 
-	public void write(String text, GeometricLayer layer) {
+	public void drawString(String text, GeometricLayer layer) {
 		if((text!=null)&&(!text.isEmpty())) {
 			drawString(layer.getX(), layer.getY(), layer.getW(), layer.getH(), text);
 		}
 	}
 
-	public void writeShadow(String text, GeometricLayer layer) {
+	public void drawStringShadow(GeometricLayer layer, String text) {
 		if((text!=null)&&(!text.isEmpty())) {
 			drawStringShadow(layer.getX(), layer.getY(), layer.getW(), layer.getH(), text);
 		}
@@ -451,9 +450,8 @@ public class AWTGraphics implements Graphics {
 	 * @param y
 	 * @param text
 	 */
-	public void escreveX(int y, String text) {
-
-		writeX(0,y,text, false);
+	public void drawStringX(int y, String text) {
+		drawStringX(0,y,text, false);
 	}
 
 	/**
@@ -462,9 +460,8 @@ public class AWTGraphics implements Graphics {
 	 * @param y
 	 * @param text
 	 */
-	public void escreveX(int offsetX, int y, String text) {
-
-		writeX(offsetX, y,text, false);
+	public void drawStringX(int offsetX, int y, String text) {
+		drawStringX(offsetX, y,text, false);
 	}
 
 	/**
@@ -473,48 +470,12 @@ public class AWTGraphics implements Graphics {
 	 * @param text
 	 * @param borda
 	 */
-	public void writeX(float y, String text, boolean borda) {
-		writeX(0,y,text, borda);
+	public void drawStringX(float y, String text, boolean borda) {
+		drawStringX(0,y,text, borda);
 	}
 
-	public void writeX(float y, String text) {
-		writeX(0,y,text, false);
-	}
-
-	/*
-	 * Write Methods
-	 */
-
-	/**
-	 * 
-	 * @param offsetX
-	 * @param y
-	 * @param text
-	 */
-	public void escreveXCustom(int offsetX, int y, String text) {
-
-		screen.drawString(text, 200, y);
-
-		/*
-		FontMetrics fm = screen.getFontMetrics (f);
-
-		int msg_width = fm.stringWidth(text);
-
-		int x = largura/2 - msg_width/2;
-		x += offsetX;
-
-		TextLayout tl = new TextLayout(text, f, frc);
-
-		Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
-
-		screen.setStroke(new BasicStroke(2.666f));
-		screen.setColor(Color.black);
-		screen.draw(sha);
-		Color c = new Color(190,10,10); 
-		screen.setColor(c);
-		screen.fill(sha);
-		 */
-
+	public void drawStringX(float y, String text) {
+		drawStringX(0,y,text, false);
 	}
 
 	/**

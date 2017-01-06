@@ -27,7 +27,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public interface Graphics {
+public interface Graphics extends TextGraphics {
 
 	public void setFastImage(BufferedImage image);
 
@@ -39,188 +39,6 @@ public interface Graphics {
 	
 	public int getHeight();
 	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param text
-	 */
-	public void drawString(int x, int y, int w, int h, String text);
-	
-	public void drawString(GeometricLayer layer, String text);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param text
-	 */
-	public void drawString(float x, float y, float w, float h, String text);
-
-	/**
-	 * @param x
-	 * @param y
-	 * @param text
-	 * @param exponent
-	 */
-	public void drawStringExponent(String text, String exponent, int x, int y);
-
-	public void drawStringExponentShadow(String text, String exponent, int x, int y);
-
-	public void drawStringShadow(int x, int y, int w, int h, String text);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param text
-	 * @param shadowColor
-	 */
-	public void drawStringShadow(int x, int y, int w, int h, String text, Color shadowColor);
-	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param text
-	 * @param shadowColor
-	 */
-	public void drawStringShadow(float x, float y, float w, float h, String text, Color shadowColor);
-
-	/**
-	 * 
-	 * @param offsetX
-	 * @param y
-	 * @param text
-	 * @param border
-	 */
-	public void writeX(float offsetX, float y, String text, boolean border);
-
-	public void drawStringBorder(String text, int x, int y, int w, int h);
-	
-	/**
-	 * 
-	 * @param offsetX
-	 * @param y
-	 * @param text
-	 * @param border
-	 */
-	public void drawStringBorder(String text, float x, float y);
-	
-	/**
-	 * 
-	 * @param offsetX
-	 * @param y
-	 * @param text
-	 * @param border
-	 */
-	public void drawStringBorderX(String text, float y);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 */
-	public void drawShadow(int x, int y, String text);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 */
-	public void drawShadow(float x, float y, String text);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 * @param shadowColor
-	 */
-	public void drawShadow(int x, int y, String text, Color shadowColor);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 * @param shadowColor
-	 */
-	public void drawShadow(float x, float y, String text, Color shadowColor);
-
-	/**
-	 * 
-	 * @param y
-	 * @param text
-	 */
-	public void drawStringShadowX(int y, String text);
-
-	/**
-	 * 
-	 * @param y
-	 * @param text
-	 */
-	public void drawStringShadowX(float y, String text);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 */
-	public void write(float x, float y, String text);
-
-	public void write(String text, GeometricLayer layer);
-
-	public void writeShadow(String text, GeometricLayer layer);
-
-	/**
-	 * 
-	 * @param y
-	 * @param text
-	 */
-	public void escreveX(int y, String text);
-
-	/**
-	 * 
-	 * @param offsetX
-	 * @param y
-	 * @param text
-	 */
-	public void escreveX(int offsetX, int y, String text);
-
-	/**
-	 * 
-	 * @param y
-	 * @param text
-	 * @param borda
-	 */
-	public void writeX(float y, String text, boolean borda);
-
-	public void writeX(float y, String text);
-
-	/*
-	 * Write Methods
-	 */
-
-	/**
-	 * 
-	 * @param offsetX
-	 * @param y
-	 * @param text
-	 */
-	public void escreveXCustom(int offsetX, int y, String text);
-
 	/**
 	 * 
 	 * @param img
@@ -635,14 +453,6 @@ public interface Graphics {
 	 * @param nPoints
 	 */
 	public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints);
-	
-	/**
-	 * 
-	 * @param text
-	 * @param x
-	 * @param y
-	 */
-	public void drawString(String text, int x, int y);
 
 	/**
 	 * 
