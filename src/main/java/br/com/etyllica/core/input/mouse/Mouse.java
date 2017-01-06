@@ -1,6 +1,5 @@
 package br.com.etyllica.core.input.mouse;
 
-//import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -26,8 +25,6 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	protected int z = 0;
 
 	protected int clicks = 0;
-	//TODO doubleClick[]
-	protected boolean doubleClick = false;
 
 	protected boolean dragged = false;
 
@@ -226,37 +223,5 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	public void unlock() {
 		events.unlock();
 	}
-
-	/*private PointerEvent getSlot() {
-
-		if(!locked) {
-
-			return events.getSlot();
-
-		} else {
-
-			PointerEvent event = new PointerEvent();
-			alternativeList.add(event);
-
-			return event;
-		}
-
-	}
-
-	public boolean isLocked() {
-		return locked;
-	}
-
-	public void lock() {
-		this.locked = true;
-	}
-
-	public void unlock() {
-		this.locked = false;
-	}
-
-	public void setLocked(boolean locked) {
-		this.locked = locked;
-	}*/
 
 }
