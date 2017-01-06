@@ -1,6 +1,6 @@
 package br.com.etyllica.core.input.joystick;
 
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.layer.Layer;
@@ -67,7 +67,7 @@ public class TouchJoystick {
 		int mx = event.getX();
 		int my = event.getY();
 
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			if (activeId == INACTIVE) {
 				if (joystick.colideCirclePoint(mx, my)) {
 					activeId = event.getPointer();
@@ -84,7 +84,7 @@ public class TouchJoystick {
 				update();
 			}
 
-		} else if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
+		} else if(event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			//Release Joystick
 			if(active && event.getPointer() == activeId) {
 				setActive(false);

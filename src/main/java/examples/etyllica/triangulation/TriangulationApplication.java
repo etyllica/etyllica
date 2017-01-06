@@ -7,7 +7,7 @@ import java.util.List;
 import com.badlogic.gdx.math.Vector2;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.linear.Triangle2;
@@ -36,9 +36,9 @@ public class TriangulationApplication extends Application {
 	
 	@Override
 	public void updateMouse(PointerEvent event) {
-		if(event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if(event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			points.add(new Vector2(event.getX(), event.getY()));
-		} else if(event.isButtonUp(MouseButton.MOUSE_BUTTON_RIGHT)) {
+		} else if(event.isButtonUp(MouseEvent.MOUSE_BUTTON_RIGHT)) {
 			triangles = new KongTriangulation(points).triangulate();	
 		}
 	}

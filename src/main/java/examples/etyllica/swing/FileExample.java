@@ -7,7 +7,7 @@ import br.com.etyllica.awt.components.chooser.FileChooser;
 import br.com.etyllica.awt.components.chooser.SelectFileListener;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
@@ -110,7 +110,7 @@ public class FileExample extends Application implements SelectFileListener {
 	@Override
 	public void updateMouse(PointerEvent event) {
 		
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			px = event.getX();
 			py = event.getY();
 			fc.openDialog();

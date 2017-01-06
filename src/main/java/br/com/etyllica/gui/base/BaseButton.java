@@ -2,7 +2,7 @@ package br.com.etyllica.gui.base;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphics;
@@ -113,7 +113,7 @@ public class BaseButton extends RoundView {
 				
 				if(event.getState() == PointerState.PRESSED) {
 
-					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
+					if(event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
 						
 						clicked = true;
 
@@ -121,13 +121,13 @@ public class BaseButton extends RoundView {
 
 						value = GUIEvent.MOUSE_LEFT_BUTTON_DOWN;
 
-					} else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
+					} else if(event.isKey(MouseEvent.MOUSE_BUTTON_RIGHT)) {
 
 						rightClick();
 
 						value = GUIEvent.MOUSE_RIGHT_BUTTON_DOWN;
 
-					} else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
+					} else if(event.isKey(MouseEvent.MOUSE_BUTTON_MIDDLE)) {
 
 						middleClick();
 
@@ -137,7 +137,7 @@ public class BaseButton extends RoundView {
 
 				else if(event.getState() == PointerState.RELEASED) {
 
-					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
+					if(event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
 
 						clicked = false;
 						
@@ -145,11 +145,11 @@ public class BaseButton extends RoundView {
 
 						value = GUIEvent.MOUSE_LEFT_BUTTON_UP;
 
-					} else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
+					} else if(event.isKey(MouseEvent.MOUSE_BUTTON_RIGHT)) {
 
 						value = GUIEvent.MOUSE_RIGHT_BUTTON_UP;
 
-					} else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
+					} else if(event.isKey(MouseEvent.MOUSE_BUTTON_MIDDLE)) {
 
 						value = GUIEvent.MOUSE_MIDDLE_BUTTON_UP;
 
@@ -157,15 +157,15 @@ public class BaseButton extends RoundView {
 
 				} else if(event.getState()==PointerState.DOUBLE_CLICK) {
 
-					if(event.isKey(MouseButton.MOUSE_BUTTON_LEFT)) {
+					if(event.isKey(MouseEvent.MOUSE_BUTTON_LEFT)) {
 
 						value = GUIEvent.MOUSE_LEFT_BUTTON_DOUBLE_CLICK;
 
-					} else if(event.isKey(MouseButton.MOUSE_BUTTON_RIGHT)) {
+					} else if(event.isKey(MouseEvent.MOUSE_BUTTON_RIGHT)) {
 
 						value = GUIEvent.MOUSE_RIGHT_BUTTON_DOUBLE_CLICK;
 
-					} else if(event.isKey(MouseButton.MOUSE_BUTTON_MIDDLE)) {
+					} else if(event.isKey(MouseEvent.MOUSE_BUTTON_MIDDLE)) {
 
 						value = GUIEvent.MOUSE_MIDDLE_BUTTON_DOUBLE_CLICK;
 
@@ -182,7 +182,7 @@ public class BaseButton extends RoundView {
 			//If mouse is not over
 			} else {
 
-				if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+				if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
 
 					onFocus = false;
 

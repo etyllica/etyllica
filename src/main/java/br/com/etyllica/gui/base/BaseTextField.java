@@ -5,7 +5,7 @@ import java.awt.FontMetrics;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyState;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.textfield.TextFieldView;
@@ -63,7 +63,7 @@ public class BaseTextField extends TextFieldView {
 			return value;
 		}
 
-		if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			if (mouseOver) {
 				if(!onFocus) {
 					value = GUIEvent.GAIN_FOCUS;

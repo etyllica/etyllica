@@ -6,7 +6,7 @@ import java.util.List;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
@@ -200,7 +200,7 @@ public class UICore {
 			 */
 
 		case UPDATE_MOUSE:
-			updateMouse(view, new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));				
+			updateMouse(view, new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, mouse.getX(), mouse.getY()));				
 			break;
 
 		case APPLICATION_CHANGED:

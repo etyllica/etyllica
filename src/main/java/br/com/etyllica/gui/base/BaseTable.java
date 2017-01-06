@@ -7,7 +7,7 @@ import java.util.Map;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.View;
@@ -55,7 +55,7 @@ public class BaseTable extends View {
 
 		checkSelectedRow(mx, my);
 
-		if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			if (onMouseRow != null) {
 				selectedRow = onMouseRow;
 				rowListener.onClick(onMouseRow);				

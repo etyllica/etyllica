@@ -18,7 +18,7 @@ import br.com.etyllica.core.error.ErrorMessages;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyEventListener;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
@@ -456,12 +456,12 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			if(event.isKeyDown(KeyEvent.VK_NUMPAD_LEFT_ARROW)) {
 
 				getMouse().setX(getMouse().getX()-speed);
-				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
+				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_RIGHT_ARROW)) {
 
 				getMouse().setX(getMouse().getX()+speed);
-				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
+				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}
 
@@ -469,29 +469,29 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			if(event.isKeyDown(KeyEvent.VK_NUMPAD_UP_ARROW)) {
 
 				getMouse().setX(getMouse().getY()-speed);
-				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
+				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_DOWN_ARROW)) {
 
 				getMouse().setX(getMouse().getY()+speed);
-				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
+				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
 			}
 
 			//Mouse Left Button
 			if(event.isKeyDown(KeyEvent.VK_NUMPAD_INS)) {
-				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
+				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
 			}else if(event.isKeyUp(KeyEvent.VK_NUMPAD_INS)) {
-				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
+				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
 			}/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_INS)) {
 				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_LEFT, KeyState.CLICK));
 			}*/
 
 			//Mouse Right Button
 			if(event.isKeyDown(KeyEvent.VK_NUMPAD_DEL)) {
-				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
+				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
 			}else if(event.isKeyUp(KeyEvent.VK_NUMPAD_DEL)) {
-				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
+				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
 			}/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_DEL)) {
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
 			}*/

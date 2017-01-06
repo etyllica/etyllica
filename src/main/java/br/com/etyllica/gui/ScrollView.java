@@ -5,7 +5,7 @@ import java.awt.Color;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.base.BaseButton;
@@ -100,14 +100,14 @@ public class ScrollView extends View {
 
         if (mouseOver) {
 
-            if (event.isButtonDown(MouseButton.MOUSE_WHEEL_DOWN)) {
+            if (event.isButtonDown(MouseEvent.MOUSE_WHEEL_DOWN)) {
 
                 for (int i = 0; i < event.getAmount(); i++) {
                     scrollDown();
                 }
             }
 
-            if (event.isButtonDown(MouseButton.MOUSE_WHEEL_UP)) {
+            if (event.isButtonDown(MouseEvent.MOUSE_WHEEL_UP)) {
 
                 for (int i = event.getAmount(); i < 0; i++) {
                     scrollUp();
@@ -116,7 +116,7 @@ public class ScrollView extends View {
 
             if (knob.isMouseOver()) {
 
-                if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+                if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
                     //TODO Mouse dragged with knob move scroll
                 }
 

@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.linear.Point2D;
@@ -72,7 +72,7 @@ public class ElasticLineApplication extends Application implements UpdateInterva
 	public void updateMouse(PointerEvent event) {
 		q.setLocation(event.getX(), event.getY());
 
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			pressed = true;
 			back = false;
 			currentArea = 0;

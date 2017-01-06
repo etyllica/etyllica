@@ -6,7 +6,7 @@ import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.GeometricLayer;
@@ -102,11 +102,11 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 		mx = event.getX();
 		my = event.getY();
 		
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			rectangle1.setCoordinates(mx, my);
 		}
 		
-		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_RIGHT)) {
+		if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_RIGHT)) {
 			orangeRectangle.setCoordinates(mx, my);
 		}
 	}

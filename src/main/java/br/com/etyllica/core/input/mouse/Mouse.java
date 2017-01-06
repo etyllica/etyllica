@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.swing.event.MouseInputListener;
 
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.util.concurrency.ConcurrentList;
@@ -84,17 +84,17 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 
 	private void addEvent(int button, PointerState state, int amountX, int amountY) {
 
-		MouseButton key = MouseButton.MOUSE_NONE;
+		MouseEvent key = MouseEvent.MOUSE_NONE;
 
 		switch (button) {
 		case MouseEvent.BUTTON1:
-			key = MouseButton.MOUSE_BUTTON_LEFT;
+			key = MouseEvent.MOUSE_BUTTON_LEFT;
 			break;
 		case MouseEvent.BUTTON2:
-			key = MouseButton.MOUSE_BUTTON_MIDDLE;
+			key = MouseEvent.MOUSE_BUTTON_MIDDLE;
 			break;
 		case MouseEvent.BUTTON3:
-			key = MouseButton.MOUSE_BUTTON_RIGHT;
+			key = MouseEvent.MOUSE_BUTTON_RIGHT;
 			break;
 		}
 
@@ -202,17 +202,17 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent mwe) {
 
-		MouseButton key = MouseButton.MOUSE_WHEEL_DOWN;		
+		MouseEvent key = MouseEvent.MOUSE_WHEEL_DOWN;		
 
 		if(mwe.getWheelRotation()<0) {
-			key = MouseButton.MOUSE_WHEEL_UP;
+			key = MouseEvent.MOUSE_WHEEL_UP;
 		}
 
 		events.add(new PointerEvent(key, PointerState.PRESSED, x, y, mwe.getWheelRotation()));
 	}
 	
 	public void addMouseMoveEvent(int x, int y) {
-		events.add(new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, x, y));
+		events.add(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, x, y));
 	}
 
 	public void addEvent(PointerEvent event) {

@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import br.com.etyllica.awt.core.AWTCore;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphics;
@@ -77,7 +77,7 @@ public class AWTCoreTest {
 
 		Assert.assertNull(innerCore.getMouseOver());
 		
-		PointerEvent move = new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, 10, 10);
+		PointerEvent move = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 10, 10);
 				
 		innerCore.updatePointerEvent(move, components);
 		
@@ -89,13 +89,13 @@ public class AWTCoreTest {
 
 		Assert.assertNull(innerCore.getMouseOver());
 		
-		PointerEvent move = new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, 10, 10);
+		PointerEvent move = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 10, 10);
 				
 		innerCore.updatePointerEvent(move, components);
 		
 		Assert.assertEquals(button, innerCore.getMouseOver());
 		
-		move = new PointerEvent(MouseButton.MOUSE_NONE, PointerState.MOVE, 10, 30);
+		move = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 10, 30);
 		
 		innerCore.updatePointerEvent(move, components);
 		

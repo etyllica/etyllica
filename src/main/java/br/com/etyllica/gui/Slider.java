@@ -2,7 +2,7 @@ package br.com.etyllica.gui;
 
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.base.BaseButton;
@@ -35,16 +35,16 @@ public class Slider extends View {
     public GUIEvent updateMouse(PointerEvent event) {
 
         if (mouseOver) {
-            if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+            if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
                 activated = true;
             }
         }
 
         if (activated) {
-            if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+            if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
                 updateValue(event);
                 return GUIEvent.COMPONENT_CHANGED;
-            } else if (event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
+            } else if (event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
                 activated = false;
             }
         }

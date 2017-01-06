@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import br.com.etyllica.awt.stroke.DashedStroke;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.MouseButton;
+import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
@@ -93,12 +93,10 @@ public class Resizer<T extends Layer> {
 
 	public void deselect() {
 		selected = NULL_LAYER;
-		selectedIndex = UNKNOWN;
 		changer.changeMouseState(MouseState.NORMAL);
 	}
 
 	public void select(Layer layer) {
-
 		if (!isSelected()) {
 			deselect();
 		}
@@ -188,7 +186,7 @@ public class Resizer<T extends Layer> {
 			checkMouseOver(mx, my);
 		}
 
-		if (event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			if (!isSelected()) {
 				checkSelection(mx, my);
 			} else if (!isDragged()) {
@@ -218,18 +216,18 @@ public class Resizer<T extends Layer> {
 			}
 		}
 
-		if (event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			dragged = false;
 			if (lastEvent != null) {
 				notifyListener(lastEvent);
 				lastEvent = null;	
 			}
-		} else if (dragged && event.isDraggedButton(MouseButton.MOUSE_BUTTON_LEFT)) {
+		} else if (dragged && event.isDraggedButton(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			resizeEvent(lastIndex, event);
 			refresh();
 		}
 
-		if (!changed && event.isClicked(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (!changed && event.isClicked(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			deselect();
 		}
 
@@ -315,13 +313,13 @@ public class Resizer<T extends Layer> {
 
 	private void handleDragEvent(PointerEvent event) {
 
-		if (!dragged && event.isDraggedButton(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (!dragged && event.isDraggedButton(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			setInitialValues();
 			dragged = true;
 			copy.copy(selected);
 		}
 
-		if (event.isButtonUp(MouseButton.MOUSE_BUTTON_LEFT)) {
+		if (event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			dragged = false;
 		}
 	}

@@ -4,7 +4,7 @@ package br.com.etyllica.core.event;
  * Reference: http://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseEvent.html
  */
 
-public enum MouseButton {
+public enum MouseEvent {
 
 	MOUSE_BUTTON_LEFT(1),
 	MOUSE_BUTTON_MIDDLE(2),
@@ -16,7 +16,7 @@ public enum MouseButton {
 	
 	private final int code;
 
-	MouseButton(int code) {
+	MouseEvent(int code) {
 		this.code = code;
 	}
 	
