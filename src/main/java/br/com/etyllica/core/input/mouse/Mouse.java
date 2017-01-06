@@ -1,6 +1,6 @@
 package br.com.etyllica.core.input.mouse;
 
-import java.awt.event.MouseEvent;
+//import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -87,13 +87,13 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		MouseEvent key = MouseEvent.MOUSE_NONE;
 
 		switch (button) {
-		case MouseEvent.BUTTON1:
+		case java.awt.event.MouseEvent.BUTTON1:
 			key = MouseEvent.MOUSE_BUTTON_LEFT;
 			break;
-		case MouseEvent.BUTTON2:
+		case java.awt.event.MouseEvent.BUTTON2:
 			key = MouseEvent.MOUSE_BUTTON_MIDDLE;
 			break;
-		case MouseEvent.BUTTON3:
+		case java.awt.event.MouseEvent.BUTTON3:
 			key = MouseEvent.MOUSE_BUTTON_RIGHT;
 			break;
 		}
@@ -102,7 +102,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	@Override
-	public void mouseClicked( MouseEvent me ) {
+	public void mouseClicked( java.awt.event.MouseEvent me ) {
 
 		PointerState state = PointerState.CLICK;
 
@@ -120,7 +120,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	@Override
-	public void mousePressed( MouseEvent me ) {
+	public void mousePressed( java.awt.event.MouseEvent me ) {
 
 		setCoordinates(me.getX(),me.getY());
 
@@ -147,7 +147,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	@Override
-	public void mouseReleased( MouseEvent me ) {
+	public void mouseReleased( java.awt.event.MouseEvent me ) {
 
 		setCoordinates(me.getX(),me.getY());
 
@@ -159,7 +159,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	@Override
-	public void mouseMoved( MouseEvent me ) {
+	public void mouseMoved( java.awt.event.MouseEvent me ) {
 
 		setCoordinates(me.getX(),me.getY());
 
@@ -169,18 +169,18 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	}
 
 	@Override
-	public void mouseEntered( MouseEvent me ) {
+	public void mouseEntered( java.awt.event.MouseEvent me ) {
 		//mouseMoved( me );
 		me.consume();
 	}
 
 	@Override
-	public void mouseExited( MouseEvent me ) {
+	public void mouseExited( java.awt.event.MouseEvent me ) {
 		me.consume();
 	}
 
 	@Override
-	public void mouseDragged( MouseEvent me ) {
+	public void mouseDragged( java.awt.event.MouseEvent me ) {
 
 		if(!dragged) {
 			dragX = me.getX();
