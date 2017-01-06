@@ -75,13 +75,13 @@ public class CustomLoadApplication extends Application{
 		//Set Color to Black
 		g.setColor(Color.BLACK);
 		//Write HelloWorld!
-		g.escreveX(xText, yText, "Hello World!");
+		g.drawString(xText, yText, "Hello World!");
 
-		g.escreveX(250, "Click with Mouse to Gain Keyboard Focus.");
+		g.drawStringX(250, "Click with Mouse to Gain Keyboard Focus.");
 		
-		g.escreveX(300, "Press <SPACE> to change the application!");
+		g.drawStringX(300, "Press <SPACE> to change the application!");
 		
-		g.escreveX(350, "Press <ALT+ENTER> to change to Fullscreen Mode");
+		g.drawStringX(350, "Press <ALT+ENTER> to change to Fullscreen Mode");
 		
 		//Fill Circle around the Mouse Point
 		g.setColor(Color.WHITE);

@@ -90,7 +90,7 @@ public class TextLayer extends ImageLayer {
 		
 		if (!border) {
 			g.setColor(color);
-			g.write(x, y, text);
+			g.drawString(x, y, text);
 		} else {
 
 			FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);

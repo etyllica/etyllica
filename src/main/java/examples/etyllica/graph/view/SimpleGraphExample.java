@@ -79,7 +79,7 @@ public class SimpleGraphExample extends Application{
 		int w = radius*2;
 		int h = radius*2;
 		
-		g.drawStringBorder(Integer.toString(node.getData()), x, y, w, h);
+		g.drawStringBorder(x, y, w, h, Integer.toString(node.getData()));
 		g.setColor(SVGColor.BLACK);
 	}
 	

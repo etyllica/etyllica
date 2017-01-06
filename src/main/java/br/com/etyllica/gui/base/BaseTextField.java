@@ -282,11 +282,11 @@ public class BaseTextField extends TextFieldView {
 	}
 
 	private void drawText(Graphics g, int x, int y, String text) {
-		g.drawShadow(x, y, text, getTheme().getShadowColor());
+		g.drawStringShadow(x, y, text, getTheme().getShadowColor());
 	}
 
 	private void drawSelectedText(Graphics g, int x, int y, String text) {
-		g.drawShadow(x, y, text, getTheme().getBackgroundColor());
+		g.drawStringShadow(x, y, text, getTheme().getBackgroundColor());
 	}
 
 	@Override

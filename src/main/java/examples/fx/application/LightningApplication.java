@@ -33,7 +33,7 @@ public class LightningApplication extends Application{
 	public void draw(Graphics g) {
 		
 		g.setColor(Color.BLACK);
-		g.writeX(100, "Press Space to see Lightnings");
+		g.drawStringX(100, "Press Space to see the magic");
 		
 		lightning.draw(g);
 	}

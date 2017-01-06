@@ -57,7 +57,7 @@ public class ColoredTextPanel extends View {
                     break;
             }
 
-            g.write(left(), top() + (int) (fontSize + (i * fontSize + spacing)), text);
+            g.drawString(left(), top() + (int) (fontSize + (i * fontSize + spacing)), text);
         }
 
         g.setLineWidth(borderWidth);
