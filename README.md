@@ -61,7 +61,7 @@
 
 ## Dependencies (optional)
 
-If you don't need Sound nor Physics, you just have to include the [etyllica-5.1.4.jar](https://github.com/yuripourre/etyllica/releases/download/v5.1/etyllica-5.1.4.jar) (stable version with 351kB)
+If you don't need Sound nor Physics, you just have to include the [etyllica-5.2.0.jar](https://github.com/etyllica/etyllica/releases/download/v5.2.0/etyllica-5.2.0.jar) (stable version with 351kB)
 
 - [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library made by [Paul Lamb](http://www.paulscode.com))
 - [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0) (Audio Codecs made by [Paul Lamb](http://www.paulscode.com))
@@ -75,13 +75,13 @@ You can follow the [HelloWorld](https://github.com/yuripourre/etyllica/wiki/Hell
 <dependency>
   <groupId>br.com.etyllica</groupId>
   <artifactId>etyllica</artifactId>
-  <version>5.1</version>
+  <version>5.2.0</version>
 </dependency>
 ```
 
 ## Gradle Integration
 ```
-compile group: 'br.com.etyllica', name: 'etyllica', version: '5.1'
+compile group: 'br.com.etyllica', name: 'etyllica', version: '5.2.0'
 ```
 
 ## License
