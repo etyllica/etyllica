@@ -122,7 +122,7 @@ public class CollisionDetector {
 
 		double rectRotation = Math.toRadians(-layer.getAngle());
 
-		return testRectangleToPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
+		return colideRectPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
 	}
 
 	public static boolean colideRectPoint(Layer layer, double  px, double py, double scaleX, double scaleY) {
@@ -147,7 +147,7 @@ public class CollisionDetector {
 
 		double rectRotation = Math.toRadians(-layer.getAngle());
 
-		return testRectangleToPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
+		return colideRectPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
 	}
 
 	public static boolean colideRectPoint(Layer layer, Point2D point) {
@@ -159,11 +159,11 @@ public class CollisionDetector {
 
 		double rectRotation = Math.toRadians(-layer.getAngle());
 
-		return testRectangleToPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, point.getX(), point.getY());
+		return colideRectPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, point.getX(), point.getY());
 	}
 
 	/** Rectangle To Point. */
-	private static boolean testRectangleToPoint(double rectWidth, double rectHeight, double rectRotation, double rectCenterX, double rectCenterY, double pointX, double pointY) {
+	private static boolean colideRectPoint(double rectWidth, double rectHeight, double rectRotation, double rectCenterX, double rectCenterY, double pointX, double pointY) {
 
 		if(rectRotation == 0)   //High speed for rectangles without rotation
 			return Math.abs(rectCenterX-pointX) < rectWidth/2 && Math.abs(rectCenterY-pointY) < rectHeight/2;
@@ -179,9 +179,18 @@ public class CollisionDetector {
 
 		return Math.abs(cx-tx) < rectWidth/2 && Math.abs(cy-ty) < rectHeight/2;
 	}
+	
+	public static boolean colideRectPoint(int x, int y, int w, int h, int pointX, int pointY) {
+		int rectCenterX = x + w / 2;
+		int rectCenterY = y + h / 2;
+		int rectWidth = w;
+		int rectHeight = h;
+
+		return Math.abs(rectCenterX-pointX) < rectWidth/2 && Math.abs(rectCenterY-pointY) < rectHeight/2;
+	}
 
 	/** Circle To Segment. */
-	private static boolean testCircleToSegment(double circleCenterX, double circleCenterY, double circleRadius, double lineAX, double lineAY, double lineBX, double lineBY) {
+	private static boolean colideCircleLine(double circleCenterX, double circleCenterY, double circleRadius, double lineAX, double lineAY, double lineBX, double lineBY) {
 		double lineSize = Math.sqrt(Math.pow(lineAX-lineBX, 2) + Math.pow(lineAY-lineBY, 2));
 		double distance;
 
@@ -206,7 +215,7 @@ public class CollisionDetector {
 	}
 
 	/** Rectangle To Circle. */
-	public static boolean testRectangleToCircle(double rectWidth, double rectHeight, double rectRotation, double rectCenterX, double rectCenterY, double circleCenterX, double circleCenterY, double circleRadius) {
+	public static boolean colideRectCircle(double rectWidth, double rectHeight, double rectRotation, double rectCenterX, double rectCenterY, double circleCenterX, double circleCenterY, double circleRadius) {
 		double tx, ty, cx, cy;
 
 		if(rectRotation == 0) { //High speed for rectangles without rotation
@@ -223,11 +232,11 @@ public class CollisionDetector {
 			cy = Math.cos(rectRotation)*rectCenterY + Math.sin(rectRotation)*rectCenterX;
 		}
 
-		return testRectangleToPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, circleCenterX, circleCenterY) ||
-				testCircleToSegment(tx, ty, circleRadius, cx-rectWidth/2, cy+rectHeight/2, cx+rectWidth/2, cy+rectHeight/2) ||
-				testCircleToSegment(tx, ty, circleRadius, cx+rectWidth/2, cy+rectHeight/2, cx+rectWidth/2, cy-rectHeight/2) ||
-				testCircleToSegment(tx, ty, circleRadius, cx+rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy-rectHeight/2) ||
-				testCircleToSegment(tx, ty, circleRadius, cx-rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy+rectHeight/2);
+		return colideRectPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, circleCenterX, circleCenterY) ||
+				colideCircleLine(tx, ty, circleRadius, cx-rectWidth/2, cy+rectHeight/2, cx+rectWidth/2, cy+rectHeight/2) ||
+				colideCircleLine(tx, ty, circleRadius, cx+rectWidth/2, cy+rectHeight/2, cx+rectWidth/2, cy-rectHeight/2) ||
+				colideCircleLine(tx, ty, circleRadius, cx+rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy-rectHeight/2) ||
+				colideCircleLine(tx, ty, circleRadius, cx-rectWidth/2, cy-rectHeight/2, cx-rectWidth/2, cy+rectHeight/2);
 	}
 
 	public static boolean colideRectRect(Layer a, Layer b) {
