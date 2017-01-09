@@ -1,6 +1,6 @@
 ![Etyllica Logo](https://github.com/yuripourre/etyllica/blob/master/assets/images/etyllica_logo.png?raw=true) 
 
-### Current Version: 5.2.0 [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
+### Current Version: 5.2.1 [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
 
 ### [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games really fast.
 
