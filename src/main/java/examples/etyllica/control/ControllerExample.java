@@ -26,9 +26,9 @@ public class ControllerExample extends Application {
 		drawTouchJoystick(g);
 
 		g.setColor(Color.WHITE);
-		g.drawStringShadow(40, 60, "X: "+Double.toString(joystick.getSensitivityX()));
-		g.drawStringShadow(40, 80, "Y: "+Double.toString(joystick.getSensitivityY()));
-		g.drawStringShadow(40, 100, "A: "+Double.toString(joystick.getAngle()));
+		g.drawStringShadow("X: "+Double.toString(joystick.getSensitivityX()), 40, 60);
+		g.drawStringShadow("Y: "+Double.toString(joystick.getSensitivityY()), 40, 80);
+		g.drawStringShadow("A: "+Double.toString(joystick.getAngle()), 40, 100);
 	}
 	
 	public void drawTouchJoystick(Graphics g) {

@@ -94,9 +94,9 @@ public class TextLabel extends Label {
 		
 		//Label is always in center
 		if(!theme.isShadow()){
-			g.drawString(bx, by, bw, bh, layer.getText());
+			g.drawString(layer.getText(), bx, by, bw, bh);
 		}else{
-			g.drawStringShadow(bx, by, bw, bh, layer.getText() ,theme.getShadowColor());
+			g.drawStringShadow(layer.getText(), bx, by, bw, bh, theme.getShadowColor());
 		}
 		
 	}

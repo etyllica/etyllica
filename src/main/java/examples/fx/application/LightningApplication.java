@@ -4,9 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.effect.Effect;
-import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 
 public class LightningApplication extends Application{
@@ -33,7 +31,7 @@ public class LightningApplication extends Application{
 	public void draw(Graphics g) {
 		
 		g.setColor(Color.BLACK);
-		g.drawStringX(100, "Press Space to see the magic");
+		g.drawStringX("Press Space to see the magic", 100);
 		
 		lightning.draw(g);
 	}

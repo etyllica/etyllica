@@ -66,7 +66,7 @@ public class TextPanel extends View{
 		
 		for(String line: lines){
 			
-			g.drawString(x+paddingRight, y+paddingTop+(int)(fontSize+(i*fontSize+spacing)), line);
+			g.drawString(line, x+paddingRight, y+paddingTop+(int)(fontSize+(i*fontSize+spacing)));
 			
 			i++;
 			

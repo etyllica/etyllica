@@ -42,7 +42,7 @@ public class DragAndDropApplication extends Application {
 			}
 		} else {
 			g.setFontSize(40f);
-			g.drawStringShadowX(h/2, "Drop something here!");
+			g.drawStringShadowX("Drop something here!", h/2);
 		}
 	}
 

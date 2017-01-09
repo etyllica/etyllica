@@ -52,9 +52,9 @@ public interface Graphics extends TextGraphics {
 	 * @param sy2
 	 * @param observer
 	 */
-	public void drawImage( Image img, int dx1, int dy1,int dx2, int dy2, int sx1 , int sy1, int sx2, int sy2, ImageObserver observer);
+	public void drawImage (Image img, int dx1, int dy1,int dx2, int dy2, int sx1 , int sy1, int sx2, int sy2, ImageObserver observer);
 
-	public void drawImage( Image img, float dx1, float dy1, float dx2, float dy2, float sx1 , float sy1, float sx2, float sy2, ImageObserver observer);
+	public void drawImage (Image img, float dx1, float dy1, float dx2, float dy2, float sx1 , float sy1, float sx2, float sy2, ImageObserver observer);
 
 	public Graphics2D getGraphics();
 
@@ -146,6 +146,8 @@ public interface Graphics extends TextGraphics {
 	 * @param percent
 	 */
 	public void setAlpha(int percent);
+	
+	public void resetAlpha();
 
 	public void setComposite(AlphaComposite composite);
 

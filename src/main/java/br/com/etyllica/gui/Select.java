@@ -62,7 +62,7 @@ public class Select extends View {
 		int fontSize = g.getFont().getSize()+1;
 		int textOffset = 2;
 		
-		g.drawString(x+textOffset, y+fontSize, options.get(selectedOption).getLabel());
+		g.drawString(options.get(selectedOption).getLabel(), x+textOffset, y+fontSize);
 		
 		if(showOptions) {
 		
@@ -76,7 +76,7 @@ public class Select extends View {
 			int i=0;			
 			
 			for(Option option: options) {
-				g.drawString(x+textOffset, y+h*(2+i), option.getLabel());
+				g.drawString(option.getLabel(), x+textOffset, y+h*(2+i));
 				
 				i++;
 			}

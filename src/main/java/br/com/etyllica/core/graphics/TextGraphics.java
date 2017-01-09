@@ -6,169 +6,52 @@ import br.com.etyllica.layer.GeometricLayer;
 
 public interface TextGraphics {
 
-	/**
-	 * 
-	 * @param text
-	 * @param x
-	 * @param y
-	 */
 	public void drawString(String text, int x, int y);
+
+	public void drawString(String text, float x, float y);
 	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param text
-	 */
-	public void drawString(int x, int y, int w, int h, String text);
+	public void drawString(String text, int x, int y, int w, int h);
 	
-	/**
-	 * 
-	 * @param layer
-	 * @param text
-	 */
-	public void drawString(GeometricLayer layer, String text);
+	public void drawString(String text, GeometricLayer layer);
 	
-	/**
-	 * 
-	 * @param layer
-	 * @param text
-	 */
-	public void drawString(GeometricLayer layer, int offsetX, int offsetY, String text);
+	public void drawString(String text, GeometricLayer layer, int offsetX, int offsetY);
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param text
-	 */
-	public void drawString(float x, float y, float w, float h, String text);
+	public void drawString(String text, float x, float y, float w, float h);
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param text
-	 * @param exponent
-	 */
-	public void drawStringExponent(int x, int y, String text, String exponent);
+	public void drawStringExponent(String text, String exponent, int x, int y);
 
-	public void drawStringExponentShadow(int x, int y, String text, String exponent);
+	public void drawStringExponentShadow(String text, String exponent, int x, int y);
 
-	public void drawStringShadow(int x, int y, int w, int h, String text);
+	public void drawStringShadow(String text, int x, int y, int w, int h);
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param text
-	 * @param shadowColor
-	 */
-	public void drawStringShadow(int x, int y, int w, int h, String text, Color shadowColor);
+	public void drawStringShadow(String text, int x, int y, int w, int h, Color shadowColor);
 	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param text
-	 * @param shadowColor
-	 */
-	public void drawStringShadow(float x, float y, float w, float h, String text, Color shadowColor);
+	public void drawStringShadow(String text, float x, float y, float w, float h, Color shadowColor);
+
+	public void drawStringBorder(String text, float x, float y);
 	
-	/**
-	 * 
-	 * @param offsetX
-	 * @param y
-	 * @param text
-	 * @param border
-	 */
-	public void drawStringX(float offsetX, float y, String text, boolean border);
+	public void drawStringBorder(String text, int x, int y, int w, int h);
 	
-	/**
-	 * 
-	 * @param offsetX
-	 * @param y
-	 * @param text
-	 * @param border
-	 */
-	public void drawStringBorder(float x, float y, String text);
+	public void drawStringBorderX(String text, float y);
+
+	public void drawStringShadow(String text, int x, int y);
+
+	public void drawStringShadow(String text, float x, float y);
 	
-	public void drawStringBorder(int x, int y, int w, int h, String text);
+	public void drawStringShadow(String text, GeometricLayer layer);
+
+	public void drawStringShadow(String text, int x, int y, Color shadowColor);
+
+	public void drawStringShadow(String text, float x, float y, Color shadowColor);
+
+	public void drawStringShadowX(String text, int y);
+
+	public void drawStringShadowX(String text, float y);
 	
-	/**
-	 * 
-	 * @param offsetX
-	 * @param y
-	 * @param text
-	 * @param border
-	 */
-	public void drawStringBorderX(float y, String text);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 */
-	public void drawStringShadow(int x, int y, String text);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 */
-	public void drawStringShadow(float x, float y, String text);
+	public void drawStringX(String text, float offsetX, float y);
 	
-	public void drawStringShadow(GeometricLayer layer, String text);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 * @param shadowColor
-	 */
-	public void drawStringShadow(int x, int y, String text, Color shadowColor);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 * @param shadowColor
-	 */
-	public void drawStringShadow(float x, float y, String text, Color shadowColor);
-
-	/**
-	 * 
-	 * @param y
-	 * @param text
-	 */
-	public void drawStringShadowX(int y, String text);
-
-	/**
-	 * 
-	 * @param y
-	 * @param text
-	 */
-	public void drawStringShadowX(float y, String text);
+	public void drawStringX(String text, int y);
 	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param text
-	 */
-	public void drawString(float x, float y, String text);
-
-	public void drawStringX(float y, String text);
+	public void drawStringX(String text, float y);
 	
 }
