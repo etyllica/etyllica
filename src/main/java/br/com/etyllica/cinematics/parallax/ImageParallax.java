@@ -12,18 +12,23 @@ public class ImageParallax extends Parallax {
 		
 		layer = new ImageLayer(imagePath);
 	}
+	
+	public ImageParallax(int y, String imagePath) {
+		super();
+		
+		layer = new ImageLayer(0, y, imagePath);
+	}
 
 	@Override
 	public void draw(Graphics g) {
-		
-		int mod = (offset/proximity)%layer.getW();
+		int mod = (offset / proximity) % layer.getW();
 		
 		if(mod == 0) {
-			layer.simpleDraw(g, 0, 0);
+			layer.simpleDraw(g, 0, layer.getY());
 		} else {
-			layer.simpleDraw(g, -mod, 0);
-			layer.simpleDraw(g, -mod+layer.getW(), 0);
-		}		
+			layer.simpleDraw(g, -mod, layer.getY());
+			layer.simpleDraw(g, -mod + layer.getW(), layer.getY());
+		}
 	}
 	
 }
