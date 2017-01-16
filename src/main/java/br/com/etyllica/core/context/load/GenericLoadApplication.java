@@ -1,11 +1,8 @@
 package br.com.etyllica.core.context.load;
 
 import java.awt.Color;
-import java.awt.Font;
 
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.theme.Theme;
-import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 
@@ -14,9 +11,6 @@ import br.com.etyllica.theme.ThemeManager;
  */
 
 public class GenericLoadApplication extends DefaultLoadApplication {
-
-	private Font f;
-	private Font p;
 	
 	protected float fill = 0;
 	
@@ -34,10 +28,6 @@ public class GenericLoadApplication extends DefaultLoadApplication {
 	@Override
 	public void load() {
 
-		Theme theme = ThemeManager.getInstance().getTheme();
-		
-		f = new Font(theme.getFontName(), theme.getFontStyle(), 26);
-		p = new Font(theme.getFontName(), theme.getFontStyle(), 18);
 	}
 	
 	@Override
@@ -53,9 +43,6 @@ public class GenericLoadApplication extends DefaultLoadApplication {
 	
 	@Override
 	public void draw(Graphics g) {
-
-		g.setFont(f);
-		
 		g.setColor(backgroundColor);
 		g.fillRect(x, y, w, h);
 		
@@ -65,9 +52,7 @@ public class GenericLoadApplication extends DefaultLoadApplication {
 		g.drawRect(rectX, rectY, rectW, rectH);
 		g.fillRect(rectX+2, rectY+2, (int)((rectW*fill)/100)-3, rectH-3);
 		
-		g.setFont(p);
 		g.drawStringShadow(percent, rectX, rectY, rectW, rectH, Color.BLACK);
-		
 	}
 	
 }
