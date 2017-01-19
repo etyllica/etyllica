@@ -162,6 +162,16 @@ public interface Graphics extends TextGraphics {
 	public void resetOpacity();
 
 	/**
+	 * Method to prepare graphics to draw images ONLY
+	 */
+	public void beginImageBatch();
+	
+	/**
+	 * Method to end images ONLY mode
+	 */
+	public void endImageBatch();
+	
+	/**
 	 * 
 	 * @param img
 	 * @param x

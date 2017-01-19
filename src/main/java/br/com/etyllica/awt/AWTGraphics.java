@@ -1173,4 +1173,16 @@ public class AWTGraphics implements Graphics {
 		screen.fillPolygon(xPoints, yPoints, nPoints);
 	}
 
+	@Override
+	public void beginImageBatch() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void endImageBatch() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
