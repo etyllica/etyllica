@@ -2,7 +2,7 @@ package br.com.etyllica.gui.label;
 
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Label;
-import br.com.etyllica.theme.Theme;
+import br.com.etyllica.gui.theme.Theme;
 
 public class BaseRadioLabel extends Label {
 

@@ -14,9 +14,9 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.ui.ViewContainer;
 import br.com.etyllica.gui.style.Style;
+import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.gui.theme.ThemeManager;
 import br.com.etyllica.layer.Layer;
-import br.com.etyllica.theme.Theme;
-import br.com.etyllica.theme.ThemeManager;
 
 /**
  * 

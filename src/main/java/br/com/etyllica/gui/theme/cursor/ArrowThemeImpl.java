@@ -1,6 +1,6 @@
-package br.com.etyllica.theme.mouse;
+package br.com.etyllica.gui.theme.cursor;
 
-import br.com.etyllica.theme.mouse.arrow.MouseArrow;
+import br.com.etyllica.gui.theme.cursor.arrow.MouseArrow;
 
 
 public class ArrowThemeImpl implements ArrowTheme {

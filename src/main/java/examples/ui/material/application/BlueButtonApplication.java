@@ -6,7 +6,7 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.label.TextLabel;
-import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.gui.theme.ThemeManager;
 import examples.ui.material.application.model.MaterialButton;
 
 public class BlueButtonApplication extends Application {

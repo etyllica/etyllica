@@ -33,10 +33,10 @@ import br.com.etyllica.core.ui.UICore;
 import br.com.etyllica.core.ui.UICoreListener;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
-import br.com.etyllica.theme.Theme;
-import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.gui.theme.ThemeManager;
+import br.com.etyllica.gui.theme.listener.ThemeListener;
 import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;
-import br.com.etyllica.theme.listener.ThemeListener;
 
 /**
  * 

@@ -2,7 +2,7 @@ package br.com.etyllica.gui;
 
 import br.com.etyllica.gui.base.BasePanel;
 import br.com.etyllica.gui.base.UIViewGroup;
-import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.gui.theme.ThemeManager;
 
 /**
  * 

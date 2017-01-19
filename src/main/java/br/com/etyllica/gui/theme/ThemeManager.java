@@ -1,10 +1,10 @@
-package br.com.etyllica.theme;
+package br.com.etyllica.gui.theme;
 
+import br.com.etyllica.gui.theme.cursor.ArrowTheme;
+import br.com.etyllica.gui.theme.listener.ArrowThemeListener;
+import br.com.etyllica.gui.theme.listener.ThemeListener;
 import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;
 import br.com.etyllica.theme.etyllic.EtyllicTheme;
-import br.com.etyllica.theme.listener.ArrowThemeListener;
-import br.com.etyllica.theme.listener.ThemeListener;
-import br.com.etyllica.theme.mouse.ArrowTheme;
 
 
 public class ThemeManager {

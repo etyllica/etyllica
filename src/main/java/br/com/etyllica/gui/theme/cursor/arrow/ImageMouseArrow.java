@@ -1,4 +1,4 @@
-package br.com.etyllica.theme.mouse.arrow;
+package br.com.etyllica.gui.theme.cursor.arrow;
 
 import br.com.etyllica.layer.ImageLayer;
 

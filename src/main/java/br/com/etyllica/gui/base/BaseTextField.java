@@ -9,7 +9,7 @@ import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.textfield.TextFieldView;
-import br.com.etyllica.theme.Theme;
+import br.com.etyllica.gui.theme.Theme;
 
 /**
  * TextField component

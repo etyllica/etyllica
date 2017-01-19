@@ -7,7 +7,7 @@ import br.com.etyllica.gui.base.BaseRadioButton;
 import br.com.etyllica.gui.base.BaseTable;
 import br.com.etyllica.gui.base.BaseTextField;
 import br.com.etyllica.gui.base.BaseTextView;
-import br.com.etyllica.theme.Theme;
+import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.etyllic.components.EtyllicCheckBox;
 
 public class EtyllicTheme extends Theme {

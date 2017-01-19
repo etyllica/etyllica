@@ -2,7 +2,7 @@ package br.com.etyllica.gui;
 
 import br.com.etyllica.gui.base.BaseTextView;
 import br.com.etyllica.gui.base.UIView;
-import br.com.etyllica.theme.ThemeManager;
+import br.com.etyllica.gui.theme.ThemeManager;
 
 public class TextView extends UIView {
 	

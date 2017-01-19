@@ -1,4 +1,4 @@
-package br.com.etyllica.theme;
+package br.com.etyllica.gui.theme;
 
 import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.base.BaseCheckBox;

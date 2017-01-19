@@ -1,6 +1,6 @@
-package br.com.etyllica.theme.listener;
+package br.com.etyllica.gui.theme.listener;
 
-import br.com.etyllica.theme.mouse.ArrowTheme;
+import br.com.etyllica.gui.theme.cursor.ArrowTheme;
 
 
 public interface ArrowThemeListener {

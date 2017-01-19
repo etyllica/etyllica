@@ -1,5 +1,7 @@
 package br.com.etyllica.theme.etyllic;
 
+import br.com.etyllica.gui.theme.cursor.ArrowThemeImpl;
+import br.com.etyllica.gui.theme.cursor.arrow.MouseArrow;
 import br.com.etyllica.theme.etyllic.arrow.DiagonalArrow;
 import br.com.etyllica.theme.etyllic.arrow.HorizontalArrow;
 import br.com.etyllica.theme.etyllic.arrow.InvertedDiagonalArrow;
@@ -8,8 +10,6 @@ import br.com.etyllica.theme.etyllic.arrow.NormalArrow;
 import br.com.etyllica.theme.etyllic.arrow.TextArrow;
 import br.com.etyllica.theme.etyllic.arrow.VerticalArrow;
 import br.com.etyllica.theme.etyllic.arrow.WaitingArrow;
-import br.com.etyllica.theme.mouse.ArrowThemeImpl;
-import br.com.etyllica.theme.mouse.arrow.MouseArrow;
 
 /**
  * 

@@ -6,8 +6,8 @@ import java.awt.Color;
 import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.theme.mouse.ArrowTheme;
-import br.com.etyllica.theme.mouse.arrow.MouseArrow;
+import br.com.etyllica.gui.theme.cursor.ArrowTheme;
+import br.com.etyllica.gui.theme.cursor.arrow.MouseArrow;
 
 public class AWTArrowDrawer implements ArrowDrawer {
 

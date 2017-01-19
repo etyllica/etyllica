@@ -8,7 +8,7 @@ import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.RoundView;
-import br.com.etyllica.theme.Theme;
+import br.com.etyllica.gui.theme.Theme;
 
 /**
  *
