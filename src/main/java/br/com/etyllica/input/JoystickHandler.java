@@ -1,4 +1,4 @@
-package br.com.etyllica.loader;
+package br.com.etyllica.input;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.input.joystick.Joystick;
+import br.com.etyllica.loader.LoaderImpl;
 
 /**
  * 
@@ -22,13 +22,13 @@ import br.com.etyllica.core.input.joystick.Joystick;
  *
  */
 
-public class JoystickLoader extends LoaderImpl implements Updatable, Runnable {
+public class JoystickHandler extends LoaderImpl implements Updatable, Runnable {
 
-	private static JoystickLoader instance = null;
+	private static JoystickHandler instance = null;
 
-	public static JoystickLoader getInstance() {
+	public static JoystickHandler getInstance() {
 		if(instance==null){
-			instance = new JoystickLoader();
+			instance = new JoystickHandler();
 		}
 
 		return instance;

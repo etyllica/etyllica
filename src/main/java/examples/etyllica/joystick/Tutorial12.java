@@ -2,7 +2,7 @@ package examples.etyllica.joystick;
 
 import br.com.etyllica.EtyllicaApplet;
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.loader.JoystickLoader;
+import br.com.etyllica.input.JoystickHandler;
 
 public class Tutorial12 extends EtyllicaApplet {
 
@@ -17,7 +17,7 @@ public class Tutorial12 extends EtyllicaApplet {
 		initialSetup("../../../../../");
 		
 		//Init searching for 5 joysticks
-		JoystickLoader.getInstance().init(5);
+		JoystickHandler.getInstance().init(5);
 
 		return new JoystickExample(w,h);
 	}

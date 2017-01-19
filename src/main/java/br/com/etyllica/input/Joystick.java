@@ -1,4 +1,4 @@
-package br.com.etyllica.core.input.joystick;
+package br.com.etyllica.input;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,6 +9,10 @@ import java.util.List;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.KeyState;
 
+/**
+ * Joystick abstraction (works only on Linux)
+ *
+ */
 public class Joystick {
 
 	private int id;

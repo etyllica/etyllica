@@ -4,7 +4,7 @@ import br.com.etyllica.core.event.KeyEventListener;
 import br.com.etyllica.core.input.HIDController;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.loader.JoystickLoader;
+import br.com.etyllica.input.JoystickHandler;
 
 /**
  * 
@@ -20,7 +20,7 @@ public class AWTController implements HIDController {
 	
 	private Keyboard keyboard;
 	
-	private JoystickLoader joystick;
+	private JoystickHandler joystick;
 			
 	public AWTController(KeyEventListener listener) {
 		
@@ -29,7 +29,7 @@ public class AWTController implements HIDController {
 		keyboard = new AWTKeyboard(listener);
 		keyboard.init();
 		
-		joystick = JoystickLoader.getInstance();
+		joystick = JoystickHandler.getInstance();
 		joystick.setListener(listener);
 	}
 
