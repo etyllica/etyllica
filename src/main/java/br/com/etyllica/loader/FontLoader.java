@@ -81,5 +81,8 @@ public class FontLoader extends LoaderImpl {
 	public void setSystemFonts(String[] systemFonts) {
 		this.systemFonts = systemFonts;
 	}
-		
+	
+	public void disposeFont(String fontName) {
+		fonts.remove(fontName);
+	}
 }

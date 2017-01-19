@@ -219,5 +219,9 @@ public class ImageLoader extends LoaderImpl {
 	public void addLoader(String extension, ImageReader loader) {
 		loaders.put(extension, loader);
 	}
-
+	
+	public void disposeImage(String path) {
+		images.remove(path);
+	}
+	
 }
