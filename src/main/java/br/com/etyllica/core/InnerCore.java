@@ -536,7 +536,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	public void changeApplication() {
 		Context currentApplication = currentContext();
-		currentApplication.unload();
+		currentApplication.dispose();
 		
 		reload(currentApplication.getNextApplication());
 	}

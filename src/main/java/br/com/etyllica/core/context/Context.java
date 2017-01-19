@@ -190,9 +190,9 @@ public abstract class Context extends Layer implements ViewContainer, UIComponen
 	public abstract void draw(Graphics g);
 
 	/**
-	 * Unload is not implemented yet but is useful when Applications needs free memory before change to next Application
+	 * Method called when activity will be closed, useful to  dispose loaded resources
 	 */
-	public void unload() {
+	public void dispose() {
 
 	}
 
