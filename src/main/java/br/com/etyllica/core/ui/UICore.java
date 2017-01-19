@@ -57,7 +57,7 @@ public class UICore {
 	}
 
 	private void updateGuiComponent(View component, GUIEvent event) {
-		component.update(event);
+		component.updateEvent(event);
 
 		for(View child: component.getViews()) {
 			updateGuiComponent(child, event);
@@ -129,7 +129,7 @@ public class UICore {
 
 			//Remove focus from last
 			if(focus != null) {
-				focus.update(GUIEvent.LOST_FOCUS);
+				focus.updateEvent(GUIEvent.LOST_FOCUS);
 			}
 
 			view.setOnFocus(true);
@@ -179,7 +179,7 @@ public class UICore {
 			//controle.getTeclado().loseFocus();
 			//events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.))
 
-			view.update(GUIEvent.LOST_FOCUS);
+			view.updateEvent(GUIEvent.LOST_FOCUS);
 
 			break;
 
@@ -246,13 +246,13 @@ public class UICore {
 		}
 		focus = component;
 		component.setOnFocus(true);
-		component.update(GUIEvent.GAIN_FOCUS);
+		component.updateEvent(GUIEvent.GAIN_FOCUS);
 	}
 
 	private void removeFocus(View component) {
 		if (component == focus) {
 			component.setOnFocus(false);
-			component.update(GUIEvent.LOST_FOCUS);
+			component.updateEvent(GUIEvent.LOST_FOCUS);
 			focus = null;			
 		}
 	}
@@ -261,7 +261,7 @@ public class UICore {
 		if (view == null)
 			return;
 		view.setMouseOver(false);
-		view.update(GUIEvent.MOUSE_OUT);
+		view.updateEvent(GUIEvent.MOUSE_OUT);
 	}
 
 	public void drawCursor(Graphics g) {

@@ -198,8 +198,8 @@ public abstract class UIView extends View {
 	}
 
 	@Override
-	public void update(GUIEvent event) {
-		delegatedView.update(event);
+	public void updateEvent(GUIEvent event) {
+		delegatedView.updateEvent(event);
 	}
 
 	@Override

@@ -102,7 +102,7 @@ public class BaseTable extends View {
 	}
 
 	@Override
-	public void update(GUIEvent event) {
+	public void updateEvent(GUIEvent event) {
 
 	}
 	

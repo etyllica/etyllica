@@ -61,7 +61,7 @@ public class TextLabel extends Label {
 	}
 	
 	@Override
-	public void update(GUIEvent event) {
+	public void updateEvent(GUIEvent event) {
 		switch (event) {
 		
 		case LOST_FOCUS:

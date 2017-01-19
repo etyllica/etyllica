@@ -30,7 +30,7 @@ public interface GUIComponent {
 	 * 
 	 * @param event
 	 */
-	public void update(GUIEvent event);
+	public void updateEvent(GUIEvent event);
 		
 	/**
 	 * 

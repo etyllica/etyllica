@@ -59,7 +59,7 @@ public class BaseTextField extends TextFieldView {
 		GUIEvent value = super.updateMouse(event);
 
 		if (value != GUIEvent.NONE) {
-			update(value);
+			updateEvent(value);
 			return value;
 		}
 
@@ -67,12 +67,12 @@ public class BaseTextField extends TextFieldView {
 			if (mouseOver) {
 				if(!onFocus) {
 					value = GUIEvent.GAIN_FOCUS;
-					update(value);
+					updateEvent(value);
 					return value;
 				}
 			} else if(onFocus) {
 				value = GUIEvent.LOST_FOCUS;
-				update(value);
+				updateEvent(value);
 				return value;
 			}
 
@@ -86,7 +86,7 @@ public class BaseTextField extends TextFieldView {
 
 		}
 
-		update(value);
+		updateEvent(value);
 		return value;
 	}
 
@@ -295,7 +295,7 @@ public class BaseTextField extends TextFieldView {
 	}
 
 	@Override
-	public void update(GUIEvent event) {
+	public void updateEvent(GUIEvent event) {
 
 		switch (event) {
 

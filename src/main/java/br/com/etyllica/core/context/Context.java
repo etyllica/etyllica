@@ -20,6 +20,7 @@ import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
 import br.com.etyllica.core.ui.UIComponent;
+import br.com.etyllica.core.ui.UIResizableComponent;
 import br.com.etyllica.core.ui.ViewContainer;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
@@ -32,7 +33,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public abstract class Context extends Layer implements ViewContainer, UIComponent, Updatable, MouseStateChanger, LanguageChanger, DropTarget {
+public abstract class Context extends Layer implements ViewContainer, UIResizableComponent, Updatable, MouseStateChanger, LanguageChanger, DropTarget {
 
 	private static final ApplicationLoadListener DUMMY_LOAD_LISTENER = new ApplicationLoadListener() {
 		@Override

@@ -15,7 +15,7 @@ public class ScrollBackground extends View{
 	}
 	
 	@Override
-	public void update(GUIEvent event) {
+	public void updateEvent(GUIEvent event) {
 		// TODO Auto-generated method stub
 	}
 

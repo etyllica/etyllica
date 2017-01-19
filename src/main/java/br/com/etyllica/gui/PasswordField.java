@@ -31,7 +31,7 @@ public class PasswordField extends BaseTextField {
 	
 	//TODO Remove test
 	@Override
-	public void update(GUIEvent event) {
+	public void updateEvent(GUIEvent event) {
 
 		switch (event) {
 

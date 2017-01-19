@@ -252,12 +252,12 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 
 	public void mouseIn() {
 		setMouseOver(true);
-		update(GUIEvent.MOUSE_IN);
+		updateEvent(GUIEvent.MOUSE_IN);
 	}	
 
 	public void mouseOut() {
 		setMouseOver(false);
-		update(GUIEvent.MOUSE_OUT);
+		updateEvent(GUIEvent.MOUSE_OUT);
 	}
 
 	/* Util methods to Resize

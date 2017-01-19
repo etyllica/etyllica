@@ -35,7 +35,7 @@ public class MultiLangLabel extends TextLabel {
 	}
 		
 	@Override
-	public void update(GUIEvent event){
+	public void updateEvent(GUIEvent event){
 				
 		if(event==GUIEvent.LOST_FOCUS){
 			

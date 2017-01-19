@@ -70,11 +70,11 @@ public class BaseButton extends RoundView {
 
 	}
 
-	public void update(GUIEvent event) {
+	public void updateEvent(GUIEvent event) {
 		executeAction(event);
 		
 		if(hasLabel())
-			label.update(event);
+			label.updateEvent(event);
 	}
 	
 	protected void leftClick() {
@@ -102,7 +102,7 @@ public class BaseButton extends RoundView {
 		GUIEvent value = super.updateMouse(event);
 		
 		if(value != GUIEvent.NONE) {
-			update(value);
+			updateEvent(value);
 			return value;
 		}
 		
@@ -191,7 +191,7 @@ public class BaseButton extends RoundView {
 			}
 		}
 		
-		update(value);
+		updateEvent(value);
 		return value;
 	}
 
@@ -248,7 +248,7 @@ public class BaseButton extends RoundView {
 		}
 
 		if(event.isKeyDown(KeyEvent.VK_ENTER)) {
-			this.update(GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
+			this.updateEvent(GUIEvent.MOUSE_LEFT_BUTTON_DOWN);
 		}/*else if(event.getReleased(Tecla.TSK_ENTER)) {
 
 			return GUIEvent.MOUSE_LEFT_BUTTON_UP;
