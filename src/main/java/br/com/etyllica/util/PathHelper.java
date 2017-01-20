@@ -45,7 +45,7 @@ public class PathHelper {
 	public static String upperDirectory(String path) {
 		
 		String separator = File.separator;
-		if(!path.contains(separator)) {
+		if (!path.contains(separator)) {
 			separator = "\\";
 		}
 		
@@ -67,8 +67,32 @@ public class PathHelper {
 		return System.getenv("ProgramFiles");	
 	}
 
-	public String getExternalStoragePath() {
+	public static String getExternalStoragePath() {
 		return currentPath();
+	}
+	
+	public static String clearPath(String path) {
+		String cleanPath = path.replaceAll("/", File.separator);
+		
+		final String upper = "../";
+		int index = cleanPath.indexOf(upper);
+		while (index != -1) {
+			int lastFolder = lastFolder(cleanPath, index);
+			String before = cleanPath.substring(0, lastFolder-1);
+			String after = cleanPath.substring(index + 3);
+			cleanPath = before + after;
+			
+			index = cleanPath.indexOf(upper);
+		}
+		return cleanPath;
+	}
+	
+	private static int lastFolder(String path, int cursor) {
+		int index = cursor;
+		while (path.charAt(index) != File.separatorChar) {
+			index--;
+		}
+		return index;
 	}
 	
 }
