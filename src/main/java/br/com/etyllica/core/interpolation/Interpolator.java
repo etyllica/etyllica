@@ -6,5 +6,5 @@ public interface Interpolator {
 	public static final Interpolator QUADRATIC = new QuadraticInterpolator();
 	public static final Interpolator REVERSE_QUADRATIC = new ReverseQuadraticInterpolator();
 	
-	double factor(double startValue, double endValue, double x);
+	double interpolate(double startValue, double endValue, double factor);
 }

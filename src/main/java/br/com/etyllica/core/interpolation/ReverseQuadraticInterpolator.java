@@ -2,10 +2,10 @@ package br.com.etyllica.core.interpolation;
 
 public class ReverseQuadraticInterpolator implements Interpolator {
 
-	public double factor(double startValue, double endValue, double value) {
-		double factor = endValue-startValue-((endValue-startValue)*((1-value)*(1-value)));
-		factor += startValue;
-		return factor;
+	public double interpolate(double startValue, double endValue, double fator) {
+		double value = endValue-startValue-((endValue-startValue)*((1-fator)*(1-fator)));
+		value += startValue;
+		return value;
 	}
 
 }

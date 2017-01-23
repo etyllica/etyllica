@@ -2,10 +2,10 @@ package br.com.etyllica.core.interpolation;
 
 public class LinearInterpolator implements Interpolator {
 
-	public double factor(double startValue, double endValue, double value) {
-		double factor = (endValue-startValue)*value;
-		factor += startValue;
-		return factor;
+	public double interpolate(double startValue, double endValue, double factor) {
+		double value = (endValue-startValue)*factor;
+		value += startValue;
+		return value;
 	}
 
 }

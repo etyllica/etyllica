@@ -2,10 +2,10 @@ package br.com.etyllica.core.interpolation;
 
 public class QuadraticInterpolator implements Interpolator {
 
-	public double factor(double startValue, double endValue, double value) {
-		double factor = (endValue-startValue)*value*value;
-		factor += startValue;
-		return factor;
+	public double interpolate(double startValue, double endValue, double factor) {
+		double value = (endValue-startValue)*factor*factor;
+		value += startValue;
+		return value;
 	}
 
 }
