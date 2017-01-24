@@ -25,9 +25,9 @@ public class MovementScript extends LayerAnimation {
 		this.duration = time;
 	}
 	
-	public void calculate(double x) {
-		double valueX = interpolator.factor(startX, endX, x);
-		double valueY = interpolator.factor(startY, endY, x);
+	public void calculate(double factor) {
+		double valueX = interpolator.interpolate(startX, endX, factor);
+		double valueY = interpolator.interpolate(startY, endY, factor);
 		
 		target.setCoordinates((int)valueX, (int)valueY);
 	}

@@ -30,8 +30,9 @@ public abstract class SingleIntervalAnimation extends LayerAnimation {
 		setTarget(target);
 	}
 	
-	public void calculate(double x) {
-		double value = interpolator.factor(startValue, endValue, x);
+	@Override
+	public void calculate(double factor) {
+		double value = interpolator.interpolate(startValue, endValue, factor);
 		update(value);
 	}
 	

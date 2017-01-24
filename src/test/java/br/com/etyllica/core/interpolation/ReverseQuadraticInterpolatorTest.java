@@ -18,19 +18,19 @@ public class ReverseQuadraticInterpolatorTest {
 	
 	@Test
 	public void testStart() {
-		double value = interpolator.factor(START, END, 0);
+		double value = interpolator.interpolate(START, END, 0);
 		Assert.assertEquals(START, value, 0);
 	}
 	
 	@Test
 	public void testMiddle() {
-		double value = interpolator.factor(START, END, 0.5);
-		Assert.assertEquals(START+75, value, 0);
+		double value = interpolator.interpolate(START, END, 0.5);
+		Assert.assertEquals(START + 75, value, 0);
 	}
 	
 	@Test
 	public void testEnd() {
-		double value = interpolator.factor(START, END, 1);
+		double value = interpolator.interpolate(START, END, 1);
 		Assert.assertEquals(END, value, 0);
 	}
 	
