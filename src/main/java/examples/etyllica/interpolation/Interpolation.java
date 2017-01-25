@@ -13,7 +13,7 @@ public class Interpolation extends Etyllica {
 	public static void main(String[] args){
 		Interpolation viewer = new Interpolation();
 		viewer.init();
-	}	
+	}
 	
 	@Override
 	public Application startApplication() {

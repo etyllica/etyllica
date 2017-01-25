@@ -9,6 +9,7 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.interpolation.Interpolator;
 import br.com.etyllica.core.interpolation.LinearInterpolator;
 import br.com.etyllica.core.interpolation.QuadraticInterpolator;
+import br.com.etyllica.core.interpolation.RadialInterpolator;
 import br.com.etyllica.core.interpolation.ReverseQuadraticInterpolator;
 import br.com.etyllica.layer.Layer;
 
@@ -24,11 +25,15 @@ public class InterpolationExample extends Application {
 	HorizontalMovementScript rightQuadraticScript;
 	HorizontalMovementScript leftQuadraticScript;
 	
+	HorizontalMovementScript rightRadialScript;
+	HorizontalMovementScript leftRadialScript;
+	
 	HorizontalMovementScript rightReverseQuadraticScript;
 	HorizontalMovementScript leftReverseQuadraticScript;
-	
+		
 	private Layer linearBall;
 	private Layer quadraticBall;
+	private Layer radialBall;
 	private Layer reverseQuadraticBall;
 	
 	@Override
@@ -38,7 +43,8 @@ public class InterpolationExample extends Application {
 		
 		linearBall = new Layer(40, 80, 30, 30);
 		quadraticBall = new Layer(40, 120, 30, 30);
-		reverseQuadraticBall = new Layer(40, 160, 30, 30);
+		radialBall = new Layer(40, 160, 30, 30);
+		reverseQuadraticBall = new Layer(40, 200, 30, 30);
 				
 		leftLinearScript = createLeftScript(linearBall, new LinearInterpolator());
 		rightLinearScript = createRightScript(linearBall, new LinearInterpolator());
@@ -52,6 +58,13 @@ public class InterpolationExample extends Application {
 		rightQuadraticScript.addNext(leftQuadraticScript);
 		leftQuadraticScript.addNext(rightQuadraticScript);
 		
+		Interpolator radialInterpolator = new RadialInterpolator();
+		
+		leftRadialScript = createLeftScript(radialBall, radialInterpolator);
+		rightRadialScript = createRightScript(radialBall, radialInterpolator);
+		rightRadialScript.addNext(leftRadialScript);
+		leftRadialScript.addNext(rightRadialScript);
+		
 		Interpolator reverseQuadraticInterpolator = new ReverseQuadraticInterpolator();
 		
 		leftReverseQuadraticScript = createLeftScript(reverseQuadraticBall, reverseQuadraticInterpolator);
@@ -61,7 +74,8 @@ public class InterpolationExample extends Application {
 		
 		AnimationHandler.getInstance().add(rightLinearScript);
 		AnimationHandler.getInstance().add(rightQuadraticScript);
-		AnimationHandler.getInstance().add(leftReverseQuadraticScript);
+		AnimationHandler.getInstance().add(rightRadialScript);
+		AnimationHandler.getInstance().add(rightReverseQuadraticScript);
 		
 		loading = 100;
 	}
@@ -84,6 +98,7 @@ public class InterpolationExample extends Application {
 	public void draw(Graphics g) {
 		drawBall(g, linearBall);
 		drawBall(g, quadraticBall);
+		drawBall(g, radialBall);
 		drawBall(g, reverseQuadraticBall);
 	}
 

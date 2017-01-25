@@ -1,9 +1,12 @@
 package br.com.etyllica.core.interpolation;
 
-public class ReverseQuadraticInterpolator implements Interpolator {
+public class RadialInterpolator implements Interpolator {
 
 	public double interpolate(double startValue, double endValue, double factor) {
-		double value = endValue-startValue-((endValue-startValue)*((1-factor)*(1-factor)));
+		
+		double radial = Math.sin(Math.toRadians(180-90*factor));
+		double value = (endValue-startValue)*radial;
+		
 		value += startValue;
 		return value;
 	}
