@@ -394,6 +394,9 @@ public class KDTree<T> implements Serializable {
 		return nbrs;
 	}
 
+	public void clear() {
+		m_root = null;
+	}
 
 }
 
