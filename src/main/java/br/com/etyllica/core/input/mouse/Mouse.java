@@ -224,4 +224,8 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		events.unlock();
 	}
 
+	public boolean hasEvents() {
+		return !events.isEmpty();
+	}
+
 }
