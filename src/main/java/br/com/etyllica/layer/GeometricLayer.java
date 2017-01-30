@@ -69,7 +69,7 @@ public class GeometricLayer extends PointInt2D implements Movable {
 	 * 
 	 * @param offsetX
 	 */
-	public void setOffsetX(int offsetX) {
+	public void offsetX(int offsetX) {
 		setX(this.x+offsetX);
 	}
 	
@@ -77,7 +77,7 @@ public class GeometricLayer extends PointInt2D implements Movable {
 	 * 
 	 * @param offsetY
 	 */
-	public void setOffsetY(int offsetY) {
+	public void offsetY(int offsetY) {
 		setY(this.y+offsetY);
 	}
 
@@ -86,9 +86,9 @@ public class GeometricLayer extends PointInt2D implements Movable {
 	 * @param offsetX
 	 * @param offsetY
 	 */
-	public void setOffset(int offsetX, int offsetY) {
-		setOffsetX(offsetX);
-		setOffsetY(offsetY);
+	public void offset(int offsetX, int offsetY) {
+		offsetX(offsetX);
+		offsetY(offsetY);
 	}
 	
 	/**

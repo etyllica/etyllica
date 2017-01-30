@@ -382,13 +382,13 @@ public class Resizer<T extends Layer> {
 
 		if (event.isKeyDown(KeyEvent.VK_UP_ARROW)) {
 			if (selectedIndex != UNKNOWN) {
-				selected.setOffsetY(-speed());
+				selected.offsetY(-speed());
 				notifyListener(ResizerEvent.MOVE);
 				refresh();	
 			}			
 		} else if (event.isKeyDown(KeyEvent.VK_DOWN_ARROW)) {
 			if (selectedIndex != UNKNOWN) {
-				selected.setOffsetY(+speed());
+				selected.offsetY(+speed());
 				notifyListener(ResizerEvent.MOVE);
 				refresh();
 			}
@@ -396,13 +396,13 @@ public class Resizer<T extends Layer> {
 
 		if (event.isKeyDown(KeyEvent.VK_LEFT_ARROW)) {
 			if (selectedIndex != UNKNOWN) {
-				selected.setOffsetX(-speed());
+				selected.offsetX(-speed());
 				notifyListener(ResizerEvent.MOVE);
 				refresh();
 			}
 		} else if (event.isKeyDown(KeyEvent.VK_RIGHT_ARROW)) {
 			if (selectedIndex != UNKNOWN) {
-				selected.setOffsetX(+speed());
+				selected.offsetX(+speed());
 				notifyListener(ResizerEvent.MOVE);
 				refresh();
 			}

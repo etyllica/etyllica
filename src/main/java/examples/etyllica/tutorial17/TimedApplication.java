@@ -40,7 +40,7 @@ public class TimedApplication extends Application {
 				press = false;
 			}*/
 			
-			layer.setOffsetX(10);
+			layer.offsetX(10);
 			
 		}
 		

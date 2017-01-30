@@ -35,26 +35,26 @@ public class JoystickExample extends Application{
 	public void updateKeyboard(KeyEvent event) {
 		
 		if(event.isKeyDown(KeyEvent.VK_RIGHT)) {
-			hello.setOffsetX(10);
+			hello.offsetX(10);
 		}
 		if(event.isKeyDown(KeyEvent.VK_LEFT)) {
-			hello.setOffsetX(-10);
+			hello.offsetX(-10);
 		}
 		
 		if(event.isKeyDown(KeyEvent.VK_JOYSTICK_RIGHT)) {
-			hello.setOffsetX(10);
+			hello.offsetX(10);
 		}
 		
 		else if(event.isKeyDown(KeyEvent.VK_JOYSTICK_LEFT)) {
-			hello.setOffsetX(-10);
+			hello.offsetX(-10);
 		}
 		
 		if(event.isKeyDown(KeyEvent.VK_JOYSTICK_UP)) {
-			hello.setOffsetY(-10);
+			hello.offsetY(-10);
 		}
 		
 		else if(event.isKeyDown(KeyEvent.VK_JOYSTICK_DOWN)) {
-			hello.setOffsetY(10);
+			hello.offsetY(10);
 		}
 		
 		if(event.isKeyDown(KeyEvent.VK_JOYSTICK_BUTTON_1)) {

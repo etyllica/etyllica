@@ -53,17 +53,17 @@ public class FileExample extends Application implements SelectFileListener {
 	public void update(long now) {
 		
 		if(right) {
-			hello.setOffsetX(1);
+			hello.offsetX(1);
 		}
 		if(left) {
-			hello.setOffsetX(-1);
+			hello.offsetX(-1);
 		}
 		
 		if(down) {
-			hello.setOffsetY(1);
+			hello.offsetY(1);
 		}
 		if(up) {
-			hello.setOffsetY(-1);
+			hello.offsetY(-1);
 		}
 		
 	}

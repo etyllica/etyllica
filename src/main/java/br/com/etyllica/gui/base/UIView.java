@@ -183,13 +183,13 @@ public abstract class UIView extends View {
 	}
 
 	@Override
-	public void setOffsetX(int offsetX) {
-		delegatedView.setOffsetX(offsetX);
+	public void offsetX(int offsetX) {
+		delegatedView.offsetX(offsetX);
 	}
 
 	@Override
-	public void setOffsetY(int offsetY) {
-		delegatedView.setOffsetY(offsetY);
+	public void offsetY(int offsetY) {
+		delegatedView.offsetY(offsetY);
 	}
 
 	@Override
