@@ -479,6 +479,8 @@ public interface Graphics extends TextGraphics {
 	public void fill(Shape shape);
 
 	public FontMetrics getFontMetrics();
+	
+	public int textWidth(String text);
 
 	/*public void setGraphics(GLGraphics2D graphics) {		
 		this.screen = graphics;

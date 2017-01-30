@@ -359,14 +359,20 @@ public class AWTGraphics implements Graphics {
 		return centralizeTextX(text, 0, width);
 	}
 
+	
+	
 	private int centralizeTextX(String text, int x, int w) {
-		FontMetrics fm = screen.getFontMetrics();
-
-		int textWidth = fm.stringWidth(text);
+		int textWidth = textWidth(text);
 
 		int dx = x + w/2 - textWidth/2;
 
 		return dx;
+	}
+
+	public int textWidth(String text) {
+		FontMetrics fm = screen.getFontMetrics();
+		int textWidth = fm.stringWidth(text);
+		return textWidth;
 	}
 
 	private int centralizeTextY(String text) {
