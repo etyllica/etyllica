@@ -3,10 +3,13 @@ package br.com.etyllica.core.animation;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.animation.script.AnimationScript;
+import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.ui.UIComponent;
 
-public class AnimationHandler implements Updatable {
+public class AnimationHandler implements UIComponent {
 
 	private static AnimationHandler instance;
 
@@ -109,6 +112,24 @@ public class AnimationHandler implements Updatable {
 	public void clearAll() {
 		scripts.clear();
 		nextScripts.clear();
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateKeyboard(KeyEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

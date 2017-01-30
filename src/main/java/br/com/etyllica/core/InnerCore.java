@@ -29,6 +29,7 @@ import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.i18n.LanguageHandler;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
+import br.com.etyllica.core.ui.UIComponent;
 import br.com.etyllica.core.ui.UICore;
 import br.com.etyllica.core.ui.UICoreListener;
 import br.com.etyllica.gui.View;
@@ -226,13 +227,16 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			return false;
 		}
 
-		if(context.getUpdateInterval() == 0) {
+		if (context.getUpdateInterval() == 0) {
 
 			context.update(now);
 
 			context.setLastUpdate(now);
 
-			context.getScene().update(now);
+			//Update Components
+			for (UIComponent component:context.getComponents()) {
+				component.update(now);
+			}
 
 		}else if(now-context.getLastUpdate() >= context.getUpdateInterval()) {
 
@@ -245,8 +249,10 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			updated.timeUpdate(now);
 
 			context.setLastUpdate(now);
-
-			context.getScene().update(now);
+			
+			for (UIComponent component:context.getComponents()) {
+				component.update(now);
+			}
 		}
 
 		return true;
@@ -358,7 +364,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		}
 
 		context.draw(g);
-		context.getScene().draw(g);
+		
+		//Draw Components
+		for (UIComponent component:context.getComponents()) {
+			component.draw(g);
+		}
 		uiCore.drawUIViews(g, context);
 	}
 
@@ -536,6 +546,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	public void changeApplication() {
 		Context currentApplication = currentContext();
+		currentApplication.getComponents().remove(AnimationHandler.getInstance());
 		currentApplication.dispose();
 		
 		reload(currentApplication.getNextApplication());
@@ -556,8 +567,9 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		application.setDrawCursor(drawCursor);
 		application.setMouseStateListener(arrowDrawer);
 		application.setLanguageChangerListener(this);
+		application.getComponents().add(AnimationHandler.getInstance());
 		
-		if(application.isLoaded()) {
+		if (application.isLoaded()) {
 			activeWindow.setApplication(applicationLoader.reloadApplication(this, application));
 		}
 	}

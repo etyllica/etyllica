@@ -9,10 +9,13 @@ import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.animation.script.AnimationScript;
 import br.com.etyllica.core.effect.particle.Emitter;
+import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.ui.UIComponent;
 import br.com.etyllica.layer.Layer;
 
-public class Scene implements Updatable {
+public class Scene implements UIComponent {
 	
 	protected List<Updatable> updatables = new ArrayList<Updatable>();
 	
@@ -76,6 +79,18 @@ public class Scene implements Updatable {
 		for(Layer child: children) {
 			drawLayer(g, child);
 		}
+	}
+
+	@Override
+	public void updateMouse(PointerEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateKeyboard(KeyEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

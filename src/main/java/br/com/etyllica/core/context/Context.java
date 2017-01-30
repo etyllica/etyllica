@@ -44,7 +44,7 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	 * The updateInterval between executions
 	 */
 	private int updateInterval = 0;
-	
+
 	/**
 	 * Listener to be updated
 	 */
@@ -84,11 +84,11 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	 * Scene camera  
 	 */
 	protected Camera camera;
-	
+
 	/**
 	 * Scene Graph Windows
 	 */
-	protected Scene scene = new Scene();
+	protected Scene scene;
 
 	/**
 	 * Last time updated
@@ -100,7 +100,7 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	 * Lock on update
 	 */
 	private boolean locked = false;
-	
+
 	/**
 	 * Lock on load
 	 * Start as true
@@ -111,36 +111,37 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	 * Pause
 	 */
 	protected boolean paused = false;
-	
+
 	/**
 	 * Active Center Mouse
 	 */
 	protected boolean activeCenterMouse = false;
 
 	/**
-     * Application to be shown during loading
-     */
+	 * Application to be shown during loading
+	 */
 	private ApplicationLoadListener loadListener = DUMMY_LOAD_LISTENER;
-	
+
 	private MouseStateListener mouseStateListener;
-	
+
 	private LanguageChangerListener languageChangerListener;
-	
+
 	protected Window parent;
-		
+
 	/**
 	 * Returned Application (next Application to show up)
 	 */
 	protected Context nextApplication = this;
-	
+
 	protected DefaultLoadApplication loadApplication;
-	
+
 	protected int fps = 0;
-	
+
 	private boolean drawCursor = true;
-	
+
 	protected List<View> views = new ArrayList<View>();
-	
+	protected List<UIComponent> components = new ArrayList<UIComponent>();
+
 	/**
 	 * Constructor
 	 * 
@@ -151,6 +152,9 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	 */
 	public Context(int x, int y, int w, int h) {
 		super(x, y, w, h);
+
+		scene = new Scene();
+		components.add(scene);
 
 		this.loading = 0;
 		//TODO Dictionary get "loading"+...
@@ -184,7 +188,7 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	 * Application gets lock while load() and unlocks when loading = 100;     
 	 */
 	public abstract void load();
-	
+
 	/**
 	 * Draw method
 	 */
@@ -203,9 +207,9 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	public void update(GUIEvent event) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	public void update(long now) {
-		
+
 	}
 
 	@Override
@@ -262,12 +266,12 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	protected  void stopTimeUpdate() {
 		updateInterval = 0;
 	}
-	
+
 	public void changeMouseState(MouseState state) {
 		if(mouseStateListener != null)
 			mouseStateListener.changeState(state);
 	}
-	
+
 	public MouseStateListener getMouseStateListener() {
 		return mouseStateListener;
 	}
@@ -280,7 +284,7 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 		if(languageChangerListener != null)
 			languageChangerListener.changeLanguage(language);
 	}
-	
+
 	public LanguageChangerListener getLanguageChangerListener() {
 		return languageChangerListener;
 	}
@@ -309,11 +313,11 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	public void setLoadListener(ApplicationLoadListener listener) {
 		this.loadListener = listener;
 	}
-	
+
 	public Context getNextApplication() {
 		return nextApplication;
 	}
-	
+
 	protected void setNextApplication(Context nextApplication) {
 		this.nextApplication = nextApplication;
 	}
@@ -325,7 +329,7 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	public void setScene(Scene scene) {
 		this.scene = scene;
 	}
-	
+
 	public Camera getCamera() {
 		return camera;
 	}
@@ -353,7 +357,7 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	public boolean isDrawCursor() {
 		return drawCursor;
 	}
-	
+
 	public void setDrawCursor(boolean drawCursor) {
 		this.drawCursor = drawCursor;
 	}
@@ -361,7 +365,7 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	public void hideCursor() {
 		this.drawCursor = false;
 	}
-	
+
 	public void showCursor() {
 		this.drawCursor = true;
 	}
@@ -391,7 +395,7 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	public void setViews(List<View> views) {
 		this.views = views;
 	}
-	
+
 	public void addView(View view) {
 		this.views.add(view);
 	}
@@ -399,16 +403,21 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 	public Color getBackgroundColor() {
 		return Color.WHITE;
 	}
-	
+
 	public void dragEnter() {
-		
+
 	}
-	
+
 	public void dragExit() {
-		
+
 	}
-	
+
 	public void dropFiles(int x, int y, List<File> files) {
-		
+
 	}
+
+	public List<UIComponent> getComponents() {
+		return components;
+	}
+
 }
