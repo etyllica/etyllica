@@ -5,7 +5,7 @@
            uri="antlib:org.apache.maven.artifact.ant"
            classpathref="maven-ant-tasks.classpath" />
         
-  <property name="version" value="5.3.1" /><!-- Change version in maven/pom.xml-->
+  <property name="version" value="5.4.0" /><!-- Change version in maven/pom.xml-->
   <property name="maven-version" value="${version}" />
 
   <property name="libcore"     value="etyllica-${version}" />
@@ -128,30 +128,30 @@
   <target name="package" depends="compile, prepare">
     <jar destfile="${lib.dir}/${libcore}.jar">
       <fileset dir="${build.dir}">
-	<include name="**/br/com/etyllica/*"/>
-	<include name="**/br/com/etyllica/**"/>
-	<include name="**/com/badlogic/gdx/*"/>
-	<include name="**/com/badlogic/gdx/**"/>
+        <include name="**/br/com/etyllica/*"/>
+        <include name="**/br/com/etyllica/**"/>
+        <include name="**/com/badlogic/gdx/*"/>
+        <include name="**/com/badlogic/gdx/**"/>
       </fileset>
     </jar>
     <jar destfile="${jar}">
       <fileset dir="${build.dir}">
-	<include name="**/br/com/etyllica/*"/>
-	<include name="**/br/com/etyllica/**"/>
-	<include name="**/com/badlogic/gdx/*"/>
-	<include name="**/com/badlogic/gdx/**"/>
+        <include name="**/br/com/etyllica/*"/>
+        <include name="**/br/com/etyllica/**"/>
+        <include name="**/com/badlogic/gdx/*"/>
+        <include name="**/com/badlogic/gdx/**"/>
       </fileset>
     </jar>
     <jar destfile="${lib.dir}/${libutil}.jar">
       <fileset dir="${build.dir}">
-	<include name="**/br/com/etyllica/util/*"/>
-	<include name="**/br/com/etyllica/util/**"/>
+        <include name="**/br/com/etyllica/util/*"/>
+        <include name="**/br/com/etyllica/util/**"/>
       </fileset>
     </jar>
     <jar destfile="${lib.dir}/${libsound}.jar">
       <fileset dir="${build.dir}">
-	<include name="**/sound/*"/>
-	<include name="**/sound/**"/>
+        <include name="**/sound/*"/>
+        <include name="**/sound/**"/>
       </fileset>
     </jar>
   </target>
