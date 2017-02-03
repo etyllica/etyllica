@@ -68,4 +68,8 @@ public class IOHelper {
 		return path.replaceAll(StringUtils.WINDOWS_SPACING, StringUtils.WHITE_SPACE);
 	}
 
+	public static void createDirectory(String path) {
+		new File(path).mkdirs();
+	}
+
 }
