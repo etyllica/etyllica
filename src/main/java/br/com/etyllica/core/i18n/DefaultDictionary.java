@@ -13,12 +13,14 @@ public class DefaultDictionary extends Dictionary{
 	
 	@Override
 	protected void populateVocabulary() {
-		Map<Language,String> messageFullscreen = new HashMap<Language,String>();
-		messageFullscreen.put(Language.ENGLISH_USA,"Press ESC to exit Fullscreen.");
-		messageFullscreen.put(Language.PORTUGUESE_BRAZIL,"Pressione ESC para sair da Tela Cheia.");
+		Map<String,String> usVocabulary = new HashMap<String,String>();
+		usVocabulary.put(MESSAGE_FULLSCREEN, "Press ESC to exit Fullscreen.");
 		
-		vocabulary.put(MESSAGE_FULLSCREEN, messageFullscreen);
+		Map<String,String> brVocabulary = new HashMap<String,String>();
+		brVocabulary.put(MESSAGE_FULLSCREEN, "Pressione ESC para sair da Tela Cheia.");
 		
+		vocabulary.put(Language.ENGLISH_US, usVocabulary);
+		vocabulary.put(Language.PORTUGUESE_BRAZIL, brVocabulary);
 	}
 
 }

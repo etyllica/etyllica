@@ -13,33 +13,31 @@ import br.com.etyllica.core.i18n.Language;
 
 public abstract class Dictionary {
 
-	protected Map<String,Map<Language,String>> vocabulary;
+	protected Map<Language, Map<String, String>> vocabulary;
 	
-	protected Language defaultLanguage = Language.ENGLISH_USA;
+	protected Language defaultLanguage = Language.ENGLISH_US;
 
-	public Dictionary(){
-
-		vocabulary = new HashMap<String,Map<Language,String>>();
-
+	public Dictionary() {
+		vocabulary = new HashMap<Language,Map<String, String>>();
 		populateVocabulary();
 	}
 
 	protected abstract void populateVocabulary();
 
-	public Map<Language, String> getWord(String word){
-		return vocabulary.get(word);
+	public Map<String, String> getDictionary(Language language) {
+		return vocabulary.get(language);
 	}
 
-	public String getTranslatedWord(String word, Language language){
-
-		Map<Language, String> words = vocabulary.get(word);
-
-		if(words.containsKey(language)){
-			return words.get(language);
-		}else{
-			return words.get(defaultLanguage);
+	public String getTranslatedWord(String word, Language language) {
+		Map<String, String> words;
+		
+		if (vocabulary.containsKey(language)) {
+			words = vocabulary.get(language);
+		} else {
+			words = vocabulary.get(defaultLanguage);
 		}
-
+		
+		return words.get(word);
 	}
 
 }
