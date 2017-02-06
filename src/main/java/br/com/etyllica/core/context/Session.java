@@ -45,4 +45,11 @@ public class Session {
 		map.put(key, value);
 	}
 	
+	public boolean contains(String param) {
+		return map.containsKey(param);		
+	}
+	
+	public Map<String, Object> getAll() {
+		return map;
+	}
 }
