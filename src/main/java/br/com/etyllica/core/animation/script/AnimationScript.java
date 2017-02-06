@@ -73,7 +73,7 @@ public abstract class AnimationScript {
 				}
 				
 			} else {
-				if(now-startedAt >= delay) {
+				if (now-startedAt >= delay) {
 					this.animate(now);
 				}
 			}
@@ -82,11 +82,18 @@ public abstract class AnimationScript {
 
 	}
 
-	public void animate(long now) {
+	public boolean animate(long now) {
 		long timeElapsed = now-startedAt-delay;
 		float factor = (float)timeElapsed/duration;
 
-		calculate(factor);
+		if (factor < 1) {
+			calculate(factor);
+		} else {
+			calculate(1);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public abstract void calculate(double factor);
