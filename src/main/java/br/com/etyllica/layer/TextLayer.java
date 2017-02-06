@@ -76,7 +76,7 @@ public class TextLayer extends ImageLayer {
 		
 		this.fontName = fontName;
 
-		this.font = FontLoader.getInstance().loadFont(fontName).deriveFont(style,size);		
+		this.font = FontLoader.getInstance().loadFont(fontName).deriveFont(style, size);		
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class BlueButtonApplication extends Application {
 
 	public void load() {
 		ThemeManager.getInstance().getTheme().setShadow(false);
-		
+				
 		TextLabel label = new TextLabel(text);
 		label.setFontStyle(Font.BOLD);
 		label.setFontSize(16);
