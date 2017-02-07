@@ -34,19 +34,19 @@ public class ConcurrentList<T> {
 	}
 	
 	public List<T> lock() {
+		alternativeList.clear();
 		locked = true;
 		return list;
 	}
 	
 	public void unlock() {
 		list.clear();
-		
-		locked = false;
-		
-		if(!alternativeList.isEmpty()) {
+				
+		if (!alternativeList.isEmpty()) {
 			list.addAll(alternativeList);
-			alternativeList.clear();
 		}
+
+		locked = false;
 	}
 
 	public List<T> getList() {
