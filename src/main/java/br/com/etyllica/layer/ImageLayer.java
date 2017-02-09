@@ -262,10 +262,14 @@ public class ImageLayer extends StaticLayer {
 	public void simpleDraw(Graphics g) {
 		simpleDraw(g, x, y);
 	}
-
+	
 	public void simpleDraw(Graphics g, int x, int y) {
-		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x+utilWidth(), y+utilHeight(),
-				xImage,yImage,xImage+utilWidth(),yImage+utilHeight(), null );
+		simpleDraw(g, x, y, utilWidth(), utilHeight());
+	}
+
+	public void simpleDraw(Graphics g, int x, int y, int w, int h) {
+		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x + w, y + h,
+				xImage, yImage, xImage + w,yImage + h, null );
 	}
 	
 	public boolean onMouse(Mouse mouse) {
