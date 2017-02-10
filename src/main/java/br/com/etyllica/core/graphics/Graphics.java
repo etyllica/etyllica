@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 import br.com.etyllica.cinematics.Camera;
+import br.com.etyllica.core.linear.Line2D;
 import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.core.linear.PointInt2D;
 import br.com.etyllica.layer.GeometricLayer;
@@ -225,6 +226,12 @@ public interface Graphics extends TextGraphics {
 	 * @param q
 	 */
 	public void drawLine(Point2D p, Point2D q);
+	
+	/**
+	 * 
+	 * @param line
+	 */
+	public void drawLine(Line2D line);
 
 	/**
 	 * @param xPoints

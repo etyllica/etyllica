@@ -6,19 +6,17 @@ public class Line2D {
 	
 	private Point2D p2;
 	
+	public Line2D(Point2D p1) {
+		super();
+		
+		this.p1 = p1;
+	}
+	
 	public Line2D(Point2D p1, Point2D p2) {
 		super();
 		
 		this.p1 = p1;
 		this.p2 = p2;
-	}
-
-	public Point2D getP1() {
-		return p1;
-	}
-
-	public Point2D getP2() {
-		return p2;
 	}
 	
 	public static Point2D intersection(Point2D p1, Point2D p2, Point2D p3, Point2D p4) {
@@ -76,5 +74,66 @@ public class Line2D {
 		
 		return array;
 	}
+
+	public double distance(Point2D q) {
+		return distance(p1, p2, q);
+	}
 	
+	public static double distance(Point2D p1, Point2D p2, Point2D q) {
+		double x1 = p1.getX();
+		double y1 = p1.getY();
+		double x2 = p2.getX();
+		double y2 = p2.getY();
+		
+		double num = (y2 - y1) * q.getX() - (x2 - x1) * q.getY() + (x2 * y1) - (y2 * x1);
+		double distance = num / Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
+		return distance;
+	}
+	
+	public Point2D nearestPoint(Point2D q) {
+		return nearestPoint(p1, p2, q);
+	}
+	
+	/**
+	 * Answered at: http://stackoverflow.com/questions/1459368/snap-point-to-a-line-java
+	 */
+	public static Point2D nearestPoint(Point2D p1, Point2D p2, Point2D q) {
+		boolean clampToSegment = true;
+		Point2D out = new Point2D();
+	    		
+	    double apx = q.getX() - p1.getX();
+	    double apy = q.getY() - p1.getY();
+	    double abx = p2.getX() - p1.getX();
+	    double aby = p2.getY() - p1.getY();
+
+	    double ab2 = abx * abx + aby * aby;
+	    double ap_ab = apx * abx + apy * aby;
+	    double t = ap_ab / ab2;
+	    if (clampToSegment) {
+	        if (t < 0) {
+	            t = 0;
+	        } else if (t > 1) {
+	            t = 1;
+	        }
+	    }
+	    out.setLocation(p1.getX() + abx * t, p1.getY() + aby * t);
+	    return out;
+	}
+	
+	public Point2D getP1() {
+		return p1;
+	}
+
+	public void setP1(Point2D p1) {
+		this.p1 = p1;
+	}
+
+	public Point2D getP2() {
+		return p2;
+	}
+
+	public void setP2(Point2D p2) {
+		this.p2 = p2;
+	}
+
 }

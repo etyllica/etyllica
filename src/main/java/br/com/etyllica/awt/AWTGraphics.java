@@ -22,6 +22,7 @@ import java.awt.image.VolatileImage;
 
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.linear.Line2D;
 import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.core.linear.PointInt2D;
 import br.com.etyllica.layer.GeometricLayer;
@@ -714,6 +715,15 @@ public class AWTGraphics implements Graphics {
 	 */
 	public void drawLine(Point2D p, Point2D q) {
 		screen.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
+	}
+	
+	/**
+	 * 
+	 * @param line
+	 */
+	@Override
+	public void drawLine(Line2D line) {
+		this.drawLine(line.getP1(), line.getP2());
 	}
 
 	/**
