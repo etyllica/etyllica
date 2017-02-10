@@ -19,6 +19,10 @@ public class Line2D {
 		this.p2 = p2;
 	}
 	
+	public Point2D intersection(Line2D line) {
+		return intersection(p1, p2, line.p1, line.p2);		
+	}
+	
 	public static Point2D intersection(Point2D p1, Point2D p2, Point2D p3, Point2D p4) {
 		
 		double x1 = p1.getX();
@@ -134,6 +138,10 @@ public class Line2D {
 
 	public void setP2(Point2D p2) {
 		this.p2 = p2;
+	}
+
+	public double length() {
+		return p1.distance(p2);
 	}
 
 }
