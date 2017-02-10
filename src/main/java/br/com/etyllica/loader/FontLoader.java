@@ -45,14 +45,14 @@ public class FontLoader extends LoaderImpl {
 		
 	public Font loadFont(String fontName) {
 
-		if(!fonts.containsKey(fontName)) {
+		if (!fonts.containsKey(fontName)) {
 
-			String diretorio = folder+fontName;
+			String fullPath = folder + fontName;
 			
 			URL dir = null;
 			
 			try {
-				dir = new URL(url, diretorio);
+				dir = new URL(url, fullPath);
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
@@ -60,6 +60,7 @@ public class FontLoader extends LoaderImpl {
 			try {
 				Font font = Font.createFont( Font.TRUETYPE_FONT, dir.openStream());
 				fonts.put(fontName, font);
+				return font;
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (FontFormatException e) {
@@ -67,11 +68,9 @@ public class FontLoader extends LoaderImpl {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
 
 		return fonts.get(fontName);
-
 	}
 
 	public String[] getSystemFonts() {

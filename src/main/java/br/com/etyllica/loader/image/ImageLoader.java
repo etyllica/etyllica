@@ -117,48 +117,46 @@ public class ImageLoader extends LoaderImpl {
 
 	public BufferedImage getImage(String path, boolean absolute) {
 
-		String diretorio = getFullPath(path, absolute);
+		String fullPath = getFullPath(path, absolute);
 
-		if(images.containsKey(diretorio)) {
-			return images.get(diretorio);
+		if (images.containsKey(fullPath)) {
+			return images.get(fullPath);
 		} else {
-
-			BufferedImage img = null;
-
 			URL dir = null;
 
-			if(!absolute) {
+			if (!absolute) {
 				try {
-					dir = new URL(url, diretorio);
+					dir = new URL(url, fullPath);
 				} catch (MalformedURLException e1) {
 					e1.printStackTrace();
 				}	
 			} else {
 				
-				if(!diretorio.startsWith(IOHelper.FILE_PREFIX)) {
-					diretorio = IOHelper.FILE_PREFIX+diretorio;	
+				if (!fullPath.startsWith(IOHelper.FILE_PREFIX)) {
+					fullPath = IOHelper.FILE_PREFIX + fullPath;	
 				}
 				
 				try {
-					dir = new URL(diretorio);
+					dir = new URL(fullPath);
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 
-			String ext = StringUtils.fileExtension(diretorio);
-
+			String ext = StringUtils.fileExtension(fullPath);
 			ImageReader reader = loaders.get(ext);
+
+			BufferedImage img = null;
 
 			if(reader == null) {
 				System.out.println("Etyllica can't load "+ext+" files.");
 			} else {
 				try {
 					img = reader.loadImage(dir);
-					images.put(diretorio, img);
+					images.put(fullPath, img);
 				} catch (IOException e) {
-					System.err.println("Image "+diretorio+" not found.");
+					System.err.println("Image "+fullPath+" not found.");
 				}
 			}
 
