@@ -24,18 +24,6 @@ public class Dictionary {
 		return vocabularies.get(language);
 	}
 
-	public String getTranslatedWord(String word, Language language) {
-		Map<String, String> words;
-		
-		if (vocabularies.containsKey(language)) {
-			words = vocabularies.get(language);
-		} else {
-			words = vocabularies.get(defaultLanguage);
-		}
-		
-		return words.get(word);
-	}
-
 	public void addLanguage(Language language) {
 		addLanguage(language, new HashMap<String, String>());
 	}
@@ -52,4 +40,20 @@ public class Dictionary {
 		return vocabularies.get(language);
 	}
 
+	public void clear() {
+		vocabularies.clear();
+	}
+
+	public String getText(Language language, String key) {
+		Map<String, String> words;
+		
+		if (vocabularies.containsKey(language)) {
+			words = vocabularies.get(language);
+		} else {
+			words = vocabularies.get(defaultLanguage);
+		}
+		
+		return words.get(key);
+	}
+	
 }

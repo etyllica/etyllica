@@ -47,7 +47,7 @@ public class GenericFullScreenEffect extends GlobalEffect {
 		g.setColor(Color.WHITE);
 		g.setFont(g.getFont().deriveFont(20f));
 		
-		String sentence = dictionary.getTranslatedWord(DefaultDictionary.MESSAGE_FULLSCREEN,Configuration.getInstance().getLanguage());
+		String sentence = dictionary.getText(Configuration.getInstance().getLanguage(), DefaultDictionary.MESSAGE_FULLSCREEN);
 		
 		g.drawStringShadow(sentence, rectX, rectY, rectW, rectH, Color.BLACK);
 		
