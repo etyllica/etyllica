@@ -55,5 +55,9 @@ public class Dictionary {
 		
 		return words.get(key);
 	}
+
+	public Language getDefaultLanguage() {
+		return defaultLanguage;
+	}
 	
 }

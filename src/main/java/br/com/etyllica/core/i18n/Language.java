@@ -65,7 +65,9 @@ public enum Language {
 	THAI ("th_TH", "UTF-8", false),
 	TURKISH ("tr_TR", "UTF-8", false),
 	UKRANIAN_UKRAINE ("uk_UA", "UTF-8", false),
-	VIETNAMESE ("vi_VN", "UTF-8", false);
+	VIETNAMESE ("vi_VN", "UTF-8", false),
+	
+	UNKNOWN ("?", "UTF-8", false);
 	
 	private final String charsetName;
 	private final String charsetEncode;
@@ -87,5 +89,15 @@ public enum Language {
 	
 	public final boolean isRTL(){ 
 		return rtl;
+	}
+
+	public static Language byCode(String code) {
+		String lowerCode = code.toLowerCase();
+		for(Language language : values()) {
+			if (language.charsetName.toLowerCase().equals(lowerCode)) {
+				return language;
+			}
+		}
+		return UNKNOWN;
 	}
 }
