@@ -34,6 +34,9 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 		this.listener = listener;
 	}
 
+	@Override
+	public void init() {}
+
 	public void update(long now) {
 		
 		Set<Integer> changedCopy = changed.lock();
@@ -48,9 +51,9 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 
 				if (keyState == KeyState.RELEASED) {
 					keyStates.put(key,KeyState.ONCE);
-					keyEvents.add(new KeyEvent(key, KeyState.PRESSED));
+					addKeyEvent(new KeyEvent(key, KeyState.PRESSED));
 				} else if (keyState != KeyState.PRESSED) {
-					keyStates.put(key,KeyState.PRESSED);
+					keyStates.put(key, KeyState.PRESSED);
 				}
 
 			} else {
@@ -59,7 +62,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 					keyStates.put(key,KeyState.FIRST_RELEASED);
 				} else if (keyState == KeyState.FIRST_RELEASED) {
 					keyStates.put(key, KeyState.RELEASED);
-					keyEvents.add(new KeyEvent(key, KeyState.RELEASED));
+					addKeyEvent(new KeyEvent(key, KeyState.RELEASED));
 
 					changed.remove(key);
 				}
@@ -83,6 +86,10 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 	public void poll(KeyEventListener listener) {
 		
 		for (KeyEvent event: keyEvents.lock()) {
+			if (event == null) {
+				System.err.println("AWTKeyboard ERROR!");
+				continue;
+			}
 			listener.updateKeyEvent(event);
 		}
 
@@ -118,9 +125,9 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 
 		char c = ke.getKeyChar();
 
-		//TODO Ajeitar o typed
+		//TODO Fix typed
 		if ( c != KeyEvent.CHAR_UNDEFINED ) {
-			keyEvents.add(new KeyEvent(code, c, KeyState.TYPED));
+			addKeyEvent(new KeyEvent(code, c, KeyState.TYPED));
 		}
 
 		ke.consume();
@@ -130,38 +137,20 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 		int code = ke.getKeyCode();
 
 		if (ke.getKeyLocation() != java.awt.event.KeyEvent.KEY_LOCATION_STANDARD) {
-			code+=ke.getKeyLocation()*100;
+			code += ke.getKeyLocation()*100;
 		}
 
 		return code;
 	}
 
-	/*public List<KeyEvent> getEvents() {
-		return keyEvents;
-	}
-	 */
-
-	public void init() {
-		/*Field[] fields = KeyEvent.class.getDeclaredFields();
-
-		for (Field f : fields) {
-			if (Modifier.isPublic(f.getModifiers()) && Modifier.isStatic(f.getModifiers()) && f.getName().startsWith("TSK_")) {
-				try {
-					keys.put(f.getInt(null),false);
-					keyStates.put(f.getInt(null),KeyState.RELEASED);
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}                                
-			}
-		}*/
-	}
-
 	public boolean hasPendingEvent() {
 		return changed.getSet().size() > 0;
+	}
+	
+	private void addKeyEvent(KeyEvent event) {
+		long now = System.currentTimeMillis();
+		event.setTimestamp(now);
+		keyEvents.add(event);
 	}
 
 }
