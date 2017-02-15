@@ -1,5 +1,7 @@
 package br.com.etyllica.core.linear;
 
+import br.com.etyllica.util.math.EtyllicaMath;
+
 public class Line2D {
 
 	private Point2D p1;
@@ -83,6 +85,13 @@ public class Line2D {
 		return distance(p1, p2, q);
 	}
 	
+	/**
+	 * Found at: https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
+	 * @param p1
+	 * @param p2
+	 * @param q
+	 * @return
+	 */
 	public static double distance(Point2D p1, Point2D p2, Point2D q) {
 		double x1 = p1.getX();
 		double y1 = p1.getY();
@@ -90,6 +99,7 @@ public class Line2D {
 		double y2 = p2.getY();
 		
 		double num = (y2 - y1) * q.getX() - (x2 - x1) * q.getY() + (x2 * y1) - (y2 * x1);
+		num = EtyllicaMath.mod(num);
 		double distance = num / Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
 		return distance;
 	}

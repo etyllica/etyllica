@@ -12,7 +12,7 @@ public class EtyllicaMath {
 	}
 
 	public static double mod(double a) {
-		if(a<0) {
+		if (a < 0) {
 			return -a;
 		}
 		return a;
