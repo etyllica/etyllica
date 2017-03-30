@@ -11,7 +11,6 @@ public class FullScreenHelper {
 	public static FullScreenWindow enableFullScreen(AWTCore core, Monitor selectedMonitor) {
 		GraphicsDevice gd = selectedMonitor.getDevice();
 		
-		//Frame frame = buildFrame(gs);
 		FullScreenWindow frame = new FullScreenWindow(core, selectedMonitor);
 
 		gd.setFullScreenWindow(frame);
