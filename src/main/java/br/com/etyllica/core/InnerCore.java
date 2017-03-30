@@ -552,7 +552,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		reload(currentApplication.getNextApplication());
 	}
 
-	protected Context currentContext() {
+	public Context currentContext() {
 		return activeWindow.getContext();
 	}
 

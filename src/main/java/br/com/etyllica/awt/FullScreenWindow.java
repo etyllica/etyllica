@@ -2,13 +2,9 @@ package br.com.etyllica.awt;
 
 import java.awt.Cursor;
 import java.awt.Frame;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 
 import br.com.etyllica.awt.core.input.AWTKeyboard;
@@ -23,7 +19,7 @@ import br.com.etyllica.core.input.mouse.Mouse;
  *
  */
 
-public class FullScreenWindow extends Window {
+public class FullScreenWindow extends Frame {
 	
 	private static final long serialVersionUID = -5176767672500250086L;
 	
@@ -31,41 +27,25 @@ public class FullScreenWindow extends Window {
 	
 	private int w;
 	private int h;
-	
-	private int utilHeight;
-	
-	private int offsetY = 0;
-	
-	public FullScreenWindow(InnerCore core, Monitor monitor) {
-
-		super(new Frame());
-				
+		
+	public FullScreenWindow(InnerCore core, Monitor selectedMonitor) {
 		this.core = core;
 		
-		//int gnomebar = 20;
+		this.w = selectedMonitor.getW();
+		this.h = selectedMonitor.getH();
 		
-		//setBounds(0, gnomebar, ss.width, ss.height-gnomebar*2);
-		//setBounds(0, 0, ss.width, ss.height-gnomebar*2);
-		setBounds((int)monitor.getX(), (int)monitor.getY(), (int)monitor.getW(), (int)monitor.getH());
+		this.setBounds(selectedMonitor.getX(), selectedMonitor.getY(), selectedMonitor.getW(), selectedMonitor.getH());
 		
-		this.w = (int)monitor.getW();
-		this.h = (int)monitor.getH();
-		
-		//TODO Calculate monitor aspect
-		
-		int wfactor = this.w/16;
-		
-		utilHeight = 9*wfactor;
-		
-		offsetY = (this.h-utilHeight)/2;
-
+		//These configurations are needed in some cases
+		setUndecorated(true);
+		setResizable(true);
+				
 		hideDefaultCursor();
 		
 		setVisible(true);
 		setAlwaysOnTop(true);
 		setListeners();
-		
-	}	
+	}
 	
 	private void setListeners() {
 		Mouse mouse = core.getControl().getMouse();
@@ -77,23 +57,10 @@ public class FullScreenWindow extends Window {
 		addKeyListener( (AWTKeyboard) keyboard );
 	}
 		
-	public void draw(Image volatileImage) {
-		
-		//int w, int h;
-		int y = offsetY;
-		
-		BufferedImage resized = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-	    Graphics2D g = resized.createGraphics();
+	public void draw(Image volatileImage) {		
+		Image resized = volatileImage.getScaledInstance(w, h, Image.SCALE_REPLICATE);
 	    
-	    //Better Quality
-	    //g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-	    //Fastest (in multicore)
-	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-	    
-	    g.drawImage(volatileImage, 0, y, w, h, 0, 0, volatileImage.getWidth(null), y+volatileImage.getHeight(null), null);
-	    g.dispose();
-				
-		getGraphics().drawImage(resized,0,0,null);
+		getGraphics().drawImage(resized, 0, 0, null);
 	}
 	
 	private void hideDefaultCursor() {

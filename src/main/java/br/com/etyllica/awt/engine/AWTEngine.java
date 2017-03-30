@@ -18,21 +18,14 @@ import br.com.etyllica.loader.image.ImageLoader;
  */
 public class AWTEngine implements Engine {
 
-	private Component component;
-
 	private AWTCore core;
 
 	private Set<Loader> loaders = new HashSet<Loader>();
 	
-	protected Session session = new Session();
-
 	public AWTEngine(Component component, int w, int h) {
 		super();
 
-		this.component = component;
-
-		core = new AWTCore(component, w, h);		
-		core.setSession(session);
+		core = new AWTCore(component, w, h);
 	}
 
 	public void updateSuperEvent(GUIEvent event) {
@@ -47,9 +40,8 @@ public class AWTEngine implements Engine {
 			
 		}
 		else if (event == GUIEvent.REQUEST_FOCUS) {
-
-			if ( !component.hasFocus() ) {
-				component.requestFocus();
+			if ( !core.getComponent().hasFocus() ) {
+				core.getComponent().requestFocus();
 			}
 		}
 	}
