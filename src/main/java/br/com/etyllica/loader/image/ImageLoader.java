@@ -101,23 +101,9 @@ public class ImageLoader extends LoaderImpl {
 		return getImage(path, absolute);
 	}
 
-	private String getFullPath(String path, boolean absolute) {
-
-		StringBuilder sb = new StringBuilder();
-
-		if(!absolute) {
-			sb.append(url.getPath());
-			sb.append(folder);
-		}
-
-		sb.append(path);
-
-		return sb.toString();
-	}
-
 	public BufferedImage getImage(String path, boolean absolute) {
 
-		String fullPath = getFullPath(path, absolute);
+		String fullPath = fullPath(path, absolute);
 
 		if (images.containsKey(fullPath)) {
 			return images.get(fullPath);
@@ -173,10 +159,10 @@ public class ImageLoader extends LoaderImpl {
 
 	public List<ImageFrame> getAnimation(String path, boolean absolute) {
 
-		String diretorio = getFullPath(path, absolute);
+		String fullPath = fullPath(path, absolute);
 
-		if(animations.containsKey(diretorio)) {
-			return animations.get(diretorio);
+		if(animations.containsKey(fullPath)) {
+			return animations.get(fullPath);
 
 		}else{
 
@@ -185,22 +171,22 @@ public class ImageLoader extends LoaderImpl {
 			URL dir = null;
 
 			try {
-				dir = new URL(url, diretorio);
+				dir = new URL(url, fullPath);
 			} catch (MalformedURLException e1) {
 				e1.printStackTrace();
 			}
 
-			String ext = StringUtils.fileExtension(diretorio);
+			String ext = StringUtils.fileExtension(fullPath);
 
 			if(ext.equals("gif")) {
 
 				try {
 					list = GIFReader.getInstance().loadAnimation(dir);
-					animations.put(diretorio, list);
+					animations.put(fullPath, list);
 
 				} catch (IOException e) {
 
-					System.err.println("Image "+diretorio+" not found.");
+					System.err.println("Image "+fullPath+" not found.");
 
 					e.printStackTrace();
 				}

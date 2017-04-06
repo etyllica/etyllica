@@ -71,12 +71,12 @@ public class MultimediaLoader extends LoaderImpl {
 	}
 
 	public void loadSound(String path) {
-		mySoundSystem.loadSound(fullPath()+path);
+		mySoundSystem.loadSound(fullPath(path));
 	}
 
 	public void playSound(String path) {
 	
-		mySoundSystem.quickPlay( false, fullPath()+path, false,
+		mySoundSystem.quickPlay( false, fullPath(path), false,
                 0, 0, 0,
                 SoundSystemConfig.ATTENUATION_NONE,
                 SoundSystemConfig.getDefaultRolloff());
@@ -84,11 +84,11 @@ public class MultimediaLoader extends LoaderImpl {
 	
 	//Loads ogg and mp3 too
 	public void loadMusic(String path) {
-		mySoundSystem.loadSound(fullPath()+path);
+		mySoundSystem.loadSound(fullPath(path));
 	}
 
 	public void playMusic(String path, boolean loop) {
-		mySoundSystem.backgroundMusic( fullPath()+path, fullPath()+path, loop );
+		mySoundSystem.backgroundMusic( fullPath(path), fullPath(path), loop );
 	}
 
 	public void playMusicStream(String path) {
@@ -101,7 +101,7 @@ public class MultimediaLoader extends LoaderImpl {
 	}
 
 	public void stop(String path) {
-		mySoundSystem.stop(fullPath()+path);
+		mySoundSystem.stop(fullPath(path));
 	}
 	
 

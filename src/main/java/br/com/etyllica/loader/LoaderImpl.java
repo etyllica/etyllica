@@ -43,14 +43,28 @@ public class LoaderImpl implements Loader {
 		return path;
 	}
 	
-	public String fullPath() {
-		return getPath()+folder;
-	}
-	
 	@Override
 	public void initLoader() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String fullPath(String path) {
+		return fullPath(path, false);
+	}
+	
+	public String fullPath(String path, boolean absolute) {
+
+		StringBuilder sb = new StringBuilder();
+
+		if(!absolute) {
+			sb.append(url.getPath());
+			sb.append(folder);
+		}
+
+		sb.append(path);
+
+		return sb.toString();
 	}
 	
 }

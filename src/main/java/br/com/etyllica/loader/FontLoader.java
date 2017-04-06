@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.etyllica.util.io.IOHelper;
+
 /**
  * 
  * @author yuripourre
@@ -43,23 +45,37 @@ public class FontLoader extends LoaderImpl {
 		return font.deriveFont(size);
 	}
 		
-	public Font loadFont(String fontName) {
+	public Font loadFont(String path, boolean absolute) {
 
-		if (!fonts.containsKey(fontName)) {
-
-			String fullPath = folder + fontName;
+		String fullPath = fullPath(path, absolute);
+		
+		if (!fonts.containsKey(fullPath)) {
 			
 			URL dir = null;
 			
-			try {
-				dir = new URL(url, fullPath);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
+			if (!absolute) {
+				try {
+					dir = new URL(url, fullPath);
+				} catch (MalformedURLException e1) {
+					e1.printStackTrace();
+				}	
+			} else {
+				
+				if (!fullPath.startsWith(IOHelper.FILE_PREFIX)) {
+					fullPath = IOHelper.FILE_PREFIX + fullPath;	
+				}
+				
+				try {
+					dir = new URL(fullPath);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			try {
 				Font font = Font.createFont( Font.TRUETYPE_FONT, dir.openStream());
-				fonts.put(fontName, font);
+				fonts.put(fullPath, font);
 				return font;
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -70,7 +86,7 @@ public class FontLoader extends LoaderImpl {
 			}
 		}
 
-		return fonts.get(fontName);
+		return fonts.get(fullPath);
 	}
 
 	public String[] getSystemFonts() {
@@ -82,6 +98,11 @@ public class FontLoader extends LoaderImpl {
 	}
 	
 	public void disposeFont(String fontName) {
-		fonts.remove(fontName);
+		String fullPath = fullPath(fontName, false); 
+		fonts.remove(fullPath);
+	}
+
+	public Font loadFont(String path) {
+		return loadFont(path, false);
 	}
 }
