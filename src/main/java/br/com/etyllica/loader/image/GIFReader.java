@@ -23,11 +23,11 @@ public class GIFReader implements ImageReader, AnimationReader {
 	
 	public GIFReader() {
 		super();
-		decoder = new GifDecoder();
 	}
 	
 	@Override
 	public BufferedImage loadImage(URL url) throws IOException {
+		decoder = new GifDecoder();
 		decoder.read(url.getPath());
 		return decoder.getImage();
 	}
