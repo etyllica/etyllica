@@ -268,6 +268,9 @@ public class ImageLayer extends StaticLayer {
 	}
 
 	public void simpleDraw(Graphics g, int x, int y, int w, int h) {
+		if (path.isEmpty()) {
+			return;
+		}
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x + w, y + h,
 				xImage, yImage, xImage + w,yImage + h, null );
 	}
