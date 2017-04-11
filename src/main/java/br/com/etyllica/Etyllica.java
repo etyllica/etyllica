@@ -83,13 +83,7 @@ public abstract class Etyllica extends JFrame implements EtyllicaFrame {
 	}
 
 	protected void initialSetup(String suffix) {
-
-		//Load Monitors
-		/*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsDevice[] gs = ge.getScreenDevices();*/
-
 		String defaultPath = PathHelper.currentFileDirectory().toString();
-					
 		setPath(defaultPath+suffix);
 	}
 
