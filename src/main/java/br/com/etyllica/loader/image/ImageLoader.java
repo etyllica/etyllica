@@ -141,6 +141,9 @@ public class ImageLoader extends LoaderImpl {
 				try {
 					img = reader.loadImage(dir);
 					images.put(fullPath, img);
+					if (img == null) {
+						System.err.println("Image "+fullPath+" not found.");	
+					}
 				} catch (IOException e) {
 					System.err.println("Image "+fullPath+" not found.");
 				}
