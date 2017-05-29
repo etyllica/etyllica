@@ -84,13 +84,13 @@ public class Scene implements UIComponent {
 	@Override
 	public void updateMouse(PointerEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateKeyboard(KeyEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }

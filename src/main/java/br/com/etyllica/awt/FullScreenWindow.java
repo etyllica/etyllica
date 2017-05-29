@@ -70,7 +70,7 @@ public class FullScreenWindow extends Frame {
 				, new Point(0, 0), "invisibleCursor");
 		setCursor( transparentCursor );
 		
-		core.showCursor();
+		//core.showCursor();
 	}
 	
 }

@@ -6,6 +6,6 @@ public interface Updatable {
 	 * Update Component
 	 * @param now
 	 */
-	public void update(long now);
+	void update(long now);
 	
 }

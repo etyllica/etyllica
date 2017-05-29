@@ -24,6 +24,7 @@ import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.graphics.Monitor;
+import br.com.etyllica.core.handler.Handler;
 import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.i18n.LanguageHandler;
@@ -62,7 +63,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	private Window mainWindow;
 
-	private boolean drawCursor = true;
+	//private boolean drawCursor = true;
 
 	private boolean fullScreenEnable = false;
 
@@ -88,8 +89,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	private ArrowDrawer arrowDrawer;
 
 	private LanguageHandler languageHandler;
-	
-	private List<Updatable> updatables = new ArrayList<Updatable>();
 
 	private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
 	
@@ -97,6 +96,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		
 	protected ApplicationLoader applicationLoader;
 	protected UICore uiCore;
+
+	private List<Handler> handlers = new ArrayList<Handler>();
 	
 	public InnerCore(int w, int h) {
 		super();
@@ -117,10 +118,17 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		
 		initTheme();
 
-		updatables.add(AnimationHandler.getInstance());
+		//updatables.add(AnimationHandler.getInstance());
 		
 		applicationLoader = new ApplicationLoader(w, h);
-	}	
+
+		initHandlers();
+	}
+
+	//Default Handlers
+	private void initHandlers() {
+		handlers.add(AnimationHandler.getInstance());
+	}
 
 	private void initTheme() {
 
@@ -147,13 +155,13 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		updateActiveWindow(now);
 
-		updateEffects(now);
+		updateHandlers(now);
 
 		Context application = currentContext();
 
 		updateApplication(application, now);
 		
-		if(checkApplicationChange(application)) {
+		if (checkApplicationChange(application)) {
 			return;
 		}
 
@@ -170,14 +178,14 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	private void updateInput(Context application, long now) {
 		//Update All components
 		//List<View> components = new CopyOnWriteArrayList<View>(application.getViews());
-		List<View> components = application.getViews();
-		uiCore.updateGui(components);
+
+		for (Handler handler : handlers) {
+			handler.update(now);
+		}
 
 		List<PointerEvent> events = getMouse().lock();
-		updatePointerEvents(events, application, components);
+		updatePointerEvents(events, application, application.getViews());
 		getMouse().unlock();
-
-		updateHelperUI(now);
 
 		//updateKeyboard();
 
@@ -306,20 +314,22 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		for(int i=0; i < eventSize; i++) {
 
 			PointerEvent event = events.get(i);
-			
 			context.updateMouse(event);
 
-			updatePointerEvent(event, components);
+			//Update Handlers
+			updatePointerEvent(event);
 		}
 	}
 
-	public void updatePointerEvent(PointerEvent event, List<View> components) {
+	public void updatePointerEvent(PointerEvent event) {
 
 		if(fixEventPosition) {
 			fixEventPosition(event);
 		}
 
-		uiCore.updateMouseViews(event, components);
+		for (Handler handler: handlers) {
+			handler.updateMouse(event);
+		}
 
 		updateWindowEvent(event, activeWindow);		
 	}
@@ -342,14 +352,14 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			return;
 
 		drawContext(currentContext(), g);
-		drawGlobalEffects(g);
 
-		if(drawCursor) {
-			if(currentContext().isDrawCursor()) {
-				uiCore.drawCursor(g);
-			}
+		//Draw Handlers
+		for(Handler handler: handlers) {
+			handler.draw(g);
 		}
 
+		//Draw Global Effects
+		drawGlobalEffects(g);
 	}
 
 	protected boolean canDraw() {
@@ -357,23 +367,16 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	private void drawContext(Context context, Graphics g) {
-
-		if(context.isClearBeforeDraw()) {
+		if (context.isClearBeforeDraw()) {
 			g.setColor(context.getBackgroundColor());
 			g.fillRect(0, 0, context.getW(), context.getH());
 		}
 
 		context.draw(g);
-		
-		//Draw Components
-		for (UIComponent component:context.getComponents()) {
-			component.draw(g);
-		}
-		uiCore.drawUIViews(g, context);
 	}
 
-	private void updateEffects(long now) {
-		for(Updatable updatable: updatables) {
+	private void updateHandlers(long now) {
+		for(Updatable updatable: handlers) {
 			updatable.update(now);	
 		}
 	}
@@ -405,7 +408,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	public void addEffect(GlobalEffect effect) {
-
 		AnimationHandler.getInstance().add(effect.getScript());
 		globalScripts.add(effect.getScript());
 
@@ -546,10 +548,14 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	public void changeApplication() {
 		Context currentApplication = currentContext();
-		currentApplication.getComponents().remove(AnimationHandler.getInstance());
+		//Remove Handlers
+		removeHandlers(currentApplication);
 		currentApplication.dispose();
-		
-		reload(currentApplication.getNextApplication());
+
+		Context nextApplication = currentApplication.getNextApplication();
+		nextApplication.setDrawCursor(currentApplication.isDrawCursor());
+
+		reload(nextApplication);
 	}
 
 	public Context currentContext() {
@@ -558,19 +564,19 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	private void reload(Context application) {
 
-		if(application == null) {
+		if (application == null) {
 			System.err.println(ErrorMessages.APPLICATION_NULL);
 			return;
 		}
-		
+
 		application.setParent(activeWindow);
-		application.setDrawCursor(drawCursor);
 		application.setMouseStateListener(arrowDrawer);
 		application.setLanguageChangerListener(this);
-		application.getComponents().add(AnimationHandler.getInstance());
-		
+		addHandlers(application);
+
 		if (application.isLoaded()) {
-			activeWindow.setApplication(applicationLoader.reloadApplication(this, application));
+			Application nextApplication = applicationLoader.reloadApplication(this, application);
+			activeWindow.setApplication(nextApplication);
 		}
 	}
 
@@ -585,10 +591,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		locked = false;
 	}
 
-	private void updateHelperUI(long now) {
-		uiCore.updateTimerClick(now);
-	}
-	
 	@Override
 	public void updateKeyEvent(KeyEvent event) {
 
@@ -596,7 +598,9 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		
 		handleApplicationKeyEvents(context, event);
 
-		uiCore.updateKeyboard(event);
+		for (Handler handler : handlers) {
+			handler.updateKeyboard(event);
+		}
 
 		updateKeyboardEvents(event);
 
@@ -621,14 +625,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		return superEvent;
 	}
 
-	public void hideCursor() {
-		drawCursor = false;
-	}
-
-	public void showCursor() {
-		drawCursor = true;		
-	}
-
 	public int getFps() {
 		return fps;
 	}
@@ -640,7 +636,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	@Override
 	public void updateTheme(Theme theme) {
-
 		needReload = true;
 	}
 
@@ -649,15 +644,27 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		languageHandler.changeLanguage(language);
 
-		List<View> components = currentContext().getViews();
-
-		uiCore.updateGuiEvent(components, GUIEvent.LANGUAGE_CHANGED);
+		for(Handler handler:handlers) {
+			handler.updateGuiEvent(GUIEvent.LANGUAGE_CHANGED);
+		}
 	}
 	
 	@Override
 	public void onLoad(Context context) {		
 		activeWindow.setApplication(context);
 		context.setLoaded(true);
+	}
+
+	private void addHandlers(Context application) {
+		for (Handler handler: handlers) {
+			handler.init(application);
+		}
+	}
+
+	private void removeHandlers(Context application) {
+		for (Handler handler: handlers) {
+			handler.dispose(application);
+		}
 	}
 		
 	public List<Monitor> getMonitors() {

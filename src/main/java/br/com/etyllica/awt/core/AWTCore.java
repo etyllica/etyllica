@@ -312,9 +312,8 @@ public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.e
 		engine.draw();
 	}
 
-	@Override
 	public void hideCursor() {
-		super.hideCursor();
+		currentContext().hideCursor();
 	}
 
 	public void setEngine(EtyllicaFrame engine) {

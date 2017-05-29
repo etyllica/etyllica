@@ -14,6 +14,7 @@ import br.com.etyllica.core.effect.TransitionEffect;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.MouseState;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.handler.Handler;
 import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.core.i18n.LanguageChanger;
 import br.com.etyllica.core.i18n.LanguageChangerListener;

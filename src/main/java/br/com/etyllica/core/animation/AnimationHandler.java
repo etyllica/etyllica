@@ -1,135 +1,139 @@
 package br.com.etyllica.core.animation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.etyllica.core.animation.script.AnimationScript;
+import br.com.etyllica.core.context.Context;
+import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UIComponent;
+import br.com.etyllica.core.handler.Handler;
 
-public class AnimationHandler implements UIComponent {
+import java.util.ArrayList;
+import java.util.List;
 
-	private static AnimationHandler instance;
+public class AnimationHandler implements Handler {
 
-	private List<AnimationExecution> scripts = new ArrayList<AnimationExecution>();
-	private List<AnimationScript> nextScripts = new ArrayList<AnimationScript>();
+    private static AnimationHandler instance;
 
-	private AnimationHandler() {
-		super();
-	}
+    private List<AnimationExecution> scripts = new ArrayList<AnimationExecution>();
+    private List<AnimationScript> nextScripts = new ArrayList<AnimationScript>();
 
-	public static AnimationHandler getInstance() {
+    private AnimationHandler() {
+        super();
+    }
 
-		if (instance == null) {
-			instance = new AnimationHandler();
-		}
+    public static AnimationHandler getInstance() {
 
-		return instance;
-	}
+        if (instance == null) {
+            instance = new AnimationHandler();
+        }
 
-	public void update(long now) {
+        return instance;
+    }
 
-		for(int i = scripts.size()-1; i>=0; i--) {
+    public void update(long now) {
 
-			AnimationExecution execution = scripts.get(i);
+        for (int i = scripts.size() - 1; i >= 0; i--) {
 
-			if(!execution.execute(now)) {
-				if(repeatLogic(execution, now)) {
-					scripts.remove(execution);
-				}
-			}
-		}
+            AnimationExecution execution = scripts.get(i);
 
-		//Add next Scripts
-		for(AnimationScript script: nextScripts) {
-			scripts.add(new AnimationExecution(script));
-		}
+            if (!execution.execute(now)) {
+                if (repeatLogic(execution, now)) {
+                    scripts.remove(execution);
+                }
+            }
+        }
 
-		nextScripts.clear();
-	}
+        //Add next Scripts
+        for (AnimationScript script : nextScripts) {
+            scripts.add(new AnimationExecution(script));
+        }
 
-	private boolean repeatLogic(AnimationExecution execution, long now) {
+        nextScripts.clear();
+    }
 
-		AnimationScript script = execution.getScript();
+    private boolean repeatLogic(AnimationExecution execution, long now) {
 
-		if(script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
-			
-			//Repeat Forever
-			script.restart();
-			nextScripts.add(script);
-			
-		} else if(script.getRepeat()-1 > execution.getRepeated()) {
+        AnimationScript script = execution.getScript();
 
-			//Repeat cycle
-			//script.calculate(1);
-			execution.repeat();
-			script.preAnimate(now);
-			
-			return false;
+        if (script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
 
-		} else {
-			//Animation is over
-			notifyFinish(script, now);
-			
-			//Next Script
-			appendNextScript(script);
-		}
+            //Repeat Forever
+            script.restart();
+            nextScripts.add(script);
 
-		return true;
-	}
-	
-	private void appendNextScript(AnimationScript script) {
-		//Next Scripts
-		List<AnimationScript> nextScript = script.getNext();
+        } else if (script.getRepeat() - 1 > execution.getRepeated()) {
 
-		if(nextScript != null) {
-			for(AnimationScript s: nextScript) {
-				nextScripts.add(s);	
-				s.restart();
-			}
-		}
-	}
-	
-	private void notifyFinish(AnimationScript script, long now) {
-		script.finish(now);		
-	}
+            //Repeat cycle
+            //script.calculate(1);
+            execution.repeat();
+            script.preAnimate(now);
 
-	public void add(AnimationScript script) {
-		scripts.add(new AnimationExecution(script));
-	}
-	
-	public void remove(AnimationScript script) {
-		for(AnimationExecution execution: scripts) {
-			if(execution.getScript() == script) {
-				scripts.remove(script);
-				break;
-			}
-		}
-	}
-	
-	public void clearAll() {
-		scripts.clear();
-		nextScripts.clear();
-	}
+            return false;
 
-	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
+        } else {
+            //Animation is over
+            notifyFinish(script, now);
 
-	@Override
-	public void updateMouse(PointerEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
+            //Next Script
+            appendNextScript(script);
+        }
 
-	@Override
-	public void updateKeyboard(KeyEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
+        return true;
+    }
 
+    private void appendNextScript(AnimationScript script) {
+        //Next Scripts
+        List<AnimationScript> nextScript = script.getNext();
+
+        if (nextScript != null) {
+            for (AnimationScript s : nextScript) {
+                nextScripts.add(s);
+                s.restart();
+            }
+        }
+    }
+
+    private void notifyFinish(AnimationScript script, long now) {
+        script.finish(now);
+    }
+
+    public void add(AnimationScript script) {
+        scripts.add(new AnimationExecution(script));
+    }
+
+    public void remove(AnimationScript script) {
+        for (AnimationExecution execution : scripts) {
+            if (execution.getScript() == script) {
+                scripts.remove(script);
+                break;
+            }
+        }
+    }
+
+    public void clearAll() {
+        scripts.clear();
+        nextScripts.clear();
+    }
+
+
+    @Override
+    public void draw(Graphics g) {}
+
+    @Override
+    public void updateMouse(PointerEvent event) {}
+
+    @Override
+    public void updateKeyboard(KeyEvent event) {}
+
+    @Override
+    public void updateGuiEvent(GUIEvent event) {}
+
+    @Override
+    public void init(Context context) {}
+
+    @Override
+    public void dispose(Context context) {
+
+    }
 }
