@@ -28,7 +28,6 @@ public class UIModule implements Module {
 
     private View focus;
 
-
     //View above Mouse
     public View mouseOver = null;
     protected View focusComponent = null;
@@ -36,11 +35,6 @@ public class UIModule implements Module {
     private boolean overClickable = false;
 
     public List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
-
-    public UIModule(UICoreListener listener) {
-        super();
-        this.listener = listener;
-    }
 
     private UIModule() {
         super();

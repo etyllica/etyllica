@@ -26,7 +26,7 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
-import br.com.etyllica.core.i18n.LanguageHandler;
+import br.com.etyllica.core.i18n.LanguageModule;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.ui.UIComponent;
@@ -87,8 +87,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	//Create an Arrow Drawer 
 	private ArrowDrawer arrowDrawer;
 
-	private LanguageHandler languageHandler;
-
 	private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
 	
 	protected List<Monitor> monitors = new ArrayList<Monitor>();
@@ -108,9 +106,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		setKeyboard(control.getKeyboard());
 
 		arrowDrawer = new AWTArrowDrawer();
-		
-		languageHandler = new LanguageHandler();
-		
+
 		initTheme();
 
 		//updatables.add(AnimationHandler.getInstance());
@@ -124,21 +120,19 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		UIModule.arrowDrawer = arrowDrawer;
 		UIModule.mouse = control.getMouse();
 
-		initHandlers();
+		initModules();
 	}
 
 	//Default Handlers
-	private void initHandlers() {
+	private void initModules() {
 		modules.add(AnimationModule.getInstance());
 		modules.add(UIModule.getInstance());
+		modules.add(LanguageModule.getInstance());
 	}
 
 	private void initTheme() {
-
 		ThemeManager.getInstance().setThemeListener(this);
-
 		ThemeManager.getInstance().setArrowThemeListener(arrowDrawer);
-
 		ThemeManager.getInstance().setArrowTheme(new EtyllicArrowTheme());
 	}
 
@@ -567,7 +561,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		application.setParent(activeWindow);
 		application.setMouseStateListener(arrowDrawer);
 		application.setLanguageChangerListener(this);
-		initHandlers(application);
+		initModules(application);
 
 		if (application.isLoaded()) {
 			Application nextApplication = applicationLoader.reloadApplication(this, application);
@@ -636,8 +630,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	@Override
 	public void changeLanguage(Language language) {
-
-		languageHandler.changeLanguage(language);
+		LanguageModule.getInstance().setLanguage(language);
 
 		for(Module module : modules) {
 			module.updateGuiEvent(GUIEvent.LANGUAGE_CHANGED);
@@ -650,7 +643,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		context.setLoaded(true);
 	}
 
-	private void initHandlers(Context application) {
+	private void initModules(Context application) {
 		for (Module module : modules) {
 			module.init(application);
 		}

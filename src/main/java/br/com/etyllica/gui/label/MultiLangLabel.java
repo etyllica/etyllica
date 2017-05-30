@@ -2,9 +2,9 @@ package br.com.etyllica.gui.label;
 
 import java.util.Map;
 
-import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.i18n.Language;
+import br.com.etyllica.core.i18n.LanguageModule;
 
 /**
  * 
@@ -29,7 +29,7 @@ public class MultiLangLabel extends TextLabel {
 		
 		this.texts = texts;
 		
-		Language lang = Configuration.getInstance().getLanguage();
+		Language lang = LanguageModule.getInstance().getLanguage();
 				
 		reloadText(lang);
 	}
@@ -47,7 +47,7 @@ public class MultiLangLabel extends TextLabel {
 			
 		}else if(event==GUIEvent.LANGUAGE_CHANGED){
 			
-			reloadText(Configuration.getInstance().getLanguage());
+			reloadText(LanguageModule.getInstance().getLanguage());
 			
 		}
 		
