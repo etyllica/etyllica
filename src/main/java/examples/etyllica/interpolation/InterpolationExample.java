@@ -2,7 +2,7 @@ package examples.etyllica.interpolation;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
@@ -71,11 +71,11 @@ public class InterpolationExample extends Application {
 		rightReverseQuadraticScript = createRightScript(reverseQuadraticBall, reverseQuadraticInterpolator);
 		rightReverseQuadraticScript.addNext(leftReverseQuadraticScript);
 		leftReverseQuadraticScript.addNext(rightReverseQuadraticScript);
-		
-		AnimationHandler.getInstance().add(rightLinearScript);
-		AnimationHandler.getInstance().add(rightQuadraticScript);
-		AnimationHandler.getInstance().add(rightRadialScript);
-		AnimationHandler.getInstance().add(rightReverseQuadraticScript);
+
+		AnimationModule.getInstance().add(rightLinearScript);
+		AnimationModule.getInstance().add(rightQuadraticScript);
+		AnimationModule.getInstance().add(rightRadialScript);
+		AnimationModule.getInstance().add(rightReverseQuadraticScript);
 		
 		loading = 100;
 	}

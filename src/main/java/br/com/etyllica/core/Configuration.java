@@ -2,6 +2,8 @@ package br.com.etyllica.core;
 
 import br.com.etyllica.core.i18n.Language;
 
+import java.util.Map;
+
 /**
  * 
  * @author yuripourre
@@ -11,12 +13,12 @@ import br.com.etyllica.core.i18n.Language;
 public class Configuration {
 
 	private static Configuration instance = null;
-	
-	private Language language = Language.PORTUGUESE_BRAZIL;
-	
+
 	private boolean timerClick = false;
 	private boolean numpadMouse = false;
-		
+
+	Map<Module, Map<String, Object>> configurations;
+
 	private Configuration(){
 		super();
 	}
@@ -27,18 +29,6 @@ public class Configuration {
 		}
 
 		return instance;
-	}
-
-	public Language getLanguage() {
-		return language;
-	}
-
-	/**
-	 * 
-	 * @param language
-	 */
-	public void setLanguage(Language language) {
-		this.language = language;		
 	}
 
 	public boolean isTimerClick() {

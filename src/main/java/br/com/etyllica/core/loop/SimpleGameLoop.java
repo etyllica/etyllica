@@ -1,12 +1,13 @@
 package br.com.etyllica.core.loop;
 
-import br.com.etyllica.core.GameCore;
+import br.com.etyllica.core.Core;
 
 public class SimpleGameLoop extends GameLoopImpl {
+
+	private static final int FPS = 60;
+	private static final int UPDATE_DELAY = 1000/FPS;
 	
-	private static final int UPDATE_DELAY = 1000/60;
-	
-	public SimpleGameLoop(GameCore core) {
+	public SimpleGameLoop(Core core) {
 		super(core);
 	}
 

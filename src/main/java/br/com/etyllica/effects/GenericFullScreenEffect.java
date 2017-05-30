@@ -7,6 +7,7 @@ import br.com.etyllica.core.animation.script.OpacityAnimation;
 import br.com.etyllica.core.effect.GlobalEffect;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.i18n.DefaultDictionary;
+import br.com.etyllica.core.i18n.LanguageModule;
 
 /**
  * 
@@ -47,7 +48,7 @@ public class GenericFullScreenEffect extends GlobalEffect {
 		g.setColor(Color.WHITE);
 		g.setFont(g.getFont().deriveFont(20f));
 		
-		String sentence = dictionary.getText(Configuration.getInstance().getLanguage(), DefaultDictionary.MESSAGE_FULLSCREEN);
+		String sentence = dictionary.getText(LanguageModule.getInstance().getLanguage(), DefaultDictionary.MESSAGE_FULLSCREEN);
 		
 		g.drawStringShadow(sentence, rectX, rectY, rectW, rectH, Color.BLACK);
 		

@@ -1,6 +1,6 @@
 package br.com.etyllica.core.loop;
 
-import br.com.etyllica.core.GameCore;
+import br.com.etyllica.core.Core;
 
 /**
  * A Game loop with frame skip
@@ -16,7 +16,7 @@ public class FrameSkippingLoop extends GameLoopImpl {
 	// the frame period
 	private final static int FRAME_PERIOD = 1000 / MAX_FPS;
 
-	public FrameSkippingLoop(GameCore core) {
+	public FrameSkippingLoop(Core core) {
 		super(core);
 	}
 

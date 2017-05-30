@@ -12,8 +12,8 @@ public interface Drawable {
 
 	/**
 	 * 
-	 * @param Graphics g
+	 * @param g
 	 */
-	public void draw(Graphics g);
+	void draw(Graphics g);
 	
 }
