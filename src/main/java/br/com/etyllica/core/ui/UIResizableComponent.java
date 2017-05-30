@@ -1,8 +1,6 @@
 package br.com.etyllica.core.ui;
 
 
-import br.com.etyllica.core.handler.Handler;
-
 /**
  * 
  * @author yuripourre

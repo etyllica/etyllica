@@ -1,6 +1,7 @@
 package br.com.etyllica.core.ui;
 
 import br.com.etyllica.core.Configuration;
+import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.event.*;
 import br.com.etyllica.core.graphics.ArrowDrawer;
@@ -14,16 +15,20 @@ import java.util.List;
 
 public class UICore implements Handler {
 
+    private static UICore instance;
+
     private Context context;
 
-    int w, h;
+    public static int w, h;
+    public static UICoreListener listener;
+    public static ArrowDrawer arrowDrawer;
+    public static Mouse mouse;
+
     //Timer click arc
     private int arc = 0;
 
-    ArrowDrawer arrowDrawer;
-
     private View focus;
-    Mouse mouse;
+
 
     //View above Mouse
     public View mouseOver = null;
@@ -31,15 +36,23 @@ public class UICore implements Handler {
 
     private boolean overClickable = false;
 
-    private UICoreListener listener;
-
     public List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
 
-    public UICore(int w, int h, UICoreListener listener) {
+    public UICore(UICoreListener listener) {
         super();
-        this.w = w;
-        this.h = h;
         this.listener = listener;
+    }
+
+    private UICore() {
+        super();
+    }
+
+    public static UICore getInstance() {
+        if (instance == null) {
+            instance = new UICore();
+        }
+
+        return instance;
     }
 
     public void updateGui(List<View> components) {
@@ -281,24 +294,11 @@ public class UICore implements Handler {
         }
     }
 
-    public ArrowDrawer getArrowDrawer() {
-        return arrowDrawer;
-    }
-
-    public void setArrowDrawer(ArrowDrawer arrowDrawer) {
-        this.arrowDrawer = arrowDrawer;
-    }
-
-    public void setMouse(Mouse mouse) {
-        this.mouse = mouse;
-    }
-
     public void drawUIViews(Graphics g, ViewContainer context) {
         for (View child : context.getViews()) {
             child.drawWithChildren(g);
         }
     }
-
 
     @Override
     public void updateMouse(PointerEvent event) {
@@ -362,4 +362,5 @@ public class UICore implements Handler {
 
         updateGui(context.getViews());
     }
+
 }

@@ -16,12 +16,15 @@ import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.base.BaseTextField;
 
 public class UICoreTest {
-	
+
 	UICore uiCore;
 	
 	@Before
 	public void setUp() {
-		uiCore = new UICore(800, 600, null);
+		UICore.w = 800;
+		UICore.h = 600;
+
+		uiCore = UICore.getInstance();
 	}
 	
 	@Test

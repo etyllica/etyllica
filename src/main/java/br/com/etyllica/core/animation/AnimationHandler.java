@@ -23,7 +23,6 @@ public class AnimationHandler implements Handler {
     }
 
     public static AnimationHandler getInstance() {
-
         if (instance == null) {
             instance = new AnimationHandler();
         }
