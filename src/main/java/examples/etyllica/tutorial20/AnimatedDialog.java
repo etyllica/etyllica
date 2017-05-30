@@ -1,7 +1,7 @@
 package examples.etyllica.tutorial20;
 
 import br.com.etyllica.animation.script.text.DialogScript;
-import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
@@ -24,8 +24,8 @@ public class AnimatedDialog extends Application{
 		layer = new TextLayer(200, 140, "Hello my friend, stay awhile and listen.");
 						
 		script = new DialogScript(layer, 2000);
-		
-		AnimationHandler.getInstance().add(script);
+
+		AnimationModule.getInstance().add(script);
 				
 		loading = 100;
 	}
@@ -44,7 +44,7 @@ public class AnimatedDialog extends Application{
 	@Override
 	public void updateMouse(PointerEvent event) {
 		if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
-			AnimationHandler.getInstance().add(script);
+			AnimationModule.getInstance().add(script);
 			script.restart();
 		}
 	}

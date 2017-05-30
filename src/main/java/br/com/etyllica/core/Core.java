@@ -14,4 +14,9 @@ public interface Core {
 	void setPath(String path);
 	void paint(Graphics g);
 	String getPath();
+
+	void update(double delta) throws Exception;
+	void render();
+	boolean isRunning();
+	void setFps(int fps);
 }

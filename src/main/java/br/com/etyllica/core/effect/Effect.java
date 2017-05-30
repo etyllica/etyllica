@@ -1,6 +1,6 @@
 package br.com.etyllica.core.effect;
 
-import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.animation.script.FrameAnimation;
 import br.com.etyllica.layer.AnimatedLayer;
 
@@ -50,8 +50,8 @@ public class Effect extends AnimatedLayer {
 		
 		setVisible(true);
 		restartAnimation();
-		
-		AnimationHandler.getInstance().add(script);
+
+		AnimationModule.getInstance().add(script);
 	}
 	
 }

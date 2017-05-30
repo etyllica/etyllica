@@ -1,21 +1,20 @@
 package br.com.etyllica.core.ui;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.animation.AnimationHandler;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.event.*;
 import br.com.etyllica.core.graphics.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.handler.Handler;
+import br.com.etyllica.core.handler.Module;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.gui.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UICore implements Handler {
+public class UIModule implements Module {
 
-    private static UICore instance;
+    private static UIModule instance;
 
     private Context context;
 
@@ -38,18 +37,18 @@ public class UICore implements Handler {
 
     public List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
 
-    public UICore(UICoreListener listener) {
+    public UIModule(UICoreListener listener) {
         super();
         this.listener = listener;
     }
 
-    private UICore() {
+    private UIModule() {
         super();
     }
 
-    public static UICore getInstance() {
+    public static UIModule getInstance() {
         if (instance == null) {
-            instance = new UICore();
+            instance = new UIModule();
         }
 
         return instance;
@@ -152,7 +151,7 @@ public class UICore implements Handler {
 			break;*/
 
 			/*case MOUSE_OVER_UNCLICKABLE:
-			if(!mouseOver) {
+            if(!mouseOver) {
 				mouseOver = true;
 				mouseOverClickable = false;
 			}			

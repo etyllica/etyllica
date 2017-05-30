@@ -7,7 +7,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 
-public interface Handler extends Drawable, Updatable {
+public interface Module extends Drawable, Updatable {
 
     /**
      * Update pointer events

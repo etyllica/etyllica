@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.etyllica.core.Updatable;
-import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.animation.script.AnimationScript;
 import br.com.etyllica.core.effect.particle.Emitter;
 import br.com.etyllica.core.event.KeyEvent;
@@ -26,7 +26,7 @@ public class Scene implements UIComponent {
 	}
 	
 	public void addAnimation(AnimationScript animation) {
-		AnimationHandler.getInstance().add(animation);
+		AnimationModule.getInstance().add(animation);
 	}
 	
 	public void addEmitter(Emitter emitter) {

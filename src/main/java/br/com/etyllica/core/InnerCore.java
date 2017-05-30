@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.etyllica.awt.AWTArrowDrawer;
 import br.com.etyllica.awt.core.input.AWTController;
-import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.animation.script.AnimationScript;
 import br.com.etyllica.core.animation.script.SingleIntervalAnimation;
 import br.com.etyllica.core.context.Application;
@@ -24,14 +24,14 @@ import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.graphics.Monitor;
-import br.com.etyllica.core.handler.Handler;
+import br.com.etyllica.core.handler.Module;
 import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.i18n.LanguageHandler;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.ui.UIComponent;
-import br.com.etyllica.core.ui.UICore;
+import br.com.etyllica.core.ui.UIModule;
 import br.com.etyllica.core.ui.UICoreListener;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
@@ -95,9 +95,9 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	protected List<Monitor> monitors = new ArrayList<Monitor>();
 		
 	protected ApplicationLoader applicationLoader;
-	//protected UICore uiCore;
+	//protected UIModule uiCore;
 
-	private List<Handler> handlers = new ArrayList<Handler>();
+	private List<Module> modules = new ArrayList<Module>();
 	
 	public InnerCore(int w, int h) {
 		super();
@@ -118,20 +118,20 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		applicationLoader = new ApplicationLoader(w, h);
 
-		//Setup UICore
-		UICore.w = w;
-		UICore.h = h;
-		UICore.listener = this;
-		UICore.arrowDrawer = arrowDrawer;
-		UICore.mouse = control.getMouse();
+		//Setup UIModule
+		UIModule.w = w;
+		UIModule.h = h;
+		UIModule.listener = this;
+		UIModule.arrowDrawer = arrowDrawer;
+		UIModule.mouse = control.getMouse();
 
 		initHandlers();
 	}
 
 	//Default Handlers
 	private void initHandlers() {
-		handlers.add(AnimationHandler.getInstance());
-		handlers.add(UICore.getInstance());
+		modules.add(AnimationModule.getInstance());
+		modules.add(UIModule.getInstance());
 	}
 
 	private void initTheme() {
@@ -183,8 +183,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		//Update All components
 		//List<View> components = new CopyOnWriteArrayList<View>(application.getViews());
 
-		for (Handler handler : handlers) {
-			handler.update(now);
+		for (Module module : modules) {
+			module.update(now);
 		}
 
 		List<PointerEvent> events = getMouse().lock();
@@ -331,8 +331,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 			fixEventPosition(event);
 		}
 
-		for (Handler handler: handlers) {
-			handler.updateMouse(event);
+		for (Module module : modules) {
+			module.updateMouse(event);
 		}
 
 		updateWindowEvent(event, activeWindow);		
@@ -358,8 +358,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		drawContext(currentContext(), g);
 
 		//Draw Handlers
-		for(Handler handler: handlers) {
-			handler.draw(g);
+		for(Module module : modules) {
+			module.draw(g);
 		}
 
 		//Draw Global Effects
@@ -380,7 +380,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	private void updateHandlers(long now) {
-		for(Updatable updatable: handlers) {
+		for(Updatable updatable: modules) {
 			updatable.update(now);	
 		}
 	}
@@ -404,7 +404,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	public void addEffect(GlobalEffect effect) {
-		AnimationHandler.getInstance().add(effect.getScript());
+		AnimationModule.getInstance().add(effect.getScript());
 		globalScripts.add(effect.getScript());
 
 		//TODO add animation
@@ -594,8 +594,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 		
 		handleApplicationKeyEvents(context, event);
 
-		for (Handler handler : handlers) {
-			handler.updateKeyboard(event);
+		for (Module module : modules) {
+			module.updateKeyboard(event);
 		}
 
 		updateKeyboardEvents(event);
@@ -640,8 +640,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 		languageHandler.changeLanguage(language);
 
-		for(Handler handler:handlers) {
-			handler.updateGuiEvent(GUIEvent.LANGUAGE_CHANGED);
+		for(Module module : modules) {
+			module.updateGuiEvent(GUIEvent.LANGUAGE_CHANGED);
 		}
 	}
 	
@@ -652,24 +652,24 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 	}
 
 	private void initHandlers(Context application) {
-		for (Handler handler: handlers) {
-			handler.init(application);
+		for (Module module : modules) {
+			module.init(application);
 		}
 	}
 
 	private void disposeHandlers(Context application) {
-		for (Handler handler: handlers) {
-			handler.dispose(application);
+		for (Module module : modules) {
+			module.dispose(application);
 		}
 	}
 
-	//TODO Remove UICore helper methods
+	//TODO Remove UIModule helper methods
 	public boolean isMouseOver() {
-		return UICore.getInstance().mouseOver != null;
+		return UIModule.getInstance().mouseOver != null;
 	}
 
 	public View getMouseOver() {
-		return UICore.getInstance().mouseOver;
+		return UIModule.getInstance().mouseOver;
 	}
 
 	public List<Monitor> getMonitors() {

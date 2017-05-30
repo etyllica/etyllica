@@ -1,6 +1,6 @@
 package examples.etyllica.tutorial08.application;
 
-import br.com.etyllica.core.animation.AnimationHandler;
+import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
@@ -31,8 +31,8 @@ public class AnimatedMenu extends Application{
 		scriptButton2.setInterval(w, button2.getX());
 		
 		script.addNext(scriptButton2);
-		
-		AnimationHandler.getInstance().add(script);
+
+		AnimationModule.getInstance().add(script);
 				
 		loading = 100;
 	}

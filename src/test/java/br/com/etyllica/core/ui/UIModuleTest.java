@@ -10,21 +10,20 @@ import org.junit.Test;
 import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
-import br.com.etyllica.gui.TextField;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.base.BaseTextField;
 
-public class UICoreTest {
+public class UIModuleTest {
 
-	UICore uiCore;
+	UIModule uiModule;
 	
 	@Before
 	public void setUp() {
-		UICore.w = 800;
-		UICore.h = 600;
+		UIModule.w = 800;
+		UIModule.h = 600;
 
-		uiCore = UICore.getInstance();
+		uiModule = UIModule.getInstance();
 	}
 	
 	@Test
@@ -37,15 +36,15 @@ public class UICoreTest {
 		views.add(f);
 		
 		PointerEvent moveOverButtonEvent = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 20, 20);
-		uiCore.updateMouseViews(moveOverButtonEvent, views);
+		uiModule.updateMouseViews(moveOverButtonEvent, views);
 		
 		Assert.assertTrue(b.isMouseOver());
 		
 		PointerEvent moveOverFieldEvent = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 20, 40);
-		uiCore.updateMouseViews(moveOverFieldEvent, views);
+		uiModule.updateMouseViews(moveOverFieldEvent, views);
 		
 		PointerEvent clickEvent = new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED, 20, 40);
-		uiCore.updateMouseViews(clickEvent, views);
+		uiModule.updateMouseViews(clickEvent, views);
 		
 		Assert.assertTrue(f.isOnFocus());
 		

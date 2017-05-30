@@ -6,25 +6,25 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.handler.Handler;
+import br.com.etyllica.core.handler.Module;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimationHandler implements Handler {
+public class AnimationModule implements Module {
 
-    private static AnimationHandler instance;
+    private static AnimationModule instance;
 
     private List<AnimationExecution> scripts = new ArrayList<AnimationExecution>();
     private List<AnimationScript> nextScripts = new ArrayList<AnimationScript>();
 
-    private AnimationHandler() {
+    private AnimationModule() {
         super();
     }
 
-    public static AnimationHandler getInstance() {
+    public static AnimationModule getInstance() {
         if (instance == null) {
-            instance = new AnimationHandler();
+            instance = new AnimationModule();
         }
 
         return instance;

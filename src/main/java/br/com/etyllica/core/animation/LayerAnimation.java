@@ -204,7 +204,7 @@ public class LayerAnimation extends AnimationScript {
 
 		if(next != null) {
 			for(AnimationScript s: next) {
-				AnimationHandler.getInstance().add(s);
+				AnimationModule.getInstance().add(s);
 			}
 		}
 	}

@@ -21,7 +21,6 @@ import java.util.concurrent.Executors;
 import br.com.etyllica.awt.AWTGraphics;
 import br.com.etyllica.awt.FullScreenWindow;
 import br.com.etyllica.awt.core.input.AWTKeyboard;
-import br.com.etyllica.core.GameCore;
 import br.com.etyllica.core.InnerCore;
 import br.com.etyllica.core.collision.CollisionDetector;
 import br.com.etyllica.core.context.Application;
@@ -41,7 +40,7 @@ import br.com.etyllica.util.io.IOHelper;
  * @author yuripourre
  *
  */
-public class AWTCore extends InnerCore implements Runnable, GameCore, java.awt.event.ComponentListener {
+public class AWTCore extends InnerCore implements Runnable, java.awt.event.ComponentListener {
 
 	private int width;
 	private int height;
