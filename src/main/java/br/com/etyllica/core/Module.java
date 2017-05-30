@@ -1,4 +1,4 @@
-package br.com.etyllica.core.handler;
+package br.com.etyllica.core;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.Updatable;

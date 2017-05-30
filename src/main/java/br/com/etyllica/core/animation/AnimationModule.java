@@ -6,7 +6,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.handler.Module;
+import br.com.etyllica.core.Module;
 
 import java.util.ArrayList;
 import java.util.List;

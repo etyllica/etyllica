@@ -5,7 +5,7 @@ import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.event.*;
 import br.com.etyllica.core.graphics.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.handler.Module;
+import br.com.etyllica.core.Module;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.gui.View;
 

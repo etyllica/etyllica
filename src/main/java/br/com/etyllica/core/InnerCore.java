@@ -24,7 +24,6 @@ import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.graphics.Monitor;
-import br.com.etyllica.core.handler.Module;
 import br.com.etyllica.core.i18n.Language;
 import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.i18n.LanguageHandler;
