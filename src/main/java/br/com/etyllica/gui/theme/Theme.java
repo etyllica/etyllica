@@ -3,6 +3,7 @@ package br.com.etyllica.gui.theme;
 import java.awt.Color;
 import java.awt.Font;
 
+import br.com.etyllica.awt.ColorHelper;
 import br.com.etyllica.gui.style.Style;
 
 /**
@@ -47,7 +48,7 @@ public abstract class Theme implements ThemeFactory {
 	protected Color borderColor = new Color(0x00,0x00, 0x00, 0xa0);
 	protected Color selectionColor = new Color(0x22, 0xca, 0x33, 0xa0);
 	protected Color backgroundColor = new Color(0xff, 0xff, 0xff, 0xa0);
-	protected Color activeSelectionColor = new Color(0x22, 0x87, 0x11, 0xa0);
+	protected Color activeColor = new Color(0x22, 0x87, 0x11, 0xa0);
 	
 	protected boolean shadow = true;
 	protected Color shadowColor = Color.WHITE;
@@ -157,14 +158,6 @@ public abstract class Theme implements ThemeFactory {
 		this.buttonOnFocus = buttonOnFocus;
 	}
 
-	public Color getActiveSelectionColor() {
-		return activeSelectionColor;
-	}
-
-	public void setActiveSelectionColor(Color activeSelectionColor) {
-		this.activeSelectionColor = activeSelectionColor;
-	}
-
 	public Color getTextColor() {
 		return textColor;
 	}
@@ -201,8 +194,8 @@ public abstract class Theme implements ThemeFactory {
 		return selectionColor;
 	}
 
-	public void setSelectionColor(Color selectionColor) {
-		this.selectionColor = selectionColor;
+	public Color getActiveColor() {
+		return activeColor;
 	}
 
 	public Color getPanelColor() {
@@ -283,6 +276,8 @@ public abstract class Theme implements ThemeFactory {
 
 	public void setBaseColor(Color baseColor) {
 		this.baseColor = baseColor;
+		this.selectionColor = ColorHelper.brighter(baseColor, 16);
+		this.activeColor = ColorHelper.darker(baseColor, 16);
 	}
 
 	public Style getStyle() {

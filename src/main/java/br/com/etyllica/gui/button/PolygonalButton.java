@@ -33,7 +33,7 @@ public class PolygonalButton extends BaseButton {
 
 		} else {
 			if (lastEvent == GUIEvent.MOUSE_LEFT_BUTTON_DOWN){
-				g.setColor(theme.getActiveSelectionColor());
+				g.setColor(theme.getActiveColor());
 			} else {
 				g.setColor(theme.getSelectionColor());
 			}

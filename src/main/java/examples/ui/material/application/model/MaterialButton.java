@@ -30,7 +30,7 @@ public class MaterialButton extends BaseButton {
                 baseColor = theme.getBaseColor();
             } else {
                 if (clicked) {
-                    baseColor = theme.getActiveSelectionColor();
+                    baseColor = theme.getActiveColor();
                 } else {
                     baseColor = theme.getSelectionColor();
                 }
@@ -53,17 +53,17 @@ public class MaterialButton extends BaseButton {
         //g.drawString(x, y, w, h, label);
 
         //Draw Shadow
-        g.setAlpha(80);
+        g.setAlpha(70);
         g.setColor(SVGColor.GRAY);
-        g.drawLine(x + radius / 4, y + h + 3, x + w - radius / 2, y + h + 3);
+        g.drawLine(x + radius / 4 + 1, y + h + 3, x + w - radius / 2, y + h + 3);
 
         g.setAlpha(30);
         g.setColor(SVGColor.GRAY);
-        g.drawLine(x + radius / 4 - 1, y + h + 3 + 1, x + w - radius / 2 - 2, y + h + 3 + 1);
+        g.drawLine(x + radius / 4 + 1, y + h + 3 + 1, x + w - radius / 2 - 2, y + h + 3 + 1);
         g.drawLine(x - 1, y + radius / 4, x - 1, y + h - radius / 2);
         g.drawLine(x + w - 1, y + radius / 4, x + w - 1, y + h - radius / 2);
 
-        g.setAlpha(100);
+        g.resetAlpha();
     }
 
 }

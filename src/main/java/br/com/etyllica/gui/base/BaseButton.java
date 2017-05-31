@@ -47,7 +47,7 @@ public class BaseButton extends RoundView {
 			} else {
 
 				if(clicked) {
-					g.setColor(theme.getActiveSelectionColor());
+					g.setColor(theme.getActiveColor());
 				} else {
 					g.setColor(theme.getSelectionColor());
 				}
