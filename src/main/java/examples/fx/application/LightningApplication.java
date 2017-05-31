@@ -35,12 +35,7 @@ public class LightningApplication extends Application{
 		
 		lightning.draw(g);
 	}
-	
-	@Override
-	public void update(long now) {
-		
-	}
-		
+
 	@Override
 	public void updateKeyboard(KeyEvent event) {
 		if(event.isKeyUp(KeyEvent.VK_SPACE)) {

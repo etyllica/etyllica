@@ -73,4 +73,9 @@ public class BaseCheckBox extends BaseButton {
 		checker.setContentBounds(x, y, w, h);
 	}
 
+	public void copy(BaseCheckBox view) {
+		super.copy(view);
+		checked = view.checked;
+		checker = view.checker;
+	}
 }

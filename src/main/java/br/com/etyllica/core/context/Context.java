@@ -208,9 +208,7 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 		// TODO Auto-generated method stub
 	}
 
-	public void update(long now) {
-
-	}
+	public void update(long now) {}
 
 	@Override
 	public boolean onMouse(int mx, int my) {

@@ -5,19 +5,26 @@ import br.com.etyllica.gui.base.UIView;
 import br.com.etyllica.gui.theme.ThemeManager;
 
 public class Button extends UIView {
-	
+
 	private BaseButton button;
-	
+
 	public Button(int x, int y, int w, int h) {
-		super();
-		
+		super(x,y,w,h);
+
 		this.button = ThemeManager.getInstance().getTheme().createButton(x, y, w, h);
 		delegateView(button);
 	}
-	
+
 	public Button(Label label) {
 		this(0,0,0,0);
-		this.button.setLabel(label);
+		setLabel(label);
+	}
+
+	public void rebuild() {
+		BaseButton view = ThemeManager.getInstance().getTheme().createButton(x, y, w, h);
+		view.copy(delegatedView);
+
+		delegateView(view);
 	}
 
 	public String getAlt() {
@@ -33,7 +40,7 @@ public class Button extends UIView {
 	}
 
 	public void setLabel(Label label) {
-		button.setLabel(label);
+		this.button.setLabel(label);
 	}
 
 	public void setCenterLabel(Label label) {

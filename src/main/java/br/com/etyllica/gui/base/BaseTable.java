@@ -300,4 +300,20 @@ public class BaseTable extends View {
 			}
 		}
 	}
+
+	public void copy(BaseTable view) {
+		super.copy(view);
+
+		showContours = view.showContours;
+		showHeaders = view.showHeaders;
+
+		onMouseRow = view.onMouseRow;
+		selectedRow = view.selectedRow;
+
+		rows = view.rows;
+		headers = view.headers;
+		columns = view.columns;
+
+		rowListener = view.rowListener;
+	}
 }

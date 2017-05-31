@@ -143,5 +143,16 @@ public abstract class ViewGroup extends View {
     		g.resetClip();	
     	}
 	}
-	
+
+	public void copy(ViewGroup view) {
+		super.copy(view);
+		rowSize = view.rowSize;
+		shrink = view.shrink;
+		orientation = view.orientation;
+
+		for (Map.Entry<Long, Float> entry : view.weights.entrySet()) {
+			weights.put(entry.getKey(), entry.getValue());
+		}
+	}
+
 }

@@ -53,5 +53,10 @@ public class BaseTextView extends View {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
+	public void copy(BaseTextView view) {
+		super.copy(view);
+		text = view.text;
+	}
+
 }

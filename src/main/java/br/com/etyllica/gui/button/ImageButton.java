@@ -17,7 +17,7 @@ public class ImageButton extends BaseButton {
 	protected String sobMouse;
 	protected String click;
 
-	protected String som = null;	
+	protected String sound = null;
 	
 	protected ImageLayer layer;
 
@@ -46,16 +46,13 @@ public class ImageButton extends BaseButton {
 		this(x,y,normal.getW(),normal.getH(),normal.getPath(),sobMouse.getPath(),click.getPath());
 	}
 
-	public void setSom(String som){
-		this.som = som;
+	public void setSound(String sound){
+		this.sound = sound;
 	}
 
-	public void draw(Graphics g){
-		
+	public void draw(Graphics g) {
 		layer.draw(g);
-	
 		drawLabel(g);
-
 	}
 		
 	@Override

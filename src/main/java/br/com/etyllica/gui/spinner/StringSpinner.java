@@ -36,18 +36,15 @@ public class StringSpinner extends View {
 
 	public StringSpinner(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		
+
 		panel = new Panel(x, y, w, h);
 
 		//TODO change size based on fontSize
 		resultLabel = new TextLabel(x,y+2+h/2,w);
-		
 
 		composer = buildComposer();
-		
+
 		configureButtons();
-		
-		//reload();
 	}
 	
 	protected SpinnerComposer buildComposer() {
@@ -55,7 +52,6 @@ public class StringSpinner extends View {
 	}
 	
 	private void configureButtons() {
-		
 		int border = 1;
 		int buttonWidth = w/6;
 		
@@ -72,7 +68,7 @@ public class StringSpinner extends View {
 		
 		currentItem++;
 		currentItem%=options.size();
-		reload();
+		updateValue();
 	}
 
 	//Should be private
@@ -82,10 +78,10 @@ public class StringSpinner extends View {
 		
 		currentItem+=options.size()-1;
 		currentItem%=options.size();
-		reload();
+		updateValue();
 	}
 	
-	protected void reload() {
+	protected void updateValue() {
 		if(options.isEmpty())
 			return;
 		
@@ -144,7 +140,7 @@ public class StringSpinner extends View {
 
 	public void setOptions(List<String> options) {
 		this.options = options;
-		reload();
+		updateValue();
 	}
 	
 }

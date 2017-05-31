@@ -52,7 +52,6 @@ public abstract class Emitter extends Layer implements Updatable{
 			lastUpdate = now;
 		
 		}
-
 	}
 	
 	protected abstract Particle createParticle(long now);

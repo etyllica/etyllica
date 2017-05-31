@@ -12,193 +12,183 @@ import br.com.etyllica.layer.TextLayer;
 import java.awt.*;
 
 /**
- *
  * @author yuripourre
- *
  */
 
 public class TextLabel extends Label {
 
-	protected TextLayer layer;
+    protected TextLayer layer;
 
-	public TextLabel(int x, int y) {
-		super(x, y);
+    public TextLabel(int x, int y) {
+        super(x, y);
+        this.layer = new TextLayer(x, y, "");
+    }
 
-		this.layer = new TextLayer(x, y, "");
-	}
+    public TextLabel(int x, int y, int w) {
+        super(x, y, w);
+        this.layer = new TextLayer(x, y, "");
+    }
 
-	public TextLabel(int x, int y, int w) {
-		super(x, y, w);
+    public TextLabel(int x, int y, String text) {
+        super(x, y);
+        this.layer = new TextLayer(x, y, text);
+    }
 
-		this.layer = new TextLayer(x, y, "");
-	}
+    public TextLabel(String text) {
+        this(0, 0, text);
+    }
 
-	public TextLabel(int x, int y, String text) {
-		super(x, y);
+    public TextLabel(String text, float size) {
+        this(0, 0, text);
+        layer.setSize(size);
+    }
 
-		this.layer = new TextLayer(x, y, text);
-	}
+    @Override
+    public void setX(int x) {
+        this.x = x;
+        this.layer.setX(x);
+    }
 
-	public TextLabel(String text) {
-		this(0, 0, text);
-	}
+    @Override
+    public void setY(int y) {
+        this.y = y;
+        this.layer.setY(y);
+    }
 
-	public TextLabel(String text, float size) {
-		this(0, 0, text);
-		this.layer.setSize(size);
-	}
+    @Override
+    public void updateEvent(GUIEvent event) {
+        switch (event) {
 
-	@Override
-	public void setX(int x) {
-		this.x = x;
-		this.layer.setX(x);
-	}
+            case LOST_FOCUS:
+                onFocus = false;
+                break;
 
-	@Override
-	public void setY(int y) {
-		this.y = y;
-		this.layer.setY(y);
-	}
+            case GAIN_FOCUS:
+                onFocus = true;
+                break;
 
-	@Override
-	public void updateEvent(GUIEvent event) {
-		switch (event) {
+            default:
+                break;
 
-		case LOST_FOCUS:
-			onFocus = false;
-			break;
+        }
+    }
 
-		case GAIN_FOCUS:
-			onFocus = true;
-			break;
+    @Override
+    public void draw(Graphics g) {
+        Theme theme = ThemeManager.getInstance().getTheme();
 
-		default:
-			break;
+        g.setFont(theme.getFont());
+        g.setFont(g.getFont().deriveFont(layer.getStyle()));
+        g.setFont(g.getFont().deriveFont(layer.getSize()));
 
-		}
-	}
+        if (!onFocus) {
+            g.setColor(theme.getTextColor());
+        } else {
+            g.setColor(theme.getButtonOnFocus());
+        }
 
-	@Override
-	public void draw(Graphics g) {
-		Theme theme = ThemeManager.getInstance().getTheme();
+        //Label is always in center
+        if (!theme.isShadow()) {
+            g.drawString(layer.getText(), bx, by, bw, bh);
+        } else {
+            g.drawStringShadow(layer.getText(), bx, by, bw, bh, theme.getShadowColor());
+        }
 
-		g.setFont(theme.getFont());
-		g.setFont(g.getFont().deriveFont(layer.getStyle()));
-		g.setFont(g.getFont().deriveFont(layer.getSize()));
+    }
 
-		if(!onFocus){
-			g.setColor(theme.getTextColor());
-		}else{
-			g.setColor(theme.getButtonOnFocus());
-		}
+    @Override
+    public GUIEvent updateKeyboard(KeyEvent event) {
 
-		//Label is always in center
-		if(!theme.isShadow()){
-			g.drawString(layer.getText(), bx, by, bw, bh);
-		}else{
-			g.drawStringShadow(layer.getText(), bx, by, bw, bh, theme.getShadowColor());
-		}
+        if (event.isKeyDown(KeyEvent.VK_TAB)) {
+            return GUIEvent.NEXT_COMPONENT;
+        }
 
-	}
+        return GUIEvent.NONE;
+    }
 
-	@Override
-	public GUIEvent updateKeyboard(KeyEvent event) {
+    public String getText() {
+        return this.layer.getText();
+    }
 
-		if(event.isKeyDown(KeyEvent.VK_TAB)) {
-			return GUIEvent.NEXT_COMPONENT;
-		}
+    /**
+     * @param text
+     */
+    public void setText(String text) {
+        this.layer.setText(text);
+    }
 
-		return GUIEvent.NONE;
-	}
+    public float getFontSize() {
+        return this.layer.getSize();
+    }
 
-	public String getText() {
-		return this.layer.getText();
-	}
+    /**
+     * @param size
+     */
+    public void setFontSize(float size) {
+        this.layer.setSize(size);
+    }
 
-	/**
-	 *
-	 * @param text
-	 */
-	public void setText(String text) {
-		this.layer.setText(text);
-	}
+    /**
+     * @param border
+     */
+    public void setBorder(boolean border) {
+        this.layer.setBorder(border);
+    }
 
-	public float getFontSize() {
-		return this.layer.getSize();
-	}
+    /**
+     * @param borderColor
+     */
+    public void setBorderColor(Color borderColor) {
+        this.layer.setBorderColor(borderColor);
+    }
 
-	/**
-	 *
-	 * @param size
-	 */
-	public void setFontSize(int size) {
-		this.layer.setSize(size);
-	}
+    /**
+     * @param borderWidh
+     */
+    public void setBorderWidth(int borderWidh) {
+        this.layer.setBorderWidth(borderWidh);
+    }
 
-	/**
-	 *
-	 * @param border
-	 */
-	public void setBorder(boolean border) {
-		this.layer.setBorder(border);
-	}
+    @Override
+    public void centralize(int x, int y, int w, int h) {
+        layer.centralize(x, y, w, h);
+    }
 
-	/**
-	 *
-	 * @param borderColor
-	 */
-	public void setBorderColor(Color borderColor) {
-		this.layer.setBorderColor(borderColor);
-	}
+    @Override
+    public void centralize(GeometricLayer layer) {
+        layer.centralize(layer);
+    }
 
-	/**
-	 *
-	 * @param borderWidh
-	 */
-	public void setBorderWidth(int borderWidh) {
-		this.layer.setBorderWidth(borderWidh);
-	}
+    @Override
+    public void centralizeX(GeometricLayer layer) {
+        layer.centralizeX(layer);
+    }
 
-	@Override
-	public void centralize(int x, int y, int w, int h) {
-		layer.centralize(x, y, w, h);
-	}
+    @Override
+    public int centralizeX(int startX, int endX) {
+        return layer.centralizeX(startX, endX);
+    }
 
-	@Override
-	public void centralize(GeometricLayer layer) {
-		layer.centralize(layer);
-	}
+    @Override
+    public void centralizeY(GeometricLayer layer) {
+        layer.centralizeY(layer);
+    }
 
-	@Override
-	public void centralizeX(GeometricLayer layer) {
-		layer.centralizeX(layer);
-	}
+    @Override
+    public int centralizeY(int startY, int endY) {
+        return layer.centralizeY(startY, endY);
+    }
 
-	@Override
-	public int centralizeX(int startX, int endX) {
-		return layer.centralizeX(startX, endX);
-	}
+    public TextLayer getLayer() {
+        return layer;
+    }
 
-	@Override
-	public void centralizeY(GeometricLayer layer) {
-		layer.centralizeY(layer);
-	}
+    public int getFontStyle() {
+        return layer.getStyle();
+    }
 
-	@Override
-	public int centralizeY(int startY, int endY) {
-		return layer.centralizeY(startY, endY);
-	}
-
-	public TextLayer getLayer() {
-		return layer;
-	}
-
-	public int getFontStyle() {
-		return layer.getStyle();
-	}
-
-	public void setFontStyle(int fontStyle) {
-		layer.setStyle(fontStyle);
-	}
+    public void setFontStyle(int fontStyle) {
+        layer.setStyle(fontStyle);
+    }
 
 }

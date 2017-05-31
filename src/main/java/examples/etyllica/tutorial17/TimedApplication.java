@@ -43,7 +43,6 @@ public class TimedApplication extends Application {
 			layer.offsetX(10);
 			
 		}
-		
 	}
 	
 	@Override

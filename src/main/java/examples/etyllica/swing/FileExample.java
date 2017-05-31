@@ -65,7 +65,6 @@ public class FileExample extends Application implements SelectFileListener {
 		if(up) {
 			hello.offsetY(-1);
 		}
-		
 	}
 	
 	private boolean up = false;

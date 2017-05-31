@@ -1,6 +1,6 @@
 package br.com.etyllica.gui.icon;
 
-public class DownArrow extends PolygonalIcon{
+public class DownArrow extends PolygonalIcon {
 
 	public DownArrow(int x, int y, float size){
 		super(x, y, size);

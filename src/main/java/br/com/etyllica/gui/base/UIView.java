@@ -1,8 +1,5 @@
 package br.com.etyllica.gui.base;
 
-import java.util.Collection;
-import java.util.List;
-
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -10,14 +7,17 @@ import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.View;
 
+import java.util.Collection;
+import java.util.List;
+
 public abstract class UIView extends View {
 
 	protected View delegatedView;
-	
-	public UIView() {
-		super();
+
+	public UIView(int x, int y, int w, int h) {
+		super(x,y,w,h);
 	}
-	
+
 	@Override
 	public int getX() {
 		return delegatedView.getX();
@@ -37,7 +37,7 @@ public abstract class UIView extends View {
 	public int getH() {
 		return delegatedView.getH();
 	}
-	
+
 	@Override
 	public void draw(Graphics g) {
 		delegatedView.draw(g);
@@ -52,7 +52,7 @@ public abstract class UIView extends View {
 	public boolean isMouseOver() {
 		return delegatedView.isMouseOver();
 	}
-	
+
 	@Override
 	public boolean isDisabled() {
 		return delegatedView.isDisabled();
@@ -71,7 +71,7 @@ public abstract class UIView extends View {
 	public boolean isOnFocus() {
 		return delegatedView.isOnFocus();
 	}
-	
+
 	@Override
 	public List<Action> getActions() {
 		return delegatedView.getActions();
@@ -146,12 +146,12 @@ public abstract class UIView extends View {
 	public View findNext() {
 		return delegatedView.findNext();
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return delegatedView.hashCode();
 	}
-	
+
 	@Override
 	public void setX(int x) {
 		delegatedView.setX(x);
@@ -221,7 +221,7 @@ public abstract class UIView extends View {
 	public void show() {
 		delegatedView.show();
 	}
-	
+
 	@Override
 	public void resize() {
 		delegatedView.resize();
@@ -256,33 +256,33 @@ public abstract class UIView extends View {
 	public void translateComponents(int x, int y) {
 		delegatedView.translateComponents(x, y);
 	}
-	
+
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
 		return delegatedView.updateMouse(event);
 	}
-	
+
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		return delegatedView.updateKeyboard(event);
 	}
-	
+
 	@Override
 	public String toString() {
 		return delegatedView.toString();
 	}
-	
+
 	protected void delegateView(View view) {
 		this.delegatedView = view;
 		this.style = view.style;
 		this.clipOnDraw = view.isClipOnDraw();
 	}
-	
+
 	@Override
 	public boolean isClipOnDraw() {
 		return this.delegatedView.isClipOnDraw();
 	}
-	
+
 	@Override
 	public void cascadeClipOnDraw(boolean clipOnDraw) {
 		this.delegatedView.cascadeClipOnDraw(clipOnDraw);

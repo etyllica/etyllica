@@ -44,9 +44,7 @@ public abstract class Etyllica extends JFrame implements EtyllicaFrame {
 	}
 	
 	public void init(String path) {
-		
 		initCore();
-
 		setPath(path);
 
 		this.application = startApplication();
@@ -57,9 +55,7 @@ public abstract class Etyllica extends JFrame implements EtyllicaFrame {
 	
 	@Override
 	public void init() {
-
 		initCore();
-
 		initialSetup("");
 		
 		this.application = startApplication();

@@ -40,10 +40,14 @@ public class ScrollView extends View {
         super(x, y, w, h);
 
         clipOnDraw = true;
-        build();
+        buildButtons();
+    }
+
+    public void rebuild() {
+        buildButtons();
     }
     
-    private void build() {
+    private void buildButtons() {
     	upButton = new BaseButton(x + w - buttonSize, y, buttonSize, buttonSize);
         upButton.setLabel(new UpArrow((-buttonSize / 3), -buttonSize / 3, buttonSize / 2));
         upButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "scrollUp"));
@@ -139,7 +143,10 @@ public class ScrollView extends View {
     public void setComponent(View component) {
     	views.clear();
     	views.add(component);
-    	build();
+
+        //Build Buttons based on size
+    	buildButtons();
+
     	this.component = component;
     	component.cascadeClipOnDraw(false);
     	    	

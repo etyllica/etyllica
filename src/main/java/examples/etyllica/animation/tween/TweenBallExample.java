@@ -68,10 +68,5 @@ public class TweenBallExample extends Application {
 		g.setColor(Color.BLACK);
 		g.drawOval(ball.getX(), ball.getY(), ball.getW(), ball.getH());
 	}
-		
-	@Override
-	public void update(long now) {
-		
-	}
-	
+
 }

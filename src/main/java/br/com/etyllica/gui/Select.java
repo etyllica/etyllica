@@ -25,18 +25,23 @@ public class Select extends View {
 	
 	public Select(int x, int y, int w, int h) {
 		super(x,y,w,h);
-		
+
 		int buttonSize = h;
-		
+
 		button = new BaseButton(x+w-buttonSize,y,buttonSize,buttonSize);
-		
+
 		DownArrow arrow = new DownArrow(-buttonSize/4, -buttonSize/3, buttonSize/2);
 		button.setLabel(arrow);
 		button.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "swapShowOptions"));
-		
+
 		add(button);
 	}
-	
+
+	public void rebuild() {
+		button.rebuild();
+		//Rebuild Options
+	}
+
 	public void swapShowOptions() {
 		showOptions = !showOptions;
 	}

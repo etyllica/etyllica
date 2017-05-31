@@ -28,12 +28,11 @@ public class MultiLangLabel extends TextLabel {
 		super(x, y, w);
 		
 		this.texts = texts;
-		
+
 		Language lang = LanguageModule.getInstance().getLanguage();
-				
 		reloadText(lang);
 	}
-		
+
 	@Override
 	public void updateEvent(GUIEvent event){
 				

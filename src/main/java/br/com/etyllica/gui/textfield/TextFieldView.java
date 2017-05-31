@@ -226,4 +226,21 @@ public abstract class TextFieldView extends View {
 	public boolean isSelected() {
 		return shift;
 	}
+
+	public void copy(TextFieldView view) {
+		super.copy(view);
+		text = view.text;
+
+		cursor = view.cursor;
+		fixMark = view.fixMark;
+
+		minMark = view.minMark;
+		maxMark = view.maxMark;
+
+		maxLength = view.maxLength;
+		shift = view.shift;
+		control = view.control;
+
+		onTextChangeListener = view.onTextChangeListener;
+	}
 }

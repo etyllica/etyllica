@@ -1,6 +1,7 @@
 package br.com.etyllica.gui;
 
 import br.com.etyllica.gui.base.BaseTextField;
+import br.com.etyllica.gui.base.BaseTextView;
 import br.com.etyllica.gui.base.UIView;
 import br.com.etyllica.gui.theme.ThemeManager;
 
@@ -16,10 +17,17 @@ public class TextField extends UIView {
 	private BaseTextField textField;
 
 	public TextField(int x, int y, int w, int h) {
-		super();
+		super(x,y,w,h);
 
 		this.textField = ThemeManager.getInstance().getTheme().createTextField(x, y, w, h);
 		delegateView(textField);
+	}
+
+	public void rebuild() {
+		BaseTextField view = ThemeManager.getInstance().getTheme().createTextField(x, y, w, h);
+		view.copy(delegatedView);
+
+		delegateView(view);
 	}
 
 	public String getText() {

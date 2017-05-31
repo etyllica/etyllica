@@ -34,10 +34,12 @@ public abstract class Spinner<T extends Number> extends View {
 	public Spinner(int x, int y, int w, int h) {
 		super(x, y, w, h);
 
+		rebuild();
+	}
+
+	public void rebuild() {
 		panel = new Panel(x, y, w, h);
-
 		composer = buildComposer();
-
 		configureButtons();
 	}
 

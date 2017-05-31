@@ -14,8 +14,9 @@ import br.com.etyllica.gui.theme.Theme;
 
 public class Slider extends View {
 
-    protected float minValue = 0;
+    protected int sliderPosition = 0;
 
+    protected float minValue = 0;
     protected float maxValue = 255;
 
     protected float value = 0;
@@ -25,10 +26,15 @@ public class Slider extends View {
     private boolean activated = false;
 
     public Slider(int x, int y, int w, int h) {
-
         super(x, y, w, h);
 
         button = new BaseButton(x, y, h / 4, h);
+        sliderPosition = getX() - button.getW() / 2;
+    }
+
+    public void rebuild() {
+        button.rebuild();
+        button.setX(sliderPosition);
     }
 
     @Override
@@ -54,18 +60,20 @@ public class Slider extends View {
 
     public void updateValue(PointerEvent event) {
         float interval = maxValue - minValue;
-        int mx = event.getX() - x;
+        int mx = event.getX() - getX();
         value = (mx * interval) / w;
 
         if (value < minValue) {
             value = minValue;
-            button.setX(getX() - button.getW() / 2);
+            sliderPosition = getX() - button.getW() / 2;
         } else if (value > maxValue) {
             value = maxValue;
-            button.setX(getX() + getW() - button.getW() / 2);
+            sliderPosition = getX() + getW() - button.getW() / 2;
         } else {
-            button.setX(event.getX() - button.getW() / 2);
+            sliderPosition = event.getX() - button.getW() / 2;
         }
+
+        button.setX(sliderPosition);
     }
 
     @Override

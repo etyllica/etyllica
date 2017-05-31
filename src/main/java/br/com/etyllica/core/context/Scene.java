@@ -54,10 +54,9 @@ public class Scene implements UIComponent {
 
 	@Override
 	public void update(long now) {
-		
 		for(Updatable updatable: updatables) {
 			updatable.update(now);
-		}		
+		}
 	}
 	
 	/**

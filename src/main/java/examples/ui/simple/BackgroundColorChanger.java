@@ -1,11 +1,13 @@
-package examples.etyllica.tutorial09;
+package examples.ui.simple;
 
-import br.com.etyllica.EtyllicaApplet;
+import br.com.etyllica.Etyllica;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.gui.theme.ThemeManager;
 import br.com.etyllica.theme.etyllic.EtyllicTheme;
-import examples.etyllica.tutorial09.application.SimpleGuiExample;
+import examples.ui.simple.UIExample.BackgroundColorChangerApplication;
+
+import java.awt.*;
 
 /**
  * 
@@ -14,23 +16,30 @@ import examples.etyllica.tutorial09.application.SimpleGuiExample;
  *
  */
 
-public class Tutorial9 extends EtyllicaApplet {
+public class BackgroundColorChanger extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 
-	public Tutorial9() {
+	public BackgroundColorChanger() {
 		super(640, 480);
 	}
-	
+
+	public static void main(String[] args){
+		BackgroundColorChanger example = new BackgroundColorChanger();
+		example.init();
+	}
+
 	@Override
 	public Application startApplication() {
 
 		Configuration.getInstance().setTimerClick(true);
 		
 		ThemeManager.getInstance().setTheme(new EtyllicTheme());
+
+		ThemeManager.getInstance().getTheme().setTextColor(Color.black);
 		//ThemeManager.getInstance().setTheme(new EtyllicMonoTheme());
 		
-		return new SimpleGuiExample(w,h);
+		return new BackgroundColorChangerApplication(w,h);
 	}
 	
 }

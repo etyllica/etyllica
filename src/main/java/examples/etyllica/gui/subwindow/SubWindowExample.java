@@ -6,7 +6,7 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.Window;
-import examples.etyllica.tutorial09.application.SimpleGuiExample;
+import examples.ui.simple.UIExample.BackgroundColorChangerApplication;
 
 public class SubWindowExample extends Application {
 
@@ -25,7 +25,7 @@ public class SubWindowExample extends Application {
 		if(event.isKeyDown(KeyEvent.VK_1)) {
 			
 			Window subWindow = new Window(200, 20, 160, 400);
-			subWindow.setApplication(new SimpleGuiExample(subWindow.getW(), subWindow.getH()));
+			subWindow.setApplication(new BackgroundColorChangerApplication(subWindow.getW(), subWindow.getH()));
 			
 		}
 	}

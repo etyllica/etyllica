@@ -92,7 +92,12 @@ public class BaseRadioButton extends BaseCheckBox {
 				group.check(this);
 			}
 		}
-		
+	}
+
+	public void copy(BaseRadioButton view) {
+		super.copy(view);
+		group = view.group;
+		value = view.value;
 	}
 	
 }

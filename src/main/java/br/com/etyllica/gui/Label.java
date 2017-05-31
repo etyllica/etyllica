@@ -4,6 +4,8 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 
+import java.awt.*;
+
 
 /**
  * 

@@ -37,7 +37,7 @@ public class BasicParticle extends Particle{
 	}
 
 	@Override
-	public void update(long now) {		
+	public void update(long now) {
 		offsetY(-1);
 	}
 	

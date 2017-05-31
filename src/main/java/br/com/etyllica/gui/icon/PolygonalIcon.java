@@ -6,23 +6,21 @@ import java.awt.Polygon;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.gui.label.Icon;
 
-public abstract class PolygonalIcon extends Icon{
+public abstract class PolygonalIcon extends Icon {
 
 	protected float size;
 	
-	protected Polygon polygon;
+	protected Polygon polygon = new Polygon();
 	
-	public PolygonalIcon(int x, int y){
+	public PolygonalIcon(int x, int y) {
 		super(x,y);
 		this.size = 12;
-		polygon = new Polygon();
 		initPolygon(x, y);
 	}
-	
+
 	public PolygonalIcon(int x, int y, float size){
 		super(x,y);
 		this.size = size;
-		polygon = new Polygon();
 		initPolygon(x, y);
 	}
 	
@@ -42,8 +40,8 @@ public abstract class PolygonalIcon extends Icon{
 	
 	@Override
 	public void draw(Graphics g) {
+		//TODO Change to Theme's Colors
 		g.setColor(Color.WHITE);
-		//g.setColor(Color.BLUE);
 		
 		g.fillPolygon(polygon);
 		

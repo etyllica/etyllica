@@ -21,6 +21,8 @@ public class ColoredTextPanel extends View {
 
     public ColoredTextPanel(int x, int y, int w, int h) {
         super(x, y, w, h);
+
+        //TODO Use Theme's default values
         style.padding.top = 5;
         style.padding.right = 4;
     }

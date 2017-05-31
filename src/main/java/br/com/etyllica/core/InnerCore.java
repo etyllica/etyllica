@@ -1,9 +1,5 @@
 package br.com.etyllica.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import br.com.etyllica.awt.AWTArrowDrawer;
 import br.com.etyllica.awt.core.input.AWTController;
 import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.animation.script.AnimationScript;
@@ -15,13 +11,7 @@ import br.com.etyllica.core.context.load.ApplicationLoader;
 import br.com.etyllica.core.context.load.LoaderListener;
 import br.com.etyllica.core.effect.GlobalEffect;
 import br.com.etyllica.core.error.ErrorMessages;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.KeyEventListener;
-import br.com.etyllica.core.event.MouseEvent;
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.PointerState;
-import br.com.etyllica.core.graphics.ArrowDrawer;
+import br.com.etyllica.core.event.*;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.i18n.Language;
@@ -30,255 +20,232 @@ import br.com.etyllica.core.i18n.LanguageModule;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.core.ui.UIComponent;
-import br.com.etyllica.core.ui.UIModule;
 import br.com.etyllica.core.ui.UICoreListener;
+import br.com.etyllica.core.ui.UIModule;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
-import br.com.etyllica.gui.theme.Theme;
-import br.com.etyllica.gui.theme.ThemeManager;
-import br.com.etyllica.gui.theme.listener.ThemeListener;
-import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 
  * @author yuripourre
- *
  */
 
-public abstract class InnerCore implements Core, KeyEventListener, Updatable, ThemeListener, LanguageChangerListener, LoaderListener, UICoreListener {
+public abstract class InnerCore implements Core, KeyEventListener, Updatable, LanguageChangerListener, LoaderListener, UICoreListener {
 
-	private static final int TITLE_BAR_HEIGHT = 50;
-	
-	//External Windows
-	private Window activeWindow = null;
+    private static final int TITLE_BAR_HEIGHT = 50;
 
-	protected AWTController control;
+    //External Windows
+    private Window activeWindow = null;
 
-	private Mouse mouse;
+    protected AWTController control;
 
-	private Keyboard keyboard;
+    private Mouse mouse;
+    private Keyboard keyboard;
 
-	//private List<KeyEvent> joyEvents;
+    //private List<KeyEvent> joyEvents;
 
-	private Window mainWindow;
+    private Window mainWindow;
 
-	//private boolean drawCursor = true;
+    //private boolean drawCursor = true;
 
-	private boolean fullScreenEnable = false;
+    private boolean fullScreenEnable = false;
 
-	private boolean needReload = false;
+    private boolean fixEventPosition = false;
 
-	private boolean locked = false;
-	
-	private boolean fixEventPosition = false;
+    private int fps = 0;
 
-	private int fps = 0;
+    //FullScreen Stuff
+    private boolean enableFullScreen = false;
+    private boolean disableFullScreen = false;
 
-	//FullScreen Stuff
-	private boolean enableFullScreen = false;
-	private boolean disableFullScreen = false;
+    private boolean alt = false;
+    private boolean enter = false;
+    private boolean esc = false;
 
-	private boolean alt = false;
-	private boolean enter = false;
-	private boolean esc = false;
+    protected GUIEvent superEvent = GUIEvent.NONE;
 
-	protected GUIEvent superEvent = GUIEvent.NONE;
+    //Create an Arrow Drawer
+    //private ArrowDrawer arrowDrawer;
 
-	//Create an Arrow Drawer 
-	private ArrowDrawer arrowDrawer;
+    private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
 
-	private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
-	
-	protected List<Monitor> monitors = new ArrayList<Monitor>();
-		
-	protected ApplicationLoader applicationLoader;
-	//protected UIModule uiCore;
+    protected List<Monitor> monitors = new ArrayList<Monitor>();
 
-	private List<Module> modules = new ArrayList<Module>();
-	
-	public InnerCore(int w, int h) {
-		super();
-		
-		control = new AWTController(this);
+    protected ApplicationLoader applicationLoader;
+    //protected UIModule uiCore;
 
-		setMouse(control.getMouse());
+    private List<Module> modules = new ArrayList<Module>();
 
-		setKeyboard(control.getKeyboard());
+    public InnerCore(int w, int h) {
+        super();
 
-		arrowDrawer = new AWTArrowDrawer();
+        control = new AWTController(this);
 
-		initTheme();
+        setMouse(control.getMouse());
+        setKeyboard(control.getKeyboard());
 
-		//updatables.add(AnimationHandler.getInstance());
+        //updatables.add(AnimationHandler.getInstance());
 
-		applicationLoader = new ApplicationLoader(w, h);
+        applicationLoader = new ApplicationLoader(w, h);
 
-		//Setup UIModule
-		UIModule.w = w;
-		UIModule.h = h;
-		UIModule.listener = this;
-		UIModule.arrowDrawer = arrowDrawer;
-		UIModule.mouse = control.getMouse();
+        //Setup UIModule
+        UIModule.w = w;
+        UIModule.h = h;
+        UIModule.listener = this;
+        UIModule.mouse = control.getMouse();
 
-		initModules();
-	}
+        initModules();
+    }
 
-	//Default Handlers
-	private void initModules() {
-		modules.add(AnimationModule.getInstance());
-		modules.add(UIModule.getInstance());
-		modules.add(LanguageModule.getInstance());
-	}
+    //Default Handlers
+    private void initModules() {
+        modules.add(AnimationModule.getInstance());
+        modules.add(UIModule.getInstance());
+        modules.add(LanguageModule.getInstance());
+    }
 
-	private void initTheme() {
-		ThemeManager.getInstance().setThemeListener(this);
-		ThemeManager.getInstance().setArrowThemeListener(arrowDrawer);
-		ThemeManager.getInstance().setArrowTheme(new EtyllicArrowTheme());
-	}
+    public Window getWindow() {
+        return mainWindow;
+    }
 
-	public Window getWindow() {
-		return mainWindow;
-	}
+    public void update(long now) {
 
-	public void update(long now) {
-		
-		if(!currentContext().isLoaded()) {
-			return;
-		} else if (needReload) {
-			fastReload();
-		}
+        if (!currentContext().isLoaded()) {
+            return;
+        }
 
-		superEvent = GUIEvent.NONE;
+        superEvent = GUIEvent.NONE;
 
-		updateActiveWindow(now);
+        updateActiveWindow(now);
 
-		updateHandlers(now);
+        updateModules(now);
 
-		Context application = currentContext();
+        Context application = currentContext();
 
-		updateApplication(application, now);
-		
-		if (checkApplicationChange(application)) {
-			return;
-		}
+        updateApplication(application, now);
 
-		updateInput(application, now);
+        if (checkApplicationChange(application)) {
+            return;
+        }
 
-		//Update in another thread
-		//Joystick locks the application
-		//JoystickLoader.getInstance().update(now);
+        updateInput(application, now);
 
-		handleFullScreen();
+        //Update in another thread
+        //Joystick locks the application
+        //JoystickLoader.getInstance().update(now);
 
-	}
+        handleFullScreen();
+    }
 
-	private void updateInput(Context application, long now) {
-		//Update All components
-		//List<View> components = new CopyOnWriteArrayList<View>(application.getViews());
+    private void updateInput(Context application, long now) {
+        //Update All components
+        //List<View> components = new CopyOnWriteArrayList<View>(application.getViews());
 
-		for (Module module : modules) {
-			module.update(now);
-		}
+        for (Module module : modules) {
+            module.update(now);
+        }
 
-		List<PointerEvent> events = getMouse().lock();
-		updatePointerEvents(events, application, application.getViews());
-		getMouse().unlock();
+        List<PointerEvent> events = getMouse().lock();
+        updatePointerEvents(events, application, application.getViews());
+        getMouse().unlock();
 
-		//updateKeyboard();
+        //updateKeyboard();
 
-		getKeyboard().update(now);
-	}
-	
-	private boolean checkApplicationChange(Context application) {
-		//if activeWindow, receive command to change application
-		if(application.getNextApplication() != application) {
+        getKeyboard().update(now);
+    }
 
-			this.changeApplication();
-			return true;
-		}
-		
-		return false;
-	}
+    private boolean checkApplicationChange(Context application) {
+        //if activeWindow, receive command to change application
+        if (application.getNextApplication() != application) {
 
-	private void handleFullScreen() {
+            this.changeApplication();
+            return true;
+        }
 
-		if(enableFullScreen) {
-			enableFullScreen = false;
+        return false;
+    }
 
-			superEvent = GUIEvent.ENABLE_FULL_SCREEN;
-		}
+    private void handleFullScreen() {
 
-		if(disableFullScreen) {
-			disableFullScreen = false;
+        if (enableFullScreen) {
+            enableFullScreen = false;
 
-			superEvent = GUIEvent.DISABLE_FULL_SCREEN;
-		}
+            superEvent = GUIEvent.ENABLE_FULL_SCREEN;
+        }
 
-	}
+        if (disableFullScreen) {
+            disableFullScreen = false;
 
-	public void resizeApplication(int w, int h) {
+            superEvent = GUIEvent.DISABLE_FULL_SCREEN;
+        }
 
-		Context application = currentContext();
+    }
 
-		application.resize(w, h);
+    public void resizeApplication(int w, int h) {
 
-		application.setW(w);
-		application.setH(h);
-	}
+        Context application = currentContext();
 
-	public boolean updateApplication(Context context, long now) {
-		
-		if(context.isLocked()) {
-			return false;
-		}
+        application.resize(w, h);
 
-		if (context.getUpdateInterval() == 0) {
+        application.setW(w);
+        application.setH(h);
+    }
 
-			context.update(now);
+    public boolean updateApplication(Context context, long now) {
 
-			context.setLastUpdate(now);
+        if (context.isLocked()) {
+            return false;
+        }
 
-			//Update Components
-			for (UIComponent component:context.getComponents()) {
-				component.update(now);
-			}
+        if (context.getUpdateInterval() == 0) {
 
-		}else if(now-context.getLastUpdate() >= context.getUpdateInterval()) {
+            context.update(now);
 
-			UpdateIntervalListener updated = context.getUpdated();
-			
-			if(updated==null) {
-				return false;
-			}
-			
-			updated.timeUpdate(now);
+            context.setLastUpdate(now);
 
-			context.setLastUpdate(now);
-			
-			for (UIComponent component:context.getComponents()) {
-				component.update(now);
-			}
-		}
+            //Update Components
+            for (UIComponent component : context.getComponents()) {
+                component.update(now);
+            }
 
-		return true;
-	}
+        } else if (now - context.getLastUpdate() >= context.getUpdateInterval()) {
 
-	private void updateActiveWindow(long now) {
+            UpdateIntervalListener updated = context.getUpdated();
 
-		List<Window> windows = activeWindow.getWindows(); 
+            if (updated == null) {
+                return false;
+            }
 
-		//Creating Windows
-		//if application has windows
-		if(!windows.isEmpty()) {
+            updated.timeUpdate(now);
 
-			//For each new window in application.windows
-			for(Window window : windows) {
-				//if this !windows.contains(window)
-				replaceWindow(window);
-			}
+            context.setLastUpdate(now);
 
-			activeWindow.getWindows().clear();
-		}
+            for (UIComponent component : context.getComponents()) {
+                component.update(now);
+            }
+        }
+
+        return true;
+    }
+
+    private void updateActiveWindow(long now) {
+
+        List<Window> windows = activeWindow.getWindows();
+
+        //Creating Windows
+        //if application has windows
+        if (!windows.isEmpty()) {
+
+            //For each new window in application.windows
+            for (Window window : windows) {
+                //if this !windows.contains(window)
+                replaceWindow(window);
+            }
+
+            activeWindow.getWindows().clear();
+        }
 
 		/*if(activeWindow.isClose()) {
 
@@ -291,405 +258,375 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Th
 
 	    }*/
 
-	}
+    }
 
-	@Override
-	public void updateJoystickEvent(KeyEvent event) {
+    @Override
+    public void updateJoystickEvent(KeyEvent event) {
 
-		Context context = currentContext();
-		
-		//Debug Joystick Commands
-		//System.out.println("UpdateJoystick "+event.getKey());
+        Context context = currentContext();
 
-		handleApplicationKeyEvents(context, event);
-	}
-	
-	public void updatePointerEvents(List<PointerEvent> events, Context context, List<View> components) {
+        //Debug Joystick Commands
+        //System.out.println("UpdateJoystick "+event.getKey());
 
-		int eventSize = events.size();
-		
-		for(int i=0; i < eventSize; i++) {
+        handleApplicationKeyEvents(context, event);
+    }
 
-			PointerEvent event = events.get(i);
-			context.updateMouse(event);
+    public void updatePointerEvents(List<PointerEvent> events, Context context, List<View> components) {
 
-			//Update Handlers
-			updatePointerEvent(event);
-		}
-	}
+        int eventSize = events.size();
 
-	public void updatePointerEvent(PointerEvent event) {
+        for (int i = 0; i < eventSize; i++) {
 
-		if(fixEventPosition) {
-			fixEventPosition(event);
-		}
+            PointerEvent event = events.get(i);
+            context.updateMouse(event);
 
-		for (Module module : modules) {
-			module.updateMouse(event);
-		}
+            //Update Handlers
+            updatePointerEvent(event);
+        }
+    }
 
-		updateWindowEvent(event, activeWindow);		
-	}
+    public void updatePointerEvent(PointerEvent event) {
 
-	
+        if (fixEventPosition) {
+            fixEventPosition(event);
+        }
 
-	private void updateWindowEvent(PointerEvent event, Window window) {
+        for (Module module : modules) {
+            module.updateMouse(event);
+        }
 
-		GUIEvent frameEvent = updateFrameEvents(event);
+        updateWindowEvent(event, activeWindow);
+    }
 
-		if(frameEvent != GUIEvent.NONE) {
-			superEvent = frameEvent;
-		}
 
-	}
+    private void updateWindowEvent(PointerEvent event, Window window) {
 
-	public void draw(Graphics g) {
+        GUIEvent frameEvent = updateFrameEvents(event);
 
-		if(!canDraw())
-			return;
+        if (frameEvent != GUIEvent.NONE) {
+            superEvent = frameEvent;
+        }
 
-		drawContext(currentContext(), g);
+    }
 
-		//Draw Handlers
-		for(Module module : modules) {
-			module.draw(g);
-		}
+    public void draw(Graphics g) {
+        drawContext(currentContext(), g);
 
-		//Draw Global Effects
-		drawGlobalEffects(g);
-	}
+        //Draw Handlers
+        for (Module module : modules) {
+            module.draw(g);
+        }
 
-	protected boolean canDraw() {
-		return !locked && !needReload;
-	}
+        //Draw Global Effects
+        drawGlobalEffects(g);
+    }
 
-	private void drawContext(Context context, Graphics g) {
-		if (context.isClearBeforeDraw()) {
-			g.setColor(context.getBackgroundColor());
-			g.fillRect(0, 0, context.getW(), context.getH());
-		}
+    private void drawContext(Context context, Graphics g) {
+        if (context.isClearBeforeDraw()) {
+            g.setColor(context.getBackgroundColor());
+            g.fillRect(0, 0, context.getW(), context.getH());
+        }
 
-		context.draw(g);
-	}
+        context.draw(g);
+    }
 
-	private void updateHandlers(long now) {
-		for(Updatable updatable: modules) {
-			updatable.update(now);	
-		}
-	}
+    private void updateModules(long now) {
+        for (Module module : modules) {
+            module.update(now);
+        }
+    }
 
-	private void drawGlobalEffects(Graphics g) {
+    private void drawGlobalEffects(Graphics g) {
 
-		List<AnimationScript> remove = new ArrayList<AnimationScript>();
+        List<AnimationScript> remove = new ArrayList<AnimationScript>();
 
-		for(SingleIntervalAnimation script: globalScripts) {
+        for (SingleIntervalAnimation script : globalScripts) {
 
-			if(!script.isStopped()) {
-				script.getTarget().draw(g);
-			} else {
-				remove.add(script);
-			}
-		}
+            if (!script.isStopped()) {
+                script.getTarget().draw(g);
+            } else {
+                remove.add(script);
+            }
+        }
 
-		for(AnimationScript script: remove) {
-			globalScripts.remove(script);
-		}
-	}
+        for (AnimationScript script : remove) {
+            globalScripts.remove(script);
+        }
+    }
 
-	public void addEffect(GlobalEffect effect) {
-		AnimationModule.getInstance().add(effect.getScript());
-		globalScripts.add(effect.getScript());
+    public void addEffect(GlobalEffect effect) {
+        AnimationModule.getInstance().add(effect.getScript());
+        globalScripts.add(effect.getScript());
 
-		//TODO add animation
-		//globalEffects.add(effect); 
-	}
+        //TODO add animation
+        //globalEffects.add(effect);
+    }
 
-	private void updateKeyboardEvents(KeyEvent event) {
+    private void updateKeyboardEvents(KeyEvent event) {
 
-		if(event.isKeyDown(KeyEvent.VK_ALT_RIGHT)||event.isKeyDown(KeyEvent.VK_ALT_LEFT)) {
+        if (event.isKeyDown(KeyEvent.VK_ALT_RIGHT) || event.isKeyDown(KeyEvent.VK_ALT_LEFT)) {
 
-			alt = true;
-		}
-		else if(event.isKeyUp(KeyEvent.VK_ALT_RIGHT)||event.isKeyUp(KeyEvent.VK_ALT_LEFT)) {
+            alt = true;
+        } else if (event.isKeyUp(KeyEvent.VK_ALT_RIGHT) || event.isKeyUp(KeyEvent.VK_ALT_LEFT)) {
 
-			alt = false;
-		}
+            alt = false;
+        }
 
-		if(event.isKeyDown(KeyEvent.VK_ENTER)) {
-			enter = true;
-		}
-		else if(event.isKeyUp(KeyEvent.VK_ENTER)) {
-			enter = false;
-		}
+        if (event.isKeyDown(KeyEvent.VK_ENTER)) {
+            enter = true;
+        } else if (event.isKeyUp(KeyEvent.VK_ENTER)) {
+            enter = false;
+        }
 
-		if(event.isKeyDown(KeyEvent.VK_ESC)) {
-			esc = true;
-		}
-		else if(event.isKeyUp(KeyEvent.VK_ESC)) {
-			esc = false;
-		}
+        if (event.isKeyDown(KeyEvent.VK_ESC)) {
+            esc = true;
+        } else if (event.isKeyUp(KeyEvent.VK_ESC)) {
+            esc = false;
+        }
 
-		if(alt&&enter) {
-			alt = false;
-			enter = false;
-			if(!isFullScreenEnable()) {
-				enableFullScreen = true;
-			}
-		}
+        if (alt && enter) {
+            alt = false;
+            enter = false;
+            if (!isFullScreenEnable()) {
+                enableFullScreen = true;
+            }
+        }
 
-		if(esc) {
+        if (esc) {
 
-			esc = false;
-			if(isFullScreenEnable()) {
-				disableFullScreen = true;
-			}
-		}
+            esc = false;
+            if (isFullScreenEnable()) {
+                disableFullScreen = true;
+            }
+        }
 
-	}
+    }
 
-	private void updateNumpadMouse(KeyEvent event) {
+    private void updateNumpadMouse(KeyEvent event) {
 
-		if(Configuration.getInstance().isNumpadMouse()) {
+        if (Configuration.getInstance().isNumpadMouse()) {
 
-			int speed = 1;
+            int speed = 1;
 
-			//Move Left/Right
-			if(event.isKeyDown(KeyEvent.VK_NUMPAD_LEFT_ARROW)) {
+            //Move Left/Right
+            if (event.isKeyDown(KeyEvent.VK_NUMPAD_LEFT_ARROW)) {
 
-				getMouse().setX(getMouse().getX()-speed);
-				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
+                getMouse().setX(getMouse().getX() - speed);
+                getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
-			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_RIGHT_ARROW)) {
+            } else if (event.isKeyDown(KeyEvent.VK_NUMPAD_RIGHT_ARROW)) {
 
-				getMouse().setX(getMouse().getX()+speed);
-				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
+                getMouse().setX(getMouse().getX() + speed);
+                getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
-			}
+            }
 
-			//Move Up/Down
-			if(event.isKeyDown(KeyEvent.VK_NUMPAD_UP_ARROW)) {
+            //Move Up/Down
+            if (event.isKeyDown(KeyEvent.VK_NUMPAD_UP_ARROW)) {
 
-				getMouse().setX(getMouse().getY()-speed);
-				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
+                getMouse().setX(getMouse().getY() - speed);
+                getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
-			}else if(event.isKeyDown(KeyEvent.VK_NUMPAD_DOWN_ARROW)) {
+            } else if (event.isKeyDown(KeyEvent.VK_NUMPAD_DOWN_ARROW)) {
 
-				getMouse().setX(getMouse().getY()+speed);
-				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
+                getMouse().setX(getMouse().getY() + speed);
+                getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, getMouse().getX(), getMouse().getY()));
 
-			}
+            }
 
-			//Mouse Left Button
-			if(event.isKeyDown(KeyEvent.VK_NUMPAD_INS)) {
-				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
-			}else if(event.isKeyUp(KeyEvent.VK_NUMPAD_INS)) {
-				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
-			}/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_INS)) {
-				Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_LEFT, KeyState.CLICK));
+            //Mouse Left Button
+            if (event.isKeyDown(KeyEvent.VK_NUMPAD_INS)) {
+                getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED));
+            } else if (event.isKeyUp(KeyEvent.VK_NUMPAD_INS)) {
+                getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.RELEASED));
+            }/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_INS)) {
+                Gui.getInstance().addEvent(new Event(Tecla.MOUSE_BUTTON_LEFT, KeyState.CLICK));
 			}*/
 
-			//Mouse Right Button
-			if(event.isKeyDown(KeyEvent.VK_NUMPAD_DEL)) {
-				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
-			}else if(event.isKeyUp(KeyEvent.VK_NUMPAD_DEL)) {
-				getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
-			}/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_DEL)) {
+            //Mouse Right Button
+            if (event.isKeyDown(KeyEvent.VK_NUMPAD_DEL)) {
+                getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_RIGHT, PointerState.PRESSED));
+            } else if (event.isKeyUp(KeyEvent.VK_NUMPAD_DEL)) {
+                getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
+            }/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_DEL)) {
 				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
 			}*/
 
-		}
-	}
+        }
+    }
 
-	private GUIEvent updateFrameEvents(PointerEvent event) {
+    private GUIEvent updateFrameEvents(PointerEvent event) {
 
-		if(event.getState() == PointerState.CLICK) {
-			return GUIEvent.REQUEST_FOCUS;
-		}
+        if (event.getState() == PointerState.CLICK) {
+            return GUIEvent.REQUEST_FOCUS;
+        }
 
-		if(event.getState() == PointerState.DRAGGED) {
+        if (event.getState() == PointerState.DRAGGED) {
 
-			if(getMouse().getY() <= TITLE_BAR_HEIGHT) {
-				
-				return GUIEvent.WINDOW_MOVE;
-			}
-		}
+            if (getMouse().getY() <= TITLE_BAR_HEIGHT) {
 
-		return GUIEvent.NONE;
-	}
+                return GUIEvent.WINDOW_MOVE;
+            }
+        }
 
-	public void replaceWindow(Window window) {
+        return GUIEvent.NONE;
+    }
 
-		if(activeWindow != window) {
+    public void replaceWindow(Window window) {
 
-			window.setClose(false);
+        if (activeWindow != window) {
 
-			activeWindow = window;
+            window.setClose(false);
 
-			//Avoid unnecessary reload
-			reload(window.getContext());
-		}
+            activeWindow = window;
 
-	}
+            //Avoid unnecessary reload
+            reload(window.getContext());
+        }
 
-	public void setMainApplication(Application application) {
-		reload(application);
-	}
+    }
 
-	public void changeApplication() {
-		Context currentApplication = currentContext();
-		//Remove Handlers
-		disposeHandlers(currentApplication);
-		currentApplication.dispose();
+    public void setMainApplication(Application application) {
+        reload(application);
+    }
 
-		Context nextApplication = currentApplication.getNextApplication();
-		nextApplication.setDrawCursor(currentApplication.isDrawCursor());
+    public void changeApplication() {
+        Context currentApplication = currentContext();
+        //Remove Handlers
+        disposeHandlers(currentApplication);
+        currentApplication.dispose();
 
-		reload(nextApplication);
-	}
+        Context nextApplication = currentApplication.getNextApplication();
+        nextApplication.setDrawCursor(currentApplication.isDrawCursor());
 
-	public Context currentContext() {
-		return activeWindow.getContext();
-	}
+        reload(nextApplication);
+    }
 
-	private void reload(Context application) {
+    public Context currentContext() {
+        return activeWindow.getContext();
+    }
 
-		if (application == null) {
-			System.err.println(ErrorMessages.APPLICATION_NULL);
-			return;
-		}
+    private void reload(Context application) {
 
-		application.setParent(activeWindow);
-		application.setMouseStateListener(arrowDrawer);
-		application.setLanguageChangerListener(this);
-		initModules(application);
+        if (application == null) {
+            System.err.println(ErrorMessages.APPLICATION_NULL);
+            return;
+        }
 
-		if (application.isLoaded()) {
-			Application nextApplication = applicationLoader.reloadApplication(this, application);
-			activeWindow.setApplication(nextApplication);
-		}
-	}
+        application.setParent(activeWindow);
+        application.setLanguageChangerListener(this);
+        initModules(application);
 
-	private void fastReload() {
-		locked = true;
+        if (application.isLoaded()) {
+            Application nextApplication = applicationLoader.reloadApplication(this, application);
+            activeWindow.setApplication(nextApplication);
+        }
+    }
 
-		currentContext().getViews().clear();
-		currentContext().load();
+    @Override
+    public void updateKeyEvent(KeyEvent event) {
+        Context context = currentContext();
 
-		needReload = false;
+        handleApplicationKeyEvents(context, event);
 
-		locked = false;
-	}
+        for (Module module : modules) {
+            module.updateKeyboard(event);
+        }
 
-	@Override
-	public void updateKeyEvent(KeyEvent event) {
+        updateKeyboardEvents(event);
 
-		Context context = currentContext();
-		
-		handleApplicationKeyEvents(context, event);
+        updateNumpadMouse(event);
+    }
 
-		for (Module module : modules) {
-			module.updateKeyboard(event);
-		}
+    protected void handleApplicationKeyEvents(Context context, KeyEvent event) {
+        //Handle Application commands
+        context.updateKeyboard(event);
+    }
 
-		updateKeyboardEvents(event);
+    private void fixEventPosition(PointerEvent event) {
+        event.setX(event.getX() - activeWindow.getX());
+        event.setY(event.getY() - activeWindow.getY());
+    }
 
-		updateNumpadMouse(event);
-	}
+    public AWTController getControl() {
+        return control;
+    }
 
-	protected void handleApplicationKeyEvents(Context context, KeyEvent event) {
-		//Handle Application commands
-		context.updateKeyboard(event);
-	}
+    public GUIEvent getSuperEvent() {
+        return superEvent;
+    }
 
-	private void fixEventPosition(PointerEvent event) {
-		event.setX(event.getX()-activeWindow.getX());
-		event.setY(event.getY()-activeWindow.getY());
-	}
+    public int getFps() {
+        return fps;
+    }
 
-	public AWTController getControl() {
-		return control;
-	}
+    public void setFps(int fps) {
+        this.fps = fps;
+        this.activeWindow.getContext().setFps(fps);
+    }
 
-	public GUIEvent getSuperEvent() {
-		return superEvent;
-	}
+    @Override
+    public void changeLanguage(Language language) {
+        LanguageModule.getInstance().setLanguage(language);
 
-	public int getFps() {
-		return fps;
-	}
+        for (Module module : modules) {
+            module.updateGuiEvent(GUIEvent.LANGUAGE_CHANGED);
+        }
+    }
 
-	public void setFps(int fps) {
-		this.fps = fps;
-		this.activeWindow.getContext().setFps(fps);
-	}
+    @Override
+    public void onLoad(Context context) {
+        activeWindow.setApplication(context);
+        context.setLoaded(true);
+    }
 
-	@Override
-	public void updateTheme(Theme theme) {
-		needReload = true;
-	}
+    private void initModules(Context application) {
+        for (Module module : modules) {
+            module.init(application);
+        }
+    }
 
-	@Override
-	public void changeLanguage(Language language) {
-		LanguageModule.getInstance().setLanguage(language);
+    private void disposeHandlers(Context application) {
+        for (Module module : modules) {
+            module.dispose(application);
+        }
+    }
 
-		for(Module module : modules) {
-			module.updateGuiEvent(GUIEvent.LANGUAGE_CHANGED);
-		}
-	}
-	
-	@Override
-	public void onLoad(Context context) {		
-		activeWindow.setApplication(context);
-		context.setLoaded(true);
-	}
+    //TODO Remove UIModule helper methods
+    public boolean isMouseOver() {
+        return UIModule.getInstance().mouseOver != null;
+    }
 
-	private void initModules(Context application) {
-		for (Module module : modules) {
-			module.init(application);
-		}
-	}
+    public View getMouseOver() {
+        return UIModule.getInstance().mouseOver;
+    }
 
-	private void disposeHandlers(Context application) {
-		for (Module module : modules) {
-			module.dispose(application);
-		}
-	}
+    public List<Monitor> getMonitors() {
+        return monitors;
+    }
 
-	//TODO Remove UIModule helper methods
-	public boolean isMouseOver() {
-		return UIModule.getInstance().mouseOver != null;
-	}
+    public boolean isFullScreenEnable() {
+        return fullScreenEnable;
+    }
 
-	public View getMouseOver() {
-		return UIModule.getInstance().mouseOver;
-	}
+    public void setFullScreenEnable(boolean fullScreenEnable) {
+        this.fullScreenEnable = fullScreenEnable;
+    }
 
-	public List<Monitor> getMonitors() {
-		return monitors;
-	}
+    public Mouse getMouse() {
+        return mouse;
+    }
 
-	public boolean isFullScreenEnable() {
-		return fullScreenEnable;
-	}
+    public void setMouse(Mouse mouse) {
+        this.mouse = mouse;
+    }
 
-	public void setFullScreenEnable(boolean fullScreenEnable) {
-		this.fullScreenEnable = fullScreenEnable;
-	}
+    public Keyboard getKeyboard() {
+        return keyboard;
+    }
 
-	public Mouse getMouse() {
-		return mouse;
-	}
-
-	public void setMouse(Mouse mouse) {
-		this.mouse = mouse;
-	}
-
-	public Keyboard getKeyboard() {
-		return keyboard;
-	}
-
-	public void setKeyboard(Keyboard keyboard) {
-		this.keyboard = keyboard;
-	}
+    public void setKeyboard(Keyboard keyboard) {
+        this.keyboard = keyboard;
+    }
 
 }

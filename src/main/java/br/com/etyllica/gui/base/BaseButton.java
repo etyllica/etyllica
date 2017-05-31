@@ -290,4 +290,11 @@ public class BaseButton extends RoundView {
 		}
 	}
 
+	public void copy(BaseButton view) {
+		super.copy(view);
+		alt = view.alt;
+		label = view.label;
+		clicked = view.clicked;
+	}
+
 }

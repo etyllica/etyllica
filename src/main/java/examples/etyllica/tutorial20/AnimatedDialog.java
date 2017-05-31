@@ -32,15 +32,9 @@ public class AnimatedDialog extends Application{
 	
 	@Override
 	public void draw(Graphics g) {
-
 		layer.draw(g);
 	}
-		
-	@Override
-	public void update(long now){
-				
-	}
-	
+
 	@Override
 	public void updateMouse(PointerEvent event) {
 		if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {

@@ -1,7 +1,5 @@
 package br.com.etyllica.core;
 
-import br.com.etyllica.core.Drawable;
-import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
@@ -11,6 +9,7 @@ public interface Module extends Drawable, Updatable {
 
     /**
      * Update pointer events
+     *
      * @param event
      * @return
      */
@@ -18,6 +17,7 @@ public interface Module extends Drawable, Updatable {
 
     /**
      * Update keyboard events
+     *
      * @param event
      * @return
      */
@@ -27,10 +27,12 @@ public interface Module extends Drawable, Updatable {
 
     /**
      * Handles the context
+     *
      * @param context
      * @return
      */
     void init(Context context);
 
     void dispose(Context context);
+
 }

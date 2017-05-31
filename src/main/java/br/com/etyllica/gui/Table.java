@@ -3,6 +3,7 @@ package br.com.etyllica.gui;
 import java.util.List;
 
 import br.com.etyllica.gui.base.BaseTable;
+import br.com.etyllica.gui.base.BaseTextField;
 import br.com.etyllica.gui.base.UIView;
 import br.com.etyllica.gui.listener.RowListener;
 import br.com.etyllica.gui.table.Row;
@@ -17,16 +18,23 @@ import br.com.etyllica.gui.theme.ThemeManager;
 public class Table extends UIView {
 
 	BaseTable table;
-	
+
 	public Table() {
 		this(0,0,0,0);
 	}
-	
+
 	public Table(int x, int y, int w, int h) {
-		super();
-		
+		super(x,y,w,h);
+
 		this.table = ThemeManager.getInstance().getTheme().createTable(x, y, w, h);
 		delegateView(table);
+	}
+
+	public void rebuild() {
+		BaseTable view = ThemeManager.getInstance().getTheme().createTable(x, y, w, h);
+		view.copy(delegatedView);
+
+		delegateView(view);
 	}
 
 	public Row addRow(String...values) {

@@ -59,6 +59,10 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 		super(0, 0);
 	}
 
+	public void rebuild() {
+
+	}
+
 	public GUIEvent getLastEvent() {
 		return lastEvent;
 	}
@@ -357,4 +361,21 @@ public abstract class View extends Layer implements GUIComponent, Drawable, View
 			child.cascadeClipOnDraw(clipOnDraw);
 		}
 	}
+
+	public void copy(View view) {
+		clipOnDraw = view.clipOnDraw;
+		mouseOver = view.mouseOver;
+		onFocus = view.onFocus;
+		disabled = view.disabled;
+		actionMap = view.actionMap;
+		actions = view.actions;
+		root = view.root;
+
+		views.clear();
+		for (View child : view.getViews()) {
+			child.rebuild();
+			views.add(child);
+		}
+	}
+
 }

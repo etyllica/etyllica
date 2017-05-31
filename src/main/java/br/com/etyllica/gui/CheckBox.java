@@ -9,10 +9,16 @@ public class CheckBox extends UIView {
 	private BaseCheckBox checkbox;
 	
 	public CheckBox(int x, int y, int w, int h) {
-		super();
-		
+		super(x,y,w,h);
+
 		this.checkbox = ThemeManager.getInstance().getTheme().createCheckBox(x, y, w, h);
 		delegateView(checkbox);
+	}
+
+	public void rebuild() {
+		BaseCheckBox view = ThemeManager.getInstance().getTheme().createCheckBox(x, y, w, h);
+		view.copy(checkbox);
+		delegateView(view);
 	}
 
 	public String getAlt() {

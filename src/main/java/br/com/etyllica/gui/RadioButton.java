@@ -9,10 +9,17 @@ public class RadioButton extends UIView {
 	private BaseRadioButton radio;
 	
 	public RadioButton(int x, int y, int w, int h) {
-		super();
-		
+		super(x,y,w,h);
+
 		this.radio = ThemeManager.getInstance().getTheme().createRadioButton(x, y, w, h);
 		delegateView(radio);
+	}
+
+	public void rebuild() {
+		BaseRadioButton view = ThemeManager.getInstance().getTheme().createRadioButton(x, y, w, h);
+		view.copy(delegatedView);
+
+		delegateView(view);
 	}
 
 	public String getAlt() {

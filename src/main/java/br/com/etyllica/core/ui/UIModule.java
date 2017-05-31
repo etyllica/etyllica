@@ -1,5 +1,6 @@
 package br.com.etyllica.core.ui;
 
+import br.com.etyllica.awt.AWTArrowDrawer;
 import br.com.etyllica.core.Configuration;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.event.*;
@@ -8,11 +9,16 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.Module;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.gui.View;
+import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.gui.theme.ThemeManager;
+import br.com.etyllica.gui.theme.cursor.ArrowTheme;
+import br.com.etyllica.gui.theme.listener.ThemeListener;
+import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UIModule implements Module {
+public class UIModule implements Module, ThemeListener {
 
     private static UIModule instance;
 
@@ -20,8 +26,9 @@ public class UIModule implements Module {
 
     public static int w, h;
     public static UICoreListener listener;
-    public static ArrowDrawer arrowDrawer;
     public static Mouse mouse;
+    public ArrowDrawer arrowDrawer = new AWTArrowDrawer();
+    public ArrowTheme arrowTheme = new EtyllicArrowTheme();
 
     //Timer click arc
     private int arc = 0;
@@ -36,6 +43,10 @@ public class UIModule implements Module {
 
     public List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
 
+    public boolean needReload = false;
+
+    private boolean locked = false;
+
     private UIModule() {
         super();
     }
@@ -43,6 +54,10 @@ public class UIModule implements Module {
     public static UIModule getInstance() {
         if (instance == null) {
             instance = new UIModule();
+
+            ThemeManager.getInstance().setArrowThemeListener(instance.arrowDrawer);
+            ThemeManager.getInstance().setArrowTheme(instance.arrowTheme);
+            ThemeManager.getInstance().setThemeListener(instance);
         }
 
         return instance;
@@ -328,6 +343,7 @@ public class UIModule implements Module {
     @Override
     public void init(Context context) {
         this.context = context;
+        context.setMouseStateListener(arrowDrawer);
     }
 
     @Override
@@ -337,6 +353,9 @@ public class UIModule implements Module {
 
     @Override
     public void draw(Graphics g) {
+        if (locked) {
+           return;
+        }
         //Draw Components
         for (UIComponent component : context.getComponents()) {
             component.draw(g);
@@ -351,9 +370,28 @@ public class UIModule implements Module {
 
     @Override
     public void update(long now) {
-        updateTimerClick(now);
+        if (needReload) {
+            fastReload();
+            needReload = false;
+        }
 
+        updateTimerClick(now);
         updateGui(context.getViews());
     }
 
+    private void fastReload() {
+        locked = true;
+
+        //Just Rebuild UI Components
+        for (View view : context.getViews()) {
+            view.rebuild();
+        }
+
+        locked = false;
+    }
+
+    @Override
+    public void updateTheme(Theme theme) {
+        needReload = true;
+    }
 }
