@@ -1,12 +1,6 @@
 package br.com.etyllica.gui.theme;
 
-import br.com.etyllica.gui.base.BaseButton;
-import br.com.etyllica.gui.base.BaseCheckBox;
-import br.com.etyllica.gui.base.BasePanel;
-import br.com.etyllica.gui.base.BaseRadioButton;
-import br.com.etyllica.gui.base.BaseTable;
-import br.com.etyllica.gui.base.BaseTextField;
-import br.com.etyllica.gui.base.BaseTextView;
+import br.com.etyllica.gui.base.*;
 
 public interface ThemeFactory {
 		
@@ -30,4 +24,5 @@ public interface ThemeFactory {
 	
 	BaseTextView createTextView(int x, int y, int w, int h);
 
+	BaseSlider createSlider(int x, int y, int w, int h);
 }

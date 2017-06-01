@@ -1,12 +1,6 @@
 package br.com.etyllica.theme.etyllic;
 
-import br.com.etyllica.gui.base.BaseButton;
-import br.com.etyllica.gui.base.BaseCheckBox;
-import br.com.etyllica.gui.base.BasePanel;
-import br.com.etyllica.gui.base.BaseRadioButton;
-import br.com.etyllica.gui.base.BaseTable;
-import br.com.etyllica.gui.base.BaseTextField;
-import br.com.etyllica.gui.base.BaseTextView;
+import br.com.etyllica.gui.base.*;
 import br.com.etyllica.gui.theme.Theme;
 import br.com.etyllica.theme.etyllic.components.EtyllicCheckBox;
 
@@ -45,6 +39,12 @@ public class EtyllicTheme extends Theme {
 	public BaseTextView createTextView(int x, int y, int w, int h) {
 		BaseTextView textView = new BaseTextView(x, y, w, h);
 		return textView;
+	}
+
+	@Override
+	public BaseSlider createSlider(int x, int y, int w, int h) {
+		BaseSlider slider = new BaseSlider(x, y, w, h);
+		return slider;
 	}
 
 	@Override
