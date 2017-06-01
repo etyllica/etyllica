@@ -15,11 +15,6 @@ public class EtyllicTheme extends Theme {
 		return button;
 	}
 
-	public BaseButton createSliderButton(int x, int y, int w, int h) {
-		BaseButton button = new BaseButton(x, y, w, h);
-		return button;
-	}
-	
 	public BaseCheckBox createCheckBox(int x, int y, int w, int h) {
 		BaseCheckBox checkBox = new EtyllicCheckBox(x, y, w, h);
 		return checkBox;

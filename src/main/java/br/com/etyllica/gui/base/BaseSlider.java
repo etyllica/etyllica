@@ -5,7 +5,7 @@ import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.SliderButton;
+import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.theme.Theme;
 
@@ -23,12 +23,12 @@ public class BaseSlider extends View {
     protected float value = 0;
     private boolean activated = false;
 
-    protected SliderButton button;
+    protected Button button;
 
     public BaseSlider(int x, int y, int w, int h) {
         super(x, y, w, h);
 
-        button = new SliderButton(x, y, h / 4, h);
+        button = new Button(x, y, h / 4, h);
         sliderPosition = getX() - button.getW() / 2;
     }
 

@@ -6,8 +6,6 @@ public interface ThemeFactory {
 		
 	BaseButton createButton(int x, int y, int w, int h);
 
-	BaseButton createSliderButton(int x, int y, int w, int h);
-
 	BaseCheckBox createCheckBox(int x, int y, int w, int h);
 	
 	BaseRadioButton createRadioButton(int x, int y, int w, int h);

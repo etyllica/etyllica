@@ -58,7 +58,6 @@ public class MaterialButton extends BaseButton {
         g.drawLine(x + radius / 4 + 1, y + h + 3, x + w - radius / 2, y + h + 3);
 
         g.setAlpha(30);
-        g.setColor(SVGColor.GRAY);
         g.drawLine(x + radius / 4 + 1, y + h + 3 + 1, x + w - radius / 2 - 2, y + h + 3 + 1);
         g.drawLine(x - 1, y + radius / 4, x - 1, y + h - radius / 2);
         g.drawLine(x + w - 1, y + radius / 4, x + w - 1, y + h - radius / 2);
