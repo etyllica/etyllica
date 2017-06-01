@@ -21,15 +21,21 @@ public class BaseSlider extends View {
     protected float maxValue = 255;
 
     protected float value = 0;
-    private boolean activated = false;
+    protected boolean activated = false;
 
-    protected Button button;
+    protected View button;
 
     public BaseSlider(int x, int y, int w, int h) {
         super(x, y, w, h);
 
-        button = new Button(x, y, h / 4, h);
+        buildButton();
+        deactivate();
         sliderPosition = getX() - button.getW() / 2;
+        button.setX(sliderPosition);
+    }
+
+    public void buildButton() {
+        button = new Button(x, y, h / 4, h);
     }
 
     public void rebuild() {
@@ -43,6 +49,7 @@ public class BaseSlider extends View {
 
         if (mouseOver) {
             if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
+                activate();
                 activated = true;
             }
         }
@@ -53,12 +60,21 @@ public class BaseSlider extends View {
                 return GUIEvent.COMPONENT_CHANGED;
             } else if (event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
                 activated = false;
+                deactivate();
             }
         }
 
         button.setMouseOver(mouseOver);
 
         return value;
+    }
+
+    protected void activate() {
+
+    }
+
+    protected void deactivate() {
+
     }
 
     public void updateValue(PointerEvent event) {

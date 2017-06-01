@@ -6,6 +6,7 @@ import br.com.etyllica.gui.theme.ThemeManager;
 import br.com.etyllica.theme.etyllic.EtyllicTheme;
 import examples.ui.kit.application.UIKitApplication;
 import examples.ui.material.application.BlueButtonApplication;
+import examples.ui.material.application.model.MaterialTheme;
 
 public class UIKitExample extends Etyllica {
 
@@ -22,7 +23,8 @@ public class UIKitExample extends Etyllica {
 
 	@Override
 	public Application startApplication() {
-		ThemeManager.getInstance().setTheme(new EtyllicTheme());
+		//ThemeManager.getInstance().setTheme(new EtyllicTheme());
+		ThemeManager.getInstance().setTheme(new MaterialTheme());
 
 		return new UIKitApplication(w,h);
 	}

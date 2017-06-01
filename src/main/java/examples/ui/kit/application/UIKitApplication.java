@@ -21,7 +21,8 @@ public class UIKitApplication extends Application {
         disabledButton.setLabel(new TextLabel("BUTTON"));
         disabledButton.setDisabled(true);
 
-        Slider slider = new Slider(20, 110, 190, 40);
+        Slider slider = new Slider(20, 110, 190, 30);
+        slider.setDisabled(true);
 
         addView(button);
         addView(disabledButton);

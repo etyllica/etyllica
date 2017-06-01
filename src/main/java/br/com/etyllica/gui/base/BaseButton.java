@@ -10,6 +10,8 @@ import br.com.etyllica.gui.Label;
 import br.com.etyllica.gui.RoundView;
 import br.com.etyllica.gui.theme.Theme;
 
+import java.awt.*;
+
 /**
  *
  * Button Component
@@ -32,36 +34,37 @@ public class BaseButton extends RoundView {
 
 	@Override
 	public void draw(Graphics g) {
-		
 		if(!visible)
 			return;
 
-		Theme theme = getTheme();
-
-		if(!disabled) {
-
-			if(!mouseOver) {
-
-				g.setColor(theme.getBaseColor());
-
-			} else {
-
-				if(clicked) {
-					g.setColor(theme.getActiveColor());
-				} else {
-					g.setColor(theme.getSelectionColor());
-				}
-
-			}
-
-		} else {
-			g.setColor(theme.getButtonDisabledColor());
-		}
+		Color color = getColor();
+		g.setColor(color);
 
 		g.fillRect(left(),top(),width(),height());
 
 		drawLabel(g);
+	}
 
+	protected Color getColor() {
+		Theme theme = getTheme();
+
+		Color color;
+
+		if(!disabled) {
+			if(!mouseOver) {
+				color = theme.getBaseColor();
+			} else {
+				if(clicked) {
+					color = theme.getActiveColor();
+				} else {
+					color = theme.getSelectionColor();
+				}
+			}
+		} else {
+			color = theme.getButtonDisabledColor();
+		}
+
+		return color;
 	}
 
 	protected void drawLabel(Graphics g) {
