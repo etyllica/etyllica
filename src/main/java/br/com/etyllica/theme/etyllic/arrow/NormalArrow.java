@@ -40,7 +40,7 @@ public class NormalArrow extends PolygonalArrow implements MouseArrow {
 		addPoint((int)(size*0.28),(int)(size*0.88));
 		addPoint((int)(size*0.42),(int)(size*0.82));
 
-		addPoint((int)(size*0.30),(int)(size*0.55));
+		addPoint((int)(size*0.30),(int)(size*0.57));
 		addPoint((int)(size*0.49),(int)(size*0.57));
 	}
 	
