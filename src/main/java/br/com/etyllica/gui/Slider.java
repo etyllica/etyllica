@@ -21,14 +21,14 @@ public class Slider extends View {
 
     protected float value = 0;
 
-    protected BaseButton button;
+    protected SliderButton button;
 
     private boolean activated = false;
 
     public Slider(int x, int y, int w, int h) {
         super(x, y, w, h);
 
-        button = new BaseButton(x, y, h / 4, h);
+        button = new SliderButton(x, y, h / 4, h);
         sliderPosition = getX() - button.getW() / 2;
     }
 
@@ -95,7 +95,6 @@ public class Slider extends View {
 
         //Draw Button
         button.draw(g);
-
     }
 
     public float getMinValue() {

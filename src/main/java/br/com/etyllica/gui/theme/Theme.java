@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import br.com.etyllica.awt.ColorHelper;
+import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.style.Style;
 
 /**
@@ -283,5 +284,5 @@ public abstract class Theme implements ThemeFactory {
 	public Style getStyle() {
 		return style;
 	}
-	
+
 }
