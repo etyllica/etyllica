@@ -36,7 +36,7 @@ public class ConcurrentList<T> {
 	public List<T> lock() {
 		alternativeList = new ArrayList<T>();
 		locked = true;
-		List<T> temp = new ArrayList<>(list);
+		List<T> temp = new ArrayList<T>(list);
 		return temp;
 	}
 	
