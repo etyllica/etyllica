@@ -79,8 +79,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         setMouse(control.getMouse());
         setKeyboard(control.getKeyboard());
 
-        //updatables.add(AnimationHandler.getInstance());
-
         applicationLoader = new ApplicationLoader(w, h);
     }
 
@@ -118,13 +116,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     }
 
     private void updateInput(Context application, long now) {
-        //Update All components
-        //List<View> components = new CopyOnWriteArrayList<View>(application.getViews());
-
-        for (Module module : modules) {
-            module.update(now);
-        }
-
         List<PointerEvent> events = getMouse().lock();
 
         for (PointerEvent event : events) {
@@ -133,8 +124,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         }
 
         getMouse().unlock();
-
-        //updateKeyboard();
 
         getKeyboard().update(now);
     }
