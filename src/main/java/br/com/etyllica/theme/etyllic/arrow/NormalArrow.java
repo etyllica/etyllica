@@ -3,10 +3,10 @@ package br.com.etyllica.theme.etyllic.arrow;
 import java.awt.Color;
 
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.theme.Theme;
-import br.com.etyllica.gui.theme.ThemeManager;
-import br.com.etyllica.gui.theme.cursor.arrow.MouseArrow;
-import br.com.etyllica.gui.theme.cursor.arrow.PolygonalArrow;
+import br.com.etyllica.ui.theme.Theme;
+import br.com.etyllica.ui.theme.ThemeManager;
+import br.com.etyllica.ui.theme.cursor.arrow.MouseArrow;
+import br.com.etyllica.ui.theme.cursor.arrow.PolygonalArrow;
 
 /**
  * 

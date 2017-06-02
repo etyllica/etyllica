@@ -19,4 +19,6 @@ public interface Core {
 	void render();
 	boolean isRunning();
 	void setFps(int fps);
+
+	void addModule(Module module);
 }

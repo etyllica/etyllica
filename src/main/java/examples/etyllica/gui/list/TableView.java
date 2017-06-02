@@ -3,10 +3,10 @@ package examples.etyllica.gui.list;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.Panel;
-import br.com.etyllica.gui.Table;
-import br.com.etyllica.gui.table.Row;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Panel;
+import br.com.etyllica.ui.Table;
+import br.com.etyllica.ui.table.Row;
 
 public class TableView extends Application {
 

@@ -5,8 +5,8 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.Slider;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Slider;
 
 public class SliderExample extends Application {
 

@@ -3,13 +3,13 @@ package examples.etyllica.gui.list;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.Panel;
-import br.com.etyllica.gui.ScrollView;
-import br.com.etyllica.gui.Select;
-import br.com.etyllica.gui.list.Option;
-import br.com.etyllica.gui.panel.ColoredTextPanel;
-import br.com.etyllica.gui.style.Orientation;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Panel;
+import br.com.etyllica.ui.ScrollView;
+import br.com.etyllica.ui.Select;
+import br.com.etyllica.ui.list.Option;
+import br.com.etyllica.ui.panel.ColoredTextPanel;
+import br.com.etyllica.ui.style.Orientation;
 
 public class ComponentsList extends Application {
 

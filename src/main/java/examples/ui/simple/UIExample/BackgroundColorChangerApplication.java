@@ -5,9 +5,9 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.Button;
-import br.com.etyllica.gui.label.TextLabel;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Button;
+import br.com.etyllica.ui.label.TextLabel;
 
 import java.awt.*;
 

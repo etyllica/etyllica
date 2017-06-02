@@ -3,6 +3,7 @@ package br.com.etyllica.core.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.etyllica.ui.UI;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +11,9 @@ import org.junit.Test;
 import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
-import br.com.etyllica.gui.View;
-import br.com.etyllica.gui.base.BaseButton;
-import br.com.etyllica.gui.base.BaseTextField;
+import br.com.etyllica.ui.View;
+import br.com.etyllica.ui.base.BaseButton;
+import br.com.etyllica.ui.base.BaseTextField;
 
 public class UITest {
 
@@ -20,9 +21,6 @@ public class UITest {
 	
 	@Before
 	public void setUp() {
-		UI.w = 800;
-		UI.h = 600;
-
 		ui = UI.getInstance();
 	}
 	

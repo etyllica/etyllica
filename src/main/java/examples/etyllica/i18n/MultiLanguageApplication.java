@@ -10,10 +10,10 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.i18n.Language;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.Button;
-import br.com.etyllica.gui.label.MultiLangLabel;
-import br.com.etyllica.gui.label.TextLabel;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Button;
+import br.com.etyllica.ui.label.MultiLangLabel;
+import br.com.etyllica.ui.label.TextLabel;
 
 public class MultiLanguageApplication extends Application {
 

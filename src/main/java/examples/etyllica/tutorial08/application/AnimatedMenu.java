@@ -4,9 +4,9 @@ import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.Button;
-import br.com.etyllica.gui.label.TextLabel;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Button;
+import br.com.etyllica.ui.label.TextLabel;
 
 public class AnimatedMenu extends Application{
 	

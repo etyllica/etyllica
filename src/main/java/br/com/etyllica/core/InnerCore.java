@@ -19,11 +19,10 @@ import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.i18n.LanguageModule;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.core.ui.UI;
+import br.com.etyllica.ui.UI;
 import br.com.etyllica.core.ui.UIComponent;
-import br.com.etyllica.core.ui.UICoreListener;
-import br.com.etyllica.gui.View;
-import br.com.etyllica.gui.Window;
+import br.com.etyllica.ui.View;
+import br.com.etyllica.ui.Window;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ import java.util.List;
  * @author yuripourre
  */
 
-public abstract class InnerCore implements Core, KeyEventListener, Updatable, LanguageChangerListener, LoaderListener, UICoreListener {
+public abstract class InnerCore implements Core, KeyEventListener, Updatable, LanguageChangerListener, LoaderListener {
 
     private static final int TITLE_BAR_HEIGHT = 50;
 
@@ -83,21 +82,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         //updatables.add(AnimationHandler.getInstance());
 
         applicationLoader = new ApplicationLoader(w, h);
-
-        //Setup UI
-        UI.w = w;
-        UI.h = h;
-        UI.listener = this;
-        UI.mouse = control.getMouse();
-
-        initModules();
-    }
-
-    //Default Handlers
-    private void initModules() {
-        modules.add(AnimationModule.getInstance());
-        modules.add(UI.getInstance());
-        modules.add(LanguageModule.getInstance());
     }
 
     public Window getWindow() {
@@ -313,6 +297,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         }
 
         context.draw(g);
+
+        //Draw Components
+        for (UIComponent component : context.getComponents()) {
+            component.draw(g);
+        }
     }
 
     private void updateModules(long now) {
@@ -477,7 +466,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     public void changeApplication() {
         Context currentApplication = currentContext();
         //Remove Handlers
-        disposeHandlers(currentApplication);
+        disposeModules(currentApplication);
         currentApplication.dispose();
 
         Context nextApplication = currentApplication.getNextApplication();
@@ -564,13 +553,17 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         context.setLoaded(true);
     }
 
+    public void addModule(Module module) {
+        modules.add(module);
+    }
+
     private void initModules(Context application) {
         for (Module module : modules) {
             module.init(application);
         }
     }
 
-    private void disposeHandlers(Context application) {
+    private void disposeModules(Context application) {
         for (Module module : modules) {
             module.dispose(application);
         }

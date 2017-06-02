@@ -5,9 +5,9 @@ import java.util.List;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.spinner.IntegerSpinner;
-import br.com.etyllica.gui.spinner.StringSpinner;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.spinner.IntegerSpinner;
+import br.com.etyllica.ui.spinner.StringSpinner;
 
 public class SpinnerExampleApplication extends Application{
 

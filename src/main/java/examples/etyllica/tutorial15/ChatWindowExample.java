@@ -7,12 +7,12 @@ import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.Button;
-import br.com.etyllica.gui.ScrollView;
-import br.com.etyllica.gui.TextField;
-import br.com.etyllica.gui.label.TextLabel;
-import br.com.etyllica.gui.panel.TextPanel;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Button;
+import br.com.etyllica.ui.ScrollView;
+import br.com.etyllica.ui.TextField;
+import br.com.etyllica.ui.label.TextLabel;
+import br.com.etyllica.ui.panel.TextPanel;
 
 public class ChatWindowExample extends Application{
 

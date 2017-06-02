@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.base.BaseTextView;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.base.BaseTextView;
 
 public class TextViewExample extends Application {
 

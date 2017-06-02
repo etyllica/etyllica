@@ -6,13 +6,13 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.ui.UI;
-import br.com.etyllica.gui.Button;
-import br.com.etyllica.gui.CheckBox;
-import br.com.etyllica.gui.RadioButton;
-import br.com.etyllica.gui.RadioGroup;
-import br.com.etyllica.gui.TextField;
-import br.com.etyllica.gui.label.TextLabel;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Button;
+import br.com.etyllica.ui.CheckBox;
+import br.com.etyllica.ui.RadioButton;
+import br.com.etyllica.ui.RadioGroup;
+import br.com.etyllica.ui.TextField;
+import br.com.etyllica.ui.label.TextLabel;
 
 public class GeneralGuiExample extends Application{
 
