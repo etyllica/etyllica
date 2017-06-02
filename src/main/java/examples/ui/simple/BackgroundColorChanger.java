@@ -36,7 +36,7 @@ public class BackgroundColorChanger extends Etyllica {
 		
 		ThemeManager.getInstance().setTheme(new EtyllicTheme());
 
-		ThemeManager.getInstance().getTheme().setTextColor(Color.black);
+		//ThemeManager.getInstance().getTheme().setTextColor(Color.black);
 		//ThemeManager.getInstance().setTheme(new EtyllicMonoTheme());
 		
 		return new BackgroundColorChangerApplication(w,h);

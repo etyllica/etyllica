@@ -10,6 +10,7 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.i18n.Language;
+import br.com.etyllica.core.ui.UI;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.label.MultiLangLabel;
 import br.com.etyllica.gui.label.TextLabel;
@@ -33,7 +34,7 @@ public class MultiLanguageApplication extends Application {
 		texts.put(Language.FRENCH, "Bonjour!");
 		
 		label = new MultiLangLabel(120, 150, texts);
-		addView(label);
+		UI.add(label);
 		
 		//Enable Accessibility Features
 		Configuration.getInstance().setTimerClick(true);
@@ -41,26 +42,26 @@ public class MultiLanguageApplication extends Application {
 		Button portugueseButton = new Button(280, 100, 200, 40);
 		portugueseButton.setLabel(new TextLabel("Portuguese"));
 		portugueseButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeLanguage", Language.PORTUGUESE_BRAZIL));
-		
-		addView(portugueseButton);
+
+		UI.add(portugueseButton);
 		
 		Button japaneseButton = new Button(280, 150, 200, 40);
 		japaneseButton.setLabel(new TextLabel("Japanese"));
 		japaneseButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeLanguage", Language.JAPANESE));
-		
-		addView(japaneseButton);
+
+		UI.add(japaneseButton);
 		
 		Button englishButton = new Button(280, 200, 200, 40);
 		englishButton.setLabel(new TextLabel("English"));
 		englishButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeLanguage", Language.ENGLISH_US));
-		
-		addView(englishButton);
+
+		UI.add(englishButton);
 		
 		Button frenchButton = new Button(280, 250, 200, 40);
 		frenchButton.setLabel(new TextLabel("French"));
 		frenchButton.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeLanguage", Language.FRENCH));
-		
-		addView(frenchButton);
+
+		UI.add(frenchButton);
 		
 		loading = 100;
 		

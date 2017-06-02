@@ -4,6 +4,7 @@ import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.etyllica.core.ui.UI;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,6 @@ public class AWTCoreTest {
 
 	@Before
 	public void setUp() {
-				
 		Window window = new Window(0, 0, 800,600);
 		
 		fakeApplication = createFakeApplication();
@@ -41,7 +41,7 @@ public class AWTCoreTest {
 		
 		button = new BaseButton(0, 0, 100, 20);
 
-		fakeApplication.getViews().add(button);
+		UI.add(button);
 	}
 
 	public Application createFakeApplication() {

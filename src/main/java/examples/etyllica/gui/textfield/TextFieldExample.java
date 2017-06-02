@@ -3,6 +3,7 @@ package examples.etyllica.gui.textfield;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.ui.UI;
 import br.com.etyllica.gui.TextField;
 
 public class TextFieldExample extends Application {
@@ -14,7 +15,7 @@ public class TextFieldExample extends Application {
 	@Override
 	public void load() {
 		TextField field = new TextField(120, 120, 100, 32);
-		addView(field);
+		UI.add(field);
 		
 		loading = 100;
 	}

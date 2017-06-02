@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.ui.UI;
 import br.com.etyllica.gui.base.BaseTextView;
 
 public class TextViewExample extends Application {
@@ -17,7 +18,7 @@ public class TextViewExample extends Application {
 		
 		BaseTextView textView = new BaseTextView(20,30,120,40);
 		textView.setText("Hello?");
-		this.addView(textView);
+		UI.add(textView);
 		
 		loading = 100;
 	}

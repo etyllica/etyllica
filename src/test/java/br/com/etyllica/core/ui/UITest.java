@@ -14,16 +14,16 @@ import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.base.BaseButton;
 import br.com.etyllica.gui.base.BaseTextField;
 
-public class UIModuleTest {
+public class UITest {
 
-	UIModule uiModule;
+	UI ui;
 	
 	@Before
 	public void setUp() {
-		UIModule.w = 800;
-		UIModule.h = 600;
+		UI.w = 800;
+		UI.h = 600;
 
-		uiModule = UIModule.getInstance();
+		ui = UI.getInstance();
 	}
 	
 	@Test
@@ -34,17 +34,19 @@ public class UIModuleTest {
 		List<View> views = new ArrayList<View>();
 		views.add(b);
 		views.add(f);
-		
+
+		UI.addAll(views);
+
 		PointerEvent moveOverButtonEvent = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 20, 20);
-		uiModule.updateMouseViews(moveOverButtonEvent, views);
+		ui.updateMouseViews(moveOverButtonEvent, views);
 		
 		Assert.assertTrue(b.isMouseOver());
 		
 		PointerEvent moveOverFieldEvent = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 20, 40);
-		uiModule.updateMouseViews(moveOverFieldEvent, views);
+		ui.updateMouseViews(moveOverFieldEvent, views);
 		
 		PointerEvent clickEvent = new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED, 20, 40);
-		uiModule.updateMouseViews(clickEvent, views);
+		ui.updateMouseViews(clickEvent, views);
 		
 		Assert.assertTrue(f.isOnFocus());
 		

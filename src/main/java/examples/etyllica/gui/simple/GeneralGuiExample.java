@@ -6,6 +6,7 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.Action;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.ui.UI;
 import br.com.etyllica.gui.Button;
 import br.com.etyllica.gui.CheckBox;
 import br.com.etyllica.gui.RadioButton;
@@ -30,19 +31,19 @@ public class GeneralGuiExample extends Application{
 		Button buttonWhite = new Button(20,30,120,40);
 		buttonWhite.setLabel(new TextLabel("WHITE"));
 		buttonWhite.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", Color.WHITE));
-		addView(buttonWhite);
+		UI.add(buttonWhite);
 		
 		Button buttonBlue = new Button(20,80,120,40);
 		buttonBlue.setLabel(new TextLabel("BLUE"));
 		buttonBlue.addAction(GUIEvent.MOUSE_LEFT_BUTTON_UP, new Action(this, "changeColor", Color.BLUE));
-		addView(buttonBlue);
+		UI.add(buttonBlue);
 		
 		TextField field = new TextField(100, 150, 120, 40);
-		addView(field);
+		UI.add(field);
 		
 		CheckBox checkbox = new CheckBox(280, 150, 60, 40);
 		checkbox.setChecked(true);
-		addView(checkbox);
+		UI.add(checkbox);
 		
 		RadioGroup group = new RadioGroup();
 		RadioButton radio1 = new RadioButton(200, 50, 40, 40);
@@ -50,9 +51,9 @@ public class GeneralGuiExample extends Application{
 		RadioButton radio2 = new RadioButton(280, 50, 40, 40);
 		radio2.setGroup(group);
 		radio1.check();
-		
-		addView(radio1);
-		addView(radio2);
+
+		UI.add(radio1);
+		UI.add(radio2);
 		
 		loading = 100;
 	}

@@ -139,7 +139,6 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 
 	private boolean drawCursor = true;
 
-	protected List<View> views = new ArrayList<View>();
 	protected List<UIComponent> components = new ArrayList<UIComponent>();
 
 	/**
@@ -384,18 +383,6 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 
 	public void setLoaded(boolean loaded) {
 		this.loaded = loaded;
-	}
-
-	public List<View> getViews() {
-		return views;
-	}
-
-	public void setViews(List<View> views) {
-		this.views = views;
-	}
-
-	public void addView(View view) {
-		this.views.add(view);
 	}
 
 	public Color getBackgroundColor() {

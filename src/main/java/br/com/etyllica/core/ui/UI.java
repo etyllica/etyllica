@@ -1,12 +1,11 @@
 package br.com.etyllica.core.ui;
 
 import br.com.etyllica.awt.AWTArrowDrawer;
-import br.com.etyllica.core.Configuration;
+import br.com.etyllica.core.Module;
 import br.com.etyllica.core.context.Context;
 import br.com.etyllica.core.event.*;
 import br.com.etyllica.core.graphics.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.Module;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.theme.Theme;
@@ -18,15 +17,16 @@ import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UIModule implements Module, ThemeListener {
+public class UI implements Module, ThemeListener {
 
-    private static UIModule instance;
+    private static UI instance;
 
     private Context context;
 
     public static int w, h;
     public static UICoreListener listener;
     public static Mouse mouse;
+    public static boolean timerClick = false;
     public ArrowDrawer arrowDrawer = new AWTArrowDrawer();
     public ArrowTheme arrowTheme = new EtyllicArrowTheme();
 
@@ -41,19 +41,20 @@ public class UIModule implements Module, ThemeListener {
 
     private boolean overClickable = false;
 
-    public List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
-
     public boolean needReload = false;
 
     private boolean locked = false;
 
-    private UIModule() {
+    public List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
+    private static List<View> views = new ArrayList<View>();
+
+    private UI() {
         super();
     }
 
-    public static UIModule getInstance() {
+    public static UI getInstance() {
         if (instance == null) {
-            instance = new UIModule();
+            instance = new UI();
 
             ThemeManager.getInstance().setArrowThemeListener(instance.arrowDrawer);
             ThemeManager.getInstance().setArrowTheme(instance.arrowTheme);
@@ -65,56 +66,50 @@ public class UIModule implements Module, ThemeListener {
 
     public void updateGui(List<View> components) {
         for (GUIEvent event : guiEvents) {
-            updateGuiEvent(components, event);
+            for (View component : components) {
+                updateGuiComponent(component, event);
+            }
         }
 
         guiEvents.clear();
     }
 
-    public void updateGuiEvent(List<View> components, GUIEvent event) {
-        for (View component : components) {
-            updateGuiComponent(component, event);
-        }
-    }
-
     private void updateGuiComponent(View component, GUIEvent event) {
         component.updateEvent(event);
 
-        for (View child : component.getViews()) {
+        for (View child : views) {
             updateGuiComponent(child, event);
         }
     }
 
     public void updateMouseViews(PointerEvent event, List<View> views) {
-
-        for (View component : views) {
-
+        for (View view : views) {
             //Update View
-            updateEvent(component, component.updateMouse(event));
+            updateEvent(view, view.updateMouse(event));
 
             //Update Children
-            updateMouseViews(event, component.getViews());
+            updateMouseViews(event, view.getViews());
         }
     }
 
-    public GUIEvent updateMouse(View component, PointerEvent event) {
+    public GUIEvent updateMouse(View view, PointerEvent event) {
 
-        if (!component.isVisible()) {
+        if (!view.isVisible()) {
             return GUIEvent.NONE;
         }
 
-        GUIEvent result = component.updateMouse(event);
+        GUIEvent result = view.updateMouse(event);
 
         if (GUIEvent.MOUSE_IN == result) {
-            setMouseOver(component);
+            setMouseOver(view);
         } else if (GUIEvent.MOUSE_OUT == result) {
             resetMouseOver();
         } else if (GUIEvent.GAIN_FOCUS == result) {
-            setFocus(component);
+            setFocus(view);
         } else if (GUIEvent.LOST_FOCUS == result) {
-            removeFocus(component);
+            removeFocus(view);
         } else if (result != GUIEvent.NONE && result != null) {
-            updateEvent(component, result);
+            updateEvent(view, result);
         }
 
         return GUIEvent.NONE;
@@ -190,7 +185,7 @@ public class UIModule implements Module, ThemeListener {
                 break;
 
 			/*case ONCE:
-			//this.event (param)
+            //this.event (param)
 			event.setState(KeyState.PRESSED);
 
 			//Prevent consume
@@ -239,19 +234,19 @@ public class UIModule implements Module, ThemeListener {
         overClickable = false;
     }
 
-    private void setFocus(View component) {
+    private void setFocus(View view) {
         if (focus != null) {
             removeFocus(focus);
         }
-        focus = component;
-        component.setOnFocus(true);
-        component.updateEvent(GUIEvent.GAIN_FOCUS);
+        focus = view;
+        view.setOnFocus(true);
+        view.updateEvent(GUIEvent.GAIN_FOCUS);
     }
 
-    private void removeFocus(View component) {
-        if (component == focus) {
-            component.setOnFocus(false);
-            component.updateEvent(GUIEvent.LOST_FOCUS);
+    private void removeFocus(View view) {
+        if (view == focus) {
+            view.setOnFocus(false);
+            view.updateEvent(GUIEvent.LOST_FOCUS);
             focus = null;
         }
     }
@@ -264,23 +259,21 @@ public class UIModule implements Module, ThemeListener {
     }
 
     public void drawCursor(Graphics g) {
-
         arrowDrawer.setCoordinates(mouse.getX(), mouse.getY());
         arrowDrawer.draw(g);
         //Draw Accessible Cursor
-        if (Configuration.getInstance().isTimerClick() && overClickable) {
+        if (timerClick && overClickable) {
             arrowDrawer.drawTimerArc(g, arc);
         }
     }
 
     //Move to ArrowDrawer
     public void updateTimerClick(long now) {
-
         final int speed = 3;
 
         if (mouseOver != null) {
 
-            if (Configuration.getInstance().isTimerClick()) {
+            if (timerClick) {
 
                 if (arc < 360) {
                     arc += speed;
@@ -295,22 +288,22 @@ public class UIModule implements Module, ThemeListener {
 
         } else {
 
-            if (Configuration.getInstance().isTimerClick()) {
+            if (timerClick) {
                 arc = 0;
             }
 
         }
     }
 
-    public void drawUIViews(Graphics g, ViewContainer context) {
-        for (View child : context.getViews()) {
+    public void drawUIViews(Graphics g) {
+        for (View child : views) {
             child.drawWithChildren(g);
         }
     }
 
     @Override
     public void updateMouse(PointerEvent event) {
-        updateMouseViews(event, context.getViews());
+        updateMouseViews(event, views);
     }
 
     public void updateKeyboard(KeyEvent event) {
@@ -337,7 +330,9 @@ public class UIModule implements Module, ThemeListener {
 
     @Override
     public void updateGuiEvent(GUIEvent event) {
-        updateGuiEvent(context.getViews(), event);
+        for (View component : views) {
+            updateGuiComponent(component, event);
+        }
     }
 
     @Override
@@ -354,13 +349,13 @@ public class UIModule implements Module, ThemeListener {
     @Override
     public void draw(Graphics g) {
         if (locked) {
-           return;
+            return;
         }
         //Draw Components
         for (UIComponent component : context.getComponents()) {
             component.draw(g);
         }
-        drawUIViews(g, context);
+        drawUIViews(g);
 
         //Draw Cursor
         if (context.isDrawCursor()) {
@@ -376,14 +371,14 @@ public class UIModule implements Module, ThemeListener {
         }
 
         updateTimerClick(now);
-        updateGui(context.getViews());
+        updateGui(views);
     }
 
     private void fastReload() {
         locked = true;
 
         //Just Rebuild UI Components
-        for (View view : context.getViews()) {
+        for (View view : views) {
             view.rebuild();
         }
 
@@ -393,5 +388,21 @@ public class UIModule implements Module, ThemeListener {
     @Override
     public void updateTheme(Theme theme) {
         needReload = true;
+    }
+
+    public List<View> getViews() {
+        return views;
+    }
+
+    public void setViews(List<View> views) {
+        this.views = views;
+    }
+
+    public static void add(View view) {
+        UI.views.add(view);
+    }
+
+    public static void addAll(List<View> views) {
+        UI.views.addAll(views);
     }
 }

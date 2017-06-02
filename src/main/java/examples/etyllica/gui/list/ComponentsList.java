@@ -3,6 +3,7 @@ package examples.etyllica.gui.list;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.ui.UI;
 import br.com.etyllica.gui.Panel;
 import br.com.etyllica.gui.ScrollView;
 import br.com.etyllica.gui.Select;
@@ -22,7 +23,7 @@ public class ComponentsList extends Application {
 		select.addOption(new Option("pt-br","Portuguese"));
 		select.addOption(new Option("en-us","English"));
 		select.addOption(new Option("es-es","Spanish" ));
-		addView(select);
+        UI.add(select);
 
         Panel panel = new Panel(0,0, 400, 400);
         panel.setOrientation(Orientation.VERTICAL);
@@ -30,7 +31,7 @@ public class ComponentsList extends Application {
 		
 		ScrollView scrollView = new ScrollView(180, 180, 400, 200);
         scrollView.setComponent(panel);
-        addView(scrollView);
+        UI.add(scrollView);
 		
 		/*OptionPanel optionPanel = new OptionPanel(400,40,200,200);
 		

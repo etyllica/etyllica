@@ -52,7 +52,7 @@ public abstract class Theme implements ThemeFactory {
 	protected Color activeColor = new Color(0x22, 0x87, 0x11, 0xa0);
 	
 	protected boolean shadow = true;
-	protected Color shadowColor = Color.WHITE;
+	protected Color shadowColor = new Color(0x33,0x33, 0x33, 0xa0);
 	
 	protected Color barColor = new Color(0x00,0x00, 0x00, 0xa0);
 	protected Color barOnMouseColor = new Color(0x33, 0x33, 0x33, 0xa0);
@@ -62,9 +62,8 @@ public abstract class Theme implements ThemeFactory {
 	protected Color buttonOnFocus = new Color(0x33, 0x33, 0x99, 0xa0);
 	//protected Color buttonOnMouse = new Color(0x33, 0x33, 0x33, 0xa0);
 	//protected Color buttonOnClick = new Color(0x99, 0x99, 0x99, 0xa0);
-	
-	private Color textColor = new Color(0x00, 0x00, 0x00);
-	//protected Color textColor = new Color(0xff, 0xff, 0xff);
+
+	protected Color textColor = new Color(0xff, 0xff, 0xff);
 	protected Color textSelectedColor = new Color(0xff, 0xff, 0xff);
 	protected Color textMarkColor = selectionColor;
 	

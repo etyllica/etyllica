@@ -19,9 +19,9 @@ import br.com.etyllica.core.i18n.LanguageChangerListener;
 import br.com.etyllica.core.i18n.LanguageModule;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
+import br.com.etyllica.core.ui.UI;
 import br.com.etyllica.core.ui.UIComponent;
 import br.com.etyllica.core.ui.UICoreListener;
-import br.com.etyllica.core.ui.UIModule;
 import br.com.etyllica.gui.View;
 import br.com.etyllica.gui.Window;
 
@@ -48,8 +48,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
 
     private Window mainWindow;
 
-    //private boolean drawCursor = true;
-
     private boolean fullScreenEnable = false;
 
     private boolean fixEventPosition = false;
@@ -66,15 +64,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
 
     protected GUIEvent superEvent = GUIEvent.NONE;
 
-    //Create an Arrow Drawer
-    //private ArrowDrawer arrowDrawer;
-
     private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
 
     protected List<Monitor> monitors = new ArrayList<Monitor>();
 
     protected ApplicationLoader applicationLoader;
-    //protected UIModule uiCore;
 
     private List<Module> modules = new ArrayList<Module>();
 
@@ -90,11 +84,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
 
         applicationLoader = new ApplicationLoader(w, h);
 
-        //Setup UIModule
-        UIModule.w = w;
-        UIModule.h = h;
-        UIModule.listener = this;
-        UIModule.mouse = control.getMouse();
+        //Setup UI
+        UI.w = w;
+        UI.h = h;
+        UI.listener = this;
+        UI.mouse = control.getMouse();
 
         initModules();
     }
@@ -102,7 +96,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     //Default Handlers
     private void initModules() {
         modules.add(AnimationModule.getInstance());
-        modules.add(UIModule.getInstance());
+        modules.add(UI.getInstance());
         modules.add(LanguageModule.getInstance());
     }
 
@@ -148,7 +142,12 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         }
 
         List<PointerEvent> events = getMouse().lock();
-        updatePointerEvents(events, application, application.getViews());
+
+        for(PointerEvent event:events) {
+            application.updateMouse(event);
+            updatePointerEvent(event);
+        }
+
         getMouse().unlock();
 
         //updateKeyboard();
@@ -271,20 +270,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         handleApplicationKeyEvents(context, event);
     }
 
-    public void updatePointerEvents(List<PointerEvent> events, Context context, List<View> components) {
-
-        int eventSize = events.size();
-
-        for (int i = 0; i < eventSize; i++) {
-
-            PointerEvent event = events.get(i);
-            context.updateMouse(event);
-
-            //Update Handlers
-            updatePointerEvent(event);
-        }
-    }
-
     public void updatePointerEvent(PointerEvent event) {
 
         if (fixEventPosition) {
@@ -399,7 +384,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
                 disableFullScreen = true;
             }
         }
-
     }
 
     private void updateNumpadMouse(KeyEvent event) {
@@ -592,13 +576,13 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         }
     }
 
-    //TODO Remove UIModule helper methods
+    //TODO Remove UI helper methods
     public boolean isMouseOver() {
-        return UIModule.getInstance().mouseOver != null;
+        return UI.getInstance().mouseOver != null;
     }
 
     public View getMouseOver() {
-        return UIModule.getInstance().mouseOver;
+        return UI.getInstance().mouseOver;
     }
 
     public List<Monitor> getMonitors() {

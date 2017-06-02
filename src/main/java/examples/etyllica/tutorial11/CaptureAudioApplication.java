@@ -2,6 +2,7 @@ package examples.etyllica.tutorial11;
 
 import java.awt.Color;
 
+import br.com.etyllica.core.ui.UI;
 import sound.capture.AudioHandler;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.Action;
@@ -35,19 +36,19 @@ public class CaptureAudioApplication extends Application {
 		final Button capture = new Button(20,20,200,30);
 		capture.setLabel(new TextLabel("Capture"));
 		capture.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new Action(this, "captureAudio"));
-		addView(capture);
+		UI.add(capture);
 
 		stop = new Button(20,60,200,30);
 		stop.setLabel(new TextLabel("Stop Capture"));
 		stop.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new Action(this, "stopCapture"));
 		stop.setDisabled(true);
-		addView(stop);
+		UI.add(stop);
 
 		play = new Button(20,100,200,30);
 		play.setLabel(new TextLabel("Play"));
 		play.addAction(GUIEvent.MOUSE_LEFT_BUTTON_DOWN, new Action(this, "playAudio"));
 		play.setDisabled(true);
-		addView(play);
+		UI.add(play);
 
 	}
 

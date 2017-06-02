@@ -3,6 +3,7 @@ package examples.etyllica.gui.list;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.ui.UI;
 import br.com.etyllica.gui.Panel;
 import br.com.etyllica.gui.Table;
 import br.com.etyllica.gui.table.Row;
@@ -55,8 +56,8 @@ public class TableView extends Application {
 		anotherTable.addRow("F", "descF");
 		
 		panel.add(anotherTable);
-		
-		addView(panel);
+
+		UI.add(panel);
 		
 		loading = 100;
 	}
