@@ -82,9 +82,9 @@ public abstract class EtyllicaApplet extends Applet implements EtyllicaFrame {
 	}
 
 	private void addModules() {
-		core.addModule(AnimationModule.getInstance());
-		core.addModule(UI.getInstance());
-		core.addModule(LanguageModule.getInstance());
+		addModule(AnimationModule.getInstance());
+		addModule(UI.getInstance());
+		addModule(LanguageModule.getInstance());
 	}
 
 	protected void initialSetup(String suffix) {

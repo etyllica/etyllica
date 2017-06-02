@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.etyllica.awt.AWTWindow;
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.core.Updatable;
 import br.com.etyllica.core.context.load.ApplicationLoadListener;
@@ -21,7 +22,6 @@ import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
 import br.com.etyllica.core.ui.UIComponent;
 import br.com.etyllica.core.ui.UIResizableComponent;
-import br.com.etyllica.ui.Window;
 import br.com.etyllica.layer.Layer;
 
 /**
@@ -124,7 +124,7 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 
 	private LanguageChangerListener languageChangerListener;
 
-	protected Window parent;
+	protected AWTWindow parent;
 
 	/**
 	 * Returned Application (next Application to show up)
@@ -369,7 +369,7 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 		return activeCenterMouse;
 	}
 
-	public void setParent(Window window) {
+	public void setParent(AWTWindow window) {
 		this.parent = window;
 		setSession(window.getSession());
 		setCamera(window.getCamera());

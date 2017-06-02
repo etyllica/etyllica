@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 
 import br.com.etyllica.awt.AWTGraphics;
 import br.com.etyllica.awt.FullScreenWindow;
+import br.com.etyllica.awt.AWTWindow;
 import br.com.etyllica.awt.core.input.AWTKeyboard;
 import br.com.etyllica.core.InnerCore;
 import br.com.etyllica.core.collision.CollisionDetector;
@@ -31,7 +32,6 @@ import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.loop.FrameSkippingLoop;
 import br.com.etyllica.core.loop.GameLoop;
 import br.com.etyllica.effects.GenericFullScreenEffect;
-import br.com.etyllica.ui.Window;
 import br.com.etyllica.loader.Loader;
 import br.com.etyllica.util.io.IOHelper;
 
@@ -51,7 +51,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 
 	private java.awt.Component component;
 
-	private Window window;
+	private AWTWindow window;
 
 	private VolatileImage volatileImage;
 
@@ -62,8 +62,6 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 	private FullScreenWindow fullScreen = null;
 
 	private EtyllicaFrame engine;
-
-	private boolean running = true;
 
 	private GameLoop gameLoop;
 
@@ -87,7 +85,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 		initMonitors(width, height);
 		moveToCenter();
 
-		window = new Window(component.getX(), component.getY(), width, height);
+		window = new AWTWindow(component.getX(), component.getY(), width, height);
 		window.setSessionMap(new Session());
 		window.setComponent(component);
 
@@ -338,12 +336,6 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 	private void updateEngine(double delta) {
 		GUIEvent event = getSuperEvent();
 		engine.updateSuperEvent(event);
-	}
-
-	@Override
-	public boolean isRunning() {
-
-		return running;
 	}
 
 	@Override

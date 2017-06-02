@@ -1,5 +1,6 @@
 package br.com.etyllica.core;
 
+import br.com.etyllica.awt.AWTWindow;
 import br.com.etyllica.awt.core.input.AWTController;
 import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.animation.script.AnimationScript;
@@ -22,7 +23,6 @@ import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.ui.UI;
 import br.com.etyllica.core.ui.UIComponent;
 import br.com.etyllica.ui.View;
-import br.com.etyllica.ui.Window;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     private static final int TITLE_BAR_HEIGHT = 50;
 
     //External Windows
-    private Window activeWindow = null;
+    private AWTWindow activeWindow = null;
 
     protected AWTController control;
 
@@ -45,7 +45,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
 
     //private List<KeyEvent> joyEvents;
 
-    private Window mainWindow;
+    private AWTWindow mainWindow;
 
     private boolean fullScreenEnable = false;
 
@@ -60,6 +60,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     private boolean alt = false;
     private boolean enter = false;
     private boolean esc = false;
+    
+    protected boolean running = true;
 
     protected GUIEvent superEvent = GUIEvent.NONE;
 
@@ -82,7 +84,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         applicationLoader = new ApplicationLoader(w, h);
     }
 
-    public Window getWindow() {
+    public AWTWindow getWindow() {
         return mainWindow;
     }
 
@@ -204,14 +206,14 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
 
     private void updateActiveWindow(long now) {
 
-        List<Window> windows = activeWindow.getWindows();
+        List<AWTWindow> windows = activeWindow.getWindows();
 
         //Creating Windows
         //if application has windows
         if (!windows.isEmpty()) {
 
             //For each new window in application.windows
-            for (Window window : windows) {
+            for (AWTWindow window : windows) {
                 //if this !windows.contains(window)
                 replaceWindow(window);
             }
@@ -257,7 +259,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     }
 
 
-    private void updateWindowEvent(PointerEvent event, Window window) {
+    private void updateWindowEvent(PointerEvent event, AWTWindow window) {
 
         GUIEvent frameEvent = updateFrameEvents(event);
 
@@ -434,7 +436,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         return GUIEvent.NONE;
     }
 
-    public void replaceWindow(Window window) {
+    public void replaceWindow(AWTWindow window) {
 
         if (activeWindow != window) {
 
@@ -595,4 +597,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         this.keyboard = keyboard;
     }
 
+	public boolean isRunning() {
+		return running;
+	}    
+    
 }

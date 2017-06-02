@@ -1,4 +1,4 @@
-package br.com.etyllica.ui;
+package br.com.etyllica.awt;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import br.com.etyllica.layer.GeometricLayer;
  *
  */
 
-public class Window extends GeometricLayer implements ContextContainer {
+public class AWTWindow extends GeometricLayer implements ContextContainer {
 	
 	private java.awt.Component component;
 	
@@ -31,13 +31,13 @@ public class Window extends GeometricLayer implements ContextContainer {
 
 	protected boolean close = false;
 	
-	private List<Window> windows = new ArrayList<Window>();
+	private List<AWTWindow> windows = new ArrayList<AWTWindow>();
 		
-	public Window(int w, int h) {
+	public AWTWindow(int w, int h) {
 		this(0,0,w,h);
 	}		
 	
-	public Window(int x, int y, int w, int h) {
+	public AWTWindow(int x, int y, int w, int h) {
 		super(x,y,w,h);
 		
 		camera = new Camera(x, y, w, h);
@@ -67,11 +67,11 @@ public class Window extends GeometricLayer implements ContextContainer {
 		this.close = close;
 	}
 
-	public List<Window> getWindows() {
+	public List<AWTWindow> getWindows() {
 		return windows;
 	}
 
-	public void setWindows(List<Window> windows) {
+	public void setWindows(List<AWTWindow> windows) {
 		this.windows = windows;
 	}
 	

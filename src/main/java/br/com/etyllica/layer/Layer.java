@@ -88,9 +88,10 @@ public class Layer extends GeometricLayer implements Drawable {
 	}
 
 	/**
-	 * 
-	 * @param origin
-	 */
+	 *
+	 * @param originX
+	 * @param originY
+     */
 	public void setOrigin(float originX, float originY) {
 		this.originX = originX;
 		this.originY = originY;
