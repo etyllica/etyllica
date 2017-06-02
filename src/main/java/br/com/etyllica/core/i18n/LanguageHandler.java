@@ -1,7 +1,7 @@
 package br.com.etyllica.core.i18n;
 
-import br.com.etyllica.gui.theme.Theme;
-import br.com.etyllica.gui.theme.ThemeManager;
+import br.com.etyllica.ui.theme.Theme;
+import br.com.etyllica.ui.theme.ThemeManager;
 
 public class LanguageHandler implements LanguageChangerListener {
 

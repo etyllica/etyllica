@@ -21,9 +21,7 @@ import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
 import br.com.etyllica.core.ui.UIComponent;
 import br.com.etyllica.core.ui.UIResizableComponent;
-import br.com.etyllica.core.ui.ViewContainer;
-import br.com.etyllica.gui.View;
-import br.com.etyllica.gui.Window;
+import br.com.etyllica.ui.Window;
 import br.com.etyllica.layer.Layer;
 
 /**
@@ -33,7 +31,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public abstract class Context extends Layer implements ViewContainer, UIResizableComponent, Updatable, MouseStateChanger, LanguageChanger, DropTarget {
+public abstract class Context extends Layer implements UIResizableComponent, Updatable, MouseStateChanger, LanguageChanger, DropTarget {
 
 	private static final ApplicationLoadListener DUMMY_LOAD_LISTENER = new ApplicationLoadListener() {
 		@Override
@@ -139,7 +137,6 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 
 	private boolean drawCursor = true;
 
-	protected List<View> views = new ArrayList<View>();
 	protected List<UIComponent> components = new ArrayList<UIComponent>();
 
 	/**
@@ -384,18 +381,6 @@ public abstract class Context extends Layer implements ViewContainer, UIResizabl
 
 	public void setLoaded(boolean loaded) {
 		this.loaded = loaded;
-	}
-
-	public List<View> getViews() {
-		return views;
-	}
-
-	public void setViews(List<View> views) {
-		this.views = views;
-	}
-
-	public void addView(View view) {
-		this.views.add(view);
 	}
 
 	public Color getBackgroundColor() {

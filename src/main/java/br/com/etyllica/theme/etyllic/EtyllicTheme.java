@@ -1,7 +1,7 @@
 package br.com.etyllica.theme.etyllic;
 
-import br.com.etyllica.gui.base.*;
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.ui.base.*;
+import br.com.etyllica.ui.theme.Theme;
 import br.com.etyllica.theme.etyllic.components.EtyllicCheckBox;
 
 public class EtyllicTheme extends Theme {

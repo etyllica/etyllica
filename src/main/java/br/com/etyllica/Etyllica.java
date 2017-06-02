@@ -8,11 +8,15 @@ import javax.swing.JFrame;
 import br.com.etyllica.awt.core.AWTCore;
 import br.com.etyllica.awt.engine.AWTEngine;
 import br.com.etyllica.core.Engine;
+import br.com.etyllica.core.Module;
+import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.engine.EtyllicaFrame;
 import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.core.i18n.LanguageModule;
 import br.com.etyllica.loader.Loader;
 import br.com.etyllica.loader.image.ImageLoader;
+import br.com.etyllica.ui.UI;
 import br.com.etyllica.util.PathHelper;
 
 /**
@@ -45,6 +49,7 @@ public abstract class Etyllica extends JFrame implements EtyllicaFrame {
 	
 	public void init(String path) {
 		initCore();
+		addModules();
 		setPath(path);
 
 		this.application = startApplication();
@@ -56,6 +61,7 @@ public abstract class Etyllica extends JFrame implements EtyllicaFrame {
 	@Override
 	public void init() {
 		initCore();
+		addModules();
 		initialSetup("");
 		
 		this.application = startApplication();
@@ -70,12 +76,22 @@ public abstract class Etyllica extends JFrame implements EtyllicaFrame {
 		core = engine.getCore();
 		core.setEngine(this);
 	}
-	
+
 	private void startCore() {
 		core.startCore(application);
 		core.startEngine();
 		
 		addComponentListener(core);
+	}
+
+	protected void addModule(Module module) {
+		core.addModule(module);
+	}
+
+	private void addModules() {
+		core.addModule(AnimationModule.getInstance());
+		core.addModule(UI.getInstance());
+		core.addModule(LanguageModule.getInstance());
 	}
 
 	protected void initialSetup(String suffix) {

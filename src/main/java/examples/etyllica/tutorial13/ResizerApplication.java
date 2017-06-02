@@ -8,7 +8,7 @@ import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.selection.Resizer;
+import br.com.etyllica.ui.selection.Resizer;
 import br.com.etyllica.layer.Layer;
 
 public class ResizerApplication extends Application {

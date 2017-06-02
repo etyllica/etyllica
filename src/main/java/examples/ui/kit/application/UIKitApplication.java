@@ -1,11 +1,11 @@
 package examples.ui.kit.application;
 
 import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.Button;
-import br.com.etyllica.gui.Slider;
-import br.com.etyllica.gui.label.TextLabel;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Button;
+import br.com.etyllica.ui.Slider;
+import br.com.etyllica.ui.label.TextLabel;
 
 public class UIKitApplication extends Application {
 
@@ -23,9 +23,9 @@ public class UIKitApplication extends Application {
 
         Slider slider = new Slider(20, 110, 190, 30);
 
-        addView(button);
-        addView(disabledButton);
-        addView(slider);
+        UI.add(button);
+        UI.add(disabledButton);
+        UI.add(slider);
     }
 
     @Override

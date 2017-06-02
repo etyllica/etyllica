@@ -1,7 +1,7 @@
 package br.com.etyllica.theme.etyllic;
 
-import br.com.etyllica.gui.theme.cursor.ArrowThemeImpl;
-import br.com.etyllica.gui.theme.cursor.arrow.MouseArrow;
+import br.com.etyllica.ui.theme.cursor.ArrowThemeImpl;
+import br.com.etyllica.ui.theme.cursor.arrow.MouseArrow;
 import br.com.etyllica.theme.etyllic.arrow.DiagonalArrow;
 import br.com.etyllica.theme.etyllic.arrow.HorizontalArrow;
 import br.com.etyllica.theme.etyllic.arrow.InvertedDiagonalArrow;

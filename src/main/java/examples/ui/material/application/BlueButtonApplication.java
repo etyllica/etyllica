@@ -2,13 +2,13 @@ package examples.ui.material.application;
 
 import java.awt.Font;
 
-import br.com.etyllica.awt.ColorHelper;
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.label.TextLabel;
-import br.com.etyllica.gui.theme.ThemeManager;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.label.TextLabel;
+import br.com.etyllica.ui.theme.ThemeManager;
 import examples.ui.material.application.model.MaterialButton;
 
 public class BlueButtonApplication extends Application {
@@ -36,7 +36,7 @@ public class BlueButtonApplication extends Application {
 		
 		button = new MaterialButton(bx, by, bw, bh);
 		button.setLabel(label);
-		addView(button);
+		UI.add(button);
 	}
 
 	@Override

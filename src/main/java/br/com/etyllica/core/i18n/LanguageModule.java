@@ -6,8 +6,8 @@ import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.theme.Theme;
-import br.com.etyllica.gui.theme.ThemeManager;
+import br.com.etyllica.ui.theme.Theme;
+import br.com.etyllica.ui.theme.ThemeManager;
 
 public class LanguageModule implements Module {
 

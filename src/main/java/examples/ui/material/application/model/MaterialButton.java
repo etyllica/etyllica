@@ -3,8 +3,8 @@ package examples.ui.material.application.model;
 import br.com.etyllica.awt.ColorHelper;
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.base.BaseButton;
-import br.com.etyllica.gui.theme.Theme;
+import br.com.etyllica.ui.base.BaseButton;
+import br.com.etyllica.ui.theme.Theme;
 
 import java.awt.*;
 

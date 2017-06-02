@@ -4,8 +4,9 @@ import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.core.animation.script.HorizontalMovementScript;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.Button;
-import br.com.etyllica.gui.label.TextLabel;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Button;
+import br.com.etyllica.ui.label.TextLabel;
 
 public class AnimatedMenu extends Application{
 	
@@ -52,12 +53,9 @@ public class AnimatedMenu extends Application{
 		button2 = new Button(w/2-buttonW/2, button1.getY()+buttonH+offset, buttonW, buttonH);
 		
 		button2.setLabel(new TextLabel("Button2"));
-		
 
-		addView(button1);
-		
-		addView(button2);
-		
+		UI.add(button1);
+		UI.add(button2);
 	}
 
 	@Override

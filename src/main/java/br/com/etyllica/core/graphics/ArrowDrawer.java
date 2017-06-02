@@ -2,7 +2,7 @@ package br.com.etyllica.core.graphics;
 
 import br.com.etyllica.core.Drawable;
 import br.com.etyllica.core.input.mouse.MouseStateListener;
-import br.com.etyllica.gui.theme.listener.ArrowThemeListener;
+import br.com.etyllica.ui.theme.listener.ArrowThemeListener;
 
 
 public interface ArrowDrawer extends MouseStateListener, Drawable, ArrowThemeListener {

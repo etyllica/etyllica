@@ -5,7 +5,7 @@ import java.awt.Color;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.Window;
+import br.com.etyllica.ui.Window;
 import examples.ui.simple.UIExample.BackgroundColorChangerApplication;
 
 public class SubWindowExample extends Application {

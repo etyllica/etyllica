@@ -5,7 +5,8 @@ import java.awt.Color;
 
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.Slider;
+import br.com.etyllica.ui.UI;
+import br.com.etyllica.ui.Slider;
 
 public class SliderExample extends Application {
 
@@ -20,7 +21,7 @@ public class SliderExample extends Application {
 		slider = new Slider(120, 120, 100, 32);
 		slider.setMinValue(0);
 		slider.setMaxValue(255);
-		addView(slider);
+		UI.add(slider);
 		
 		loading = 100;
 	}

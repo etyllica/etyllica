@@ -1,9 +1,8 @@
 package br.com.etyllica.awt;
 
 import java.awt.Frame;
-import java.util.ArrayList;
-import java.util.List;
 
+import br.com.etyllica.ui.UI;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +13,8 @@ import br.com.etyllica.core.event.MouseEvent;
 import br.com.etyllica.core.event.PointerEvent;
 import br.com.etyllica.core.event.PointerState;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.gui.View;
-import br.com.etyllica.gui.Window;
-import br.com.etyllica.gui.base.BaseButton;
+import br.com.etyllica.ui.Window;
+import br.com.etyllica.ui.base.BaseButton;
 
 public class AWTCoreTest {
 
@@ -28,7 +26,6 @@ public class AWTCoreTest {
 
 	@Before
 	public void setUp() {
-				
 		Window window = new Window(0, 0, 800,600);
 		
 		fakeApplication = createFakeApplication();
@@ -41,7 +38,7 @@ public class AWTCoreTest {
 		
 		button = new BaseButton(0, 0, 100, 20);
 
-		fakeApplication.getViews().add(button);
+		UI.add(button);
 	}
 
 	public Application createFakeApplication() {
