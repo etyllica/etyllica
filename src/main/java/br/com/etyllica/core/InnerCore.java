@@ -127,7 +127,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
 
         List<PointerEvent> events = getMouse().lock();
 
-        for(PointerEvent event:events) {
+        for (PointerEvent event : events) {
             application.updateMouse(event);
             updatePointerEvent(event);
         }

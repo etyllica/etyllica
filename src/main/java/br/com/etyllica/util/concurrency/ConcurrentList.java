@@ -34,9 +34,10 @@ public class ConcurrentList<T> {
 	}
 	
 	public List<T> lock() {
-		alternativeList.clear();
+		alternativeList = new ArrayList<T>();
 		locked = true;
-		return list;
+		List<T> temp = new ArrayList<>(list);
+		return temp;
 	}
 	
 	public void unlock() {
