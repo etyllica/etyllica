@@ -1,6 +1,7 @@
 package examples.ui.kit;
 
 import br.com.etyllica.Etyllica;
+import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.core.context.Application;
 import br.com.etyllica.gui.theme.ThemeManager;
 import br.com.etyllica.theme.etyllic.EtyllicTheme;
@@ -23,8 +24,11 @@ public class UIKitExample extends Etyllica {
 
 	@Override
 	public Application startApplication() {
-		//ThemeManager.getInstance().setTheme(new EtyllicTheme());
-		ThemeManager.getInstance().setTheme(new MaterialTheme());
+		ThemeManager.getInstance().setTheme(new EtyllicTheme());
+		//ThemeManager.getInstance().setTheme(new MaterialTheme());
+		ThemeManager.getInstance().getTheme().setShadow(false);
+		ThemeManager.getInstance().getTheme().setBaseColor(SVGColor.DEEP_SKY_BLUE);
+		ThemeManager.getInstance().getTheme().setTextColor(SVGColor.WHITE);
 
 		return new UIKitApplication(w,h);
 	}
