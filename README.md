@@ -1,6 +1,6 @@
 ![Etyllica Logo](https://github.com/yuripourre/etyllica/blob/master/assets/images/etyllica_logo.png?raw=true) 
 
-### Current Version: 5.3.0 [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
+### Current Version: 5.5.0 [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
 
 ### [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games really fast.
 
@@ -61,7 +61,7 @@
 
 ## Dependencies (optional)
 
-If you don't need Sound nor Physics, you just have to include the [etyllica-5.2.0.jar](https://github.com/etyllica/etyllica/releases/download/v5.2.0/etyllica-5.2.0.jar) (stable version with 351kB)
+If you don't need Sound nor Physics, you just have to include the [etyllica-5.5.0.jar](https://github.com/etyllica/etyllica/releases/download/v5.2.0/etyllica-5.5.0.jar) (stable version with 351kB)
 
 - [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library made by [Paul Lamb](http://www.paulscode.com))
 - [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0) (Audio Codecs made by [Paul Lamb](http://www.paulscode.com))
@@ -75,13 +75,13 @@ You can follow the [HelloWorld](https://github.com/yuripourre/etyllica/wiki/Hell
 <dependency>
   <groupId>br.com.etyllica</groupId>
   <artifactId>etyllica</artifactId>
-  <version>5.2.0</version>
+  <version>5.5.0</version>
 </dependency>
 ```
 
 ## Gradle Integration
 ```
-compile group: 'br.com.etyllica', name: 'etyllica', version: '5.2.0'
+compile group: 'br.com.etyllica', name: 'etyllica', version: '5.5.0'
 ```
 
 ## License
