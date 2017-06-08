@@ -1,6 +1,5 @@
 package br.com.etyllica.linear;
 
-import br.com.etyllica.core.linear.Point2D;
 import br.com.etyllica.util.math.EtyllicaMath;
 
 public class Ellipse {

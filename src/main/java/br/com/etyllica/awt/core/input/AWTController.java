@@ -1,7 +1,6 @@
 package br.com.etyllica.awt.core.input;
 
-import br.com.etyllica.core.Module;
-import br.com.etyllica.core.event.KeyEventListener;
+import br.com.etyllica.commons.event.KeyEventListener;
 import br.com.etyllica.core.input.HIDController;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;

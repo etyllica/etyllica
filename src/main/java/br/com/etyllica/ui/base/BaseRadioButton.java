@@ -1,7 +1,7 @@
 package br.com.etyllica.ui.base;
 
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.event.GUIEvent;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.ui.RadioGroup;
 import br.com.etyllica.ui.label.BaseRadioLabel;
 

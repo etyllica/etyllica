@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import br.com.etyllica.core.context.Context;
+import br.com.etyllica.commons.context.Context;
 
 public class AWTDragAndDrop implements DropTargetListener {
 

@@ -3,8 +3,8 @@ package br.com.etyllica.ui.base;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.KeyState;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.event.KeyState;
 import br.com.etyllica.ui.textfield.TextFieldView;
 
 public class BaseTextFieldTest {

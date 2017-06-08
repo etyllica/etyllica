@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.KeyState;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.event.KeyState;
 
 /**
  * Joystick abstraction (works only on Linux)

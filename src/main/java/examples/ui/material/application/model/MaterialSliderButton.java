@@ -1,6 +1,6 @@
 package examples.ui.material.application.model;
 
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.ui.base.BaseButton;
 
 import java.awt.*;

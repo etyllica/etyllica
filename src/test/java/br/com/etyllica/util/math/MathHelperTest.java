@@ -7,8 +7,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.etyllica.core.linear.Triangle;
-import br.com.etyllica.util.math.MathHelper;
+import br.com.etyllica.linear.Triangle;
 
 import com.badlogic.gdx.math.Vector3;
 

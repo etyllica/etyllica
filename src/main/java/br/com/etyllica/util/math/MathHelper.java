@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import br.com.etyllica.core.linear.Triangle;
+import br.com.etyllica.linear.Triangle;
 
 import com.badlogic.gdx.math.Vector3;
 

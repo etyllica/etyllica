@@ -2,7 +2,7 @@ package examples.sound;
 
 import sound.MultimediaLoader;
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 import examples.sound.application.SyntheticAudioApplication;
 
 public class SoundExample extends Etyllica {

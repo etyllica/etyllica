@@ -7,9 +7,9 @@ import java.util.List;
 
 import javax.swing.event.MouseInputListener;
 
-import br.com.etyllica.core.event.MouseEvent;
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.PointerState;
+import br.com.etyllica.commons.event.MouseEvent;
+import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.event.PointerState;
 import br.com.etyllica.util.concurrency.ConcurrentList;
 
 /**

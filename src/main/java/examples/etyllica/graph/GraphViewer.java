@@ -1,6 +1,6 @@
 package examples.etyllica.graph;
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 import examples.etyllica.graph.view.SimpleGraphExample;
 
 public class GraphViewer extends Etyllica {

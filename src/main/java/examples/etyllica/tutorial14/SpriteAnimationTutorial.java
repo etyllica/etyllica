@@ -1,9 +1,9 @@
 package examples.etyllica.tutorial14;
 
 
-import br.com.etyllica.core.animation.script.FrameAnimation;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.animation.script.FrameAnimation;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.layer.AnimatedLayer;
 
 public class SpriteAnimationTutorial extends Application{

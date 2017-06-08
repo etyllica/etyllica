@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.KeyEventListener;
-import br.com.etyllica.core.event.KeyState;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.event.KeyEventListener;
+import br.com.etyllica.commons.event.KeyState;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.util.concurrency.ConcurrentList;
 import br.com.etyllica.util.concurrency.ConcurrentSet;

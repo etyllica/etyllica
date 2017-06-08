@@ -3,7 +3,7 @@ package br.com.etyllica.ui;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.ui.style.Orientation;
 
 /**

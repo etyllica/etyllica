@@ -3,9 +3,9 @@ package examples.ui.material.application;
 import java.awt.Font;
 
 import br.com.etyllica.awt.SVGColor;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.ui.UI;
 import br.com.etyllica.ui.label.TextLabel;
 import br.com.etyllica.ui.theme.ThemeManager;

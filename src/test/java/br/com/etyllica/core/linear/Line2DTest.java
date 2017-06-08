@@ -3,8 +3,8 @@ package br.com.etyllica.core.linear;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.etyllica.core.linear.Line2D;
-import br.com.etyllica.core.linear.Point2D;
+import br.com.etyllica.linear.Line2D;
+import br.com.etyllica.linear.Point2D;
 
 public class Line2DTest {
 	

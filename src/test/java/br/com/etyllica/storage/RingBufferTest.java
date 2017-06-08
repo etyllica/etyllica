@@ -4,8 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.storage.RingBuffer;
+import br.com.etyllica.commons.event.PointerEvent;
 
 public class RingBufferTest {
 

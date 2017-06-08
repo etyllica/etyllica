@@ -2,9 +2,9 @@ package br.com.etyllica.ui.label;
 
 import java.util.Map;
 
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.i18n.Language;
-import br.com.etyllica.core.i18n.LanguageModule;
+import br.com.etyllica.commons.event.GUIEvent;
+import br.com.etyllica.i18n.Language;
+import br.com.etyllica.i18n.LanguageModule;
 
 /**
  * 

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.cinematics.Camera;
-import br.com.etyllica.core.context.Context;
-import br.com.etyllica.core.context.ContextContainer;
-import br.com.etyllica.core.context.Session;
+import br.com.etyllica.commons.context.Context;
+import br.com.etyllica.commons.context.ContextContainer;
+import br.com.etyllica.commons.context.Session;
 import br.com.etyllica.layer.GeometricLayer;
 
 /**

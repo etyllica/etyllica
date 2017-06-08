@@ -1,6 +1,6 @@
 package br.com.etyllica.layer;
 
-import br.com.etyllica.loader.image.ImageLoader;
+import br.com.etyllica.core.loader.image.ImageLoader;
 
 /**
  * 

@@ -3,8 +3,8 @@ package examples.etyllica.tutorial12;
 import java.awt.Color;
 
 import br.com.etyllica.animation.timer.Timer;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.graphics.Graphics;
 
 /**
  * 

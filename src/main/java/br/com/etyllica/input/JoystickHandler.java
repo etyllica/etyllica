@@ -11,10 +11,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import br.com.etyllica.core.Updatable;
-import br.com.etyllica.core.event.KeyEventListener;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.loader.LoaderImpl;
+import br.com.etyllica.commons.Updatable;
+import br.com.etyllica.commons.event.KeyEventListener;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.core.loader.LoaderImpl;
 
 /**
  * 

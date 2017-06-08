@@ -1,14 +1,14 @@
 package br.com.etyllica.ui;
 
 import br.com.etyllica.awt.AWTArrowDrawer;
-import br.com.etyllica.core.Module;
-import br.com.etyllica.core.context.Context;
-import br.com.etyllica.core.event.*;
-import br.com.etyllica.core.graphics.ArrowDrawer;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.Module;
+import br.com.etyllica.commons.context.Context;
+import br.com.etyllica.commons.event.*;
+import br.com.etyllica.ui.theme.ArrowDrawer;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.ui.theme.Theme;
 import br.com.etyllica.ui.theme.ThemeManager;
-import br.com.etyllica.ui.theme.cursor.ArrowTheme;
+import br.com.etyllica.ui.theme.ArrowTheme;
 import br.com.etyllica.ui.theme.listener.ThemeListener;
 import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;
 

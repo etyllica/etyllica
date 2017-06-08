@@ -1,8 +1,8 @@
 package br.com.etyllica.core.input.joystick;
 
-import br.com.etyllica.core.event.MouseEvent;
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.linear.Point2D;
+import br.com.etyllica.commons.event.MouseEvent;
+import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.linear.Point2D;
 import br.com.etyllica.layer.Layer;
 
 public class TouchJoystick {

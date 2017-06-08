@@ -1,8 +1,7 @@
 package br.com.etyllica.effects.light;
 
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.graphics.Graphics;
 
 public interface LightSpot {
-
-	public void drawLight(Graphics g);	
+    void drawLight(Graphics g);
 }

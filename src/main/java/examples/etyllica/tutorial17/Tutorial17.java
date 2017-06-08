@@ -1,7 +1,7 @@
 package examples.etyllica.tutorial17;
 
 import br.com.etyllica.EtyllicaApplet;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 
 public class Tutorial17 extends EtyllicaApplet {
 

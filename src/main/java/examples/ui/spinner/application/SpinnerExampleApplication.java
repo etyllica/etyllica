@@ -3,8 +3,8 @@ package examples.ui.spinner.application;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.ui.UI;
 import br.com.etyllica.ui.spinner.IntegerSpinner;
 import br.com.etyllica.ui.spinner.StringSpinner;

@@ -2,10 +2,10 @@ package examples.etyllica.tutorial22;
 
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.cinematics.Camera;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.context.UpdateIntervalListener;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.layer.GeometricLayer;
 
 public class SplitCameraApplication extends Application implements UpdateIntervalListener {

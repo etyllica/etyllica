@@ -2,9 +2,9 @@ package examples.etyllica.tutorial21;
 
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.cinematics.parallax.ImageParallax;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.context.UpdateIntervalListener;
+import br.com.etyllica.commons.graphics.Graphics;
 
 public class ParallaxApplication extends Application implements UpdateIntervalListener {
 	

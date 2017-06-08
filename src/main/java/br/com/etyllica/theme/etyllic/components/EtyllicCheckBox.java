@@ -1,6 +1,6 @@
 package br.com.etyllica.theme.etyllic.components;
 
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.ui.base.BaseCheckBox;
 
 /**

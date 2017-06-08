@@ -2,7 +2,7 @@ package br.com.etyllica.ui.label;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.ui.Label;
 
 public class ColorLabel extends Label {

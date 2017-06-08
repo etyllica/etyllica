@@ -1,7 +1,7 @@
 package examples.etyllica.tutorial01;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 
 public class Tutorial1 extends Etyllica {
 

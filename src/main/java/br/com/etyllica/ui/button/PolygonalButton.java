@@ -2,8 +2,8 @@ package br.com.etyllica.ui.button;
 
 import java.awt.Polygon;
 
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.event.GUIEvent;
+import br.com.etyllica.commons.graphics.Graphics;
 import br.com.etyllica.ui.base.BaseButton;
 import br.com.etyllica.ui.theme.Theme;
 

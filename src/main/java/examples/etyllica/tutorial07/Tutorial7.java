@@ -1,7 +1,7 @@
 package examples.etyllica.tutorial07;
 
 import br.com.etyllica.EtyllicaApplet;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 import examples.etyllica.tutorial07.application.AnimationExample;
 
 /**

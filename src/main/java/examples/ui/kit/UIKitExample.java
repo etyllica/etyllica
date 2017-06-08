@@ -2,7 +2,7 @@ package examples.ui.kit;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.awt.SVGColor;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.ui.theme.ThemeManager;
 import br.com.etyllica.theme.etyllic.EtyllicTheme;
 import examples.ui.kit.application.UIKitApplication;

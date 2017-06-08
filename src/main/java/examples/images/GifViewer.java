@@ -1,7 +1,7 @@
 package examples.images;
 
 import br.com.etyllica.EtyllicaApplet;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 
 public class GifViewer extends EtyllicaApplet {
 

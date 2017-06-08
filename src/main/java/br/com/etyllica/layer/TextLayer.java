@@ -9,8 +9,8 @@ import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
-import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.loader.FontLoader;
+import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.loader.FontLoader;
 
 /**
  * 

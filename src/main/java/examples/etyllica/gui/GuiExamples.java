@@ -1,11 +1,7 @@
 package examples.etyllica.gui;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.context.Application;
-import examples.etyllica.gui.list.ComponentsList;
-import examples.etyllica.gui.list.TableView;
-import examples.etyllica.gui.simple.GeneralGuiExample;
-import examples.etyllica.gui.textfield.TextFieldExample;
+import br.com.etyllica.commons.context.Application;
 import examples.etyllica.gui.textview.TextViewExample;
 
 /**

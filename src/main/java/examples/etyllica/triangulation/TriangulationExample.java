@@ -1,7 +1,6 @@
 package examples.etyllica.triangulation;
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.context.Application;
-import examples.etyllica.procedural.application.DiceApplication;
+import br.com.etyllica.commons.context.Application;
 
 
 public class TriangulationExample extends Etyllica {

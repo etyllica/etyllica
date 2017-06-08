@@ -2,10 +2,10 @@ package examples.fx.application;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.effect.Effect;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.effect.Effect;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.graphics.Graphics;
 
 public class LightningApplication extends Application{
 

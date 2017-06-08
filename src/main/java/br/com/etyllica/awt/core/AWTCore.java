@@ -23,16 +23,16 @@ import br.com.etyllica.awt.FullScreenWindow;
 import br.com.etyllica.awt.AWTWindow;
 import br.com.etyllica.awt.core.input.AWTKeyboard;
 import br.com.etyllica.core.InnerCore;
-import br.com.etyllica.core.collision.CollisionDetector;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.context.Session;
-import br.com.etyllica.core.engine.EtyllicaFrame;
-import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.commons.collision.CollisionDetector;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.context.Session;
+import br.com.etyllica.core.EtyllicaFrame;
+import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.loop.FrameSkippingLoop;
 import br.com.etyllica.core.loop.GameLoop;
 import br.com.etyllica.effects.GenericFullScreenEffect;
-import br.com.etyllica.loader.Loader;
+import br.com.etyllica.core.loader.Loader;
 import br.com.etyllica.util.io.IOHelper;
 
 /**

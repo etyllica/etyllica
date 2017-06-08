@@ -1,6 +1,6 @@
 package br.com.etyllica.core.input.mouse;
 
-import br.com.etyllica.core.event.MouseState;
+import br.com.etyllica.commons.event.MouseState;
 
 public interface MouseStateChanger {
 
