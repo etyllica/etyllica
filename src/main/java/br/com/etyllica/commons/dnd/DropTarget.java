@@ -1,4 +1,4 @@
-package br.com.etyllica.core.dnd;
+package br.com.etyllica.commons.dnd;
 
 import java.io.File;
 import java.util.List;

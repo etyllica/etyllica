@@ -42,6 +42,8 @@ import br.com.etyllica.util.io.IOHelper;
  */
 public class AWTCore extends InnerCore implements Runnable, java.awt.event.ComponentListener {
 
+	public static final String COMPONENT = "COMPONENT";
+
 	private int width;
 	private int height;
 
@@ -85,8 +87,11 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 		initMonitors(width, height);
 		moveToCenter();
 
+		Session session = new Session();
+		session.put(COMPONENT, component);
+
 		window = new AWTWindow(component.getX(), component.getY(), width, height);
-		window.setSessionMap(new Session());
+		window.setSessionMap(session);
 		window.setComponent(component);
 
 		gameLoop = new FrameSkippingLoop(this);

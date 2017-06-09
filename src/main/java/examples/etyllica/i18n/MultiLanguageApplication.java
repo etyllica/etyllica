@@ -77,13 +77,13 @@ public class MultiLanguageApplication extends Application {
 	public void updateKeyboard(KeyEvent event) {
 
 		if(event.isKeyDown(KeyEvent.VK_1)) {
-			changeLanguage(Language.PORTUGUESE_BRAZIL);
+			UI.changeLanguage(Language.PORTUGUESE_BRAZIL);
 		}
 		if(event.isKeyDown(KeyEvent.VK_2)) {
-			changeLanguage(Language.JAPANESE);
+			UI.changeLanguage(Language.JAPANESE);
 		}
 		if(event.isKeyDown(KeyEvent.VK_3)) {
-			changeLanguage(Language.ENGLISH_US);
+			UI.changeLanguage(Language.ENGLISH_US);
 		}
 	}
 }

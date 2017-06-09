@@ -1,14 +1,17 @@
 package examples.etyllica.swing;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etyllica.awt.components.chooser.FileChooser;
 import br.com.etyllica.awt.components.chooser.SelectFileListener;
+import br.com.etyllica.awt.core.AWTCore;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.core.InnerCore;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.StaticLayer;
@@ -35,8 +38,9 @@ public class FileExample extends Application implements SelectFileListener {
 		loading = 10;
 		hello = new ImageLayer(200,100,"hello.png");
 		loading = 100;
-		
-		fc = new FileChooser(this.parent.getComponent(), PathHelper.currentDirectory());
+
+		Component component = (Component) session.get(AWTCore.COMPONENT);
+		fc = new FileChooser(component, PathHelper.currentDirectory());
 		fc.setListener(this);
 	}	
 

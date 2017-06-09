@@ -9,6 +9,7 @@ import br.com.etyllica.commons.animation.script.AnimationScript;
 import br.com.etyllica.commons.animation.script.SingleIntervalAnimation;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.context.Context;
+import br.com.etyllica.commons.context.Session;
 import br.com.etyllica.commons.context.UpdateIntervalListener;
 import br.com.etyllica.commons.context.load.ApplicationLoader;
 import br.com.etyllica.commons.context.load.LoaderListener;
@@ -71,6 +72,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     private List<SingleIntervalAnimation> globalScripts = new ArrayList<SingleIntervalAnimation>();
 
     protected List<Monitor> monitors = new ArrayList<Monitor>();
+
+    private Session session = new Session();
 
     protected ApplicationLoader applicationLoader;
 
@@ -471,14 +474,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     }
 
     private void reload(Context application) {
-
         if (application == null) {
             System.err.println(ErrorMessages.APPLICATION_NULL);
             return;
         }
 
-        application.setParent(activeWindow);
-        application.setLanguageChangerListener(this);
         initModules(application);
 
         if (application.isLoaded()) {

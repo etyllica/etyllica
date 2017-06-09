@@ -80,6 +80,7 @@ public abstract class Etyllica extends JFrame implements EtyllicaFrame {
 	private void startCore() {
 		core.startCore(application);
 		core.startEngine();
+		UI.listener = core;
 		
 		addComponentListener(core);
 	}

@@ -53,6 +53,7 @@ public class AWTWindow extends GeometricLayer implements ContextContainer {
 
 	public void setApplication(Context application) {
 		this.application = application;
+		this.application.setSession(session);
 	}
 	
 	public void closeWindow() {

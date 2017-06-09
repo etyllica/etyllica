@@ -1,28 +1,21 @@
 package br.com.etyllica.commons.context;
 
-import java.awt.Color;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import br.com.etyllica.awt.AWTWindow;
 import br.com.etyllica.cinematics.Camera;
 import br.com.etyllica.commons.Updatable;
 import br.com.etyllica.commons.context.load.ApplicationLoadListener;
 import br.com.etyllica.commons.context.load.DefaultLoadApplication;
-import br.com.etyllica.core.dnd.DropTarget;
 import br.com.etyllica.commons.effect.TransitionEffect;
 import br.com.etyllica.commons.event.GUIEvent;
-import br.com.etyllica.commons.event.MouseState;
-import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.i18n.Language;
-import br.com.etyllica.i18n.LanguageChanger;
-import br.com.etyllica.i18n.LanguageChangerListener;
-import br.com.etyllica.core.input.mouse.MouseStateChanger;
-import br.com.etyllica.core.input.mouse.MouseStateListener;
 import br.com.etyllica.commons.ui.UIComponent;
 import br.com.etyllica.commons.ui.UIResizableComponent;
+import br.com.etyllica.commons.dnd.DropTarget;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.Layer;
+
+import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to represent sessions of the Main Application like Mini-Applications.  
@@ -31,7 +24,7 @@ import br.com.etyllica.layer.Layer;
  *
  */
 
-public abstract class Context extends Layer implements UIResizableComponent, Updatable, MouseStateChanger, LanguageChanger, DropTarget {
+public abstract class Context extends Layer implements UIResizableComponent, Updatable, DropTarget {
 
 	private static final ApplicationLoadListener DUMMY_LOAD_LISTENER = new ApplicationLoadListener() {
 		@Override
@@ -120,12 +113,6 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 	 */
 	private ApplicationLoadListener loadListener = DUMMY_LOAD_LISTENER;
 
-	private MouseStateListener mouseStateListener;
-
-	private LanguageChangerListener languageChangerListener;
-
-	protected AWTWindow parent;
-
 	/**
 	 * Returned Application (next Application to show up)
 	 */
@@ -138,6 +125,7 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 	private boolean drawCursor = true;
 
 	protected List<UIComponent> components = new ArrayList<UIComponent>();
+	private boolean showingAd;
 
 	/**
 	 * Constructor
@@ -190,6 +178,13 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 	 * Draw method
 	 */
 	public abstract void draw(Graphics g);
+
+	/**
+	 * Method to setup Graphics before the first draw call
+	 */
+	public void initGraphics(Graphics g) {
+
+	}
 
 	/**
 	 * Method called when activity will be closed, useful to  dispose loaded resources
@@ -260,33 +255,6 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 
 	protected  void stopTimeUpdate() {
 		updateInterval = 0;
-	}
-
-	public void changeMouseState(MouseState state) {
-		if(mouseStateListener != null)
-			mouseStateListener.changeState(state);
-	}
-
-	public MouseStateListener getMouseStateListener() {
-		return mouseStateListener;
-	}
-
-	public void setMouseStateListener(MouseStateListener mouseStateListener) {
-		this.mouseStateListener = mouseStateListener;
-	}
-
-	public void changeLanguage(Language language) {
-		if(languageChangerListener != null)
-			languageChangerListener.changeLanguage(language);
-	}
-
-	public LanguageChangerListener getLanguageChangerListener() {
-		return languageChangerListener;
-	}
-
-	public void setLanguageChangerListener(
-			LanguageChangerListener languageChangerListener) {
-		this.languageChangerListener = languageChangerListener;
 	}
 
 	public int getUpdateInterval() {
@@ -369,12 +337,6 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 		return activeCenterMouse;
 	}
 
-	public void setParent(AWTWindow window) {
-		this.parent = window;
-		setSession(window.getSession());
-		setCamera(window.getCamera());
-	}
-
 	public boolean isLoaded() {
 		return loaded;
 	}
@@ -401,6 +363,14 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 
 	public List<UIComponent> getComponents() {
 		return components;
+	}
+
+	public boolean isShowingAd() {
+		return showingAd;
+	}
+
+	public void setShowingAd(boolean showingAd) {
+		this.showingAd = showingAd;
 	}
 
 }
