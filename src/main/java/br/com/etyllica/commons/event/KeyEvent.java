@@ -136,6 +136,10 @@ public class KeyEvent {
 		this.consumed = consumed; 
 	}
 
+	public boolean isConsumed() {
+		return consumed;
+	}
+
 	public static final char CHAR_UNDEFINED = 65535;  //Locations
 	public static final int KEY_LOCATION_LEFT = 2;
 	public static final int KEY_LOCATION_NUMPAD = 4;
