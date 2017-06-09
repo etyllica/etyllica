@@ -3,6 +3,8 @@ package br.com.etyllica.core.input.mouse;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 import javax.swing.event.MouseInputListener;
@@ -33,7 +35,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	protected int dragX = 0;
 	protected int dragY = 0;
 
-	private ConcurrentList<PointerEvent> events = new ConcurrentList<PointerEvent>(4);
+	private Deque<PointerEvent> events = new ArrayDeque<PointerEvent>(8);
 	
 	public Mouse(int x, int y) {
 		super();
@@ -212,16 +214,12 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		events.add(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, x, y));
 	}
 
+	public Deque<PointerEvent> getEvents() {
+		return events;
+	}
+
 	public void addEvent(PointerEvent event) {
 		events.add(event);
-	}
-
-	public List<PointerEvent> lock() {
-		return events.lock();
-	}
-
-	public void unlock() {
-		events.unlock();
 	}
 
 	public boolean hasEvents() {

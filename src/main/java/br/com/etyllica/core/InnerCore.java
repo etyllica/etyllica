@@ -13,20 +13,21 @@ import br.com.etyllica.commons.context.UpdateIntervalListener;
 import br.com.etyllica.commons.context.load.ApplicationLoader;
 import br.com.etyllica.commons.context.load.LoaderListener;
 import br.com.etyllica.commons.effect.GlobalEffect;
-import br.com.etyllica.core.error.ErrorMessages;
 import br.com.etyllica.commons.event.*;
 import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.commons.ui.UIComponent;
+import br.com.etyllica.core.error.ErrorMessages;
 import br.com.etyllica.core.graphics.Monitor;
+import br.com.etyllica.core.input.keyboard.Keyboard;
+import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.i18n.Language;
 import br.com.etyllica.i18n.LanguageChangerListener;
 import br.com.etyllica.i18n.LanguageModule;
-import br.com.etyllica.core.input.keyboard.Keyboard;
-import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.ui.UI;
-import br.com.etyllica.commons.ui.UIComponent;
 import br.com.etyllica.ui.View;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -62,7 +63,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     private boolean alt = false;
     private boolean enter = false;
     private boolean esc = false;
-    
+
     protected boolean running = true;
 
     protected GUIEvent superEvent = GUIEvent.NONE;
@@ -120,14 +121,12 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     }
 
     private void updateInput(Context application, long now) {
-        List<PointerEvent> events = getMouse().lock();
-
-        for (PointerEvent event : events) {
+        Deque<PointerEvent> events = getMouse().getEvents();
+        while (!events.isEmpty()) {
+            PointerEvent event = events.pop();
             application.updateMouse(event);
             updatePointerEvent(event);
         }
-
-        getMouse().unlock();
 
         getKeyboard().update(now);
     }
@@ -135,7 +134,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     private boolean checkApplicationChange(Context application) {
         //if activeWindow, receive command to change application
         if (application.getNextApplication() != application) {
-
             this.changeApplication();
             return true;
         }
@@ -415,7 +413,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
             } else if (event.isKeyUp(KeyEvent.VK_NUMPAD_DEL)) {
                 getMouse().addEvent(new PointerEvent(MouseEvent.MOUSE_BUTTON_RIGHT, PointerState.RELEASED));
             }/*else if(event.getKeyTyped(Tecla.VK_NUMPAD_DEL)) {
-				getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
+                getMouse().addEvent(new PointerEvent(MouseButton.MOUSE_BUTTON_RIGHT, KeyState.CLICK));
 			}*/
 
         }
@@ -599,8 +597,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
         this.keyboard = keyboard;
     }
 
-	public boolean isRunning() {
-		return running;
-	}    
-    
+    public boolean isRunning() {
+        return running;
+    }
+
 }
