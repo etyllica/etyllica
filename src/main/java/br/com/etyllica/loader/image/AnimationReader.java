@@ -1,4 +1,4 @@
-package br.com.etyllica.core.loader.image;
+package br.com.etyllica.loader.image;
 
 import java.io.IOException;
 import java.net.URL;

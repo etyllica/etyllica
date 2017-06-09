@@ -2,7 +2,7 @@ package br.com.etyllica.ui.label;
 
 import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.commons.event.KeyEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.Label;
 import br.com.etyllica.ui.theme.Theme;
 import br.com.etyllica.ui.theme.ThemeManager;

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import br.com.etyllica.commons.Updatable;
 import br.com.etyllica.commons.event.KeyEventListener;
 import br.com.etyllica.commons.event.KeyEvent;
-import br.com.etyllica.core.loader.LoaderImpl;
+import br.com.etyllica.loader.LoaderImpl;
 
 /**
  * 

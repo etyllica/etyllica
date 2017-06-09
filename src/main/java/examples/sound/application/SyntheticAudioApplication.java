@@ -6,7 +6,7 @@ import javax.sound.sampled.AudioFormat;
 
 import sound.capture.AudioHandler;
 import br.com.etyllica.commons.context.Application;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 
 /**
  * 

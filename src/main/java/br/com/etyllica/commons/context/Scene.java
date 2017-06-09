@@ -11,7 +11,7 @@ import br.com.etyllica.commons.animation.script.AnimationScript;
 import br.com.etyllica.commons.effect.particle.Emitter;
 import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.commons.event.PointerEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.commons.ui.UIComponent;
 import br.com.etyllica.layer.Layer;
 

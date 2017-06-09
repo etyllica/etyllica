@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.commons.context.Application;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.linear.Point2D;
 import br.com.etyllica.linear.graph.Node;
 import br.com.etyllica.linear.graph.common.IntegerEdge;

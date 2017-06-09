@@ -1,6 +1,6 @@
 package br.com.etyllica.ui.base;
 
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.View;
 import br.com.etyllica.ui.ViewGroup;
 import br.com.etyllica.ui.style.Orientation;

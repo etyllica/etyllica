@@ -13,7 +13,7 @@ import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.core.EtyllicaFrame;
 import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.i18n.LanguageModule;
-import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.loader.Loader;
 import br.com.etyllica.ui.UI;
 import br.com.etyllica.util.PathHelper;
 

@@ -4,7 +4,7 @@ import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.Button;
 import br.com.etyllica.ui.View;
 import br.com.etyllica.ui.theme.Theme;

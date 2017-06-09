@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.linear.Triangle2;
 import br.com.etyllica.util.triangulation.KongTriangulation;
 

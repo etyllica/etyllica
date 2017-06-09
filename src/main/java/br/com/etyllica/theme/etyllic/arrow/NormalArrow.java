@@ -2,7 +2,7 @@ package br.com.etyllica.theme.etyllic.arrow;
 
 import java.awt.Color;
 
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.theme.Theme;
 import br.com.etyllica.ui.theme.ThemeManager;
 import br.com.etyllica.ui.theme.cursor.arrow.MouseArrow;

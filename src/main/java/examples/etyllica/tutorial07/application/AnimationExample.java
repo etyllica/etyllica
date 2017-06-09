@@ -10,7 +10,7 @@ import br.com.etyllica.commons.animation.script.RotateAnimation;
 import br.com.etyllica.commons.animation.script.ScaleUniformAnimation;
 import br.com.etyllica.commons.animation.script.VerticalMovementScript;
 import br.com.etyllica.commons.context.Application;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.Layer;
 import br.com.etyllica.layer.TextLayer;

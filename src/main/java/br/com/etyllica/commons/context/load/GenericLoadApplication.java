@@ -2,7 +2,7 @@ package br.com.etyllica.commons.context.load;
 
 import java.awt.Color;
 
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 
 /**
  * 

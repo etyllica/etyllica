@@ -14,7 +14,7 @@ import br.com.etyllica.core.dnd.DropTarget;
 import br.com.etyllica.commons.effect.TransitionEffect;
 import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.commons.event.MouseState;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.i18n.Language;
 import br.com.etyllica.i18n.LanguageChanger;
 import br.com.etyllica.i18n.LanguageChangerListener;

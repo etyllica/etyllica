@@ -1,4 +1,4 @@
-package br.com.etyllica.commons.graphics;
+package br.com.etyllica.core.graphics;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

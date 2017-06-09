@@ -3,7 +3,7 @@ package examples.etyllica.gui.textview;
 import java.awt.Color;
 
 import br.com.etyllica.commons.context.Application;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.UI;
 import br.com.etyllica.ui.base.BaseTextView;
 

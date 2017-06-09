@@ -3,7 +3,7 @@ package examples.etyllica.tutorial06.application;
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.KeyEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 
 public class ByeWorld extends Application{
 

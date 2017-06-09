@@ -5,7 +5,7 @@ import java.awt.Color;
 
 import br.com.etyllica.commons.event.MouseState;
 import br.com.etyllica.ui.theme.ArrowDrawer;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.theme.ArrowTheme;
 import br.com.etyllica.ui.theme.cursor.arrow.MouseArrow;
 

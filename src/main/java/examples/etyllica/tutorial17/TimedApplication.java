@@ -2,7 +2,7 @@ package examples.etyllica.tutorial17;
 
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.KeyEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 
 public class TimedApplication extends Application {

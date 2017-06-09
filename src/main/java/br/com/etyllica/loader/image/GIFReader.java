@@ -1,15 +1,15 @@
-package br.com.etyllica.core.loader.image;
+package br.com.etyllica.loader.image;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import br.com.etyllica.core.loader.image.gif.GifDecoder;
+import br.com.etyllica.loader.image.gif.GIFDecoder;
 
 public class GIFReader implements ImageReader, AnimationReader {
 
-	private GifDecoder decoder;
+	private GIFDecoder decoder;
 	
 	private static GIFReader instance = null;
 	
@@ -27,7 +27,7 @@ public class GIFReader implements ImageReader, AnimationReader {
 	
 	@Override
 	public BufferedImage loadImage(URL url) throws IOException {
-		decoder = new GifDecoder();
+		decoder = new GIFDecoder();
 		decoder.read(url.getPath());
 		return decoder.getImage();
 	}

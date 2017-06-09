@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.commons.animation.script.OpacityAnimation;
 import br.com.etyllica.commons.effect.GlobalEffect;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.i18n.DefaultDictionary;
 import br.com.etyllica.i18n.LanguageModule;
 

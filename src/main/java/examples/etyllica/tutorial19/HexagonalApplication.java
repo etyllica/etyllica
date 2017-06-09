@@ -5,7 +5,7 @@ import br.com.etyllica.commons.collision.CollisionDetector;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.context.UpdateIntervalListener;
 import br.com.etyllica.commons.event.PointerEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.BufferedLayer;
 
 public class HexagonalApplication extends Application implements UpdateIntervalListener {

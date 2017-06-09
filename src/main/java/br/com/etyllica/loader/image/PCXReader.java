@@ -1,4 +1,4 @@
-package br.com.etyllica.core.loader.image;
+package br.com.etyllica.loader.image;
 
 /**
  * PCX Image loader

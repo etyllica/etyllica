@@ -1,6 +1,6 @@
 package br.com.etyllica.cinematics.parallax;
 
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 
 public class ImageParallax extends Parallax {

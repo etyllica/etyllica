@@ -1,6 +1,6 @@
 package br.com.etyllica.ui.tab;
 
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.Panel;
 import br.com.etyllica.ui.base.BasePanel;
 

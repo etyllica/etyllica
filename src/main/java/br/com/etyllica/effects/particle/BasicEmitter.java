@@ -2,7 +2,7 @@ package br.com.etyllica.effects.particle;
 
 import br.com.etyllica.commons.effect.particle.Emitter;
 import br.com.etyllica.commons.effect.particle.Particle;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 
 import java.awt.*;
 

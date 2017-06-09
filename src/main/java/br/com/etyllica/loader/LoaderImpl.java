@@ -1,4 +1,4 @@
-package br.com.etyllica.core.loader;
+package br.com.etyllica.loader;
 
 import java.net.MalformedURLException;
 import java.net.URL;

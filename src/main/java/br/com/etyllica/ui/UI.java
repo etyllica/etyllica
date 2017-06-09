@@ -5,7 +5,7 @@ import br.com.etyllica.commons.Module;
 import br.com.etyllica.commons.context.Context;
 import br.com.etyllica.commons.event.*;
 import br.com.etyllica.ui.theme.ArrowDrawer;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.theme.Theme;
 import br.com.etyllica.ui.theme.ThemeManager;
 import br.com.etyllica.ui.theme.ArrowTheme;

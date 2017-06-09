@@ -7,9 +7,9 @@ import java.util.Set;
 import br.com.etyllica.awt.core.AWTCore;
 import br.com.etyllica.core.Engine;
 import br.com.etyllica.commons.event.GUIEvent;
-import br.com.etyllica.core.loader.FontLoader;
-import br.com.etyllica.core.loader.Loader;
-import br.com.etyllica.core.loader.image.ImageLoader;
+import br.com.etyllica.loader.FontLoader;
+import br.com.etyllica.loader.Loader;
+import br.com.etyllica.loader.image.ImageLoader;
 /**
  * AWTEngine is an Engine based on AWT
  * @author yuripourre

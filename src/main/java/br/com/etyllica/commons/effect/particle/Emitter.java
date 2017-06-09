@@ -1,7 +1,7 @@
 package br.com.etyllica.commons.effect.particle;
 
 import br.com.etyllica.commons.Updatable;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.Layer;
 
 import java.util.ArrayList;

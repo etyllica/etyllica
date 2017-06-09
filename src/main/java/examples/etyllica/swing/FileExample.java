@@ -9,10 +9,10 @@ import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.layer.StaticLayer;
-import br.com.etyllica.core.loader.image.ImageLoader;
+import br.com.etyllica.loader.image.ImageLoader;
 import br.com.etyllica.util.PathHelper;
 
 public class FileExample extends Application implements SelectFileListener {

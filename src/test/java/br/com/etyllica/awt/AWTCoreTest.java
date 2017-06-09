@@ -13,7 +13,7 @@ import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.commons.event.PointerState;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.base.BaseButton;
 
 public class AWTCoreTest {

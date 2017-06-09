@@ -32,7 +32,7 @@ import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.loop.FrameSkippingLoop;
 import br.com.etyllica.core.loop.GameLoop;
 import br.com.etyllica.effects.GenericFullScreenEffect;
-import br.com.etyllica.core.loader.Loader;
+import br.com.etyllica.loader.Loader;
 import br.com.etyllica.util.io.IOHelper;
 
 /**

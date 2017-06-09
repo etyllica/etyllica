@@ -12,8 +12,8 @@ import java.awt.image.Raster;
 
 import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.commons.collision.CollisionDetector;
-import br.com.etyllica.commons.graphics.Graphics;
-import br.com.etyllica.core.loader.image.ImageLoader;
+import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.loader.image.ImageLoader;
 
 /**
  * 

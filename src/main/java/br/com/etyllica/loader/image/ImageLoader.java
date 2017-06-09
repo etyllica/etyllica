@@ -1,4 +1,4 @@
-package br.com.etyllica.core.loader.image;
+package br.com.etyllica.loader.image;
 
 
 import java.awt.image.BufferedImage;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import br.com.etyllica.layer.StaticLayer;
-import br.com.etyllica.core.loader.LoaderImpl;
+import br.com.etyllica.loader.LoaderImpl;
 import br.com.etyllica.util.StringUtils;
 import br.com.etyllica.util.io.IOHelper;
 

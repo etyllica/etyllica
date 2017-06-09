@@ -1,4 +1,4 @@
-package br.com.etyllica.core.loader;
+package br.com.etyllica.loader;
 
 public interface Loader {
 	

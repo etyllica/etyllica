@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import br.com.etyllica.commons.collision.CollisionDetector;
 import br.com.etyllica.commons.context.Application;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.linear.Ellipse;
 
 public class EllipseDrawing extends Application {

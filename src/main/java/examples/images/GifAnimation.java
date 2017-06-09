@@ -4,9 +4,9 @@ import java.util.List;
 
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.context.UpdateIntervalListener;
-import br.com.etyllica.commons.graphics.Graphics;
-import br.com.etyllica.core.loader.image.ImageFrame;
-import br.com.etyllica.core.loader.image.ImageLoader;
+import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.loader.image.ImageFrame;
+import br.com.etyllica.loader.image.ImageLoader;
 
 public class GifAnimation extends Application implements UpdateIntervalListener {
 

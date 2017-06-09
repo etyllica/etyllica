@@ -1,4 +1,4 @@
-package br.com.etyllica.core.loader.image.gif;
+package br.com.etyllica.loader.image.gif;
 
 /*
  * The org.opensourcephysics.media.gif package provides animated gif
@@ -38,13 +38,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.loader.image.ImageFrame;
+import br.com.etyllica.loader.image.ImageFrame;
 
 /**
- * Class GifDecoder - Decodes a GIF file into one or more frames.
+ * Class GIFDecoder - Decodes a GIF file into one or more frames.
  * <br><pre>
  * Example:
- *    GifDecoder d = new GifDecoder();
+ *    GIFDecoder d = new GIFDecoder();
  *    d.read("sample.gif");
  *    int n = d.getFrameCount();
  *    for (int i = 0; i < n; i++) {
@@ -61,7 +61,7 @@ import br.com.etyllica.core.loader.image.ImageFrame;
  * @version 1.03 November 2003
  */
 
-public class GifDecoder {
+public class GIFDecoder {
 
 	/**
 	 * File read status: No errors.

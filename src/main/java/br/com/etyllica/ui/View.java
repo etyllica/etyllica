@@ -11,7 +11,7 @@ import br.com.etyllica.commons.Drawable;
 import br.com.etyllica.commons.event.Action;
 import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.commons.event.PointerEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.style.Style;
 import br.com.etyllica.ui.theme.Theme;
 import br.com.etyllica.ui.theme.ThemeManager;

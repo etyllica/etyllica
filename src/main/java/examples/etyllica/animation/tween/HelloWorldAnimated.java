@@ -2,7 +2,7 @@ package examples.etyllica.animation.tween;
 
 import br.com.etyllica.commons.animation.Animation;
 import br.com.etyllica.commons.context.Application;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.commons.interpolation.Interpolator;
 import br.com.etyllica.layer.ImageLayer;
 

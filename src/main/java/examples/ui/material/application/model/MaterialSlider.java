@@ -2,7 +2,7 @@ package examples.ui.material.application.model;
 
 
 import br.com.etyllica.commons.event.PointerEvent;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.base.BaseSlider;
 import br.com.etyllica.ui.theme.Theme;
 

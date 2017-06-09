@@ -14,7 +14,7 @@ import br.com.etyllica.commons.context.load.ApplicationLoader;
 import br.com.etyllica.commons.context.load.LoaderListener;
 import br.com.etyllica.commons.effect.GlobalEffect;
 import br.com.etyllica.commons.event.*;
-import br.com.etyllica.commons.graphics.Graphics;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.commons.ui.UIComponent;
 import br.com.etyllica.core.error.ErrorMessages;
 import br.com.etyllica.core.graphics.Monitor;
