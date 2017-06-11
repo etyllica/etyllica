@@ -33,7 +33,7 @@ import java.util.List;
  * @author yuripourre
  */
 
-public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*LanguageChangerListener,*/ LoaderListener {
+public abstract class InnerCore implements Core, KeyEventListener, Updatable, LoaderListener<Context> {
 
     private static final int TITLE_BAR_HEIGHT = 50;
 
