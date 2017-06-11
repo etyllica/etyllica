@@ -13,11 +13,10 @@ public class LanguageModule implements Module {
 
     private static LanguageModule instance;
 
-    private Language language;
+    private Language language = Language.ENGLISH_US;
 
     private LanguageModule() {
         super();
-        language = Language.PORTUGUESE_BRAZIL;
     }
 
     public static LanguageModule getInstance() {

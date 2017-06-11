@@ -73,7 +73,6 @@ public abstract class EtyllicaApplet extends Applet implements EtyllicaFrame {
 	private void startCore() {
 		core.startCore(application);
 		core.startEngine();
-		UI.listener = core;
 		
 		addComponentListener(core);
 	}

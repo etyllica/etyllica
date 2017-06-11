@@ -15,7 +15,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
-import br.com.etyllica.cinematics.Camera;
+import br.com.etyllica.awt.camera.Camera;
 import br.com.etyllica.linear.Line2D;
 import br.com.etyllica.linear.Point2D;
 import br.com.etyllica.linear.PointInt2D;

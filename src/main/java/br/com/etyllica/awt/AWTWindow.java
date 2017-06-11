@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.cinematics.Camera;
+import br.com.etyllica.awt.camera.Camera;
 import br.com.etyllica.commons.context.Context;
 import br.com.etyllica.commons.context.ContextContainer;
 import br.com.etyllica.commons.context.Session;

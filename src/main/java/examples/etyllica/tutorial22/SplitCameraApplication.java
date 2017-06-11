@@ -1,7 +1,7 @@
 package examples.etyllica.tutorial22;
 
 import br.com.etyllica.awt.SVGColor;
-import br.com.etyllica.cinematics.Camera;
+import br.com.etyllica.awt.camera.Camera;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.context.UpdateIntervalListener;
 import br.com.etyllica.commons.event.KeyEvent;

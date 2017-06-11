@@ -7,6 +7,7 @@ import br.com.etyllica.commons.event.*;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.i18n.Language;
 import br.com.etyllica.i18n.LanguageChangerListener;
+import br.com.etyllica.i18n.LanguageModule;
 import br.com.etyllica.ui.theme.ArrowDrawer;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.theme.Theme;
@@ -48,11 +49,9 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     private boolean updating = false;
     private boolean updatingEvents = false;
 
-    public List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
+    public static List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
     private static List<View> views = new ArrayList<View>();
-
-    private static Language language;
-    public static LanguageChangerListener listener;
+    private static List<LanguageChangerListener> listeners = new ArrayList<LanguageChangerListener>();
 
     private UI() {
         super();
@@ -414,8 +413,10 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     }
 
     public static void changeLanguage(Language language) {
-        UI.language = language;
-        if (listener != null) {
+        LanguageModule.getInstance().changeLanguage(language);
+        guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
+
+        for (LanguageChangerListener listener: listeners) {
             listener.changeLanguage(language);
         }
     }
@@ -423,5 +424,13 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     @Override
     public void changeMouseState(MouseState state) {
         arrowDrawer.changeState(state);
+    }
+
+    public static void addListener(LanguageChangerListener listener) {
+        listeners.add(listener);
+    }
+
+    public static void removeListener(LanguageChangerListener listener) {
+        listeners.remove(listener);
     }
 }

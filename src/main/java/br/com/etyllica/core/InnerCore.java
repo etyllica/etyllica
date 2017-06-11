@@ -35,7 +35,7 @@ import java.util.List;
  * @author yuripourre
  */
 
-public abstract class InnerCore implements Core, KeyEventListener, Updatable, LanguageChangerListener, LoaderListener {
+public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*LanguageChangerListener,*/ LoaderListener {
 
     private static final int TITLE_BAR_HEIGHT = 50;
 
@@ -527,15 +527,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, La
     public void setFps(int fps) {
         this.fps = fps;
         this.activeWindow.getContext().setFps(fps);
-    }
-
-    @Override
-    public void changeLanguage(Language language) {
-        LanguageModule.getInstance().setLanguage(language);
-
-        for (Module module : modules) {
-            module.updateGuiEvent(GUIEvent.LANGUAGE_CHANGED);
-        }
     }
 
     @Override

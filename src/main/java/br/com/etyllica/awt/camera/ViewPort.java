@@ -1,4 +1,4 @@
-package br.com.etyllica.cinematics;
+package br.com.etyllica.awt.camera;
 
 import java.awt.geom.AffineTransform;
 

@@ -20,7 +20,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.VolatileImage;
 
-import br.com.etyllica.cinematics.Camera;
+import br.com.etyllica.awt.camera.Camera;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.linear.Line2D;
 import br.com.etyllica.linear.Point2D;
