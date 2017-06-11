@@ -11,7 +11,6 @@ import br.com.etyllica.commons.ui.UIResizableComponent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.Layer;
 
-import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +108,11 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 
     protected DefaultLoadApplication loadApplication;
 
+    /**
+     * Background color, white = -1
+     */
+    protected int backgroundColor = -1;
+
     protected int fps = 0;
 
     private boolean drawCursor = true;
@@ -188,12 +192,6 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
 
     public void update(long now) {
     }
-
-    @Override
-    public boolean onMouse(int mx, int my) {
-        return false;
-    }
-
 
     public float getLoading() {
         return loading;
@@ -316,8 +314,8 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
         this.loaded = loaded;
     }
 
-    public Color getBackgroundColor() {
-        return Color.WHITE;
+    public int getBackgroundColor() {
+        return backgroundColor;
     }
 
     public void dragEnter() {

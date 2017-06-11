@@ -1,5 +1,7 @@
-package br.com.etyllica.commons;
+package br.com.etyllica.commons.module;
 
+import br.com.etyllica.commons.Drawable;
+import br.com.etyllica.commons.Updatable;
 import br.com.etyllica.commons.context.Context;
 import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.commons.event.KeyEvent;

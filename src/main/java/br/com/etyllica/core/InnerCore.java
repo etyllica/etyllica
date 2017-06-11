@@ -2,7 +2,6 @@ package br.com.etyllica.core;
 
 import br.com.etyllica.awt.AWTWindow;
 import br.com.etyllica.awt.core.input.AWTController;
-import br.com.etyllica.commons.Module;
 import br.com.etyllica.commons.Updatable;
 import br.com.etyllica.commons.animation.AnimationModule;
 import br.com.etyllica.commons.animation.script.AnimationScript;
@@ -15,15 +14,14 @@ import br.com.etyllica.commons.context.load.ApplicationLoader;
 import br.com.etyllica.commons.context.load.LoaderListener;
 import br.com.etyllica.commons.effect.GlobalEffect;
 import br.com.etyllica.commons.event.*;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.commons.module.Module;
+import br.com.etyllica.commons.module.ModuleHandler;
 import br.com.etyllica.commons.ui.UIComponent;
 import br.com.etyllica.core.error.ErrorMessages;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.i18n.Language;
-import br.com.etyllica.i18n.LanguageChangerListener;
-import br.com.etyllica.i18n.LanguageModule;
 import br.com.etyllica.ui.UI;
 import br.com.etyllica.ui.View;
 
@@ -77,7 +75,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
 
     protected ApplicationLoader applicationLoader;
 
-    private List<Module> modules = new ArrayList<Module>();
+    private ModuleHandler modules = new ModuleHandler();
 
     public InnerCore(int w, int h) {
         super();
@@ -104,7 +102,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
 
         updateActiveWindow(now);
 
-        updateModules(now);
+        modules.update(now);
 
         Context application = currentContext();
 
@@ -254,9 +252,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
             fixEventPosition(event);
         }
 
-        for (Module module : modules) {
-            module.updateMouse(event);
-        }
+        modules.updateMouse(event);
 
         updateWindowEvent(event, activeWindow);
     }
@@ -276,9 +272,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
         drawContext(currentContext(), g);
 
         //Draw Handlers
-        for (Module module : modules) {
-            module.draw(g);
-        }
+        modules.draw(g);
 
         //Draw Global Effects
         drawGlobalEffects(g);
@@ -295,12 +289,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
         //Draw Components
         for (UIComponent component : context.getComponents()) {
             component.draw(g);
-        }
-    }
-
-    private void updateModules(long now) {
-        for (Module module : modules) {
-            module.update(now);
         }
     }
 
@@ -450,7 +438,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
             //Avoid unnecessary reload
             reload(window.getContext());
         }
-
     }
 
     public void setMainApplication(Application application) {
@@ -460,7 +447,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
     public void changeApplication() {
         Context currentApplication = currentContext();
         //Remove Handlers
-        disposeModules(currentApplication);
+        modules.dispose(currentApplication);
         currentApplication.dispose();
 
         Context nextApplication = currentApplication.getNextApplication();
@@ -479,7 +466,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
             return;
         }
 
-        initModules(application);
+        modules.init(application);
 
         if (application.isLoaded()) {
             Application nextApplication = applicationLoader.reloadApplication(this, application);
@@ -493,9 +480,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
 
         handleApplicationKeyEvents(context, event);
 
-        for (Module module : modules) {
-            module.updateKeyboard(event);
-        }
+        modules.updateKeyboard(event);
 
         updateKeyboardEvents(event);
 
@@ -537,18 +522,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, /*
 
     public void addModule(Module module) {
         modules.add(module);
-    }
-
-    private void initModules(Context application) {
-        for (Module module : modules) {
-            module.init(application);
-        }
-    }
-
-    private void disposeModules(Context application) {
-        for (Module module : modules) {
-            module.dispose(application);
-        }
     }
 
     //TODO Remove UI helper methods
