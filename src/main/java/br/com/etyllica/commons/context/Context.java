@@ -118,7 +118,7 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
     private boolean drawCursor = true;
 
     protected List<UIComponent> components = new ArrayList<UIComponent>();
-    private boolean showingAd;
+    protected boolean showingAd;
 
     /**
      * Constructor
