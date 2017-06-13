@@ -1,7 +1,7 @@
 package br.com.etyllica.ui;
 
 import br.com.etyllica.awt.AWTArrowDrawer;
-import br.com.etyllica.commons.Module;
+import br.com.etyllica.commons.module.Module;
 import br.com.etyllica.commons.context.Context;
 import br.com.etyllica.commons.event.*;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;

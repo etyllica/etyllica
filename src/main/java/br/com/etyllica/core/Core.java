@@ -2,7 +2,7 @@ package br.com.etyllica.core;
 
 import java.awt.Graphics;
 
-import br.com.etyllica.commons.Module;
+import br.com.etyllica.commons.module.Module;
 import br.com.etyllica.commons.context.Application;
 
 public interface Core {

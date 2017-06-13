@@ -7,7 +7,7 @@ import java.net.URL;
 import br.com.etyllica.awt.core.AWTCore;
 import br.com.etyllica.awt.engine.AWTEngine;
 import br.com.etyllica.core.Engine;
-import br.com.etyllica.commons.Module;
+import br.com.etyllica.commons.module.Module;
 import br.com.etyllica.commons.animation.AnimationModule;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.core.EtyllicaFrame;

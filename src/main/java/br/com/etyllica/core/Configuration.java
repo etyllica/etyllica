@@ -1,6 +1,6 @@
 package br.com.etyllica.core;
 
-import br.com.etyllica.commons.Module;
+import br.com.etyllica.commons.module.Module;
 
 import java.util.Map;
 

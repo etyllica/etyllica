@@ -1,6 +1,6 @@
 package br.com.etyllica.i18n;
 
-import br.com.etyllica.commons.Module;
+import br.com.etyllica.commons.module.Module;
 import br.com.etyllica.commons.context.Context;
 import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.commons.event.KeyEvent;
