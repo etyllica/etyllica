@@ -1,7 +1,7 @@
 package examples.linear.circular;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 import examples.linear.circular.application.CircularApplication;
 
 public class CircularExample extends Etyllica {

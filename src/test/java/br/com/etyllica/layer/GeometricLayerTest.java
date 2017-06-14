@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.etyllica.core.collision.CollisionDetector;
+import br.com.etyllica.commons.collision.CollisionDetector;
 
 public class GeometricLayerTest {
 

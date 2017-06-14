@@ -1,8 +1,7 @@
 package examples.etyllica.i18n;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.EtyllicaApplet;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 
 public class MultiLanguageExample extends Etyllica {
 

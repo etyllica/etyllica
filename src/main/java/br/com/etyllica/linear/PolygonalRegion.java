@@ -3,9 +3,8 @@ package br.com.etyllica.linear;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.Drawable;
+import br.com.etyllica.commons.Drawable;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.linear.Point2D;
 
 public class PolygonalRegion implements Drawable {
 		

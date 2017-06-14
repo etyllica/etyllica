@@ -1,10 +1,10 @@
 package examples.etyllica.tutorial19;
 
 import br.com.etyllica.awt.SVGColor;
-import br.com.etyllica.core.collision.CollisionDetector;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.context.UpdateIntervalListener;
-import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.commons.collision.CollisionDetector;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.context.UpdateIntervalListener;
+import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.BufferedLayer;
 

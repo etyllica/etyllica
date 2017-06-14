@@ -9,10 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.etyllica.awt.core.AWTCore;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.MouseEvent;
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.PointerState;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.event.MouseEvent;
+import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.event.PointerState;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.base.BaseButton;
 

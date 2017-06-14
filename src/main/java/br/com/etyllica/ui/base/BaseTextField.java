@@ -2,11 +2,11 @@ package br.com.etyllica.ui.base;
 
 import java.awt.FontMetrics;
 
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.KeyState;
-import br.com.etyllica.core.event.MouseEvent;
-import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.commons.event.GUIEvent;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.event.KeyState;
+import br.com.etyllica.commons.event.MouseEvent;
+import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.textfield.TextFieldView;
 import br.com.etyllica.ui.theme.Theme;

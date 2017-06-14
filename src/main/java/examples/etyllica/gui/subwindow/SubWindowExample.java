@@ -3,8 +3,8 @@ package examples.etyllica.gui.subwindow;
 import java.awt.Color;
 
 import br.com.etyllica.awt.AWTWindow;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import examples.ui.simple.UIExample.BackgroundColorChangerApplication;
 

@@ -1,6 +1,5 @@
 package br.com.etyllica.ui.theme;
 
-import br.com.etyllica.ui.theme.cursor.ArrowTheme;
 import br.com.etyllica.ui.theme.listener.ArrowThemeListener;
 import br.com.etyllica.ui.theme.listener.ThemeListener;
 import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;

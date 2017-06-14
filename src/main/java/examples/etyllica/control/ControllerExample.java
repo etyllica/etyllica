@@ -2,8 +2,8 @@ package examples.etyllica.control;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.joystick.TouchJoystick;
 

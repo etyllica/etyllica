@@ -6,8 +6,7 @@ import java.util.Set;
 
 import br.com.etyllica.awt.core.AWTCore;
 import br.com.etyllica.core.Engine;
-import br.com.etyllica.core.context.Session;
-import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.loader.FontLoader;
 import br.com.etyllica.loader.Loader;
 import br.com.etyllica.loader.image.ImageLoader;

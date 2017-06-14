@@ -1,9 +1,9 @@
 package examples.etyllica.tutorial02;
 
-import br.com.etyllica.core.animation.Animation;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.animation.Animation;
+import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.interpolation.Interpolator;
+import br.com.etyllica.commons.interpolation.Interpolator;
 import br.com.etyllica.layer.ImageLayer;
 
 public class HelloWorldAnimated extends Application {

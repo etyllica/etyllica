@@ -3,7 +3,7 @@ package br.com.etyllica.linear.graph;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.linear.Point2D;
+import br.com.etyllica.linear.Point2D;
 
 public class GenericGraph<T, E extends GenericEdge<T>> {
 

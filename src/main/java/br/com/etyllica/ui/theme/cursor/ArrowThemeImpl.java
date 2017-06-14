@@ -1,5 +1,6 @@
 package br.com.etyllica.ui.theme.cursor;
 
+import br.com.etyllica.ui.theme.ArrowTheme;
 import br.com.etyllica.ui.theme.cursor.arrow.MouseArrow;
 
 

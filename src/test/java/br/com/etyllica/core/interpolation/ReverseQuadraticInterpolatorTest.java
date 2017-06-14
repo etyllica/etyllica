@@ -1,5 +1,7 @@
 package br.com.etyllica.core.interpolation;
 
+import br.com.etyllica.commons.interpolation.Interpolator;
+import br.com.etyllica.commons.interpolation.ReverseQuadraticInterpolator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

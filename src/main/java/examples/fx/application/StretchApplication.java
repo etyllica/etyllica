@@ -1,8 +1,8 @@
 package examples.fx.application;
 
-import br.com.etyllica.core.animation.AnimationModule;
-import br.com.etyllica.core.animation.script.complex.StretchAndBackVertical;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.animation.AnimationModule;
+import br.com.etyllica.commons.animation.script.complex.StretchAndBackVertical;
+import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 

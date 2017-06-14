@@ -1,6 +1,6 @@
 package br.com.etyllica.cinematics.parallax;
 
-import br.com.etyllica.core.Drawable;
+import br.com.etyllica.commons.Drawable;
 
 public abstract class Parallax implements Drawable {
 

@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.etyllica.core.context.Session;
+import br.com.etyllica.commons.context.Session;
 
 public class SessionTest {
 	

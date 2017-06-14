@@ -2,15 +2,15 @@ package examples.etyllica.interpolation;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.animation.AnimationModule;
-import br.com.etyllica.core.animation.script.HorizontalMovementScript;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.animation.AnimationModule;
+import br.com.etyllica.commons.animation.script.HorizontalMovementScript;
+import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.interpolation.Interpolator;
-import br.com.etyllica.core.interpolation.LinearInterpolator;
-import br.com.etyllica.core.interpolation.QuadraticInterpolator;
-import br.com.etyllica.core.interpolation.RadialInterpolator;
-import br.com.etyllica.core.interpolation.ReverseQuadraticInterpolator;
+import br.com.etyllica.commons.interpolation.Interpolator;
+import br.com.etyllica.commons.interpolation.LinearInterpolator;
+import br.com.etyllica.commons.interpolation.QuadraticInterpolator;
+import br.com.etyllica.commons.interpolation.RadialInterpolator;
+import br.com.etyllica.commons.interpolation.ReverseQuadraticInterpolator;
 import br.com.etyllica.layer.Layer;
 
 public class InterpolationExample extends Application {

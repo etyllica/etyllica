@@ -1,6 +1,6 @@
 package br.com.etyllica.ui;
 
-import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.ui.base.BaseTextField;
 
 /**

@@ -1,7 +1,7 @@
 package examples.linear.arrow;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 import examples.linear.arrow.application.ArrowApplication;
 
 public class ArrowExample extends Etyllica {

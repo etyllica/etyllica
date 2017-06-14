@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.etyllica.core.Configuration;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.Action;
-import br.com.etyllica.core.event.GUIEvent;
-import br.com.etyllica.core.event.KeyEvent;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.event.Action;
+import br.com.etyllica.commons.event.GUIEvent;
+import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.i18n.Language;
+import br.com.etyllica.i18n.Language;
 import br.com.etyllica.ui.UI;
 import br.com.etyllica.ui.Button;
 import br.com.etyllica.ui.label.MultiLangLabel;
@@ -77,13 +77,13 @@ public class MultiLanguageApplication extends Application {
 	public void updateKeyboard(KeyEvent event) {
 
 		if(event.isKeyDown(KeyEvent.VK_1)) {
-			changeLanguage(Language.PORTUGUESE_BRAZIL);
+			UI.changeLanguage(Language.PORTUGUESE_BRAZIL);
 		}
 		if(event.isKeyDown(KeyEvent.VK_2)) {
-			changeLanguage(Language.JAPANESE);
+			UI.changeLanguage(Language.JAPANESE);
 		}
 		if(event.isKeyDown(KeyEvent.VK_3)) {
-			changeLanguage(Language.ENGLISH_US);
+			UI.changeLanguage(Language.ENGLISH_US);
 		}
 	}
 }

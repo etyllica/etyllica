@@ -1,5 +1,6 @@
 package br.com.etyllica.core.linear;
 
+import br.com.etyllica.linear.Triangle;
 import org.junit.Assert;
 import org.junit.Test;
 

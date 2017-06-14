@@ -1,6 +1,6 @@
 package br.com.etyllica.ui.selection;
 
-import br.com.etyllica.core.event.MouseState;
+import br.com.etyllica.commons.event.MouseState;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.Layer;
 

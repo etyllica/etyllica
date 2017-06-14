@@ -1,7 +1,7 @@
 package examples.etyllica.joystick;
 
 import br.com.etyllica.EtyllicaApplet;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.input.JoystickHandler;
 
 public class Tutorial12 extends EtyllicaApplet {

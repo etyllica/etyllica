@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.base.BaseButton;
 

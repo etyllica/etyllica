@@ -2,9 +2,9 @@ package br.com.etyllica.ui;
 
 import java.awt.Color;
 
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.GUIEvent;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.BufferedLayer;
 

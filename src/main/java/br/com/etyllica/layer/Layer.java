@@ -2,9 +2,9 @@ package br.com.etyllica.layer;
 
 import java.awt.geom.AffineTransform;
 
-import br.com.etyllica.core.Drawable;
-import br.com.etyllica.core.collision.CollisionDetector;
-import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.commons.Drawable;
+import br.com.etyllica.commons.collision.CollisionDetector;
+import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 
 /**

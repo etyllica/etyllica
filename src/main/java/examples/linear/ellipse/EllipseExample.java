@@ -1,7 +1,7 @@
 package examples.linear.ellipse;
 
 import br.com.etyllica.Etyllica;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.context.Application;
 import examples.linear.ellipse.application.EllipseDrawing;
 
 public class EllipseExample extends Etyllica {

@@ -2,8 +2,8 @@ package br.com.etyllica.core;
 
 import java.awt.Graphics;
 
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.engine.EtyllicaFrame;
+import br.com.etyllica.commons.module.Module;
+import br.com.etyllica.commons.context.Application;
 
 public interface Core {
 	void initMonitors(int width, int height);

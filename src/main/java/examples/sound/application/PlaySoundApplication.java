@@ -4,9 +4,9 @@ import java.awt.Color;
 
 import sound.model.Sound;
 import br.com.etyllica.awt.SVGColor;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.PointerEvent;
-import br.com.etyllica.core.event.PointerState;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.event.PointerState;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.Layer;
 

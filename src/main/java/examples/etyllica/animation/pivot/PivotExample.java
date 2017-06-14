@@ -3,12 +3,12 @@ package examples.etyllica.animation.pivot;
 import java.awt.Color;
 import java.util.Set;
 
-import br.com.etyllica.core.animation.pivot.Part;
-import br.com.etyllica.core.context.Application;
-import br.com.etyllica.core.event.KeyEvent;
-import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.animation.pivot.Part;
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.linear.Point2D;
+import br.com.etyllica.linear.Point2D;
 
 public class PivotExample extends Application {
 

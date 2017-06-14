@@ -1,35 +1,35 @@
 package examples.etyllica.tutorial14;
 
 
-import br.com.etyllica.core.animation.script.FrameAnimation;
-import br.com.etyllica.core.context.Application;
+import br.com.etyllica.commons.animation.AnimationModule;
+import br.com.etyllica.commons.animation.script.FrameAnimation;
+import br.com.etyllica.context.SceneApplication;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.AnimatedLayer;
 
-public class SpriteAnimationTutorial extends Application{
+public class SpriteAnimationTutorial extends SceneApplication {
 
-	public SpriteAnimationTutorial(int w, int h){
-		super(w,h);
-	}
-	
-	private AnimatedLayer fruit;
-	
-	@Override
-	public void load() {
-		
-		fruit = new AnimatedLayer(20, 20, 16, 16, "fruits.png");
-		fruit.setFrames(3);
-		//fruit.setOscilate(true);
-		fruit.setSpeed(500);
-		
-		this.scene.addAnimation(new FrameAnimation(fruit));
-		
-		loading = 100;
-	}
+    public SpriteAnimationTutorial(int w, int h) {
+        super(w, h);
+    }
 
-	@Override
-	public void draw(Graphics g) {
-		fruit.draw(g);		
-	}
+    private AnimatedLayer fruit;
+
+    @Override
+    public void load() {
+        fruit = new AnimatedLayer(20, 60, 16, 16, "fruits.png");
+        fruit.setFrames(3);
+        //fruit.setOscilate(true);
+        fruit.setSpeed(500);
+
+        AnimationModule.getInstance().add(new FrameAnimation(fruit));
+
+        loading = 100;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        fruit.draw(g);
+    }
 
 }

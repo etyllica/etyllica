@@ -4,10 +4,10 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etyllica.cinematics.Camera;
-import br.com.etyllica.core.context.Context;
-import br.com.etyllica.core.context.ContextContainer;
-import br.com.etyllica.core.context.Session;
+import br.com.etyllica.awt.camera.Camera;
+import br.com.etyllica.commons.context.Context;
+import br.com.etyllica.commons.context.ContextContainer;
+import br.com.etyllica.commons.context.Session;
 import br.com.etyllica.layer.GeometricLayer;
 
 /**
@@ -53,6 +53,7 @@ public class AWTWindow extends GeometricLayer implements ContextContainer {
 
 	public void setApplication(Context application) {
 		this.application = application;
+		this.application.setSession(session);
 	}
 	
 	public void closeWindow() {
