@@ -87,11 +87,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 		initMonitors(width, height);
 		moveToCenter();
 
-		Session session = new Session();
-		session.put(COMPONENT, component);
-
 		window = new AWTWindow(component.getX(), component.getY(), width, height);
-		window.setSessionMap(session);
 		window.setComponent(component);
 
 		gameLoop = new FrameSkippingLoop(this);
@@ -129,10 +125,6 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 		int y = firstMonitor.getH()/2-component.getHeight()/2;
 
 		component.setLocation(x, y);
-	}
-
-	public void setSession(Session session) {
-		window.setSessionMap(session);
 	}
 
 	private void initGraphics(int width, int height) {
@@ -341,6 +333,12 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 	private void updateEngine(double delta) {
 		GUIEvent event = getSuperEvent();
 		engine.updateSuperEvent(event);
+	}
+
+	protected Session buildSession() {
+		Session session = new Session();
+		session.put(COMPONENT, component);
+		return session;
 	}
 
 	@Override

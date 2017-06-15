@@ -71,7 +71,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     protected List<Monitor> monitors = new ArrayList<Monitor>();
 
-    private Session session = new Session();
+    protected Session session = buildSession();
 
     protected ApplicationLoader applicationLoader;
 
@@ -446,11 +446,14 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     public void changeApplication() {
         Context currentApplication = currentContext();
-        //Remove Handlers
+        // Remove Handlers
         modules.dispose(currentApplication);
         currentApplication.dispose();
 
         Context nextApplication = currentApplication.getNextApplication();
+
+        // Setup nextApplication
+        nextApplication.setSession(session);
         nextApplication.setDrawCursor(currentApplication.isDrawCursor());
 
         reload(nextApplication);
@@ -518,6 +521,10 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     public void onLoad(Context context) {
         activeWindow.setApplication(context);
         context.setLoaded(true);
+    }
+
+    protected Session buildSession() {
+        return new Session();
     }
 
     public void addModule(Module module) {

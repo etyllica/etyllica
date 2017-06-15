@@ -22,12 +22,7 @@ public class AWTWindow extends GeometricLayer implements ContextContainer {
 	
 	protected Context application;
 
-	//TODO Change to Application backApplication
-	protected List<Context> oldApplications = new ArrayList<Context>();
-
 	protected Camera camera;
-	
-	protected Session session = new Session();
 
 	protected boolean close = false;
 	
@@ -53,7 +48,6 @@ public class AWTWindow extends GeometricLayer implements ContextContainer {
 
 	public void setApplication(Context application) {
 		this.application = application;
-		this.application.setSession(session);
 	}
 	
 	public void closeWindow() {
@@ -74,14 +68,6 @@ public class AWTWindow extends GeometricLayer implements ContextContainer {
 
 	public void setWindows(List<AWTWindow> windows) {
 		this.windows = windows;
-	}
-	
-	public Session getSession() {
-		return session;
-	}
-
-	public void setSessionMap(Session sessionMap) {
-		this.session = sessionMap;
 	}
 
 	public Camera getCamera() {
