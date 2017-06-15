@@ -115,7 +115,7 @@ public class ApplicationLoader {
 		listener.onLoad(application);
 	}
 	
-	private void checkForLoadApplication(Context context) {
+	private void checkForCustomLoadApplication(Context context) {
 		DefaultLoadApplication loadApp = context.getLoadApplication();
 		
 		if(loadApp != null) {
@@ -125,7 +125,7 @@ public class ApplicationLoader {
 	
 	public DefaultLoadApplication reloadApplication(LoaderListener listener, Context context) {		
 		context.setLoaded(false);
-		checkForLoadApplication(context);
+		checkForCustomLoadApplication(context);
 		
 		this.listener = listener;
 		this.application = context;

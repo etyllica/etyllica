@@ -184,6 +184,8 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 	}
 
 	public void startCore(Application application) {
+		//Setup first Application
+		application.setSession(session);
 
 		this.window.setApplication(application);
 		replaceWindow(window);

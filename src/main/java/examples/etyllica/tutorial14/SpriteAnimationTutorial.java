@@ -24,6 +24,8 @@ public class SpriteAnimationTutorial extends SceneApplication {
 
         AnimationModule.getInstance().add(new FrameAnimation(fruit));
 
+        session.put("hello", "my friend");
+
         loading = 100;
     }
 
