@@ -49,7 +49,7 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 
 	public void timeUpdate(long now) {
 
-		if(!CollisionDetector.colidePolygon(rectangle1, rectangle2)) {
+		if(!rectangle1.colideRectRect(rectangle2)) {
 			color = Color.BLUE;
 		} else {			
 			color = Color.YELLOW;
@@ -57,7 +57,7 @@ public class ColisionElements extends Application implements UpdateIntervalListe
 		
 		rectangle2.setOffsetAngle(10);
 		
-		if(orangeRectangle.colideRect(greenRectangle)) {
+		if(orangeRectangle.colideRectRect(greenRectangle)) {
 			colideGreenOrange = true;
 		} else {
 			colideGreenOrange = false;

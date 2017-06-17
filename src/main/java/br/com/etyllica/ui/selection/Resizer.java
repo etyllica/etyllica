@@ -203,7 +203,7 @@ public class Resizer<T extends Layer> {
 		if (!dragged) {
 			for (int b = 0; b < 9; b++) {
 
-				if (CollisionDetector.colideRectPoint(points[b], mx, my)) {
+				if (points[b].colideRectPoint(mx, my)) {
 					lastIndex = b;
 
 					changer.changeMouseState(points[b].getState());

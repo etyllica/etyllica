@@ -165,7 +165,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 		Point p = this.component.getLocation();
 
 		for(Monitor monitor: monitors) {
-			if(CollisionDetector.colideRectPoint(monitor, p.x, p.y)) {
+			if(monitor.colideRectPoint(p.x, p.y)) {
 				selectedMonitor = monitor;
 			}
 		}

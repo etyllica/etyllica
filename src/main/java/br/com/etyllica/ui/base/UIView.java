@@ -88,8 +88,8 @@ public abstract class UIView extends View {
 	}
 
 	@Override
-	public boolean colideRect(int bx, int by, int bw, int bh) {
-		return delegatedView.colideRect(bx, by, bw, bh);
+	public boolean colideRectRect(int bx, int by, int bw, int bh) {
+		return delegatedView.colideRectRect(bx, by, bw, bh);
 	}
 
 	@Override
