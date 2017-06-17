@@ -85,13 +85,16 @@ public class CollisionDetector {
     /**
      * Rectangle To Point.
      */
-    public static boolean colideRectPoint(double rectWidth, double rectHeight, double rectRotation, double rectCenterX, double rectCenterY, double pointX, double pointY) {
+    public static boolean colideRectPoint(double rectX, double rectY, double rectWidth, double rectHeight, double rectAngle, double pointX, double pointY) {
 
-        if (rectRotation == 0)   //High speed for rectangles without rotation
+        double rectCenterX = rectX+rectWidth/2;
+        double rectCenterY = rectY+rectHeight/2;
+
+        if (rectAngle == 0)   //High speed for rectangles without rotation
             return Math.abs(rectCenterX - pointX) < rectWidth / 2 && Math.abs(rectCenterY - pointY) < rectHeight / 2;
 
-        final double cos = Math.cos(rectRotation);
-        final double sin = Math.cos(rectRotation);
+        final double cos = Math.cos(rectAngle);
+        final double sin = Math.cos(rectAngle);
 
         double tx = cos * pointX - sin * pointY;
         double ty = cos * pointY + sin * pointX;
