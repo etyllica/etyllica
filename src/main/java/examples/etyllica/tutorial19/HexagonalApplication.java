@@ -31,7 +31,7 @@ public class HexagonalApplication extends Application implements UpdateIntervalL
 	@Override
 	public void timeUpdate(long now) {
 		
-		if(CollisionDetector.colideHexagonPoint(hexagon, mx, my)) {
+		if(CollisionDetector.colideHexagonPoint(hexagon.getX(), hexagon.getY(), hexagon.utilWidth(), hexagon.utilHeight(), mx, my)) {
 			hexagon.offsetNegativeBlue(0x130);
 		} else {
 			hexagon.resetImage();

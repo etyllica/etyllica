@@ -20,12 +20,12 @@ public class GeometricLayerTest {
 	@Test
 	public void testRectPointColision() {
 		
-		Assert.assertTrue(CollisionDetector.colideRectPoint(layer, 20, 20));
+		Assert.assertTrue(layer.colideRectPoint(20, 20));
 		
-		Assert.assertTrue(CollisionDetector.colideRectPoint(layer, 0, 31));
-		Assert.assertTrue(CollisionDetector.colideRectPoint(layer, 0, 32));
+		Assert.assertTrue(layer.colideRectPoint(0, 31));
+		Assert.assertTrue(layer.colideRectPoint(0, 32));
 		
-		Assert.assertFalse(CollisionDetector.colideRectPoint(layer, 0, 33));
+		Assert.assertFalse(layer.colideRectPoint(0, 33));
 		
 	}
 	

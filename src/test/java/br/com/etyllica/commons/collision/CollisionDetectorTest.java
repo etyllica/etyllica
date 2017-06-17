@@ -21,16 +21,16 @@ public class CollisionDetectorTest {
 	
 	@Test
 	public void testFixedCollision() {
-		Assert.assertTrue(CollisionDetector.colideRectPoint(fixedLayer, 20, 60));
-		Assert.assertFalse(CollisionDetector.colideRectPoint(fixedLayer, 19, 60));
+		Assert.assertTrue(fixedLayer.colideRectPoint(20, 60));
+		Assert.assertFalse(fixedLayer.colideRectPoint(19, 60));
 	}
 	
 	@Test
 	public void testRotatedCollision() {
-		Assert.assertTrue(CollisionDetector.colideRectPoint(rotatedLayer, 220, 80));
+		Assert.assertTrue(rotatedLayer.colideRectPoint(220, 80));
 		
-		Assert.assertFalse(CollisionDetector.colideRectPoint(rotatedLayer, 20, 60));
-		Assert.assertFalse(CollisionDetector.colideRectPoint(rotatedLayer, 19, 60));
+		Assert.assertFalse(rotatedLayer.colideRectPoint(20, 60));
+		Assert.assertFalse(rotatedLayer.colideRectPoint(19, 60));
 	}
 	
 }

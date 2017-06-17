@@ -1,6 +1,6 @@
 package br.com.etyllica.linear;
 
-import br.com.etyllica.util.math.EtyllicaMath;
+import br.com.etyllica.commons.math.EtyllicaMath;
 
 public class Line2D {
 

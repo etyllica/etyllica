@@ -6,7 +6,7 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.linear.Rectangle;
 import br.com.etyllica.loader.image.ImageLoader;
-import br.com.etyllica.util.math.EtyllicaMath;
+import br.com.etyllica.commons.math.EtyllicaMath;
 
 /**
  * 
@@ -150,7 +150,7 @@ public class ImageLayer extends StaticLayer {
 	}	
 
 	public boolean colideRetangular(int bx, int by, int bw, int bh) {
-		return colideRect(bx, by, bw, bh);
+		return colideRectRect(bx, by, bw, bh);
 	}
 
 	public boolean colideRetangular(Layer b) {
@@ -276,7 +276,7 @@ public class ImageLayer extends StaticLayer {
 	}
 	
 	public boolean onMouse(Mouse mouse) {
-		return CollisionDetector.colideRectPoint(this, mouse.getX(), mouse.getY());
+		return colideRectPoint(mouse.getX(), mouse.getY());
 	}
 
 	public void clone(ImageLayer b) {

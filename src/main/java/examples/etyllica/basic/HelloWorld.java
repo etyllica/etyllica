@@ -3,6 +3,8 @@ package examples.etyllica.basic;
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.commons.context.Application;
 
+import java.awt.*;
+
 public class HelloWorld extends Etyllica {
 
 	private static final long serialVersionUID = 1L;

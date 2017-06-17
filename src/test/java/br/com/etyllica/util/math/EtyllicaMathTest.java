@@ -3,7 +3,7 @@ package br.com.etyllica.util.math;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.etyllica.util.math.EtyllicaMath;
+import br.com.etyllica.commons.math.EtyllicaMath;
 
 public class EtyllicaMathTest {
 

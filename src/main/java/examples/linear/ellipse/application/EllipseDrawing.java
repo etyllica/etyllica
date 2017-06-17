@@ -24,7 +24,7 @@ public class EllipseDrawing extends Application {
 		
 		for (int j = 0; j < h; j++) {
 			for (int i = 0; i < w; i++) {
-				if(CollisionDetector.colideEllipsePoint(ellipse, i, j)) {
+				if(ellipse.colideEllipsePoint(i, j)) {
 					mask[j][i] = true;
 				}
 			}

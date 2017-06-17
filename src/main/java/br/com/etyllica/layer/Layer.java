@@ -6,6 +6,7 @@ import br.com.etyllica.commons.Drawable;
 import br.com.etyllica.commons.collision.CollisionDetector;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.linear.Point2D;
 
 /**
  * 
@@ -184,8 +185,8 @@ public class Layer extends GeometricLayer implements Drawable {
 	 * @param my
 	 * @return
 	 */
-	public boolean onMouse(int px, int py) {
-		return CollisionDetector.colideRectPoint(this, px, py);
+	public boolean onMouse(int mx, int my) {
+		return CollisionDetector.colideRectPoint(x, y, utilWidth(), utilHeight(), mx, my);
 	}
 
 	public AffineTransform getTransform() {
@@ -233,5 +234,53 @@ public class Layer extends GeometricLayer implements Drawable {
 		setScaleY(layer.getScaleY());
 		setAngle(layer.getAngle());
 		setOpacity(layer.getOpacity());
+	}
+
+	/**
+	 * Code found at: http://stackoverflow.com/questions/5650032/collision-detection-with-rotated-rectangles
+	 */
+	public boolean colideRectPoint(double px, double py) {
+		int rectWidth = utilWidth();
+		int rectHeight = utilHeight();
+		int offsetX = 0;
+		int offsetY = 0;
+
+		if (getScaleX() != 1) {
+			rectWidth *= getScaleX();
+			offsetX = (int) (utilWidth() * (1 - getScaleX())) / 2;
+		}
+
+		if (getScaleY() != 1) {
+			rectHeight *= getScaleY();
+			offsetY = (int) (utilHeight() * (1 - getScaleY())) / 2;
+		}
+
+		int rectCenterX = getX() + offsetX + rectWidth / 2;
+		int rectCenterY = getY() + offsetY + rectHeight / 2;
+
+		double rectRotation = Math.toRadians(-getAngle());
+
+		return CollisionDetector.colideRectPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
+	}
+
+	public boolean colideRectPoint(Point2D point) {
+		int rectCenterX = getX() + utilWidth() / 2;
+		int rectCenterY = getY() + utilHeight() / 2;
+		int rectWidth = utilWidth();
+		int rectHeight = utilHeight();
+
+		double rectRotation = Math.toRadians(-getAngle());
+
+		return CollisionDetector.colideRectPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, point.getX(), point.getY());
+	}
+
+	public boolean colide(Layer b) {
+		if (getAngle() == 0 && b.getAngle() == 0) {
+			return ((getX() + utilWidth() / 2 - b.getX() + b.utilWidth() / 2) * 2 < (utilWidth() + b.utilWidth())) &&
+					((getY() + utilHeight() / 2 - b.getY() + b.utilHeight() / 2) * 2 < (utilHeight() + b.utilHeight()));
+		} else {
+			return CollisionDetector.colidePolygon(getX(), getY(), utilWidth(), utilHeight(), getAngle(),
+					b.getX(), b.getY(), b.utilWidth(), b.utilHeight(), b.getAngle());
+		}
 	}
 }
