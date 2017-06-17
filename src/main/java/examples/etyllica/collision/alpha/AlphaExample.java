@@ -1,26 +1,26 @@
-package examples.fx;
+package examples.etyllica.collision.alpha;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.commons.context.Application;
-import examples.fx.application.StretchApplication;
+import examples.etyllica.collision.hexagon.HexagonExample;
 
-public class StretchTutorial extends Etyllica {
+public class AlphaExample extends Etyllica {
 
     private static final long serialVersionUID = 1L;
 
-    public StretchTutorial() {
-        super(800, 600);
+    public AlphaExample() {
+        super(320, 100);
     }
 
     public static void main(String[] args) {
-        StretchTutorial app = new StretchTutorial();
+        AlphaExample app = new AlphaExample();
         app.init();
     }
 
     @Override
     public Application startApplication() {
         //initialSetup("../../");
-        return new StretchApplication(w, h);
+        return new AlphaCollision(w, h);
     }
 
 }

@@ -1,17 +1,17 @@
-package examples.etyllica.animation.pivot;
+package examples.etyllica.animation.tween;
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.commons.context.Application;
 
-public class PivotExample extends Etyllica {
+public class TweenExample extends Etyllica {
 
 	private static final long serialVersionUID = 1L;
 
-	public PivotExample() {
+	public TweenExample() {
 		super(800, 600);
 	}
 
 	public static void main(String[] args){
-		PivotExample viewer = new PivotExample();
+		TweenExample viewer = new TweenExample();
 		viewer.init();
 	}	
 	
@@ -19,7 +19,7 @@ public class PivotExample extends Etyllica {
 	public Application startApplication() {
 		initialSetup("../");
 
-		return new PivotApplication(w,h);
+		return new TweenBall(w,h);
 	}
 
 }

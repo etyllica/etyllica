@@ -1,26 +1,25 @@
-package examples.fx;
+package examples.etyllica.particle.basic;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.commons.context.Application;
-import examples.fx.application.StretchApplication;
 
-public class StretchTutorial extends Etyllica {
+public class ParticleExample extends Etyllica {
 
     private static final long serialVersionUID = 1L;
 
-    public StretchTutorial() {
+    public ParticleExample() {
         super(800, 600);
     }
 
     public static void main(String[] args) {
-        StretchTutorial app = new StretchTutorial();
+        ParticleExample app = new ParticleExample();
         app.init();
     }
 
     @Override
     public Application startApplication() {
         //initialSetup("../../");
-        return new StretchApplication(w, h);
+        return new ParticleApplication(w, h);
     }
 
 }

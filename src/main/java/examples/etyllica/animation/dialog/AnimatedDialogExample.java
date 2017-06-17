@@ -1,26 +1,24 @@
-package examples.fx;
+package examples.etyllica.animation.dialog;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.commons.context.Application;
-import examples.fx.application.StretchApplication;
 
-public class StretchTutorial extends Etyllica {
+public class AnimatedDialogExample extends Etyllica {
 
     private static final long serialVersionUID = 1L;
 
-    public StretchTutorial() {
+    public AnimatedDialogExample() {
         super(800, 600);
     }
 
     public static void main(String[] args) {
-        StretchTutorial app = new StretchTutorial();
+        AnimatedDialogExample app = new AnimatedDialogExample();
         app.init();
     }
 
     @Override
     public Application startApplication() {
-        //initialSetup("../../");
-        return new StretchApplication(w, h);
+        return new AnimatedDialog(w, h);
     }
 
 }

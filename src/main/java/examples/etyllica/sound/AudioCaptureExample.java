@@ -1,25 +1,30 @@
-package examples.etyllica.swing;
+package examples.etyllica.sound;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.commons.context.Application;
 
-public class SwingIntegration extends Etyllica {
+/**
+ * @author yuripourre
+ * @license LGPLv3
+ */
+
+public class AudioCaptureExample extends Etyllica {
 
     private static final long serialVersionUID = 1L;
 
-    public SwingIntegration() {
-        super(800, 600);
+    public AudioCaptureExample() {
+        super(640, 480);
     }
 
     public static void main(String[] args) {
-        SwingIntegration app = new SwingIntegration();
+        AudioCaptureExample app = new AudioCaptureExample();
         app.init();
     }
 
     @Override
     public Application startApplication() {
         initialSetup("../../");
-        return new FileExample(w, h);
+        return new AudioCaptureApplication(w, h);
     }
 
 }
