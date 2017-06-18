@@ -1,4 +1,4 @@
-package br.com.etyllica.commons.collision;
+package br.com.etyllica.linear;
 
 import java.util.ArrayList;
 import java.util.List;
