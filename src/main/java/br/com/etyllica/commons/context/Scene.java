@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.etyllica.commons.Drawable;
 import br.com.etyllica.commons.Updatable;
 import br.com.etyllica.commons.animation.AnimationModule;
 import br.com.etyllica.commons.animation.script.AnimationScript;
@@ -18,6 +19,7 @@ import br.com.etyllica.layer.Layer;
 public class Scene implements UIComponent {
 	
 	protected List<Updatable> updatables = new ArrayList<Updatable>();
+	protected List<Drawable> drawables = new ArrayList<Drawable>();
 	
 	protected Map<Layer, List<Layer>> graph = new LinkedHashMap<Layer, List<Layer>>();
 	
@@ -31,7 +33,7 @@ public class Scene implements UIComponent {
 	
 	public void addEmitter(Emitter emitter) {
 		updatables.add(emitter);
-		add(emitter);
+		drawables.add(emitter);
 	}
 	
 	public void add(Layer layer) {
@@ -66,6 +68,10 @@ public class Scene implements UIComponent {
 		
 		for(Layer layer: graph.keySet()) {
 			drawLayer(g, layer);
+		}
+
+		for(Drawable drawable: drawables) {
+			drawable.draw(g);
 		}
 	}
 
