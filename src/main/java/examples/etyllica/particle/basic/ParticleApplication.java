@@ -14,8 +14,9 @@ public class ParticleApplication extends SceneApplication {
 
     @Override
     public void load() {
-
-        emitter = new BasicEmitter(50, 450);
+        emitter = new BasicEmitter(w/2, h/2);
+        emitter.setAngle(90);
+        emitter.setVariance(90);
 
         scene.addEmitter(emitter);
 
