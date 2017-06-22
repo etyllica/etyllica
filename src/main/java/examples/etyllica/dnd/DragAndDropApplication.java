@@ -1,12 +1,12 @@
 package examples.etyllica.dnd;
 
+import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.graphics.Color;
+import br.com.etyllica.core.graphics.Graphics;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import br.com.etyllica.awt.SVGColor;
-import br.com.etyllica.commons.context.Application;
-import br.com.etyllica.core.graphics.Graphics;
 
 public class DragAndDropApplication extends Application {
 
@@ -26,7 +26,7 @@ public class DragAndDropApplication extends Application {
 	public void draw(Graphics g) {
 		if(dragAction) {
 			int width = 4;
-			g.setColor(SVGColor.AQUA);
+			g.setColor(Color.AQUA);
 			g.setLineWidth(width);
 			g.drawRect(x+width, y+width, w-width*2, h-width*2);
 			g.setLineWidth(1f);
@@ -34,7 +34,7 @@ public class DragAndDropApplication extends Application {
 
 		if(!paths.isEmpty()) {
 			g.setFontSize(16f);
-			g.setColor(SVGColor.BLACK);
+			g.setColor(Color.BLACK);
 			int count = 0;
 			for(String path : paths) {				
 				g.drawString(path, 20, 60+count*20);

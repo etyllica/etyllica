@@ -25,8 +25,12 @@ public interface TextGraphics {
 	public void drawStringShadow(String text, int x, int y, int w, int h);
 
 	public void drawStringShadow(String text, int x, int y, int w, int h, Color shadowColor);
+
+	public void drawStringShadow(String text, int x, int y, int w, int h, br.com.etyllica.commons.graphics.Color shadowColor);
 	
 	public void drawStringShadow(String text, float x, float y, float w, float h, Color shadowColor);
+
+	public void drawStringShadow(String text, float x, float y, float w, float h, br.com.etyllica.commons.graphics.Color shadowColor);
 
 	public void drawStringBorder(String text, float x, float y);
 	
@@ -42,7 +46,11 @@ public interface TextGraphics {
 
 	public void drawStringShadow(String text, int x, int y, Color shadowColor);
 
+	public void drawStringShadow(String text, int x, int y, br.com.etyllica.commons.graphics.Color shadowColor);
+
 	public void drawStringShadow(String text, float x, float y, Color shadowColor);
+
+	public void drawStringShadow(String text, float x, float y, br.com.etyllica.commons.graphics.Color shadowColor);
 
 	public void drawStringShadowX(String text, int y);
 

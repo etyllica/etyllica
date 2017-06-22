@@ -140,6 +140,8 @@ public interface Graphics extends TextGraphics {
 	 */
 	public void setColor(Color color);
 
+	public void setColor(br.com.etyllica.commons.graphics.Color color);
+
 	public void setFontSize(float size);
 
 	/**

@@ -10,8 +10,7 @@ import java.awt.image.DataBufferByte;
 import java.awt.image.DataBufferInt;
 import java.awt.image.Raster;
 
-import br.com.etyllica.awt.SVGColor;
-import br.com.etyllica.commons.collision.CollisionDetector;
+import br.com.etyllica.awt.ColorHelper;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.loader.image.ImageLoader;
 
@@ -193,7 +192,7 @@ public class BufferedLayer extends ImageLayer {
 	public Graphics2D clearGraphics() {
 		
 		Graphics2D g2 = originalBuffer.createGraphics();
-		g2.setColor(SVGColor.TRANSPARENT);
+		g2.setColor(ColorHelper.convert(br.com.etyllica.commons.graphics.Color.TRANSPARENT));
         g2.clearRect(x, y, w, h);
         
         graphics = buffer.createGraphics();

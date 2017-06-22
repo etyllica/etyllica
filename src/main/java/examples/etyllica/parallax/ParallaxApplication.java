@@ -1,9 +1,9 @@
 package examples.etyllica.parallax;
 
-import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.cinematics.parallax.ImageParallax;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.context.UpdateIntervalListener;
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
 
 public class ParallaxApplication extends Application implements UpdateIntervalListener {
@@ -34,7 +34,7 @@ public class ParallaxApplication extends Application implements UpdateIntervalLi
 	@Override
 	public void draw(Graphics g) {
 
-		g.setColor(SVGColor.SKY_BLUE);
+		g.setColor(Color.SKY_BLUE);
 		g.fillRect(0, 0, w, h);
 		
 		parallax.draw(g);

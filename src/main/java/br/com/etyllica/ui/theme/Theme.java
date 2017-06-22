@@ -1,9 +1,9 @@
 package br.com.etyllica.ui.theme;
 
-import java.awt.Color;
 import java.awt.Font;
 
 import br.com.etyllica.awt.ColorHelper;
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.ui.style.Style;
 
 /**
@@ -275,8 +275,8 @@ public abstract class Theme implements ThemeFactory {
 
 	public void setBaseColor(Color baseColor) {
 		this.baseColor = baseColor;
-		this.selectionColor = ColorHelper.brighter(baseColor, 16);
-		this.activeColor = ColorHelper.darker(baseColor, 16);
+		this.selectionColor = baseColor.brighter(16);
+		this.activeColor = baseColor.darker(16);
 	}
 
 	public Style getStyle() {

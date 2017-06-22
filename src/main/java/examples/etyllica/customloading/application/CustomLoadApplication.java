@@ -1,11 +1,9 @@
 package examples.etyllica.customloading.application;
 
-import java.awt.Color;
-
-import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
 
 public class CustomLoadApplication extends Application{
@@ -68,7 +66,7 @@ public class CustomLoadApplication extends Application{
 	public void draw(Graphics g) {
 
 		//Set Color to SVG Crimson
-		g.setColor(SVGColor.CRIMSON);		
+		g.setColor(Color.CRIMSON);
 		//Draw Background
 		g.fillRect(0, 0, w, h);
 		

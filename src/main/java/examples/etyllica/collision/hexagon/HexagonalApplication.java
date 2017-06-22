@@ -1,10 +1,10 @@
 package examples.etyllica.collision.hexagon;
 
-import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.commons.collision.CollisionDetector;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.context.UpdateIntervalListener;
 import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.BufferedLayer;
 
@@ -46,7 +46,7 @@ public class HexagonalApplication extends Application implements UpdateIntervalL
 	@Override
 	public void draw(Graphics g) {
 
-		g.setColor(SVGColor.SKY_BLUE);
+		g.setColor(Color.SKY_BLUE);
 		g.fillRect(0, 0, w, h);
 		
 		hexagon.draw(g);
