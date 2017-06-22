@@ -615,6 +615,14 @@ public class AWTGraphics implements Graphics {
 	 *
 	 * @param font
 	 */
+	public void setFont(br.com.etyllica.core.graphics.Font font) {
+		screen.setFont(font.getFont());
+	}
+
+	/**
+	 *
+	 * @param font
+	 */
 	public void setFont(Font font) {
 		screen.setFont(font);
 	}
@@ -1102,20 +1110,11 @@ public class AWTGraphics implements Graphics {
 		return vimg;
 	}
 
-	/**
-	 *
-	 * @param startX
-	 * @param startY
-	 * @param w
-	 * @param h
-	 * @param rgbArray
-	 * @param offset
-	 * @param scansize
-	 */
-	/*public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
-
-		vimg..setRGB(startX, startY, w, h, rgbArray, offset, scansize);
-	}*/
+	/*
+	public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
+		vimg.setRGB(startX, startY, w, h, rgbArray, offset, scansize);
+	}
+	*/
 
 	public void drawImage(BufferedImage image, int x, int y) {
 		screen.drawImage(image, x, y, null);

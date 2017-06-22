@@ -120,16 +120,6 @@ public interface Graphics extends TextGraphics {
 
 	/**
 	 * 
-	 * @param font
-	 */
-	public void setFont(Font font);
-
-	public Font getFont();
-
-	public FontRenderContext getFontRenderContext();
-
-	/**
-	 * 
 	 * @param color
 	 */
 	public void setColor(int color) ;
@@ -141,8 +131,6 @@ public interface Graphics extends TextGraphics {
 	public void setColor(Color color);
 
 	public void setColor(br.com.etyllica.commons.graphics.Color color);
-
-	public void setFontSize(float size);
 
 	/**
 	 * 
@@ -487,10 +475,6 @@ public interface Graphics extends TextGraphics {
 	 */
 	public void fill(Shape shape);
 
-	public FontMetrics getFontMetrics();
-	
-	public int textWidth(String text);
-
 	/*public void setGraphics(GLGraphics2D graphics) {		
 		this.screen = graphics;
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -498,7 +482,7 @@ public interface Graphics extends TextGraphics {
 
 	public BufferedImage getBimg();
 
-	/**
+	/*
 	 * 
 	 * @param startX
 	 * @param startY
@@ -507,9 +491,8 @@ public interface Graphics extends TextGraphics {
 	 * @param rgbArray
 	 * @param offset
 	 * @param scansize
-	 */
-	/*public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
 
+	public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
 		vimg..setRGB(startX, startY, w, h, rgbArray, offset, scansize);
 	}*/
 
