@@ -2,8 +2,8 @@ package examples.etyllica.graph.view;
 
 import java.util.List;
 
-import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.commons.context.Application;
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.linear.Point2D;
 import br.com.etyllica.linear.graph.Node;
@@ -70,9 +70,9 @@ public class SimpleGraphExample extends Application{
 		
 		int radius = 12;
 		
-		g.setColor(SVGColor.BLACK);
+		g.setColor(Color.BLACK);
 		g.fillCircle(point, radius);
-		g.setColor(SVGColor.WHITE);
+		g.setColor(Color.WHITE);
 		
 		int x = (int)point.getX()-radius;
 		int y = (int)point.getY()-radius;
@@ -80,7 +80,7 @@ public class SimpleGraphExample extends Application{
 		int h = radius*2;
 		
 		g.drawStringBorder(Integer.toString(node.getData()), x, y, w, h);
-		g.setColor(SVGColor.BLACK);
+		g.setColor(Color.BLACK);
 	}
 	
 	private void drawNode(Graphics g, Node<Integer> node) {
@@ -96,7 +96,7 @@ public class SimpleGraphExample extends Application{
 		
 		List<IntegerEdge> edges = graph.getEdges(node);
 		
-		g.setColor(SVGColor.RED);
+		g.setColor(Color.RED);
 		
 		for(IntegerEdge edge: edges) {
 			

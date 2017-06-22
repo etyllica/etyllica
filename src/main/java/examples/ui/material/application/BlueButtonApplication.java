@@ -1,15 +1,15 @@
 package examples.ui.material.application;
 
-import java.awt.Font;
-
-import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.UI;
 import br.com.etyllica.ui.label.TextLabel;
 import br.com.etyllica.ui.theme.ThemeManager;
 import examples.ui.material.application.model.MaterialButton;
+
+import java.awt.*;
 
 public class BlueButtonApplication extends Application {
 	
@@ -27,8 +27,8 @@ public class BlueButtonApplication extends Application {
 
 	public void load() {
 		ThemeManager.getInstance().getTheme().setShadow(false);
-		ThemeManager.getInstance().getTheme().setBaseColor(SVGColor.DEEP_SKY_BLUE);
-		ThemeManager.getInstance().getTheme().setTextColor(SVGColor.WHITE);
+		ThemeManager.getInstance().getTheme().setBaseColor(Color.DEEP_SKY_BLUE);
+		ThemeManager.getInstance().getTheme().setTextColor(Color.WHITE);
 
 		TextLabel label = new TextLabel(text);
 		label.setFontStyle(Font.BOLD);

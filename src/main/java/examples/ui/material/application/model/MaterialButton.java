@@ -1,12 +1,9 @@
 package examples.ui.material.application.model;
 
-import br.com.etyllica.awt.ColorHelper;
-import br.com.etyllica.awt.SVGColor;
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.base.BaseButton;
 import br.com.etyllica.ui.theme.Theme;
-
-import java.awt.*;
 
 public class MaterialButton extends BaseButton {
 
@@ -40,7 +37,7 @@ public class MaterialButton extends BaseButton {
         }
 
         //Draw diffuse Button
-        g.setColor(ColorHelper.darker(baseColor, 8));
+        g.setColor(baseColor.darker(8));
         g.fillRoundRect(x, y + h - radius * 2, w, radius * 2 + 3, radius, radius);
 
         //Draw bottom effect
@@ -54,7 +51,7 @@ public class MaterialButton extends BaseButton {
 
         //Draw Shadow
         g.setAlpha(70);
-        g.setColor(SVGColor.GRAY);
+        g.setColor(Color.GRAY);
         g.drawLine(x + radius / 4 + 1, y + h + 3, x + w - radius / 2, y + h + 3);
 
         g.setAlpha(30);

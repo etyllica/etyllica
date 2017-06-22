@@ -1,18 +1,14 @@
 package br.com.etyllica.awt;
 
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Paint;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.Stroke;
+import br.com.etyllica.awt.camera.Camera;
+import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.layer.GeometricLayer;
+import br.com.etyllica.layer.Layer;
+import br.com.etyllica.linear.Line2D;
+import br.com.etyllica.linear.Point2D;
+import br.com.etyllica.linear.PointInt2D;
+
+import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
@@ -20,16 +16,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.VolatileImage;
 
-import br.com.etyllica.awt.camera.Camera;
-import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.linear.Line2D;
-import br.com.etyllica.linear.Point2D;
-import br.com.etyllica.linear.PointInt2D;
-import br.com.etyllica.layer.GeometricLayer;
-import br.com.etyllica.layer.Layer;
-
 /**
- * 
+ *
  * @author yuripourre
  * @license LGPLv3
  *
@@ -112,7 +100,7 @@ public class AWTGraphics implements Graphics {
 	}*/
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -136,7 +124,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -148,7 +136,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param exponent
 	 * @param x
@@ -193,12 +181,12 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
 	 * @param w
-	 * @param h 
+	 * @param h
 	 * @param shadowColor
 	 */
 	public void drawStringShadow(String text, int x, int y, int w, int h, Color shadowColor) {
@@ -208,8 +196,22 @@ public class AWTGraphics implements Graphics {
 		drawStringShadow(text, dx, dy,shadowColor);
 	}
 
+    /**
+     *
+     * @param text
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param shadowColor
+     */
+    public void drawStringShadow(String text, int x, int y, int w, int h, br.com.etyllica.commons.graphics.Color shadowColor) {
+        drawStringShadow(text, x, y, w, h, ColorHelper.convert(shadowColor));
+    }
+
+
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -221,11 +223,24 @@ public class AWTGraphics implements Graphics {
 		this.drawStringShadow(text, (int)x, (int)y, (int)w, (int)h, shadowColor);
 	}
 
+    /**
+     *
+     * @param text
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param shadowColor
+     */
+    public void drawStringShadow(String text, float x, float y, float w, float h, br.com.etyllica.commons.graphics.Color shadowColor) {
+        drawStringShadow(text, x, y, w, h, ColorHelper.convert(shadowColor));
+    }
+
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param offsetX
-	 * @param y 
+	 * @param y
 	 * @param border
 	 */
 	public void drawStringX(String text, float offsetX, float y, boolean border) {
@@ -250,15 +265,14 @@ public class AWTGraphics implements Graphics {
 		int dx = centralizeTextX(text, x, w);
 		int dy = centralizeTextY(text, y, h);
 
-		drawStringBorder(text, dx, dy);		
+		drawStringBorder(text, dx, dy);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
-	 * @param offsetX
-	 * @param y 
-	 * @param border
+	 * @param x
+	 * @param y
 	 */
 	public void drawStringBorder(String text, float x, float y) {
 
@@ -272,7 +286,7 @@ public class AWTGraphics implements Graphics {
 
 		TextLayout tl = new TextLayout(text, f, frc);
 
-		Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));        
+		Shape sha = tl.getOutline(AffineTransform.getTranslateInstance(x,y));
 
 		Color standardColor = screen.getColor();
 
@@ -284,9 +298,9 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
-	 * @param y 
+	 * @param y
 	 */
 	public void drawStringBorderX(String text, float y) {
 
@@ -296,17 +310,17 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
-	 * @param y 
+	 * @param y
 	 */
 	public void drawStringShadow(String text, int x, int y) {
 		drawStringShadow(text, x, y, shadowColor);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -316,7 +330,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -331,21 +345,43 @@ public class AWTGraphics implements Graphics {
 		screen.drawString(text,x,y);
 	}
 
+    /**
+     *
+     * @param text
+     * @param x
+     * @param y
+     * @param shadowColor
+     */
+	public void drawStringShadow(String text, int x, int y, br.com.etyllica.commons.graphics.Color shadowColor) {
+		drawStringShadow(text,x,y,ColorHelper.convert(shadowColor));
+	}
+
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
-	 * @param y 
+	 * @param y
 	 * @param shadowColor
 	 */
 	public void drawStringShadow(String text, float x, float y, Color shadowColor) {
 		this.drawStringShadow(text, (int)x, (int)y, shadowColor);
 	}
 
+    /**
+     *
+     * @param text
+     * @param x
+     * @param y
+     * @param shadowColor
+     */
+    public void drawStringShadow(String text, float x, float y, br.com.etyllica.commons.graphics.Color shadowColor) {
+        drawStringShadow(text,x,y,ColorHelper.convert(shadowColor));
+    }
+
 	/**
-	 * 
+	 *
 	 * @param text
-	 * @param y 
+	 * @param y
 	 */
 	public void drawStringShadowX(String text, int y) {
 		FontMetrics fm = screen.getFontMetrics();
@@ -360,8 +396,8 @@ public class AWTGraphics implements Graphics {
 		return centralizeTextX(text, 0, width);
 	}
 
-	
-	
+
+
 	private int centralizeTextX(String text, int x, int w) {
 		int textWidth = textWidth(text);
 
@@ -393,16 +429,16 @@ public class AWTGraphics implements Graphics {
 
 
 	/**
-	 * 
+	 *
 	 * @param text
-	 * @param y 
+	 * @param y
 	 */
 	public void drawStringShadowX(String text, float y) {
 		this.drawStringShadowX(text, (int)y);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -420,26 +456,26 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
-	 * @param y 
+	 * @param y
 	 */
 	public void drawStringX(String text, int y) {
 		drawStringX(text, 0, y, false);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param offsetX
-	 * @param y 
+	 * @param y
 	 */
 	public void drawStringX(String text, float offsetX, float y) {
 		drawStringX(text, offsetX, y, false);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param offsetX
 	 * @param y
@@ -453,7 +489,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param img
 	 * @param dx1
 	 * @param dy1
@@ -479,7 +515,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param layer
 	 */
 	public void drawRect(GeometricLayer layer) {
@@ -487,7 +523,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param layer
 	 */
 	public void drawRect(Layer layer) {
@@ -504,7 +540,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param layer
 	 */
 	public void fillOval(GeometricLayer layer) {
@@ -512,7 +548,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param layer
 	 * @param startAngle
 	 * @param arcAngle
@@ -523,7 +559,7 @@ public class AWTGraphics implements Graphics {
 
 	/** Delegated Methods */
 	/**
-	 * 
+	 *
 	 * @param width
 	 */
 	public void setLineWidth(float width) {
@@ -535,7 +571,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param tx
 	 */
 	public void setTransform(AffineTransform tx) {
@@ -546,7 +582,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param tx
 	 */
 	public void transform(AffineTransform tx) {
@@ -557,18 +593,18 @@ public class AWTGraphics implements Graphics {
 	}
 
 	public void resetTransform() {
-		setTransform(RESET_TRANSFORM);	
+		setTransform(RESET_TRANSFORM);
 	}
 
 	/**
-	 * Set basic stroke with width 1f 
+	 * Set basic stroke with width 1f
 	 */
 	public void resetStroke() {
 		screen.setStroke(new BasicStroke(1f));
 	}
 
 	/**
-	 * 
+	 *
 	 * @param stroke
 	 */
 	public void setStroke(Stroke stroke) {
@@ -576,7 +612,15 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
+	 * @param font
+	 */
+	public void setFont(br.com.etyllica.core.graphics.Font font) {
+		screen.setFont(font.getFont());
+	}
+
+	/**
+	 *
 	 * @param font
 	 */
 	public void setFont(Font font) {
@@ -592,7 +636,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param color
 	 */
 	public void setColor(int color) {
@@ -600,11 +644,19 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param color
 	 */
 	public void setColor(Color color) {
 		screen.setColor(color);
+	}
+
+	/**
+	 *
+	 * @param color
+	 */
+	public void setColor(br.com.etyllica.commons.graphics.Color color) {
+		screen.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()));
 	}
 
 	public void setFontSize(float size) {
@@ -612,7 +664,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param percent
 	 */
 	public void setAlpha(int percent) {
@@ -627,10 +679,10 @@ public class AWTGraphics implements Graphics {
 	public void setClearAlpha(int percent) {
 		float alpha = (float)percent/100;
 		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, alpha));
-	}	
+	}
 
 	/**
-	 * 
+	 *
 	 * @param opacity
 	 */
 	public void setOpacity(int opacity) {
@@ -644,14 +696,14 @@ public class AWTGraphics implements Graphics {
 	public void resetAlpha() {
 		resetOpacity();
 	}
-	
+
 	public void resetOpacity() {
 		float a = 1f;
 		screen.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, a));
 	}
 
 	/**
-	 * 
+	 *
 	 * @param img
 	 * @param x
 	 * @param y
@@ -661,7 +713,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -674,7 +726,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -687,7 +739,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -698,7 +750,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -709,16 +761,16 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param p
 	 * @param q
 	 */
 	public void drawLine(Point2D p, Point2D q) {
 		screen.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param line
 	 */
 	@Override
@@ -727,7 +779,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param polygon
 	 */
 	public void drawPolygon(Polygon polygon) {
@@ -735,7 +787,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param polygon
 	 */
 	public void fillPolygon(Polygon polygon) {
@@ -743,7 +795,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param layer
 	 */
 	public void fillRect(GeometricLayer layer) {
@@ -764,7 +816,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -775,7 +827,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -787,7 +839,7 @@ public class AWTGraphics implements Graphics {
 
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -799,7 +851,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -811,7 +863,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -824,7 +876,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -837,7 +889,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -848,7 +900,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -859,7 +911,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param width
@@ -872,7 +924,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param width
@@ -885,7 +937,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -896,7 +948,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -907,7 +959,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param cx
 	 * @param cy
 	 * @param radius
@@ -917,7 +969,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param cx
 	 * @param cy
 	 * @param radius
@@ -927,7 +979,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param cx
 	 * @param cy
 	 * @param radius
@@ -937,7 +989,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param point
 	 * @param radius
 	 */
@@ -946,7 +998,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param cx
 	 * @param cy
 	 * @param radius
@@ -956,7 +1008,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param cx
 	 * @param cy
 	 * @param radius
@@ -966,7 +1018,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param cx
 	 * @param cy
 	 * @param radius
@@ -976,7 +1028,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param point
 	 * @param radius
 	 */
@@ -985,7 +1037,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param point
 	 * @param radius
 	 */
@@ -994,7 +1046,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -1005,7 +1057,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -1016,7 +1068,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -1026,7 +1078,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param shape
 	 */
 	public void draw(Shape shape) {
@@ -1034,7 +1086,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param shape
 	 */
 	public void fill(Shape shape) {
@@ -1058,20 +1110,11 @@ public class AWTGraphics implements Graphics {
 		return vimg;
 	}
 
-	/**
-	 * 
-	 * @param startX
-	 * @param startY
-	 * @param w
-	 * @param h
-	 * @param rgbArray
-	 * @param offset
-	 * @param scansize
-	 */
-	/*public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
-
-		vimg..setRGB(startX, startY, w, h, rgbArray, offset, scansize);
-	}*/
+	/*
+	public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
+		vimg.setRGB(startX, startY, w, h, rgbArray, offset, scansize);
+	}
+	*/
 
 	public void drawImage(BufferedImage image, int x, int y) {
 		screen.drawImage(image, x, y, null);
@@ -1082,7 +1125,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 */
@@ -1091,7 +1134,7 @@ public class AWTGraphics implements Graphics {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 */
@@ -1129,7 +1172,7 @@ public class AWTGraphics implements Graphics {
 
 	public void setCamera(Camera camera) {
 		camera.resetImage();
-		setImage(camera.getBuffer());		
+		setImage(camera.getBuffer());
 	}
 
 	public void resetCamera(Camera camera) {
@@ -1192,13 +1235,13 @@ public class AWTGraphics implements Graphics {
 	@Override
 	public void beginImageBatch() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void endImageBatch() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

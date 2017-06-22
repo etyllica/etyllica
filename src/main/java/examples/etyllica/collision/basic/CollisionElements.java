@@ -1,12 +1,10 @@
 package examples.etyllica.collision.basic;
 
-import java.awt.Color;
-
-import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.context.UpdateIntervalListener;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
@@ -83,14 +81,14 @@ public class CollisionElements extends Application implements UpdateIntervalList
 		g.resetTransform();
 		
 		//Draw fixed rectangles
-		g.setColor(SVGColor.GREEN);
+		g.setColor(Color.GREEN);
 		g.fillRect(greenRectangle);
 		
-		g.setColor(SVGColor.ORANGE);
+		g.setColor(Color.ORANGE);
 		g.fillRect(orangeRectangle);
 		
 		if(colideGreenOrange) {
-			g.setColor(SVGColor.RED);
+			g.setColor(Color.RED);
 			g.drawRect(greenRectangle);
 			g.drawRect(orangeRectangle);
 		}

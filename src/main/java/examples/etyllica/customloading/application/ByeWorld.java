@@ -1,8 +1,8 @@
 package examples.etyllica.customloading.application;
 
-import br.com.etyllica.awt.SVGColor;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
 
 public class ByeWorld extends Application{
@@ -55,12 +55,12 @@ public class ByeWorld extends Application{
 	public void draw(Graphics g) {
 
 		//Set Background Color
-		g.setColor(SVGColor.ORANGE_RED);
+		g.setColor(Color.ORANGE_RED);
 
 		//Draw Background
 		g.fillRect(0, 0, w, h);
 
-		g.setColor(SVGColor.FOREST_GREEN);
+		g.setColor(Color.FOREST_GREEN);
 
 		//Write at center with shadow
 		g.drawStringShadowX("Bye World!", 100);

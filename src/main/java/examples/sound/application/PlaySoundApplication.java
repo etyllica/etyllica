@@ -1,9 +1,9 @@
 package examples.sound.application;
 
-import java.awt.Color;
 
+import br.com.etyllica.commons.graphics.Color;
 import sound.model.Sound;
-import br.com.etyllica.awt.SVGColor;
+
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.commons.event.PointerState;
@@ -38,7 +38,7 @@ public class PlaySoundApplication extends Application {
 
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(SVGColor.KHAKI);
+		g.setColor(Color.KHAKI);
 		g.fillRect(layer);
 		
 		g.setColor(Color.BLACK);
