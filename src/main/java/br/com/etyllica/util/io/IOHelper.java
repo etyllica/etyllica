@@ -12,10 +12,11 @@ import br.com.etyllica.util.StringUtils;
 public class IOHelper {
 
 	public static final String FILE_PREFIX = "file:///";
-	
+	public static final String STREAM_PREFIX = "stream:///";
+
 	public static final String ENCODING_UTF_8 = "UTF-8";
 
-	public static void write(String path, String text) {
+    public static void write(String path, String text) {
 		
 		Writer writer = null;
 		

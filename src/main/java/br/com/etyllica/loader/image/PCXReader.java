@@ -1,74 +1,5 @@
 package br.com.etyllica.loader.image;
 
-/**
- * PCX Image loader
- *
- *  include ported C code from:
- *
- *  PCXLoad
- *  Author	: Mustata Bogdan (LoneRunner)
- *  Contact	: lonerunner@planetquake.com (e-mail don't exist anymore)
- *
- * @author Michele Marcon
- * 
- * 
- * Updated by yuripourre to work with Etyllica Engine
- * 
- * This code had a minor bug and didn't open images smaller than 256x256 pixels.
- * 
- * I talked to a homonymous (Michele Marcon) who might be the owner.
- * 
- * See the e-mails below:
- * 
- *  2013/3/21 Yuri Pourre <yuripourre@gmail.com>
- *  
- *  Hi Michele,
- *  
- *  I found  a PCX Image Loader on Internet(sorry, I lost the link) and the author identify yourself just with Michele Marcon.
- *  
- *  I want to publish it under LGPL. So I'm looking for the authors.
- *  
- *  Reply me please.
- *  
- *  
- *  Best Regards
- *  
- *  Yuri 
- *  
- *  
- *  2013/3/22 Michele Marcon <michelemarcon77@gmail.com>
- *  
- *  How did you get my email?
- *  
- *  Well, I remember that about 10 or more years ago I did convert some C code to Java for importing Quake models... but a lot of time has passed, and I don't even remember if I finished the work and what I did with it. :(
- *  
- *  I probably am the author but I'm not sure...
- *  
- *  However, I'm not against publishing it under LGPL.
- *  
- *  
- *  2013/3/22 Yuri Pourre <yuripourre@gmail.com>
- *  
- *  Hi,
- *  
- *  I found your e-mail on google code, don't ask me how. Was a blind shot.
- *  
- *  I'm developing a Java Game Engine since 2009 http://yuripourre.github.com/etyllica/
- *  
- *  If you want to be assure I am attaching the class with few modifications, I lost the original code, sorry.
- *  
- *  
- *  Thank You for allow me to publish it as LGPL.
- *  
- *  Best Regards
- *
- *  Yuri
- * 
- * 
- * 2013/3/25 Michele Marcon <michelemarcon77@gmail.com>
- * This code is probably mine, but again, I'm not 100% sure.
- *     
- */
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -118,25 +49,25 @@ public class PCXReader implements ImageReader {
 		}
 	}
 
-	public BufferedImage loadImage(URL url) throws IOException{
+	@Override
+	public BufferedImage loadImage(URL url) throws IOException {
+		InputStream f = url.openStream();
+		return loadImage(f);
+	}
 
-		//
-		// load the file
-		//
-
-		InputStream	f = url.openStream();
-		
-		int len=f.available();
+	@Override
+	public BufferedImage loadImage(InputStream input) throws IOException {
+		int len=input.available();
 		
 		byte[] buffer = new byte[len+1];
 		
 		buffer[len] = 0;
 
 		for (int i = 0; i < len; i++){
-			buffer[i] = (byte)f.read();
+			buffer[i] = (byte)input.read();
 		}
 
-		f.close();
+		input.close();
 		
 		//
 		// parse the PCX file
@@ -152,9 +83,8 @@ public class PCXReader implements ImageReader {
 				|| pcx.bits_per_pixel != 8
 				|| pcx.xmax >= 640
 				|| pcx.ymax >= 480)
-		{ 
-			System.err.println("Bad pcx file "+ url);
-			return null;
+		{
+			throw new IOException("Bad pcx file");
 		}
 
 		int palette[] = new int[768];

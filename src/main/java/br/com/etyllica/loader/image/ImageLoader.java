@@ -1,8 +1,15 @@
 package br.com.etyllica.loader.image;
 
 
+import br.com.etyllica.layer.StaticLayer;
+import br.com.etyllica.loader.LoaderImpl;
+import br.com.etyllica.util.PathHelper;
+import br.com.etyllica.util.StringUtils;
+import br.com.etyllica.util.io.IOHelper;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -10,13 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import br.com.etyllica.layer.StaticLayer;
-import br.com.etyllica.loader.LoaderImpl;
-import br.com.etyllica.util.StringUtils;
-import br.com.etyllica.util.io.IOHelper;
-
 /**
- * 
+ *
  * @author yuripourre
  * @license LGPLv3
  *
@@ -73,14 +75,14 @@ public class ImageLoader extends LoaderImpl {
 	public StaticLayer loadImage(String path) {
 		return loadImage(path, false);
 	}
-	
+
 	public StaticLayer loadImage(String path, boolean absolute) {
 
 		BufferedImage img = getImage(path, absolute);
 
 		StaticLayer cam = new StaticLayer();
 		cam.setSize(img.getWidth(), img.getHeight());
-		
+
 		if(absolute) {
 			cam.cloneLayer(IOHelper.FILE_PREFIX+path);
 		} else {
@@ -90,19 +92,59 @@ public class ImageLoader extends LoaderImpl {
 		return cam;
 	}
 
-	public BufferedImage getImage(String path) {
-		
-		boolean absolute = false;
-		
-		if(path.startsWith(IOHelper.FILE_PREFIX)) {
-			absolute = true;
-		}
-		
-		return getImage(path, absolute);
+	public StaticLayer loadImage(InputStream stream, String path) {
+	    String streamPath = IOHelper.STREAM_PREFIX + path;
+        BufferedImage img = getImage(stream, streamPath);
+
+		StaticLayer cam = new StaticLayer();
+		cam.setSize(img.getWidth(), img.getHeight());
+		cam.cloneLayer(streamPath);
+
+		return cam;
 	}
 
-	public BufferedImage getImage(String path, boolean absolute) {
+    public BufferedImage getImage(String path) {
 
+		boolean absolute = false;
+
+		if (path.startsWith(IOHelper.FILE_PREFIX)) {
+			absolute = true;
+		} else if(path.startsWith(IOHelper.STREAM_PREFIX)) {
+            return getImageAsStream(path);
+        }
+
+        return getImage(path, absolute);
+	}
+
+    private BufferedImage getImage(InputStream stream, String path) {
+        if (images.containsKey(path)) {
+            return images.get(path);
+        } else {
+
+            String ext = StringUtils.fileExtension(path);
+            ImageReader reader = loaders.get(ext);
+
+            BufferedImage img = null;
+
+            if(reader == null) {
+                System.out.println("Etyllica can't load "+ext+" files.");
+            } else {
+                try {
+                    img = reader.loadImage(stream);
+                    images.put(path, img);
+                    if (img == null) {
+                        System.err.println("Image "+path+" not found.");
+                    }
+                } catch (IOException e) {
+                    System.err.println("Image "+path+" not found.");
+                }
+            }
+
+            return img;
+        }
+    }
+
+	public BufferedImage getImage(String path, boolean absolute) {
 		String fullPath = fullPath(path, absolute);
 
 		if (images.containsKey(fullPath)) {
@@ -115,13 +157,13 @@ public class ImageLoader extends LoaderImpl {
 					dir = new URL(url, fullPath);
 				} catch (MalformedURLException e1) {
 					e1.printStackTrace();
-				}	
-			} else {
-				
-				if (!fullPath.startsWith(IOHelper.FILE_PREFIX)) {
-					fullPath = IOHelper.FILE_PREFIX + fullPath;	
 				}
-				
+			} else {
+
+				if (!fullPath.startsWith(IOHelper.FILE_PREFIX)) {
+					fullPath = IOHelper.FILE_PREFIX + fullPath;
+				}
+
 				try {
 					dir = new URL(fullPath);
 				} catch (MalformedURLException e) {
@@ -142,7 +184,7 @@ public class ImageLoader extends LoaderImpl {
 					img = reader.loadImage(dir);
 					images.put(fullPath, img);
 					if (img == null) {
-						System.err.println("Image "+fullPath+" not found.");	
+						System.err.println("Image "+fullPath+" not found.");
 					}
 				} catch (IOException e) {
 					System.err.println("Image "+fullPath+" not found.");
@@ -198,17 +240,44 @@ public class ImageLoader extends LoaderImpl {
 			return list;
 		}
 	}
-	
+
 	public Set<String> supportedExtensions() {
 		return loaders.keySet();
 	}
-	
+
 	public void addLoader(String extension, ImageReader loader) {
 		loaders.put(extension, loader);
 	}
-	
+
 	public void disposeImage(String path) {
 		images.remove(path);
 	}
-	
+
+    public StaticLayer loadImageAsStream(String path) {
+	    String p = path.substring(IOHelper.STREAM_PREFIX.length());
+
+        try {
+            return loadImage(PathHelper.loadAsset(p), p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private BufferedImage getImageAsStream(String path) {
+        if (images.containsKey(path)) {
+            return images.get(path);
+        } else {
+            String p = path.substring(IOHelper.STREAM_PREFIX.length());
+
+            InputStream stream = null;
+            try {
+                stream = PathHelper.loadAsset(p);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return getImage(stream, path);
+        }
+    }
 }

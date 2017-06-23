@@ -1,6 +1,7 @@
 package br.com.etyllica.layer;
 
 import br.com.etyllica.loader.image.ImageLoader;
+import br.com.etyllica.util.io.IOHelper;
 
 /**
  * 
@@ -117,7 +118,12 @@ public class StaticLayer extends Layer {
 	}
 	
 	public StaticLayer load(boolean absolute) {
-		StaticLayer layer = ImageLoader.getInstance().loadImage(path, absolute);
+		StaticLayer layer;
+		if (path.startsWith(IOHelper.STREAM_PREFIX)) {
+			layer = ImageLoader.getInstance().loadImageAsStream(path);
+		} else {
+			layer = ImageLoader.getInstance().loadImage(path, absolute);
+		}
 		this.w = layer.getW();
 		this.h = layer.getH();
 		setOriginCenter();

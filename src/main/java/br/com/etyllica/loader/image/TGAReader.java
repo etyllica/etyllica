@@ -13,12 +13,15 @@ import java.net.URL;
 //       00,04 -> 04,00 -> 1024
 public class TGAReader implements ImageReader {
 
-	public BufferedImage loadImage(URL url) throws IOException{
+	public BufferedImage loadImage(URL url) throws IOException {
+		return loadImage(url.openStream());
+	}
 
-		InputStream is = url.openStream();
-		int len=is.available();
+	@Override
+	public BufferedImage loadImage(InputStream input) throws IOException {
+		int len=input.available();
 
-		BufferedInputStream bis = new BufferedInputStream(is);
+		BufferedInputStream bis = new BufferedInputStream(input);
 		byte[] buf = new byte[len];
 		bis.read(buf);
 		bis.close();
