@@ -94,8 +94,8 @@ public class Layer extends GeometricLayer implements Drawable {
     }
 
     public void setOriginCenter() {
-        this.originX = utilWidth() / 2;
-        this.originY = utilHeight() / 2;
+        this.originX = (float) utilWidth() / 2;
+        this.originY = (float) utilHeight() / 2;
     }
 
     /**
