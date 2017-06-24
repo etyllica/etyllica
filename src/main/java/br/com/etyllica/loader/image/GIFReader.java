@@ -2,6 +2,7 @@ package br.com.etyllica.loader.image;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
@@ -9,8 +10,6 @@ import br.com.etyllica.loader.image.gif.GIFDecoder;
 
 public class GIFReader implements ImageReader, AnimationReader {
 
-	private GIFDecoder decoder;
-	
 	private static GIFReader instance = null;
 	
 	public static GIFReader getInstance() {
@@ -27,13 +26,21 @@ public class GIFReader implements ImageReader, AnimationReader {
 	
 	@Override
 	public BufferedImage loadImage(URL url) throws IOException {
-		decoder = new GIFDecoder();
+		GIFDecoder decoder = new GIFDecoder();
 		decoder.read(url.getPath());
 		return decoder.getImage();
 	}
-	
+
+	@Override
+	public BufferedImage loadImage(InputStream input) throws IOException {
+		GIFDecoder decoder = new GIFDecoder();
+		decoder.read(input);
+		return decoder.getImage();
+	}
+
 	@Override
 	public List<ImageFrame> loadAnimation(URL url) throws IOException {
+		GIFDecoder decoder = new GIFDecoder();
 		decoder.read(url.getPath());
 		return decoder.getFrames();
 	}

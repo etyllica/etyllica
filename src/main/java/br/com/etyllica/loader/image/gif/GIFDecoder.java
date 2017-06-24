@@ -35,6 +35,7 @@ import java.awt.image.DataBufferInt;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -777,5 +778,8 @@ public class GIFDecoder {
 	public List<ImageFrame> getFrames() {
 		return frames;
 	}
-	
+
+	public void read(InputStream input) {
+		read(new BufferedInputStream(input));
+	}
 }
