@@ -36,7 +36,6 @@ public class ImageLoader extends LoaderImpl {
 
 	private final static String BMP = "bmp";
 	private final static String GIF = "gif";
-	private final static String ICO = "ico";
 	private final static String JPG = "jpg";
 	private final static String JPEG = "jpeg";
 	private final static String PCX = "pcx";
@@ -58,7 +57,6 @@ public class ImageLoader extends LoaderImpl {
 		loaders.put(PNG, awtReader);
 		loaders.put(TIF, awtReader);
 		loaders.put(TIFF, awtReader);
-		loaders.put(ICO, new ICOReader());
 		loaders.put(GIF, new GIFReader());
 		loaders.put(TGA, new TGAReader());
 		loaders.put(PCX, new PCXReader());
