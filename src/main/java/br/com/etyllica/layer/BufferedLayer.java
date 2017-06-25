@@ -390,7 +390,7 @@ public class BufferedLayer extends ImageLayer {
     @Override
     public void simpleDraw(Graphics g, int x, int y) {
         g.drawImage(buffer, x, y, x + w, y + h,
-                srcX, srcY, srcX + w, srcY + h, null);
+                xImage, yImage, xImage + w, yImage + h, null);
     }
 
     public void createBuffer(byte[] imageData) {
