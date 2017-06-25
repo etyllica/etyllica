@@ -1,5 +1,6 @@
 package br.com.etyllica.commons.context.load;
 
+import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
 
 /**
@@ -10,6 +11,10 @@ public class GenericLoadApplication extends DefaultLoadApplication {
 
     protected float fill = 0;
 
+    public GenericLoadApplication(int w, int h) {
+        super(w, h);
+    }
+
     public GenericLoadApplication(int x, int y, int w, int h) {
         super(x, y, w, h);
     }
@@ -19,8 +24,8 @@ public class GenericLoadApplication extends DefaultLoadApplication {
     private int rectY = h / 2 + 100;
     private int rectH = 32;
 
-    private int foregroundColor = -1;
-    private int backgroundColor = -11472993;
+    private Color backgroundColor = Color.WHITE;
+    private Color foregroundColor = Color.GREEN_ETYLLICA;
 
     @Override
     public void load() {
@@ -44,12 +49,9 @@ public class GenericLoadApplication extends DefaultLoadApplication {
         g.fillRect(x, y, w, h);
 
         g.setColor(foregroundColor);
-        g.drawStringX(phrase, 280 - y);
 
         g.drawRect(rectX, rectY, rectW, rectH);
         g.fillRect(rectX + 2, rectY + 2, (int) ((rectW * fill) / 100) - 3, rectH - 3);
-
-        g.drawString(percent, rectX, rectY, rectW, rectH);
     }
 
 }
