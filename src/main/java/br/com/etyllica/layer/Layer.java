@@ -199,11 +199,10 @@ public class Layer extends GeometricLayer implements Drawable {
     }
 
     public AffineTransform getTransform(float offsetX, float offsetY) {
-
-        final float px = getX();
-        final float py = getY();
-
         AffineTransform transform = new AffineTransform();
+
+        float px = getX() + offsetX;
+        float py = getY() + offsetY;
 
         transform.translate(px + originX, py + originY);
 
@@ -214,7 +213,12 @@ public class Layer extends GeometricLayer implements Drawable {
 
         // Rotate
         if (angle != 0) {
-            transform.rotate(Math.toRadians(angle));
+            if ((scaleY > 0 && scaleX > 0)
+                    || (scaleX < 0 && scaleY < 0)) {
+                transform.rotate(Math.toRadians(angle));
+            } else {
+                transform.rotate(Math.toRadians(-angle));
+            }
         }
 
         // Move to origin (centered)
