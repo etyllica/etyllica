@@ -1,6 +1,6 @@
 ![Etyllica Logo](https://github.com/yuripourre/etyllica/blob/master/assets/images/etyllica_logo.png?raw=true) 
 
-### Current Version: 5.6.1 [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
+### Current Version: 5.8.1 [![Circle CI](https://circleci.com/gh/yuripourre/etyllica.svg?style=svg)](https://circleci.com/gh/yuripourre/etyllica)
 
 ### [Etyllica](http://yuripourre.github.com/etyllica) is a pure Java Game Engine to make games really fast.
 
@@ -28,6 +28,38 @@
 - [Abby](https://github.com/yuripourre/abby) - 3D Fork of Etyllica
 - [Luvia](https://github.com/yuripourre/luvia) - JoGL backend to Abby
 - [Abby-jGL](https://github.com/yuripourre/abby-jgl) - An OpenGL simulation with software rendering (even in unsigned applets)
+
+## Dependencies (optional)
+
+If you don't need Sound nor Physics, just include the [etyllica-5.8.1.jar](https://github.com/etyllica/etyllica/releases/download/v5.8.1/etyllica-5.8.1.jar) to your project.
+
+- [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library made by [Paul Lamb](http://www.paulscode.com))
+- [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0) (Audio Codecs made by [Paul Lamb](http://www.paulscode.com))
+
+
+## How to Start
+You can follow the [HelloWorld](https://github.com/yuripourre/etyllica/wiki/Hello-World) example.
+
+## Maven Integration
+```
+<dependency>
+  <groupId>br.com.etyllica</groupId>
+  <artifactId>etyllica</artifactId>
+  <version>5.8.1</version>
+</dependency>
+```
+
+## Gradle Integration
+```
+compile group: 'br.com.etyllica', name: 'etyllica', version: '5.8.1'
+```
+
+## Contributing
+- Fork it ( https://github.com/etyllica/etyllica/fork )
+- Create your feature branch (git checkout -b my-new-feature)
+- Commit your changes (git commit -am 'Add some feature')
+- Push to the branch (git push origin my-new-feature)
+- Create a new Pull Request
 
 ## Related Projects
 ### Games
@@ -58,31 +90,6 @@
 - [Etyllic Paint](http://yuripourre.github.com/etyllic-paint) - A Paint Clone
 - [Etyllica Mobile](https://github.com/yuripourre/etyllica-mobile) - Etyllica port to Android (deprecated).
 
-
-## Dependencies (optional)
-
-If you don't need Sound nor Physics, just include the [etyllica-5.8.1.jar](https://github.com/etyllica/etyllica/releases/download/v5.8.1/etyllica-5.8.1.jar) to your project.
-
-- [SoundSystem](http://www.paulscode.com/forum/index.php?topic=4.0) (Audio Library made by [Paul Lamb](http://www.paulscode.com))
-- [WAV, JOgg, JOrbis and MP3 codec plug-in](http://www.paulscode.com/forum/index.php?topic=496.0) (Audio Codecs made by [Paul Lamb](http://www.paulscode.com))
-
-
-## How to Start
-You can follow the [HelloWorld](https://github.com/yuripourre/etyllica/wiki/Hello-World) example.
-
-## Maven Integration
-```
-<dependency>
-  <groupId>br.com.etyllica</groupId>
-  <artifactId>etyllica</artifactId>
-  <version>5.8.1</version>
-</dependency>
-```
-
-## Gradle Integration
-```
-compile group: 'br.com.etyllica', name: 'etyllica', version: '5.8.1'
-```
 
 ## License
 - [LGPL](http://www.gnu.org/copyleft/lesser.html)
