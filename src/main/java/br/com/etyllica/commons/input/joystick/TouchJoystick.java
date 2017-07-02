@@ -73,7 +73,7 @@ public class TouchJoystick {
 					activeId = event.getPointer();
 					setActive(true);
 				}
-			} else {
+			} else if (event.getPointer() == activeId) {
 				angle = center.angle(mx, my);
 				double radAngle = Math.toRadians(angle);
 				sensitivityX = Math.cos(radAngle);
@@ -86,7 +86,7 @@ public class TouchJoystick {
 
 		} else if(event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			//Release Joystick
-			if(active && event.getPointer() == activeId) {
+			if (active && event.getPointer() == activeId) {
 				setActive(false);
 				activeId = INACTIVE;
 				reset();
