@@ -155,6 +155,10 @@ public class Color {
 
     private int rgb;
 
+    public Color(int rgb) {
+        this.rgb = rgb;
+    }
+
     public Color(int r, int g, int b) {
         this.rgb = rgb(r, g, b);
     }
