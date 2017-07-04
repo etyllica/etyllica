@@ -187,6 +187,10 @@ public class Color {
         return rgb & 0xFF;
     }
 
+    public int getRGB() {
+        return rgb;
+    }
+
     public Color darker(int intensity) {
         int a = getAlpha();
         int r = darker(getRed(), intensity);
