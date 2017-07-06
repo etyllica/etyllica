@@ -47,6 +47,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     //private List<KeyEvent> joyEvents;
 
+    private boolean firstDraw = true;
     private AWTWindow mainWindow;
 
     private boolean fullScreenEnable = false;
@@ -269,6 +270,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     }
 
     public void draw(Graphics g) {
+        if (firstDraw) {
+            currentContext().initGraphics(g);
+            firstDraw = false;
+        }
+
         drawContext(currentContext(), g);
 
         //Draw Handlers
@@ -519,6 +525,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     @Override
     public void onLoad(Context context) {
+        firstDraw = true;
         activeWindow.setApplication(context);
         context.setLoaded(true);
     }
