@@ -1,11 +1,10 @@
 package br.com.etyllica.layer;
 
-import br.com.etyllica.linear.HitBox;
+import br.com.etyllica.commons.math.EtyllicaMath;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.Mouse;
 import br.com.etyllica.linear.Rectangle;
 import br.com.etyllica.loader.image.ImageLoader;
-import br.com.etyllica.commons.math.EtyllicaMath;
 
 /**
  * 
@@ -15,10 +14,10 @@ import br.com.etyllica.commons.math.EtyllicaMath;
 
 public class ImageLayer extends StaticLayer {
 
-	protected int xImage = 0;
-	protected int yImage = 0;
-
-	protected HitBox colisionArea = null;
+	protected int srcX = 0;
+	protected int srcY = 0;
+	protected int srcW = 0;
+	protected int srcH = 0;
 
 	public ImageLayer() {
 		super();
@@ -44,6 +43,8 @@ public class ImageLayer extends StaticLayer {
 	 */
 	public ImageLayer(int x, int y, int w, int h) {
 		super(x,y,w,h);
+		srcW = w;
+		srcH = h;
 	}
 
 	/**
@@ -56,6 +57,8 @@ public class ImageLayer extends StaticLayer {
 	 */
 	public ImageLayer(int x, int y, int w, int h, String path) {
 		super(x,y,w,h,path);
+		srcW = w;
+		srcH = h;
 	}
 
 	/**
@@ -64,14 +67,14 @@ public class ImageLayer extends StaticLayer {
 	 * @param y
 	 * @param w
 	 * @param h
-	 * @param xImagem
-	 * @param yImagem
+	 * @param srcX
+	 * @param srcY
 	 * @param path
 	 */
-	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String path) {
+	public ImageLayer(int x, int y, int w, int h, int srcX, int srcY, String path) {
 		super(x,y,w,h,path);
-		this.xImage = xImagem;
-		this.yImage = yImagem;
+		this.srcX = srcX;
+		this.srcY = srcY;
 	}
 
 	/**
@@ -102,51 +105,31 @@ public class ImageLayer extends StaticLayer {
 		setCoordinates(x, y);
 	}
 
-	public int getXImage() {
-		return xImage;
+	public int getSrcX() {
+		return srcX;
 	}
 
 	/**
 	 * 
-	 * @param xImage
+	 * @param srcX
 	 */
-	public void setXImage(int xImage) {
-		this.xImage = xImage;
+	public void setSrcX(int srcX) {
+		this.srcX = srcX;
 	}
 
-	public int getYImage() {
-		return yImage;
+	public int getSrcY() {
+		return srcY;
 	}
 
 	/**
 	 * 
-	 * @param yImage
+	 * @param srcX
+	 * @param srcY
 	 */
-	public void setYImage(int yImage) {
-		this.yImage = yImage;
+	public void setImageCoordinates(int srcX, int srcY) {
+		this.srcX = srcX;
+		this.srcY = srcY;
 	}
-
-	public HitBox getColisionArea() {
-		return colisionArea;
-	}
-
-	/**
-	 * 
-	 * @param colisionArea
-	 */
-	public void setColisionArea(HitBox colisionArea) {
-		this.colisionArea = colisionArea;
-	}
-
-	/**
-	 * 
-	 * @param xImage
-	 * @param yImage
-	 */
-	public void setImageCoordinates(int xImage, int yImage) {
-		this.xImage = xImage;
-		this.yImage = yImage;
-	}	
 
 	public boolean colideRetangular(int bx, int by, int bw, int bh) {
 		return colideRectRect(bx, by, bw, bh);
@@ -164,42 +147,6 @@ public class ImageLayer extends StaticLayer {
 		if(rect2y+rect2.getY() > y+rect.getY() + rect.getH())		return false;
 
 		return true;	
-	}
-
-	private boolean colideHitBox(Rectangle hitBox, int rect2x, int rect2y) {
-
-		for(Rectangle rect: colisionArea.getAreas()) {
-
-			if(colideRectangle(rect, hitBox, rect2x, rect2y)) {
-				return true;
-			}
-
-		}
-
-		return false;
-	}
-
-	public boolean colideAreaHitBox(AnimatedLayer b) {
-		Rectangle rect2 = new Rectangle(0, 0, b.getTileW(), b.getTileH());
-		return colideHitBox(rect2,b.getX(), b.getY());
-	}
-
-	public boolean colideAreaHitBox(ImageLayer b) {
-		Rectangle rect2 = new Rectangle(0, 0,b.getW(),b.getH());
-		return colideHitBox(rect2,b.getX(),b.getY());
-	}
-
-	public boolean colideHitBoxes(ImageLayer b) {
-
-		for(Rectangle rect: colisionArea.getAreas()) {
-			for(Rectangle rect2: b.getColisionArea().getAreas()) {
-				if(colideRectangle(rect, rect2, b.getX(), b.getY())) {
-					return true;
-				}
-			}
-		}
-
-		return false;
 	}
 
 	//Based on code at: http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
@@ -239,7 +186,6 @@ public class ImageLayer extends StaticLayer {
 	}
 	
 	public void draw(Graphics g, int offsetX, int offsetY) {
-	
 		if(!visible) {
 			return;
 		}
@@ -271,7 +217,7 @@ public class ImageLayer extends StaticLayer {
 			return;
 		}
 		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x + w, y + h,
-				xImage, yImage, xImage + w,yImage + h, null );
+				srcX, srcY, srcX + w, srcY + h, null );
 	}
 	
 	public boolean onMouse(Mouse mouse) {
@@ -282,8 +228,10 @@ public class ImageLayer extends StaticLayer {
 		this.w = b.w;
 		this.h = b.h;
 
-		this.xImage = b.xImage;
-		this.yImage = b.yImage;
+		this.srcX = b.srcX;
+		this.srcY = b.srcY;
+		this.srcW = b.srcW;
+		this.srcH = b.srcH;
 		
 		this.scaleX = b.scaleX;
 		this.scaleY = b.scaleY;
@@ -291,5 +239,4 @@ public class ImageLayer extends StaticLayer {
 
 		this.path = b.path;
 	}
-
 }

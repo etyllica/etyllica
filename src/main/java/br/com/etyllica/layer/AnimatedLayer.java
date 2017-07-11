@@ -9,32 +9,21 @@ import br.com.etyllica.commons.animation.OnFrameChangeListener;
 
 public class AnimatedLayer extends ImageLayer {
 
-    protected int tileW = 0;
-
-    protected int tileH = 0;
-
     protected int needleX = 0;
-
     protected int needleY = 0;
 
     protected boolean once = false;
-
     protected boolean stopped = true;
-
     protected boolean animateHorizontally = true;
-
     protected boolean lockOnce = false;
 
     private int inc = 1;
 
     protected int frames = 1;
-
     protected int currentFrame = 0;
-
     protected int speed = 500;
 
     protected long startedAt = 0;
-
     protected long changedAt = 0;
 
     protected OnAnimationFinishListener onAnimationFinishListener = DUMMY_ANIMATION_FINISH_LISTENER;
@@ -64,28 +53,28 @@ public class AnimatedLayer extends ImageLayer {
     /**
      * @param x
      * @param y
-     * @param tileW
-     * @param tileH
+     * @param srcW
+     * @param srcH
      * @param path
      */
-    public AnimatedLayer(int x, int y, int tileW, int tileH, String path) {
+    public AnimatedLayer(int x, int y, int srcW, int srcH, String path) {
         super(x, y, path);
 
-        this.tileW = tileW;
-        this.tileH = tileH;
+        this.srcW = srcW;
+        this.srcH = srcH;
     }
 
     /**
      * @param x
      * @param y
-     * @param tileW
-     * @param tileH
+     * @param srcW
+     * @param srcH
      */
-    public AnimatedLayer(int x, int y, int tileW, int tileH) {
+    public AnimatedLayer(int x, int y, int srcW, int srcH) {
         super(x, y);
 
-        this.tileW = tileW;
-        this.tileH = tileH;
+        this.srcW = srcW;
+        this.srcH = srcH;
     }
 
     public void restartAnimation() {
@@ -94,8 +83,8 @@ public class AnimatedLayer extends ImageLayer {
     }
 
     public void resetAnimation() {
-        xImage = needleX;
-        yImage = needleY;
+        srcX = needleX;
+        srcY = needleY;
         currentFrame = 0;
     }
 
@@ -103,26 +92,26 @@ public class AnimatedLayer extends ImageLayer {
         this.animateHorizontally = animateHorizontally;
     }
 
-    public int getTileW() {
-        return tileW;
+    public int getSrcW() {
+        return srcW;
     }
 
-    public int getTileH() {
-        return tileH;
-    }
-
-    /**
-     * @param tileW
-     */
-    public void setTileW(int tileW) {
-        this.tileW = tileW;
+    public int getSrcH() {
+        return srcH;
     }
 
     /**
-     * @param tileH
+     * @param srcW
      */
-    public void setTileH(int tileH) {
-        this.tileH = tileH;
+    public void setSrcW(int srcW) {
+        this.srcW = srcW;
+    }
+
+    /**
+     * @param srcH
+     */
+    public void setSrcH(int srcH) {
+        this.srcH = srcH;
     }
 
     /**
@@ -130,8 +119,8 @@ public class AnimatedLayer extends ImageLayer {
      * @param tileH
      */
     public void setTileCoordinates(int tileW, int tileH) {
-        setTileW(tileW);
-        setTileH(tileH);
+        setSrcW(tileW);
+        setSrcH(tileH);
     }
 
     public void animateWithFrame(int frame) {
@@ -233,21 +222,21 @@ public class AnimatedLayer extends ImageLayer {
     private void setFrame(int frame) {
 
         if (animateHorizontally) {
-            setXImage(needleX + tileW * frame);
+            setSrcX(needleX + srcW * frame);
         } else {
-            setYImage(needleY + tileH * frame);
+            setSrcY(needleY + srcH * frame);
         }
 
     }
 
     @Override
     public int utilWidth() {
-        return tileW;
+        return srcW;
     }
 
     @Override
     public int utilHeight() {
-        return tileH;
+        return srcH;
     }
 
     /**
