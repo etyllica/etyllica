@@ -37,11 +37,12 @@ public class Resizer<T extends Layer> {
     private ResizerPoint[] points;
 
     private ResizerListener listener;
-    private MouseStateChanger changer;
+    private MouseStateChanger mouseStateChanger;
 
     private final DashedStroke dash = new DashedStroke();
     private final BasicStroke resetStroke = new BasicStroke(1);
 
+    private boolean onlyMove = false;
     private boolean dragged = false;
 
     private int offsetX = 0;
@@ -60,14 +61,15 @@ public class Resizer<T extends Layer> {
     private int keyboardSpeed = 1;
     private int speedFactor = NORMAL_SPEED;
 
-    public Resizer(MouseStateChanger context) {
+    public Resizer(MouseStateChanger mouseStateChanger) {
         super();
 
-        changer = context;
+        this.mouseStateChanger = mouseStateChanger;
 
         points = new ResizerPoint[9];
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++) {
             points[i] = new ResizerPoint(0, 0, 1, 1);
+        }
 
         selectedArea = new ResizerPoint(0, 0, 1, 1);
         selectedArea.setState(MouseState.MOVE);
@@ -91,7 +93,7 @@ public class Resizer<T extends Layer> {
 
     public void deselect() {
         selected = NULL_LAYER;
-        changer.changeMouseState(MouseState.NORMAL);
+        mouseStateChanger.changeMouseState(MouseState.NORMAL);
     }
 
     public void select(int index) {
@@ -108,24 +110,26 @@ public class Resizer<T extends Layer> {
 
         int inc = 0;
 
-        //Update 8 points
-        for (int b = 0; b < 9; b++) {
+        if (!onlyMove) {
+            //Update 8 points
+            for (int b = 0; b < 9; b++) {
 
-            int i = b % 3;
-            int j = b / 3;
+                int i = b % 3;
+                int j = b / 3;
 
-            if (i == 1 && j == 1) {
-                inc = -1;
-                continue;
+                if (i == 1 && j == 1) {
+                    inc = -1;
+                    continue;
+                }
+
+                int offsetX = (int) (layer.utilWidth() * (1 - layer.getScaleX())) / 2;
+                int offsetY = (int) (layer.utilHeight() * (1 - layer.getScaleY())) / 2;
+
+                int bx = (int) (layer.getX() + offsetX + i * (layer.utilWidth() * layer.getScaleX() / 2) - BUTTON_SIZE / 2);
+                int by = (int) (layer.getY() + offsetY + j * (layer.utilHeight() * layer.getScaleY() / 2) - BUTTON_SIZE / 2);
+
+                points[b + inc].setBounds(bx, by, BUTTON_SIZE, BUTTON_SIZE);
             }
-
-            int offsetX = (int) (layer.utilWidth() * (1 - layer.getScaleX())) / 2;
-            int offsetY = (int) (layer.utilHeight() * (1 - layer.getScaleY())) / 2;
-
-            int bx = (int) (layer.getX() + offsetX + i * (layer.utilWidth() * layer.getScaleX() / 2) - BUTTON_SIZE / 2);
-            int by = (int) (layer.getY() + offsetY + j * (layer.utilHeight() * layer.getScaleY() / 2) - BUTTON_SIZE / 2);
-
-            points[b + inc].setBounds(bx, by, BUTTON_SIZE, BUTTON_SIZE);
         }
     }
 
@@ -139,8 +143,10 @@ public class Resizer<T extends Layer> {
         g.setStroke(dash);
         drawScaledRect(g, selected);
 
-        for (int b = 0; b < 8; b++) {
-            points[b].draw(g, offsetX, offsetY);
+        if (!onlyMove) {
+            for (int b = 0; b < 8; b++) {
+                points[b].draw(g, offsetX, offsetY);
+            }
         }
 
         g.setStroke(resetStroke);
@@ -202,13 +208,12 @@ public class Resizer<T extends Layer> {
 
         changed = false;
 
-        if (!dragged) {
+        if (!dragged && !onlyMove) {
             for (int b = 0; b < 9; b++) {
-
                 if (points[b].colideRectPoint(mx, my)) {
                     lastIndex = b;
 
-                    changer.changeMouseState(points[b].getState());
+                    mouseStateChanger.changeMouseState(points[b].getState());
                     changed = true;
 
                     handleDragEvent(event);
@@ -234,7 +239,7 @@ public class Resizer<T extends Layer> {
         }
 
         if (!changed) {
-            changer.changeMouseState(MouseState.NORMAL);
+            mouseStateChanger.changeMouseState(MouseState.NORMAL);
         }
 
     }
