@@ -1,5 +1,6 @@
 package examples.etyllica.collision.basic;
 
+import br.com.etyllica.awt.helper.TransformHelper;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.context.UpdateIntervalListener;
 import br.com.etyllica.commons.event.MouseEvent;
@@ -9,103 +10,107 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 
+import java.awt.geom.AffineTransform;
+
 public class CollisionElements extends Application implements UpdateIntervalListener {
 
-	private Color color = Color.BLUE;
+    private Color color = Color.BLUE;
 
-	private Layer rectangle1;
-	private Layer rectangle2;
-	
-	private GeometricLayer greenRectangle;
-	private GeometricLayer orangeRectangle;
-	
-	private boolean colideGreenOrange = false;
-	
-	private int mx = 0;
-	private int my = 0;	
+    private Layer rectangle1;
+    private Layer rectangle2;
 
-	public CollisionElements(int w, int h) {
-		super(w, h);
-	}
+    private GeometricLayer greenRectangle;
+    private GeometricLayer orangeRectangle;
 
-	@Override
-	public void load() {
+    private boolean colideGreenOrange = false;
 
-		rectangle1 = new Layer(80, 100, 200, 50);
-		rectangle1.setAngle(20);
+    private int mx = 0;
+    private int my = 0;
 
-		rectangle2 = new Layer(200, 200, 200, 50);
-		
-		greenRectangle = new Layer(480, 280, 200, 50);
-		orangeRectangle = new Layer(520, 300, 200, 50);
+    public CollisionElements(int w, int h) {
+        super(w, h);
+    }
 
-		updateAtFixedRate(100, this);
+    @Override
+    public void load() {
 
-		loading = 100;
-	}
+        rectangle1 = new Layer(80, 100, 200, 50);
+        rectangle1.setAngle(20);
 
-	public void timeUpdate(long now) {
+        rectangle2 = new Layer(200, 200, 200, 50);
 
-		if(!rectangle1.colideRectRect(rectangle2)) {
-			color = Color.BLUE;
-		} else {			
-			color = Color.YELLOW;
-		}
-		
-		rectangle2.setOffsetAngle(10);
-		
-		if(orangeRectangle.colideRectRect(greenRectangle)) {
-			colideGreenOrange = true;
-		} else {
-			colideGreenOrange = false;
-		}
-	}
+        greenRectangle = new Layer(480, 280, 200, 50);
+        orangeRectangle = new Layer(520, 300, 200, 50);
 
-	@Override
-	public void draw(Graphics g) {
-		
-		if(rectangle2.getTransform()!=null)
-			g.setTransform(rectangle2.getTransform());
+        updateAtFixedRate(100, this);
 
-		g.setColor(Color.RED);
-		g.fillRect(rectangle2);
+        loading = 100;
+    }
 
-		g.resetTransform();
-		
-		if(rectangle1.getTransform()!=null)
-			g.setTransform(rectangle1.getTransform());
+    public void timeUpdate(long now) {
 
-		g.setColor(color);
-		g.fillRect(rectangle1);
+        if (!rectangle1.colideRectRect(rectangle2)) {
+            color = Color.BLUE;
+        } else {
+            color = Color.YELLOW;
+        }
 
-		g.resetTransform();
-		
-		//Draw fixed rectangles
-		g.setColor(Color.GREEN);
-		g.fillRect(greenRectangle);
-		
-		g.setColor(Color.ORANGE);
-		g.fillRect(orangeRectangle);
-		
-		if(colideGreenOrange) {
-			g.setColor(Color.RED);
-			g.drawRect(greenRectangle);
-			g.drawRect(orangeRectangle);
-		}
-	}
-	
-	public void updateMouse(PointerEvent event) {
+        rectangle2.setOffsetAngle(10);
 
-		mx = event.getX();
-		my = event.getY();
-		
-		if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
-			rectangle1.setCoordinates(mx, my);
-		}
-		
-		if(event.isButtonDown(MouseEvent.MOUSE_BUTTON_RIGHT)) {
-			orangeRectangle.setCoordinates(mx, my);
-		}
-	}
+        if (orangeRectangle.colideRectRect(greenRectangle)) {
+            colideGreenOrange = true;
+        } else {
+            colideGreenOrange = false;
+        }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+
+        AffineTransform transform2 = TransformHelper.getTransform(rectangle2);
+        if (transform2 != null)
+            g.setTransform(transform2);
+
+        g.setColor(Color.RED);
+        g.fillRect(rectangle2);
+
+        g.resetTransform();
+
+        AffineTransform transform1 = TransformHelper.getTransform(rectangle1);
+        if (transform1 != null)
+            g.setTransform(transform1);
+
+        g.setColor(color);
+        g.fillRect(rectangle1);
+
+        g.resetTransform();
+
+        //Draw fixed rectangles
+        g.setColor(Color.GREEN);
+        g.fillRect(greenRectangle);
+
+        g.setColor(Color.ORANGE);
+        g.fillRect(orangeRectangle);
+
+        if (colideGreenOrange) {
+            g.setColor(Color.RED);
+            g.drawRect(greenRectangle);
+            g.drawRect(orangeRectangle);
+        }
+    }
+
+    public void updateMouse(PointerEvent event) {
+
+        mx = event.getX();
+        my = event.getY();
+
+        if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
+            rectangle1.setCoordinates(mx, my);
+        }
+
+        if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_RIGHT)) {
+            orangeRectangle.setCoordinates(mx, my);
+        }
+    }
 
 }

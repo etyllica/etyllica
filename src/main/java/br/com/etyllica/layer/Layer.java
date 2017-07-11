@@ -4,9 +4,6 @@ import br.com.etyllica.commons.Drawable;
 import br.com.etyllica.commons.collision.CollisionDetector;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.linear.Point2D;
-
-import java.awt.geom.AffineTransform;
 
 /**
  * @author yuripourre
@@ -194,39 +191,6 @@ public class Layer extends GeometricLayer implements Drawable {
         }
     }
 
-    public AffineTransform getTransform() {
-        return getTransform(0, 0);
-    }
-
-    public AffineTransform getTransform(float offsetX, float offsetY) {
-        AffineTransform transform = new AffineTransform();
-
-        float px = getX() + offsetX;
-        float py = getY() + offsetY;
-
-        transform.translate(px + originX, py + originY);
-
-        // Scale
-        if (scaleX != 1 || scaleY != 1) {
-            transform.scale(scaleX, scaleY);
-        }
-
-        // Rotate
-        if (angle != 0) {
-            if ((scaleY > 0 && scaleX > 0)
-                    || (scaleX < 0 && scaleY < 0)) {
-                transform.rotate(Math.toRadians(angle));
-            } else {
-                transform.rotate(Math.toRadians(-angle));
-            }
-        }
-
-        // Move to origin (centered)
-        transform.translate(-px - originX, -py - originY);
-
-        return transform;
-    }
-
     @Override
     public void draw(Graphics g) {
         // TODO Auto-generated method stub
@@ -270,17 +234,6 @@ public class Layer extends GeometricLayer implements Drawable {
         double rectRotation = Math.toRadians(-getAngle());
 
         return CollisionDetector.colideRectPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
-    }
-
-    public boolean colideRectPoint(Point2D point) {
-        int rectCenterX = getX() + utilWidth() / 2;
-        int rectCenterY = getY() + utilHeight() / 2;
-        int rectWidth = utilWidth();
-        int rectHeight = utilHeight();
-
-        double rectRotation = Math.toRadians(-getAngle());
-
-        return CollisionDetector.colideRectPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, point.getX(), point.getY());
     }
 
     public boolean colide(Layer b) {

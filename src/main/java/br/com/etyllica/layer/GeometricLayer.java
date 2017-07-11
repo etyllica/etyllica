@@ -2,9 +2,18 @@ package br.com.etyllica.layer;
 
 import br.com.etyllica.commons.Movable;
 import br.com.etyllica.commons.collision.CollisionDetector;
-import br.com.etyllica.linear.PointInt2D;
 
-public class GeometricLayer extends PointInt2D implements Movable {
+public class GeometricLayer implements Movable {
+
+    /**
+     * Layer's x
+     */
+    protected int x = 0;
+
+    /**
+     * Layer's y
+     */
+    protected int y = 0;
 
     /**
      * Layer's width
@@ -24,7 +33,6 @@ public class GeometricLayer extends PointInt2D implements Movable {
         super();
         this.x = x;
         this.y = y;
-        //setLocation(x, y);
     }
 
     public GeometricLayer(int x, int y, int w, int h) {
@@ -33,7 +41,22 @@ public class GeometricLayer extends PointInt2D implements Movable {
         this.y = y;
         this.w = w;
         this.h = h;
-        //setBounds(x, y, w, h);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getW() {
@@ -50,6 +73,11 @@ public class GeometricLayer extends PointInt2D implements Movable {
 
     public void setH(int h) {
         this.h = h;
+    }
+
+    public void setLocation(int x, int y) {
+        setX(x);
+        setY(y);
     }
 
     public void setBounds(int x, int y, int w, int h) {
@@ -98,7 +126,7 @@ public class GeometricLayer extends PointInt2D implements Movable {
     }
 
 	/*
-	 * Centralization Methods
+     * Centralization Methods
 	 */
 
     /**

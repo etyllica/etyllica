@@ -1,4 +1,4 @@
-package br.com.etyllica.awt;
+package br.com.etyllica.awt.helper;
 
 import java.awt.*;
 

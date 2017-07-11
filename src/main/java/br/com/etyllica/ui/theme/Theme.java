@@ -2,7 +2,6 @@ package br.com.etyllica.ui.theme;
 
 import java.awt.Font;
 
-import br.com.etyllica.awt.ColorHelper;
 import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.ui.style.Style;
 

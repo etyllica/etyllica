@@ -1,6 +1,6 @@
 package br.com.etyllica.layer;
 
-import br.com.etyllica.awt.ColorHelper;
+import br.com.etyllica.awt.helper.ColorHelper;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.loader.image.ImageLoader;
 

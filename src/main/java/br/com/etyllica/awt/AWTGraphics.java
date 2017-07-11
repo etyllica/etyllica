@@ -1,6 +1,8 @@
 package br.com.etyllica.awt;
 
 import br.com.etyllica.awt.camera.Camera;
+import br.com.etyllica.awt.helper.ColorHelper;
+import br.com.etyllica.awt.helper.TransformHelper;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
@@ -528,11 +530,11 @@ public class AWTGraphics implements Graphics {
 	 */
 	public void drawRect(Layer layer) {
 
-		AffineTransform transform = layer.getTransform();
+		AffineTransform transform = TransformHelper.getTransform(layer);
 
-		if(transform == null)
-			drawRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
-		else {
+		if (transform == null) {
+			drawRect(layer.getX(), layer.getY(), layer.getW(), layer.getH());
+		} else {
 			setTransform(transform);
 			drawRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 			resetTransform();
@@ -804,11 +806,11 @@ public class AWTGraphics implements Graphics {
 
 	public void fillRect(Layer layer) {
 
-		AffineTransform transform = layer.getTransform();
+		AffineTransform transform = TransformHelper.getTransform(layer);
 
-		if(transform == null)
-			fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
-		else {
+		if (transform == null) {
+			fillRect(layer.getX(), layer.getY(), layer.getW(), layer.getH());
+		} else {
 			setTransform(transform);
 			fillRect(layer.getX(),layer.getY(),layer.getW(),layer.getH());
 			resetTransform();

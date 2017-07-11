@@ -3,6 +3,8 @@ package br.com.etyllica.layer;
 import br.com.etyllica.loader.image.ImageLoader;
 import br.com.etyllica.util.io.IOHelper;
 
+import java.awt.geom.AffineTransform;
+
 /**
  * 
  * @author yuripourre
@@ -128,6 +130,39 @@ public class StaticLayer extends Layer {
 		this.h = layer.getH();
 		setOriginCenter();
 		return layer;
+	}
+
+	public AffineTransform getTransform() {
+		return getTransform(0, 0);
+	}
+
+	public AffineTransform getTransform(float offsetX, float offsetY) {
+		AffineTransform transform = new AffineTransform();
+
+		float px = getX() + offsetX;
+		float py = getY() + offsetY;
+
+		transform.translate(px + originX, py + originY);
+
+		// Scale
+		if (scaleX != 1 || scaleY != 1) {
+			transform.scale(scaleX, scaleY);
+		}
+
+		// Rotate
+		if (angle != 0) {
+			if ((scaleY > 0 && scaleX > 0)
+					|| (scaleX < 0 && scaleY < 0)) {
+				transform.rotate(Math.toRadians(angle));
+			} else {
+				transform.rotate(Math.toRadians(-angle));
+			}
+		}
+
+		// Move to origin (centered)
+		transform.translate(-px - originX, -py - originY);
+
+		return transform;
 	}
 
 }
