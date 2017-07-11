@@ -220,13 +220,11 @@ public class AnimatedLayer extends ImageLayer {
     }
 
     private void setFrame(int frame) {
-
         if (animateHorizontally) {
             setSrcX(needleX + srcW * frame);
         } else {
             setSrcY(needleY + srcH * frame);
         }
-
     }
 
     @Override
