@@ -1,15 +1,6 @@
 package br.com.etyllica.ui.selection;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import br.com.etyllica.awt.stroke.DashedStroke;
-import br.com.etyllica.commons.collision.CollisionDetector;
 import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.MouseState;
@@ -18,6 +9,13 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
+
+import java.awt.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Resizer<T extends Layer> {
 
@@ -28,7 +26,7 @@ public class Resizer<T extends Layer> {
 	private static final int BUTTON_SIZE = 16;
 	public static final int UNKNOWN = -1;
 	private static final Layer NULL_LAYER = new Layer(UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN);
-	
+
 	protected Map<Integer, T> layers = new HashMap<Integer, T>();
 
 	protected int selectedIndex = UNKNOWN;
@@ -43,12 +41,12 @@ public class Resizer<T extends Layer> {
 
 	private final DashedStroke dash = new DashedStroke();
 	private final BasicStroke resetStroke = new BasicStroke(1);
-	
+
 	private boolean dragged = false;
 
 	private int offsetX = 0;
 	private int offsetY = 0;
-	
+
 	private int initialX = 0;
 	private int initialY = 0;
 	private double initialW = 0;
@@ -96,6 +94,10 @@ public class Resizer<T extends Layer> {
 		changer.changeMouseState(MouseState.NORMAL);
 	}
 
+	public void select(int index) {
+		select(layers.get(index));
+	}
+
 	public void select(Layer layer) {
 		if (!isSelected()) {
 			deselect();
@@ -126,7 +128,7 @@ public class Resizer<T extends Layer> {
 			points[b+inc].setBounds(bx, by, BUTTON_SIZE, BUTTON_SIZE);
 		}
 	}
-	
+
 	public void draw(Graphics g) {
 		drawOverlay(g);
 
@@ -181,7 +183,7 @@ public class Resizer<T extends Layer> {
 
 		int mx = event.getX() - offsetX;
 		int my = event.getY() - offsetY;
- 
+
 		if (!isSelected()) {
 			checkMouseOver(mx, my);
 		}
@@ -193,7 +195,7 @@ public class Resizer<T extends Layer> {
 				deselect();
 			}
 		}
-		
+
 		if (!isSelected()) {
 			return;
 		}
@@ -220,7 +222,7 @@ public class Resizer<T extends Layer> {
 			dragged = false;
 			if (lastEvent != null) {
 				notifyListener(lastEvent);
-				lastEvent = null;	
+				lastEvent = null;
 			}
 		} else if (dragged && event.isDraggedButton(MouseEvent.MOUSE_BUTTON_LEFT)) {
 			resizeEvent(lastIndex, event);
@@ -236,7 +238,7 @@ public class Resizer<T extends Layer> {
 		}
 
 	}
-	
+
 	protected boolean checkMouseOver(int mx, int my) {
 		for (Layer component: layers.values()) {
 			if (component.onMouse(mx, my)) {
@@ -384,8 +386,8 @@ public class Resizer<T extends Layer> {
 			if (selectedIndex != UNKNOWN) {
 				selected.offsetY(-speed());
 				notifyListener(ResizerEvent.MOVE);
-				refresh();	
-			}			
+				refresh();
+			}
 		} else if (event.isKeyDown(KeyEvent.VK_DOWN_ARROW)) {
 			if (selectedIndex != UNKNOWN) {
 				selected.offsetY(+speed());
@@ -417,7 +419,7 @@ public class Resizer<T extends Layer> {
 		if (listener == null)
 			return;
 
-		listener.onResize(event, selectedIndex, selected, copy);		
+		listener.onResize(event, selectedIndex, selected, copy);
 	}
 
 	public ResizerListener getListener() {
@@ -485,6 +487,6 @@ public class Resizer<T extends Layer> {
 	public void setOffsetY(int offsetY) {
 		this.offsetY = offsetY;
 	}
-	
-	
+
+
 }
