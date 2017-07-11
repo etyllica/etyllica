@@ -1,6 +1,6 @@
 package br.com.etyllica.ui.selection;
 
-import br.com.etyllica.awt.stroke.DashedStroke;
+import br.com.etyllica.commons.Drawable;
 import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.MouseState;
@@ -10,14 +10,13 @@ import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.layer.GeometricLayer;
 import br.com.etyllica.layer.Layer;
 
-import java.awt.*;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Resizer<T extends Layer> {
+public abstract class Resizer<T extends Layer> implements Drawable {
 
     private int count = 0;
     ResizerEvent lastEvent = null;
@@ -30,23 +29,21 @@ public class Resizer<T extends Layer> {
     protected Map<Integer, T> layers = new HashMap<Integer, T>();
 
     protected int selectedIndex = UNKNOWN;
-    private Layer selected = NULL_LAYER;
+    protected Layer selected = NULL_LAYER;
     protected Layer overlay = new Layer();
 
     private ResizerPoint selectedArea;
-    private ResizerPoint[] points;
+    protected ResizerPoint[] points;
 
     private ResizerListener listener;
     private MouseStateChanger mouseStateChanger;
 
-    private final DashedStroke dash = new DashedStroke();
-    private final BasicStroke resetStroke = new BasicStroke(1);
-
-    private boolean onlyMove = false;
+    protected boolean moveOnly = false;
     private boolean dragged = false;
+    private boolean changed = false;
 
-    private int offsetX = 0;
-    private int offsetY = 0;
+    protected int offsetX = 0;
+    protected int offsetY = 0;
 
     private int initialX = 0;
     private int initialY = 0;
@@ -87,6 +84,8 @@ public class Resizer<T extends Layer> {
         points[8].setState(MouseState.MOVE);
     }
 
+    public abstract void drawOverlay(Graphics graphics);
+
     public void refresh() {
         select(selected);
     }
@@ -110,7 +109,7 @@ public class Resizer<T extends Layer> {
 
         int inc = 0;
 
-        if (!onlyMove) {
+        if (!moveOnly) {
             //Update 8 points
             for (int b = 0; b < 9; b++) {
 
@@ -133,57 +132,6 @@ public class Resizer<T extends Layer> {
         }
     }
 
-    public void draw(Graphics g) {
-        drawOverlay(g);
-
-        if (!isSelected())
-            return;
-
-        g.setColor(Color.BLACK);
-        g.setStroke(dash);
-        drawScaledRect(g, selected);
-
-        if (!onlyMove) {
-            for (int b = 0; b < 8; b++) {
-                points[b].draw(g, offsetX, offsetY);
-            }
-        }
-
-        g.setStroke(resetStroke);
-    }
-
-    private void drawScaledRect(Graphics g, Layer layer) {
-        int sw = (int) (layer.utilWidth() * layer.getScaleX());
-        int sh = (int) (layer.utilHeight() * layer.getScaleY());
-
-        int oX = (int) (layer.utilWidth() * (1 - layer.getScaleX())) / 2;
-        int oY = (int) (layer.utilHeight() * (1 - layer.getScaleY())) / 2;
-
-        g.drawRect(layer.getX() + oX + offsetX, layer.getY() + oY + offsetY, sw, sh);
-    }
-
-    private void fillScaledRect(Graphics g, Layer layer) {
-        int sw = (int) (layer.utilWidth() * layer.getScaleX());
-        int sh = (int) (layer.utilHeight() * layer.getScaleY());
-
-        int oX = (int) (layer.utilWidth() * (1 - layer.getScaleX())) / 2;
-        int oY = (int) (layer.utilHeight() * (1 - layer.getScaleY())) / 2;
-
-        g.fillRect(layer.getX() + oX + offsetX, layer.getY() + oY + offsetY, sw, sh);
-    }
-
-    private void drawOverlay(Graphics g) {
-        if (overlay.isVisible() == false) {
-            return;
-        }
-
-        g.setColor(Color.BLACK);
-        g.setAlpha(60);
-        fillScaledRect(g, overlay);
-        g.resetOpacity();
-    }
-
-    private boolean changed = false;
 
     public void handleEvent(PointerEvent event) {
 
@@ -208,7 +156,7 @@ public class Resizer<T extends Layer> {
 
         changed = false;
 
-        if (!dragged && !onlyMove) {
+        if (!dragged && !moveOnly) {
             for (int b = 0; b < 9; b++) {
                 if (points[b].colideRectPoint(mx, my)) {
                     lastIndex = b;
@@ -493,5 +441,11 @@ public class Resizer<T extends Layer> {
         this.offsetY = offsetY;
     }
 
+    public boolean isMoveOnly() {
+        return moveOnly;
+    }
 
+    public void setMoveOnly(boolean moveOnly) {
+        this.moveOnly = moveOnly;
+    }
 }
