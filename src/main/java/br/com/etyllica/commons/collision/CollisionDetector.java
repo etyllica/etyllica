@@ -179,6 +179,13 @@ public class CollisionDetector {
     }
 
     public static Vector[] getBounds(int ax, int ay, int aw, int ah, double angle) {
+        int originX = aw / 2;
+        int originY = ah / 2;
+
+        return getBounds(ax, ay, aw, ah, originX, originY, angle);
+    }
+
+    public static Vector[] getBounds(int ax, int ay, int aw, int ah, int originX, int originY, double angle) {
         Vector[] points = new Vector[4];
 
         points[0] = new Vector(ax, ay);
@@ -188,7 +195,7 @@ public class CollisionDetector {
 
         if (angle != 0) {
             for (Vector point : points) {
-                point.rotate(ax + aw / 2, ay + ah / 2, angle);
+                point.rotate(ax + originX, ay + originY, angle);
             }
         }
 
