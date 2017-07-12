@@ -24,6 +24,8 @@ public class CollisionElements extends Application implements UpdateIntervalList
 
     private boolean colideGreenOrange = false;
 
+    private int speed = -5;
+
     private int mx = 0;
     private int my = 0;
 
@@ -33,23 +35,21 @@ public class CollisionElements extends Application implements UpdateIntervalList
 
     @Override
     public void load() {
-
         rectangle1 = new Layer(80, 100, 200, 50);
         rectangle1.setAngle(20);
 
         rectangle2 = new Layer(200, 200, 200, 50);
 
-        greenRectangle = new Layer(480, 280, 200, 50);
-        orangeRectangle = new Layer(520, 300, 200, 50);
+        greenRectangle = new Layer(480, 340, 200, 50);
+        orangeRectangle = new Layer(520, 360, 200, 50);
 
-        updateAtFixedRate(100, this);
+        updateAtFixedRate(60, this);
 
         loading = 100;
     }
 
     public void timeUpdate(long now) {
-
-        if (!rectangle1.colideRectRect(rectangle2)) {
+        if (!rectangle1.colide(rectangle2)) {
             color = Color.BLUE;
         } else {
             color = Color.YELLOW;
@@ -62,14 +62,22 @@ public class CollisionElements extends Application implements UpdateIntervalList
         } else {
             colideGreenOrange = false;
         }
+
+        orangeRectangle.setX(orangeRectangle.getX() + speed);
+
+        if (orangeRectangle.getX() < 0) {
+            speed = -speed;
+        } else if (orangeRectangle.getX() + orangeRectangle.utilWidth() > w) {
+            speed = -speed;
+        }
     }
 
     @Override
     public void draw(Graphics g) {
-
         AffineTransform transform2 = TransformHelper.getTransform(rectangle2);
-        if (transform2 != null)
+        if (transform2 != null) {
             g.setTransform(transform2);
+        }
 
         g.setColor(Color.RED);
         g.fillRect(rectangle2);
@@ -77,8 +85,9 @@ public class CollisionElements extends Application implements UpdateIntervalList
         g.resetTransform();
 
         AffineTransform transform1 = TransformHelper.getTransform(rectangle1);
-        if (transform1 != null)
+        if (transform1 != null) {
             g.setTransform(transform1);
+        }
 
         g.setColor(color);
         g.fillRect(rectangle1);
@@ -94,13 +103,14 @@ public class CollisionElements extends Application implements UpdateIntervalList
 
         if (colideGreenOrange) {
             g.setColor(Color.RED);
-            g.drawRect(greenRectangle);
-            g.drawRect(orangeRectangle);
+        } else {
+            g.setColor(Color.BLUE);
         }
+        g.drawRect(greenRectangle);
+        g.drawRect(orangeRectangle);
     }
 
     public void updateMouse(PointerEvent event) {
-
         mx = event.getX();
         my = event.getY();
 
@@ -109,7 +119,7 @@ public class CollisionElements extends Application implements UpdateIntervalList
         }
 
         if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_RIGHT)) {
-            orangeRectangle.setCoordinates(mx, my);
+            greenRectangle.setCoordinates(mx, my);
         }
     }
 

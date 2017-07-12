@@ -18,8 +18,6 @@ public class CollisionExample extends Etyllica {
 
 	@Override
 	public Application startApplication() {
-		initialSetup("../../../../../");
-		
 		return new CollisionElements(w, h);
 	}
 
