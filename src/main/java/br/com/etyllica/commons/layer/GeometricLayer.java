@@ -1,4 +1,4 @@
-package br.com.etyllica.layer;
+package br.com.etyllica.commons.layer;
 
 import br.com.etyllica.commons.Movable;
 import br.com.etyllica.commons.collision.CollisionDetector;
@@ -86,14 +86,6 @@ public class GeometricLayer implements Movable {
     }
 
     /**
-     * @param x
-     * @param y
-     */
-    public void setCoordinates(int x, int y) {
-        setLocation(x, y);
-    }
-
-    /**
      * @param offsetX
      */
     public void offsetX(int offsetX) {
@@ -152,7 +144,7 @@ public class GeometricLayer implements Movable {
      * @param layer
      */
     public void centralizeX(GeometricLayer layer) {
-        centralizeX(layer.getX(), layer.getX() + layer.utilWidth());
+        centralizeX(layer.getX(), layer.getX() + layer.getW());
     }
 
     /**
@@ -161,7 +153,7 @@ public class GeometricLayer implements Movable {
      * @return
      */
     public int centralizeX(int startX, int endX) {
-        int x = (((startX + endX) / 2) - (utilWidth() / 2));
+        int x = (((startX + endX) / 2) - (getW() / 2));
         setX(x);
 
         return x;
@@ -171,7 +163,7 @@ public class GeometricLayer implements Movable {
      * @param layer
      */
     public void centralizeY(GeometricLayer layer) {
-        centralizeY(layer.getY(), layer.getY() + layer.utilHeight());
+        centralizeY(layer.getY(), layer.getY() + layer.getH());
     }
 
     /**
@@ -180,7 +172,7 @@ public class GeometricLayer implements Movable {
      * @return
      */
     public int centralizeY(int startY, int endY) {
-        int y = (((startY + endY) / 2) - (utilHeight() / 2));
+        int y = (((startY + endY) / 2) - (getH() / 2));
         setY(y);
 
         return y;
@@ -198,7 +190,7 @@ public class GeometricLayer implements Movable {
 	 */
 
     public boolean colideRectRect(GeometricLayer b) {
-        return colideRectRect(b.getX(), b.getY(), b.utilWidth(), b.utilHeight());
+        return colideRectRect(b.getX(), b.getY(), b.getW(), b.getH());
     }
 
     /**
@@ -209,11 +201,11 @@ public class GeometricLayer implements Movable {
      * @return
      */
     public boolean colideRectRect(int bx, int by, int bw, int bh) {
-        return CollisionDetector.colideRectRect(getX(), getY(), utilWidth(), utilHeight(), bx, by, bw, bh);
+        return CollisionDetector.colideRectRect(getX(), getY(), getW(), getH(), bx, by, bw, bh);
     }
 
     public boolean colideRectPoint(int bx, int by) {
-        return CollisionDetector.colideRectPoint(getX(), getY(), utilWidth(), utilHeight(), bx, by);
+        return CollisionDetector.colideRectPoint(getX(), getY(), getW(), getH(), bx, by);
     }
 
     /**
@@ -224,11 +216,11 @@ public class GeometricLayer implements Movable {
      * @return
      */
     public boolean colideCircleCircle(int bx, int by, int bw, int bh) {
-        return CollisionDetector.colideCircleCircle(getX(), getY(), utilWidth(), utilHeight(), bx, by, bw, bh);
+        return CollisionDetector.colideCircleCircle(getX(), getY(), getW(), getH(), bx, by, bw, bh);
     }
 
     public boolean colideCircleCircle(GeometricLayer layer) {
-        return colideCircleCircle(layer.getX(), layer.getY(), layer.utilWidth(), layer.utilHeight());
+        return colideCircleCircle(layer.getX(), layer.getY(), layer.getW(), layer.getH());
     }
 
     /**
@@ -237,18 +229,10 @@ public class GeometricLayer implements Movable {
      * @return
      */
     public boolean colideCirclePoint(int px, int py) {
-        int radius = utilWidth() / 2;
+        int radius = getW() / 2;
         int cx = getX() + radius;
         int cy = getY() + radius;
         return CollisionDetector.colideCirclePoint(cx, cy, radius, px, py);
-    }
-
-    public int utilWidth() {
-        return getW();
-    }
-
-    public int utilHeight() {
-        return getH();
     }
 
 }

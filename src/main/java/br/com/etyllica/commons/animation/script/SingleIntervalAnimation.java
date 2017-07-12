@@ -1,7 +1,7 @@
 package br.com.etyllica.commons.animation.script;
 
 import br.com.etyllica.commons.animation.LayerAnimation;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 public abstract class SingleIntervalAnimation extends LayerAnimation {
 		

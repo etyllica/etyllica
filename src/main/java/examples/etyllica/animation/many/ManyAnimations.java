@@ -4,7 +4,7 @@ import br.com.etyllica.commons.animation.script.*;
 import br.com.etyllica.context.SceneApplication;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 import br.com.etyllica.layer.TextLayer;
 
 import java.awt.*;

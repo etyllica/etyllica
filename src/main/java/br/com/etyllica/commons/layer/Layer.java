@@ -1,4 +1,4 @@
-package br.com.etyllica.layer;
+package br.com.etyllica.commons.layer;
 
 import br.com.etyllica.commons.Drawable;
 import br.com.etyllica.commons.collision.CollisionDetector;
@@ -28,7 +28,7 @@ public class Layer extends GeometricLayer implements Drawable {
     protected double scaleX = 1, scaleY = 1;
 
     /**
-     * if layer is visible
+     * If layer is visible
      */
     protected boolean visible = true;
 
@@ -37,10 +37,7 @@ public class Layer extends GeometricLayer implements Drawable {
     }
 
     public Layer(int x, int y) {
-        super();
-
-        this.x = x;
-        this.y = y;
+        super(x, y);
     }
 
     public Layer(int x, int y, int w, int h) {
@@ -89,8 +86,8 @@ public class Layer extends GeometricLayer implements Drawable {
     }
 
     public void setOriginCenter() {
-        this.originX = (float) utilWidth() / 2;
-        this.originY = (float) utilHeight() / 2;
+        this.originX = (float) getW() / 2;
+        this.originY = (float) getH() / 2;
     }
 
     /**
@@ -172,18 +169,18 @@ public class Layer extends GeometricLayer implements Drawable {
     public boolean onMouse(int mx, int my) {
         if (angle == 0) {
             if (scaleX == 1 && scaleY == 1) {
-                return CollisionDetector.colideRectPoint(getX(), getY(), utilWidth(), utilHeight(), mx, my);
+                return CollisionDetector.colideRectPoint(getX(), getY(), getW(), getH(), mx, my);
             } else {
-                int rw = (int) (utilWidth() * getScaleX());
-                int rh = (int) (utilHeight() * getScaleY());
+                int rw = (int) (getW() * getScaleX());
+                int rh = (int) (getH() * getScaleY());
                 return CollisionDetector.colideRectPoint(getX() - rw / 4, getY() - rh / 4, rw, rh, mx, my);
             }
         } else {
             if (scaleX == 1 && scaleY == 1) {
-                return CollisionDetector.colideRectPoint(getX(), getY(), utilWidth() / 2, utilHeight() / 2, getAngle(), mx, my);
+                return CollisionDetector.colideRectPoint(getX(), getY(), getW() / 2, getH() / 2, getAngle(), mx, my);
             } else {
-                int rw = (int) (utilWidth() * getScaleX());
-                int rh = (int) (utilHeight() * getScaleY());
+                int rw = (int) (getW() * getScaleX());
+                int rh = (int) (getH() * getScaleY());
                 return CollisionDetector.colideRectPoint(getX() - rw / 4, getY() - rh / 4, rw / 2, rh / 2, getAngle(), mx, my);
             }
         }
@@ -207,40 +204,21 @@ public class Layer extends GeometricLayer implements Drawable {
         setOpacity(layer.getOpacity());
     }
 
-    /**
-     * Code found at: http://stackoverflow.com/questions/5650032/collision-detection-with-rotated-rectangles
-     */
-    public boolean colideRectPoint(double px, double py) {
-        int rectWidth = utilWidth();
-        int rectHeight = utilHeight();
-        int offsetX = 0;
-        int offsetY = 0;
+    @Override
+    public boolean colideRectPoint(int px, int py) {
+        int rectWidth = (int) (getW() * getScaleX());
+        int rectHeight = (int) (getH() * getScaleY());
 
-        if (getScaleX() != 1) {
-            rectWidth *= getScaleX();
-            offsetX = (int) (utilWidth() * (1 - getScaleX())) / 2;
-        }
-
-        if (getScaleY() != 1) {
-            rectHeight *= getScaleY();
-            offsetY = (int) (utilHeight() * (1 - getScaleY())) / 2;
-        }
-
-        int rectCenterX = getX() + offsetX + rectWidth / 2;
-        int rectCenterY = getY() + offsetY + rectHeight / 2;
-
-        double rectRotation = Math.toRadians(-getAngle());
-
-        return CollisionDetector.colideRectPoint(rectWidth, rectHeight, rectRotation, rectCenterX, rectCenterY, px, py);
+        return CollisionDetector.colideRectPoint(getX(), getY(), rectWidth, rectHeight, angle, px, py);
     }
 
     public boolean colide(Layer b) {
         if (getAngle() == 0 && b.getAngle() == 0) {
-            return CollisionDetector.colideRectRect(getX(), getY(), utilWidth(), utilHeight(),
-                    b.getX(), b.getY(), b.utilWidth(), b.utilHeight());
+            return CollisionDetector.colideRectRect(getX(), getY(), getW(), getH(),
+                    b.getX(), b.getY(), b.getW(), b.getH());
         } else {
-            return CollisionDetector.colidePolygon(getX(), getY(), utilWidth(), utilHeight(), getAngle(),
-                    b.getX(), b.getY(), b.utilWidth(), b.utilHeight(), b.getAngle());
+            return CollisionDetector.colidePolygon(getX(), getY(), getW(), getH(), getAngle(),
+                    b.getX(), b.getY(), b.getW(), b.getH(), b.getAngle());
         }
     }
 }

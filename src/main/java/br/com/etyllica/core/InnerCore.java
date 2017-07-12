@@ -22,8 +22,6 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.graphics.Monitor;
 import br.com.etyllica.core.input.keyboard.Keyboard;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.ui.UI;
-import br.com.etyllica.ui.View;
 
 import java.util.ArrayList;
 import java.util.Deque;
@@ -38,7 +36,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     private static final int TITLE_BAR_HEIGHT = 50;
 
     //External Windows
-    private AWTWindow activeWindow = null;
+    private AWTWindow window = null;
 
     protected AWTController control;
 
@@ -48,7 +46,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     //private List<KeyEvent> joyEvents;
 
     private boolean firstDraw = true;
-    private AWTWindow mainWindow;
 
     private boolean fullScreenEnable = false;
 
@@ -90,7 +87,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     }
 
     public AWTWindow getWindow() {
-        return mainWindow;
+        return window;
     }
 
     public void update(long now) {
@@ -134,7 +131,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     }
 
     private boolean checkApplicationChange(Context application) {
-        //if activeWindow, receive command to change application
+        //if window, receive command to change application
         if (application.getNextApplication() != application) {
             this.changeApplication();
             return true;
@@ -170,7 +167,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     }
 
     public boolean updateApplication(Context context, long now) {
-
         if (context.isLocked()) {
             return false;
         }
@@ -208,7 +204,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     private void updateActiveWindow(long now) {
 
-        List<AWTWindow> windows = activeWindow.getWindows();
+        List<AWTWindow> windows = window.getWindows();
 
         //Creating Windows
         //if application has windows
@@ -220,14 +216,14 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
                 replaceWindow(window);
             }
 
-            activeWindow.getWindows().clear();
+            window.getWindows().clear();
         }
 
-		/*if(activeWindow.isClose()) {
+		/*if(window.isClose()) {
 
 			if(windows.size()>0) {
-				windows.remove(activeWindow);
-				activeWindow = windows.get(windows.size()-1);
+				windows.remove(window);
+				window = windows.get(windows.size()-1);
 			}else{
 				System.exit(0);
 			}
@@ -255,7 +251,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
         modules.updateMouse(event);
 
-        updateWindowEvent(event, activeWindow);
+        updateWindowEvent(event, window);
     }
 
 
@@ -434,12 +430,10 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     }
 
     public void replaceWindow(AWTWindow window) {
-
-        if (activeWindow != window) {
-
+        if (this.window != window) {
             window.setClose(false);
 
-            activeWindow = window;
+            this.window = window;
 
             //Avoid unnecessary reload
             reload(window.getContext());
@@ -466,7 +460,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     }
 
     public Context currentContext() {
-        return activeWindow.getContext();
+        return window.getContext();
     }
 
     private void reload(Context application) {
@@ -479,7 +473,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
         if (application.isLoaded()) {
             Application nextApplication = applicationLoader.reloadApplication(this, application);
-            activeWindow.setApplication(nextApplication);
+            window.setApplication(nextApplication);
         }
     }
 
@@ -502,8 +496,8 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     }
 
     private void fixEventPosition(PointerEvent event) {
-        event.setX(event.getX() - activeWindow.getX());
-        event.setY(event.getY() - activeWindow.getY());
+        event.setX(event.getX() - window.getX());
+        event.setY(event.getY() - window.getY());
     }
 
     public AWTController getControl() {
@@ -520,13 +514,13 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     public void setFps(int fps) {
         this.fps = fps;
-        this.activeWindow.getContext().setFps(fps);
+        this.window.getContext().setFps(fps);
     }
 
     @Override
     public void onLoad(Context context) {
         firstDraw = true;
-        activeWindow.setApplication(context);
+        window.setApplication(context);
         context.setLoaded(true);
     }
 
@@ -536,15 +530,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     public void addModule(Module module) {
         modules.add(module);
-    }
-
-    //TODO Remove UI helper methods
-    public boolean isMouseOver() {
-        return UI.getInstance().mouseOver != null;
-    }
-
-    public View getMouseOver() {
-        return UI.getInstance().mouseOver;
     }
 
     public List<Monitor> getMonitors() {

@@ -15,7 +15,7 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.style.Style;
 import br.com.etyllica.ui.theme.Theme;
 import br.com.etyllica.ui.theme.ThemeManager;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 /**
  * 

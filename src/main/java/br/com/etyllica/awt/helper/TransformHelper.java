@@ -1,6 +1,6 @@
 package br.com.etyllica.awt.helper;
 
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 import java.awt.geom.AffineTransform;
 

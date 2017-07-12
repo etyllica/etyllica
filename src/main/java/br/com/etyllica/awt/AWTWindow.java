@@ -7,8 +7,7 @@ import java.util.List;
 import br.com.etyllica.awt.camera.Camera;
 import br.com.etyllica.commons.context.Context;
 import br.com.etyllica.commons.context.ContextContainer;
-import br.com.etyllica.commons.context.Session;
-import br.com.etyllica.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.GeometricLayer;
 
 /**
  * 

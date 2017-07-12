@@ -178,8 +178,8 @@ public abstract class UIView extends View {
 	}
 
 	@Override
-	public void setCoordinates(int x, int y) {
-		delegatedView.setCoordinates(x, y);
+	public void setLocation(int x, int y) {
+		delegatedView.setLocation(x, y);
 	}
 
 	@Override
@@ -200,11 +200,6 @@ public abstract class UIView extends View {
 	@Override
 	public void updateEvent(GUIEvent event) {
 		delegatedView.updateEvent(event);
-	}
-
-	@Override
-	public void setLocation(int offsetX, int offsetY) {
-		delegatedView.setLocation(offsetX, offsetY);
 	}
 
 	@Override

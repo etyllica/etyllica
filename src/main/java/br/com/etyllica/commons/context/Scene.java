@@ -14,7 +14,7 @@ import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.commons.ui.UIComponent;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 public class Scene implements UIComponent {
 	

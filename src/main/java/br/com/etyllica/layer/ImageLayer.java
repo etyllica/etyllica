@@ -1,9 +1,9 @@
 package br.com.etyllica.layer;
 
+import br.com.etyllica.commons.layer.Layer;
 import br.com.etyllica.commons.math.EtyllicaMath;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.linear.Rectangle;
 import br.com.etyllica.loader.image.ImageLoader;
 
 /**
@@ -39,8 +39,9 @@ public class ImageLayer extends StaticLayer {
      */
     public ImageLayer(int x, int y, int w, int h) {
         super(x, y, w, h);
-        srcW = w;
-        srcH = h;
+        this.srcW = w;
+        this.srcH = h;
+        setOriginCenter();
     }
 
     /**
@@ -52,8 +53,9 @@ public class ImageLayer extends StaticLayer {
      */
     public ImageLayer(int x, int y, int w, int h, String path) {
         super(x, y, w, h, path);
-        srcW = w;
-        srcH = h;
+        this.srcW = w;
+        this.srcH = h;
+        setOriginCenter();
     }
 
     /**
@@ -69,6 +71,9 @@ public class ImageLayer extends StaticLayer {
         super(x, y, w, h, path);
         this.srcX = srcX;
         this.srcY = srcY;
+        this.srcW = w;
+        this.srcH = h;
+        setOriginCenter();
     }
 
     /**
@@ -78,7 +83,7 @@ public class ImageLayer extends StaticLayer {
      */
     public ImageLayer(int x, int y, String path) {
         super(path);
-        setCoordinates(x, y);
+        setLocation(x, y);
     }
 
     /**
@@ -94,9 +99,12 @@ public class ImageLayer extends StaticLayer {
 
     public ImageLayer(int x, int y, String path, boolean absolute) {
         super(path, absolute);
-        setCoordinates(x, y);
+        setLocation(x, y);
     }
 
+    /**
+     * @return srcX
+     */
     public int getSrcX() {
         return srcX;
     }
@@ -108,6 +116,9 @@ public class ImageLayer extends StaticLayer {
         this.srcX = srcX;
     }
 
+    /**
+     * @return srcY
+     */
     public int getSrcY() {
         return srcY;
     }
@@ -119,13 +130,69 @@ public class ImageLayer extends StaticLayer {
         this.srcY = srcY;
     }
 
+    public int getSrcW() {
+        return srcW;
+    }
+
+    public void setSrcW(int srcW) {
+        this.srcW = srcW;
+    }
+
+    public int getSrcH() {
+        return srcH;
+    }
+
+    public void setSrcH(int srcH) {
+        this.srcH = srcH;
+    }
+
     /**
      * @param srcX
      * @param srcY
      */
-    public void setImageCoordinates(int srcX, int srcY) {
+    public void setLocationSrc(int srcX, int srcY) {
         this.srcX = srcX;
         this.srcY = srcY;
+    }
+
+    /**
+     * @param srcX
+     * @param srcY
+     */
+    public void setSrc(int srcX, int srcY, int srcW, int srcH) {
+        this.srcX = srcX;
+        this.srcY = srcY;
+        this.srcW = srcW;
+        this.srcH = srcH;
+    }
+
+    public int getImageWidth() {
+        return w;
+    }
+
+    public int getImageHeight() {
+        return h;
+    }
+
+    // Src methods
+    @Override
+    public int getW() {
+        return getSrcW();
+    }
+
+    @Override
+    public int getH() {
+        return getSrcH();
+    }
+
+    @Override
+    public void setW(int w) {
+        this.srcW = w;
+    }
+
+    @Override
+    public void setH(int h) {
+        this.srcH = h;
     }
 
     public boolean colideRetangular(int bx, int by, int bw, int bh) {
@@ -136,43 +203,31 @@ public class ImageLayer extends StaticLayer {
         return colideRetangular(b.getX(), b.getY(), b.getW(), b.getH());
     }
 
-    private boolean colideRectangle(Rectangle rect, Rectangle rect2, int rect2x, int rect2y) {
-        if (rect2x + rect2.getX() + rect2.getW() < x + rect.getX()) return false;
-        if (rect2x + rect2.getX() > x + rect.getX() + rect.getW()) return false;
-
-        if (rect2y + rect2.getY() + rect2.getH() < y + rect.getY()) return false;
-        if (rect2y + rect2.getY() > y + rect.getY() + rect.getH()) return false;
-
-        return true;
-    }
-
-    //Based on code at: http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
+    // Based on code at: http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
     public boolean colideRotated(int mx, int my) {
-
         double sx = EtyllicaMath.mod(scaleX);
         double sy = EtyllicaMath.mod(scaleY);
 
-        int halfWidth = (int) ((w * sx) / 2);
-        int halfHeight = (int) ((h * sy) / 2);
+        int scaledOriginX = (int) (originX * sx);
+        int scaledOriginY = (int) (originY * sy);
 
         //Pivot Point of rotation
-        int px = x + halfWidth;
-        int py = y + halfHeight;
+        int px = x + scaledOriginX;
+        int py = y + scaledOriginY;
 
         double c = Math.cos(angle);
         double s = Math.sin(angle);
 
-        // UNrotate the point depending on the rotation of the rectangle
+        // Unrotate the point depending on the rotation of the rectangle
         double rotatedX = px + c * (mx - px) - s * (my - py);
-
         double rotatedY = py + s * (mx - px) + c * (my - py);
 
         // perform a normal check if the new point is inside the
-        // bounds of the UNrotated rectangle
-        int leftX = px - halfWidth;
-        int rightX = px + halfWidth;
-        int topY = py - halfHeight;
-        int bottomY = py + halfHeight;
+        // bounds of the unrotated rectangle
+        int leftX = px - scaledOriginX;
+        int rightX = px + scaledOriginX;
+        int topY = py - scaledOriginY;
+        int bottomY = py + scaledOriginY;
 
         return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
     }
@@ -206,7 +261,7 @@ public class ImageLayer extends StaticLayer {
     }
 
     public void simpleDraw(Graphics g, int x, int y) {
-        simpleDraw(g, x, y, utilWidth(), utilHeight());
+        simpleDraw(g, x, y, getW(), getH());
     }
 
     public void simpleDraw(Graphics g, int x, int y, int w, int h) {
@@ -221,19 +276,15 @@ public class ImageLayer extends StaticLayer {
         return colideRectPoint(mouse.getX(), mouse.getY());
     }
 
-    public void clone(ImageLayer b) {
-        this.w = b.w;
-        this.h = b.h;
+    public void copy(ImageLayer b) {
+        super.copy(b);
 
         this.srcX = b.srcX;
         this.srcY = b.srcY;
         this.srcW = b.srcW;
         this.srcH = b.srcH;
 
-        this.scaleX = b.scaleX;
-        this.scaleY = b.scaleY;
-        this.angle = b.angle;
-
         this.path = b.path;
     }
+
 }

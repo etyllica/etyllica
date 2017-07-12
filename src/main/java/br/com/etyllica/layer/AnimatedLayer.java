@@ -92,37 +92,6 @@ public class AnimatedLayer extends ImageLayer {
         this.animateHorizontally = animateHorizontally;
     }
 
-    public int getSrcW() {
-        return srcW;
-    }
-
-    public int getSrcH() {
-        return srcH;
-    }
-
-    /**
-     * @param srcW
-     */
-    public void setSrcW(int srcW) {
-        this.srcW = srcW;
-    }
-
-    /**
-     * @param srcH
-     */
-    public void setSrcH(int srcH) {
-        this.srcH = srcH;
-    }
-
-    /**
-     * @param tileW
-     * @param tileH
-     */
-    public void setTileCoordinates(int tileW, int tileH) {
-        setSrcW(tileW);
-        setSrcH(tileH);
-    }
-
     public void animateWithFrame(int frame) {
         if (this.currentFrame != frame) {
             notifyFrameChangeListener(0, frame);
@@ -225,16 +194,6 @@ public class AnimatedLayer extends ImageLayer {
         } else {
             setSrcY(needleY + srcH * frame);
         }
-    }
-
-    @Override
-    public int utilWidth() {
-        return srcW;
-    }
-
-    @Override
-    public int utilHeight() {
-        return srcH;
     }
 
     /**

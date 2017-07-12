@@ -1,8 +1,10 @@
 package br.com.etyllica.core.graphics;
 
+import br.com.etyllica.commons.layer.GeometricLayer;
+
 import java.awt.GraphicsDevice;
 
-public class Monitor extends br.com.etyllica.layer.GeometricLayer {
+public class Monitor extends GeometricLayer {
 
 	private GraphicsDevice device;
 	

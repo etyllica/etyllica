@@ -1,26 +1,25 @@
 package br.com.etyllica.ui;
 
 import br.com.etyllica.awt.AWTArrowDrawer;
-import br.com.etyllica.commons.module.Module;
 import br.com.etyllica.commons.context.Context;
 import br.com.etyllica.commons.event.*;
+import br.com.etyllica.commons.module.Module;
+import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
 import br.com.etyllica.i18n.Language;
 import br.com.etyllica.i18n.LanguageChangerListener;
 import br.com.etyllica.i18n.LanguageModule;
+import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;
 import br.com.etyllica.ui.theme.ArrowDrawer;
-import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.ui.theme.ArrowTheme;
 import br.com.etyllica.ui.theme.Theme;
 import br.com.etyllica.ui.theme.ThemeManager;
-import br.com.etyllica.ui.theme.ArrowTheme;
 import br.com.etyllica.ui.theme.listener.ThemeListener;
-import br.com.etyllica.theme.etyllic.EtyllicArrowTheme;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UI implements Module, ThemeListener, MouseStateChanger {
-
     private static UI instance;
 
     private Context context;
@@ -35,11 +34,11 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     //Timer click arc
     private int arc = 0;
 
-    private View focus;
+    private View focus = NULL_VIEW;
 
     //View above Mouse
-    public View mouseOver = null;
-    protected View focusComponent = null;
+    public View mouseOver = NULL_VIEW;
+    protected View focusComponent = NULL_VIEW;
 
     private boolean overClickable = false;
 
@@ -90,8 +89,22 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     public void updateMouseViews(PointerEvent event, List<View> views) {
         updatingEvents = true;
         for (View view : views) {
+
+            boolean wasMouseOver = view.isMouseOver();
             //Update View
             updateEvent(view, view.updateMouse(event));
+
+            if (view == mouseOver) {
+
+                if (!view.isMouseOver()) {
+                    // Lose Mouse Focus
+                    mouseOver = NULL_VIEW;
+                }
+
+            } else if (!wasMouseOver && view.isMouseOver()) {
+                // Gain Mouse Focus
+                mouseOver = view;
+            }
 
             //Update Children
             updateMouseViews(event, view.getViews());
@@ -146,8 +159,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
                     //events.add(new Event(Tecla.NONE, KeyState.LOSE_FOCUS));
                     //events.add(new Event(DeviceType.KEYBOARD, Tecla.NONE, KeyState.LOSE_FOCUS));
 
-                    //TODO improve it
-                    focus = null;
+                    focus = NULL_VIEW;
                 }
 
                 break;
@@ -211,7 +223,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
             default:
 
 			/*if(view.isMouseOver()) {
-				view.update(GUIEvent.MOUSE_OUT);
+                view.update(GUIEvent.MOUSE_OUT);
 			}*/
 
                 break;
@@ -237,12 +249,12 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
 
     public void resetMouseOver() {
         removeMouseOver(mouseOver);
-        mouseOver = null;
+        mouseOver = NULL_VIEW;
         overClickable = false;
     }
 
     private void setFocus(View view) {
-        if (focus != null) {
+        if (focus != NULL_VIEW) {
             removeFocus(focus);
         }
         focus = view;
@@ -254,7 +266,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         if (view == focus) {
             view.setOnFocus(false);
             view.updateEvent(GUIEvent.LOST_FOCUS);
-            focus = null;
+            focus = NULL_VIEW;
         }
     }
 
@@ -266,7 +278,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     }
 
     public void drawCursor(Graphics g) {
-        arrowDrawer.setCoordinates(mx, my);
+        arrowDrawer.setLocation(mx, my);
         arrowDrawer.draw(g);
         //Draw Accessible Cursor
         if (timerClick && overClickable) {
@@ -416,7 +428,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         LanguageModule.getInstance().changeLanguage(language);
         guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
 
-        for (LanguageChangerListener listener: listeners) {
+        for (LanguageChangerListener listener : listeners) {
             listener.changeLanguage(language);
         }
     }
@@ -433,4 +445,24 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     public static void removeListener(LanguageChangerListener listener) {
         listeners.remove(listener);
     }
+
+    public View getMouseOver() {
+        return mouseOver;
+    }
+
+    public boolean isMouseOver() {
+        return mouseOver != NULL_VIEW;
+    }
+
+    private static final View NULL_VIEW = new View() {
+        @Override
+        public GUIEvent updateKeyboard(KeyEvent event) {
+            return null;
+        }
+
+        @Override
+        public void updateEvent(GUIEvent event) {
+        }
+    };
+
 }

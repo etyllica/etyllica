@@ -1,7 +1,7 @@
 package br.com.etyllica.commons.effect;
 
 import br.com.etyllica.commons.animation.script.SingleIntervalAnimation;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 /**
  * 

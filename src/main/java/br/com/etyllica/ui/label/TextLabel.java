@@ -6,7 +6,7 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.Label;
 import br.com.etyllica.ui.theme.Theme;
 import br.com.etyllica.ui.theme.ThemeManager;
-import br.com.etyllica.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.GeometricLayer;
 import br.com.etyllica.layer.TextLayer;
 
 import java.awt.*;

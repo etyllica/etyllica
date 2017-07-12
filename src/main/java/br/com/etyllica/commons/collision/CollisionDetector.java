@@ -62,7 +62,6 @@ public class CollisionDetector {
 
     //Checks collision with a vertical hexagon
     public static boolean colideHexagonPoint(int x, int y, int w, int h, int px, int py) {
-
         float mx = w / 4;
         float my = h / 2;
 
@@ -86,12 +85,11 @@ public class CollisionDetector {
      * Rectangle To Point.
      */
     public static boolean colideRectPoint(double rectX, double rectY, double rectWidth, double rectHeight, double rectAngle, double pointX, double pointY) {
-
-        double rectCenterX = rectX+rectWidth/2;
-        double rectCenterY = rectY+rectHeight/2;
+        double rectCenterX = rectX + rectWidth / 2;
+        double rectCenterY = rectY + rectHeight / 2;
 
         if (rectAngle == 0)   //High speed for rectangles without rotation
-            return Math.abs(rectCenterX - pointX) < rectWidth / 2 && Math.abs(rectCenterY - pointY) < rectHeight / 2;
+            return colideRectPointByCenter(rectWidth, rectHeight, rectCenterX, rectCenterY, pointX, pointY);
 
         final double cos = Math.cos(rectAngle);
         final double sin = Math.cos(rectAngle);
@@ -102,16 +100,15 @@ public class CollisionDetector {
         double cx = cos * rectCenterX - sin * rectCenterY;
         double cy = cos * rectCenterY + sin * rectCenterX;
 
-        return Math.abs(cx - tx) < rectWidth / 2 && Math.abs(cy - ty) < rectHeight / 2;
+        return colideRectPointByCenter(rectWidth, rectHeight, cx, cy, tx, ty);
+    }
+
+    private static boolean colideRectPointByCenter(double rectWidth, double rectHeight, double rectCenterX, double rectCenterY, double pointX, double pointY) {
+        return Math.abs(rectCenterX - pointX) < rectWidth / 2 && Math.abs(rectCenterY - pointY) < rectHeight / 2;
     }
 
     public static boolean colideRectPoint(int x, int y, int w, int h, int pointX, int pointY) {
-        int rectCenterX = x + w / 2;
-        int rectCenterY = y + h / 2;
-        int rectWidth = w;
-        int rectHeight = h;
-
-        return Math.abs(rectCenterX - pointX) < rectWidth / 2 && Math.abs(rectCenterY - pointY) < rectHeight / 2;
+        return pointX >= x && pointX <= x + w && pointY >= y && pointY <= y + h;
     }
 
     /**

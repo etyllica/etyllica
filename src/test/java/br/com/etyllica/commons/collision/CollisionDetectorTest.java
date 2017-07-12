@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.etyllica.layer.GeometricLayer;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.Layer;
 
 public class CollisionDetectorTest {
 
@@ -27,8 +27,13 @@ public class CollisionDetectorTest {
 	
 	@Test
 	public void testRotatedCollision() {
+		int cx = rotatedLayer.getX()+rotatedLayer.getW()/2;
+		int cy = rotatedLayer.getY()+rotatedLayer.getH()/2;
+
+		Assert.assertTrue(rotatedLayer.colideRectPoint(cx, cy));
 		Assert.assertTrue(rotatedLayer.colideRectPoint(220, 80));
-		
+
+		Assert.assertFalse(rotatedLayer.colideRectPoint(0, 0));
 		Assert.assertFalse(rotatedLayer.colideRectPoint(20, 60));
 		Assert.assertFalse(rotatedLayer.colideRectPoint(19, 60));
 	}

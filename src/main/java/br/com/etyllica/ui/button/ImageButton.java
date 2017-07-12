@@ -57,28 +57,28 @@ public class ImageButton extends BaseButton {
 		
 	@Override
 	protected void leftClick(){
-		layer.cloneLayer(click);
+		layer.setPath(click);
 	}
 	
 	@Override
 	protected void rightClick(){
-		layer.cloneLayer(click);
+		layer.setPath(click);
 	}
 
 	@Override
 	protected void middleClick(){
-		layer.cloneLayer(click);
+		layer.setPath(click);
 	}
 
 	@Override
 	protected void justOnMouse(){
-		layer.cloneLayer(sobMouse);
+		layer.setPath(sobMouse);
 	}
 	
 	@Override
 	public void mouseOut(){
 		super.mouseOut();
-		layer.cloneLayer(normal);
+		layer.setPath(normal);
 	}
 
 	@Override

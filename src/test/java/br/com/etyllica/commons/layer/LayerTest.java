@@ -1,4 +1,4 @@
-package br.com.etyllica.layer;
+package br.com.etyllica.commons.layer;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,12 +17,12 @@ public class LayerTest {
     }
 
     @Test
-    public void testGetUtilMeasures() {
-        Assert.assertEquals(31, layer.utilWidth());
-        Assert.assertEquals(32, layer.utilHeight());
+    public void testGetSrcMeasures() {
+        Assert.assertEquals(31, layer.getW());
+        Assert.assertEquals(32, layer.getH());
 
         layer.setW(200);
-        Assert.assertEquals(200, layer.utilWidth());
+        Assert.assertEquals(200, layer.getW());
     }
 
     @Test

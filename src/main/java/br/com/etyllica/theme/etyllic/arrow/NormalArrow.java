@@ -44,8 +44,7 @@ public class NormalArrow extends PolygonalArrow implements MouseArrow {
 		addPoint((int)(size*0.49),(int)(size*0.57));
 	}
 	
-	public void setCoordinates(int mx, int my) {
-
+	public void setLocation(int mx, int my) {
 		int difx = mx;
 		int dify = my;
 
@@ -53,7 +52,6 @@ public class NormalArrow extends PolygonalArrow implements MouseArrow {
 
 		cursorX = difx;
 		cursorY = dify;
-
 	}
 
 	public void draw(Graphics g) {

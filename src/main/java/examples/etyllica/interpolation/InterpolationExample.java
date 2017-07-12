@@ -11,7 +11,7 @@ import br.com.etyllica.commons.interpolation.LinearInterpolator;
 import br.com.etyllica.commons.interpolation.QuadraticInterpolator;
 import br.com.etyllica.commons.interpolation.RadialInterpolator;
 import br.com.etyllica.commons.interpolation.ReverseQuadraticInterpolator;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 public class InterpolationExample extends Application {
 

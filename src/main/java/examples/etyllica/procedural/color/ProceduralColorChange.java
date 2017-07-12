@@ -18,20 +18,17 @@ public class ProceduralColorChange extends Application {
     @Override
     public void load() {
         cursor = new BufferedLayer(50, 50, "cursor.png");
-
         loading = 100;
     }
 
     @Override
     public void updateMouse(PointerEvent event) {
-
         int ex = event.getX();
         int ey = event.getY();
-        cursor.setCoordinates(ex, ey);
+        cursor.setLocation(ex, ey);
 
-
-        int red = (int) ((ex * 255) / 640);
-        int green = (int) ((ey * 255) / 480);
+        int red = (ex * 255) / w;
+        int green = (ey * 255) / h;
         int blue = 0;
 
         cursor.offsetRGB(red, green, blue);
