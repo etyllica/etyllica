@@ -5,10 +5,6 @@ import br.com.etyllica.commons.collision.CollisionDetector;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 
-/**
- * @author yuripourre
- */
-
 public class Layer extends GeometricLayer implements Drawable {
 
     /**
@@ -49,6 +45,8 @@ public class Layer extends GeometricLayer implements Drawable {
 
     public Layer(int x, int y, int w, int h) {
         super(x, y, w, h);
+        originX = w / 2;
+        originY = h / 2;
     }
 
     public int getOpacity() {
@@ -238,8 +236,8 @@ public class Layer extends GeometricLayer implements Drawable {
 
     public boolean colide(Layer b) {
         if (getAngle() == 0 && b.getAngle() == 0) {
-            return ((getX() + utilWidth() / 2 - b.getX() + b.utilWidth() / 2) * 2 < (utilWidth() + b.utilWidth())) &&
-                    ((getY() + utilHeight() / 2 - b.getY() + b.utilHeight() / 2) * 2 < (utilHeight() + b.utilHeight()));
+            return CollisionDetector.colideRectRect(getX(), getY(), utilWidth(), utilHeight(),
+                    b.getX(), b.getY(), b.utilWidth(), b.utilHeight());
         } else {
             return CollisionDetector.colidePolygon(getX(), getY(), utilWidth(), utilHeight(), getAngle(),
                     b.getX(), b.getY(), b.utilWidth(), b.utilHeight(), b.getAngle());
