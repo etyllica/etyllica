@@ -420,6 +420,14 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
         UI.views.addAll(views);
     }
 
+    public static void remove(View view) {
+        UI.views.remove(view);
+    }
+
+    public static void clear() {
+        UI.views.clear();
+    }
+
     private boolean isUpdating() {
         return updating || updatingEvents;
     }
