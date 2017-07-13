@@ -1,18 +1,18 @@
-package examples.etyllica.basic.hello;
+package examples.etyllica.basic.image;
 
 import br.com.etyllica.Etyllica;
 import br.com.etyllica.commons.context.Application;
 
-public class HelloWorld extends Etyllica {
+public class HelloWorldImage extends Etyllica {
 
     private static final long serialVersionUID = 1L;
 
-    public HelloWorld() {
+    public HelloWorldImage() {
         super(800, 600);
     }
 
     public static void main(String[] args) {
-        HelloWorld app = new HelloWorld();
+        HelloWorldImage app = new HelloWorldImage();
         app.setTitle("Hello World Example");
         app.setIcon("particle.png");
         app.init();
@@ -25,7 +25,7 @@ public class HelloWorld extends Etyllica {
         //System.out.println(getPath());
         //initialSetup("../");
 
-        return new HelloWorldApplication(w, h);
+        return new HelloWorldImageApplication(w, h);
     }
 
 }
