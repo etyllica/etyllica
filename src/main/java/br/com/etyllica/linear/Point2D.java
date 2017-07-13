@@ -112,11 +112,8 @@ public class Point2D {
 	}
 
 	public void rotate(double cx, double cy, double degreeAngle) {
-
 		double angle = Math.toRadians(degreeAngle);
-
 		double nx = cx + (x-cx)*Math.cos(angle) - (y-cy)*Math.sin(angle);
-
 		double ny = cy + (x-cx)*Math.sin(angle) + (y-cy)*Math.cos(angle);
 
 		x = nx;
@@ -137,19 +134,16 @@ public class Point2D {
 	}
 
 	public double distance(double px, double py) {
-
 		return distance(px, py, this.x, this.y);
 	}
 
 	public static double distance(double px, double py, double qx, double qy) {
-
 		double difX = px - qx;
 		double difY = py - qy;
 
 		double dist = Math.sqrt(Math.pow(difX, 2) + Math.pow(difY, 2));
 
 		return dist;
-
 	}
 
 	public Point2D distantPoint(Point2D b, double distance) {

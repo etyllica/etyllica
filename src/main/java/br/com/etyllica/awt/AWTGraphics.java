@@ -8,7 +8,7 @@ import br.com.etyllica.commons.layer.GeometricLayer;
 import br.com.etyllica.commons.layer.Layer;
 import br.com.etyllica.linear.Line2D;
 import br.com.etyllica.linear.Point2D;
-import br.com.etyllica.linear.PointInt2D;
+import br.com.etyllica.commons.math.Vector2i;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -1043,7 +1043,7 @@ public class AWTGraphics implements Graphics {
 	 * @param point
 	 * @param radius
 	 */
-	public void fillCircle(PointInt2D point, int radius) {
+	public void fillCircle(Vector2i point, int radius) {
 		screen.fillOval(point.getX()-radius, point.getY()-radius, radius*2, radius*2);
 	}
 

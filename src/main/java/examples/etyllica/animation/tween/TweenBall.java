@@ -2,8 +2,8 @@ package examples.etyllica.animation.tween;
 
 import java.awt.Color;
 
-import br.com.etyllica.commons.animation.Animation;
-import br.com.etyllica.commons.animation.LayerAnimation;
+import br.com.etyllica.core.animation.Animation;
+import br.com.etyllica.core.animation.script.LayerAnimation;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.commons.interpolation.Interpolator;

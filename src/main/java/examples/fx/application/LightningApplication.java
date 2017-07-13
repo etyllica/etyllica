@@ -1,7 +1,7 @@
 package examples.fx.application;
 
 import br.com.etyllica.commons.context.Application;
-import br.com.etyllica.commons.effect.Effect;
+import br.com.etyllica.core.effect.Effect;
 import br.com.etyllica.commons.event.KeyEvent;
 import br.com.etyllica.core.graphics.Graphics;
 

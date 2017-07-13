@@ -15,7 +15,7 @@ import java.awt.image.ImageObserver;
 import br.com.etyllica.awt.camera.Camera;
 import br.com.etyllica.linear.Line2D;
 import br.com.etyllica.linear.Point2D;
-import br.com.etyllica.linear.PointInt2D;
+import br.com.etyllica.commons.math.Vector2i;
 import br.com.etyllica.commons.layer.GeometricLayer;
 import br.com.etyllica.commons.layer.Layer;
 
@@ -433,7 +433,7 @@ public interface Graphics extends TextGraphics {
 	 * @param point
 	 * @param radius
 	 */
-	public void fillCircle(PointInt2D point, int radius);
+	public void fillCircle(Vector2i point, int radius);
 
 	/**
 	 * 

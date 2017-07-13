@@ -3,7 +3,7 @@ package br.com.etyllica.commons.input.joystick;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.commons.layer.Layer;
-import br.com.etyllica.linear.Point2D;
+import br.com.etyllica.commons.math.Vector2i;
 
 public class TouchJoystick {
 
@@ -17,8 +17,8 @@ public class TouchJoystick {
     protected int activeId = INACTIVE;
     protected boolean active = false;
 
-    protected Point2D center;
-    protected Point2D joyPosition;
+    protected Vector2i center;
+    protected Vector2i joyPosition;
 
     protected int radius = DEFAULT_RADIUS;
     protected int joystickRadius = DEFAULT_JOYSTICK_RADIUS;
@@ -43,8 +43,8 @@ public class TouchJoystick {
         int cx = x + radius;
         int cy = y + radius;
 
-        center = new Point2D(cx, cy);
-        joyPosition = new Point2D(cx, cy);
+        center = new Vector2i(cx, cy);
+        joyPosition = new Vector2i(cx, cy);
 
         joystick = new Layer(cx - joystickRadius, cy - joystickRadius, joystickRadius * 2, joystickRadius * 2);
         reset();
@@ -167,7 +167,7 @@ public class TouchJoystick {
         this.joystickRadius = joystickRadius;
     }
 
-    public Point2D getCenter() {
+    public Vector2i getCenter() {
         return center;
     }
 

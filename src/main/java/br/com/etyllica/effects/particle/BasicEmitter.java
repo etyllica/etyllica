@@ -1,6 +1,6 @@
 package br.com.etyllica.effects.particle;
 
-import br.com.etyllica.commons.effect.particle.Emitter;
+import br.com.etyllica.commons.particle.Emitter;
 import br.com.etyllica.core.graphics.Graphics;
 
 import java.awt.*;

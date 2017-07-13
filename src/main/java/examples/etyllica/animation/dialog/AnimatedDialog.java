@@ -1,7 +1,7 @@
 package examples.etyllica.animation.dialog;
 
 import br.com.etyllica.animation.script.text.DialogScript;
-import br.com.etyllica.commons.animation.AnimationModule;
+import br.com.etyllica.core.animation.AnimationModule;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;

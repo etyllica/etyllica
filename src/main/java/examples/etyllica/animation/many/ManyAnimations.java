@@ -1,7 +1,7 @@
 package examples.etyllica.animation.many;
 
-import br.com.etyllica.commons.animation.script.*;
-import br.com.etyllica.context.SceneApplication;
+import br.com.etyllica.core.animation.script.*;
+import br.com.etyllica.core.context.SceneApplication;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.ImageLayer;
 import br.com.etyllica.commons.layer.Layer;

@@ -4,7 +4,6 @@ import br.com.etyllica.commons.Updatable;
 import br.com.etyllica.commons.context.load.ApplicationLoadListener;
 import br.com.etyllica.commons.context.load.DefaultLoadApplication;
 import br.com.etyllica.commons.dnd.DropTarget;
-import br.com.etyllica.commons.effect.TransitionEffect;
 import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.commons.ui.UIComponent;
 import br.com.etyllica.commons.ui.UIResizableComponent;
@@ -38,11 +37,6 @@ public abstract class Context extends Layer implements UIResizableComponent, Upd
      * Listener to be updated
      */
     private UpdateIntervalListener updated = null;
-
-    /**
-     * Transition effect while change to returned Application
-     */
-    protected TransitionEffect effect = TransitionEffect.NONE;
 
     /**
      * Load percentage unlock Application when reaches 100

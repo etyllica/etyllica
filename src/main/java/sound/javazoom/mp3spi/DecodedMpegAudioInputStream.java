@@ -39,8 +39,6 @@ import sound.javazoom.decoder.Header;
 import sound.javazoom.decoder.Obuffer;
 import sound.tritonus.TAsynchronousFilteredAudioInputStream;
 
-
-
 /**
  * Main decoder.
  */

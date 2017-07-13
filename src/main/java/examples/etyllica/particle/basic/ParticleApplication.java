@@ -1,6 +1,6 @@
 package examples.etyllica.particle.basic;
 
-import br.com.etyllica.context.SceneApplication;
+import br.com.etyllica.core.context.SceneApplication;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.effects.particle.BasicEmitter;
 

@@ -1,9 +1,9 @@
 package examples.etyllica.animation.sprite;
 
 
-import br.com.etyllica.commons.animation.AnimationModule;
-import br.com.etyllica.commons.animation.script.FrameAnimation;
-import br.com.etyllica.context.SceneApplication;
+import br.com.etyllica.core.animation.AnimationModule;
+import br.com.etyllica.core.animation.script.FrameAnimation;
+import br.com.etyllica.core.context.SceneApplication;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.layer.AnimatedLayer;
 
