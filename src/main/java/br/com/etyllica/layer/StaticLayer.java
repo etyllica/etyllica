@@ -87,6 +87,10 @@ public class StaticLayer extends Layer {
 		this.path = path;
 		load();
 	}
+
+	public void onLoad(String path) {
+		this.path = path;
+	}
 	
 	/**
 	 * 
