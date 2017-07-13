@@ -75,11 +75,11 @@ public class ImageLoader extends LoaderImpl {
 	}
 
 	public StaticLayer loadImage(String path, boolean absolute) {
-
 		BufferedImage img = getImage(path, absolute);
 
 		StaticLayer cam = new StaticLayer();
 		cam.setSize(img.getWidth(), img.getHeight());
+		cam.setOriginCenter();
 
 		if(absolute) {
 			cam.onLoad(IOHelper.FILE_PREFIX+path);

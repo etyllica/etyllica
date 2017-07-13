@@ -98,8 +98,8 @@ public class StaticLayer extends Layer {
 	 * @param h
 	 */
 	public void setSize(int w , int h) {
-		this.w = w;
-		this.h = h;
+		setW(w);
+		setH(h);
 	}
 
 	/**
@@ -108,8 +108,8 @@ public class StaticLayer extends Layer {
 	 */
 	public void cloneLayer(StaticLayer layer) {
 		this.path = layer.path;
-		this.w = layer.w;
-		this.h = layer.h;
+		setW(w);
+		setH(h);
 	}
 
 	public StaticLayer load() {
@@ -125,7 +125,12 @@ public class StaticLayer extends Layer {
 		}
 		this.w = layer.w;
 		this.h = layer.h;
+
+		// It is needed to update ImageLayer
+		setW(layer.w);
+		setH(layer.h);
 		setOriginCenter();
+
 		return layer;
 	}
 
