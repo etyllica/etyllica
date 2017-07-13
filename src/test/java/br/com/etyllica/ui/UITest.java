@@ -4,23 +4,27 @@ import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.commons.event.PointerState;
 import br.com.etyllica.ui.base.BaseButton;
+import br.com.etyllica.ui.base.BaseTextField;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class UITest {
+import java.util.ArrayList;
+import java.util.List;
 
-    private BaseButton button;
+public class UITest {
 
     @Before
     public void setUp() {
-        button = new BaseButton(0, 0, 100, 20);
-        UI.add(button);
-        UI.getInstance().resetMouseOver();
+        UI.clear();
     }
 
     @Test
     public void testUpdatePointerEvent() {
+        BaseButton button = new BaseButton(0, 0, 100, 20);
+        UI.add(button);
+        UI.getInstance().resetMouseOver();
+
         Assert.assertFalse(UI.getInstance().isMouseOver());
 
         PointerEvent move = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 10, 10);
@@ -29,7 +33,36 @@ public class UITest {
     }
 
     @Test
+    public void testUpdateMouse() {
+        BaseButton b = new BaseButton(10, 10, 200, 20);
+        BaseTextField f = new BaseTextField(10, 30, 200, 60);
+
+        List<View> views = new ArrayList<View>();
+        views.add(b);
+        views.add(f);
+
+        UI.addAll(views);
+
+        PointerEvent moveOverButtonEvent = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 20, 20);
+        UI.getInstance().updateMouseViews(moveOverButtonEvent, views);
+
+        Assert.assertTrue(b.isMouseOver());
+
+        PointerEvent moveOverFieldEvent = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 20, 40);
+        UI.getInstance().updateMouseViews(moveOverFieldEvent, views);
+
+        PointerEvent clickEvent = new PointerEvent(MouseEvent.MOUSE_BUTTON_LEFT, PointerState.PRESSED, 20, 40);
+        UI.getInstance().updateMouseViews(clickEvent, views);
+
+        Assert.assertTrue(f.isOnFocus());
+    }
+
+    @Test
     public void testMouseOut() {
+        BaseButton button = new BaseButton(0, 0, 100, 20);
+        UI.add(button);
+        UI.getInstance().resetMouseOver();
+
         Assert.assertFalse(UI.getInstance().isMouseOver());
 
         PointerEvent move = new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, 10, 10);
