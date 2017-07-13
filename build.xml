@@ -5,7 +5,7 @@
            uri="antlib:org.apache.maven.artifact.ant"
            classpathref="maven-ant-tasks.classpath" />
         
-  <property name="version" value="5.8.4"/><!-- Change version in maven/pom.xml-->
+  <property name="version" value="6.0.0"/><!-- Change version in maven/pom.xml-->
   <property name="maven-version" value="${version}" />
 
   <property name="libcore"     value="etyllica-${version}" />
