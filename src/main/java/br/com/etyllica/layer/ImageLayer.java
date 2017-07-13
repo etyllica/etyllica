@@ -1,295 +1,290 @@
 package br.com.etyllica.layer;
 
-import br.com.etyllica.linear.HitBox;
+import br.com.etyllica.commons.layer.Layer;
+import br.com.etyllica.commons.math.EtyllicaMath;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.Mouse;
-import br.com.etyllica.linear.Rectangle;
 import br.com.etyllica.loader.image.ImageLoader;
-import br.com.etyllica.commons.math.EtyllicaMath;
 
 /**
- * 
  * @author yuripourre
- *
  */
 
 public class ImageLayer extends StaticLayer {
 
-	protected int xImage = 0;
-	protected int yImage = 0;
+    protected int srcX = 0;
+    protected int srcY = 0;
+    protected int srcW = 0;
+    protected int srcH = 0;
 
-	protected HitBox colisionArea = null;
+    public ImageLayer() {
+        super();
+    }
 
-	public ImageLayer() {
-		super();
-	}
+    /**
+     * @param x
+     * @param y
+     */
+    public ImageLayer(int x, int y) {
+        super();
+        this.x = x;
+        this.y = y;
+    }
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 */
-	public ImageLayer(int x, int y) {
-		super();
-		this.x = x;
-		this.y = y;
-	}
+    /**
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public ImageLayer(int x, int y, int w, int h) {
+        super(x, y, w, h);
+        this.srcW = w;
+        this.srcH = h;
+        setOriginCenter();
+    }
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 */
-	public ImageLayer(int x, int y, int w, int h) {
-		super(x,y,w,h);
-	}
+    /**
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param path
+     */
+    public ImageLayer(int x, int y, int w, int h, String path) {
+        super(x, y, w, h, path);
+        this.srcW = w;
+        this.srcH = h;
+        setOriginCenter();
+    }
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param path
-	 */
-	public ImageLayer(int x, int y, int w, int h, String path) {
-		super(x,y,w,h,path);
-	}
+    /**
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param srcX
+     * @param srcY
+     * @param path
+     */
+    public ImageLayer(int x, int y, int w, int h, int srcX, int srcY, String path) {
+        super(x, y, w, h, path);
+        this.srcX = srcX;
+        this.srcY = srcY;
+        this.srcW = w;
+        this.srcH = h;
+        setOriginCenter();
+    }
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 * @param xImagem
-	 * @param yImagem
-	 * @param path
-	 */
-	public ImageLayer(int x, int y, int w, int h, int xImagem, int yImagem, String path) {
-		super(x,y,w,h,path);
-		this.xImage = xImagem;
-		this.yImage = yImagem;
-	}
+    /**
+     * @param x
+     * @param y
+     * @param path
+     */
+    public ImageLayer(int x, int y, String path) {
+        super(path);
+        setLocation(x, y);
+    }
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param path
-	 */
-	public ImageLayer(int x, int y, String path) {
-		super(path);
-		setCoordinates(x, y);
-	}
+    /**
+     * @param path
+     */
+    public ImageLayer(String path) {
+        this(0, 0, path);
+    }
 
-	/**
-	 * 
-	 * @param path
-	 */
-	public ImageLayer(String path) {
-		this(0, 0, path);
-	}
-	
-	public ImageLayer(String path, boolean absolute) {
-		this(0, 0, path, absolute);
-	}
+    public ImageLayer(String path, boolean absolute) {
+        this(0, 0, path, absolute);
+    }
 
-	public ImageLayer(int x, int y, String path, boolean absolute) {
-		super(path, absolute);
-		setCoordinates(x, y);
-	}
+    public ImageLayer(int x, int y, String path, boolean absolute) {
+        super(path, absolute);
+        setLocation(x, y);
+    }
 
-	public int getXImage() {
-		return xImage;
-	}
+    /**
+     * @return srcX
+     */
+    public int getSrcX() {
+        return srcX;
+    }
 
-	/**
-	 * 
-	 * @param xImage
-	 */
-	public void setXImage(int xImage) {
-		this.xImage = xImage;
-	}
+    /**
+     * @param srcX
+     */
+    public void setSrcX(int srcX) {
+        this.srcX = srcX;
+    }
 
-	public int getYImage() {
-		return yImage;
-	}
+    /**
+     * @return srcY
+     */
+    public int getSrcY() {
+        return srcY;
+    }
 
-	/**
-	 * 
-	 * @param yImage
-	 */
-	public void setYImage(int yImage) {
-		this.yImage = yImage;
-	}
+    /**
+     * @param srcY
+     */
+    public void setSrcY(int srcY) {
+        this.srcY = srcY;
+    }
 
-	public HitBox getColisionArea() {
-		return colisionArea;
-	}
+    public int getSrcW() {
+        return srcW;
+    }
 
-	/**
-	 * 
-	 * @param colisionArea
-	 */
-	public void setColisionArea(HitBox colisionArea) {
-		this.colisionArea = colisionArea;
-	}
+    public void setSrcW(int srcW) {
+        this.srcW = srcW;
+    }
 
-	/**
-	 * 
-	 * @param xImage
-	 * @param yImage
-	 */
-	public void setImageCoordinates(int xImage, int yImage) {
-		this.xImage = xImage;
-		this.yImage = yImage;
-	}	
+    public int getSrcH() {
+        return srcH;
+    }
 
-	public boolean colideRetangular(int bx, int by, int bw, int bh) {
-		return colideRectRect(bx, by, bw, bh);
-	}
+    public void setSrcH(int srcH) {
+        this.srcH = srcH;
+    }
 
-	public boolean colideRetangular(Layer b) {
-		return colideRetangular(b.getX(), b.getY(), b.getW(), b.getH());
-	}
+    /**
+     * @param srcX
+     * @param srcY
+     */
+    public void setLocationSrc(int srcX, int srcY) {
+        this.srcX = srcX;
+        this.srcY = srcY;
+    }
 
-	private boolean colideRectangle(Rectangle rect, Rectangle rect2, int rect2x, int rect2y) {
-		if(rect2x+rect2.getX() + rect2.getW() < x+rect.getX())	return false;
-		if(rect2x+rect2.getX() > x+rect.getX() + rect.getW())		return false;
+    /**
+     * @param srcX
+     * @param srcY
+     */
+    public void setSrc(int srcX, int srcY, int srcW, int srcH) {
+        this.srcX = srcX;
+        this.srcY = srcY;
+        this.srcW = srcW;
+        this.srcH = srcH;
+    }
 
-		if(rect2y+rect2.getY() + rect2.getH() < y+rect.getY())	return false;
-		if(rect2y+rect2.getY() > y+rect.getY() + rect.getH())		return false;
+    public int getImageWidth() {
+        return w;
+    }
 
-		return true;	
-	}
+    public int getImageHeight() {
+        return h;
+    }
 
-	private boolean colideHitBox(Rectangle hitBox, int rect2x, int rect2y) {
+    // Src methods
+    @Override
+    public int getW() {
+        return getSrcW();
+    }
 
-		for(Rectangle rect: colisionArea.getAreas()) {
+    @Override
+    public int getH() {
+        return getSrcH();
+    }
 
-			if(colideRectangle(rect, hitBox, rect2x, rect2y)) {
-				return true;
-			}
+    @Override
+    public void setW(int w) {
+        this.srcW = w;
+    }
 
-		}
+    @Override
+    public void setH(int h) {
+        this.srcH = h;
+    }
 
-		return false;
-	}
+    public boolean colideRetangular(int bx, int by, int bw, int bh) {
+        return colideRectRect(bx, by, bw, bh);
+    }
 
-	public boolean colideAreaHitBox(AnimatedLayer b) {
-		Rectangle rect2 = new Rectangle(0, 0, b.getTileW(), b.getTileH());
-		return colideHitBox(rect2,b.getX(), b.getY());
-	}
+    public boolean colideRetangular(Layer b) {
+        return colideRetangular(b.getX(), b.getY(), b.getW(), b.getH());
+    }
 
-	public boolean colideAreaHitBox(ImageLayer b) {
-		Rectangle rect2 = new Rectangle(0, 0,b.getW(),b.getH());
-		return colideHitBox(rect2,b.getX(),b.getY());
-	}
+    // Based on code at: http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
+    public boolean colideRotated(int mx, int my) {
+        double sx = EtyllicaMath.mod(scaleX);
+        double sy = EtyllicaMath.mod(scaleY);
 
-	public boolean colideHitBoxes(ImageLayer b) {
+        int scaledOriginX = (int) (originX * sx);
+        int scaledOriginY = (int) (originY * sy);
 
-		for(Rectangle rect: colisionArea.getAreas()) {
-			for(Rectangle rect2: b.getColisionArea().getAreas()) {
-				if(colideRectangle(rect, rect2, b.getX(), b.getY())) {
-					return true;
-				}
-			}
-		}
+        //Pivot Point of rotation
+        int px = x + scaledOriginX;
+        int py = y + scaledOriginY;
 
-		return false;
-	}
+        double c = Math.cos(angle);
+        double s = Math.sin(angle);
 
-	//Based on code at: http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
-	public boolean colideRotated(int mx, int my) {
-		
-		double sx = EtyllicaMath.mod(scaleX);
-		double sy = EtyllicaMath.mod(scaleY);
-		
-		int halfWidth = (int)((w*sx)/2);
-		int halfHeight = (int)((h*sy)/2);
-		
-		//Pivot Point of rotation
-		int px = x+halfWidth;
-		int py = y+halfHeight;
+        // Unrotate the point depending on the rotation of the rectangle
+        double rotatedX = px + c * (mx - px) - s * (my - py);
+        double rotatedY = py + s * (mx - px) + c * (my - py);
 
-		double c = Math.cos(angle);
-		double s = Math.sin(angle);
+        // perform a normal check if the new point is inside the
+        // bounds of the unrotated rectangle
+        int leftX = px - scaledOriginX;
+        int rightX = px + scaledOriginX;
+        int topY = py - scaledOriginY;
+        int bottomY = py + scaledOriginY;
 
-		// UNrotate the point depending on the rotation of the rectangle
-		double rotatedX = px + c * (mx - px) - s * (my - py);
+        return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
+    }
 
-		double rotatedY = py + s * (mx - px) + c * (my - py);
+    @Override
+    public void draw(Graphics g) {
+        draw(g, 0, 0);
+    }
 
-		// perform a normal check if the new point is inside the 
-		// bounds of the UNrotated rectangle
-		int leftX = px - halfWidth;
-		int rightX = px + halfWidth;
-		int topY = py - halfHeight;
-		int bottomY = py + halfHeight;
+    public void draw(Graphics g, int offsetX, int offsetY) {
+        if (!visible) {
+            return;
+        }
 
-		return (leftX <= rotatedX && rotatedX <= rightX && topY <= rotatedY && rotatedY <= bottomY);
-	}
+        if (opacity < 0xff) {
+            g.setOpacity(opacity);
+        }
 
-	@Override
-	public void draw(Graphics g) {
-		draw(g, 0, 0);
-	}
-	
-	public void draw(Graphics g, int offsetX, int offsetY) {
-	
-		if(!visible) {
-			return;
-		}
+        g.setTransform(getTransform(offsetX, offsetY));
+        simpleDraw(g);
+        g.resetTransform();
 
-		if(opacity < 0xff) {
-			g.setOpacity(opacity);
-		}
+        if (opacity < 0xff) {
+            g.resetOpacity();
+        }
+    }
 
-		g.setTransform(getTransform(offsetX, offsetY));
-		simpleDraw(g);
-		g.resetTransform();
-		
-		if(opacity < 0xff) {
-			g.resetOpacity();
-		}
-	}
+    @Override
+    public void simpleDraw(Graphics g) {
+        simpleDraw(g, x, y);
+    }
 
-	@Override
-	public void simpleDraw(Graphics g) {
-		simpleDraw(g, x, y);
-	}
-	
-	public void simpleDraw(Graphics g, int x, int y) {
-		simpleDraw(g, x, y, utilWidth(), utilHeight());
-	}
+    public void simpleDraw(Graphics g, int x, int y) {
+        simpleDraw(g, x, y, getW(), getH());
+    }
 
-	public void simpleDraw(Graphics g, int x, int y, int w, int h) {
-		if (path.isEmpty()) {
-			return;
-		}
-		g.drawImage( ImageLoader.getInstance().getImage(path), x, y, x + w, y + h,
-				xImage, yImage, xImage + w,yImage + h, null );
-	}
-	
-	public boolean onMouse(Mouse mouse) {
-		return colideRectPoint(mouse.getX(), mouse.getY());
-	}
+    public void simpleDraw(Graphics g, int x, int y, int w, int h) {
+        if (path.isEmpty()) {
+            return;
+        }
+        g.drawImage(ImageLoader.getInstance().getImage(path), x, y, x + w, y + h,
+                srcX, srcY, srcX + w, srcY + h, null);
+    }
 
-	public void clone(ImageLayer b) {
-		this.w = b.w;
-		this.h = b.h;
+    public boolean onMouse(Mouse mouse) {
+        return colideRectPoint(mouse.getX(), mouse.getY());
+    }
 
-		this.xImage = b.xImage;
-		this.yImage = b.yImage;
-		
-		this.scaleX = b.scaleX;
-		this.scaleY = b.scaleY;
-		this.angle = b.angle;
+    public void copy(ImageLayer b) {
+        super.copy(b);
 
-		this.path = b.path;
-	}
+        this.srcX = b.srcX;
+        this.srcY = b.srcY;
+        this.srcW = b.srcW;
+        this.srcH = b.srcH;
+
+        this.path = b.path;
+    }
 
 }

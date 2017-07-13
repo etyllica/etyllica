@@ -24,12 +24,11 @@ public class AWTArrowDrawer implements ArrowDrawer {
 
 	protected boolean overText = false;
 
-	public void setCoordinates(int x, int y) {
-
+	public void setLocation(int x, int y) {
 		this.x = x;
 		this.y = y;
 
-		arrow.setCoordinates(x, y);
+		arrow.setLocation(x, y);
 	}
 
 	public void draw(Graphics g) {

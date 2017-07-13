@@ -9,7 +9,7 @@ import br.com.etyllica.commons.event.GUIEvent;
 import br.com.etyllica.commons.ui.UIComponent;
 import br.com.etyllica.commons.ui.UIResizableComponent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 import java.io.File;
 import java.util.ArrayList;

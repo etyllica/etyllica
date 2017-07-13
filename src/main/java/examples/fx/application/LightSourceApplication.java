@@ -44,7 +44,7 @@ public class LightSourceApplication extends Application {
     }
 
     public void updateMouse(PointerEvent event) {
-        source.setCoordinates(event.getX() - source.getW() / 2, event.getY() - source.getH() / 2);
+        source.setLocation(event.getX() - source.getW() / 2, event.getY() - source.getH() / 2);
     }
 
 }

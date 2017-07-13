@@ -29,7 +29,7 @@ public class FollowingText extends Application{
 	
 	@Override
 	public void updateMouse(PointerEvent event) {
-		text.setCoordinates(event.getX(), event.getY());
+		text.setLocation(event.getX(), event.getY());
 	}
 	
 	@Override

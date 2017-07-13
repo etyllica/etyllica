@@ -7,8 +7,8 @@ import br.com.etyllica.commons.event.MouseState;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
-import br.com.etyllica.layer.GeometricLayer;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.Layer;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -121,11 +121,11 @@ public abstract class Resizer<T extends Layer> implements Drawable {
                     continue;
                 }
 
-                int offsetX = (int) (layer.utilWidth() * (1 - layer.getScaleX())) / 2;
-                int offsetY = (int) (layer.utilHeight() * (1 - layer.getScaleY())) / 2;
+                int offsetX = (int) (layer.getW() * (1 - layer.getScaleX())) / 2;
+                int offsetY = (int) (layer.getH() * (1 - layer.getScaleY())) / 2;
 
-                int bx = (int) (layer.getX() + offsetX + i * (layer.utilWidth() * layer.getScaleX() / 2) - BUTTON_SIZE / 2);
-                int by = (int) (layer.getY() + offsetY + j * (layer.utilHeight() * layer.getScaleY() / 2) - BUTTON_SIZE / 2);
+                int bx = (int) (layer.getX() + offsetX + i * (layer.getW() * layer.getScaleX() / 2) - BUTTON_SIZE / 2);
+                int by = (int) (layer.getY() + offsetY + j * (layer.getH() * layer.getScaleY() / 2) - BUTTON_SIZE / 2);
 
                 points[b + inc].setBounds(bx, by, BUTTON_SIZE, BUTTON_SIZE);
             }
@@ -134,7 +134,6 @@ public abstract class Resizer<T extends Layer> implements Drawable {
 
 
     public void handleEvent(PointerEvent event) {
-
         int mx = event.getX() - offsetX;
         int my = event.getY() - offsetY;
 
@@ -219,7 +218,6 @@ public abstract class Resizer<T extends Layer> implements Drawable {
     }
 
     private void resizeEvent(int index, PointerEvent event) {
-
         lastEvent = ResizerEvent.SCALE;
 
         switch (index) {
@@ -282,8 +280,8 @@ public abstract class Resizer<T extends Layer> implements Drawable {
     private void setInitialValues() {
         initialX = selected.getX();
         initialY = selected.getY();
-        initialW = selected.utilWidth() * selected.getScaleX();
-        initialH = selected.utilHeight() * selected.getScaleY();
+        initialW = selected.getW() * selected.getScaleX();
+        initialH = selected.getH() * selected.getScaleY();
     }
 
     private void moveSelected(PointerEvent event) {
@@ -294,25 +292,25 @@ public abstract class Resizer<T extends Layer> implements Drawable {
     private void resizeUp(PointerEvent event) {
         selected.setY(initialY + event.getAmountY() / 2);
         double sy = initialH - event.getAmountY();
-        selected.setScaleY(sy / selected.utilHeight());
+        selected.setScaleY(sy / selected.getH());
     }
 
     private void resizeDown(PointerEvent event) {
         selected.setY(initialY + event.getAmountY() / 2);
         double sy = initialH + event.getAmountY();
-        selected.setScaleY(sy / selected.utilHeight());
+        selected.setScaleY(sy / selected.getH());
     }
 
     private void resizeLeft(PointerEvent event) {
         selected.setX(initialX + event.getAmountX() / 2);
         double sx = initialW - event.getAmountX();
-        selected.setScaleX(sx / selected.utilWidth());
+        selected.setScaleX(sx / selected.getW());
     }
 
     private void resizeRight(PointerEvent event) {
         selected.setX(initialX + event.getAmountX() / 2);
         double sx = initialW + event.getAmountX();
-        selected.setScaleX(sx / selected.utilWidth());
+        selected.setScaleX(sx / selected.getW());
     }
 
     public boolean isDragged() {

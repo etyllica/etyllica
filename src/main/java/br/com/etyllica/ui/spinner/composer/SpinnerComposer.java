@@ -3,7 +3,7 @@ package br.com.etyllica.ui.spinner.composer;
 import br.com.etyllica.ui.Button;
 import br.com.etyllica.ui.Label;
 import br.com.etyllica.ui.label.TextLabel;
-import br.com.etyllica.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.GeometricLayer;
 
 public abstract class SpinnerComposer extends GeometricLayer {
 	

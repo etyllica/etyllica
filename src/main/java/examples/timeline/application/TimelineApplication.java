@@ -6,7 +6,7 @@ import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 public class TimelineApplication extends Application {
 

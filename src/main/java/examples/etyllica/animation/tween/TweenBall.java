@@ -7,7 +7,7 @@ import br.com.etyllica.commons.animation.LayerAnimation;
 import br.com.etyllica.commons.context.Application;
 import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.commons.interpolation.Interpolator;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 public class TweenBall extends Application {
 

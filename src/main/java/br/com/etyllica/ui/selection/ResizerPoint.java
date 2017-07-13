@@ -2,7 +2,7 @@ package br.com.etyllica.ui.selection;
 
 import br.com.etyllica.commons.event.MouseState;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 public class ResizerPoint extends Layer {
 
@@ -12,17 +12,17 @@ public class ResizerPoint extends Layer {
         super(x, y, w, h);
     }
 
-    //Draw with half size
+    // Draw with half size
     public void draw(Graphics g) {
         draw(g, 0, 0);
     }
 
     public void draw(Graphics g, int offsetX, int offsetY) {
-        int sw = (int) (utilWidth() * getScaleX());
-        int sh = (int) (utilHeight() * getScaleY());
+        int sw = (int) (getW() * getScaleX());
+        int sh = (int) (getH() * getScaleY());
 
-        int oX = (int) (utilWidth() * (1 - getScaleX())) / 2;
-        int oY = (int) (utilHeight() * (1 - getScaleY())) / 2;
+        int oX = (int) (getW() * (1 - getScaleX())) / 2;
+        int oY = (int) (getH() * (1 - getScaleY())) / 2;
 
         g.fillRect(getX() + oX + offsetX, getY() + oY + offsetY, sw, sh);
     }

@@ -4,8 +4,8 @@ import br.com.etyllica.awt.camera.Camera;
 import br.com.etyllica.awt.helper.ColorHelper;
 import br.com.etyllica.awt.helper.TransformHelper;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.layer.GeometricLayer;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.Layer;
 import br.com.etyllica.linear.Line2D;
 import br.com.etyllica.linear.Point2D;
 import br.com.etyllica.linear.PointInt2D;
@@ -118,11 +118,11 @@ public class AWTGraphics implements Graphics {
 	}
 
 	public void drawString(String text, GeometricLayer layer) {
-		drawString(text, layer.getX(), layer.getY(), layer.utilWidth(), layer.utilHeight());
+		drawString(text, layer.getX(), layer.getY(), layer.getW(), layer.getH());
 	}
 
 	public void drawString(String text, GeometricLayer layer, int x, int y) {
-		drawString(text, layer.getX()+x, layer.getY()+y, layer.utilWidth(), layer.utilHeight());
+		drawString(text, layer.getX()+x, layer.getY()+y, layer.getW(), layer.getH());
 	}
 
 	/**

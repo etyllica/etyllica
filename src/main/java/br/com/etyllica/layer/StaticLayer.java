@@ -1,5 +1,6 @@
 package br.com.etyllica.layer;
 
+import br.com.etyllica.commons.layer.Layer;
 import br.com.etyllica.loader.image.ImageLoader;
 import br.com.etyllica.util.io.IOHelper;
 
@@ -96,23 +97,15 @@ public class StaticLayer extends Layer {
 		this.w = w;
 		this.h = h;
 	}
-	
-	/**
-	 * 
-	 * @param path
-	 */
-	public void cloneLayer(String path) {
-		this.path = path;
-	}
-	
+
 	/**
 	 * 
 	 * @param layer
 	 */
 	public void cloneLayer(StaticLayer layer) {
 		this.path = layer.path;
-		w = layer.getW();
-		h = layer.getH();
+		this.w = layer.w;
+		this.h = layer.h;
 	}
 
 	public StaticLayer load() {
@@ -126,8 +119,8 @@ public class StaticLayer extends Layer {
 		} else {
 			layer = ImageLoader.getInstance().loadImage(path, absolute);
 		}
-		this.w = layer.getW();
-		this.h = layer.getH();
+		this.w = layer.w;
+		this.h = layer.h;
 		setOriginCenter();
 		return layer;
 	}

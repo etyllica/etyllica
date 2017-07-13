@@ -2,7 +2,7 @@ package br.com.etyllica.ui.selection;
 
 import br.com.etyllica.awt.stroke.DashedStroke;
 import br.com.etyllica.core.input.mouse.MouseStateChanger;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 import java.awt.*;
 
@@ -46,21 +46,21 @@ public class BaseResizer<T extends Layer> extends Resizer<T> {
     }
 
     private void drawScaledRect(br.com.etyllica.core.graphics.Graphics g, Layer layer) {
-        int sw = (int) (layer.utilWidth() * layer.getScaleX());
-        int sh = (int) (layer.utilHeight() * layer.getScaleY());
+        int sw = (int) (layer.getW() * layer.getScaleX());
+        int sh = (int) (layer.getH() * layer.getScaleY());
 
-        int oX = (int) (layer.utilWidth() * (1 - layer.getScaleX())) / 2;
-        int oY = (int) (layer.utilHeight() * (1 - layer.getScaleY())) / 2;
+        int oX = (int) (layer.getW() * (1 - layer.getScaleX())) / 2;
+        int oY = (int) (layer.getH() * (1 - layer.getScaleY())) / 2;
 
         g.drawRect(layer.getX() + oX + offsetX, layer.getY() + oY + offsetY, sw, sh);
     }
 
     private void fillScaledRect(br.com.etyllica.core.graphics.Graphics g, Layer layer) {
-        int sw = (int) (layer.utilWidth() * layer.getScaleX());
-        int sh = (int) (layer.utilHeight() * layer.getScaleY());
+        int sw = (int) (layer.getW() * layer.getScaleX());
+        int sh = (int) (layer.getH() * layer.getScaleY());
 
-        int oX = (int) (layer.utilWidth() * (1 - layer.getScaleX())) / 2;
-        int oY = (int) (layer.utilHeight() * (1 - layer.getScaleY())) / 2;
+        int oX = (int) (layer.getW() * (1 - layer.getScaleX())) / 2;
+        int oY = (int) (layer.getH() * (1 - layer.getScaleY())) / 2;
 
         g.fillRect(layer.getX() + oX + offsetX, layer.getY() + oY + offsetY, sw, sh);
     }

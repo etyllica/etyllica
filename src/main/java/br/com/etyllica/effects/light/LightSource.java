@@ -1,7 +1,7 @@
 package br.com.etyllica.effects.light;
 
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.GeometricLayer;
 
 import java.awt.*;
 

@@ -11,7 +11,7 @@ import br.com.etyllica.core.graphics.Graphics;
 import br.com.etyllica.ui.UI;
 import br.com.etyllica.ui.selection.BaseResizer;
 import br.com.etyllica.ui.selection.Resizer;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 public class ResizerApplication extends Application {
 

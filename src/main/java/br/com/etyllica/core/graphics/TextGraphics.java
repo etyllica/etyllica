@@ -1,6 +1,6 @@
 package br.com.etyllica.core.graphics;
 
-import br.com.etyllica.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.GeometricLayer;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;

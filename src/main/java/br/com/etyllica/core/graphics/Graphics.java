@@ -2,15 +2,12 @@ package br.com.etyllica.core.graphics;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.Stroke;
-import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -19,8 +16,8 @@ import br.com.etyllica.awt.camera.Camera;
 import br.com.etyllica.linear.Line2D;
 import br.com.etyllica.linear.Point2D;
 import br.com.etyllica.linear.PointInt2D;
-import br.com.etyllica.layer.GeometricLayer;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.Layer;
 
 /**
  * 

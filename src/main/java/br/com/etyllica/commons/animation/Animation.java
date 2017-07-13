@@ -1,6 +1,6 @@
 package br.com.etyllica.commons.animation;
 
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 public class Animation {
 

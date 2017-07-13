@@ -147,15 +147,14 @@ public class BufferedLayer extends ImageLayer {
         resetImage();
     }
 
-    public void cropImage(int xImage, int yImage, int w, int h) {
-
-        buffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+    public void cropImage(int srcX, int srcY, int srcW, int srcH) {
+        buffer = new BufferedImage(srcW, srcH, BufferedImage.TYPE_INT_ARGB);
 
         graphics = buffer.createGraphics();
-        graphics.drawImage(originalBuffer, -xImage, -yImage, null);
+        graphics.drawImage(originalBuffer, -srcX, -srcY, null);
 
-        this.w = w;
-        this.h = h;
+        this.w = srcW;
+        this.h = srcH;
     }
 
 
@@ -195,34 +194,27 @@ public class BufferedLayer extends ImageLayer {
      * @param blue
      */
     public void offsetRGB(int red, int green, int blue) {
-
         resetImage();
-
         offsetPixels(red, green, blue);
     }
 
     public void offsetNegativeRed(int red) {
-
         resetImage();
         offsetPixels(0, -red, -red);
     }
 
     public void offsetNegativeGreen(int green) {
-
         resetImage();
         offsetPixels(-green, 0, -green);
     }
 
     public void offsetNegativeBlue(int blue) {
-
         resetImage();
         offsetPixels(-blue, -blue, 0);
     }
 
     private void offsetPixels(int offsetRed, int offsetGreen, int offsetBlue) {
-
         for (int j = 0; j < h; j++) {
-
             for (int i = 0; i < w; i++) {
 
                 int rgb = originalBuffer.getRGB(i, j);
@@ -261,7 +253,6 @@ public class BufferedLayer extends ImageLayer {
                 buffer.setRGB(i, j, new Color(r, g, b, a).getRGB());
             }
         }
-
     }
 
     public void flipVertical() {
@@ -363,11 +354,8 @@ public class BufferedLayer extends ImageLayer {
     }
 
     public Color getColor(int px, int py) {
-
         if (this.colideRectPoint(px, py)) {
-
             int mx = px - x;
-
             int my = py - y;
 
             if (mx >= buffer.getWidth() || my >= buffer.getHeight()) {
@@ -380,7 +368,6 @@ public class BufferedLayer extends ImageLayer {
         }
 
         return null;
-
     }
 
     public Graphics2D getGraphics() {
@@ -390,7 +377,7 @@ public class BufferedLayer extends ImageLayer {
     @Override
     public void simpleDraw(Graphics g, int x, int y) {
         g.drawImage(buffer, x, y, x + w, y + h,
-                xImage, yImage, xImage + w, yImage + h, null);
+                srcX, srcY, srcX + w, srcY + h, null);
     }
 
     public void createBuffer(byte[] imageData) {

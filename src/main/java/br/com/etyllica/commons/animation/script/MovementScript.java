@@ -1,7 +1,7 @@
 package br.com.etyllica.commons.animation.script;
 
 import br.com.etyllica.commons.animation.LayerAnimation;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.Layer;
 
 
 public class MovementScript extends LayerAnimation {
@@ -29,7 +29,7 @@ public class MovementScript extends LayerAnimation {
 		double valueX = interpolator.interpolate(startX, endX, factor);
 		double valueY = interpolator.interpolate(startY, endY, factor);
 		
-		target.setCoordinates((int)valueX, (int)valueY);
+		target.setLocation((int)valueX, (int)valueY);
 	}
 
 	public MovementScript from(int x, int y) {

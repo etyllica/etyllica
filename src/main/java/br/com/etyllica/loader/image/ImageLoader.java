@@ -82,9 +82,9 @@ public class ImageLoader extends LoaderImpl {
 		cam.setSize(img.getWidth(), img.getHeight());
 
 		if(absolute) {
-			cam.cloneLayer(IOHelper.FILE_PREFIX+path);
+			cam.setPath(IOHelper.FILE_PREFIX+path);
 		} else {
-			cam.cloneLayer(path);
+			cam.setPath(path);
 		}
 
 		return cam;
@@ -96,7 +96,7 @@ public class ImageLoader extends LoaderImpl {
 
 		StaticLayer cam = new StaticLayer();
 		cam.setSize(img.getWidth(), img.getHeight());
-		cam.cloneLayer(streamPath);
+		cam.setPath(streamPath);
 
 		return cam;
 	}

@@ -7,8 +7,8 @@ import br.com.etyllica.commons.event.MouseEvent;
 import br.com.etyllica.commons.event.PointerEvent;
 import br.com.etyllica.commons.graphics.Color;
 import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.layer.GeometricLayer;
-import br.com.etyllica.layer.Layer;
+import br.com.etyllica.commons.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.Layer;
 
 import java.awt.geom.AffineTransform;
 
@@ -67,7 +67,7 @@ public class CollisionElements extends Application implements UpdateIntervalList
 
         if (orangeRectangle.getX() < 0) {
             speed = -speed;
-        } else if (orangeRectangle.getX() + orangeRectangle.utilWidth() > w) {
+        } else if (orangeRectangle.getX() + orangeRectangle.getW() > w) {
             speed = -speed;
         }
     }
@@ -115,11 +115,11 @@ public class CollisionElements extends Application implements UpdateIntervalList
         my = event.getY();
 
         if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_LEFT)) {
-            rectangle1.setCoordinates(mx, my);
+            rectangle1.setLocation(mx, my);
         }
 
         if (event.isButtonDown(MouseEvent.MOUSE_BUTTON_RIGHT)) {
-            greenRectangle.setCoordinates(mx, my);
+            greenRectangle.setLocation(mx, my);
         }
     }
 
