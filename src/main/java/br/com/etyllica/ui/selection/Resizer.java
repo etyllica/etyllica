@@ -1,20 +1,20 @@
 package br.com.etyllica.ui.selection;
 
-import br.com.etyllica.commons.Drawable;
-import br.com.etyllica.commons.event.KeyEvent;
-import br.com.etyllica.commons.event.MouseEvent;
-import br.com.etyllica.commons.event.MouseState;
-import br.com.etyllica.commons.event.PointerEvent;
-import br.com.etyllica.core.graphics.Graphics;
-import br.com.etyllica.core.input.mouse.MouseStateChanger;
-import br.com.etyllica.commons.layer.GeometricLayer;
-import br.com.etyllica.commons.layer.Layer;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import br.com.etyllica.commons.Drawable;
+import br.com.etyllica.commons.event.KeyEvent;
+import br.com.etyllica.commons.event.MouseEvent;
+import br.com.etyllica.commons.event.MouseState;
+import br.com.etyllica.commons.event.PointerEvent;
+import br.com.etyllica.commons.layer.GeometricLayer;
+import br.com.etyllica.commons.layer.Layer;
+import br.com.etyllica.core.graphics.Graphics;
+import br.com.etyllica.core.input.mouse.MouseStateChanger;
 
 public abstract class Resizer<T extends Layer> implements Drawable {
 
@@ -92,7 +92,7 @@ public abstract class Resizer<T extends Layer> implements Drawable {
 
     public void deselect() {
         selected = NULL_LAYER;
-        mouseStateChanger.changeMouseState(MouseState.NORMAL);
+        notifyStateChange(MouseState.NORMAL);
     }
 
     public void select(int index) {
@@ -161,7 +161,7 @@ public abstract class Resizer<T extends Layer> implements Drawable {
                     if (points[b].colideRectPoint(mx, my)) {
                         lastIndex = b;
 
-                        mouseStateChanger.changeMouseState(points[b].getState());
+                        notifyStateChange(points[b].getState());
                         changed = true;
 
                         handleDragEvent(event);
@@ -190,7 +190,7 @@ public abstract class Resizer<T extends Layer> implements Drawable {
         }
 
         if (!changed) {
-            mouseStateChanger.changeMouseState(MouseState.NORMAL);
+            notifyStateChange(MouseState.NORMAL);
         }
 
     }
@@ -371,10 +371,17 @@ public abstract class Resizer<T extends Layer> implements Drawable {
     }
 
     private void notifyListener(ResizerEvent event) {
-        if (listener == null)
+        if (listener == null) {
             return;
-
+        }
         listener.onResize(event, selectedIndex, selected, copy);
+    }
+
+    protected void notifyStateChange(MouseState state) {
+        if (mouseStateChanger == null) {
+            return;
+        }
+        mouseStateChanger.changeMouseState(state);
     }
 
     public ResizerListener getListener() {
