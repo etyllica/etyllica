@@ -75,6 +75,11 @@ public class PathHelper {
         return currentPath();
     }
 
+    public static String filename(String path) {
+        int index = path.lastIndexOf(File.separator);
+        return path.substring(index);
+    }
+
     public static String clearPath(String path) {
         String cleanPath = path.replaceAll("/", File.separator);
 
